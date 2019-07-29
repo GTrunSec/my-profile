@@ -1944,6 +1944,22 @@ _p_: projectile        _t_: travis status     _F_: flycheck
   :commands (undo-propose)
   :bind ("C-x u" . undo-propose))
 
+(defun gtrun-open-in-terminal ()
+  "Open the current dir in a new terminal window.
+URL `http://ergoemacs.org/emacs/emacs_dired_open_file_in_ext_apps.html'
+Version 2017-10-09"
+  (interactive)
+  (cond
+   ((string-equal system-type "windows-nt")
+    (message "Microsoft Windows not supported. File a bug report or pull request."))
+   ((string-equal system-type "darwin")
+    (let ((process-connection-type nil))
+      (start-process "" nil "/Applications/iTerm.app/Contents/MacOS/iTerm2" default-directory)))
+   ((string-equal system-type "gnu/linux")
+    (let ((process-connection-type nil))
+      (start-process "" nil "termite"
+                     (concat "--directory=" default-directory))))))
+
 (defun edit-current-file-as-root ()
   "Edit the file that is associated with the current buffer as root"
   (interactive)

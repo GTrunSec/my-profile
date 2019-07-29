@@ -2806,7 +2806,7 @@ Version 2017-10-09"
    ((string-equal system-type "gnu/linux")
     (let ((process-connection-type nil))
       (start-process "" nil "termite"
-                     (concat "-d " default-directory))))))
+                     (concat "--directory=" default-directory))))))
 #+end_src
 ** Editing as root
 
