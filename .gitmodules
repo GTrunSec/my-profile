@@ -11,3 +11,6 @@
 [submodule "dotfiles/emacs/emacs.d/setup/snails"]
 	path = dotfiles/emacs/emacs.d/setup/snails
 	url = https://github.com/manateelazycat/snails.git
+[submodule "dotfiles/wallpaper"]
+	path = dotfiles/wallpaper
+	url = https://github.com/GTrunSec/wallpaper.git
