@@ -661,7 +661,7 @@ CLOSED: [2019-07-27 Sat 06:05]
                              "~/org-notes/art"
                              "~/org-notes/NSM-GTD"
                              "~/org-notes/post"
-                             "~/project/home-manager/dotfiles/wallpaper"
+                             "~/project/gtrun-profile/dotfiles/wallpaper"
                              ))
 
 #+end_src

@@ -252,7 +252,7 @@
                            "~/org-notes/art"
                            "~/org-notes/NSM-GTD"
                            "~/org-notes/post"
-                           "~/project/home-manager/dotfiles/wallpaper"
+                           "~/project/gtrun-profile/dotfiles/wallpaper"
                            ))
 
 (use-package all-the-icons
