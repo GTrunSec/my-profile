@@ -1416,8 +1416,8 @@
   :hook
   (org-mode . toc-org-enable))
 
-(use-package ox-hugo
-  :straight t)
+(straight-use-package 'ox-hugo)
+(require 'ox-hugo)
 
 (use-package org-download
 :straight t

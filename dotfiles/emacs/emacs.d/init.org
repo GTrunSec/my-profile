@@ -942,49 +942,49 @@ CLOSED: [2019-07-25 Thu 18:56]
 * Completion
 ** Ivy/counsel
    #+begin_src emacs-lisp :tangle yes
-(use-package counsel
-  :straight t
-  :hook
-  (after-init . ivy-mode)
-  (counsel-grep-post-action . better-jumper-set-jump)
-  :diminish ivy-mode
-  :config
-  (setq counsel-find-file-ignore-regexp "\\(?:^[#.]\\)\\|\\(?:[#~]$\\)\\|\\(?:^Icon?\\)"
-        counsel-describe-function-function #'helpful-callable
-        counsel-describe-variable-function #'helpful-variable
-        ;; Add smart-casing (-S) to default command arguments:
-        counsel-rg-base-command "rg -S --no-heading --line-number --color never %s ."
-        counsel-ag-base-command "ag -S --nocolor --nogroup %s"
-        counsel-pt-base-command "pt -S --nocolor --nogroup -e %s"
-        counsel-find-file-at-point t)
-)
+     (use-package counsel
+       :straight t
+       :hook
+       (after-init . ivy-mode)
+       (counsel-grep-post-action . better-jumper-set-jump)
+       :diminish ivy-mode
+       :config
+       (setq counsel-find-file-ignore-regexp "\\(?:^[#.]\\)\\|\\(?:[#~]$\\)\\|\\(?:^Icon?\\)"
+             counsel-describe-function-function #'helpful-callable
+             counsel-describe-variable-function #'helpful-variable
+             ;; Add smart-casing (-S) to default command arguments:
+             counsel-rg-base-command "rg -S --no-heading --line-number --color never %s ."
+             counsel-ag-base-command "ag -S --nocolor --nogroup %s"
+             counsel-pt-base-command "pt -S --nocolor --nogroup -e %s"
+             counsel-find-file-at-point t)
+     )
 
-(use-package ivy
-  :straight t
-  :custom
-  (ivy-re-builders-alist
-   '((t . ivy--regex-plus)))
-  :config
-  (ivy-mode)
-  (setq ivy-display-style 'fancy
-        ivy-use-virtual-buffers t
-        enable-recursive-minibuffers t
-        ivy-use-selectable-prompt t)
-(ivy-set-actions
-   t
-   '(("I" insert "insert")))
-  (ivy-set-occur 'ivy-switch-buffer 'ivy-switch-buffer-occur))
+     (use-package ivy
+       :straight t
+       :custom
+       (ivy-re-builders-alist
+        '((t . ivy--regex-plus)))
+       :config
+       (ivy-mode)
+       (setq ivy-display-style 'fancy
+             ivy-use-virtual-buffers t
+             enable-recursive-minibuffers t
+             ivy-use-selectable-prompt t)
+     (ivy-set-actions
+        t
+        '(("I" insert "insert")))
+       (ivy-set-occur 'ivy-switch-buffer 'ivy-switch-buffer-occur))
 
-(use-package ivy-rich
-  :straight t
-  :config
-  (ivy-rich-mode 1)
-  (setq ivy-format-function #'ivy-format-function-line))
-;;[[https://github.com/gilbertw1/better-jumper][gilbertw1/better-jumper: A configurable jump list implementation for Emacs]]
-(use-package better-jumper
-  :straight t
-  :config
-  )
+     (use-package ivy-rich
+       :straight t
+       :config
+       (ivy-rich-mode 1)
+       (setq ivy-format-function #'ivy-format-function-line))
+     ;;[[https://github.com/gilbertw1/better-jumper][gilbertw1/better-jumper: A configurable jump list implementation for Emacs]]
+     (use-package better-jumper
+       :straight t
+       :config
+       )
 
 
    #+end_src
@@ -1191,7 +1191,8 @@ dtrt-indent guesses the indentation settings of files, and sets the buffer local
 :config
 (global-hungry-delete-mode))
 #+end_src
-** [[https://github.com/raxod502/prescient.el][raxod502/prescient.el: ☄️ Simple but effective sorting and filtering for Emacs.]]
+** ❤ Love [[https://github.com/raxod502/prescient.el][raxod502/prescient.el: ☄️ Simple but effective sorting and filtering for Emacs.]]
+CLOSED: [2019-07-28 Sun 21:14]
 #+begin_src emacs-lisp :tangle yes
 (straight-use-package 'prescient)
 (straight-use-package 'ivy-prescient)
@@ -2081,8 +2082,8 @@ change ~CC~ PATH ~gcc~ to ~clang++~
    #+end_src
 ** Hugo
    #+begin_src emacs-lisp :tangle yes
-(use-package ox-hugo
-  :straight t)
+     (straight-use-package 'ox-hugo)
+     (require 'ox-hugo)
 
    #+end_src
 ** [[https://github.com/abo-abo/org-download/tree/ac72bf8fce3e855da60687027b6b8601cf1de480][abo-abo/org-download at ac72bf8fce3e855da60687027b6b8601cf1de480]]
@@ -2789,6 +2790,24 @@ please test your init file when you modified done.
     :commands (undo-propose)
     :bind ("C-x u" . undo-propose))
    #+end_src
+** open-terminal
+#+begin_src emacs-lisp :tangle yes
+(defun gtrun-open-in-terminal ()
+  "Open the current dir in a new terminal window.
+URL `http://ergoemacs.org/emacs/emacs_dired_open_file_in_ext_apps.html'
+Version 2017-10-09"
+  (interactive)
+  (cond
+   ((string-equal system-type "windows-nt")
+    (message "Microsoft Windows not supported. File a bug report or pull request."))
+   ((string-equal system-type "darwin")
+    (let ((process-connection-type nil))
+      (start-process "" nil "/Applications/iTerm.app/Contents/MacOS/iTerm2" default-directory)))
+   ((string-equal system-type "gnu/linux")
+    (let ((process-connection-type nil))
+      (start-process "" nil "termite"
+                     (concat "-d " default-directory))))))
+#+end_src
 ** Editing as root
 
    #+begin_src emacs-lisp :tangle yes
