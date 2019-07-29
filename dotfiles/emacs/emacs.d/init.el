@@ -1934,6 +1934,11 @@ _p_: projectile        _t_: travis status     _F_: flycheck
   :if (memq window-system '(mac ns))
   )
 
+(use-package linux
+:load-path "./setup")
+:if (memq window-system '(x)
+)
+
 (use-package undo-propose
   :straight t
   :commands (undo-propose)

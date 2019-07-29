@@ -2235,6 +2235,23 @@ change ~CC~ PATH ~gcc~ to ~clang++~
                    :size 24.5)))
 
 #+end_src
+**** Linux
+#+begin_src emacs-lisp :tangle "./setup/linux.el"
+(set-face-attribute
+ 'default nil
+ :font (font-spec :name "-PfEd-Fantasque Sans Mono-bold-italic-normal-*-*-*-*-*-m-0-iso10646-1"
+                  :weight 'normal
+                  :slant 'normal
+                  :size 28))
+(dolist (charset '(kana han symbol cjk-misc bopomofo))
+  (set-fontset-font
+   (frame-parameter nil 'font)
+   charset
+   (font-spec :name "-ADBO-Source Han Serif CN-semibold-normal-normal-*-*-*-*-*-*-0-iso10646-1"
+              :weight 'normal
+              :slant 'normal
+              :size 28.5)))
+#+end_src
 *** [[https://blog.slegetank.com/blog/20190331-emacschinese.html][emacs 内置中文输入法]] 
 *** ✔ DONE TO-> setup/macos.el
 CLOSED: [2019-07-24 Wed 18:18]
@@ -2753,6 +2770,18 @@ please test your init file when you modified done.
 (provide 'macos)
 
 #+end_src
+** Linux
+#+begin_src emacs-lisp :tangle yes
+(use-package linux
+:load-path "./setup")
+:if (memq window-system '(x)
+)
+#+end_src
+
+#+begin_src emacs-lisp :tangle "./setup/linux.el"
+(provide 'linux)
+#+end_src
+
 ** Undo
    #+begin_src emacs-lisp :tangle yes
   (use-package undo-propose
