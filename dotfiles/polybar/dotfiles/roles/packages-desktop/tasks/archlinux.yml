@@ -1,0 +1,14 @@
+---
+- name: Install Desktop packages [Archlinux]
+  packer: name={{item}} state=present
+  with_items:
+    - google-chrome
+    - connman-gtk
+    - gnome-ssh-askpass2
+    - ttf-font-awesome
+    - ttf-unifont
+    - ttf-font-icons
+  notify: clean tmp packer
+
+- name: Flush handlers to clean /tmp
+  meta: flush_handlers

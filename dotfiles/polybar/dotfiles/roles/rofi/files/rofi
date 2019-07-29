@@ -1,0 +1,32 @@
+! ------------------------------------------------------------------------------
+! ROFI Color theme
+! ------------------------------------------------------------------------------
+! Use extended color scheme
+rofi.color-enabled:                  true
+! Color scheme for normal row
+rofi.color-normal:                   argb:00000000,  #D8DEE9 , argb:00000000,  #f3f99d ,  #1B2B34
+! Color scheme for urgent row
+rofi.color-urgent:                   argb:00000000,  #F99157 , argb:00000000,  #F99157 ,  #1B2B34
+! Color scheme for active row
+rofi.color-active:                   argb:00000000,  #6699CC , argb:00000000,  #6699CC ,  #1B2B34
+! Color scheme window
+rofi.color-window:                   argb:D0202020,  #f3f99d ,  #f3f99d
+rofi.separator-style:                solid
+rofi.hide-scrollbar:                 true
+! rofi.fullscreen:                     true
+rofi.display-run:		     shell
+rofi.display-drun:		     app
+rofi.font:                           hack 12
+rofi.width:                          100
+rofi.bw:                             0
+rofi.lines:                          15
+rofi.location:			     2
+rofi.yoffset:                        23
+rofi.padding:                        10
+rofi.fixed-num-lines:                false
+! rofi.kb-cancel:                      Escape,Mod4+w
+rofi.terminal:             termite
+rofi.ssh-client:           ssh
+rofi.ssh-command:          {terminal} -e "{ssh-client} {host}"
+rofi.run-command:          {cmd}
+rofi.run-shell-command:    {terminal} -e {cmd}

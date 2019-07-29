@@ -1,0 +1,21 @@
+.DS_Store
+dotfiles/emacs/emacs.d/var
+dotfiles/emacs/emacs.d/straight
+dotfiles/emacs/emacs.d/.*
+dotfiles/emacs/emacs.d/elpa
+
+
+
+## Emacs librime config
+
+dotfiles/emacs/emacs.d/pyim/rime/easy_en.userdb
+dotfiles/emacs/emacs.d/pyim/rime/easy_en.userdb.old
+dotfiles/emacs/emacs.d/pyim/rime/luna_pinyin.userdb
+dotfiles/emacs/emacs.d/pyim/rime/luna_pinyin.userdb.old
+dotfiles/emacs/emacs.d/pyim/scel2pyim/scel2pyim
+dotfiles/emacs/emacs.d/liberime.so
+
+
+## lsp
+
+dotfiles/emacs/emacs.d/mspyls

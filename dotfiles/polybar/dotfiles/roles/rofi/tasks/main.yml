@@ -1,0 +1,18 @@
+---
+- name: Install rofi
+  packer: name=rofi state=present
+
+- name: Create rofi conf dir
+  file: path=~/.config/rofi state=directory
+
+- name: Copy powermenu script
+  copy: src=files/powermenu.sh dest=~/.config/rofi/powermenu.sh mode=0755
+
+- name: Create .Xresources.d dir
+  file: path=~/.Xresources.d state=directory
+
+- name: Copy Xresources.d rofi file
+  copy: src=files/rofi dest=~/.Xresources.d/rofi
+
+- name: Init rofi in Xresources
+  lineinfile: path=~/.Xresources create=yes state=present line='#include ".Xresources.d/rofi"'

@@ -1,0 +1,32 @@
+---
+- name: Install i3-wm
+  packer: name={{item}} state=present
+  with_items:
+    - i3-gaps
+    - i3lock
+
+- name: Clone i3lock-fancy-multimonitor
+  git:
+    repo: https://github.com/guimeira/i3lock-fancy-multimonitor
+    dest: ~/.i3/i3lock-fancy-multimonitor
+    force: yes
+
+- name: Configure i3lock blur
+  lineinfile:
+    path: ~/.i3/i3lock-fancy-multimonitor/lock
+    regexp: '^BLURTYPE="2x8"'
+    line: '#BLURTYPE="2x8"'
+  ignore_errors: True
+
+- name: Configure i3lock blur bis
+  lineinfile:
+    path: ~/.i3/i3lock-fancy-multimonitor/lock
+    regexp: '^#BLURTYPE="5x3"'
+    line: 'BLURTYPE="5x3"'
+  ignore_errors: True
+
+- name: Configure xinitrc
+  copy: src=files/xinitrc dest=~/.xinitrc backup=yes
+
+- name: Template config file
+  template: src=templates/config.j2 dest=~/.i3/config backup=yes

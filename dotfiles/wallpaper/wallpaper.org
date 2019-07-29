@@ -1,0 +1,104 @@
+#+TITLE: wallpaper
+#+AUTHOR: GTrunSec
+#+EMAIL: gtrunsec@hardenedlinux.org
+#+DATE: 27 July 2019
+#+DESCRIPTION: my wallpaper 
+#+KEYWORDS: wallpaper
+#+LANGUAGE:  en cn
+#+SETUPFILE: ~/org-notes/setup/hugo.local
+#+hugo_publishdate: 
+#+hugo_auto_set_lastmod: t
+#+HUGO_categories: profile 
+#+HUGO_tags: wallpaper personal
+#+OPTIONS:   H:2 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+SELECT_TAGS: export
+#+EXCLUDE_TAGS: noexport
+#+TAGS: Fantasy Illustration mountain Environments city Concept modern
+* Cyberpunk
+** [[https://www.artstation.com/artwork/KqZ1y][ArtStation - Cyberpunk Busy Street , Donglu Yu]]
+
+
+#+DOWNLOADED: https://cdna.artstation.com/p/assets/images/images/011/733/734/large/donglu-yu-cyberpunk-demo-lowres.jpg?1531137404 @ 2019-07-27 04:12:46
+[[file:Cyberpunk/donglu-yu-cyberpunk-demo-lowres_2019-07-27_04-12-46.jpeg]]
+** ❤ Love  [[https://www.artstation.com/artwork/Xag90][ArtStation - Barcelona Smoke & Neons: Sant Pau i La Sagrada Familia, Guillem H. Pongiluppi]]
+CLOSED: [2019-07-27 Sat 04:37]
+[[file:Cyberpunk/wallhaven-590770.jpg]]
+** [[https://www.artstation.com/artwork/Z5gJ5N][ArtStation - Cyberpunk Alley Environment, James Atkinson]]    :city:modern:
+* City
+** [[https://the-binary-tomorrow.tumblr.com/post/173454677836/theartofmany-artist-%E6%89%8B%E6%8C%87%E6%96%AD%E4%BA%86-a-title-hi-chengdu][theartofmany: Artist: 手指断了 a Title: Hi ChengDu ... - Our Sci-Fi Future]]
+
+#+DOWNLOADED: https://66.media.tumblr.com/a1f9e29dd20f96ceae892c251bbcd7ac/tumblr_p7ikadfPzT1uzeyaxo3_1280.jpg @ 2019-07-27 05:25:59
+[[file:City/tumblr_p7ikadfPzT1uzeyaxo3_1280.jpg]]
+** [[https://www.artstation.com/artwork/EaaRn][ArtStation - Half-Life - (February work), Wadim Kashin]]
+
+#+DOWNLOADED: https://cdna.artstation.com/p/assets/images/images/000/494/460/large/wadim-kashin-halflife1.jpg?1424720087 @ 2019-07-27 08:18:11
+[[file:City/wadim-kashin-halflife1_2019-07-27_08-18-11.jpeg]]
+
+* Science Fiction
+** [[https://www.artstation.com/artwork/NKYRD][ArtStation - xcom , Eddie Del Rio]]
+
+#+DOWNLOADED: https://cdnb.artstation.com/p/assets/images/images/003/998/505/large/eddie-del-rio-622709-10152191443342178-2030898129-o.jpg?1479313105 @ 2019-07-27 04:21:22
+[[file:Science_Fiction/eddie-del-rio-622709-10152191443342178-2030898129-o_2019-07-27_04-21-22.jpeg]]
+* Environments
+** [[https://www.artstation.com/artwork/xdR3O][ArtStation - Subterra, Wadim Kashin]]
+
+#+DOWNLOADED: https://cdna.artstation.com/p/assets/images/images/001/463/980/large/wadim-kashin-exotic1.jpg?1446871380 @ 2019-07-27 04:42:57
+[[file:Environments/wadim-kashin-exotic1_2019-07-27_04-42-57.jpeg]]
+** [[https://www.artstation.com/artwork/3ENAg][ArtStation - Barcelona Aftermath: El Palau de la Música, Guillem H. Pongiluppi]] :Concept:
+
+#+DOWNLOADED: https://cdnb.artstation.com/p/assets/images/images/001/200/371/large/guillem-h-pongiluppi-palau-de-la-musica-catalana-barcelona-catalunya-guillemhp.jpg?1442054652 @ 2019-07-27 04:57:33
+[[file:Environments/guillem-h-pongiluppi-palau-de-la-musica-catalana-barcelona-catalunya-guillemhp_2019-07-27_04-57-33.jpeg]]
+** [[https://www.artstation.com/artwork/vwAn3][ArtStation - Environment concepts , Grafit Studio]]
+
+#+DOWNLOADED: https://cdna.artstation.com/p/assets/images/images/003/857/544/large/grafit-studio-5.jpg?1478011495 @ 2019-07-27 08:31:07
+[[file:Environments/grafit-studio-5_2019-07-27_08-31-07.jpeg]]
+*** Next
+
+#+DOWNLOADED: https://cdna.artstation.com/p/assets/images/images/004/516/332/large/grafit-studio-imgpsh-fullsize-3.jpg?1484238005 @ 2019-07-27 08:33:26
+[[file:Environments/grafit-studio-imgpsh-fullsize-3_2019-07-27_08-33-26.jpeg]]
+** [[https://www.artstation.com/artwork/0ZrWV][ArtStation - Rift Nightmare Tide environment concept, Herman Ng]]
+
+#+DOWNLOADED: https://cdna.artstation.com/p/assets/images/images/003/680/874/large/herman-ng-20161012-style-sheet-final.jpg?1476365418 @ 2019-07-27 13:52:45
+[[file:Environments/herman-ng-20161012-style-sheet-final_2019-07-27_13-52-45.jpeg]]
+** ❤ Love [[https://www.artstation.com/artwork/b6e0n][ArtStation - Destiny 2 Forsaken: Hellrise Canyon, Richard Rude]]
+CLOSED: [2019-07-27 Sat 16:32]
+
+#+DOWNLOADED: https://cdna.artstation.com/p/assets/images/images/013/094/802/large/richard-rude-richardrude-d2f-hellrisecanyon-002.jpg?1538021578 @ 2019-07-27 16:32:49
+[[file:Environments/richard-rude-richardrude-d2f-hellrisecanyon-002_2019-07-27_16-32-49.jpeg]]
+
+* Mountain & spring
+** [[https://www.artstation.com/artwork/985Ga][ArtStation - Torrent of Gelion, Ferdinand Ladera]]
+#+DOWNLOADED: https://cdna.artstation.com/p/assets/images/images/001/070/896/large/ferdinand-ladera-torrent-of-gelion-2k.jpg?1439402973 @ 2019-07-27 16:17:26
+[[file:Mountain_&_spring/ferdinand-ladera-torrent-of-gelion-2k_2019-07-27_16-17-26.jpeg]]
+
+* Fantasy
+** [[https://www.artstation.com/artwork/L4n65][ArtStation - The Mountain Kingdom, Max Bedulenko]]  :mountain:Environments:
+
+#+DOWNLOADED: https://cdna.artstation.com/p/assets/images/images/001/265/810/large/max-bedulenko-.jpg?1443926878 @ 2019-07-27 04:48:06
+[[file:Fantasy/max-bedulenko-_2019-07-27_04-48-06.jpeg]]
+* Sky & sea
+** [[https://www.artstation.com/artwork/aRB4kX][ArtStation - More animation environments, Ned Rogers]]
+
+#+DOWNLOADED: https://cdnb.artstation.com/p/assets/images/images/018/547/783/large/ned-rogers-forest-forestchoir-concept01-002.jpg?1559781601 @ 2019-07-27 14:07:36
+[[file:Sky_&_sea/ned-rogers-forest-forestchoir-concept01-002_2019-07-27_14-07-36.jpeg]]
+** [[https://www.artstation.com/artwork/yPzZ5][ArtStation - Arrival, James Ross McNab]]
+
+#+DOWNLOADED: https://cdnb.artstation.com/p/assets/images/images/007/265/261/large/james-ross-mcnab-matte-final.jpg?1504883678 @ 2019-07-27 16:31:34
+[[file:Sky_&_sea/james-ross-mcnab-matte-final_2019-07-27_16-31-34.jpeg]]
+
+* Cave & Rock
+** [[https://www.artstation.com/artwork/z30yQ][ArtStation - 24h Speed Environment, Robert Berg]]
+
+#+DOWNLOADED: https://cdnb.artstation.com/p/assets/images/images/009/655/541/large/robert-berg-beauty2.jpg?1520189436 @ 2019-07-27 16:16:10
+[[file:Cave/robert-berg-beauty2_2019-07-27_16-16-10.jpeg]]
+** [[https://www.artstation.com/artwork/bgO2m][ArtStation - Mystical Woods, Ferdinand Ladera]]
+
+#+DOWNLOADED: https://cdna.artstation.com/p/assets/images/images/001/070/846/large/ferdinand-ladera-mystical-woods.jpg?1439402074 @ 2019-07-27 16:18:37
+[[file:Cave_&_Rock/ferdinand-ladera-mystical-woods_2019-07-27_16-18-37.jpeg]]
+** [[https://www.artstation.com/artwork/YXYGw][ArtStation - Destiny 2 Forsaken: Trapper's Cave, Richard Rude]]
+
+#+DOWNLOADED: https://cdna.artstation.com/p/assets/images/images/013/094/608/large/richard-rude-richardrude-d2f-trapperscave-001.jpg?1538020984 @ 2019-07-27 16:45:07
+[[file:Cave_&_Rock/richard-rude-richardrude-d2f-trapperscave-001_2019-07-27_16-45-07.jpeg]]
+* Cache
+** [[https://www.artstation.com/search?q=Environments&sort_by=relevance][ArtStation - Arrival, James Ross McNab]]
+** [[https://www.artstation.com/artwork/wrkV][ArtStation - The forest of Keilah, Ferdinand Ladera]]

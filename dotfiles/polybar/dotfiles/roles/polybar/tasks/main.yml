@@ -1,0 +1,36 @@
+---
+- name: Install polybar deps
+  package: name={{item}} state=present
+  with_items:
+    - wireless_tools
+  become: True
+
+- name: Install polybar
+  packer: name={{item}} state=present
+  with_items:
+    - siji-git
+    - polybar-git
+
+- name: Create polybar conf dir
+  file: path=~/.config/polybar state=directory
+
+- name: Add pkg check script
+  copy: src=files/pkg.sh dest=~/.config/polybar/pkg.sh mode=0755
+
+- name: Test if node specific template exists for launch.sh
+  stat: path="{{ playbook_dir }}/roles/polybar/templates/by_host/{{ ansible_hostname }}/launch.j2"
+  register: launch_file
+
+- name: Test if node specific template exists for modules top
+  stat: path="{{ playbook_dir }}/roles/polybar/templates/by_host/{{ ansible_hostname }}/modules-top.j2"
+  register: polybar_top_file
+
+- name: Test if node specific template exists for modules bottom
+  stat: path="{{ playbook_dir }}/roles/polybar/templates/by_host/{{ ansible_hostname }}/modules-bottom.j2"
+  register: polybar_bottom_file
+
+- name: Template launch file
+  template: src=templates/launch.j2 dest=~/.config/polybar/launch.sh mode=0755 backup=yes
+
+- name: Template config file
+  template: src=templates/config.j2 dest=~/.config/polybar/config backup=yes

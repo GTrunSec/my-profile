@@ -1,0 +1,13 @@
+---
+- name: Install Cursors
+  packer: name=capitaine-cursors state=present
+
+- name: Create .Xresources.d dir
+  file: path=~/.Xresources.d state=directory
+
+- name: Configure Cursors
+  copy: src=files/cursor dest=~/.Xresources.d/cursor
+
+- name: Init Cursors in .Xresources
+  lineinfile: path=~/.Xresources create=yes state=present line='#include ".Xresources.d/cursor"'
+

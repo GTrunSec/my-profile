@@ -1,0 +1,36 @@
+#assign osz
+assign [class="Google-chrome"] $tag1
+assign [class="Thunderbird"] $tag3
+assign [class="Lollypop"] $tag5
+for_window [class="Lollypop"] focus
+assign [class="Code"] $tag6
+for_window [class="Code"] focus
+assign [class="WebTorrent"] $tag7
+for_window [class="WebTorrent"] focus
+assign [class="Nicotine"] $tag9
+for_window [class="Nicotine"] focus
+
+#bindsym osz
+bindsym $mod+Control+Left exec ~/dev/git/mpris-ctrl/mpris-ctrl.sh Lollypop prev
+bindsym $mod+Control+Down exec ~/dev/git/mpris-ctrl/mpris-ctrl.sh Lollypop play-pause
+bindsym $mod+Control+Right exec ~/dev/git/mpris-ctrl/mpris-ctrl.sh Lollypop next
+bindsym $mod+Control+Prior exec "cd ~/dev/git/interfaceliftdownloader/ ; ./interfacelift.sh -c ./wallpaper.conf"
+bindsym $mod+Control+Next exec "~/dev/git/interfaceliftdownloader/interfacelift.sh -sc ~/dev/git/interfaceliftdownloader/wallpaper.conf"
+
+#assign workspace to screens
+workspace $tag1 output DP-1-1
+workspace $tag2 output eDP-1
+workspace $tag3 output eDP-1
+workspace $tag4 output eDP-1
+workspace $tag5 output eDP-1
+workspace $tag6 output eDP-1
+workspace $tag7 output eDP-1
+workspace $tag8 output eDP-1
+workspace $tag9 output eDP-1
+workspace $tag10 output eDP-1
+
+# exec startup apps
+exec --no-startup-id i3-msg 'exec thunderbird'
+exec --no-startup-id i3-msg 'exec google-chrome-stable'
+exec --no-startup-id i3-msg 'workspace $tag4; exec termite -e "screen -rd weechat &"'
+exec --no-startup-id i3-msg 'workspace $tag2; exec termite'

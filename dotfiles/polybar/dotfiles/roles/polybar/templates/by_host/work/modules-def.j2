@@ -1,0 +1,19 @@
+[module/neon-lvmcheck]
+type = custom/script
+interval = 1200
+format = <label>
+label = "%output:0:100%%"
+format-prefix = " neon:thinpool "
+format-prefix-foreground = #5b5b5b
+exec = ssh root@neon lvs | grep '^\ *rootpool' | awk '{ print $5 }'
+exec-if = ssh-add -L
+
+[module/neon-backupcheck]
+type = custom/script
+interval = 1200
+format = <label>
+label = "%output:0:100%"
+format-prefix = " neon:dev/sdb "
+format-prefix-foreground = #5b5b5b
+exec = ssh root@neon df -h | grep /mnt/sdb | awk '{ print $5 }'
+exec-if = ssh-add -L

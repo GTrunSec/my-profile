@@ -1,0 +1,8 @@
+---
+- name: authorize eoli3n key
+  authorized_key:
+    user: "{{ ansible_user_id }}"
+    state: present
+    key: "{{ item }}"
+  with_file:
+    - files/id_rsa.pub

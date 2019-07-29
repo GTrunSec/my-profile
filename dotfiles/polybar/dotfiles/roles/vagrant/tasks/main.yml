@@ -1,0 +1,14 @@
+---
+- name: Create img dir
+  file: path=~/img state=directory
+
+- name: Copy wallpaper
+  copy: src=files/wallpaper.jpg dest=~/img/wallpaper.jpg
+
+- name: Init wallpaper in .xprofile
+  blockinfile:
+    path: ~/.xprofile
+    create: True
+    marker: "### {mark} DOTFILES wallpaper ###"
+    content: |
+      feh --bg-scale ~/img/wallpaper.jpg &

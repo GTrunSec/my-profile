@@ -1,0 +1,4 @@
+---
+- name: Install backlight controller package
+  packer: name=light-git state=present
+  when: ansible_os_family == "Archlinux"

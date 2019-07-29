@@ -1,0 +1,20 @@
+---
+- name: Install common packages [Archlinux]
+  pacman: name={{item}} state=present
+  with_items:
+    - expac
+    - jshon
+    - pygmentize
+  become: True
+
+- name: Install cower on [Archlinux]
+  shell: curl -o PKGBUILD https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=cower; makepkg PKGBUILD --skippgpcheck --install --needed --noconfirm
+  args:
+    creates: /usr/bin/cower
+    chdir: /tmp
+
+- name: Install packer on [Archlinux]
+  shell: curl -o PKGBUILD https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=packer-git; makepkg PKGBUILD --install --needed --noconfirm
+  args:
+    creates: /usr/bin/packer
+    chdir: /tmp

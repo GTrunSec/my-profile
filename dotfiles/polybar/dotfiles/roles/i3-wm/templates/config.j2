@@ -1,0 +1,185 @@
+# i3 config file (v4)
+#
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+
+# mod key
+set $mod Mod4
+
+# fonts
+font pango: hack, Awesome 10
+
+# resolv i3 transparancy bug
+new_window pixel
+
+# start a terminal
+bindsym $mod+Return exec termite
+
+# start drofi dmenu
+bindsym $mod+Tab exec --no-startup-id rofi -show window
+bindsym $mod+Shift+d exec --no-startup-id rofi -show run
+bindsym $mod+d exec --no-startup-id rofi -show drun
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# kill focused window
+bindsym $mod+Shift+a kill
+
+# change focus
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+m focus right
+ 
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+m move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+z layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+q focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+#scratchpad
+bindsym $mod+twosuperior scratchpad show
+bindsym $mod+Shift+twosuperior move scratchpad
+
+#Swith with same key to precedent workspace
+workspace_auto_back_and_forth yes
+
+# set workspace names
+set $tag1 "1:"
+set $tag2 "2:"
+set $tag3 "3:"
+set $tag4 "4:"
+set $tag5 "5:"
+set $tag6 "6:"
+set $tag7 "7:"
+set $tag8 "8:"
+set $tag9 "9:"
+set $tag10 "10:"
+
+#colors
+# class                 border  backgr. text    indicator child_border
+client.focused          #FFFFFF #FFFFFF #000000 #000000   #000000
+client.focused_inactive #333333 #5f676a #ffffff #484e50   #000000
+client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+client.urgent           #2f343a #900000 #ffffff #900000   #900000
+client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+
+#i3-gaps
+for_window [class="^.*"] border pixel 0
+gaps inner 4
+gaps outer -4
+smart_gaps on
+smart_borders on
+
+#rofi_power menu
+bindsym $mod+Shift+q exec ~/.config/rofi/powermenu.sh
+
+# apps
+bindsym $mod+Control+t exec thunar
+bindsym $mod+Control+n exec connman-gtk
+
+# by class
+## floatings
+for_window [class="XTerm"] floating enable, border normal
+for_window [class="feh"] floating enable, border normal
+
+# assigns focus
+assign [class="Connman-gtk"] $tag10
+for_window [class="Connman-gtk"] focus
+
+#toggle workspace's display screen
+bindsym $mod+less move workspace to output right
+bindsym $mod+Shift+less move workspace to output up
+
+# switch to workspace
+bindsym $mod+ampersand workspace $tag1
+bindsym $mod+eacute workspace $tag2
+bindsym $mod+quotedbl workspace $tag3
+bindsym $mod+apostrophe workspace $tag4
+bindsym $mod+parenleft workspace $tag5
+bindsym $mod+minus workspace $tag6
+bindsym $mod+egrave workspace $tag7
+bindsym $mod+underscore workspace $tag8
+bindsym $mod+ccedilla workspace $tag9
+bindsym $mod+agrave workspace $tag10
+
+# move focused container to workspace
+bindsym $mod+Shift+ampersand move container to workspace $tag1
+bindsym $mod+Shift+eacute move container to workspace $tag2
+bindsym $mod+Shift+quotedbl move container to workspace $tag3
+bindsym $mod+Shift+apostrophe move container to workspace $tag4
+bindsym $mod+Shift+5 move container to workspace $tag5
+bindsym $mod+Shift+minus move container to workspace $tag6
+bindsym $mod+Shift+egrave move container to workspace $tag7
+bindsym $mod+Shift+underscore move container to workspace $tag8
+bindsym $mod+Shift+ccedilla move container to workspace $tag9
+bindsym $mod+Shift+agrave move container to workspace $tag10
+
+{% include 'by_host/' + ansible_hostname + '/config.j2' ignore missing %}
+
+{% include 'by_os/' + ansible_distribution|lower + '/config.j2' ignore missing %}
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym m resize grow width 10 px or 10 ppt
+
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# polybar exec
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh

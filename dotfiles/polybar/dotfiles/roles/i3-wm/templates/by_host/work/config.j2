@@ -1,0 +1,37 @@
+#assign work
+assign [class="Google-chrome"] $tag1
+assign [class="Thunderbird"] $tag3
+assign [class="Code"] $tag6
+for_window [class="Code"] focus
+assign [class="Virt-manager"] $tag8
+for_window [class="Virt-manager"] focus
+assign [class="VirtualBox"] $tag8
+for_window [class="VirtualBox"] focus
+assign [class="Connman-gtk"] $tag10
+for_window [class="Connman-gtk"] focus
+
+#class confs
+for_window [class="Cssh"] floating enable, border normal
+for_window [class="XTerm"] floating enable, border normal
+for_window [class="feh"] floating enable, border normal
+for_window [class="Wine"] move to workspace $tag6
+for_window [class="Pidgin"] move to workspace $tag5
+for_window [class="retroarch"] move to scratchpad
+
+#bindsym work
+bindsym $mod+Control+Prior exec "cd ~/dev/git/interfaceliftdownloader/ ; ./interfacelift.sh -c ./wallpaper.conf"
+bindsym $mod+Control+Next exec "~/dev/git/interfaceliftdownloader/interfacelift.sh -sc ~/dev/git/interfaceliftdownloader/wallpaper.conf"
+
+#assign workspace to screens
+workspace $tag1 output HDMI-1
+workspace $tag2 output HDMI-2
+workspace $tag3 output HDMI-2
+workspace $tag4 output HDMI-2
+workspace $tag5 output HDMI-2
+
+# exec startup apps
+
+exec --no-startup-id i3-msg 'exec thunderbird'
+exec --no-startup-id i3-msg 'exec google-chrome-stable &'
+exec --no-startup-id i3-msg 'workspace $tag4; exec termite -e "screen -rd weechat &"'
+exec --no-startup-id i3-msg 'workspace $tag2; exec termite'

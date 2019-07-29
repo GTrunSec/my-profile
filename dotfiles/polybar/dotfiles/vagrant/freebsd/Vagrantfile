@@ -1,0 +1,36 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "generic/freebsd11"
+
+  config.vm.provider "virtualbox" do |vb|
+  # Customize the amount of memory on the VM:
+    vb.name = "freebsd_dotfiles"
+    vb.memory = "1024"
+    vb.cpus = 1
+  end
+
+  config.vm.provision "shell", inline: <<-SHELL
+  env ASSUME_ALWAYS_YES=YES pkg install ansible git
+  ln -s /usr/local/bin/python2 /usr/bin/python
+  echo 'hostname="freebsd"' >> /etc/rc.conf
+  hostname freebsd
+  # DOTFILES DIR
+  mkdir -p /home/vagrant/dotfiles
+  SHELL
+
+  config.vm.synced_folder "../../", "/home/vagrant/dotfiles/", type: "rsync", rsync__exclude: [".git/", ".vagrant.d/"]
+
+  $script = <<-SCRIPT
+  # PREP
+  touch ~/.viminfo; rm ~/.viminfo
+  touch ~/.vimrc; rm ~/.vimrc
+  # EXEC
+  cd $HOME/dotfiles
+  ./install.sh server
+  #CHANGE SH LINE : chsh -s /usr/local/bin/zsh -p ?? how to use crypt
+  SCRIPT
+  config.vm.provision "shell", inline: $script, privileged: false
+
+end

@@ -1,0 +1,19 @@
+sudo: required
+
+services:
+  - docker
+
+branches:
+  only:
+    - master
+    - dev
+
+install:
+  - docker build -t archlinux/dotfiles -f docker/archlinux/Dockerfile .
+  - docker build -t debian/dotfiles -f docker/debian/Dockerfile .
+  - docker build -t centos/dotfiles -f docker/centos/Dockerfile .
+
+script:
+  - docker run archlinux/dotfiles dotfiles/docker/archlinux/test.sh
+  - docker run debian/dotfiles dotfiles/docker/debian/test.sh
+  - docker run centos/dotfiles dotfiles/docker/centos/test.sh

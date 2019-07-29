@@ -1,0 +1,21 @@
+---
+- name: Install Numix Theme
+  packer: name={{item}} state=present
+  with_items:
+    - numix-themes-darkblue
+    - vibrancy-colors
+
+- name: Create gtk conf dir
+  file: path=~/.config/gtk-3.0/ state=directory
+
+- name: Configure GTK
+  copy: src=files/settings.ini dest=~/.config/gtk-3.0/settings.ini backup=yes
+
+- name: Configure Qt as GTK theme
+  copy: src=files/Trolltech.conf dest=~/.config/Trolltech.conf backup=yes
+
+- name: Update font cache
+  shell: creates=.Xdefaults fc-cache -f
+
+- name: Link Xdefaults
+  file: src=~/.Xresources dest=~/.Xdefaults state=link force=yes

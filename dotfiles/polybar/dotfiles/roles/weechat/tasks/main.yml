@@ -1,0 +1,62 @@
+---
+- name: Install weechat
+  package: name={{item}} state=present
+  with_items:
+    - screen
+    - weechat
+  become: True
+
+- name: Init weechat in .xprofile
+  blockinfile:
+    path: ~/.xprofile
+    create: True
+    marker: "### {mark} DOTFILES weechat ###"
+    content: |
+      screen -DmS weechat /usr/bin/weechat &
+  when: ansible_user_id != "vagrant"
+
+- name: Start weechat
+  shell: screen -DmS weechat /usr/bin/weechat &
+  changed_when: False
+
+- name: Test if weechat fifo is enable
+  stat: path='~/.weechat/weechat_fifo'
+  register: stat_fifo
+
+- debug:
+    msg: "Please active fifo with '/fifo enable' in weechat"
+  when: not stat_fifo.stat.exists
+
+- name: Theme weechat
+  shell: creates=~/.weechat/themed echo {{item}} >~/.weechat/weechat_fifo
+  with_items:
+    - '*/bar hide nicklist'
+    - '*/bar show title'
+    - '*/bar hide status'
+    - '*/bar hide buflist'
+    - '*/script install colorize_nicks.py highmon.pl buffers.pl'
+    - '*/set weechat.look.separator_horizontal " "'
+    - '*/set weechat.look.prefix_suffix " "'
+    - '*/set buffers.color.hotlist_message_fg 7'
+    - '*/set buffers.color.current_bg 240'
+    - '*/set buffers.color.current_fg white'
+    - '*/set buffers.look.show_number off'
+    - '*/set weechat.bar.status.color_bg 0'
+    - '*/set weechat.bar.title.color_bg 0'
+    - '*/set weechat.color.chat_nick_colors 1,2,3,4,5,6'
+    - '*/set weechat.color.chat_highlight_bg red'
+    - '*/set weechat.color.chat_highlight black'
+    - '*/set weechat.bar.buffers.position top'
+    - '*/set weechat.bar.input.items "            ,[input_search],[input_paste],input_text"'
+    - '*/set weechat.bar.input.color_delim 240'
+    - '*/set weechat.look.prefix_error "✘"'
+    - '*/set weechat.look.prefix_join ""'
+    - '*/set weechat.look.prefix_quit ""'
+    - '*/set weechat.look.read_marker none'
+    - '*/set env TERM screen-256color'
+    - '*/set weechat.look.buffer_time_format \${color:252}%H\${color:245}%M\${color:240}%S'
+    - '*/save'
+    - '*/reload'
+
+- name: Create themed file
+  file: path=~/.weechat/themed state=touch

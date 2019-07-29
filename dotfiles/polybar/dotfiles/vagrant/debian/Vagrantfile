@@ -1,0 +1,47 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "debian/jessie64"
+  config.vm.hostname = "debian"
+  config.vm.provider "virtualbox" do |vb|
+    # Display the VirtualBox GUI when booting the machine
+    #vb.gui = true
+  
+    # Customize the amount of memory on the VM:
+    vb.name = "debian_dotfiles"
+    vb.memory = "1024"
+    vb.cpus = 1
+  end
+
+  config.vm.provision "shell", inline: <<-SHELL
+    # LOCALES
+    apt-get update && apt-get install -y locales
+    localedef -i fr_FR -c -f UTF-8 -A /usr/share/locale/locale.alias fr_FR.UTF-8
+    echo 'LANG="fr_FR.UTF-8"' > /etc/locale.conf
+    # KEYBOARD
+    loadkeys fr
+    localectl set-keymap fr
+    localectl set-x11-keymap fr
+    # DEPS
+    echo 'deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main' >> /etc/apt/sources.list
+    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
+    apt update
+    apt install git ansible -y
+    # DOTFILES DIR
+    mkdir -p /home/vagrant/dotfiles
+  SHELL
+
+  config.vm.synced_folder "../../", "/home/vagrant/dotfiles/", type: "rsync", rsync__exclude: [".git/", ".vagrant.d/"]
+
+  $script = <<-SCRIPT
+  # PREP
+  touch ~/.viminfo; rm ~/.viminfo
+  touch ~/.vimrc; rm ~/.vimrc
+  # EXEC
+  cd $HOME/dotfiles
+  ./install.sh server && echo -e "vagrant\n/usr/bin/zsh" | chsh
+  SCRIPT
+
+  config.vm.provision "shell", inline: $script, privileged: false
+end
