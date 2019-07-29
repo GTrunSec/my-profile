@@ -2773,8 +2773,8 @@ please test your init file when you modified done.
 ** Linux
 #+begin_src emacs-lisp :tangle yes
 (use-package linux
-:load-path "./setup")
-:if (memq window-system '(x)
+:load-path "./setup"
+:if (eq system-type 'gnu/linux)
 )
 #+end_src
 

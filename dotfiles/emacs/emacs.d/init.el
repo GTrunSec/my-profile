@@ -1935,8 +1935,8 @@ _p_: projectile        _t_: travis status     _F_: flycheck
   )
 
 (use-package linux
-:load-path "./setup")
-:if (memq window-system '(x)
+:load-path "./setup"
+:if (eq system-type 'gnu/linux)
 )
 
 (use-package undo-propose
