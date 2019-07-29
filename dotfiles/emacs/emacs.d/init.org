@@ -1064,6 +1064,14 @@ CLOSED: [2019-07-25 Thu 18:56]
 *** ☟ NEXT [[https://github.com/SavchenkoValeriy/emacs-powerthesaurus][SavchenkoValeriy/emacs-powerthesaurus: Powerthesaurus integration for Emacs]]
 ** [[https://github.com/manateelazycat/snails][manateelazycat/snails: A modern, easy-to-expand fuzzy search framework]]
 #+begin_src emacs-lisp :tangle yes
+  ;; (use-package snails
+  ;;   :straight (snails :type git
+  ;;                     :host github
+  ;;                     :repo "manateelazycat/snails")
+  ;;   :config
+  ;;   (define-key snails-mode-map [remap next-line] #'snails-select-next-item)
+  ;;   (add-hook 'snails-mode-hook #'xah-fly-insert-mode-activate)  
+  ;;   )
   (use-package snails
     :load-path "./setup/snails"
     :config
@@ -1685,8 +1693,8 @@ The commands are based on http://endlessparentheses.com/improving-projectile-wit
           ;; (use-package lsp-treemacs
           ;;   :straight (lsp-treemacs :type git :host github :repo "emacs-lsp/lsp-treemacs")
           ;;   :commands lsp-treemacs-errors-list)
-     (use-package lsp-treemacs
-       :load-path "./setup/lsp-treemacs")
+     (straight-use-package 'lsp-treemacs)
+
 
    #+end_src
 ** ⚑ WAITING Debug(Dap-mode)

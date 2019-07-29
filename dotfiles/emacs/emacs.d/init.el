@@ -584,6 +584,14 @@
 (use-package company-tabnine
 :straight t)
 
+;; (use-package snails
+;;   :straight (snails :type git
+;;                     :host github
+;;                     :repo "manateelazycat/snails")
+;;   :config
+;;   (define-key snails-mode-map [remap next-line] #'snails-select-next-item)
+;;   (add-hook 'snails-mode-hook #'xah-fly-insert-mode-activate)  
+;;   )
 (use-package snails
   :load-path "./setup/snails"
   :config
@@ -1123,8 +1131,7 @@
      ;; (use-package lsp-treemacs
      ;;   :straight (lsp-treemacs :type git :host github :repo "emacs-lsp/lsp-treemacs")
      ;;   :commands lsp-treemacs-errors-list)
-(use-package lsp-treemacs
-  :load-path "./setup/lsp-treemacs")
+(straight-use-package 'lsp-treemacs)
 
 ;; (use-package dap-mode
 ;; :straight t
