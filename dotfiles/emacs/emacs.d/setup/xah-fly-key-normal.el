@@ -118,7 +118,7 @@ Version 2017-01-21"
          (t nil)))
 
 
-      (defun gtrun-xah-minus-fly-key ()
+(defun gtrun-xah-minus-fly-key ()
         "key `-'"
         (interactive)
         (cond

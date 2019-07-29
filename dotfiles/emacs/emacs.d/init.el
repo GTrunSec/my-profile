@@ -95,11 +95,16 @@
 
   )
 
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/setup"))
-(require 'xah-fly-key-normal)
+(use-package xah-fly-key-normal
+ :load-path "./setup"
+ :if (memq window-system '(mac ns)))
 
 ;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/setup"))
 ;; (require 'xah-fly-key-ergo)
+
+(use-package xah-fly-key-ergo
+:if (eq system-type 'gnu/linux)
+:load-path "./setup")
 
 (straight-use-package 'xah-fly-keys)
 (require 'xah-fly-keys)
@@ -1938,6 +1943,20 @@ _p_: projectile        _t_: travis status     _F_: flycheck
 :load-path "./setup"
 :if (eq system-type 'gnu/linux)
 )
+
+(if (featurep 'cocoa)
+    (progn
+      (setq ns-use-native-fullscreen nil)
+      (setq ns-use-fullscreen-animation nil)
+
+      (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
+
+      (run-at-time "2sec" nil
+                   (lambda ()
+                     (toggle-frame-fullscreen)
+                     )))
+  (require 'fullscreen)
+  (fullscreen))
 
 (use-package undo-propose
   :straight t

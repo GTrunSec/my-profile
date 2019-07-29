@@ -142,9 +142,13 @@ CLOSED: [2019-07-24 Wed 23:42]
 
 * Keybinds
 ** Xah-lee-fly-key
+*** Normal-keyboard
+**** load-path
 #+begin_src emacs-lisp :tangle yes
-  (add-to-list 'load-path (expand-file-name "~/.emacs.d/setup"))
-  (require 'xah-fly-key-normal)
+
+  (use-package xah-fly-key-normal
+   :load-path "./setup"
+   :if (memq window-system '(mac ns)))
 #+end_src
 
 I would like use ErgoDox keyboard on my linux environment
@@ -153,7 +157,7 @@ I would like use ErgoDox keyboard on my linux environment
   ;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/setup"))
   ;; (require 'xah-fly-key-ergo)
 #+end_src
-*** Normal-keyboard
+**** default-layout
 #+begin_src emacs-lisp :tangle "./setup/xah-fly-key-normal.el"
 
    (straight-use-package 'xah-fly-keys)
@@ -273,54 +277,61 @@ I would like use ErgoDox keyboard on my linux environment
     #+end_src
 **** special-key-to-mode-map
     #+begin_src emacs-lisp :tangle "./setup/xah-fly-key-normal.el"
-      (defun gtrun-xah-dot-fly-key ()
-        "key `.'"
-        (interactive)
-        (cond
-         ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
-         ((eq major-mode 'dired-mode) (call-interactively 'hydra-dired/body))
-         ((eq major-mode 'w3m-mode) (call-interactively 'scroll-up))
-         (t nil)))
+            (defun gtrun-xah-dot-fly-key ()
+              "key `.'"
+              (interactive)
+              (cond
+               ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
+               ((eq major-mode 'dired-mode) (call-interactively 'hydra-dired/body))
+               ((eq major-mode 'w3m-mode) (call-interactively 'scroll-up))
+               (t nil)))
 
-      (defun gtrun-xah-fly-key ()
-        "key `p'"
-        (interactive)
-        (cond
-         ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
-         ((eq major-mode 'dired-mode) (call-interactively 'xah-open-in-external-app))
-         (t nil)))
+            (defun gtrun-xah-fly-key ()
+              "key `p'"
+              (interactive)
+              (cond
+               ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
+               ((eq major-mode 'dired-mode) (call-interactively 'xah-open-in-external-app))
+               (t nil)))
 
 
       (defun gtrun-xah-minus-fly-key ()
-        "key `-'"
-        (interactive)
-        (cond
-         ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
-         ((eq major-mode 'dired-mode) (call-interactively 'vinegar/up-directory))
-         (t nil)))
+              "key `-'"
+              (interactive)
+              (cond
+               ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
+               ((eq major-mode 'dired-mode) (call-interactively 'vinegar/up-directory))
+               (t nil)))
 
-      (defun gtrun-xah-slash-fly-key ()
-        "key `/'"
-        (interactive)
-        (cond
-         ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
-         ((eq major-mode 'dired-mode) (call-interactively 'vinegar/dired-diff))
-         ((eq major-mode 'w3m-mode) (call-interactively 'w3m-bookmark-add-current-url))
-         ((eq major-mode 'org-mode) (call-interactively 'helm-org-in-buffer-headings))
-         (t nil)))
+            (defun gtrun-xah-slash-fly-key ()
+              "key `/'"
+              (interactive)
+              (cond
+               ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
+               ((eq major-mode 'dired-mode) (call-interactively 'vinegar/dired-diff))
+               ((eq major-mode 'w3m-mode) (call-interactively 'w3m-bookmark-add-current-url))
+               ((eq major-mode 'org-mode) (call-interactively 'helm-org-in-buffer-headings))
+               (t nil)))
 
 
-      (defun gtrun-xah-comma-fly-key ()
-        "key `,'"
-        (interactive)
-        (cond
-         ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
-         ((eq major-mode 'w3m-mode) (call-interactively 'scroll-down))
-         (t nil)))
+            (defun gtrun-xah-comma-fly-key ()
+              "key `,'"
+              (interactive)
+              (cond
+               ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
+               ((eq major-mode 'w3m-mode) (call-interactively 'scroll-down))
+               (t nil)))
 
-(provide 'xah-fly-key-normal)
+      (provide 'xah-fly-key-normal)
     #+end_src
 *** Ergo layout
+
+#+begin_src emacs-lisp :tangle yes
+(use-package xah-fly-key-ergo
+:if (eq system-type 'gnu/linux)
+:load-path "./setup")
+#+end_src
+
 #+begin_src emacs-lisp :tangle yes
   (straight-use-package 'xah-fly-keys)
   (require 'xah-fly-keys)
@@ -337,7 +348,8 @@ I would like use ErgoDox keyboard on my linux environment
 #+end_src
 **** leader-key-map
 #+begin_src emacs-lisp :tangle "./setup/xah-fly-key-ergo.el"
-      (require 'xah-fly-keys)
+
+ (require 'xah-fly-keys)
 
 (xah-fly--define-keys
    (define-prefix-command 'xah-fly-leader-key-map)
@@ -402,7 +414,7 @@ I would like use ErgoDox keyboard on my linux environment
            ("SPC" . xah-fly-leader-key-map)
            ("q" . quit-window)
            ("a" . counsel-M-x)
-           ("w" . snails)
+           ("e" . snails)
            ("i" . previous-line)
            ("k" . next-line )
            ("b" . backward-word)
@@ -413,7 +425,7 @@ I would like use ErgoDox keyboard on my linux environment
            ("[" . xah-backward-punct )
            ("]" . xah-forward-punct)
            ("g" . set-mark-command)
-           ("y" . undo)
+           ("i" . undo)
            ("v" . xah-paste-or-paste-previous)
            ("c" . xah-copy-line-or-region)
            ("x" . xah-cut-line-or-region)
@@ -2782,7 +2794,23 @@ please test your init file when you modified done.
 #+begin_src emacs-lisp :tangle "./setup/linux.el"
 (provide 'linux)
 #+end_src
+*** snails fullscreen
+#+begin_src emacs-lisp :tangle yes
+(if (featurep 'cocoa)
+    (progn
+      (setq ns-use-native-fullscreen nil)
+      (setq ns-use-fullscreen-animation nil)
 
+      (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
+
+      (run-at-time "2sec" nil
+                   (lambda ()
+                     (toggle-frame-fullscreen)
+                     )))
+  (require 'fullscreen)
+  (fullscreen))
+
+#+end_src
 ** Undo
    #+begin_src emacs-lisp :tangle yes
   (use-package undo-propose
