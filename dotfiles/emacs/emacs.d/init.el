@@ -11,7 +11,7 @@
          'silent 'inhibit-cookies)
       (goto-char (point-max))
       (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
+  (load bootstrap-file nil 'nomessage))	
 
 
 (setq package-enable-at-startup nil
@@ -30,6 +30,13 @@
 
 (straight-use-package 'use-package)
 (setq use-package-always-ensure t)
+
+(setq inhibit-startup-message t)
+(setq initial-scratch-message "")
+
+(require 'server)
+(unless (server-running-p)
+  (server-start))
 
 (use-package use-package-chords
   :straight t
@@ -102,22 +109,29 @@
 ;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/setup"))
 ;; (require 'xah-fly-key-ergo)
 
+(xah-fly--define-keys
+ ;; create a keymap my-keymap
+ (define-prefix-command 'git-keymap)
+ '(
+   ("d" . magit-remove-git-lock-file)
+   ("r" . magit-reset-hard)
+   ;;
+   ))
+(xah-fly--define-keys
+ ;; create a keymap org-keymap
+ (define-prefix-command 'org-keymap)
+ '(
+   ("i" . org-clock-in)
+   ("o" . org-clock-out)
+   ("l" . org-clcok-in-last)
+   ("r" . org-starter-refile-by-key)
+   ("s" .org-starter-select-file-other-window)
+   ;;
+   ))
+
 (use-package xah-fly-key-ergo
 :if (eq system-type 'gnu/linux)
 :load-path "./setup")
-
-(straight-use-package 'xah-fly-keys)
-(require 'xah-fly-keys)
-
-(add-hook 'xah-fly-command-mode-activate-hook
-          (lambda ()
-            (setq xah-fly-insert-state-q nil)))
-;; automatic save buffer when switching to command mode
-;; (add-hook 'xah-fly-command-mode-activate 'xah-fly-save-buffer-if-file)
-
-;;(xah-fly-keys-set-layout "qwerty") 
-
-(xah-fly-keys 1)
 
 (straight-use-package '(lazy-load :type git
                                  :host github
@@ -196,6 +210,8 @@
   (load-theme 'doom-vibrant t)
 )
 
+(straight-use-package 'solarized-theme)
+
 (use-package doom-modeline
    :straight t
    :hook (after-init . doom-modeline-mode)
@@ -257,7 +273,9 @@
                            "~/org-notes/art"
                            "~/org-notes/NSM-GTD"
                            "~/org-notes/post"
+                           "~/org-notes/course"
                            "~/project/gtrun-profile/dotfiles/wallpaper"
+                           "~/project/global-profile/global-doc"
                            ))
 
 (use-package all-the-icons
@@ -303,7 +321,7 @@
     (define-key eyebrowse-mode-map (kbd "M-2") 'eyebrowse-switch-to-window-config-2)
     (define-key eyebrowse-mode-map (kbd "M-3") 'eyebrowse-switch-to-window-config-3)
     (define-key eyebrowse-mode-map (kbd "M-4") 'eyebrowse-switch-to-window-config-4)
-    (define-key eyebrowse-mode-map (kbd "M-4") 'eyebrowse-switch-to-window-config-5)
+    (define-key eyebrowse-mode-map (kbd "M-5") 'eyebrowse-switch-to-window-config-5)
 
     (eyebrowse-mode t)
     (setq eyebrowse-new-workspace t)))
@@ -341,38 +359,73 @@
 )
 
 (use-package nlinum
-    :straight (nlinum :type git :host github :repo "emacsmirror/nlinum")
- ;   :disabled t
-    :config
-    (line-number-mode t)
-    (column-number-mode t)
-    (global-nlinum-mode t)
-    (size-indication-mode t))
+        :straight (nlinum :type git :host github :repo "emacsmirror/nlinum")
+                                              ;   :disabled t
+        :config
+        (line-number-mode t)
+        (column-number-mode t)
+        (global-nlinum-mode t)
+        (size-indication-mode t)
 
-  (use-package nlinum-hl
-    :straight t
-    :after nlinum
-;    :disabled t
-    :hook
-    (nlinum-mode . (lambda () (setq nlinum-highlight-current-line t))))
+        ;; FIX [[http://emacs.1067599.n8.nabble.com/bug-23777-25-0-95-Throwing-error-quot-Selecting-deleted-buffer-quot-in-timer-td400528.html][Emacs - Bugs - bug#23777: 25.0.95; Throwing (error "Selecting deleted buffer") in timer]]
 
- (use-package fill-column-indicator
-    :straight t
-    :config
+        (defun my-nlinum-mode-hook () 
+          (when nlinum-mode 
+            (setq-local nlinum-format 
+                        (concat "%" (number-to-string 
+                                     (ceiling (log (max 1 (count-lines (point-min) 
+                                                                       (point-max))) 
+                                                   10))) 
+                                "d")))) 
+        ;; (defun my-nlinum-mode-hook () 
+        ;;     (setq-local nlinum-format 
+        ;;                 (concat "%" (number-to-string 
+        ;;                              (ceiling (log (max 1 (/ (buffer-size) 80)) 10))) 
+        ;;                         "d")))) 
+        (add-hook 'nlinum-mode-hook #'my-nlinum-mode-hook)  
 
-    ;; Define a global mode but not sure I am going to use it
-    (define-globalized-minor-mode
-      global-fci-mode fci-mode
-      (lambda ()
-        (fci-mode 1))))
+
+        )
+
+      (use-package nlinum-hl
+        :straight t
+        :after nlinum
+                                              ;    :disabled t
+        :hook
+        (nlinum-mode . (lambda () (setq nlinum-highlight-current-line t))))
 
 
-(setq-default truncate-lines t)
+ (use-package visual-fill-column
+   :straight t
+   :defer t
+   :bind (("C-c t v" . visual-fill-column-mode))
+   :init
+   (dolist (hook '(visual-line-mode-hook
+                   prog-mode-hook
+                   text-mode-hook
+ ;;                   help-mode-hook;;未成功
+                   ))
+(add-hook hook #'visual-fill-column-mode))
+   :config (setq-default visual-fill-column-width 110
+                         visual-fill-column-center-text t
+                         visual-fill-column-fringes-outside-margins nil))
+      ;; (use-package fill-column-indicator
+      ;;   :straight t
+      ;;   :config
 
-(defun gtrun/truncate-lines-hook ()
-  (setq truncate-lines nil))
+      ;;   ;; Define a global mode but not sure I am going to use it
+      ;;   (define-globalized-minor-mode
+      ;;     global-fci-mode fci-mode
+      ;;     (lambda ()
+      ;;       (fci-mode 1))))
 
-(add-hook 'text-mode-hook 'gtrun/truncate-lines-hook)
+
+      (setq-default truncate-lines t)
+
+      (defun gtrun/truncate-lines-hook ()
+        (setq truncate-lines nil))
+
+      (add-hook 'text-mode-hook 'gtrun/truncate-lines-hook)
 
 (use-package dired-rainbow
    :straight t
@@ -413,6 +466,8 @@
  ;:config
  ; (setq dired-k-padding 1)
 )
+
+(straight-use-package 'rainbow-mode)
 
 (use-package scrollkeeper
   :straight (scrollkeeper :type git :host github :repo "alphapapa/scrollkeeper.el")
@@ -542,52 +597,93 @@
    "rg -i -M 120 --no-heading --line-number --color never '%s' %s"))
 
 (use-package company
-  :straight t
-  :hook
-  (emacs-lisp-mode . (lambda () (add-to-list (make-local-variable 'company-backends) '(company-elisp))))
-  :config
+       :straight t
+       :hook
+       (emacs-lisp-mode . (lambda () (add-to-list (make-local-variable 'company-backends) '(company-elisp))))
+       :config
 
-  ;; Global
-  (setq company-idle-delay 1
-        company-minimum-prefix-length 1
-        company-show-numbers t
-        company-tooltip-limit 20)
+       ;; Global
+       (setq company-idle-delay 1
+             company-minimum-prefix-length 1
+             company-show-numbers t
+             company-tooltip-limit 20)
 
-  ;; Facing
-  (unless (face-attribute 'company-tooltip :background)
-    (set-face-attribute 'company-tooltip nil :background "black" :foreground "gray40")
-    (set-face-attribute 'company-tooltip-selection nil :inherit 'company-tooltip :background "gray15")
-    (set-face-attribute 'company-preview nil :background "black")
-    (set-face-attribute 'company-preview-common nil :inherit 'company-preview :foreground "gray40")
-    (set-face-attribute 'company-scrollbar-bg nil :inherit 'company-tooltip :background "gray20")
-    (set-face-attribute 'company-scrollbar-fg nil :background "gray40"))
+       ;; Facing
+       (unless (face-attribute 'company-tooltip :background)
+         (set-face-attribute 'company-tooltip nil :background "black" :foreground "gray40")
+         (set-face-attribute 'company-tooltip-selection nil :inherit 'company-tooltip :background "gray15")
+         (set-face-attribute 'company-preview nil :background "black")
+         (set-face-attribute 'company-preview-common nil :inherit 'company-preview :foreground "gray40")
+         (set-face-attribute 'company-scrollbar-bg nil :inherit 'company-tooltip :background "gray20")
+         (set-face-attribute 'company-scrollbar-fg nil :background "gray40"))
 
-  ;; Default backends
-  (setq company-backends '((company-files
-                            company-keywords
-                            company-capf
-                            company-yasnippet)
-                           (company-abbrev company-dabbrev)))
-
-  ;; Activating globally
-  (global-company-mode t))
-
+       ;; Default backends
+       (setq company-backends '((company-files
+                                 company-keywords
+                                 company-capf
+                                 company-yasnippet)
+                                (company-abbrev company-dabbrev)))
+       ;; Use the tab-and-go frontend.
+       ;; Allows TAB to select and complete at the same time.
 
 
-(use-package company-quickhelp
-  :straight t
-  :after company
-  :config
-  (company-quickhelp-mode 1))
+       (defun company-smart-complete ()
+         (interactive)
+         (setq company-echo-metadata-frontend-bypass t)
+         (cond
+          (company-selection-changed
+           (company-complete-selection))
+          (company-candidates
+           (company-select-next)
+           (company-complete-selection))
+          (t
+           (company-auto-begin)
+           (company-select-next))))
 
 
-(straight-use-package '(company-englisp-helper
-                        :type git
-                        :host github
-                        :repo "manateelazycat/company-english-helper"))
+       (add-to-list 'company-backends #'company-tabnine)
+       (add-hook 'comppany-mode #' company-smart-complete)
+       ;; Activating globally
+       (global-company-mode t)
+
+
+
+
+
+)
+
+
+
+     (use-package company-quickhelp
+       :straight t
+       :after company
+       :config
+       (company-quickhelp-mode 1))
+
+
+     (straight-use-package '(company-englisp-helper
+                             :type git
+                             :host github
+                             :repo "manateelazycat/company-english-helper"))
+     (require 'company-english-helper)
 
 (use-package company-tabnine
-:straight t)
+:straight t
+:config
+(setq company-tabnine--disable-next-transform nil)
+(defun my-company--transform-candidates (func &rest args)
+(if (not company-tabnine--disable-next-transform)
+    (apply func args)
+    (setq company-tabnine--disable-next-transform nil)
+    (car args)))
+
+(defun my-company-tabnine (func &rest args)
+(when (eq (car args) 'candidates)
+    (setq company-tabnine--disable-next-transform t))
+(apply func args))
+
+(advice-add #'company--transform-candidates :around #'my-company--transform-candidates)
+(advice-add #'company-tabnine :around #'my-company-tabnine))
 
 ;; (use-package snails
 ;;   :straight (snails :type git
@@ -618,6 +714,10 @@
         helm-move-to-line-cycle-in-source nil ; move to end or beginning of source when reaching top or bottom of source.
         )
   )
+
+(straight-use-package 'imenu-list)
+(require 'imenu-list)
+(global-set-key (kbd "C-'") #'imenu-list-smart-toggle)
 
 (defun set-icon-fonts (CODE-FONT-ALIST)
    "Utility to associate many unicode points with specified fonts."
@@ -750,9 +850,11 @@
   )
 
 (straight-use-package '(color-rg
-                        :type git
-                        :host github
-                        :repo "manateelazycat/color-rg"))
+                             :type git
+                             :host github
+                             :repo "manateelazycat/color-rg"))
+
+(define-key isearch-mode-map (kbd "M-s M-s") 'isearch-toggle-color-rg)
 (require 'color-rg)
 
 (use-package flycheck
@@ -1131,7 +1233,8 @@
        :after company lsp-mode latex-mode
        :config
        (add-to-list 'company-backends 'company-lsp)
-       (add-to-list 'company-backends #'company-tabnine))
+     )
+
 
      ;; (use-package lsp-treemacs
      ;;   :straight (lsp-treemacs :type git :host github :repo "emacs-lsp/lsp-treemacs")
@@ -1148,18 +1251,57 @@
 ;; (require 'dap-go)
 ;; )
 
-(use-package package-lint
-  :straight t)
+(straight-use-package 'package-lint)
 
 ;; Pretty print for lisp
-(use-package ipretty
-  :straight t)
+(straight-use-package 'ipretty)
+
+(straight-use-package 'anaphora)
+(require 'anaphora)
+
+(straight-use-package '(prism :type git
+                                 :host github
+                                 :repo "alphapapa/prism.el"))
+(require 'prism)
+(require 'solarized-theme)
+(prism-set-faces :num 24
+  :desaturations (list 20 40) :lightens (list 0 20 40)
+  :colors (solarized-with-color-variables 'dark
+	    (list red orange yellow green blue cyan violet magenta)))
 
 (use-package slime
 :straight t
 :config
 (setq inferior-lisp-program "/usr/local/bin/sbcl")
 (setq slime-contribs '(slime-fancy)))
+
+(straight-use-package 'ess)
+;;(load "ess-autoloads")
+  ;;(require 'ess-site)
+(require 'ess-r-mode)
+(when (not (boundp 'ess-r-mode-hook))
+  (setq ess-r-mode-hook nil ))
+(defun emacsmate-turn-on-ess-eldoc ()
+  (require 'ess-eldoc))
+(add-hook 'ess-r-mode-hook 'emacsmate-turn-on-ess-eldoc)
+(autoload 'R-mode "ess-site" "ESS" 't)
+
+(add-to-list 'auto-mode-alist '("\\.[rR]\\'" . ess-r-mode))
+
+    (defun gtrun/add-company-backend-ess ()
+      (pop company-backends)
+      (setq-local company-backends
+                  (append '((company-R-args company-R-objects company-R-library
+                                            company-tabnine))
+                          company-backends)))
+
+    (add-hook 'ess-r-mode-hook 'gtrun/add-company-backend-ess)
+
+ ;; (require 'ess-r-mode)
+    ;; (straight-use-package 'ess)
+    ;; (require 'ess)
+    (straight-use-package 'ess-R-data-view)
+    (require 'ess-R-data-view)
 
 (use-package go-mode
 :straight t
@@ -1189,26 +1331,24 @@
 )
 
 (use-package tex-site
-      :ensure nil
-      :after (tex latex)
-      :hook
-      (LaTeX-mode . turn-off-auto-fill)
-      (LaTeX-mode . (lambda () (TeX-fold-mode t)))
-      (LaTeX-mode . flyspell-mode)
-      (LaTeX-mode . LaTeX-math-mode)
-      (LaTeX-mode . outline-minor-mode)
-      (LaTeX-mode . TeX-source-correlate-mode)
-      :config
-      ;; Pdf activated by default
-      (require 'tex)
-      (TeX-global-PDF-mode 1)
-      (setq-default TeX-engine 'xetex)
+  :ensure nil
+  :after (tex latex)
+  :hook
+  (LaTeX-mode . turn-off-auto-fill)
+  (LaTeX-mode . (lambda () (TeX-fold-mode t)))
+  (LaTeX-mode . flyspell-mode)
+  (LaTeX-mode . LaTeX-math-mode)
+  (LaTeX-mode . outline-minor-mode)
+  (LaTeX-mode . TeX-source-correlate-mode)
+  :config
+  ;; Pdf activated by default
+  (require 'tex)
 
-      ;; Diverse
-      (setq-default TeX-master nil)
-      (setq TeX-parse-self t
-            TeX-auto-save t)
-      )
+  ;; Diverse
+  (setq-default TeX-master nil)
+  (setq TeX-parse-self t
+        TeX-auto-save t)
+  )
 
 
 (defun my-latex-mode-setup ()
@@ -1217,6 +1357,74 @@
                       company-backends)))
 
 (add-hook 'TeX-mode-hook 'my-latex-mode-setup)
+(setq tex-compile-commands '(("xelatex %r")))
+(setq tex-command "xelatex")
+(setq org-latex-compiler "xelatex")
+
+(setq-default TeX-engine 'xetex)
+(setq-default TeX-PDF-mode t)
+
+(require 'ox-latex)
+  (add-to-list 'org-latex-classes '("ctexart" "\\documentclass[11pt]{ctexart}
+
+  [NO-DEFAULT-PACKAGES]
+    \\usepackage[utf8]{inputenc}
+    \\usepackage[T1]{fontenc}
+    \\usepackage{fixltx2e}
+    \\usepackage{graphicx}
+    \\usepackage{longtable}
+    \\usepackage{float}
+    \\usepackage{wrapfig}
+    \\usepackage{rotating}
+    \\usepackage[normalem]{ulem}
+    \\usepackage{amsmath}
+    \\usepackage{textcomp}
+    \\usepackage{marvosym}
+    \\usepackage{wasysym}
+    \\usepackage{amssymb}
+    \\usepackage{booktabs}
+    \\usepackage[colorlinks,linkcolor=black,anchorcolor=black,citecolor=black]{hyperref}
+    \\tolerance=1000
+    \\usepackage{listings}
+    \\usepackage{xcolor}
+    \\lstset{
+    %行号
+    numbers=left,
+    %背景框
+    framexleftmargin=10mm,
+    frame=none,
+    %背景色
+    %backgroundcolor=\\color[rgb]{1,1,0.76},
+    backgroundcolor=\\color[RGB]{245,245,244},
+    %样式
+    keywordstyle=\\bf\\color{blue},
+    identifierstyle=\\bf,
+    numberstyle=\\color[RGB]{0,192,192},
+    commentstyle=\\it\\color[RGB]{0,96,96},
+    stringstyle=\\rmfamily\\slshape\\color[RGB]{128,0,0},
+    %显示空格
+    showstringspaces=false
+    }
+    "
+                                            ("\\section{%s}" . "\\section*{%s}")
+                                            ("\\subsection{%s}" . "\\subsection*{%s}")
+                                            ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                                            ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                                            ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
+          ;; {{ export org-mode in Chinese into PDF
+          ;; @see http://freizl.github.io/posts/tech/2012-04-06-export-orgmode-file-in-Chinese.html
+          ;; and you need install texlive-xetex on different platforms
+          ;; To install texlive-xetex:
+          ;;    `sudo USE="cjk" emerge texlive-xetex` on Gentoo Linux
+          ;; }}
+          (setq org-latex-default-class "ctexart")
+          (setq org-latex-pdf-process
+                '(
+                  "xelatex -interaction nonstopmode -output-directory %o %f"
+                  "xelatex -interaction nonstopmode -output-directory %o %f"
+                  "xelatex -interaction nonstopmode -output-directory %o %f"
+                  "rm -fr %b.out %b.log %b.tex auto"))
 
 (use-package company-math
 :straight t
@@ -1224,18 +1432,6 @@
   (latex-mode . (lambda () (add-to-list (make-local-variable 'company-backends) '(company-math-symbols-unicode))))
   (org-mode . (lambda () (add-to-list (make-local-variable 'company-backends) '(company-math-symbols-unicode))))
 )
-
-(use-package nix-mode
-  :straight t
-  :config
-  (add-to-list 'auto-mode-alist '("\\.nix\\'" . nix-mode))
-
-)
-(use-package company-nixos-options
-  :straight t
-  :after nix-mode
-  :config
-(add-to-list 'company-backends 'company-nixos-options))
 
 (use-package bro-mode
   :load-path "./setup"
@@ -1250,135 +1446,288 @@
 (use-package space-vinegar
 :load-path ("./setup"))
 
-(use-package org
-  :straight org-plus-contrib
-  :config
-  (define-key org-mode-map [remap org-set-tags-command] #'counsel-org-tag)
-  ;; Global
-  (setq org-startup-indented t
-        org-enforce-todo-dependencies t
-        org-cycle-separator-lines 2
-        org-blank-before-new-entry '((heading) (plain-list-item . auto))
-        org-insert-heading-respect-content nil
-        org-reverse-note-order nil
-        org-show-following-heading t
-        org-show-hierarchy-above t
-        org-show-siblings '((default))
-        org-id-method 'uuidgen
-        org-deadline-warning-days 30
-        org-table-export-default-format "orgtbl-to-csv"
-        org-src-window-setup 'other-window
-        org-clone-delete-id t
-        org-cycle-include-plain-lists t
-        org-src-fontify-natively t
-        org-src-tab-acts-natively t
-        org-display-inline-images nil
-        org-hide-emphasis-markers t)
+(straight-use-package 'git)
 
-  ;; Activate spelling
-  (add-hook 'org-mode 'flyspell-mode)
-  (add-to-list 'ispell-skip-region-alist '("^#+begin_src" . "^#+end_src"))
+(defun org-git-version ()
+  "The Git version of org-mode.
+Inserted by installing org-mode or when a release is made."
+  (require 'git)
+  (let ((git-repo (expand-file-name
+                   "straight/repos/org/" user-emacs-directory)))
+    (string-trim
+     (git-run "describe"
+              "--match=release\*"
+              "--abbrev=6"
+              "HEAD"))))
 
-  ;; Todo part
-  (setq org-todo-keywords '(;; Baseline sequence
-                            (sequence "☞ TODO(t)" "☟ NEXT(n)" "✰ Important(i)" "⚑ WAITING(w)"  "💬 MEETING(M)" "|" "✔ DONE(d!)" "✘ CANCELED(c@)" "⚔ STARTED(s)")
+(defun org-release ()
+  "The release version of org-mode.
+Inserted by installing org-mode or when a release is made."
+  (require 'git)
+  (let ((git-repo (expand-file-name
+                   "straight/repos/org/" user-emacs-directory)))
+    (string-trim
+     (string-remove-prefix
+      "release_"
+      (git-run "describe"
+               "--match=release\*"
+               "--abbrev=0"
+               "HEAD")))))
+(provide 'org-version)
 
-                            ;; Specific "to complete
-                            (sequence "📄 REVIEW(r)" "📚 RELEASE(R)" " 📩 MAIL(m)" "|" "❤ Love(l)")
+(straight-use-package 'org)
 
-                            ;; Note information
-                            (sequence "|" "✍ NOTE(N)" " 🔮 EVENT(E)" "☕ BREAK(b)"))
+  (push (expand-file-name "~/.emacs.d/straight/repos/org/contrib/lisp") load-path)
 
-        org-todo-state-tags-triggers '(("CANCELLED" ("CANCELLED" . t))
-                                       ("WAITING"   ("WAITING"   . t))
-                                       ("STARTED" ("STARTED" . t)))
+    (require 'org-mac-link)
 
-        ;; Priority definition
-        org-highest-priority ?A
-        org-lowest-priority ?E
-        org-default-priority ?C
 
-        ;; Archiving
-        org-archive-mark-done t
-        org-log-done 'time
-                                        ;org-archive-location "%s_archive::* Archived Tasks"
-        org-time-clocksum-format '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t)
-        org-archive-location (concat "%s_archive_" (format-time-string "%Y" (current-time)) "::")
+        (define-key org-mode-map [remap org-set-tags-command] #'counsel-org-tag)
+        ;; Global
+        (setq org-startup-indented t
+              org-enforce-todo-dependencies t
+              org-cycle-separator-lines 2
+              org-blank-before-new-entry '((heading) (plain-list-item . auto))
+              org-insert-heading-respect-content nil
+              org-reverse-note-order nil
+              org-show-following-heading t
+              org-show-hierarchy-above t
+              org-show-siblings '((default))
+              org-id-method 'uuidgen
+              org-deadline-warning-days 30
+              org-table-export-default-format "orgtbl-to-csv"
+              org-src-window-setup 'other-window
+              org-clone-delete-id t
+              org-cycle-include-plain-lists t
+              org-src-fontify-natively t
+              org-src-tab-acts-natively t
+              org-display-inline-images nil
+              org-hide-emphasis-markers t)
 
-        ;; Refiling
-        org-refile-targets '((org-agenda-files . (:maxlevel . 6)))
-        org-completion-use-ido nil
-        org-refile-use-outline-path 'file
-        org-outline-path-complete-in-steps nil
-        org-refile-allow-creating-parent-nodes 'confirm)
+        ;; Activate spelling
+        (add-hook 'org-mode 'flyspell-mode)
+        (add-to-list 'ispell-skip-region-alist '("^#+begin_src" . "^#+end_src"))
 
-  ;; Change task state to STARTED when clocking in
-  (setq org-clock-in-switch-to-state "⚔ STARTED")
-  ;; Save clock data and notes in the LOGBOOK drawer
-  (setq org-clock-into-drawer t)
-  ;; Removes clocked tasks with 0:00 duration
-  (setq org-clock-out-remove-zero-time-clocks t) 
-  ;; Show the clocked-in task - if any - in the header line
-  (setq org-ellipsis "☯")
-  (setq org-todo-keyword-faces
-        '(("☞ TODO" . (:foreground "#ff39a3" :weight bold))
-          ("⚔ STARTED"  . "#E35DBF")
-          ("✘ CANCELED" . (:foreground "white" :background "#4d4d4d" :weight bold))
-          ("⚑ WAITING" . "pink")
-          ("☕ BREAK" . "gray")
-          ("❤ Love" . (:foreground "blue" 
-                                   ;; :background "#7A586A"
-                                   :weight bold))
-          ("✔ DONE" . "#008080")))
+        ;; Todo part
+        (setq org-todo-keywords '(;; Baseline sequence
+                                  (sequence "☞ TODO(t)" "☟ NEXT(n)" "✰ Important(i)" "⚑ WAITING(w)"  "💬 MEETING(M)" "|" "✔ DONE(d!)" "✘ CANCELED(c@)" "⚔ STARTED(s)")
 
-  (org-babel-do-load-languages 'org-babel-load-languages
-                               '((emacs-lisp . t)
-                                 (dot . t)
-                                 (ditaa . t)
-                                 (R . t)
-                                 (python . t)
-                                 (gnuplot . t)
-                                 (lisp . t)
-                                 (shell . t)
-                                 (org . t)
-                                 (plantuml . t)
-                                 (latex . t)))
+                                  ;; Specific "to complete
+                                  (sequence "📄 REVIEW(r)" "📚 RELEASE(R)" " 📩 MAIL(m)" "|" "❤ Love(l)")
 
-  )
+                                  ;; Note information
+                                  (sequence "|" "✍ NOTE(N)" " 🔮 EVENT(E)" "☕ BREAK(b)"))
+
+              org-todo-state-tags-triggers '(("CANCELLED" ("CANCELLED" . t))
+                                             ("WAITING"   ("WAITING"   . t))
+                                             ("STARTED" ("STARTED" . t)))
+
+              ;; Priority definition
+              org-highest-priority ?A
+              org-lowest-priority ?E
+              org-default-priority ?C
+
+              ;; Archiving
+              org-archive-mark-done t
+              org-log-done 'time
+                                                ;org-archive-location "%s_archive::* Archived Tasks"
+              org-time-clocksum-format '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t)
+              org-archive-location (concat "%s_archive_" (format-time-string "%Y" (current-time)) "::")
+
+              ;; Refiling
+              org-refile-targets '((org-agenda-files . (:maxlevel . 6)))
+              org-completion-use-ido nil
+              org-refile-use-outline-path 'file
+              org-outline-path-complete-in-steps nil
+              org-refile-allow-creating-parent-nodes 'confirm)
+
+        ;; Change task state to STARTED when clocking in
+        (setq org-clock-in-switch-to-state "⚔ STARTED")
+        ;; Save clock data and notes in the LOGBOOK drawer
+        (setq org-clock-into-drawer t)
+        ;; Removes clocked tasks with 0:00 duration
+        (setq org-clock-out-remove-zero-time-clocks t) 
+        ;; Show the clocked-in task - if any - in the header line
+        (setq org-ellipsis "☯")
+        (setq org-todo-keyword-faces
+              '(("☞ TODO" . (:foreground "#ff39a3" :weight bold))
+                ("⚔ STARTED"  . "#E35DBF")
+                ("✘ CANCELED" . (:foreground "white" :background "#4d4d4d" :weight bold))
+                ("⚑ WAITING" . "pink")
+                ("☕ BREAK" . "gray")
+                ("❤ Love" . (:foreground "blue" 
+                                         ;; :background "#7A586A"
+                                         :weight bold))
+                ("✔ DONE" . "#008080")))
+
+        (org-babel-do-load-languages 'org-babel-load-languages
+                                     '((emacs-lisp . t)
+                                       (dot . t)
+                                       (ditaa . t)
+                                       (R . t)
+                                       (python . t)
+                                       (gnuplot . t)
+                                       (lisp . t)
+                                       (shell . t)
+                                       (org . t)
+                                       (plantuml . t)
+                                       (latex . t)))
 
 (use-package org-starter
   :straight t
   :config
   (org-starter-def "~/org-notes"
     :files
-    ("gtd.org" :agenda t)
-    ("notes.org" :agenda t :required nil)
-    ("myself.org" :agenda t))
+    ("gtd.org" :agenda t :key "g" :refile (:maxlevel . 5))
+    ("notes.org" :agenda t :key "n" :refile (:maxlevel .5 ) :required nil)
+    ("myself.org" :agenda t)
+    )
 
   (org-starter-def "~/org-notes/NSM-GTD"
     :files
     ("NsmOrg.org" :agenda t)
-    ("workflow.org" :agenda t :required nil))
+    ;;  ("workflow.org" :agenda t :required nil)
+    )
   (org-starter-def "~/.emacs.d"
     :files
-    ("init.org" :agenda t)
-    ("nix.org" :agenda t)
+    ("init.org" :key "i" :refile (:maxlevel . 5))
+    ("nix.org" :key "x" :refile (:maxlevel . 5))
     )
-  (org-starter-def "~/org-notes/post/global-init.org"
-    :key "g"
-    :refile (:maxlevel . 5))
-
-  (org-starter-def "~/org-notes/post/LearnNix.org"
-    :key "n"    
-    :refile (:maxlevel . 5))
+  (org-starter-def "~/project/global-profile/global-doc/global-init.org")
   :bind
   (
-  ("C-c e" . org-starter-select-file))
-  ;; ("C-c e" . org-starter-refile-by-key))
+   ("C-c e" . org-starter-select-file))
+  ;; "C-c e" . org-starter-refile-by-key))
   )
 
-(use-package org-super-agenda
-  :straight t)
+(straight-use-package 'org-super-agenda)
+(require 'org-super-agenda) 
+
+;; org-agenda window dedication
+(add-hook 'org-agenda-mode-hook
+          (lambda ()
+            (interactive)
+            (set-window-dedicated-p (selected-window) 1)))
+
+(require 'org-habit)
+  (setq org-agenda-span 'day)
+  (setq org-agenda-time-grid
+        '((daily today)
+          ))
+  (setq 
+   org-agenda-skip-scheduled-if-done t
+   org-agenda-skip-deadline-if-done t
+   org-agenda-include-deadlines t
+   org-agenda-include-diary nil
+   org-agenda-block-separator nil
+   org-agenda-compact-blocks t
+   org-agenda-start-with-log-mode t)
+
+(setq org-super-agenda-groups
+      '((:habit t)
+        (:name "Next Items"
+               :time-grid t
+               :tag ("NEXT" "outbox"))
+        (:name "Important"
+               :priority "A")
+        (:name "Quick Picks"
+               :effort< "0:30")
+   (:name "Waiting..."
+                   :todo " WAITING"
+                   :order 98)
+            (:name "Due today"
+                   :deadline today)
+            (:name "Overdue"
+                   :deadline past)
+            (:name "Due soon"
+                   :deadline future)
+            ;; (:discard (:anything t))
+        (:priority<= "B"
+                     :scheduled future
+                     :order 1)))
+  ;; (setq org-agenda-custom-commands
+  ;;       '(("z" "Super zaen view"
+  ;;          ((agenda "" ((org-agenda-span 'day)
+  ;;                       (org-super-agenda-groups
+  ;;                        '((:name "Today"
+  ;;                                 :time-grid t
+  ;;                                 :date today
+  ;;                                 :todo "TODO"
+  ;;                                 :scheduled today
+  ;;                                 :order 1)))))
+  ;;           (alltodo "" ((org-agenda-overriding-header "")
+  ;;                        (org-super-agenda-groups
+  ;;                         '((:name "Next to do"
+  ;;                                  :todo "NEXT"
+  ;;                                  :order 1)
+  ;;                           (:name "Important"
+  ;;                                  :tag "Important"
+  ;;                                  :priority "A"
+  ;;                                  :order 6)
+  ;;                           (:name "Due Today"
+  ;;                                  :deadline today
+  ;;                                  :order 2)
+  ;;                           (:name "Due Soon"
+  ;;                                  :deadline future
+  ;;                                  :order 8)
+  ;;                           (:name "Overdue"
+  ;;                                  :deadline past
+  ;;                                  :order 7)
+  ;;                           (:name "Assignments"
+  ;;                                  :tag "Assignment"
+  ;;                                  :order 10)
+  ;;                           (:name "Issues"
+  ;;                                  :tag "Issue"
+  ;;                                  :order 12)
+  ;;                           (:name "Projects"
+  ;;                                  :tag "Project"
+  ;;                                  :order 14)
+  ;;                           (:name "Emacs"
+  ;;                                  :tag "Emacs"
+  ;;                                  :order 13)
+  ;;                           (:name "Research"
+  ;;                                  :tag "Research"
+  ;;                                  :order 15)
+  ;;                           (:name "To read"
+  ;;                                  :tag "Read"
+  ;;                                  :order 30)
+  ;;                           (:name "Waiting"
+  ;;                                  :todo "WAITING"
+  ;;                                  :order 20)
+  ;;                           (:name "trivial"
+  ;;                                  :priority<= "C"
+  ;;                                  :tag ("Trivial" "Unimportant")
+  ;;                                  :todo ("SOMEDAY" )
+  ;;                                  :order 90)
+  ;;                           (:discard (:tag ("Chore" "Routine" "Daily")))))))))))
+
+  ;;   (setq org-super-agenda-groups
+  ;;         '((:habit t)
+  ;;           ;; (:name "Next Items"
+  ;;           ;;        :time-grid t
+  ;;           ;;        :tag ("NEXT" "outbox"))
+
+  ;;           (:name "Important"
+  ;;                  :priority "A"
+  ;;       ;;           :discard (:anything t)
+  ;; )
+
+  ;;           ;; (:name "Quick Picks"
+  ;;           ;;        :effort< "0:30")
+  ;;           ;; (:priority<= "B"
+  ;;           ;;              :scheduled future
+  ;;           ;;              :order 1)
+  ;;           (:name "Waiting..."
+  ;;                  :todo " WAITING"
+  ;;                  :order 98)
+  ;;           (:name "Due today"
+  ;;                  :deadline today)
+  ;;           (:name "Overdue"
+  ;;                  :deadline past)
+  ;;           (:name "Due soon"
+  ;;                  :deadline future)
+  ;;           ;; (:discard (:anything t))
+  ;;           ))
 
 (straight-use-package '(org-ql
                          :type git
@@ -1433,16 +1782,18 @@
 )
 
 (use-package ox-latex
-  :ensure nil
-  :after ox
-  :config
-  (setq org-latex-listings t
-        org-export-with-LaTeX-fragments t
-        org-latex-pdf-process (list "latexmk -shell-escape -bibtex -f -pdf %f")))
+    :ensure nil
+    :after ox
+    :config
+    (setq org-latex-listings t
+          org-export-with-LaTeX-fragments t
+    ;      org-latex-pdf-process (list "latexmk -shell-escape -bibtex -f -pdf %f")
+)
+)
 
 (use-package ox-pandoc
   :straight t
-  :disabled t
+  ;;:disabled t
   :defines (org-pandoc-options-for-docx org-pandoc-options-for-beamer-pdf org-pandoc-options-for-latex-pdf)
   :config
   ;; default options for all output formats
@@ -1454,12 +1805,63 @@
         org-pandoc-options-for-latex-pdf '((pdf-engine . "xelatex"))))
 
 (setq org-publish-project-alist
-        '(("org"
-           :base-directory "~/org-notes/NSM-GTD"
-           :publishing-function org-html-publish-to-html
-           :publishing-directory "~/Dropbox/application/blog/public/post"
-           :include ["workflow.org"]
-)))
+      '(("NSM"
+         :base-directory "~/org-notes/NSM-GTD"
+         :publishing-function org-html-publish-to-html
+         :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
+         :include ["workflow.org"]
+         )
+        ("init"
+         :base-directory "~/.emacs.d"
+         :publishing-function org-html-publish-to-html
+         :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
+         )
+        ("art"
+         :base-directory "~/org-notes/art"
+         :publishing-function org-html-publish-to-html
+         :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
+         )
+        ("course"
+         :base-directory "~/org-notes/course"
+         :publishing-function org-html-publish-to-html
+         :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
+         )
+        ))
+
+(require 'ox)
+(defun my-html-mark-tag (text backend info)
+  "Transcode :blah: into <mark>blah</mark> in body text."
+  (when (org-export-derived-backend-p backend 'html)
+    (let ((text (replace-regexp-in-string "[^\\w]\\(:\\)[^\n\t\r]+\\(:\\)[^\\w]" "<mark>"  text nil nil 1 nil)))
+      (replace-regexp-in-string "[^\\w]\\(<mark>\\)[^\n\t\r]+\\(:\\)[^\\w]" "</mark>" text nil nil 2 nil))))
+
+(add-to-list 'org-export-filter-plain-text-functions 'my-html-mark-tag)
+
+(defun my-html-mark-tag (text backend info)
+  "Transcode :blah: into <mark>blah</mark> in body text."
+  (when (org-export-derived-backend-p backend 'html)
+    (let ((text (replace-regexp-in-string "[^\\w]\\(:\\)[^\n\t\r]+\\(:\\)[^\\w]" "<mark>"  text nil nil 1 nil)))
+      (replace-regexp-in-string "[^\\w]\\(<mark>\\)[^\n\t\r]+\\(:\\)[^\\w]" "</mark>" text nil nil 2 nil))))
+
+(add-to-list 'org-export-filter-plain-text-functions 'my-html-mark-tag)
+
+(org-add-link-type "audio" #'ignore #'endless/export-audio-link)
+
+(defun endless/export-audio-link (path desc format)
+  "Export org audio links to hmtl."
+  (cl-case format
+    (html (format 
+           "<audio preload=\"auto\"> <source src=\"https://www.gtrun.org/music/%s\">%s</audio>"
+           path (or desc "")))
+
+    ;; README: hugo music file path
+    (md (format
+         "<audio class=\"wp-audio-shortcode\"  loop=\"1\"  preload=\"auto\" style=\"width: 100%%;\" controls> <source src=\"https://www.gtrun.org/music/%s\">%s</audio>"
+         path (or desc "")))
+    (latex (format "(HOW DO I EXPORT AUDIO TO LATEX? \"%s\")" path))))
+
+(straight-use-package 'htmlize)
+(require 'htmlize)
 
 (straight-use-package 'posframe)
 (require 'posframe)
@@ -1928,6 +2330,8 @@ _p_: projectile        _t_: travis status     _F_: flycheck
 ;; 高亮当前行
 (global-hl-line-mode t)
 
+;; (setq org-hide-block-startup t)
+
 ;(remove-hook 'find-file-hooks 'vc-find-file-hook)
 
 (use-package eww
@@ -1944,24 +2348,54 @@ _p_: projectile        _t_: travis status     _F_: flycheck
 :if (eq system-type 'gnu/linux)
 )
 
-(if (featurep 'cocoa)
-    (progn
-      (setq ns-use-native-fullscreen nil)
-      (setq ns-use-fullscreen-animation nil)
-
-      (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
-
-      (run-at-time "2sec" nil
-                   (lambda ()
-                     (toggle-frame-fullscreen)
-                     )))
-  (require 'fullscreen)
-  (fullscreen))
-
 (use-package undo-propose
   :straight t
   :commands (undo-propose)
   :bind ("C-x u" . undo-propose))
+
+(defun infinity-apply-theme (theme name)
+    (let
+        ((class '((class color) (min-colors 89)))
+         (act1          (if (eq theme 'dark) (if (has-true-color) "#222226" "#121212") (if (has-true-color) "#e7e7e7" "#d7dfff")))
+         (act2          (if (eq theme 'dark) (if (has-true-color) "#1c48ad" "#444444") (if (has-true-color) "#bcdfff" "#afafd7")))
+         (base          (if (eq theme 'dark) (if (has-true-color) "#C0C5CC" "#b2b2b2") (if (has-true-color) "#555555" "#5f5f87")))
+         (base-dim      (if (eq theme 'dark) (if (has-true-color) "#616A73" "#585858") (if (has-true-color) "#9a9a9a" "#afafd7")))
+         (bg1           (if (eq theme 'dark) (if (has-true-color) "#282c34" "#262626") (if (has-true-color) "#f4f4f4" "#ffffff")))
+         ;; (bg1           (if (eq theme 'dark) (if (has-true-color) "#2B2C30" "#262626") (if (has-true-color) "#f4f4f4" "#ffffff")))
+         (bg11          (if (eq theme 'dark) (if (has-true-color) "#31343D" "#262626") (if (has-true-color) "#EBEBEB" "#ffffff")))
+         (bg12          (if (eq theme 'dark) (if (has-true-color) "#34373D" "#262626") (if (has-true-color) "#E0E0E0" "#ffffff")))
+         (bg12b         (if (eq theme 'dark) (if (has-true-color) "#2D3848" "#262626") (if (has-true-color) "#d2E2Eb" "#ffffff")))
+         (bg13          (if (eq theme 'dark) (if (has-true-color) "#1B1C1F" "#262626") (if (has-true-color) "#D4D4D4" "#ffffff")))
+         (bg14          (if (eq theme 'dark) (if (has-true-color) "#404147" "#262626") (if (has-true-color) "#C7C7C7" "#ffffff")))
+         (bg15          (if (eq theme 'dark) (if (has-true-color) "#333540" "#262626") (if (has-true-color) "#C7C7C7" "#ffffff")))
+         (bg2           (if (eq theme 'dark) (if (has-true-color) "#212329" "#1c1c1c") (if (has-true-color) "#e9e9e9" "#e4e4e4")))
+         (bg3           (if (eq theme 'dark) (if (has-true-color) "#0a1014" "#121212") (if (has-true-color) "#dedede" "#d0d0d0")))
+         (bg4           (if (eq theme 'dark) (if (has-true-color) "#080a14" "#080808") (if (has-true-color) "#dadada" "#bcbcbc")))
+         (border        (if (eq theme 'dark) (if (has-true-color) "#565C66" "#111111") (if (has-true-color) "#aaaaaa" "#b3b9be")))
+
+
+      (custom-theme-set-faces
+       name
+
+    ;;;;; company
+       `(company-echo-common ((,class (:background ,base :foreground ,bg1))))
+       `(company-preview ((,class (:foreground ,ttip-dim :background ,bg2))))
+       `(company-preview-active-face ((,class (:foreground ,base :background ,ttip-bg))))
+       `(company-preview-common ((,class (:inherit company-preview))))
+       `(company-preview-search ((,class (:inherit match))))
+       `(company-scrollbar-bg ((,class (:background ,bg2))))
+       `(company-scrollbar-fg ((,class (:background ,act2))))
+       `(company-template-field ((,class (:inherit region))))
+       `(company-tooltip ((,class (:background ,back-border :foreground ,base))))
+       `(company-tooltip-annotation ((,class (:foreground ,type))))
+       `(company-tooltip-common ((,class (:background ,back-border :foreground ,keyword))))
+       `(company-tooltip-common-selection ((,class (:foreground ,base))))
+       `(company-tooltip-mouse ((,class (:inherit highlight))))
+       `(company-tooltip-search ((,class (:inherit match))))
+       `(company-tooltip-selection ((,class (:background ,ttip-sl :foreground ,base))))
+
+       )
+)))
 
 (defun gtrun-open-in-terminal ()
   "Open the current dir in a new terminal window.

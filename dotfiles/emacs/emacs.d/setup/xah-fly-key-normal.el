@@ -14,27 +14,28 @@
 (require 'xah-fly-keys)
 
 (xah-fly--define-keys
-   (define-prefix-command 'xah-fly-leader-key-map)
-   '(
-     ("2" . org-keymap)
-     ("8" . my-keymap)
-     ("fr" . counsel-recentf)
-     ;;("<tab>" . spacemacs/alternate-buffer)
-     ("ff" . counsel-fd-file-jump)
-     ("fj" . counsel-fd-dired-jump)
-     ("RET" . helm-bookmarks)
-     ;; treemacs
-     ("tt" . treemacs-toggle)
-     ("tf" . treemacs-fine-file)
-     ;; helm
-     ("bb" . switch-to-buffer)
-     ;; isearch
-     ("y" . xah-search-current-word)
-     ;; search
-     ("sa" . counsel-ag)
-     ("sr" . counsel-rg)
-   
-     ))
+ (define-prefix-command 'xah-fly-leader-key-map)
+ '(
+   ("2" . org-keymap)
+   ("8" . git-keymap)
+   ("fr" . counsel-recentf)
+   ;;("<tab>" . spacemacs/alternate-buffer)
+   ("ff" . counsel-fd-file-jump)
+   ("fj" . counsel-fd-dired-jump)
+   ("RET" . helm-bookmarks)
+   ;; treemacs
+   ("tt" . treemacs-toggle)
+   ("tf" . treemacs-fine-file)
+   ;; helm
+   ("bb" . switch-to-buffer)
+   ;; isearch
+   ("y" . xah-search-current-word)
+   ;; search
+   ("sa" . counsel-ag)
+   ("sr" . counsel-rg)
+   ;; imenu
+   ("il" . imenu-list-smart-toggle)
+   ))
 
 ;; edit
 (define-key xah-fly-key-map (kbd "C-a") 'beginning-of-visual-line)

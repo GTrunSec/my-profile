@@ -1,3 +1,15 @@
+(use-package nix-mode
+  :straight t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.nix\\'" . nix-mode))
+
+)
+(use-package company-nixos-options
+  :straight t
+  :after nix-mode
+  :config
+(add-to-list 'company-backends 'company-nixos-options))
+
 (set-face-attribute
  'default nil
  :font (font-spec :name "-PfEd-Fantasque Sans Mono-bold-italic-normal-*-*-*-*-*-m-0-iso10646-1"

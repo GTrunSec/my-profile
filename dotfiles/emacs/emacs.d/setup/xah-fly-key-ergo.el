@@ -1,4 +1,15 @@
+(straight-use-package 'xah-fly-keys)
 (require 'xah-fly-keys)
+
+(add-hook 'xah-fly-command-mode-activate-hook
+          (lambda ()
+            (setq xah-fly-insert-state-q nil)))
+;; automatic save buffer when switching to command mode
+;; (add-hook 'xah-fly-command-mode-activate 'xah-fly-save-buffer-if-file)
+
+;;(xah-fly-keys-set-layout "qwerty") 
+
+(xah-fly-keys 1)
 
 (xah-fly--define-keys
    (define-prefix-command 'xah-fly-leader-key-map)
@@ -55,7 +66,7 @@ Version 2017-01-21"
      ("SPC" . xah-fly-leader-key-map)
      ("q" . quit-window)
      ("a" . counsel-M-x)
-     ("e" . snails)
+     ("w" . snails)
      ("i" . previous-line)
      ("k" . next-line )
      ("b" . backward-word)

@@ -15,7 +15,7 @@
 ;; keywords
 (defconst bro-font-lock-keywords-1
   (list
-   '("\\<\\(a\\(?:dd\\|larm\\)\\|break\\|c\\(?:ase\\|on\\(?:st\\|tinue\\)\\)\\|d\\(?:elete\\|o\\)\\|e\\(?:lse\\|num\\|\\(?:ven\\|xpor\\)t\\)\\|f\\(?:or\\|unction\\)\\|global\\|if\\|local\\|module\\|next\\|of\\|print\\|re\\(?:def\\|turn\\)\\|schedule\\|type\\|wh\\(?:en\\|ile\\)\\)\\>" . font-lock-keyword-face)
+   '("\\<\\(a\\(?:dd\\|larm\\)\\|break\\|c\\(?:ase\\|on\\(?:st\\|tinue\\)\\)\\|d\\(?:elete\\|o\\)\\|e\\(?:lse\\|num\\|\\(?:ven\\|xpor\\)t\\)\\|f\\(?:or\\|unction\\)\\|global\\|if\\|option\\|local\\|module\\|next\\|of\\|print\\|re\\(?:def\\|turn\\)\\|schedule\\|type\\|wh\\(?:en\\|ile\\)\\)\\>" . font-lock-keyword-face)
    '("\\('\\w*'\\)" . font-lock-variable-name-face))
   "Highlighting for basic keywords")
 
@@ -63,7 +63,7 @@
                       ;; blank line ending in '}"
                       (setq cur-indent (- (current-indentation) default-tab-width))
                       (setq not-indented nil))
-                  (if (looking-at "^[ \t]*\\(^event\\|function\\|if\\|else\\|when\\|for\\|export\\|while\\|redef.*{\\|type.*\{\\)")
+                  (if (looking-at "^[ \t]*\\(^event\\|function\\|if\\|else\\|timeout\\|when\\|for\\|export\\|while\\|redef.*{\\|type.*\{\\)")
                       (progn
                         ;; an event, if, for, export, while or redef block
                         (setq cur-indent (+ (current-indentation) default-tab-width))

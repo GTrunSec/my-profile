@@ -1,0 +1,68 @@
+/Users/gtrun/org-notes/post/LearnNix/LearnNix.org:1:#+TITLE: LearnNix
+/Users/gtrun/org-notes/post/LearnNix/LearnNix.org:2:* Nixpkgs
+/Users/gtrun/org-notes/post/LearnNix/LearnNix.org:4:*** ☛ NEXT [#A] [[https://nixos.org/releases/nix/nix-2.2.2/manual/][Nix Package Manager Guide]]
+/Users/gtrun/org-notes/post/LearnNix/LearnNix.org:6:*** [[https://adelbertc.github.io/posts/2017-04-08-first-nix-derivation.html][Adelblog - My first Nix derivation]]
+/Users/gtrun/org-notes/post/LearnNix/LearnNix.org:7:*** [[https://nixos.org/nixos/nix-pills/generic-builders.html][Nix Pills]]
+/Users/gtrun/org-notes/post/LearnNix/LearnNix.org:8:** nixpkgs--fff-repo
+/Users/gtrun/org-notes/post/LearnNix/LearnNix.org:11:Make sure it's in ~pkgs/top-level/all-packages.nix~
+/Users/gtrun/org-notes/post/LearnNix/LearnNix.org:13:nix-env -i pkg-name -f <path to your local nixpkgs folder>
+/Users/gtrun/org-notes/post/LearnNix/LearnNix.org:17:sudo nixos-rebuild switch -I nixpkgs=/etc/nixos/nixpkgs
+/Users/gtrun/org-notes/post/LearnNix/LearnNix.org:18:nix-channel --add https://github.com/rycee/home-manager/archive/master.tar.gz home-manager
+/Users/gtrun/org-notes/post/LearnNix/LearnNix.org:19:nix-channel --update
+/Users/gtrun/org-notes/post/LearnNix/LearnNix.org:21: nix-channel --add https://nixos.org/channels/nixos-19.03 nixos
+/Users/gtrun/org-notes/post/LearnNix/LearnNix.org:22:ln -s .config/nixpkgs/nixpkgs ~/.nix-defexpr/nixpkgs
+/Users/gtrun/org-notes/post/LearnNix/LearnNix.org:23:nix-env -f .config/nixpkgs/nixpkgs
+/Users/gtrun/org-notes/post/LearnNix/LearnNix.org:24:nixos-rebuild switch -I nixpkgs=~/.config/nixpkgs/nixpkgs/
+/Users/gtrun/org-notes/post/LearnNix/LearnNix.org:27:** write-nixpkgs
+/Users/gtrun/org-notes/post/LearnNix/LearnNix.org:33:*** [[https://nixos.wiki/wiki/I3][I3 - NixOS Wiki]]
+/Users/gtrun/org-notes/post/LearnNix/LearnNix.org:35:*** [[https://github.com/NixOS/nixpkgs/issues/10597][python: can not use imperatively installed packages as libraries · Issue #10597 · NixOS/nixpkgs]]
+/Users/gtrun/org-notes/post/LearnNix/LearnNix.org:36:*** [[https://github.com/FRidh/python-on-nix/blob/master/tutorial.md][python-on-nix/tutorial.md at master · FRidh/python-on-nix]]
+/Users/gtrun/org-notes/post/LearnNix/LearnNix.org:37:*** [[https://nixos.wiki/wiki/Python][Python - NixOS Wiki]]
+/Users/gtrun/org-notes/post/LearnNix/LearnNix.org:41:*** ☞ TODO [#A] [[https://github.com/IvanMalison/dotfiles][IvanMalison/dotfiles: Configuration files for XMonad, Emacs, NixOS, Taffybar and more.]]
+/Users/gtrun/org-notes/post/LearnNix/LearnNix.org:42:*** [[https://github.com/sveitser/nixconfig][sveitser/nixconfig: Nixos configuration.]]
+/Users/gtrun/org-notes/post/LearnNix/LearnNix.org:43:*** [[https://github.com/avatarwin/nix-config][avatarwin/nix-config]]
+/Users/gtrun/org-notes/post/LearnNix/LearnNix.org:44:*** [[https://github.com/xtruder/nix-profiles][xtruder/nix-profiles: Configuration profiles for x-truder networks]]
+/Users/gtrun/org-notes/post/LearnNix/LearnNix.org:45:***  Important [[https://github.com/mtrsk/nixos-config/tree/ddd2029dc639b4c8df074e1e05c8971db0758cd2][mtrsk/nixos-config at ddd2029dc639b4c8df074e1e05c8971db0758cd2]] [virual]
+/Users/gtrun/org-notes/post/LearnNix/LearnNix.org:46:*** [[https://github.com/jD91mZM2/dotfiles/tree/fb9867b048126b6e4c08587b55558427f891e6bf/etc/nixos][dotfiles/etc/nixos at fb9867b048126b6e4c08587b55558427f891e6bf · jD91mZM2/dotfiles]] [font]
+/Users/gtrun/org-notes/post/LearnNix/LearnNix.org:47:*** [[https://github.com/rvolosatovs/infrastructure/tree/3bfd3fa5ba0a2e281dc847d52a2563d3e7620eab/nixos][infrastructure/nixos at 3bfd3fa5ba0a2e281dc847d52a2563d3e7620eab · rvolosatovs/infrastructure]]
+/Users/gtrun/org-notes/post/LearnNix/LearnNix.org:49:** [[https://github.com/rycee/home-manager][rycee/home-manager: Manage a user environment using Nix]]
+/Users/gtrun/org-notes/post/LearnNix/LearnNix.org:55: nix-env -f '/etc/'nixos/nixpkgs/ -i -A bro
+/Users/gtrun/org-notes/post/LearnNix/LearnNix.org:58:sudo ln -s ~/.config/nixpkgs/nixpkgs/ /etc/nixos/nixpkgs
+/Users/gtrun/org-notes/post/LearnNix/LearnNix.org:59:** [[https://matthewbauer.us/bauer/][bauer: an Emacs+Nix IDE]]
+/Users/gtrun/org-notes/post/LearnNix/LearnNix.org:60:* Nix-shell
+/Users/gtrun/org-notes/post/LearnNix/LearnNix.org:62:** [[https://github.com/nix-community/nixbox][nix-community/nixbox: NixOS Vagrant boxes [maintainer=@zimbatm]​]]
+/Users/gtrun/org-notes/post/agenda/agenda.org:47:├── LearnNix
+/Users/gtrun/org-notes/post/agenda/agenda.org:123:- nix.org 
+/Users/gtrun/org-notes/post/agenda/agenda.org:124:管理生成 NIX 相关的配置 
+/Users/gtrun/org-notes/post/agenda/agenda.org:162:    ("nix.org" :key "x" :refile (:maxlevel . 5))
+/Users/gtrun/org-notes/post/life-thing/life-things.org:187:- [[https://www.amazon.com/gp/product/B073CF4KRT/ref=ppx_yo_dt_b_asin_image_o02_s00?ie=UTF8&psc=1][Ambertronix LED Desk Table Lamp, Soft Touch Dimmer Control Panel, 5 Level Brightness, 4 Color Modes, 14W, 1-Hour Auto Time Off, 5V/1A, USB Charging Port, US Support (Black) - - Amazon.com]]
+/Users/gtrun/org-notes/course/WGEECN/E.org:30:  包括shar和unshar，用来创建和解包软件发布版本。形式为sharutils-x.y.gz。当前版本是4.2。shar文件不需要使用unshar解包；只需要使用标准的UNIX sh命令就可以了。
+/Users/gtrun/org-notes/course/WGEECN/9.org:16:多年来我一直从互联网上收集一些风趣的谚语，并且使用老牌UNIX程序fortune所使用的格式将它们存储在一个称为Quips的文件里。每个谚语都会使用一行包含%%的行开始。下面是一个例子：
+/Users/gtrun/org-notes/course/WGEECN/5.org:47:Emacs能够根据像/usr/local/share/emacs/site-lisp/foo.el这样的绝对路径来加载文件，但是通常更为方便的方式是直接使用如bo.el这样的文件名，而让Emacs在加载路径（load path）中去找到它。加载路径简单来说就是Emacs用来搜索要加载的文件的目录列表，跟UNIX shell中使用环境变量PATH来找到要执行的程序相似。Emacs的加载路径储存在一个字符串列表变量load-path里。
+/Users/gtrun/org-notes/course/WGEECN/5.org:183:+ 在UNIX shell里：执行emacs -batch -f batch-byte-compile file.el。
+/Users/gtrun/org-notes/course/WGEECN/4.org:308:许多UNIX程序使用了正则，这包括sed，grep，awk以及pert。不幸的是每个程序的正则都或多或少的不一样；但是在所有情况下，大多数字符是非“魔法”的（特别是字母和数字）并且可以被用来搜索他们自己；更长的正则可以由短一些的正则拼接而成。下面是Emacs中使用的正则表达式的语法。
+/Users/gtrun/org-notes/course/WGEECN/2.org:350:在UNIX里，符号链接（symbol link，或者symlink）是一个指向另一个文件的文件。当你查看符号链接的内容时，你实际上得到的是它所指向的文件的内容。
+/Users/gtrun/org-notes/course/WGEECN/10.org:1120:可以使用标准的UNIX工具来帮助你寻找合适的单词。UNIX程序grep，通过给定一个合适的正则表达式，可以帮助从词语文件里找到匹配的词语。大多数UNIX系统都在/usr/dict/words下或者/usr/lib/dict/words下有一个词语文件，或者在GNU系统里的/usr/local/share/dict/words。
+/Users/gtrun/org-notes/course/WGEECN/10.org:1122:如果词语文件中每个单词一行，那么可以通过下面的UNIX命令找到一个五个字母并且以“fas”结尾的单词：
+/Users/gtrun/org-notes/course/WGEECN/10.org:1451:关于start-process的另一件事。当Emacs创建进程的时候，它会通过UNIX的管道或者伪终端（pseudo-ttys，ptys）保持一个对于它的连接（通过它进行输入输出流）。管道对于像egrep这种不需要交互的进程来说更合适，而伪终端对于交互程序更合适--例如像UNIX shell这样的命令解析器。start-process创建的连接的种类被变量process-connection-type控制--nil表示使用管道，t表示伪终端。虽然有点古怪，但是最好每次调用start-process的时候都用let暂时把process-connection-type设置为需要的值，例如：
+/Users/gtrun/org-notes/course/WGEECN/0.org:25:  Stallman and now called "GNU EMACS" or GNUMACS, runs principally under UNIX. It includes
+/Users/gtrun/org-notes/course/hello-emacs/emacs学习笔记.org:409:*** 执行UNIX命令
+/Users/gtrun/org-notes/course/hello-emacs/emacs学习笔记.org:410:    1. 执行一条UNIX命令
+/Users/gtrun/org-notes/course/hello-emacs/emacs学习笔记.org:414:    2. 将文本块作为UNIX命令的输入
+/Users/gtrun/org-notes/course/hello-emacs/emacs学习笔记.org:457:       * 文件重命名 / 移动文件                  :R （与UNIX的mv命令一样）
+/Users/gtrun/org-notes/course/hello-emacs/emacs学习笔记.org:461:       * 在文件上执行UNIX命令                    :! (若要传入的参数不止一个文件名，则可以在命令行中用*来代替该文件名称)
+/Users/gtrun/org-notes/course/hello-emacs/emacs学习笔记.org:493:*** 用Emacs查询UNIX在线文档
+/Users/gtrun/org-notes/course/hello-emacs/emacs学习笔记.org:495:    2. M-x manual-entry RETURN UNIX命令 ERTURN
+/Users/gtrun/org-notes/course/hello-emacs/emacs学习笔记.org:629:      * diff-switches                 :在生成修改报告的时候,把这个变量传递到UNIX的diff命令
+/Users/gtrun/org-notes/course/hello-emacs/elisp.org:8943:       ;; This example shows the behavior on GNU and Unix systems.
+/Users/gtrun/org-notes/course/hello-emacs/elisp.org:9703:		'local表示为Unix socket,这种情况下:host参数可以被忽略
+/Users/gtrun/org-notes/course/hello-emacs/elisp.org:9934:    | (:family local)     | Non-`nil' if local (a.k.a. "UNIX domain") sockets are supported. |
+/Users/gtrun/org-notes/course/hello-emacs/elisp.org:9988:	   serial port的名称(Unix下为/dev/ttyS0,Win下为COM1或\\.\COM10)
+/Users/gtrun/org-notes/course/hello-emacs/elisp.org:10326:	 * 'berkeley-unix
+/Users/gtrun/org-notes/course/hello-emacs/elisp.org:10335:	 * usg-unix-v
+/Users/gtrun/org-notes/course/hello-emacs/elisp.org:10374:	 在搜索路径变量(PATH)中分隔各路径的分隔符. unix类操作系统为":",win下为";"
+/Users/gtrun/org-notes/course/hello-emacs/Emacs中的shell--Eshell使用笔记.org:7:  Eshell是Emacs完全用Elisp实现的类UNIX shell. 由于它完全是由Elisp实现的,因此它具有与Emacs相同的可移植性,而且它可以很自然的与Elisp代码相结合. 事实上,你完全可以在Eshell下运行lisp代码
+/Users/gtrun/org-notes/course/hello-emacs/Emacs中的shell--Eshell使用笔记.org:23:  * Eshell类似于unix的shell,因此若你是在windows下运行Eshell,你会发现像dir,copy这一类cmd.exe执的内置命令无法使用了,取而代之的是ls,cp这一类的unix命令
+/Users/gtrun/org-notes/course/hello-emacs/Emacs_Redux/删除重复的行.org:40:注意到:与UNIX的uniq命令不同的是,在判断重复行时,并不要求重复行是相互毗邻的,若要实现类似uniq的效果,可以使用C-u C-u M-x delete-duplicate-lines.
+/Users/gtrun/org-notes/course/hello-emacs/Emacs_Redux/locate.org:5:locate是一款使用很普遍的unix命令,它允许你在一个预生成的数据库中搜索文件的路径.
+/Users/gtrun/org-notes/course/suricata/eve.org:4: check notation is a file format that is both human-readable and easily Parts by most programming languages many tools can consume Json logstash making it very easy to store and analyze events something like that yolk Sac is just an acronym that refers to the combination of elasticsearch logstash and Cabana no this is Eric at his best out but it does require the Janson live terracotta otherwise it will be built without support for you however I'll Prevail packages include the support even extensible format providing unified feet of a variety of event types these types include alerts question responses similar to what you might see in a DNS requests and responses certificate metadata on TLS connections a data profile seen on supportive protocols packets when running an IPS mode email metadata for messages sent over SMTP SSH connection data such as client and server software and versions internal suricata statistics flow records a more traditional netflow like record with unidirectiona

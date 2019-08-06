@@ -17,6 +17,12 @@
 (global-tree-sitter-live-mode t)
 )
 
+;; FIXME macos can't load org correctly by onece
+
+
+(add-hook 'after-init-hook #'org-reload)
+(add-hook 'after-init-hook #'org-super-agenda-mode)
+
 (set-face-attribute
     'default nil
     :font (font-spec :name "-*-Fantasque Sans Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1"
