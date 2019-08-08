@@ -1,3 +1,9 @@
+(straightuse-package '(snails :type git
+                              :host github
+                              :repo "manateelazycat/snails")
+                     (define-key snails-mode-map [remap next-line] #'snails-select-next-item)
+                     (add-hook 'snails-mode-hook #'xah-fly-insert-mode-activate)
+
 (use-package nix-mode
   :straight t
   :config

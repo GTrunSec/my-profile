@@ -1,3 +1,10 @@
+(use-package snails
+  :load-path "./setup/snails"
+  :config
+  (define-key snails-mode-map [remap next-line] #'snails-select-next-item)
+  (add-hook 'snails-mode-hook #'xah-fly-insert-mode-activate)
+  )
+
 (use-package tree-sitter
 :load-path "~/project/emacs/tree-sitter.el/tree-sitter-0.0.3"
 :load-path "~/project/emacs/tree-sitter.el/langs/python"

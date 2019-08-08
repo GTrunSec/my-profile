@@ -11,7 +11,7 @@
          'silent 'inhibit-cookies)
       (goto-char (point-max))
       (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))	
+  (load bootstrap-file nil 'nomessage))
 
 
 (setq package-enable-at-startup nil
@@ -200,48 +200,39 @@
  ;;    ("E" . ora-ediff-files)
  ;;    ("." . hydra-dired/body))
 
-(setq-default cursor-type 'box)
+(straight-use-package 'doom-themes)
 
-(blink-cursor-mode t)
-
-  (use-package doom-themes
-     :straight t
-     :config
-  (load-theme 'doom-vibrant t)
-)
-
+(load-theme 'doom-vibrant t)
 (straight-use-package 'solarized-theme)
 
-(use-package doom-modeline
-   :straight t
-   :hook (after-init . doom-modeline-mode)
-   :init
-   (setq doom-modeline-icon t
-         doom-modeline-major-mode-icon t
-         doom-modeline-buffer-file-name-style 'truncate-upto-project
-         doom-modeline-persp-name t
-         doom-modeline-checker-simple-format t
+(straight-use-package 'doom-modeline)
+(add-hook 'after-init-hook #'doom-modeline-mode)
 
-         ;; Whether display environment version or not
-         doom-modeline-env-version t
+(setq doom-modeline-icon t
+      doom-modeline-major-mode-icon t
+      doom-modeline-buffer-file-name-style 'truncate-upto-project
+      doom-modeline-persp-name t
+      doom-modeline-checker-simple-format t
 
-         ;; Or for individual languages
-         doom-modeline-env-enable-python t
-         doom-modeline-env-enable-go t
-         doom-modeline-env-enable-rust t
+      ;; Whether display environment version or not
+      doom-modeline-env-version t
 
-         ;; Change the executables to use for the language version string
-         doom-modeline-env-python-executable "python"
-         doom-modeline-env-go-executable "go"
-         doom-modeline-env-rust-executable "rustc"
+      ;; Or for individual languages
+      doom-modeline-env-enable-python t
+      doom-modeline-env-enable-go t
+      doom-modeline-env-enable-rust t
 
-         ;; Whether display irc notifications or not. Requires `circe' package.
-         doom-modeline-irc t
-         doom-modeline-irc-stylize 'identity
+      ;; Change the executables to use for the language version string
+      doom-modeline-env-python-executable "python"
+      doom-modeline-env-go-executable "go"
+      doom-modeline-env-rust-executable "rustc"
 
-         ;;
-         doom-modeline-checker-simple-format t)
-   )
+      ;; Whether display irc notifications or not. Requires `circe' package.
+      doom-modeline-irc t
+      doom-modeline-irc-stylize 'identity
+
+      ;;
+      doom-modeline-checker-simple-format t)
 
 (use-package highlight-indent-guides
   :straight t
@@ -259,24 +250,6 @@
   (beacon-push-mark 10)
   :config
   (beacon-mode +1))
-
-;; (straight-use-package 'deft)
-;; (require 'deft)
-
-(straight-use-package '(helm-deft :type git
-                                  :host github
-                                  :repo "dfeich/helm-deft"))
-
-(require 'helm-deft)
-(setq helm-deft-extension "org")
-(setq helm-deft-dir-list '(
-                           "~/org-notes/art"
-                           "~/org-notes/NSM-GTD"
-                           "~/org-notes/post"
-                           "~/org-notes/course"
-                           "~/project/gtrun-profile/dotfiles/wallpaper"
-                           "~/project/global-profile/global-doc"
-                           ))
 
 (use-package all-the-icons
   :straight t)
@@ -369,20 +342,20 @@
 
         ;; FIX [[http://emacs.1067599.n8.nabble.com/bug-23777-25-0-95-Throwing-error-quot-Selecting-deleted-buffer-quot-in-timer-td400528.html][Emacs - Bugs - bug#23777: 25.0.95; Throwing (error "Selecting deleted buffer") in timer]]
 
-        (defun my-nlinum-mode-hook () 
-          (when nlinum-mode 
-            (setq-local nlinum-format 
-                        (concat "%" (number-to-string 
-                                     (ceiling (log (max 1 (count-lines (point-min) 
-                                                                       (point-max))) 
-                                                   10))) 
-                                "d")))) 
         ;; (defun my-nlinum-mode-hook () 
+        ;;   (when nlinum-mode 
         ;;     (setq-local nlinum-format 
         ;;                 (concat "%" (number-to-string 
-        ;;                              (ceiling (log (max 1 (/ (buffer-size) 80)) 10))) 
+        ;;                              (ceiling (log (max 1 (count-lines (point-min) 
+        ;;                                                                (point-max))) 
+        ;;                                            10))) 
         ;;                         "d")))) 
-        (add-hook 'nlinum-mode-hook #'my-nlinum-mode-hook)  
+        ;; ;; (defun my-nlinum-mode-hook () 
+        ;; ;;     (setq-local nlinum-format 
+        ;; ;;                 (concat "%" (number-to-string 
+        ;; ;;                              (ceiling (log (max 1 (/ (buffer-size) 80)) 10))) 
+        ;; ;;                         "d")))) 
+        ;; (add-hook 'nlinum-mode-hook #'my-nlinum-mode-hook)  
 
 
         )
@@ -537,49 +510,70 @@
 
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
+(straight-use-package 'popwin)
+(require 'popwin)
+
 (use-package counsel
-  :straight t
-  :hook
-  (after-init . ivy-mode)
-  (counsel-grep-post-action . better-jumper-set-jump)
-  :diminish ivy-mode
-  :config
-  (setq counsel-find-file-ignore-regexp "\\(?:^[#.]\\)\\|\\(?:[#~]$\\)\\|\\(?:^Icon?\\)"
-        counsel-describe-function-function #'helpful-callable
-        counsel-describe-variable-function #'helpful-variable
-        ;; Add smart-casing (-S) to default command arguments:
-        counsel-rg-base-command "rg -S --no-heading --line-number --color never %s ."
-        counsel-ag-base-command "ag -S --nocolor --nogroup %s"
-        counsel-pt-base-command "pt -S --nocolor --nogroup -e %s"
-        counsel-find-file-at-point t)
-)
+   :straight t
+   :hook
+   (after-init . ivy-mode)
+   (counsel-grep-post-action . better-jumper-set-jump)
+   :diminish ivy-mode
+   :config
+   (setq counsel-find-file-ignore-regexp "\\(?:^[#.]\\)\\|\\(?:[#~]$\\)\\|\\(?:^Icon?\\)"
+         counsel-describe-function-function #'helpful-callable
+         counsel-describe-variable-function #'helpful-variable
+         ;; Add smart-casing (-S) to default command arguments:
+         counsel-rg-base-command "rg -S --no-heading --line-number --color never %s ."
+         counsel-ag-base-command "ag -S --nocolor --nogroup %s"
+         counsel-pt-base-command "pt -S --nocolor --nogroup -e %s"
+         counsel-find-file-at-point t)
+   )
 
-(use-package ivy
-  :straight t
-  :custom
-  (ivy-re-builders-alist
-   '((t . ivy--regex-plus)))
-  :config
-  (ivy-mode)
-  (setq ivy-display-style 'fancy
-        ivy-use-virtual-buffers t
-        enable-recursive-minibuffers t
-        ivy-use-selectable-prompt t)
-(ivy-set-actions
-   t
-   '(("I" insert "insert")))
-  (ivy-set-occur 'ivy-switch-buffer 'ivy-switch-buffer-occur))
+ (use-package ivy
+   :straight t
+   :custom
+   (ivy-re-builders-alist
+    '((t . ivy--regex-plus)))
+   :config
+   (ivy-mode)
+   (setq ivy-display-style 'fancy
+         ivy-use-virtual-buffers t
+         enable-recursive-minibuffers t
+         ivy-use-selectable-prompt t)
+   (ivy-set-actions
+    t
+    '(("I" insert "insert")))
+   (ivy-set-occur 'ivy-switch-buffer 'ivy-switch-buffer-occur))
 
-(use-package ivy-rich
-  :straight t
-  :config
-  (ivy-rich-mode 1)
-  (setq ivy-format-function #'ivy-format-function-line))
-;;[[https://github.com/gilbertw1/better-jumper][gilbertw1/better-jumper: A configurable jump list implementation for Emacs]]
+ (use-package ivy-rich
+   :straight t
+   :config
+   (ivy-rich-mode 1)
+   (setq ivy-format-function #'ivy-format-function-line))
+ ;;[[https://github.com/gilbertw1/better-jumper][gilbertw1/better-jumper: A configurable jump list implementation for Emacs]]
+
+
 (use-package better-jumper
-  :straight t
-  :config
-  )
+   :straight t
+   )
+
+(setq ivy-display-style 'fancy)
+
+(straight-use-package '(point-history 
+                        :type git 
+                        :host github 
+                        :repo "blue0513/point-history"))
+
+
+(setq point-history-mode 1)
+
+(straight-use-package '(ivy-point-history 
+                        :type git 
+                        :host github 
+                        :repo "SuzumiyaAoba/ivy-point-history"))
+(setq point-history-ignore-buffer "^ \\*Minibuf\\|^ \\*point-history-show*")
+(setq point-history-ignore-major-mode '(emacs-lisp-mode ruby-mode))
 
 (use-package swiper
   :ensure nil
@@ -597,75 +591,69 @@
    "rg -i -M 120 --no-heading --line-number --color never '%s' %s"))
 
 (use-package company
-       :straight t
-       :hook
-       (emacs-lisp-mode . (lambda () (add-to-list (make-local-variable 'company-backends) '(company-elisp))))
-       :config
+  :straight t
+  :hook
+  (emacs-lisp-mode . (lambda () (add-to-list (make-local-variable 'company-backends) '(company-elisp))))
+  :config
 
-       ;; Global
-       (setq company-idle-delay 1
-             company-minimum-prefix-length 1
-             company-show-numbers t
-             company-tooltip-limit 20)
+  ;; Global
+  (setq company-idle-delay 1
+        company-minimum-prefix-length 1
+        company-show-numbers t
+        company-tooltip-limit 20)
 
-       ;; Facing
-       (unless (face-attribute 'company-tooltip :background)
-         (set-face-attribute 'company-tooltip nil :background "black" :foreground "gray40")
-         (set-face-attribute 'company-tooltip-selection nil :inherit 'company-tooltip :background "gray15")
-         (set-face-attribute 'company-preview nil :background "black")
-         (set-face-attribute 'company-preview-common nil :inherit 'company-preview :foreground "gray40")
-         (set-face-attribute 'company-scrollbar-bg nil :inherit 'company-tooltip :background "gray20")
-         (set-face-attribute 'company-scrollbar-fg nil :background "gray40"))
+  ;; Facing
+  (unless (face-attribute 'company-tooltip :background)
+    (set-face-attribute 'company-tooltip nil :background "black" :foreground "gray40")
+    (set-face-attribute 'company-tooltip-selection nil :inherit 'company-tooltip :background "gray15")
+    (set-face-attribute 'company-preview nil :background "black")
+    (set-face-attribute 'company-preview-common nil :inherit 'company-preview :foreground "gray40")
+    (set-face-attribute 'company-scrollbar-bg nil :inherit 'company-tooltip :background "gray20")
+    (set-face-attribute 'company-scrollbar-fg nil :background "gray40"))
 
-       ;; Default backends
-       (setq company-backends '((company-files
-                                 company-keywords
-                                 company-capf
-                                 company-yasnippet)
-                                (company-abbrev company-dabbrev)))
-       ;; Use the tab-and-go frontend.
-       ;; Allows TAB to select and complete at the same time.
-
-
-       (defun company-smart-complete ()
-         (interactive)
-         (setq company-echo-metadata-frontend-bypass t)
-         (cond
-          (company-selection-changed
-           (company-complete-selection))
-          (company-candidates
-           (company-select-next)
-           (company-complete-selection))
-          (t
-           (company-auto-begin)
-           (company-select-next))))
+  ;; Default backends
+  (setq company-backends '((company-files
+                            company-keywords
+                            company-capf
+                            company-yasnippet)
+                           (company-abbrev company-dabbrev)))
+  ;; Use the tab-and-go frontend.
+  ;; Allows TAB to select and complete at the same time.
 
 
-       (add-to-list 'company-backends #'company-tabnine)
-       (add-hook 'comppany-mode #' company-smart-complete)
-       ;; Activating globally
-       (global-company-mode t)
+  (defun company-smart-complete ()
+    (interactive)
+    (setq company-echo-metadata-frontend-bypass t)
+    (cond
+     (company-selection-changed
+      (company-complete-selection))
+     (company-candidates
+      (company-select-next)
+      (company-complete-selection))
+     (t
+      (company-auto-begin)
+      (company-select-next))))
 
 
+  (add-to-list 'company-backends #'company-tabnine)
+  (add-hook 'comppany-mode #' company-smart-complete)
+  ;; Activating globally
+  (global-company-mode t)
+  )
 
+(straight-use-package 'company-quickhelp)
+(setq company-quickhelp-mode 1)
 
+(straight-use-package '(company-englisp-helper
+			   :type git
+			   :host github
+			   :repo "manateelazycat/company-english-helper"))
+   (require 'company-english-helper)
 
-)
-
-
-
-     (use-package company-quickhelp
-       :straight t
-       :after company
-       :config
-       (company-quickhelp-mode 1))
-
-
-     (straight-use-package '(company-englisp-helper
-                             :type git
-                             :host github
-                             :repo "manateelazycat/company-english-helper"))
-     (require 'company-english-helper)
+(straight-use-package '(emacs-powerthesaurus
+                        :type git
+                        :host github
+                        :repo "SavchenkoValeriy/emacs-powerthesaurus"))
 
 (use-package company-tabnine
 :straight t
@@ -684,21 +672,6 @@
 
 (advice-add #'company--transform-candidates :around #'my-company--transform-candidates)
 (advice-add #'company-tabnine :around #'my-company-tabnine))
-
-;; (use-package snails
-;;   :straight (snails :type git
-;;                     :host github
-;;                     :repo "manateelazycat/snails")
-;;   :config
-;;   (define-key snails-mode-map [remap next-line] #'snails-select-next-item)
-;;   (add-hook 'snails-mode-hook #'xah-fly-insert-mode-activate)  
-;;   )
-(use-package snails
-  :load-path "./setup/snails"
-  :config
-  (define-key snails-mode-map [remap next-line] #'snails-select-next-item)
-  (add-hook 'snails-mode-hook #'xah-fly-insert-mode-activate)  
-  )
 
 (use-package helm
   :straight t
@@ -772,6 +745,9 @@
 (defvar my-cache-dir  "~/.emacs.d/.cache")
 (setq amx-save-file (concat my-cache-dir "amx-items"))
 
+(straight-use-package 'multiple-cursors)
+(require 'multiple-cursors)
+
 (use-package iedit
 :straight t
 :config
@@ -799,6 +775,11 @@
 (straight-use-package 'prescient)
 (straight-use-package 'ivy-prescient)
 (straight-use-package 'company-prescient)
+
+(add-hook 'company-mode-hook #'company-prescient-mode)
+(add-hook 'ivy-mode-hook #'ivy-prescient-mode)
+(require 'prescient)
+(add-hook 'after-init-hook #'prescient-persist-mode)
 
 (defvar my-private-dir  "~/.emacs.d/private")
 ;; (defvar +snippet-dir (format "%s/snippets" my-private-dir))
@@ -848,6 +829,9 @@
   (yatemplate-fill-alist)
   (add-hook 'find-file-hook 'auto-insert)
   )
+
+(straight-use-package 'request)
+(require 'request)
 
 (straight-use-package '(color-rg
                              :type git
@@ -1276,7 +1260,6 @@
 (setq slime-contribs '(slime-fancy)))
 
 (straight-use-package 'ess)
-;;(load "ess-autoloads")
   ;;(require 'ess-site)
 (require 'ess-r-mode)
 (when (not (boundp 'ess-r-mode-hook))
@@ -1443,6 +1426,8 @@
   (:map bro-mode-map
         ("C-c C-c" . bro-run)))
 
+(straight-use-package 'jeison)
+
 (use-package space-vinegar
 :load-path ("./setup"))
 
@@ -1573,21 +1558,38 @@ Inserted by installing org-mode or when a release is made."
                                        (plantuml . t)
                                        (latex . t)))
 
+(straight-use-package '(helm-deft :type git
+                                  :host github
+                                  :repo "dfeich/helm-deft"))
+
+(require 'helm-deft)
+(setq helm-deft-extension "org")
+(setq helm-deft-dir-list '(
+                           "~/org-notes/art"
+                           "~/org-notes/NSM-GTD"
+                           "~/org-notes/post"
+                           "~/org-notes/course"
+                           "~/project/gtrun-profile/dotfiles/wallpaper"
+                           "~/project/global-profile/global-doc"
+                           ))
+
 (use-package org-starter
   :straight t
   :config
   (org-starter-def "~/org-notes"
     :files
     ("gtd.org" :agenda t :key "g" :refile (:maxlevel . 5))
-    ("notes.org" :agenda t :key "n" :refile (:maxlevel .5 ) :required nil)
+    ("notes.org" :agenda t :key "n" :refile (:maxlevel .5 ))
     ("myself.org" :agenda t)
+    ("NSM-GTD/workflow.org" :agenda t :required t)
+    ("NSM-GTD/NsmOrg.org" :agenda t :required t)
     )
 
-  (org-starter-def "~/org-notes/NSM-GTD"
-    :files
-    ("NsmOrg.org" :agenda t)
-    ;;  ("workflow.org" :agenda t :required nil)
-    )
+  ;; (org-starter-def "~/org-notes/NSM-GTD"
+  ;;   :files
+  ;;   ("NsmOrg.org" :agenda t)
+  ;;   ("workflow.org" :agenda t :required nil)
+  ;;   )
   (org-starter-def "~/.emacs.d"
     :files
     ("init.org" :key "i" :refile (:maxlevel . 5))
@@ -1609,125 +1611,102 @@ Inserted by installing org-mode or when a release is made."
             (interactive)
             (set-window-dedicated-p (selected-window) 1)))
 
+(defadvice org-agenda (around split-vertically activate)
+  (let ((split-width-threshold 80))  ; or whatever width makes sense for you
+    ad-do-it))
+
 (require 'org-habit)
-  (setq org-agenda-span 'day)
-  (setq org-agenda-time-grid
-        '((daily today)
-          ))
-  (setq 
-   org-agenda-skip-scheduled-if-done t
-   org-agenda-skip-deadline-if-done t
-   org-agenda-include-deadlines t
-   org-agenda-include-diary nil
-   org-agenda-block-separator nil
-   org-agenda-compact-blocks t
-   org-agenda-start-with-log-mode t)
+;; (setq org-agenda-time-grid
+;;       '((daily today)
+;;         ))
+(setq 
+ org-agenda-skip-scheduled-if-done t
+ org-agenda-skip-deadline-if-done t
+ org-agenda-include-deadlines t
+ org-agenda-include-diary nil
+ org-agenda-block-separator nil
+ org-agenda-compact-blo0cks t
+ org-agenda-start-with-log-mode t)
 
-(setq org-super-agenda-groups
-      '((:habit t)
-        (:name "Next Items"
-               :time-grid t
-               :tag ("NEXT" "outbox"))
-        (:name "Important"
-               :priority "A")
-        (:name "Quick Picks"
-               :effort< "0:30")
-   (:name "Waiting..."
-                   :todo " WAITING"
-                   :order 98)
-            (:name "Due today"
-                   :deadline today)
-            (:name "Overdue"
-                   :deadline past)
-            (:name "Due soon"
-                   :deadline future)
-            ;; (:discard (:anything t))
-        (:priority<= "B"
-                     :scheduled future
-                     :order 1)))
-  ;; (setq org-agenda-custom-commands
-  ;;       '(("z" "Super zaen view"
-  ;;          ((agenda "" ((org-agenda-span 'day)
-  ;;                       (org-super-agenda-groups
-  ;;                        '((:name "Today"
-  ;;                                 :time-grid t
-  ;;                                 :date today
-  ;;                                 :todo "TODO"
-  ;;                                 :scheduled today
-  ;;                                 :order 1)))))
-  ;;           (alltodo "" ((org-agenda-overriding-header "")
-  ;;                        (org-super-agenda-groups
-  ;;                         '((:name "Next to do"
-  ;;                                  :todo "NEXT"
-  ;;                                  :order 1)
-  ;;                           (:name "Important"
-  ;;                                  :tag "Important"
-  ;;                                  :priority "A"
-  ;;                                  :order 6)
-  ;;                           (:name "Due Today"
-  ;;                                  :deadline today
-  ;;                                  :order 2)
-  ;;                           (:name "Due Soon"
-  ;;                                  :deadline future
-  ;;                                  :order 8)
-  ;;                           (:name "Overdue"
-  ;;                                  :deadline past
-  ;;                                  :order 7)
-  ;;                           (:name "Assignments"
-  ;;                                  :tag "Assignment"
-  ;;                                  :order 10)
-  ;;                           (:name "Issues"
-  ;;                                  :tag "Issue"
-  ;;                                  :order 12)
-  ;;                           (:name "Projects"
-  ;;                                  :tag "Project"
-  ;;                                  :order 14)
-  ;;                           (:name "Emacs"
-  ;;                                  :tag "Emacs"
-  ;;                                  :order 13)
-  ;;                           (:name "Research"
-  ;;                                  :tag "Research"
-  ;;                                  :order 15)
-  ;;                           (:name "To read"
-  ;;                                  :tag "Read"
-  ;;                                  :order 30)
-  ;;                           (:name "Waiting"
-  ;;                                  :todo "WAITING"
-  ;;                                  :order 20)
-  ;;                           (:name "trivial"
-  ;;                                  :priority<= "C"
-  ;;                                  :tag ("Trivial" "Unimportant")
-  ;;                                  :todo ("SOMEDAY" )
-  ;;                                  :order 90)
-  ;;                           (:discard (:tag ("Chore" "Routine" "Daily")))))))))))
 
-  ;;   (setq org-super-agenda-groups
-  ;;         '((:habit t)
-  ;;           ;; (:name "Next Items"
-  ;;           ;;        :time-grid t
-  ;;           ;;        :tag ("NEXT" "outbox"))
 
-  ;;           (:name "Important"
-  ;;                  :priority "A"
-  ;;       ;;           :discard (:anything t)
-  ;; )
+(setq org-agenda-custom-commands
+      '(("z" "GtruN Agenda"
+         ((agenda "" ((org-agenda-span 'day)
+                      (org-super-agenda-groups
+                       '((:habit t)
+                         (:log t)
+                         (:name "Today List"
+                                :time-grid t
+                                :date today
+                                :todo "☞ TODO"
+                                :scheduled today
+                                :order 1)))))
+          (alltodo "" ((org-agenda-overriding-header "")
+                       (org-super-agenda-groups
+                        '((:name "Next to do"
+                                 :priority>= "B"
+                                 :order 1)
+                          (:name "Important"
+                                 :todo "✰ Important"
+                                 :order 6)
+                          (:name "Due Today"
+                                 :deadline today
+                                 :order 2)
+                          (:name "Due Soon"
+                                 :deadline future
+                                 :order 8)
+                          (:name "Overdue"
+                                 :deadline past
+                                 :order 7)
+                          (:name "Issues"
+                                 :tag "Issue"
+                                 :order 12)
+                          (:name "Projects"
+                                 :tag "Project"
+                                 :order 14)
+                          (:name "Emacs"
+                                 :tag "Emacs"
+                                 :order 13)
+                          (:name "Research"
+                                 :tag "Research"
+                                 :order 15)
+                          (:name "To read"
+                                 :tag "BOOK"
+                                 :order 30)
+                          (:name "Waiting"
+                                 :todo "⚑ WAITING"
+                                 :order 20)
+                          (:name "trivial"
+                                 :priority<= "C"
+                                 :todo ("SOMEDAY")
+                                 :order 90)
+                          (:discard (:tag ("Chore" "Routine" "Daily")))))))))
 
-  ;;           ;; (:name "Quick Picks"
-  ;;           ;;        :effort< "0:30")
-  ;;           ;; (:priority<= "B"
-  ;;           ;;              :scheduled future
-  ;;           ;;              :order 1)
-  ;;           (:name "Waiting..."
-  ;;                  :todo " WAITING"
-  ;;                  :order 98)
-  ;;           (:name "Due today"
-  ;;                  :deadline today)
-  ;;           (:name "Overdue"
-  ;;                  :deadline past)
-  ;;           (:name "Due soon"
-  ;;                  :deadline future)
-  ;;           ;; (:discard (:anything t))
-  ;;           ))
+        ("b" . "BOOK")
+
+        ("bb" "Search tags in todo, note, and archives"
+         search "+{:book\\|books:}")
+
+        ("bd" "BOOK TODO List"
+         search "+{^\\*+\\s-+\\(STARTED\\|☞ TODO\\|WAITING\\)\\s-} +{book\\|books}")
+
+        ("d" "ALL DONE OF TASKS"
+         search "+{^\\*+\\s-+\\(DONE\\|✘ CANCELED\\)\\s-}")
+        ))
+;; WARNING double //
+;;  +{^\*+\s-+\(TODO\|WAITING\):(book):\s-}  +(TODO\|WAITING\) +{:book\|books:}
+;; +{^*+ -+(DONE|WAITING) -}
+
+;; (defmacro eab/search-word (funcname name function &optional funargs)
+;;   "Wrapper for search word interface."
+;;   `(defun ,funcname (word)
+;;      (interactive
+;;       (list (read-string (concat ,name " word: ") (current-word))))
+;;      (,function ,@funargs)))
+
+
+;; (eab/search-word eab/org-agenda-search "agenda search" org-search-view (nil word))
 
 (straight-use-package '(org-ql
                          :type git
@@ -1810,21 +1789,28 @@ Inserted by installing org-mode or when a release is made."
          :publishing-function org-html-publish-to-html
          :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
          :include ["workflow.org"]
+         :exclude "Pattern.org"
+
          )
         ("init"
          :base-directory "~/.emacs.d"
          :publishing-function org-html-publish-to-html
          :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
+         :exclude "Pattern.org"
          )
         ("art"
          :base-directory "~/org-notes/art"
          :publishing-function org-html-publish-to-html
          :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
+         :exclude "Pattern.org"
+
+
          )
         ("course"
          :base-directory "~/org-notes/course"
          :publishing-function org-html-publish-to-html
          :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
+         :exclude "Pattern.org"
          )
         ))
 
@@ -2322,6 +2308,11 @@ _p_: projectile        _t_: travis status     _F_: flycheck
                             :host github
                             :repo "Malabarba/elisp-bug-hunter"))
 
+(setq-default cursor-type 'bar)
+
+(blink-cursor-mode -1)
+(set-cursor-color "yellow1")
+
 (setq-default default-tab-width 4)
 ;; 禁止响铃
 (setq ring-bell-function 'ignore)
@@ -2353,49 +2344,18 @@ _p_: projectile        _t_: travis status     _F_: flycheck
   :commands (undo-propose)
   :bind ("C-x u" . undo-propose))
 
-(defun infinity-apply-theme (theme name)
-    (let
-        ((class '((class color) (min-colors 89)))
-         (act1          (if (eq theme 'dark) (if (has-true-color) "#222226" "#121212") (if (has-true-color) "#e7e7e7" "#d7dfff")))
-         (act2          (if (eq theme 'dark) (if (has-true-color) "#1c48ad" "#444444") (if (has-true-color) "#bcdfff" "#afafd7")))
-         (base          (if (eq theme 'dark) (if (has-true-color) "#C0C5CC" "#b2b2b2") (if (has-true-color) "#555555" "#5f5f87")))
-         (base-dim      (if (eq theme 'dark) (if (has-true-color) "#616A73" "#585858") (if (has-true-color) "#9a9a9a" "#afafd7")))
-         (bg1           (if (eq theme 'dark) (if (has-true-color) "#282c34" "#262626") (if (has-true-color) "#f4f4f4" "#ffffff")))
-         ;; (bg1           (if (eq theme 'dark) (if (has-true-color) "#2B2C30" "#262626") (if (has-true-color) "#f4f4f4" "#ffffff")))
-         (bg11          (if (eq theme 'dark) (if (has-true-color) "#31343D" "#262626") (if (has-true-color) "#EBEBEB" "#ffffff")))
-         (bg12          (if (eq theme 'dark) (if (has-true-color) "#34373D" "#262626") (if (has-true-color) "#E0E0E0" "#ffffff")))
-         (bg12b         (if (eq theme 'dark) (if (has-true-color) "#2D3848" "#262626") (if (has-true-color) "#d2E2Eb" "#ffffff")))
-         (bg13          (if (eq theme 'dark) (if (has-true-color) "#1B1C1F" "#262626") (if (has-true-color) "#D4D4D4" "#ffffff")))
-         (bg14          (if (eq theme 'dark) (if (has-true-color) "#404147" "#262626") (if (has-true-color) "#C7C7C7" "#ffffff")))
-         (bg15          (if (eq theme 'dark) (if (has-true-color) "#333540" "#262626") (if (has-true-color) "#C7C7C7" "#ffffff")))
-         (bg2           (if (eq theme 'dark) (if (has-true-color) "#212329" "#1c1c1c") (if (has-true-color) "#e9e9e9" "#e4e4e4")))
-         (bg3           (if (eq theme 'dark) (if (has-true-color) "#0a1014" "#121212") (if (has-true-color) "#dedede" "#d0d0d0")))
-         (bg4           (if (eq theme 'dark) (if (has-true-color) "#080a14" "#080808") (if (has-true-color) "#dadada" "#bcbcbc")))
-         (border        (if (eq theme 'dark) (if (has-true-color) "#565C66" "#111111") (if (has-true-color) "#aaaaaa" "#b3b9be")))
+(custom-set-faces
+   '(ivy-current-match ((t (:background "grey70" :foreground "DarkOrchid3"))))
+'(ivy-highlight-face             ((t (:background nil :foreground nil :underline unspecified :weight unspecified))))
+   '(ivy-minibuffer-match-face-1 ((t (:underline t :foreground "LightGreen" :inherit bold))))
+   '(ivy-minibuffer-match-face-2 ((t (:underline t :foreground "LightGreen"))))
+   '(ivy-minibuffer-match-face-3 ((t (:underline t :foreground "LightGreen"))))
+   '(ivy-minibuffer-match-face-4 ((t (:underline t :foreground "LightGreen"))))
+   '(swiper-match-face-1 ((t (:underline t :foreground "LightGreen" :inherit bold))))
+   '(swiper-line-face ((t (:background "grey70" :foreground "DarkOrchid3"))))
 
-
-      (custom-theme-set-faces
-       name
-
-    ;;;;; company
-       `(company-echo-common ((,class (:background ,base :foreground ,bg1))))
-       `(company-preview ((,class (:foreground ,ttip-dim :background ,bg2))))
-       `(company-preview-active-face ((,class (:foreground ,base :background ,ttip-bg))))
-       `(company-preview-common ((,class (:inherit company-preview))))
-       `(company-preview-search ((,class (:inherit match))))
-       `(company-scrollbar-bg ((,class (:background ,bg2))))
-       `(company-scrollbar-fg ((,class (:background ,act2))))
-       `(company-template-field ((,class (:inherit region))))
-       `(company-tooltip ((,class (:background ,back-border :foreground ,base))))
-       `(company-tooltip-annotation ((,class (:foreground ,type))))
-       `(company-tooltip-common ((,class (:background ,back-border :foreground ,keyword))))
-       `(company-tooltip-common-selection ((,class (:foreground ,base))))
-       `(company-tooltip-mouse ((,class (:inherit highlight))))
-       `(company-tooltip-search ((,class (:inherit match))))
-       `(company-tooltip-selection ((,class (:background ,ttip-sl :foreground ,base))))
-
-       )
-)))
+     ) 
+  (setq ivy-format-function 'ivy-format-function-line)
 
 (defun gtrun-open-in-terminal ()
   "Open the current dir in a new terminal window.

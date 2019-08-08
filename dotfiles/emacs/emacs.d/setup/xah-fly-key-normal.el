@@ -67,6 +67,7 @@ Version 2017-01-21"
      (":" . nil)
 
      ("SPC" . xah-fly-leader-key-map)
+     ("2" . org-agenda)
      ("q" . quit-window)
      ("a" . counsel-M-x)
      ("w" . snails)
@@ -91,6 +92,7 @@ Version 2017-01-21"
      ("9" . xah-select-text-in-quote)
      ("0" . xah-pop-local-mark-ring)
      ("n" . isearch-forward)
+     ("m" . mc/edit-lines)
      ))
   (define-key xah-fly-key-map (kbd ".") 'gtrun-xah-dot-fly-key)
   (define-key xah-fly-key-map (kbd "p") 'gtrun-xah-fly-key)
@@ -135,6 +137,8 @@ Version 2017-01-21"
          ((eq major-mode 'dired-mode) (call-interactively 'vinegar/dired-diff))
          ((eq major-mode 'w3m-mode) (call-interactively 'w3m-bookmark-add-current-url))
          ((eq major-mode 'org-mode) (call-interactively 'helm-org-in-buffer-headings))
+         ((eq major-mode 'org-agenda-mode) (call-interactively 'org-agenda-filter-by-tag))
+
          (t nil)))
 
 

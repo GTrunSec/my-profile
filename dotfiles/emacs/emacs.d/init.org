@@ -7,7 +7,7 @@
 #+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t pri:t
 #+SETUPFILE: ~/org-notes/setup/hugo.local
 #+SETUPFILE: ~/org-notes/setup/darkcss.local
-#+hugo_publishdate: <2019-07-24 Wed 17:01>
+#+hugo_publishdate: `org-time-stamp-rounding-minutes`
 #+hugo_auto_set_lastmod: t
 #+HUGO_categories: profile
 #+HUGO_tags: Emacs
@@ -214,6 +214,8 @@ I would like use ErgoDox keyboard on my linux environment
 
 #+end_src
 
+
+
 - define a custom keymap
 #+begin_src emacs-lisp :tangle yes
   (xah-fly--define-keys
@@ -261,52 +263,58 @@ I would like use ErgoDox keyboard on my linux environment
 
 **** command-init(key)
     #+begin_src emacs-lisp :tangle "./setup/xah-fly-key-normal.el"
-      (defun xah-fly-command-mode-init ()
-        "Set command mode keys.
-      Version 2017-01-21"
-        (interactive)
-        (xah-fly--define-keys
-         xah-fly-key-map
-         '(
-           ;; IMPORTANT, These keys are all dvorak keys
-           ("~" . nil)
-           (":" . nil)
+            (defun xah-fly-command-mode-init ()
+              "Set command mode keys.
+            Version 2017-01-21"
+              (interactive)
+              (xah-fly--define-keys
+               xah-fly-key-map
+               '(
+                 ;; IMPORTANT, These keys are all dvorak keys
+                 ("~" . nil)
+                 (":" . nil)
 
-           ("SPC" . xah-fly-leader-key-map)
-           ("q" . quit-window)
-           ("a" . counsel-M-x)
-           ("w" . snails)
-           ("i" . previous-line)
-           ("k" . next-line )
-           ("b" . backward-word)
-           ("h" . forward-word)
-           ("l" . backward-char)
-           ("j" . forward-char)
-           ("f" . xah-fly-insert-mode-activate)
-           ("[" . xah-backward-punct )
-           ("]" . xah-forward-punct)
-           ("g" . set-mark-command)
-           ("y" . undo)
-           ("v" . xah-paste-or-paste-previous)
-           ("c" . xah-copy-line-or-region)
-           ("x" . xah-cut-line-or-region)
-           ("t" . set-mark-command)
-           ("6" . xah-select-block)
-           ("7" . xah-select-line)
-           ("8" . xah-extend-selection)
-           ("9" . xah-select-text-in-quote)
-           ("0" . xah-pop-local-mark-ring)
-           ("n" . isearch-forward)
-           ))
-        (define-key xah-fly-key-map (kbd ".") 'gtrun-xah-dot-fly-key)
-        (define-key xah-fly-key-map (kbd "p") 'gtrun-xah-fly-key)
-        (define-key xah-fly-key-map (kbd "M-<SPC>") 'xah-fly-command-mode-activate)
+                 ("SPC" . xah-fly-leader-key-map)
+                 ("2" . org-agenda)
+                 ("q" . quit-window)
+                 ("a" . counsel-M-x)
+                 ("w" . snails)
+                 ("i" . previous-line)
+                 ("k" . next-line )
+                 ("b" . backward-word)
+                 ("h" . forward-word)
+                 ("l" . backward-char)
+                 ("j" . forward-char)
+                 ("f" . xah-fly-insert-mode-activate)
+                 ("[" . xah-backward-punct )
+                 ("]" . xah-forward-punct)
+                 ("g" . set-mark-command)
+                 ("y" . undo)
+                 ("v" . xah-paste-or-paste-previous)
+                 ("c" . xah-copy-line-or-region)
+                 ("x" . xah-cut-line-or-region)
+                 ("t" . set-mark-command)
+                 ("6" . xah-select-block)
+                 ("7" . xah-select-line)
+                 ("8" . xah-extend-selection)
+                 ("9" . xah-select-text-in-quote)
+                 ("0" . xah-pop-local-mark-ring)
+                 ("n" . isearch-forward)
+                 ("m" . mc/edit-lines)
+                 ))
+              (define-key xah-fly-key-map (kbd ".") 'gtrun-xah-dot-fly-key)
+              (define-key xah-fly-key-map (kbd "p") 'gtrun-xah-fly-key)
+              (define-key xah-fly-key-map (kbd "M-<SPC>") 'xah-fly-command-mode-activate)
 
-        (define-key xah-fly-key-map (kbd "-") 'gtrun-xah-minus-fly-key)
-        (define-key xah-fly-key-map (kbd "/") 'gtrun-xah-slash-fly-key)
-        (define-key xah-fly-key-map (kbd ",") 'gtrun-xah-comma-fly-key)
-        )
+              (define-key xah-fly-key-map (kbd "-") 'gtrun-xah-minus-fly-key)
+              (define-key xah-fly-key-map (kbd "/") 'gtrun-xah-slash-fly-key)
+              (define-key xah-fly-key-map (kbd ",") 'gtrun-xah-comma-fly-key)
+              )
     #+end_src
+
+    #+RESULTS:
+    : xah-fly-command-mode-init
+
 **** special-key-to-mode-map
     #+begin_src emacs-lisp :tangle "./setup/xah-fly-key-normal.el"
             (defun gtrun-xah-dot-fly-key ()
@@ -343,6 +351,8 @@ I would like use ErgoDox keyboard on my linux environment
                ((eq major-mode 'dired-mode) (call-interactively 'vinegar/dired-diff))
                ((eq major-mode 'w3m-mode) (call-interactively 'w3m-bookmark-add-current-url))
                ((eq major-mode 'org-mode) (call-interactively 'helm-org-in-buffer-headings))
+               ((eq major-mode 'org-agenda-mode) (call-interactively 'org-agenda-filter-by-tag))
+
                (t nil)))
 
 
@@ -612,54 +622,46 @@ If Emacs loads a plugin by default, instead of dynamically loading it at runtime
 
 #+end_src
 * Visual
-** Global theme
+** doom-theme
    #+begin_src emacs-lisp :tangle yes
 
-(setq-default cursor-type 'box)
+     (straight-use-package 'doom-themes)
 
-(blink-cursor-mode t)
-
-  (use-package doom-themes
-     :straight t
-     :config
-  (load-theme 'doom-vibrant t)
-)
-
-(straight-use-package 'solarized-theme)
+     (load-theme 'doom-vibrant t)
+     (straight-use-package 'solarized-theme)
    #+end_src
-
+** doom-modeline
   
    #+begin_src emacs-lisp :tangle yes
- (use-package doom-modeline
-    :straight t
-    :hook (after-init . doom-modeline-mode)
-    :init
-    (setq doom-modeline-icon t
-          doom-modeline-major-mode-icon t
-          doom-modeline-buffer-file-name-style 'truncate-upto-project
-          doom-modeline-persp-name t
-          doom-modeline-checker-simple-format t
+     (straight-use-package 'doom-modeline)
+     (add-hook 'after-init-hook #'doom-modeline-mode)
 
-          ;; Whether display environment version or not
-          doom-modeline-env-version t
+     (setq doom-modeline-icon t
+           doom-modeline-major-mode-icon t
+           doom-modeline-buffer-file-name-style 'truncate-upto-project
+           doom-modeline-persp-name t
+           doom-modeline-checker-simple-format t
 
-          ;; Or for individual languages
-          doom-modeline-env-enable-python t
-          doom-modeline-env-enable-go t
-          doom-modeline-env-enable-rust t
+           ;; Whether display environment version or not
+           doom-modeline-env-version t
 
-          ;; Change the executables to use for the language version string
-          doom-modeline-env-python-executable "python"
-          doom-modeline-env-go-executable "go"
-          doom-modeline-env-rust-executable "rustc"
+           ;; Or for individual languages
+           doom-modeline-env-enable-python t
+           doom-modeline-env-enable-go t
+           doom-modeline-env-enable-rust t
 
-          ;; Whether display irc notifications or not. Requires `circe' package.
-          doom-modeline-irc t
-          doom-modeline-irc-stylize 'identity
+           ;; Change the executables to use for the language version string
+           doom-modeline-env-python-executable "python"
+           doom-modeline-env-go-executable "go"
+           doom-modeline-env-rust-executable "rustc"
 
-          ;;
-          doom-modeline-checker-simple-format t)
-    )
+           ;; Whether display irc notifications or not. Requires `circe' package.
+           doom-modeline-irc t
+           doom-modeline-irc-stylize 'identity
+
+           ;;
+           doom-modeline-checker-simple-format t)
+
 
    #+end_src
 ** Edition
@@ -687,33 +689,6 @@ If Emacs loads a plugin by default, instead of dynamically loading it at runtime
     #+end_src
 *** [[https://github.com/joostkremers/visual-fill-column/tree/772d4b25ba19f57409cd03524be0f5bfdc2e8da1][joostkremers/visual-fill-column at 772d4b25ba19f57409cd03524be0f5bfdc2e8da1]]
 
-** ❤ Love [[https://github.com/jrblevin/deft][jrblevin/deft: Deft for Emacs]]
-CLOSED: [2019-07-27 Sat 05:16]
-#+begin_src emacs-lisp :tangle yes
-  ;; (straight-use-package 'deft)
-  ;; (require 'deft)
-
-#+end_src
-*** ❤ Love [[https://github.com/dfeich/helm-deft][dfeich/helm-deft: A helm based emacs module to help search in a predetermined list of directories. Inspired by the deft module.]]
-CLOSED: [2019-07-27 Sat 06:05]
-
-#+begin_src emacs-lisp :tangle yes
-  (straight-use-package '(helm-deft :type git
-                                    :host github
-                                    :repo "dfeich/helm-deft"))
-
-  (require 'helm-deft)
-  (setq helm-deft-extension "org")
-  (setq helm-deft-dir-list '(
-                             "~/org-notes/art"
-                             "~/org-notes/NSM-GTD"
-                             "~/org-notes/post"
-                             "~/org-notes/course"
-                             "~/project/gtrun-profile/dotfiles/wallpaper"
-                             "~/project/global-profile/global-doc"
-                             ))
-
-#+end_src
 ** icons
    #+begin_src emacs-lisp :tangle yes
   (use-package all-the-icons
@@ -765,6 +740,8 @@ CLOSED: [2019-07-27 Sat 06:05]
 *** window
 **** ✍ NOTE [[https://github.com/m2ym/popwin-el/tree/95dea14c60019d6cccf9a3b33e0dec4e1f22c304][m2ym/popwin-el at 95dea14c60019d6cccf9a3b33e0dec4e1f22c304]]
 CLOSED: [2019-07-25 Thu 18:56]
+
+
 *** ☟ NEXT [[https://github.com/bmag/emacs-purpose][bmag/emacs-purpose: Manage Windows and Buffers According to Purposes]]
 *** eysbrowse
 #+begin_src emacs-lisp :tangle yes
@@ -822,74 +799,74 @@ CLOSED: [2019-07-25 Thu 18:56]
 ** Column/line
 
    #+begin_src emacs-lisp :tangle yes
-          (use-package nlinum
-            :straight (nlinum :type git :host github :repo "emacsmirror/nlinum")
-                                                  ;   :disabled t
-            :config
-            (line-number-mode t)
-            (column-number-mode t)
-            (global-nlinum-mode t)
-            (size-indication-mode t)
+           (use-package nlinum
+             :straight (nlinum :type git :host github :repo "emacsmirror/nlinum")
+                                                   ;   :disabled t
+             :config
+             (line-number-mode t)
+             (column-number-mode t)
+             (global-nlinum-mode t)
+             (size-indication-mode t)
 
-            ;; FIX [[http://emacs.1067599.n8.nabble.com/bug-23777-25-0-95-Throwing-error-quot-Selecting-deleted-buffer-quot-in-timer-td400528.html][Emacs - Bugs - bug#23777: 25.0.95; Throwing (error "Selecting deleted buffer") in timer]]
+             ;; FIX [[http://emacs.1067599.n8.nabble.com/bug-23777-25-0-95-Throwing-error-quot-Selecting-deleted-buffer-quot-in-timer-td400528.html][Emacs - Bugs - bug#23777: 25.0.95; Throwing (error "Selecting deleted buffer") in timer]]
 
-            (defun my-nlinum-mode-hook () 
-              (when nlinum-mode 
-                (setq-local nlinum-format 
-                            (concat "%" (number-to-string 
-                                         (ceiling (log (max 1 (count-lines (point-min) 
-                                                                           (point-max))) 
-                                                       10))) 
-                                    "d")))) 
-            ;; (defun my-nlinum-mode-hook () 
-            ;;     (setq-local nlinum-format 
-            ;;                 (concat "%" (number-to-string 
-            ;;                              (ceiling (log (max 1 (/ (buffer-size) 80)) 10))) 
-            ;;                         "d")))) 
-            (add-hook 'nlinum-mode-hook #'my-nlinum-mode-hook)  
-
-
-            )
-
-          (use-package nlinum-hl
-            :straight t
-            :after nlinum
-                                                  ;    :disabled t
-            :hook
-            (nlinum-mode . (lambda () (setq nlinum-highlight-current-line t))))
+             ;; (defun my-nlinum-mode-hook () 
+             ;;   (when nlinum-mode 
+             ;;     (setq-local nlinum-format 
+             ;;                 (concat "%" (number-to-string 
+             ;;                              (ceiling (log (max 1 (count-lines (point-min) 
+             ;;                                                                (point-max))) 
+             ;;                                            10))) 
+             ;;                         "d")))) 
+             ;; ;; (defun my-nlinum-mode-hook () 
+             ;; ;;     (setq-local nlinum-format 
+             ;; ;;                 (concat "%" (number-to-string 
+             ;; ;;                              (ceiling (log (max 1 (/ (buffer-size) 80)) 10))) 
+             ;; ;;                         "d")))) 
+             ;; (add-hook 'nlinum-mode-hook #'my-nlinum-mode-hook)  
 
 
-     (use-package visual-fill-column
-       :straight t
-       :defer t
-       :bind (("C-c t v" . visual-fill-column-mode))
-       :init
-       (dolist (hook '(visual-line-mode-hook
-                       prog-mode-hook
-                       text-mode-hook
-     ;;                   help-mode-hook;;未成功
-                       ))
-    (add-hook hook #'visual-fill-column-mode))
-       :config (setq-default visual-fill-column-width 110
-                             visual-fill-column-center-text t
-                             visual-fill-column-fringes-outside-margins nil))
-          ;; (use-package fill-column-indicator
-          ;;   :straight t
-          ;;   :config
+             )
 
-          ;;   ;; Define a global mode but not sure I am going to use it
-          ;;   (define-globalized-minor-mode
-          ;;     global-fci-mode fci-mode
-          ;;     (lambda ()
-          ;;       (fci-mode 1))))
+           (use-package nlinum-hl
+             :straight t
+             :after nlinum
+                                                   ;    :disabled t
+             :hook
+             (nlinum-mode . (lambda () (setq nlinum-highlight-current-line t))))
 
 
-          (setq-default truncate-lines t)
+      (use-package visual-fill-column
+        :straight t
+        :defer t
+        :bind (("C-c t v" . visual-fill-column-mode))
+        :init
+        (dolist (hook '(visual-line-mode-hook
+                        prog-mode-hook
+                        text-mode-hook
+      ;;                   help-mode-hook;;未成功
+                        ))
+     (add-hook hook #'visual-fill-column-mode))
+        :config (setq-default visual-fill-column-width 110
+                              visual-fill-column-center-text t
+                              visual-fill-column-fringes-outside-margins nil))
+           ;; (use-package fill-column-indicator
+           ;;   :straight t
+           ;;   :config
 
-          (defun gtrun/truncate-lines-hook ()
-            (setq truncate-lines nil))
+           ;;   ;; Define a global mode but not sure I am going to use it
+           ;;   (define-globalized-minor-mode
+           ;;     global-fci-mode fci-mode
+           ;;     (lambda ()
+           ;;       (fci-mode 1))))
 
-          (add-hook 'text-mode-hook 'gtrun/truncate-lines-hook)
+
+           (setq-default truncate-lines t)
+
+           (defun gtrun/truncate-lines-hook ()
+             (setq truncate-lines nil))
+
+           (add-hook 'text-mode-hook 'gtrun/truncate-lines-hook)
    #+end_src
 ** Buffer
 *** Face/Colors
@@ -1025,7 +1002,19 @@ CLOSED: [2019-07-25 Thu 18:56]
 
     (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 #+end_src
+elisp
+#+begin_src emacs-lisp :tangle yes
+(straight-use-package 'popwin)
+(require 'popwin)
+
+#+end_src
 **** [[https://github.com/bmag/emacs-purpose][bmag/emacs-purpose: Manage Windows and Buffers According to Purposes]]
+
+** ✘ CANCELED [[https://github.com/jrblevin/deft][jrblevin/deft: Deft for Emacs]]
+- State "✘ CANCELED" from "❤ Love"     [2019-08-08 Thu 01:03] \\
+  replaced it with helm-deft
+**
+#+end_src
 * Completion
 ** Ivy/counsel
    #+begin_src emacs-lisp :tangle yes
@@ -1044,7 +1033,7 @@ CLOSED: [2019-07-25 Thu 18:56]
              counsel-ag-base-command "ag -S --nocolor --nogroup %s"
              counsel-pt-base-command "pt -S --nocolor --nogroup -e %s"
              counsel-find-file-at-point t)
-     )
+       )
 
      (use-package ivy
        :straight t
@@ -1057,7 +1046,7 @@ CLOSED: [2019-07-25 Thu 18:56]
              ivy-use-virtual-buffers t
              enable-recursive-minibuffers t
              ivy-use-selectable-prompt t)
-     (ivy-set-actions
+       (ivy-set-actions
         t
         '(("I" insert "insert")))
        (ivy-set-occur 'ivy-switch-buffer 'ivy-switch-buffer-occur))
@@ -1068,13 +1057,39 @@ CLOSED: [2019-07-25 Thu 18:56]
        (ivy-rich-mode 1)
        (setq ivy-format-function #'ivy-format-function-line))
      ;;[[https://github.com/gilbertw1/better-jumper][gilbertw1/better-jumper: A configurable jump list implementation for Emacs]]
-     (use-package better-jumper
+
+    
+    (use-package better-jumper
        :straight t
-       :config
        )
 
-
    #+end_src
+*** ivy-color
+#+begin_src emacs-lisp :tangle yes
+  (setq ivy-display-style 'fancy)
+
+
+
+#+end_src
+
+*** point-history
+#+begin_src emacs-lisp :tangle yes
+  (straight-use-package '(point-history 
+                          :type git 
+                          :host github 
+                          :repo "blue0513/point-history"))
+
+
+  (setq point-history-mode 1)
+
+  (straight-use-package '(ivy-point-history 
+                          :type git 
+                          :host github 
+                          :repo "SuzumiyaAoba/ivy-point-history"))
+  (setq point-history-ignore-buffer "^ \\*Minibuf\\|^ \\*point-history-show*")
+  (setq point-history-ignore-major-mode '(emacs-lisp-mode ruby-mode)) 
+#+end_src
+
 ** Swiper
    #+begin_src emacs-lisp :tangle yes
 (use-package swiper
@@ -1092,84 +1107,82 @@ CLOSED: [2019-07-25 Thu 18:56]
   (counsel-grep-base-command
    "rg -i -M 120 --no-heading --line-number --color never '%s' %s"))
    #+end_src
-** Company
-*** default
-   #+begin_src emacs-lisp :tangle yes
-          (use-package company
-            :straight t
-            :hook
-            (emacs-lisp-mode . (lambda () (add-to-list (make-local-variable 'company-backends) '(company-elisp))))
-            :config
+** compnay
+*** company-mode
+#+begin_src emacs-lisp :tangle yes
+  (use-package company
+    :straight t
+    :hook
+    (emacs-lisp-mode . (lambda () (add-to-list (make-local-variable 'company-backends) '(company-elisp))))
+    :config
 
-            ;; Global
-            (setq company-idle-delay 1
-                  company-minimum-prefix-length 1
-                  company-show-numbers t
-                  company-tooltip-limit 20)
+    ;; Global
+    (setq company-idle-delay 1
+          company-minimum-prefix-length 1
+          company-show-numbers t
+          company-tooltip-limit 20)
 
-            ;; Facing
-            (unless (face-attribute 'company-tooltip :background)
-              (set-face-attribute 'company-tooltip nil :background "black" :foreground "gray40")
-              (set-face-attribute 'company-tooltip-selection nil :inherit 'company-tooltip :background "gray15")
-              (set-face-attribute 'company-preview nil :background "black")
-              (set-face-attribute 'company-preview-common nil :inherit 'company-preview :foreground "gray40")
-              (set-face-attribute 'company-scrollbar-bg nil :inherit 'company-tooltip :background "gray20")
-              (set-face-attribute 'company-scrollbar-fg nil :background "gray40"))
+    ;; Facing
+    (unless (face-attribute 'company-tooltip :background)
+      (set-face-attribute 'company-tooltip nil :background "black" :foreground "gray40")
+      (set-face-attribute 'company-tooltip-selection nil :inherit 'company-tooltip :background "gray15")
+      (set-face-attribute 'company-preview nil :background "black")
+      (set-face-attribute 'company-preview-common nil :inherit 'company-preview :foreground "gray40")
+      (set-face-attribute 'company-scrollbar-bg nil :inherit 'company-tooltip :background "gray20")
+      (set-face-attribute 'company-scrollbar-fg nil :background "gray40"))
 
-            ;; Default backends
-            (setq company-backends '((company-files
-                                      company-keywords
-                                      company-capf
-                                      company-yasnippet)
-                                     (company-abbrev company-dabbrev)))
-            ;; Use the tab-and-go frontend.
-            ;; Allows TAB to select and complete at the same time.
-
-
-            (defun company-smart-complete ()
-              (interactive)
-              (setq company-echo-metadata-frontend-bypass t)
-              (cond
-               (company-selection-changed
-                (company-complete-selection))
-               (company-candidates
-                (company-select-next)
-                (company-complete-selection))
-               (t
-                (company-auto-begin)
-                (company-select-next))))
+    ;; Default backends
+    (setq company-backends '((company-files
+                              company-keywords
+                              company-capf
+                              company-yasnippet)
+                             (company-abbrev company-dabbrev)))
+    ;; Use the tab-and-go frontend.
+    ;; Allows TAB to select and complete at the same time.
 
 
-            (add-to-list 'company-backends #'company-tabnine)
-            (add-hook 'comppany-mode #' company-smart-complete)
-            ;; Activating globally
-            (global-company-mode t)
+    (defun company-smart-complete ()
+      (interactive)
+      (setq company-echo-metadata-frontend-bypass t)
+      (cond
+       (company-selection-changed
+        (company-complete-selection))
+       (company-candidates
+        (company-select-next)
+        (company-complete-selection))
+       (t
+        (company-auto-begin)
+        (company-select-next))))
 
 
+    (add-to-list 'company-backends #'company-tabnine)
+    (add-hook 'comppany-mode #' company-smart-complete)
+    ;; Activating globally
+    (global-company-mode t)
+    )
 
-
- 
-     )
-
-
-
-          (use-package company-quickhelp
-            :straight t
-            :after company
-            :config
-            (company-quickhelp-mode 1))
-
-
-          (straight-use-package '(company-englisp-helper
-                                  :type git
-                                  :host github
-                                  :repo "manateelazycat/company-english-helper"))
-          (require 'company-english-helper)
-
-   #+end_src
-*** tabine
-- [[https://github.com/TommyX12/company-tabnine][TommyX12/company-tabnine: A company-mode backend for TabNine, the all-language autocompleter: https://tabnine.com/]]
-- [[https://tabnine.com/buy][Buy a license | TabNine]]
+#+end_src
+*** company-quickhelp
+#+begin_src emacs-lisp :tangle yes
+ (straight-use-package 'company-quickhelp)
+(setq company-quickhelp-mode 1)
+#+end_src
+*** company-english-helper
+#+begin_src emacs-lisp :tangle yes
+  (straight-use-package '(company-englisp-helper
+			     :type git
+			     :host github
+			     :repo "manateelazycat/company-english-helper"))
+     (require 'company-english-helper)
+#+end_src
+**** [[https://github.com/SavchenkoValeriy/emacs-powerthesaurus][SavchenkoValeriy/emacs-powerthesaurus: Powerthesaurus integration for Emacs]] [powerful your english]
+#+begin_src emacs-lisp :tangle yes
+  (straight-use-package '(emacs-powerthesaurus
+                          :type git
+                          :host github
+                          :repo "SavchenkoValeriy/emacs-powerthesaurus"))
+#+end_src
+*** company-tabine
 #+begin_src emacs-lisp :tangle yes
 (use-package company-tabnine
 :straight t
@@ -1189,25 +1202,8 @@ CLOSED: [2019-07-25 Thu 18:56]
 (advice-add #'company--transform-candidates :around #'my-company--transform-candidates)
 (advice-add #'company-tabnine :around #'my-company-tabnine))
 #+end_src
-*** ☟ NEXT [[https://github.com/SavchenkoValeriy/emacs-powerthesaurus][SavchenkoValeriy/emacs-powerthesaurus: Powerthesaurus integration for Emacs]]
-** [[https://github.com/manateelazycat/snails][manateelazycat/snails: A modern, easy-to-expand fuzzy search framework]]
-#+begin_src emacs-lisp :tangle yes
-  ;; (use-package snails
-  ;;   :straight (snails :type git
-  ;;                     :host github
-  ;;                     :repo "manateelazycat/snails")
-  ;;   :config
-  ;;   (define-key snails-mode-map [remap next-line] #'snails-select-next-item)
-  ;;   (add-hook 'snails-mode-hook #'xah-fly-insert-mode-activate)  
-  ;;   )
-  (use-package snails
-    :load-path "./setup/snails"
-    :config
-    (define-key snails-mode-map [remap next-line] #'snails-select-next-item)
-    (add-hook 'snails-mode-hook #'xah-fly-insert-mode-activate)  
-    )
-#+end_src
 ** Helm
+*** Helm-mode
    #+begin_src emacs-lisp :tangle yes
   (use-package helm
     :straight t
@@ -1293,6 +1289,11 @@ CLOSED: [2019-07-25 Thu 18:56]
 (setq amx-save-file (concat my-cache-dir "amx-items"))
    #+end_src
 ** Edition
+*** multiple-cursors
+#+begin_src emacs-lisp :tangle yes
+(straight-use-package 'multiple-cursors)
+(require 'multiple-cursors)
+#+end_src
 *** Iedit
     - [[https://github.com/victorhge/iedit/tree/e2c100cdd67b7d82835d281ac2cd1bf4f374bc8f][victorhge/iedit at e2c100cdd67b7d82835d281ac2cd1bf4f374bc8f]]
     #+begin_src emacs-lisp :tangle yes
@@ -1320,6 +1321,7 @@ dtrt-indent guesses the indentation settings of files, and sets the buffer local
   :config
   (dtrt-indent-mode +1))
     #+end_src
+
 *** [[https://github.com/nflath/hungry-delete/tree/0434458d3f6b2b585f332271feaa054bf4ec96d7][nflath/hungry-delete at 0434458d3f6b2b585f332271feaa054bf4ec96d7]]
 #+begin_src emacs-lisp :tangle yes
 (use-package hungry-delete
@@ -1333,6 +1335,11 @@ CLOSED: [2019-07-28 Sun 21:14]
 (straight-use-package 'prescient)
 (straight-use-package 'ivy-prescient)
 (straight-use-package 'company-prescient)
+
+(add-hook 'company-mode-hook #'company-prescient-mode)
+(add-hook 'ivy-mode-hook #'ivy-prescient-mode)
+(require 'prescient)
+(add-hook 'after-init-hook #'prescient-persist-mode)
 #+end_src
 ** Templating
 *** Edition templates
@@ -1392,6 +1399,29 @@ file type dedicated templates. The templates are available in =third_parties/tem
     )
     #+END_SRC
 * Compilation
+** search frame
+*** [[https://github.com/manateelazycat/snails][manateelazycat/snails: A modern, easy-to-expand fuzzy search framework]]
+#+begin_src emacs-lisp :tangle "./setup/macos.el"
+(use-package snails
+  :load-path "./setup/snails"
+  :config
+  (define-key snails-mode-map [remap next-line] #'snails-select-next-item)
+  (add-hook 'snails-mode-hook #'xah-fly-insert-mode-activate)
+  )
+#+end_src
+
+#+begin_src emacs-lisp :tangle "./setup/linux.el"
+  (straightuse-package '(snails :type git
+                                :host github
+                                :repo "manateelazycat/snails")
+                       (define-key snails-mode-map [remap next-line] #'snails-select-next-item)
+                       (add-hook 'snails-mode-hook #'xah-fly-insert-mode-activate)
+#+end_src
+** emacs-request
+#+begin_src emacs-lisp :tangle yes
+(straight-use-package 'request)
+(require 'request)
+#+end_src
 ** ripgrep
 ** color-rg
    - [[https://github.com/manateelazycat/color-rg][manateelazycat/color-rg: Search and refactoring tool based on ripgrep.]]
@@ -2109,6 +2139,11 @@ http://endlessparentheses.com/improving-projectile-with-extra-commands.html?sour
     (:map bro-mode-map
           ("C-c C-c" . bro-run)))
 #+end_src
+** Json
+*** [[https://github.com/SavchenkoValeriy/jeison][SavchenkoValeriy/jeison: An Emacs library for declarative JSON parsing]]
+#+begin_src emacs-lisp :tangle yes
+(straight-use-package 'jeison)
+#+end_src
 ** ⚔ STARTED [[https://github.com/karlotness/tree-sitter.el][karlotness/tree-sitter.el: An Emacs dynamic module exposing tree-sitter.]]
 CLOSED: [2019-07-25 Thu 19:55]
 *** [[https://github.com/ubolonton/emacs-tree-sitter][ubolonton/emacs-tree-sitter: Emacs Lisp binding and tooling for tree-sitter]]
@@ -2288,36 +2323,59 @@ change ~CC~ PATH ~gcc~ to ~clang++~
 #+end_src
 
 ** Org-starte/Link org-field
-*** 📄 REVIEW [#A] [[https://github.com/akirak/emacs.d/blob/master/main.org#org-ql][emacs.d/main.org at master · akrak/emacs.d]]
-*** 📚 RELEASE [[https://github.com/akirak/emacs-config-library/blob/master/org-starter/.org-config.el][emacs-config-library/.org-config.el at master · akirak/emacs-config-library]]
-    #+begin_src emacs-lisp :tangle yes
-      (use-package org-starter
-        :straight t
-        :config
-        (org-starter-def "~/org-notes"
-          :files
-          ("gtd.org" :agenda t :key "g" :refile (:maxlevel . 5))
-          ("notes.org" :agenda t :key "n" :refile (:maxlevel .5 ) :required nil)
-          ("myself.org" :agenda t)
-          )
+-  📄 REVIEW [[https://github.com/akirak/emacs.d/blob/master/main.org#org-ql][emacs.d/main.org at master · akrak/emacs.d]]
+***  ❤ Love [[https://github.com/dfeich/helm-deft][dfeich/helm-deft: A helm based emacs module to help search in a predetermined list of directories. Inspired by the deft module.]]
+CLOSED: [2019-07-27 Sat 06:05]
 
-        (org-starter-def "~/org-notes/NSM-GTD"
-          :files
-          ("NsmOrg.org" :agenda t)
-          ;;  ("workflow.org" :agenda t :required nil)
-          )
-        (org-starter-def "~/.emacs.d"
-          :files
-          ("init.org" :key "i" :refile (:maxlevel . 5))
-          ("nix.org" :key "x" :refile (:maxlevel . 5))
-          )
-        (org-starter-def "~/project/global-profile/global-doc/global-init.org")
-        :bind
-        (
-         ("C-c e" . org-starter-select-file))
-        ;; "C-c e" . org-starter-refile-by-key))
-        )
+#+begin_src emacs-lisp :tangle yes
+  (straight-use-package '(helm-deft :type git
+                                    :host github
+                                    :repo "dfeich/helm-deft"))
+
+  (require 'helm-deft)
+  (setq helm-deft-extension "org")
+  (setq helm-deft-dir-list '(
+                             "~/org-notes/art"
+                             "~/org-notes/NSM-GTD"
+                             "~/org-notes/post"
+                             "~/org-notes/course"
+                             "~/project/gtrun-profile/dotfiles/wallpaper"
+                             "~/project/global-profile/global-doc"
+                             ))
+#+end_src
+
+*** [[https://github.com/akirak/emacs-config-library/blob/master/org-starter/.org-config.el][emacs-config-library/.org-config.el at master · akirak/emacs-config-library]]
+    #+begin_src emacs-lisp :tangle yes
+           (use-package org-starter
+             :straight t
+             :config
+             (org-starter-def "~/org-notes"
+               :files
+               ("gtd.org" :agenda t :key "g" :refile (:maxlevel . 5))
+               ("notes.org" :agenda t :key "n" :refile (:maxlevel .5 ))
+               ("myself.org" :agenda t)
+               ("NSM-GTD/workflow.org" :agenda t :required t)
+               ("NSM-GTD/NsmOrg.org" :agenda t :required t)
+               )
+
+             ;; (org-starter-def "~/org-notes/NSM-GTD"
+             ;;   :files
+             ;;   ("NsmOrg.org" :agenda t)
+             ;;   ("workflow.org" :agenda t :required nil)
+             ;;   )
+             (org-starter-def "~/.emacs.d"
+               :files
+               ("init.org" :key "i" :refile (:maxlevel . 5))
+               ("nix.org" :key "x" :refile (:maxlevel . 5))
+               )
+             (org-starter-def "~/project/global-profile/global-doc/global-init.org")
+             :bind
+             (
+              ("C-c e" . org-starter-select-file))
+             ;; "C-c e" . org-starter-refile-by-key))
+             )
     #+end_src
+
 ** Calendar / Agenda
 *** org-super-agenda
 - [[https://github.com/alphapapa/org-super-agenda/blob/master/examples.org][org-super-agenda/examples.org at master · alphapapa/org-super-agenda]]
@@ -2330,7 +2388,7 @@ change ~CC~ PATH ~gcc~ to ~clang++~
                 (lambda ()
                   (interactive)
                   (set-window-dedicated-p (selected-window) 1)))
-   
+
     #+end_src
 
 #+begin_src emacs-lisp :tangle "./setup/macos.el"
@@ -2341,132 +2399,121 @@ change ~CC~ PATH ~gcc~ to ~clang++~
   (add-hook 'after-init-hook #'org-super-agenda-mode)
 
 #+end_src
+#+begin_src emacs-lisp :tangle yes
+(defadvice org-agenda (around split-vertically activate)
+  (let ((split-width-threshold 80))  ; or whatever width makes sense for you
+    ad-do-it))
+#+end_src
 
 *** Super-agenda-setting
 #+begin_src emacs-lisp :tangle yes
 
-    (require 'org-habit)
-    (setq org-agenda-span 'day)
-    (setq org-agenda-time-grid
-          '((daily today)
-            ))
-    (setq 
-     org-agenda-skip-scheduled-if-done t
-     org-agenda-skip-deadline-if-done t
-     org-agenda-include-deadlines t
-     org-agenda-include-diary nil
-     org-agenda-block-separator nil
-     org-agenda-compact-blocks t
-     org-agenda-start-with-log-mode t)
-
-  (setq org-super-agenda-groups
-        '((:habit t)
-          (:name "Next Items"
-                 :time-grid t
-                 :tag ("NEXT" "outbox"))
-          (:name "Important"
-                 :priority "A")
-          (:name "Quick Picks"
-                 :effort< "0:30")
-     (:name "Waiting..."
-                     :todo " WAITING"
-                     :order 98)
-              (:name "Due today"
-                     :deadline today)
-              (:name "Overdue"
-                     :deadline past)
-              (:name "Due soon"
-                     :deadline future)
-              ;; (:discard (:anything t))
-          (:priority<= "B"
-                       :scheduled future
-                       :order 1)))
-    ;; (setq org-agenda-custom-commands
-    ;;       '(("z" "Super zaen view"
-    ;;          ((agenda "" ((org-agenda-span 'day)
-    ;;                       (org-super-agenda-groups
-    ;;                        '((:name "Today"
-    ;;                                 :time-grid t
-    ;;                                 :date today
-    ;;                                 :todo "TODO"
-    ;;                                 :scheduled today
-    ;;                                 :order 1)))))
-    ;;           (alltodo "" ((org-agenda-overriding-header "")
-    ;;                        (org-super-agenda-groups
-    ;;                         '((:name "Next to do"
-    ;;                                  :todo "NEXT"
-    ;;                                  :order 1)
-    ;;                           (:name "Important"
-    ;;                                  :tag "Important"
-    ;;                                  :priority "A"
-    ;;                                  :order 6)
-    ;;                           (:name "Due Today"
-    ;;                                  :deadline today
-    ;;                                  :order 2)
-    ;;                           (:name "Due Soon"
-    ;;                                  :deadline future
-    ;;                                  :order 8)
-    ;;                           (:name "Overdue"
-    ;;                                  :deadline past
-    ;;                                  :order 7)
-    ;;                           (:name "Assignments"
-    ;;                                  :tag "Assignment"
-    ;;                                  :order 10)
-    ;;                           (:name "Issues"
-    ;;                                  :tag "Issue"
-    ;;                                  :order 12)
-    ;;                           (:name "Projects"
-    ;;                                  :tag "Project"
-    ;;                                  :order 14)
-    ;;                           (:name "Emacs"
-    ;;                                  :tag "Emacs"
-    ;;                                  :order 13)
-    ;;                           (:name "Research"
-    ;;                                  :tag "Research"
-    ;;                                  :order 15)
-    ;;                           (:name "To read"
-    ;;                                  :tag "Read"
-    ;;                                  :order 30)
-    ;;                           (:name "Waiting"
-    ;;                                  :todo "WAITING"
-    ;;                                  :order 20)
-    ;;                           (:name "trivial"
-    ;;                                  :priority<= "C"
-    ;;                                  :tag ("Trivial" "Unimportant")
-    ;;                                  :todo ("SOMEDAY" )
-    ;;                                  :order 90)
-    ;;                           (:discard (:tag ("Chore" "Routine" "Daily")))))))))))
-
-    ;;   (setq org-super-agenda-groups
-    ;;         '((:habit t)
-    ;;           ;; (:name "Next Items"
-    ;;           ;;        :time-grid t
-    ;;           ;;        :tag ("NEXT" "outbox"))
-
-    ;;           (:name "Important"
-    ;;                  :priority "A"
-    ;;       ;;           :discard (:anything t)
-    ;; )
-
-    ;;           ;; (:name "Quick Picks"
-    ;;           ;;        :effort< "0:30")
-    ;;           ;; (:priority<= "B"
-    ;;           ;;              :scheduled future
-    ;;           ;;              :order 1)
-    ;;           (:name "Waiting..."
-    ;;                  :todo " WAITING"
-    ;;                  :order 98)
-    ;;           (:name "Due today"
-    ;;                  :deadline today)
-    ;;           (:name "Overdue"
-    ;;                  :deadline past)
-    ;;           (:name "Due soon"
-    ;;                  :deadline future)
-    ;;           ;; (:discard (:anything t))
-    ;;           ))
+  (require 'org-habit)
+  ;; (setq org-agenda-time-grid
+  ;;       '((daily today)
+  ;;         ))
+  (setq 
+   org-agenda-skip-scheduled-if-done t
+   org-agenda-skip-deadline-if-done t
+   org-agenda-include-deadlines t
+   org-agenda-include-diary nil
+   org-agenda-block-separator nil
+   org-agenda-compact-blo0cks t
+   org-agenda-start-with-log-mode t)
 
 
 
+  (setq org-agenda-custom-commands
+        '(("z" "GtruN Agenda"
+           ((agenda "" ((org-agenda-span 'day)
+                        (org-super-agenda-groups
+                         '((:habit t)
+                           (:log t)
+                           (:name "Today List"
+                                  :time-grid t
+                                  :date today
+                                  :todo "☞ TODO"
+                                  :scheduled today
+                                  :order 1)))))
+            (alltodo "" ((org-agenda-overriding-header "")
+                         (org-super-agenda-groups
+                          '((:name "Next to do"
+                                   :priority>= "B"
+                                   :order 1)
+                            (:name "Important"
+                                   :todo "✰ Important"
+                                   :order 6)
+                            (:name "Due Today"
+                                   :deadline today
+                                   :order 2)
+                            (:name "Due Soon"
+                                   :deadline future
+                                   :order 8)
+                            (:name "Overdue"
+                                   :deadline past
+                                   :order 7)
+                            (:name "Issues"
+                                   :tag "Issue"
+                                   :order 12)
+                            (:name "Projects"
+                                   :tag "Project"
+                                   :order 14)
+                            (:name "Emacs"
+                                   :tag "Emacs"
+                                   :order 13)
+                            (:name "Research"
+                                   :tag "Research"
+                                   :order 15)
+                            (:name "To read"
+                                   :tag "BOOK"
+                                   :order 30)
+                            (:name "Waiting"
+                                   :todo "⚑ WAITING"
+                                   :order 20)
+                            (:name "trivial"
+                                   :priority<= "C"
+                                   :todo ("SOMEDAY")
+                                   :order 90)
+                            (:discard (:tag ("Chore" "Routine" "Daily")))))))))
+
+          ("b" . "BOOK")
+
+          ("bb" "Search tags in todo, note, and archives"
+           search "+{:book\\|books:}")
+
+          ("bd" "BOOK TODO List"
+           search "+{^\\*+\\s-+\\(STARTED\\|☞ TODO\\|WAITING\\)\\s-} +{book\\|books}")
+
+          ("d" "ALL DONE OF TASKS"
+           search "+{^\\*+\\s-+\\(DONE\\|✘ CANCELED\\)\\s-}")
+          ))
+  ;; WARNING double //
+  ;;  +{^\*+\s-+\(TODO\|WAITING\):(book):\s-}  +(TODO\|WAITING\) +{:book\|books:}
+  ;; +{^*+ -+(DONE|WAITING) -}
+
+#+end_src
+
+
+
+
+
+- tags-view [[https://orgmode.org/worg/org-tutorials/advanced-searching.html][Advanced searching]]
+- PROP-search [[https://emacs.stackexchange.com/questions/50823/searching-for-org-tags-programmatically-without-regexp?rq=1][org mode - Searching for org-tags programmatically (without regexp)? - Emacs Stack Exchange]]
+- discover
+
+- [[https://github.com/boykov/eab-spacemacs/blob/f6ce25eecd62eaa69e6a1836c14ff2a5cf102a51/lisp/eab-words.el][eab-spacemacs/eab-words.el at f6ce25eecd62eaa69e6a1836c14ff2a5cf102a51 · boykov/eab-spacemacs]]
+
+#+begin_src emacs-lisp :tangle yes
+
+  ;; (defmacro eab/search-word (funcname name function &optional funargs)
+  ;;   "Wrapper for search word interface."
+  ;;   `(defun ,funcname (word)
+  ;;      (interactive
+  ;;       (list (read-string (concat ,name " word: ") (current-word))))
+  ;;      (,function ,@funargs)))
+
+
+  ;; (eab/search-word eab/org-agenda-search "agenda search" org-search-view (nil word))
 #+end_src
 
 -[[https://github.com/pmallappa/elisp/blob/5ec0519126910f0ebd7cfaf67ee7f156bf7d7c28/emacs-org.el][elisp/emacs-org.el at 5ec0519126910f0ebd7cfaf67ee7f156bf7d7c28 · pmallappa/elisp]]
@@ -2571,31 +2618,45 @@ change ~CC~ PATH ~gcc~ to ~clang++~
 #+end_src
 ** org-publish-alist
 #+begin_src emacs-lisp :tangle yes
-  (setq org-publish-project-alist
-        '(("NSM"
-           :base-directory "~/org-notes/NSM-GTD"
-           :publishing-function org-html-publish-to-html
-           :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
-           :include ["workflow.org"]
-           )
-          ("init"
-           :base-directory "~/.emacs.d"
-           :publishing-function org-html-publish-to-html
-           :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
-           )
-          ("art"
-           :base-directory "~/org-notes/art"
-           :publishing-function org-html-publish-to-html
-           :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
-           )
-          ("course"
-           :base-directory "~/org-notes/course"
-           :publishing-function org-html-publish-to-html
-           :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
-           )
-          ))
+    (setq org-publish-project-alist
+          '(("NSM"
+             :base-directory "~/org-notes/NSM-GTD"
+             :publishing-function org-html-publish-to-html
+             :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
+             :include ["workflow.org"]
+             :exclude "Pattern.org"
+
+             )
+            ("init"
+             :base-directory "~/.emacs.d"
+             :publishing-function org-html-publish-to-html
+             :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
+             :exclude "Pattern.org"
+             )
+            ("art"
+             :base-directory "~/org-notes/art"
+             :publishing-function org-html-publish-to-html
+             :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
+             :exclude "Pattern.org"
+
+
+             )
+            ("course"
+             :base-directory "~/org-notes/course"
+             :publishing-function org-html-publish-to-html
+             :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
+             :exclude "Pattern.org"
+             )
+            ))
 
 #+end_src
+
+#+RESULTS:
+| NSM    | :base-directory | ~/org-notes/NSM-GTD | :publishing-function | org-html-publish-to-html | :publishing-directory | ~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom | :include | [workflow.org] |
+| init   | :base-directory | ~/.emacs.d          | :publishing-function | org-html-publish-to-html | :publishing-directory | ~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom | :exclude | Pattern.org    |
+| art    | :base-directory | ~/org-notes/art     | :publishing-function | org-html-publish-to-html | :publishing-directory | ~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom |          |                |
+| course | :base-directory | ~/org-notes/course  | :publishing-function | org-html-publish-to-html | :publishing-directory | ~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom |          |                |
+
 ** HIghtlight org to HTML
 - [[http://www.gonsie.com/blorg/org-highlight.html][Highlighting in Org-Mode]]
 #+begin_src emacs-lisp :tangle yes
@@ -3217,6 +3278,11 @@ please test your init file when you modified done.
 #+end_src
 ** setting
 #+begin_src emacs-lisp :tangle yes
+(setq-default cursor-type 'bar)
+
+(blink-cursor-mode -1)
+(set-cursor-color "yellow1")
+
 (setq-default default-tab-width 4)
 ;; 禁止响铃
 (setq ring-bell-function 'ignore)
@@ -3313,53 +3379,25 @@ please test your init file when you modified done.
 ** Custom
 #+begin_src emacs-lisp :tangle yes
 
+  (custom-set-faces
+   '(ivy-current-match ((t (:background "grey70" :foreground "DarkOrchid3"))))
+'(ivy-highlight-face             ((t (:background nil :foreground nil :underline unspecified :weight unspecified))))
+   '(ivy-minibuffer-match-face-1 ((t (:underline t :foreground "LightGreen" :inherit bold))))
+   '(ivy-minibuffer-match-face-2 ((t (:underline t :foreground "LightGreen"))))
+   '(ivy-minibuffer-match-face-3 ((t (:underline t :foreground "LightGreen"))))
+   '(ivy-minibuffer-match-face-4 ((t (:underline t :foreground "LightGreen"))))
+   '(swiper-match-face-1 ((t (:underline t :foreground "LightGreen" :inherit bold))))
+   '(swiper-line-face ((t (:background "grey70" :foreground "DarkOrchid3"))))
 
-   (defun infinity-apply-theme (theme name)
-     (let
-         ((class '((class color) (min-colors 89)))
-          (act1          (if (eq theme 'dark) (if (has-true-color) "#222226" "#121212") (if (has-true-color) "#e7e7e7" "#d7dfff")))
-          (act2          (if (eq theme 'dark) (if (has-true-color) "#1c48ad" "#444444") (if (has-true-color) "#bcdfff" "#afafd7")))
-          (base          (if (eq theme 'dark) (if (has-true-color) "#C0C5CC" "#b2b2b2") (if (has-true-color) "#555555" "#5f5f87")))
-          (base-dim      (if (eq theme 'dark) (if (has-true-color) "#616A73" "#585858") (if (has-true-color) "#9a9a9a" "#afafd7")))
-          (bg1           (if (eq theme 'dark) (if (has-true-color) "#282c34" "#262626") (if (has-true-color) "#f4f4f4" "#ffffff")))
-          ;; (bg1           (if (eq theme 'dark) (if (has-true-color) "#2B2C30" "#262626") (if (has-true-color) "#f4f4f4" "#ffffff")))
-          (bg11          (if (eq theme 'dark) (if (has-true-color) "#31343D" "#262626") (if (has-true-color) "#EBEBEB" "#ffffff")))
-          (bg12          (if (eq theme 'dark) (if (has-true-color) "#34373D" "#262626") (if (has-true-color) "#E0E0E0" "#ffffff")))
-          (bg12b         (if (eq theme 'dark) (if (has-true-color) "#2D3848" "#262626") (if (has-true-color) "#d2E2Eb" "#ffffff")))
-          (bg13          (if (eq theme 'dark) (if (has-true-color) "#1B1C1F" "#262626") (if (has-true-color) "#D4D4D4" "#ffffff")))
-          (bg14          (if (eq theme 'dark) (if (has-true-color) "#404147" "#262626") (if (has-true-color) "#C7C7C7" "#ffffff")))
-          (bg15          (if (eq theme 'dark) (if (has-true-color) "#333540" "#262626") (if (has-true-color) "#C7C7C7" "#ffffff")))
-          (bg2           (if (eq theme 'dark) (if (has-true-color) "#212329" "#1c1c1c") (if (has-true-color) "#e9e9e9" "#e4e4e4")))
-          (bg3           (if (eq theme 'dark) (if (has-true-color) "#0a1014" "#121212") (if (has-true-color) "#dedede" "#d0d0d0")))
-          (bg4           (if (eq theme 'dark) (if (has-true-color) "#080a14" "#080808") (if (has-true-color) "#dadada" "#bcbcbc")))
-          (border        (if (eq theme 'dark) (if (has-true-color) "#565C66" "#111111") (if (has-true-color) "#aaaaaa" "#b3b9be")))
-
-
-       (custom-theme-set-faces
-        name
-
-     ;;;;; company
-        `(company-echo-common ((,class (:background ,base :foreground ,bg1))))
-        `(company-preview ((,class (:foreground ,ttip-dim :background ,bg2))))
-        `(company-preview-active-face ((,class (:foreground ,base :background ,ttip-bg))))
-        `(company-preview-common ((,class (:inherit company-preview))))
-        `(company-preview-search ((,class (:inherit match))))
-        `(company-scrollbar-bg ((,class (:background ,bg2))))
-        `(company-scrollbar-fg ((,class (:background ,act2))))
-        `(company-template-field ((,class (:inherit region))))
-        `(company-tooltip ((,class (:background ,back-border :foreground ,base))))
-        `(company-tooltip-annotation ((,class (:foreground ,type))))
-        `(company-tooltip-common ((,class (:background ,back-border :foreground ,keyword))))
-        `(company-tooltip-common-selection ((,class (:foreground ,base))))
-        `(company-tooltip-mouse ((,class (:inherit highlight))))
-        `(company-tooltip-search ((,class (:inherit match))))
-        `(company-tooltip-selection ((,class (:background ,ttip-sl :foreground ,base))))
-
-        )
- )))
-
+     ) 
+  (setq ivy-format-function 'ivy-format-function-line)
 
 #+end_src
+
+#+RESULTS:
+: ivy-format-function-line
+
+
 ** open-terminal
 #+begin_src emacs-lisp :tangle yes
 (defun gtrun-open-in-terminal ()
