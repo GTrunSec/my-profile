@@ -34,6 +34,26 @@
    
      ))
 
+(xah-fly--define-keys
+ ;; create a keymap my-keymap
+ (define-prefix-command 'git-keymap)
+ '(
+   ("d" . magit-remove-git-lock-file)
+   ("r" . magit-reset-hard)
+   ;;
+   ))
+(xah-fly--define-keys
+ ;; create a keymap org-keymap
+ (define-prefix-command 'org-keymap)
+ '(
+   ("i" . org-clock-in)
+   ("o" . org-clock-out)
+   ("l" . org-clcok-in-last)
+   ("r" . org-starter-refile-by-key)
+   ("s" .org-starter-select-file-other-window)
+   ;;
+   ))
+
 ;; edit
 (define-key xah-fly-key-map (kbd "C-a") 'beginning-of-visual-line)
 (define-key xah-fly-key-map (kbd "C-0") 'delete-region)

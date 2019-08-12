@@ -1,8 +1,16 @@
-(straightuse-package '(snails :type git
-                              :host github
-                              :repo "manateelazycat/snails")
-                     (define-key snails-mode-map [remap next-line] #'snails-select-next-item)
-                     (add-hook 'snails-mode-hook #'xah-fly-insert-mode-activate)
+;; (straight-use-package '(snails :type git
+ ;;                                :host github
+ ;;                                :repo "manateelazycat/snails"))
+ ;;  (define-key snails-mode-map [remap next-line] #'snails-select-next-item)
+(use-package snails
+ :load-path "./setup/snails"
+ :config
+ (define-key snails-mode-map [remap next-line] #'snails-select-next-item)
+ (add-hook 'snails-mode-hook #'xah-fly-insert-mode-activate)
+ )
+
+(setq lsp-python-ms-executable
+      "~/src/python-language-server/output/bin/Release/linux-x64/publish/Microsoft.Python.LanguageServer")
 
 (use-package nix-mode
   :straight t

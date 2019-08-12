@@ -1,15 +1,15 @@
 (straight-use-package 'xah-fly-keys)
-(require 'xah-fly-keys)
+ (require 'xah-fly-keys)
 
-(add-hook 'xah-fly-command-mode-activate-hook
-          (lambda ()
-            (setq xah-fly-insert-state-q nil)))
-;; automatic save buffer when switching to command mode
-;; (add-hook 'xah-fly-command-mode-activate 'xah-fly-save-buffer-if-file)
+ (add-hook 'xah-fly-command-mode-activate-hook
+           (lambda ()
+             (setq xah-fly-insert-state-q nil)))
+ ;; automatic save buffer when switching to command mode
+ ;; (add-hook 'xah-fly-command-mode-activate 'xah-fly-save-buffer-if-file)
 
-;;(xah-fly-keys-set-layout "qwerty") 
+ ;;(xah-fly-keys-set-layout "qwerty") 
 
-(xah-fly-keys 1)
+ (xah-fly-keys 1)
 
 (require 'xah-fly-keys)
 
@@ -35,6 +35,26 @@
    ("sr" . counsel-rg)
    ;; imenu
    ("il" . imenu-list-smart-toggle)
+   ))
+
+(xah-fly--define-keys
+ ;; create a keymap my-keymap
+ (define-prefix-command 'git-keymap)
+ '(
+   ("d" . magit-remove-git-lock-file)
+   ("r" . magit-reset-hard)
+   ;;
+   ))
+(xah-fly--define-keys
+ ;; create a keymap org-keymap
+ (define-prefix-command 'org-keymap)
+ '(
+   ("i" . org-clock-in)
+   ("o" . org-clock-out)
+   ("l" . org-clcok-in-last)
+   ("r" . org-starter-refile-by-key)
+   ("s" .org-starter-select-file-other-window)
+   ;;
    ))
 
 ;; edit

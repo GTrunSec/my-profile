@@ -109,26 +109,6 @@
 ;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/setup"))
 ;; (require 'xah-fly-key-ergo)
 
-(xah-fly--define-keys
- ;; create a keymap my-keymap
- (define-prefix-command 'git-keymap)
- '(
-   ("d" . magit-remove-git-lock-file)
-   ("r" . magit-reset-hard)
-   ;;
-   ))
-(xah-fly--define-keys
- ;; create a keymap org-keymap
- (define-prefix-command 'org-keymap)
- '(
-   ("i" . org-clock-in)
-   ("o" . org-clock-out)
-   ("l" . org-clcok-in-last)
-   ("r" . org-starter-refile-by-key)
-   ("s" .org-starter-select-file-other-window)
-   ;;
-   ))
-
 (use-package xah-fly-key-ergo
 :if (eq system-type 'gnu/linux)
 :load-path "./setup")
@@ -368,20 +348,21 @@
         (nlinum-mode . (lambda () (setq nlinum-highlight-current-line t))))
 
 
- (use-package visual-fill-column
-   :straight t
-   :defer t
-   :bind (("C-c t v" . visual-fill-column-mode))
-   :init
-   (dolist (hook '(visual-line-mode-hook
-                   prog-mode-hook
-                   text-mode-hook
- ;;                   help-mode-hook;;未成功
-                   ))
-(add-hook hook #'visual-fill-column-mode))
-   :config (setq-default visual-fill-column-width 110
-                         visual-fill-column-center-text t
-                         visual-fill-column-fringes-outside-margins nil))
+;;  (use-package visual-fill-column
+;;    :straight t
+;;    :defer t
+;;    :bind (("C-c t v" . visual-fill-column-mode))
+;;    :init
+;;    (dolist (hook '(visual-line-mode-hook
+;;                    prog-mode-hook
+;;                    text-mode-hook
+;;  ;;                   help-mode-hook;;未成功
+;;                    ))
+;; (add-hook hook #'visual-fill-column-mode))
+;;    :config (setq-default
+;;             ;;visual-fill-column-width 110
+;;               ;;           visual-fill-column-center-text t
+;;                          visual-fill-column-fringes-outside-margins nil))
       ;; (use-package fill-column-indicator
       ;;   :straight t
       ;;   :config
@@ -510,8 +491,9 @@
 
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
-(straight-use-package 'popwin)
-(require 'popwin)
+;; (straight-use-package 'popwin)
+;; (add-hook 'after-init-hook #'popwin-mode)
+;; (require 'popwin)
 
 (use-package counsel
    :straight t
@@ -1212,12 +1194,12 @@
 
        )
 
-     (use-package company-lsp
-       :straight t
-       :after company lsp-mode latex-mode
-       :config
-       (add-to-list 'company-backends 'company-lsp)
-     )
+     ;; (use-package company-lsp
+     ;;   :straight t
+     ;;   :after company lsp-mode latex-mode
+     ;;   :config
+     ;;   (add-to-list 'company-backends 'company-lsp)
+     ;; )
 
 
      ;; (use-package lsp-treemacs
@@ -1307,11 +1289,7 @@
 (use-package lsp-python-ms
   :straight t
   :demand t
-  :hook (python-mode . lsp)
-  :config
- (setq ;lsp-python-ms-dir "/usr/lib"
-        lsp-python-ms-executable "/usr/local/bin/pyls")
-)
+  :hook (python-mode . lsp))
 
 (use-package tex-site
   :ensure nil
@@ -2407,9 +2385,9 @@ Null prefix argument turns off the mode."
   :bind
   (("M-g" . goto-line-preview)))
 
-(ignore-errors
-    (dotimes (i 50)
-      (windmove-down)))
+;; (ignore-errors
+;;     (dotimes (i 50)
+;;       (windmove-down)))
 
 (setq ad-redefinition-action 'accept)
 

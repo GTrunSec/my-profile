@@ -5,6 +5,9 @@
   (add-hook 'snails-mode-hook #'xah-fly-insert-mode-activate)
   )
 
+(setq lsp-python-ms-executable
+      "~/src/python-language-server/output/bin/Release/osx-x64/publish/Microsoft.Python.LanguageServer")
+
 (use-package tree-sitter
 :load-path "~/project/emacs/tree-sitter.el/tree-sitter-0.0.3"
 :load-path "~/project/emacs/tree-sitter.el/langs/python"

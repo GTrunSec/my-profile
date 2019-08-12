@@ -169,7 +169,7 @@ I would like use ErgoDox keyboard on my linux environment
 **** default-layout
 #+begin_src emacs-lisp :tangle "./setup/xah-fly-key-normal.el"
 
-   (straight-use-package 'xah-fly-keys)
+ (straight-use-package 'xah-fly-keys)
   (require 'xah-fly-keys)
 
   (add-hook 'xah-fly-command-mode-activate-hook
@@ -216,9 +216,8 @@ I would like use ErgoDox keyboard on my linux environment
 #+end_src
 
 
-
 - define a custom keymap
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle "./setup/xah-fly-key-normal.el"
   (xah-fly--define-keys
    ;; create a keymap my-keymap
    (define-prefix-command 'git-keymap)
@@ -366,8 +365,8 @@ I would like use ErgoDox keyboard on my linux environment
 
       (provide 'xah-fly-key-normal)
     #+end_src
-*** Ergo layout
-
+*** Ergo layout [Linux]
+**** install
 #+begin_src emacs-lisp :tangle yes
 (use-package xah-fly-key-ergo
 :if (eq system-type 'gnu/linux)
@@ -413,6 +412,30 @@ I would like use ErgoDox keyboard on my linux environment
      ("sa" . counsel-ag)
      ("sr" . counsel-rg)
    
+     ))
+#+end_src
+
+- define a custom keymap
+
+#+begin_src emacs-lisp :tangle "./setup/xah-fly-key-ergo.el"
+  (xah-fly--define-keys
+   ;; create a keymap my-keymap
+   (define-prefix-command 'git-keymap)
+   '(
+     ("d" . magit-remove-git-lock-file)
+     ("r" . magit-reset-hard)
+     ;;
+     ))
+  (xah-fly--define-keys
+   ;; create a keymap org-keymap
+   (define-prefix-command 'org-keymap)
+   '(
+     ("i" . org-clock-in)
+     ("o" . org-clock-out)
+     ("l" . org-clcok-in-last)
+     ("r" . org-starter-refile-by-key)
+     ("s" .org-starter-select-file-other-window)
+     ;;
      ))
 
 #+end_src
@@ -838,20 +861,21 @@ CLOSED: [2019-07-25 Thu 18:56]
              (nlinum-mode . (lambda () (setq nlinum-highlight-current-line t))))
 
 
-      (use-package visual-fill-column
-        :straight t
-        :defer t
-        :bind (("C-c t v" . visual-fill-column-mode))
-        :init
-        (dolist (hook '(visual-line-mode-hook
-                        prog-mode-hook
-                        text-mode-hook
-      ;;                   help-mode-hook;;未成功
-                        ))
-     (add-hook hook #'visual-fill-column-mode))
-        :config (setq-default visual-fill-column-width 110
-                              visual-fill-column-center-text t
-                              visual-fill-column-fringes-outside-margins nil))
+     ;;  (use-package visual-fill-column
+     ;;    :straight t
+     ;;    :defer t
+     ;;    :bind (("C-c t v" . visual-fill-column-mode))
+     ;;    :init
+     ;;    (dolist (hook '(visual-line-mode-hook
+     ;;                    prog-mode-hook
+     ;;                    text-mode-hook
+     ;;  ;;                   help-mode-hook;;未成功
+     ;;                    ))
+     ;; (add-hook hook #'visual-fill-column-mode))
+     ;;    :config (setq-default
+     ;;             ;;visual-fill-column-width 110
+     ;;               ;;           visual-fill-column-center-text t
+     ;;                          visual-fill-column-fringes-outside-margins nil))
            ;; (use-package fill-column-indicator
            ;;   :straight t
            ;;   :config
@@ -1007,8 +1031,9 @@ CLOSED: [2019-07-25 Thu 18:56]
 #+end_src
 elisp
 #+begin_src emacs-lisp :tangle yes
-(straight-use-package 'popwin)
-(require 'popwin)
+  ;; (straight-use-package 'popwin)
+  ;; (add-hook 'after-init-hook #'popwin-mode)
+  ;; (require 'popwin)
 
 #+end_src
 **** [[https://github.com/bmag/emacs-purpose][bmag/emacs-purpose: Manage Windows and Buffers According to Purposes]]
@@ -1414,11 +1439,17 @@ file type dedicated templates. The templates are available in =third_parties/tem
 #+end_src
 
 #+begin_src emacs-lisp :tangle "./setup/linux.el"
-  (straightuse-package '(snails :type git
-                                :host github
-                                :repo "manateelazycat/snails")
-                       (define-key snails-mode-map [remap next-line] #'snails-select-next-item)
-                       (add-hook 'snails-mode-hook #'xah-fly-insert-mode-activate)
+  ;; (straight-use-package '(snails :type git
+  ;;                                :host github
+  ;;                                :repo "manateelazycat/snails"))
+  ;;  (define-key snails-mode-map [remap next-line] #'snails-select-next-item)
+ (use-package snails
+  :load-path "./setup/snails"
+  :config
+  (define-key snails-mode-map [remap next-line] #'snails-select-next-item)
+  (add-hook 'snails-mode-hook #'xah-fly-insert-mode-activate)
+  )
+
 #+end_src
 ** emacs-request
 #+begin_src emacs-lisp :tangle yes
@@ -1858,12 +1889,12 @@ http://endlessparentheses.com/improving-projectile-with-extra-commands.html?sour
 
             )
 
-          (use-package company-lsp
-            :straight t
-            :after company lsp-mode latex-mode
-            :config
-            (add-to-list 'company-backends 'company-lsp)
-          )
+          ;; (use-package company-lsp
+          ;;   :straight t
+          ;;   :after company lsp-mode latex-mode
+          ;;   :config
+          ;;   (add-to-list 'company-backends 'company-lsp)
+          ;; )
 
 
           ;; (use-package lsp-treemacs
@@ -1984,12 +2015,19 @@ CLOSED: [2019-08-08 Thu 14:56]
       (use-package lsp-python-ms
         :straight t
         :demand t
-        :hook (python-mode . lsp)
-        :config
-       (setq ;lsp-python-ms-dir "/usr/lib"
-              lsp-python-ms-executable "/usr/local/bin/pyls")
-      )
+        :hook (python-mode . lsp))
+
+
 #+end_src
+#+begin_src emacs-lisp :tangle "./setup/macos.el"
+(setq lsp-python-ms-executable
+      "~/src/python-language-server/output/bin/Release/osx-x64/publish/Microsoft.Python.LanguageServer")
+#+end_src
+#+begin_src emacs-lisp :tangle "./setup/linux.el"
+(setq lsp-python-ms-executable
+      "~/src/python-language-server/output/bin/Release/linux-x64/publish/Microsoft.Python.LanguageServer")
+#+end_src
+
 *** [[https://github.com/dzop/emacs-jupyter][dzop/emacs-jupyter: An interface to communicate with Jupyter kernels.]]
 ** Latex
 *** Acutex
@@ -3446,10 +3484,12 @@ Version 2017-10-09"
 分享一个技巧给大家：
 移动到当前 frame 最底部的那个窗口，这样不管光标在什么地方，都可以在最底部 split 一个像终端的小窗口出来。
 #+begin_src emacs-lisp :tangle yes
-(ignore-errors
-    (dotimes (i 50)
-      (windmove-down)))
+  ;; (ignore-errors
+  ;;     (dotimes (i 50)
+  ;;       (windmove-down)))
 #+end_src
+
+#+RESULTS:
 
 ** warning
    #+begin_src emacs-lisp :tangle yes
