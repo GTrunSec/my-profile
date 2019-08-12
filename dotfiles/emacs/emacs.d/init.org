@@ -137,6 +137,7 @@ CLOSED: [2019-07-24 Wed 23:42]
 ;;     ;; (byte-recompile-file (format "%s/init.el" user-emacs-directory) t 0 nil)
 ;;     ))
    #+end_src
+** [[https://github.com/iqbalansari/restart-emacs][iqbalansari/restart-emacs: A simple emacs package to restart emacs from within emacs]]
 ** Exec-path-from-shell
     #+begin_src emacs-lisp :tangle yes
       (use-package exec-path-from-shell
@@ -300,7 +301,6 @@ I would like use ErgoDox keyboard on my linux environment
                  ("9" . xah-select-text-in-quote)
                  ("0" . xah-pop-local-mark-ring)
                  ("n" . isearch-forward)
-                 ("m" . mc/edit-lines)
                  ))
               (define-key xah-fly-key-map (kbd ".") 'gtrun-xah-dot-fly-key)
               (define-key xah-fly-key-map (kbd "p") 'gtrun-xah-fly-key)
@@ -621,6 +621,8 @@ If Emacs loads a plugin by default, instead of dynamically loading it at runtime
    ;;    ("." . hydra-dired/body))
 
 #+end_src
+** Repo
+*** [[http://www.wilfred.me.uk/blog/2018/01/06/the-emacs-guru-guide-to-key-bindings/][The Emacs Guru Guide to Key Bindings – Wilfred Hughes::Blog]]
 * Visual
 ** doom-theme
    #+begin_src emacs-lisp :tangle yes
@@ -925,6 +927,7 @@ CLOSED: [2019-07-25 Thu 18:56]
     :general ([remap scroll-up-command] #'scrollkeeper-contents-up
               [remap scroll-down-command] #'scrollkeeper-contents-down))
 #+end_src
+**** [[https://github.com/ahungry/fast-scroll][ahungry/fast-scroll: Emacs package to ensure scrolling remains fast]] [Linux]
 *** Emoji
 
 #+begin_src emacs-lisp :tangle yes
@@ -1870,7 +1873,8 @@ http://endlessparentheses.com/improving-projectile-with-extra-commands.html?sour
 
 
    #+end_src
-** ⚑ WAITING Debug(Dap-mode)
+** ☕ BREAK Debug(Dap-mode)
+CLOSED: [2019-08-08 Thu 14:56]
 - [[https://github.com/emacs-lsp/dap-mode][emacs-lsp/dap-mode: Emacs Debug Adapter Protocol]]
 #+begin_src emacs-lisp :tangle yes
   ;; (use-package dap-mode
@@ -2110,6 +2114,8 @@ http://endlessparentheses.com/improving-projectile-with-extra-commands.html?sour
 
 
 #+end_src
+*** ⚑ WAITING [[https://github.com/johnbcoughlin/calctex][johnbcoughlin/calctex]]
+
 ** NixOS
 *** default
     - [[https://github.com/travisbhartwell/nix-emacs/tree/45c8d90748304c90e1503c9fa8db0443f3d4bd89][travisbhartwell/nix-emacs at 45c8d90748304c90e1503c9fa8db0443f3d4bd89]]
@@ -2590,6 +2596,7 @@ CLOSED: [2019-07-27 Sat 06:05]
 #+end_src
 * Exporting
 ** latex
+*** ox-latex
 #+begin_src emacs-lisp :tangle yes
   (use-package ox-latex
     :ensure nil
@@ -2598,118 +2605,7 @@ CLOSED: [2019-07-27 Sat 06:05]
     (setq org-latex-listings t
           org-export-with-LaTeX-fragments t
     ;      org-latex-pdf-process (list "latexmk -shell-escape -bibtex -f -pdf %f")
-)
-)
-#+end_src
-** pandoc
-#+begin_src emacs-lisp :tangle yes
-(use-package ox-pandoc
-  :straight t
-  ;;:disabled t
-  :defines (org-pandoc-options-for-docx org-pandoc-options-for-beamer-pdf org-pandoc-options-for-latex-pdf)
-  :config
-  ;; default options for all output formats
-  (setq org-pandoc-options '((standalone . t))
-        ;; cancel above settings only for 'docx' format
-        org-pandoc-options-for-docx '((standalone . nil))
-        ;; special settings for beamer-pdf and latex-pdf exporters
-        org-pandoc-options-for-beamer-pdf '((pdf-engine . "xelatex"))
-        org-pandoc-options-for-latex-pdf '((pdf-engine . "xelatex"))))
-#+end_src
-** org-publish-alist
-#+begin_src emacs-lisp :tangle yes
-    (setq org-publish-project-alist
-          '(("NSM"
-             :base-directory "~/org-notes/NSM-GTD"
-             :publishing-function org-html-publish-to-html
-             :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
-             :include ["workflow.org"]
-             :exclude "Pattern.org"
-
-             )
-            ("init"
-             :base-directory "~/.emacs.d"
-             :publishing-function org-html-publish-to-html
-             :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
-             :exclude "Pattern.org"
-             )
-            ("art"
-             :base-directory "~/org-notes/art"
-             :publishing-function org-html-publish-to-html
-             :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
-             :exclude "Pattern.org"
-
-
-             )
-            ("course"
-             :base-directory "~/org-notes/course"
-             :publishing-function org-html-publish-to-html
-             :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
-             :exclude "Pattern.org"
-             )
-            ))
-
-#+end_src
-
-#+RESULTS:
-| NSM    | :base-directory | ~/org-notes/NSM-GTD | :publishing-function | org-html-publish-to-html | :publishing-directory | ~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom | :include | [workflow.org] |
-| init   | :base-directory | ~/.emacs.d          | :publishing-function | org-html-publish-to-html | :publishing-directory | ~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom | :exclude | Pattern.org    |
-| art    | :base-directory | ~/org-notes/art     | :publishing-function | org-html-publish-to-html | :publishing-directory | ~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom |          |                |
-| course | :base-directory | ~/org-notes/course  | :publishing-function | org-html-publish-to-html | :publishing-directory | ~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom |          |                |
-
-** HIghtlight org to HTML
-- [[http://www.gonsie.com/blorg/org-highlight.html][Highlighting in Org-Mode]]
-#+begin_src emacs-lisp :tangle yes
-(require 'ox)
-(defun my-html-mark-tag (text backend info)
-  "Transcode :blah: into <mark>blah</mark> in body text."
-  (when (org-export-derived-backend-p backend 'html)
-    (let ((text (replace-regexp-in-string "[^\\w]\\(:\\)[^\n\t\r]+\\(:\\)[^\\w]" "<mark>"  text nil nil 1 nil)))
-      (replace-regexp-in-string "[^\\w]\\(<mark>\\)[^\n\t\r]+\\(:\\)[^\\w]" "</mark>" text nil nil 2 nil))))
-
-(add-to-list 'org-export-filter-plain-text-functions 'my-html-mark-tag)
-
-(defun my-html-mark-tag (text backend info)
-  "Transcode :blah: into <mark>blah</mark> in body text."
-  (when (org-export-derived-backend-p backend 'html)
-    (let ((text (replace-regexp-in-string "[^\\w]\\(:\\)[^\n\t\r]+\\(:\\)[^\\w]" "<mark>"  text nil nil 1 nil)))
-      (replace-regexp-in-string "[^\\w]\\(<mark>\\)[^\n\t\r]+\\(:\\)[^\\w]" "</mark>" text nil nil 2 nil))))
-
-(add-to-list 'org-export-filter-plain-text-functions 'my-html-mark-tag)
-#+end_src
-
-#+RESULTS:
-| my-html-mark-tag |
-
-
-
-** [[https://github.com/relevance/org-html-slideshow][relevance/org-html-slideshow: JavaScript presentation slides generated from Emacs org-mode]]
-** org-mode : Mp3 HTML
-
-#+begin_src emacs-lisp :tangle yes
-  (org-add-link-type "audio" #'ignore #'endless/export-audio-link)
-
-  (defun endless/export-audio-link (path desc format)
-    "Export org audio links to hmtl."
-    (cl-case format
-      (html (format 
-             "<audio preload=\"auto\"> <source src=\"https://www.gtrun.org/music/%s\">%s</audio>"
-             path (or desc "")))
-
-      ;; README: hugo music file path
-      (md (format
-           "<audio class=\"wp-audio-shortcode\"  loop=\"1\"  preload=\"auto\" style=\"width: 100%%;\" controls> <source src=\"https://www.gtrun.org/music/%s\">%s</audio>"
-           path (or desc "")))
-      (latex (format "(HOW DO I EXPORT AUDIO TO LATEX? \"%s\")" path))))
-
-#+end_src
-
-#+RESULTS:
-: endless/export-audio-link
-** emacs-htmlize
-#+begin_src emacs-lisp :tangle yes
-(straight-use-package 'htmlize)
-(require 'htmlize)
+))
 #+end_src
 * Chinese
 ** [[https://github.com/redguardtoo/zhfreq][redguardtoo/zhfreq: processing chinese text using word frequency data]]

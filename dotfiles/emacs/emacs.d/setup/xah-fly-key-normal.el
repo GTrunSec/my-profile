@@ -92,7 +92,6 @@ Version 2017-01-21"
      ("9" . xah-select-text-in-quote)
      ("0" . xah-pop-local-mark-ring)
      ("n" . isearch-forward)
-     ("m" . mc/edit-lines)
      ))
   (define-key xah-fly-key-map (kbd ".") 'gtrun-xah-dot-fly-key)
   (define-key xah-fly-key-map (kbd "p") 'gtrun-xah-fly-key)
