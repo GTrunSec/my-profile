@@ -1747,6 +1747,72 @@ Inserted by installing org-mode or when a release is made."
     ;      org-latex-pdf-process (list "latexmk -shell-escape -bibtex -f -pdf %f")
 ))
 
+(require 'ox)
+(defun my-html-mark-tag (text backend info)
+  "Transcode :blah: into <mark>blah</mark> in body text."
+  (when (org-export-derived-backend-p backend 'html)
+    (let ((text (replace-regexp-in-string "[^\\w]\\(:\\)[^\n\t\r]+\\(:\\)[^\\w]" "<mark>"  text nil nil 1 nil)))
+      (replace-regexp-in-string "[^\\w]\\(<mark>\\)[^\n\t\r]+\\(:\\)[^\\w]" "</mark>" text nil nil 2 nil))))
+
+(add-to-list 'org-export-filter-plain-text-functions 'my-html-mark-tag)
+
+(defun my-html-mark-tag (text backend info)
+  "Transcode :blah: into <mark>blah</mark> in body text."
+  (when (org-export-derived-backend-p backend 'html)
+    (let ((text (replace-regexp-in-string "[^\\w]\\(:\\)[^\n\t\r]+\\(:\\)[^\\w]" "<mark>"  text nil nil 1 nil)))
+      (replace-regexp-in-string "[^\\w]\\(<mark>\\)[^\n\t\r]+\\(:\\)[^\\w]" "</mark>" text nil nil 2 nil))))
+
+(add-to-list 'org-export-filter-plain-text-functions 'my-html-mark-tag)
+
+(setq org-publish-project-alist
+      '(("NSM"
+	 :base-directory "~/org-notes/NSM-GTD"
+	 :publishing-function org-html-publish-to-html
+	 :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
+	 :include ["workflow.org"]
+	 :exclude "Pattern.org"
+
+	 )
+	("init"
+	 :base-directory "~/.emacs.d"
+	 :publishing-function org-html-publish-to-html
+	 :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
+	 :exclude "Pattern.org"
+	 )
+	("art"
+	 :base-directory "~/org-notes/art"
+	 :publishing-function org-html-publish-to-html
+	 :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
+	 :exclude "Pattern.org"
+
+
+	 )
+	("course"
+	 :base-directory "~/org-notes/course"
+	 :publishing-function org-html-publish-to-html
+	 :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
+	 :exclude "Pattern.org"
+	 )
+	))
+
+(org-add-link-type "audio" #'ignore #'endless/export-audio-link)
+
+(defun endless/export-audio-link (path desc format)
+  "Export org audio links to hmtl."
+  (cl-case format
+    (html (format
+	   "<audio preload=\"auto\"> <source src=\"https://www.gtrun.org/music/%s\">%s</audio>"
+	   path (or desc "")))
+
+    ;; README: hugo music file path
+    (md (format
+	 "<audio class=\"wp-audio-shortcode\"  loop=\"1\"  preload=\"auto\" style=\"width: 100%%;\" controls> <source src=\"https://www.gtrun.org/music/%s\">%s</audio>"
+	 path (or desc "")))
+    (latex (format "(HOW DO I EXPORT AUDIO TO LATEX? \"%s\")" path))))
+
+(straight-use-package 'htmlize)
+(require 'htmlize)
+
 (straight-use-package 'posframe)
 (require 'posframe)
 
@@ -2385,9 +2451,9 @@ Null prefix argument turns off the mode."
   :bind
   (("M-g" . goto-line-preview)))
 
-;; (ignore-errors
-;;     (dotimes (i 50)
-;;       (windmove-down)))
+(ignore-errors
+    (dotimes (i 50)
+      (windmove-down)))
 
 (setq ad-redefinition-action 'accept)
 
