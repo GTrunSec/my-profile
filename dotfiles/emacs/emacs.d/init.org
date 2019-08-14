@@ -2214,25 +2214,34 @@ change ~CC~ PATH ~gcc~ to ~clang++~
 
 
 #+begin_src emacs-lisp :tangle "./setup/macos.el"
-(use-package tree-sitter
-:load-path "~/project/emacs/tree-sitter.el/tree-sitter-0.0.3"
-:load-path "~/project/emacs/tree-sitter.el/langs/python"
-:load-path "~/project/emacs/tree-sitter.el/langs/go"
-:config
-(require 'tree-sitter)
-(require 'tree-sitter-live)
-(require 'tree-sitter-lang-python)
-(require 'tree-sitter-lang-go)
+  (use-package tree-sitter
+  :load-path "~/project/emacs/tree-sitter.el/tree-sitter-0.0.3"
+  :load-path "~/project/emacs/tree-sitter.el/langs/python"
+  :load-path "~/project/emacs/tree-sitter.el/langs/go"
+  :config
+  (require 'tree-sitter)
+  (require 'tree-sitter-live)
+  (require 'tree-sitter-live-preview)
+  (require 'tree-sitter-lang-python)
+  (require 'tree-sitter-lang-go)
 
 
-(setq tree-sitter-live-auto-alist
-      '((python-mode . tree-sitter-lang-python)))
+  (setq tree-sitter-live-auto-alist
+        '((go-mode . tree-sitter-lang-go)
+          (python-mode . tree-sitter-lang-python)))
+  (global-tree-sitter-live-mode t)
 
-(setq tree-sitter-live-auto-alist
-      '((go-mode . tree-sitter-lang-go)))
-(global-tree-sitter-live-mode t)
-)
+  )
 #+end_src
+
+#+RESULTS:
+: t
+
+
+
+  
+#+end_src
+
 * Better Setting (doom-emacs & spacemacs)
 ** vinegar(spacemacs)
 #+begin_src emacs-lisp :tangle yes
@@ -2782,7 +2791,7 @@ CLOSED: [2019-07-27 Sat 06:05]
 #+end_src
 *** cnfont
 - [[https://github.com/tumashu/cnfonts/issues/92][mode-line 字體機制分離 · Issue #92 · tumashu/cnfonts]]
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle "./setup/macos.el"
     (use-package cnfonts
     :straight t
     :init
@@ -2797,7 +2806,7 @@ CLOSED: [2019-07-27 Sat 06:05]
           (set-fontset-font "fontset-default" charset "file-icons" nil 'append)
           (set-fontset-font "fontset-default" charset "Weather Icons" nil 'append))))
     :hook ((after-init . cnfonts-enable)
-           (cnfonts-set-font-finish . cnfonts--set-all-the-icons-fonts))
+      )
     :config
   (setq cnfonts-use-cache t)
     (setq cnfonts-keep-frame-size nil)
@@ -2814,6 +2823,28 @@ CLOSED: [2019-07-27 Sat 06:05]
 
 
   )
+
+#+end_src
+
+#+begin_src emacs-lisp :tangle "./setup/linux.el"
+   (use-package cnfonts
+    :straight t
+    :hook ((after-init . cnfonts-enable))
+    :config
+  (setq cnfonts-use-cache t)
+    (setq cnfonts-keep-frame-size nil)
+    (add-hook 'window-setup-hook (lambda ()
+                                   (setq cnfonts-keep-frame-size t)))
+    ;; Set profiles
+    (setq cnfonts-directory (concat no-littering-var-directory "cnfonts"))
+    (setq cnfonts-profiles '("program1" "program2" "program3" "org-mode" "read-book"))
+    (setq cnfonts--profiles-steps '(("program1" . 4)
+                                    ("program2" . 5)
+                                    ("program3" . 3)
+                                    ("org-mode" . 6)
+                                    ("read-book" . 8)))
+)
+
 #+end_src
 **** Macos
 #+begin_src emacs-lisp :tangle "./setup/macos.el"
@@ -2832,24 +2863,29 @@ CLOSED: [2019-07-27 Sat 06:05]
                    :slant 'normal
                    :size 24.5)))
 
-#+end_src
-**** Linux
+
+
+#+END_SRC
+**** linux-font
 #+begin_src emacs-lisp :tangle "./setup/linux.el"
+
 (set-face-attribute
  'default nil
- :font (font-spec :name "-PfEd-Fantasque Sans Mono-bold-italic-normal-*-*-*-*-*-m-0-iso10646-1"
+ :font (font-spec :name "-PfEd-Fantasque Sans Mono-normal-italic-normal-*-*-*-*-*-m-0-iso10646-1"
                   :weight 'normal
                   :slant 'normal
-                  :size 28))
+                  :size 26.0))
 (dolist (charset '(kana han symbol cjk-misc bopomofo))
   (set-fontset-font
    (frame-parameter nil 'font)
    charset
-   (font-spec :name "-ADBO-Source Han Serif CN-semibold-normal-normal-*-*-*-*-*-*-0-iso10646-1"
+   (font-spec :name "-ADBO-Source Han Sans CN-normal-normal-normal-*-*-*-*-*-*-0-iso10646-1"
               :weight 'normal
               :slant 'normal
-              :size 28.5)))
-#+end_src
+              :size 31.5)))
+ 
+
+#+END_SRC
 *** [[https://blog.slegetank.com/blog/20190331-emacschinese.html][emacs 内置中文输入法]] 
 *** ✔ DONE TO-> setup/macos.el
 CLOSED: [2019-07-24 Wed 18:18]

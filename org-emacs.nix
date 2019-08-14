@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 
-let updateEmacs = ''emacs.d/Makefile make compile'';
+let updateEmacs = ''bash .emacs.d/bin/emacs.sh'';
 
 in
 {
@@ -15,6 +15,10 @@ in
     home.activation.linkEmacsLisp = config.lib.dag.entryAfter [ "writeBoundary" ] ''
     ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/emacs/emacs.d/lisp" $HOME/.emacs.d/lisp
   '';
+    home.activation.linkEmacsBin = config.lib.dag.entryAfter [ "writeBoundary" ] ''
+    ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/emacs/emacs.d/bin" $HOME/.emacs.d/bin
+  '';
+
    home.activation.linkEmacsPrivate = config.lib.dag.entryAfter [ "writeBoundary" ] ''
     ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/emacs/emacs.d/private" $HOME/.emacs.d/private
   '';

@@ -33,6 +33,8 @@ in
    xdotool
    compton
    fish
+   fantasque-sans-mono
+   fd
   ];
 
 

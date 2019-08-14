@@ -15,16 +15,16 @@
 :config
 (require 'tree-sitter)
 (require 'tree-sitter-live)
+(require 'tree-sitter-live-preview)
 (require 'tree-sitter-lang-python)
 (require 'tree-sitter-lang-go)
 
 
 (setq tree-sitter-live-auto-alist
-      '((python-mode . tree-sitter-lang-python)))
-
-(setq tree-sitter-live-auto-alist
-      '((go-mode . tree-sitter-lang-go)))
+      '((go-mode . tree-sitter-lang-go)
+        (python-mode . tree-sitter-lang-python)))
 (global-tree-sitter-live-mode t)
+
 )
 
 ;; FIXME macos can't load org correctly by onece
@@ -32,6 +32,38 @@
 
 (add-hook 'after-init-hook #'org-reload)
 (add-hook 'after-init-hook #'org-super-agenda-mode)
+
+(use-package cnfonts
+  :straight t
+  :init
+ (defun cnfonts--set-all-the-icons-fonts (&optional _)
+    "Show icons in all-the-icons."
+    (when (featurep 'all-the-icons)
+      (dolist (charset '(kana han cjk-misc bopomofo gb18030))
+        (set-fontset-font "fontset-default" charset "all-the-icons" nil 'append)
+        (set-fontset-font "fontset-default" charset "github-octicons" nil 'append)
+        (set-fontset-font "fontset-default" charset "FontAwesome" nil 'append)
+        (set-fontset-font "fontset-default" charset "Material Icons" nil 'append)
+        (set-fontset-font "fontset-default" charset "file-icons" nil 'append)
+        (set-fontset-font "fontset-default" charset "Weather Icons" nil 'append))))
+  :hook ((after-init . cnfonts-enable)
+    )
+  :config
+(setq cnfonts-use-cache t)
+  (setq cnfonts-keep-frame-size nil)
+  (add-hook 'window-setup-hook (lambda ()
+                                 (setq cnfonts-keep-frame-size t)))
+  ;; Set profiles
+  (setq cnfonts-directory (concat no-littering-var-directory "cnfonts"))
+  (setq cnfonts-profiles '("program1" "program2" "program3" "org-mode" "read-book"))
+  (setq cnfonts--profiles-steps '(("program1" . 4)
+                                  ("program2" . 5)
+                                  ("program3" . 3)
+                                  ("org-mode" . 6)
+                                  ("read-book" . 8)))
+
+
+)
 
 (set-face-attribute
     'default nil

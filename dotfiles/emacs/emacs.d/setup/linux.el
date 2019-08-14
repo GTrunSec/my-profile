@@ -24,19 +24,37 @@
   :config
 (add-to-list 'company-backends 'company-nixos-options))
 
+(use-package cnfonts
+    :straight t
+    :hook ((after-init . cnfonts-enable))
+    :config
+  (setq cnfonts-use-cache t)
+    (setq cnfonts-keep-frame-size nil)
+    (add-hook 'window-setup-hook (lambda ()
+                                   (setq cnfonts-keep-frame-size t)))
+    ;; Set profiles
+    (setq cnfonts-directory (concat no-littering-var-directory "cnfonts"))
+    (setq cnfonts-profiles '("program1" "program2" "program3" "org-mode" "read-book"))
+    (setq cnfonts--profiles-steps '(("program1" . 4)
+                                    ("program2" . 5)
+                                    ("program3" . 3)
+                                    ("org-mode" . 6)
+                                    ("read-book" . 8)))
+)
+
 (set-face-attribute
  'default nil
- :font (font-spec :name "-PfEd-Fantasque Sans Mono-bold-italic-normal-*-*-*-*-*-m-0-iso10646-1"
+ :font (font-spec :name "-PfEd-Fantasque Sans Mono-normal-italic-normal-*-*-*-*-*-m-0-iso10646-1"
                   :weight 'normal
                   :slant 'normal
-                  :size 28))
+                  :size 26.0))
 (dolist (charset '(kana han symbol cjk-misc bopomofo))
   (set-fontset-font
    (frame-parameter nil 'font)
    charset
-   (font-spec :name "-ADBO-Source Han Serif CN-semibold-normal-normal-*-*-*-*-*-*-0-iso10646-1"
+   (font-spec :name "-ADBO-Source Han Sans CN-normal-normal-normal-*-*-*-*-*-*-0-iso10646-1"
               :weight 'normal
               :slant 'normal
-              :size 28.5)))
+              :size 31.5)))
 
 (provide 'linux)
