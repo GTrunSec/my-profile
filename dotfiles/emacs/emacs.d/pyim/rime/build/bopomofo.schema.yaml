@@ -4,10 +4,10 @@ __build_info:
     bopomofo.custom: 0
     bopomofo.schema: 1561294609
     default: 1561294610
-    default.custom: 1564362369
-    key_bindings: 1564362369
+    default.custom: 1565728454
+    key_bindings: 1565728454
     key_bindings.custom: 0
-    punctuation: 1564362369
+    punctuation: 1565728454
     punctuation.custom: 0
 custom_phrase:
   db_class: stabledb
