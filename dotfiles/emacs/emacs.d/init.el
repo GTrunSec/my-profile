@@ -282,18 +282,20 @@
 (use-package centaur-tabs
   :straight (centaur-tabs ::type git :host github :repo "ema2159/centaur-tabs")
   :demand t
+  :custom-face
+  (centaur-tabs-active-bar-face ((t (:background "LightGoldenrod"))))
+  :hook
+  (after-init . centaur-tabs-mode)
   :config
-  (centaur-tabs-mode t)
   (setq centaur-tabs-style "bar")
   (setq centaur-tabs-set-icons t)
   (setq centaur-tabs-set-bar t)
+  (setq centaur-tabs-set-bar 'over)
   (setq centaur-tabs-set-modified-marker t)
-  (setq centaur-tabs-background-color (face-background 'default))
-  (centaur-tabs-inherit-tabbar-faces)
-  (setq centaur-tabs-close-button "X")
+  (setq centaur-tabs-set-close-button nil)
   (setq centaur-tabs-modified-marker "*")
 
-;;  (set-face-attribute 'centaur-tabs-modified-marker-selected nil :foreground (face-background 'doom-modeline-bar))
+  ;;  (set-face-attribute 'centaur-tabs-modified-marker-selected nil :foreground (face-background 'doom-modeline-bar))
   :bind
   ("C-c j" .  centaur-tabs-forward-group)
   ("C-c k" .  centaur-tabs-backward-group)
@@ -307,9 +309,8 @@
   ("s-7" . centaur-tabs-select-visible-tab)
   ("s-8" . centaur-tabs-select-visible-tab)
   ("s-9" . centaur-tabs-select-visible-tab)
-  ;;:custom-face
-  ;;  (centaur-tabs-active-bar-face ((t (:inherit doom-modeline-bar))))
-)
+
+  )
 
 (use-package nlinum
         :straight (nlinum :type git :host github :repo "emacsmirror/nlinum")
@@ -2317,7 +2318,10 @@ _p_: projectile        _t_: travis status     _F_: flycheck
    '(ivy-minibuffer-match-face-4 ((t (:underline t :foreground "LightGreen"))))
    '(swiper-match-face-1 ((t (:underline t :foreground "LightGreen" :inherit bold))))
    '(swiper-line-face ((t (:background "grey70" :foreground "DarkOrchid3"))))
-
+   '(centaur-tabs-close-selected((t ( :foreground "DarkGray"))))
+   '(centaur-tabs-modified-marker-selected ((t ( :foreground "yellow2"))))
+   '(centaur-tabs-selected ((t ( :foreground "LimeGreen"))))
+   '(centaur-tabs-unselected ((t ( :foreground "DarkSlateGray4"))))
      ) 
   (setq ivy-format-function 'ivy-format-function-line)
 

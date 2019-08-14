@@ -788,39 +788,46 @@ CLOSED: [2019-07-25 Thu 18:56]
     #+end_src
 *** Tab
     #+begin_src emacs-lisp :tangle yes
-(use-package centaur-tabs
-  :straight (centaur-tabs ::type git :host github :repo "ema2159/centaur-tabs")
-  :demand t
-  :config
-  (centaur-tabs-mode t)
-  (setq centaur-tabs-style "bar")
-  (setq centaur-tabs-set-icons t)
-  (setq centaur-tabs-set-bar t)
-  (setq centaur-tabs-set-modified-marker t)
-  (setq centaur-tabs-background-color (face-background 'default))
-  (centaur-tabs-inherit-tabbar-faces)
-  (setq centaur-tabs-close-button "X")
-  (setq centaur-tabs-modified-marker "*")
+      (use-package centaur-tabs
+        :straight (centaur-tabs ::type git :host github :repo "ema2159/centaur-tabs")
+        :demand t
+        :custom-face
+        (centaur-tabs-active-bar-face ((t (:background "LightGoldenrod"))))
+        :hook
+        (after-init . centaur-tabs-mode)
+        :config
+        (setq centaur-tabs-style "bar")
+        (setq centaur-tabs-set-icons t)
+        (setq centaur-tabs-set-bar t)
+        (setq centaur-tabs-set-bar 'over)
+        (setq centaur-tabs-set-modified-marker t)
+        (setq centaur-tabs-set-close-button nil)
+        (setq centaur-tabs-modified-marker "*")
 
-;;  (set-face-attribute 'centaur-tabs-modified-marker-selected nil :foreground (face-background 'doom-modeline-bar))
-  :bind
-  ("C-c j" .  centaur-tabs-forward-group)
-  ("C-c k" .  centaur-tabs-backward-group)
-  ("C-c o" . centaur-tabs-switch-group)
-  ("s-1" . centaur-tabs-select-visible-tab)
-  ("s-2" . centaur-tabs-select-visible-tab)
-  ("s-3" . centaur-tabs-select-visible-tab)
-  ("s-4" . centaur-tabs-select-visible-tab)
-  ("s-5" . centaur-tabs-select-visible-tab)
-  ("s-6" . centaur-tabs-select-visible-tab)
-  ("s-7" . centaur-tabs-select-visible-tab)
-  ("s-8" . centaur-tabs-select-visible-tab)
-  ("s-9" . centaur-tabs-select-visible-tab)
-  ;;:custom-face
-  ;;  (centaur-tabs-active-bar-face ((t (:inherit doom-modeline-bar))))
-)
+        ;;  (set-face-attribute 'centaur-tabs-modified-marker-selected nil :foreground (face-background 'doom-modeline-bar))
+        :bind
+        ("C-c j" .  centaur-tabs-forward-group)
+        ("C-c k" .  centaur-tabs-backward-group)
+        ("C-c o" . centaur-tabs-switch-group)
+        ("s-1" . centaur-tabs-select-visible-tab)
+        ("s-2" . centaur-tabs-select-visible-tab)
+        ("s-3" . centaur-tabs-select-visible-tab)
+        ("s-4" . centaur-tabs-select-visible-tab)
+        ("s-5" . centaur-tabs-select-visible-tab)
+        ("s-6" . centaur-tabs-select-visible-tab)
+        ("s-7" . centaur-tabs-select-visible-tab)
+        ("s-8" . centaur-tabs-select-visible-tab)
+        ("s-9" . centaur-tabs-select-visible-tab)
+
+        )
 
     #+end_src
+
+    #+RESULTS:
+    : centaur-tabs-select-visible-tab
+
+  
+
 ** Column/line
 
    #+begin_src emacs-lisp :tangle yes
@@ -1316,6 +1323,7 @@ elisp
 (defvar my-cache-dir  "~/.emacs.d/.cache")
 (setq amx-save-file (concat my-cache-dir "amx-items"))
    #+end_src
+** [[https://github.com/honmaple/emacs-maple-minibuffer][honmaple/emacs-maple-minibuffer: Show minibuffer with another frame]]
 ** Edition
 *** multiple-cursors
 #+begin_src emacs-lisp :tangle yes
@@ -1330,6 +1338,7 @@ elisp
       :config
       (delete-selection-mode t))
     #+end_src
+**** [[https://github.com/honmaple/emacs-maple-iedit][honmaple/emacs-maple-iedit: Emacs multiple cursors support based on iedit.]]
 *** Whitespace
     #+begin_src emacs-lisp :tangle yes
 (use-package whitespace
@@ -2570,6 +2579,8 @@ CLOSED: [2019-07-27 Sat 06:05]
                          :repo "alphapapa/org-ql"))
 
     #+end_src
+*** [[https://github.com/legalnonsense/org-time-dependencies][legalnonsense/org-time-dependencies: Make orgmode deadline dependent on another deadline]]
+*** [[https://github.com/alphapapa/org-auto-expand][alphapapa/org-auto-expand: Automatically expand certain Org headings]]
 ** Code
 
    #+BEGIN_SRC emacs-lisp :tangle yes
@@ -3389,23 +3400,25 @@ please test your init file when you modified done.
 ** Custom
 #+begin_src emacs-lisp :tangle yes
 
-  (custom-set-faces
-   '(ivy-current-match ((t (:background "grey70" :foreground "DarkOrchid3"))))
-'(ivy-highlight-face             ((t (:background nil :foreground nil :underline unspecified :weight unspecified))))
-   '(ivy-minibuffer-match-face-1 ((t (:underline t :foreground "LightGreen" :inherit bold))))
-   '(ivy-minibuffer-match-face-2 ((t (:underline t :foreground "LightGreen"))))
-   '(ivy-minibuffer-match-face-3 ((t (:underline t :foreground "LightGreen"))))
-   '(ivy-minibuffer-match-face-4 ((t (:underline t :foreground "LightGreen"))))
-   '(swiper-match-face-1 ((t (:underline t :foreground "LightGreen" :inherit bold))))
-   '(swiper-line-face ((t (:background "grey70" :foreground "DarkOrchid3"))))
+        (custom-set-faces
+         '(ivy-current-match ((t (:background "grey70" :foreground "DarkOrchid3"))))
+      '(ivy-highlight-face             ((t (:background nil :foreground nil :underline unspecified :weight unspecified))))
+         '(ivy-minibuffer-match-face-1 ((t (:underline t :foreground "LightGreen" :inherit bold))))
+         '(ivy-minibuffer-match-face-2 ((t (:underline t :foreground "LightGreen"))))
+         '(ivy-minibuffer-match-face-3 ((t (:underline t :foreground "LightGreen"))))
+         '(ivy-minibuffer-match-face-4 ((t (:underline t :foreground "LightGreen"))))
+         '(swiper-match-face-1 ((t (:underline t :foreground "LightGreen" :inherit bold))))
+         '(swiper-line-face ((t (:background "grey70" :foreground "DarkOrchid3"))))
+         '(centaur-tabs-close-selected((t ( :foreground "DarkGray"))))
+         '(centaur-tabs-modified-marker-selected ((t ( :foreground "yellow2"))))
+         '(centaur-tabs-selected ((t ( :foreground "LimeGreen"))))
+         '(centaur-tabs-unselected ((t ( :foreground "DarkSlateGray4"))))
+           ) 
+        (setq ivy-format-function 'ivy-format-function-line)
 
-     ) 
-  (setq ivy-format-function 'ivy-format-function-line)
 
 #+end_src
 
-#+RESULTS:
-: ivy-format-function-line
 
 ** open-terminal
 #+begin_src emacs-lisp :tangle yes
