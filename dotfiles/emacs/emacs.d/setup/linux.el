@@ -22,7 +22,12 @@
   :straight t
   :after nix-mode
   :config
-(add-to-list 'company-backends 'company-nixos-options))
+  (defun my-nix-mode-setup ()
+    (setq-local company-backends
+                (append '((company-nixos-options company-files company-tabnine company-yasnippet ))
+                        company-backends)))
+
+  (add-hook 'nix-mode-hook 'my-nix-mode-setup))
 
 (use-package cnfonts
     :straight t
@@ -47,7 +52,7 @@
  :font (font-spec :name "-PfEd-Fantasque Sans Mono-normal-italic-normal-*-*-*-*-*-m-0-iso10646-1"
                   :weight 'normal
                   :slant 'normal
-                  :size 26.0))
+                  :size 16.0))
 (dolist (charset '(kana han symbol cjk-misc bopomofo))
   (set-fontset-font
    (frame-parameter nil 'font)
@@ -55,6 +60,6 @@
    (font-spec :name "-ADBO-Source Han Sans CN-normal-normal-normal-*-*-*-*-*-*-0-iso10646-1"
               :weight 'normal
               :slant 'normal
-              :size 31.5)))
+              :size 20.5)))
 
 (provide 'linux)

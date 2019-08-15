@@ -19,6 +19,8 @@ in
     imports = [
       ./org-emacs.nix
       ./git.nix
+      ./cursor.nix
+      ./randr/work.nix
     ];
 
 
@@ -38,7 +40,12 @@ in
   ];
 
 
-
+  programs.autorandr.enable = true;
+  programs.autorandr.hooks.postswitch = {
+    "fix_screen" = "${pkgs.stumpish}/bin/stumpish refresh-heads";
+    "fix_kb" = "${pkgs.xorg.setxkbmap}/bin/setxkbmap -option \"ctrl:nocaps\"";
+  };
+  
   #fish
   programs.direnv.enable = true;
   programs.fish = {
@@ -64,6 +71,8 @@ in
   #home.file.".config/polybar/pkg.sh".source = ./dotfiles/polybar/pkg.sh;
 
 
+
+  
   # compton
   home.file."~/.compton.conf".source = ./dotfiles/.compton.conf;
   # rofi
