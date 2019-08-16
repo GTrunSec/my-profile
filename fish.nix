@@ -19,7 +19,5 @@
 
   
   home.file.".config/fish/functions/hs.fish".source = ./dotfiles/fish/functions/hs.fish;
-  home.file.".config/fish/functions/aliases.fish".source = ./dotfiles/fish/functions/aliases.fish;
-
 
 }

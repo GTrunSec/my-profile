@@ -86,7 +86,7 @@
   services.xserver.displayManager.slim.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
 
-# i3 gaps
+  # i3 gaps
   environment.pathsToLink = [ "/libexec"  ]; # links /libexec from derivations to /run/current-system/sw
   services.xserver.windowManager.i3.package = pkgs.i3-gaps;
   services.xserver.windowManager.i3.enable = true;

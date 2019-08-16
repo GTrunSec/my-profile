@@ -38,6 +38,7 @@ in
    fish
    fantasque-sans-mono
    fd
+   feh
   ];
 
 programs.autorandr = {
@@ -57,7 +58,7 @@ programs.autorandr = {
 
   
   # compton
-  home.file."~/.compton.conf".source = ./dotfiles/.compton.conf;
+  home.file.".compton.conf".source = ./dotfiles/.compton.conf;
   # rofi
   home.file.".config/rofi/config".source = ./dotfiles/rofi/config;
   home.file.".config/rofi/powermenu.sh".source = ./dotfiles/rofi/powermenu.sh;

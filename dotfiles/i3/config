@@ -185,7 +185,7 @@ for_window [class="feh"] floating enable, border normal
 exec --no-startup-id compton --config /home/gtrun/.compton.conf
 
 # Wallpaper
-exec_always --no-startup-id feh --randomize --bg-fill ~/Pictures/wall/wallhaven-590770.jpg
+exec_always --no-startup-id feh --randomize --bg-fill ~/.config/nixpkgs/dotfiles/wallpaper/Environments/grafit-studio-5_2019-07-27_08-31-07.jpeg
 exec --no-startup-id fcitx-autostart 
 
 
