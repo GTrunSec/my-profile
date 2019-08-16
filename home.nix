@@ -21,6 +21,7 @@ in
       ./git.nix
       ./cursor.nix
       ./randr/work.nix
+      ./fish.nix
     ];
 
 
@@ -39,36 +40,18 @@ in
    fd
   ];
 
-
-  programs.autorandr.enable = true;
-  programs.autorandr.hooks.postswitch = {
-    "fix_screen" = "${pkgs.stumpish}/bin/stumpish refresh-heads";
-    "fix_kb" = "${pkgs.xorg.setxkbmap}/bin/setxkbmap -option \"ctrl:nocaps\"";
-  };
-  
-  #fish
-  programs.direnv.enable = true;
-  programs.fish = {
-    enable = true;
-    shellAliases = with pkgs; {
-      l = "exa -lah";
-      f = "rg --files";
-      pcat = "${python3Packages.pygments}/bin/pygmentize";
-      so = "pactl set-default-sink (pacmd list-sinks | awk \\\'/name:.*usb/{if (a != \"\") print a;} {a=$NF}\\\')";
-      si = "pactl set-default-sink (pacmd list-sinks | awk \\\'/name:.*pci/{if (a != \"\") print a;} {a=$NF}\\\')";
+programs.autorandr = {
+      enable = true;
     };
-  };
-
-  home.file.".config/fish/functions/hs.fish".source = ./dotfiles/fish/functions/hs.fish;
-
-  # i3-gaps
+  
+    # i3-gaps
   home.file.".config/i3/config".source = ./dotfiles/i3/config;
   home.file.".config/i3/move-cursor-window-center.sh".source = ./dotfiles/i3/move-cursor-window-center.sh;
 
   #polyar
   home.file.".config/polybar/config".source = ./dotfiles/polybar/config;
   home.file.".config/polybar/launch.sh".source = ./dotfiles/polybar/launch.sh;
-  #home.file.".config/polybar/pkg.sh".source = ./dotfiles/polybar/pkg.sh;
+
 
 
 

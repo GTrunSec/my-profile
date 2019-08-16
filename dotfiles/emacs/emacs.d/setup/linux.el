@@ -62,4 +62,9 @@
               :slant 'normal
               :size 20.5)))
 
+(setq-default cursor-type 'box)
+
+(blink-cursor-mode -1)
+(set-cursor-color "IndianRed3")
+
 (provide 'linux)

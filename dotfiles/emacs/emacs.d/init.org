@@ -3340,10 +3340,7 @@ please test your init file when you modified done.
 #+end_src
 ** setting
 #+begin_src emacs-lisp :tangle yes
-(setq-default cursor-type 'bar)
 
-(blink-cursor-mode -1)
-(set-cursor-color "yellow1")
 
 (setq-default default-tab-width 4)
 ;; 禁止响铃
@@ -3385,6 +3382,12 @@ please test your init file when you modified done.
 #+end_src
 *** setup/macos.el
 #+begin_src emacs-lisp :tangle "./setup/macos.el"
+
+(setq-default cursor-type 'bar)
+
+(blink-cursor-mode -1)
+(set-cursor-color "yellow1")
+
 (setq insert-directory-program "/usr/local/bin/gls")
 (org-link-set-parameters "skim" :follow #'org-mac-skim-open)
 (defun org-mac-skim-open (uri)
@@ -3429,6 +3432,11 @@ please test your init file when you modified done.
 #+end_src
 
 #+begin_src emacs-lisp :tangle "./setup/linux.el"
+(setq-default cursor-type 'box)
+
+(blink-cursor-mode -1)
+(set-cursor-color "IndianRed3")
+
 (provide 'linux)
 #+end_src
 ** Undo
@@ -3459,7 +3467,6 @@ please test your init file when you modified done.
 
 
 #+end_src
-
 
 ** open-terminal
 #+begin_src emacs-lisp :tangle yes

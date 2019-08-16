@@ -80,6 +80,11 @@
                  :slant 'normal
                  :size 24.5)))
 
+(setq-default cursor-type 'bar)
+
+(blink-cursor-mode -1)
+(set-cursor-color "yellow1")
+
 (setq insert-directory-program "/usr/local/bin/gls")
 (org-link-set-parameters "skim" :follow #'org-mac-skim-open)
 (defun org-mac-skim-open (uri)

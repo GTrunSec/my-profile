@@ -196,7 +196,7 @@ exec --no-startup-id xset dpms 500
 
 #workspace
 assign [class="^Emacs$"] → 2
-assign [class="^Chromium$"] → 3
+assign [class="^Chromium-browser$"] → 3
 assign [class="^Okular$"] → 3
 
 mode "swap_windows" {
