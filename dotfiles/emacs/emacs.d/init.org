@@ -3441,10 +3441,15 @@ please test your init file when you modified done.
 #+end_src
 ** Undo
    #+begin_src emacs-lisp :tangle yes
-  (use-package undo-propose
-    :straight t
-    :commands (undo-propose)
-    :bind ("C-x u" . undo-propose))
+     (use-package undo-propose
+       :straight t
+       :disabled t
+       :commands (undo-propose)
+       :bind ("C-x u" . undo-propose))
+
+
+(straight-use-package 'undo-tree)
+(global-undo-tree-mode 1)
    #+end_src
 ** Custom
 #+begin_src emacs-lisp :tangle yes

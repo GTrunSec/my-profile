@@ -1853,38 +1853,6 @@ Inserted by installing org-mode or when a release is made."
       `((:name "sougou-shiji" :file ,(expand-file-name "pyim/shiji.pyim" user-emacs-directory))
         (:name "sougou-shijin" :file ,(expand-file-name "pyim/shijin.pyim" user-emacs-directory))))
 
-(use-package cnfonts
-  :straight t
-  :init
- (defun cnfonts--set-all-the-icons-fonts (&optional _)
-    "Show icons in all-the-icons."
-    (when (featurep 'all-the-icons)
-      (dolist (charset '(kana han cjk-misc bopomofo gb18030))
-        (set-fontset-font "fontset-default" charset "all-the-icons" nil 'append)
-        (set-fontset-font "fontset-default" charset "github-octicons" nil 'append)
-        (set-fontset-font "fontset-default" charset "FontAwesome" nil 'append)
-        (set-fontset-font "fontset-default" charset "Material Icons" nil 'append)
-        (set-fontset-font "fontset-default" charset "file-icons" nil 'append)
-        (set-fontset-font "fontset-default" charset "Weather Icons" nil 'append))))
-  :hook ((after-init . cnfonts-enable)
-         (cnfonts-set-font-finish . cnfonts--set-all-the-icons-fonts))
-  :config
-(setq cnfonts-use-cache t)
-  (setq cnfonts-keep-frame-size nil)
-  (add-hook 'window-setup-hook (lambda ()
-                                 (setq cnfonts-keep-frame-size t)))
-  ;; Set profiles
-  (setq cnfonts-directory (concat no-littering-var-directory "cnfonts"))
-  (setq cnfonts-profiles '("program1" "program2" "program3" "org-mode" "read-book"))
-  (setq cnfonts--profiles-steps '(("program1" . 4)
-                                  ("program2" . 5)
-                                  ("program3" . 3)
-                                  ("org-mode" . 6)
-                                  ("read-book" . 8)))
-
-
-)
-
 (use-package ace-pinyin
 :straight t
 :config
@@ -2273,11 +2241,6 @@ _p_: projectile        _t_: travis status     _F_: flycheck
                             :host github
                             :repo "Malabarba/elisp-bug-hunter"))
 
-(setq-default cursor-type 'bar)
-
-(blink-cursor-mode -1)
-(set-cursor-color "yellow1")
-
 (setq-default default-tab-width 4)
 ;; 禁止响铃
 (setq ring-bell-function 'ignore)
@@ -2305,9 +2268,14 @@ _p_: projectile        _t_: travis status     _F_: flycheck
 )
 
 (use-package undo-propose
-  :straight t
-  :commands (undo-propose)
-  :bind ("C-x u" . undo-propose))
+       :straight t
+       :disabled t
+       :commands (undo-propose)
+       :bind ("C-x u" . undo-propose))
+
+
+(straight-use-package 'undo-tree)
+(global-undo-tree-mode 1)
 
 (custom-set-faces
    '(ivy-current-match ((t (:background "grey70" :foreground "DarkOrchid3"))))
