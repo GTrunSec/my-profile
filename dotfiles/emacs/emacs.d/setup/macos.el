@@ -47,7 +47,7 @@
         (set-fontset-font "fontset-default" charset "file-icons" nil 'append)
         (set-fontset-font "fontset-default" charset "Weather Icons" nil 'append))))
   :hook ((after-init . cnfonts-enable)
-    )
+         (cnfonts-set-font-finish . cnfonts--set-all-the-icons-fonts))
   :config
 (setq cnfonts-use-cache t)
   (setq cnfonts-keep-frame-size nil)

@@ -2277,6 +2277,8 @@ _p_: projectile        _t_: travis status     _F_: flycheck
 (straight-use-package 'undo-tree)
 (global-undo-tree-mode 1)
 
+;;TODO: undo-tree-auto-save-history
+
 (custom-set-faces
    '(ivy-current-match ((t (:background "grey70" :foreground "DarkOrchid3"))))
 '(ivy-highlight-face             ((t (:background nil :foreground nil :underline unspecified :weight unspecified))))
