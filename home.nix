@@ -1,11 +1,14 @@
 { config, pkgs, ... }:
 
 let
+  
   home_directory = builtins.getEnv "HOME";
   log_directory = "${home_directory}/logs";
-  clean-nix-store = pkgs.writeShellScriptBin "clean-nix-store" ./bin/clean-nix-store;
+
 in
+
 {
+  
   nixpkgs = {
     config = {
       allowUnfree = true;
