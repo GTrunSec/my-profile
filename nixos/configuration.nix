@@ -39,7 +39,7 @@
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-  services.xserver.videoDrivers = [ "nvidia" ];
+  
 
   # Select internationalisation properties.
   i18n = {
@@ -87,7 +87,7 @@ services.xserver = {
      enable = true;
      displayManager.slim.enable = true;
      displayManager.slim.autoLogin = true;
-     services.xserver.layout = "us";
+     layout = "us";
      displayManager.slim.defaultUser = "gtrun";
      desktopManager.plasma5.enable = true;
      # Enable touchpad support.
@@ -95,6 +95,7 @@ services.xserver = {
      desktopManager.xterm.enable = false;
      windowManager.i3.package = pkgs.i3-gaps;
      windowManager.i3.enable = true;
+     videoDrivers = [ "nvidia" ];
      };
  
 
