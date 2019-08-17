@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
 environment.systemPackages = with pkgs; [
-	   w3m
+     w3m
      fantasque-sans-mono
      polybar
      cmake
@@ -18,5 +18,11 @@ environment.systemPackages = with pkgs; [
      xdotool
      ditaa
      graphviz
+     # Unzip
+     p7zip
+     unzip
+     zip
+     pciutils    # lspci
+     psmisc      # pkill, killall, pstree, fuser
    ];
 }

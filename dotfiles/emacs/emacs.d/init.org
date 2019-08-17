@@ -365,6 +365,8 @@ I would like use ErgoDox keyboard on my linux environment
 
       (provide 'xah-fly-key-normal)
     #+end_src
+
+
 *** Ergo layout [Linux]
 **** install
 #+begin_src emacs-lisp :tangle yes
@@ -3202,18 +3204,12 @@ e
 * Documentation
 ** help
    #+begin_src emacs-lisp :tangle yes
-   (use-package helpful
-     :straight t
-     )
+   (straightuse-package 'helpful)
    #+end_src
 ** Info
    #+begin_src emacs-lisp :tangle yes
-(use-package info-buffer
-  :straight t
-)
-(use-package info+
-  :straight t
-  :disabled t)
+(straight-use-package 'info-buffer)
+;;(straight-use-package 'info+)
    #+end_src
 
 * Hydra-Keys/shortcuts

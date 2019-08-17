@@ -12,6 +12,8 @@
       ./pulse.nix
       ./systemPackages.nix
       ./fonts.nix
+      ./virtualisation/docker.nix
+      ./virtualisation/libvirtd.nix
     ];
 
   boot.extraModprobeConfig = ''
@@ -39,16 +41,21 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
   services.xserver.videoDrivers = [ "nvidia" ];
 
-# Select internationalisation properties.
-   i18n = {
-     consoleFont = "Lat2-Terminus16";
-     consoleKeyMap = "us";
+  # Select internationalisation properties.
+  i18n = {
      defaultLocale = "en_US.UTF-8";
-   };
+     consoleFont = "Lat2-Terminus16";
+     inputMethod.enabled = "fcitx";
+     consoleKeyMap = "us";
+     inputMethod.fcitx.engines = [ pkgs.fcitx-engines.libpinyin ];
+  };
 
-   programs.fish.enable = true;
+  programs.fish.enable = true;
+
   # Set your time zone.
+  
    time.timeZone = "America/Los_Angeles";
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
 
@@ -75,21 +82,24 @@
   sound.enable = true;
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.xserver.layout = "us";
-  services.xserver.xkbOptions = "eurosign:e";
 
-  # Enable touchpad support.
-  # services.xserver.libinput.enable = true;
-
-  # Enable the KDE Desktop Environment.
-  services.xserver.displayManager.slim.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+services.xserver = {
+     enable = true;
+     displayManager.slim.enable = true;
+     displayManager.slim.autoLogin = true;
+     services.xserver.layout = "us";
+     displayManager.slim.defaultUser = "gtrun";
+     desktopManager.plasma5.enable = true;
+     # Enable touchpad support.
+     # libinput.enable = true;
+     desktopManager.xterm.enable = false;
+     windowManager.i3.package = pkgs.i3-gaps;
+     windowManager.i3.enable = true;
+     };
+ 
 
   # i3 gaps
   environment.pathsToLink = [ "/libexec"  ]; # links /libexec from derivations to /run/current-system/sw
-  services.xserver.windowManager.i3.package = pkgs.i3-gaps;
-  services.xserver.windowManager.i3.enable = true;
 
   nixpkgs.config = {
     pulseaudio = true;
@@ -98,14 +108,15 @@
       polybar = pkgs.polybar.override {
         i3Support = true;
 	    };
-	    emacs = pkgs.emacs.override { gtk = pkgs.gtk3; };
+	    emacs = pkgs.emacs.override { gtk = pkgs.gtk3;
+	    	  };
 		};
 	};
 
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
    users.users.gtrun = {
-	   home = "/home/gtrun/";
+     home = "/home/gtrun/";
      isNormalUser = true;
      extraGroups = [ "wheel" "audio" "pulse" "sound"]; # Enable ‘sudo’ for the user.
      shell = "/run/current-system/sw/bin/fish";
