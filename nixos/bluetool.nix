@@ -1,7 +1,7 @@
 { ... }:
 {
 	hardware.pulseaudio = {
-	    enable = true;
-	        support32Bit = true;
-			     };
-			     }
+	  enable = true;
+	  support32Bit = true;
+	};
+}

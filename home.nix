@@ -15,7 +15,6 @@ in
       allowBroken = false;
       allowUnsupportedSystem = false;
     };
-
   };
 
 
@@ -47,18 +46,15 @@ in
 programs.autorandr = {
       enable = true;
     };
-  
-    # i3-gaps
+
+
+  # i3-gaps
   home.file.".config/i3/config".source = ./dotfiles/i3/config;
   home.file.".config/i3/move-cursor-window-center.sh".source = ./dotfiles/i3/move-cursor-window-center.sh;
 
   #polyar
   home.file.".config/polybar/config".source = ./dotfiles/polybar/config;
   home.file.".config/polybar/launch.sh".source = ./dotfiles/polybar/launch.sh;
-
-
-
-
   
   # compton
   home.file.".compton.conf".source = ./dotfiles/.compton.conf;
@@ -70,7 +66,7 @@ programs.autorandr = {
   # termite
   home.file.".config/termite/config".source = ./dotfiles/termite/config;
 
-# Let Home Manager install and manage itself.
+  # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
 }
