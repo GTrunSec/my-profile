@@ -18,6 +18,6 @@
   };
 
   
-  home.file.".config/fish/functions/hs.fish".source = ./dotfiles/fish/functions/hs.fish;
-  home.file.".config/fish/functions/clean-nix-store.fish".source = ./dotfiles/fish/functions/clean-nix-store.fish;
+  home.file.".config/fish/functions/hs.fish".source = ../dotfiles/fish/functions/hs.fish;
+  home.file.".config/fish/functions/clean-nix-store.fish".source = ../dotfiles/fish/functions/clean-nix-store.fish;
 }

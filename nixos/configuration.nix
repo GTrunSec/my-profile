@@ -88,15 +88,14 @@
     windowManager.default = "i3";
     #displayManager.slim.autoLogin = true;
     layout = "us";
-    #displayManager.slim.defaultUser = "gtrun";
     desktopManager.plasma5.enable = true;
     # Enable touchpad support.
     # libinput.enable = true;
     displayManager.slim = {
-          enable = true;
-	        autoLogin = true;
-		      defaultUser = "gtrun";
-		          };
+      enable = true;
+	    autoLogin = true;
+		  defaultUser = "gtrun";
+		};
     windowManager.i3.package = pkgs.i3-gaps;
     windowManager.i3.enable = true;
     videoDrivers = [ "nvidia" ];

@@ -191,7 +191,7 @@ exec --no-startup-id fcitx-autostart
 
 ##nix-daemon
 
-exec --no-startup-id xset dpms 500
+exec_always --no-startup-id xset dpms 500
 
 
 #workspace

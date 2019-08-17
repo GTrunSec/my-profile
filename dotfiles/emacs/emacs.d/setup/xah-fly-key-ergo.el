@@ -15,7 +15,7 @@
    (define-prefix-command 'xah-fly-leader-key-map)
    '(
      ("2" . org-keymap)
-     ("8" . my-keymap)
+     ("8" . git-keymap)
      ("fr" . counsel-recentf)
      ;;("<tab>" . spacemacs/alternate-buffer)
      ("ff" . counsel-fd-file-jump)
