@@ -61,6 +61,7 @@
 (define-key xah-fly-key-map (kbd "C-a") 'beginning-of-visual-line)
 (define-key xah-fly-key-map (kbd "C-0") 'delete-region)
 (define-key xah-fly-key-map (kbd "C-n") 'next-line)
+(define-key xah-fly-key-map (kbd "C-;") 'maple-iedit-match-all)
 
 
 ;; org-mode
@@ -70,7 +71,6 @@
 
 ;; iseach
 (define-key xah-fly-key-map (kbd "C-s") 'swiper-isearch)
-
 
 ;; scrolling
 (define-key xah-fly-key-map (kbd "C-v") 'scroll-up-command)
@@ -120,53 +120,83 @@ Version 2017-01-21"
   (define-key xah-fly-key-map (kbd "-") 'gtrun-xah-minus-fly-key)
   (define-key xah-fly-key-map (kbd "/") 'gtrun-xah-slash-fly-key)
   (define-key xah-fly-key-map (kbd ",") 'gtrun-xah-comma-fly-key)
+  (define-key xah-fly-key-map (kbd "'") 'gtrun-xah-apostrophe-fly-key)
+  (define-key xah-fly-key-map (kbd ";") 'gtrun-xah-semicolon-fly-key)
+  (define-key xah-fly-key-map (kbd "=") 'gtrun-xah-equality-fly-key)
+
   )
 
 (defun gtrun-xah-dot-fly-key ()
-        "key `.'"
-        (interactive)
-        (cond
-         ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
-         ((eq major-mode 'dired-mode) (call-interactively 'hydra-dired/body))
-         ((eq major-mode 'w3m-mode) (call-interactively 'scroll-up))
-         (t nil)))
+  "key `.'"
+  (interactive)
+  (cond
+   ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
+   ((eq major-mode 'dired-mode) (call-interactively 'hydra-dired/body))
+   ((eq major-mode 'w3m-mode) (call-interactively 'scroll-up))
+   (t nil)))
 
-      (defun gtrun-xah-fly-key ()
-        "key `p'"
-        (interactive)
-        (cond
-         ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
-         ((eq major-mode 'dired-mode) (call-interactively 'xah-open-in-external-app))
-         (t nil)))
+(defun gtrun-xah-comma-fly-key ()
+  "key `,'"
+  (interactive)
+  (cond
+   ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
+   ((eq major-mode 'w3m-mode) (call-interactively 'scroll-down))
+   (t nil)))
+
+(defun gtrun-xah-slash-fly-key ()
+  "key `/'"
+  (interactive)
+  (cond
+   ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
+   ((eq major-mode 'dired-mode) (call-interactively 'vinegar/dired-diff))
+   ((eq major-mode 'w3m-mode) (call-interactively 'w3m-bookmark-add-current-url))
+   ((eq major-mode 'org-mode) (call-interactively 'helm-org-in-buffer-headings))
+   ((eq major-mode 'org-agenda-mode) (call-interactively 'org-agenda-filter-by-tag))
+
+   (t nil)))
+
+(defun gtrun-xah-semicolon-fly-key ()
+  "key `;'"
+  (interactive)
+  (cond
+   ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
+
+   (t nil)))
+
+(defun gtrun-xah-apostrophe-fly-key ()
+  "key `''"
+  (interactive)
+  (cond
+   ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
+
+   (t nil)))
+(defun gtrun-xah-equality-fly-key ()
+  "key `='"
+  (interactive)
+  (cond
+   ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
+   (t nil)))
+
+
+(defun gtrun-xah-fly-key ()
+  "key `p'"
+  (interactive)
+  (cond
+   ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
+   ((eq major-mode 'dired-mode) (call-interactively 'xah-open-in-external-app))
+   (t nil)))
 
 
 (defun gtrun-xah-minus-fly-key ()
-        "key `-'"
-        (interactive)
-        (cond
-         ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
-         ((eq major-mode 'dired-mode) (call-interactively 'vinegar/up-directory))
-         (t nil)))
-
-      (defun gtrun-xah-slash-fly-key ()
-        "key `/'"
-        (interactive)
-        (cond
-         ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
-         ((eq major-mode 'dired-mode) (call-interactively 'vinegar/dired-diff))
-         ((eq major-mode 'w3m-mode) (call-interactively 'w3m-bookmark-add-current-url))
-         ((eq major-mode 'org-mode) (call-interactively 'helm-org-in-buffer-headings))
-         ((eq major-mode 'org-agenda-mode) (call-interactively 'org-agenda-filter-by-tag))
-
-         (t nil)))
+  "key `-'"
+  (interactive)
+  (cond
+   ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
+   ((eq major-mode 'dired-mode) (call-interactively 'vinegar/up-directory))
+   (t nil)))
 
 
-      (defun gtrun-xah-comma-fly-key ()
-        "key `,'"
-        (interactive)
-        (cond
-         ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
-         ((eq major-mode 'w3m-mode) (call-interactively 'scroll-down))
-         (t nil)))
+
+
 
 (provide 'xah-fly-key-normal)

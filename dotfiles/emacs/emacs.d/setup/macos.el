@@ -29,7 +29,6 @@
 
 ;; FIXME macos can't load org correctly by onece
 
-
 (add-hook 'after-init-hook #'org-reload)
 (add-hook 'after-init-hook #'org-super-agenda-mode)
 

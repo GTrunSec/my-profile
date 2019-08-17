@@ -728,13 +728,32 @@
 (defvar my-cache-dir  "~/.emacs.d/.cache")
 (setq amx-save-file (concat my-cache-dir "amx-items"))
 
-(straight-use-package 'multiple-cursors)
-(require 'multiple-cursors)
+;; (straight-use-package 'multiple-cursors)
+;; (require 'multiple-cursors)
 
-(use-package iedit
-:straight t
-:config
-(delete-selection-mode t))
+(straight-use-package 'iedit)
+
+(use-package maple-iedit
+  :ensure nil
+  :straight (maple-iedit :type git
+                         :host github
+                         :repo "honmaple/emacs-maple-iedit")
+  :commands (maple-iedit-match-all maple-iedit-match-next maple-iedit-match-previous)
+  :config
+  (delete-selection-mode t)
+  (setq maple-iedit-ignore-case t)
+  (defhydra maple/iedit ()
+    ("n" maple-iedit-match-next "next")
+    ("t" maple-iedit-skip-and-match-next "skip and next")
+    ("T" maple-iedit-skip-and-match-previous "skip and previous")
+    ("p" maple-iedit-match-previous "prev"))
+  :bind (:map maple-iedit-mode-keymap
+              ("," . maple-iedit-match-next)
+              ("." . maple-iedit-match-previous)
+              (";" . maple-iedit-skip-and-match-next)
+              ("'" . maple-iedit-skip-and-match-previous)
+              )
+  )
 
 (use-package whitespace
   :straight t
@@ -2122,16 +2141,10 @@ Inserted by installing org-mode or when a release is made."
 (straight-use-package 'w3m)
 (require 'w3m)
 
-(use-package helpful
-  :straight t
-  )
+(straight-use-package 'helpful)
 
-(use-package info-buffer
-  :straight t
-)
-(use-package info+
-  :straight t
-  :disabled t)
+(straight-use-package 'info-buffer)
+;;(straight-use-package 'info+)
 
 (defhydra hydra-projectile-other-window (:color teal)
   "projectile-other-window"
