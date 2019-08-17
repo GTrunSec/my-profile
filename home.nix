@@ -20,11 +20,11 @@ in
 
 
     imports = [
-      ./org-emacs.nix
-      ./git.nix
-      ./cursor.nix
-      ./randr/work.nix
-      ./fish.nix
+      ./home-manager/org-emacs.nix
+      ./home-manager/git.nix
+      ./home-manager/cursor.nix
+      ./home-manager/randr/work.nix
+      ./home-manager/fish.nix
     ];
 
 
