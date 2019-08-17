@@ -760,7 +760,8 @@
 (straight-use-package 'company-prescient)
 
 (add-hook 'company-mode-hook #'company-prescient-mode)
-(add-hook 'ivy-mode-hook #'ivy-prescient-mode)
+;;add pinyin to ivy-re-build-alist
+;;(add-hook 'ivy-mode-hook #'ivy-prescient-mode)
 (require 'prescient)
 (add-hook 'after-init-hook #'prescient-persist-mode)
 
@@ -1927,7 +1928,8 @@ Inserted by installing org-mode or when a release is made."
           ("r" ivy--rename-buffer-action "rename")))))
 (with-eval-after-load "swiper-isearch"
  (setq ivy-re-builders-alist
-        '((t . re-builder-extended-pattern))))
+        '((t . re-builder-extended-pattern)
+          (t . ivy-prescient-re-builder))))
 
 (use-package eshell
   :ensure nil
