@@ -40,6 +40,7 @@ in
    fish
    fantasque-sans-mono
    fd
+   ripgrep
    feh
   ];
 

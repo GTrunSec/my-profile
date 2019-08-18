@@ -24,5 +24,9 @@ environment.systemPackages = with pkgs; [
      zip
      pciutils    # lspci
      psmisc      # pkill, killall, pstree, fuser
-   ];
+     # rime
+     librime
+     fcitx-configtool
+     #
+     ];
 }

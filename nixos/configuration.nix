@@ -46,8 +46,7 @@
      defaultLocale = "en_US.UTF-8";
      consoleFont = "Lat2-Terminus16";
      inputMethod.enabled = "fcitx";
-     consoleKeyMap = "us";
-     inputMethod.fcitx.engines = [ pkgs.fcitx-engines.libpinyin ];
+     inputMethod.fcitx.engines = [ pkgs.fcitx-engines.rime ];
   };
 
   programs.fish.enable = true;

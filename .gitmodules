@@ -17,3 +17,6 @@
 [submodule "dotfiles/emacs/emacs.d/setup/point-history"]
 	path = dotfiles/emacs/emacs.d/setup/point-history
 	url = https://github.com/blue0513/point-history.git
+[submodule "own-nixpkgs/liberime/liberime"]
+	path = own-nixpkgs/liberime/liberime
+	url = https://github.com/tumashu/liberime.git
