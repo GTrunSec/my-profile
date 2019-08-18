@@ -28,5 +28,8 @@ environment.systemPackages = with pkgs; [
      librime
      fcitx-configtool
      #
+     goldendict
+     #
+     qt5.qtbase
      ];
 }

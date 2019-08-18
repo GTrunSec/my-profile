@@ -14,6 +14,7 @@
       ./fonts.nix
       ./virtualisation/docker.nix
       ./virtualisation/libvirtd.nix
+      ./theme/desktop.nix
     ];
 
   boot.extraModprobeConfig = ''
@@ -79,43 +80,6 @@
 
   # Enable sound.
   sound.enable = true;
-
-  # Enable the X11 windowing system.
-
-  services.xserver = {
-    enable = true;
-    windowManager.default = "i3";
-    #displayManager.slim.autoLogin = true;
-    layout = "us";
-    desktopManager.plasma5.enable = true;
-    # Enable touchpad support.
-    # libinput.enable = true;
-    displayManager.slim = {
-      enable = true;
-	    autoLogin = true;
-		  defaultUser = "gtrun";
-		};
-    windowManager.i3.package = pkgs.i3-gaps;
-    windowManager.i3.enable = true;
-    videoDrivers = [ "nvidia" ];
-    desktopManager.default = "none";
-  };
- 
-
-  # i3 gaps
-  environment.pathsToLink = [ "/libexec"  ]; # links /libexec from derivations to /run/current-system/sw
-
-  nixpkgs.config = {
-    pulseaudio = true;
-    allowUnfree = true;
-    packageOverrides = pkgs: rec {
-      polybar = pkgs.polybar.override {
-        i3Support = true;
-	    };
-	    emacs = pkgs.emacs.override { gtk = pkgs.gtk3;
-	    	                          };
-		};
-	};
 
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
