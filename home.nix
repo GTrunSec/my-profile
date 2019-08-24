@@ -9,44 +9,14 @@ in
 
 {
   
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-      allowBroken = false;
-      allowUnsupportedSystem = false;
-    };
-  };
-
-
-    imports = [
-      ./home-manager/org-emacs.nix
-      ./home-manager/git.nix
-      ./home-manager/cursor.nix
-      ./home-manager/randr/work.nix
-      ./home-manager/fish.nix
-    ];
-
-
-  home.packages = with pkgs; [
-   xclip
-   urxvt_perls
-   ag
-   graphviz
-   rofi
-   termite
-   i3-gaps
-   xdotool
-   compton
-   fish
-   fantasque-sans-mono
-   fd
-   ripgrep
-   feh
+  imports = [
+    ./home-manager/import.nix
   ];
 
-programs.autorandr = {
-      enable = true;
-    };
+
+  programs.autorandr = {
+    enable = true;
+  };
 
 
   # i3-gaps

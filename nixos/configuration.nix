@@ -15,6 +15,7 @@
       ./virtualisation/docker.nix
       ./virtualisation/libvirtd.nix
       ./theme/desktop.nix
+      # ./hydra.nix               
     ];
 
   boot.extraModprobeConfig = ''

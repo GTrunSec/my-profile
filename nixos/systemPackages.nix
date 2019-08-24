@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-environment.systemPackages = with pkgs; [
+  environment.systemPackages = with pkgs; [
      w3m
      fantasque-sans-mono
      polybar
