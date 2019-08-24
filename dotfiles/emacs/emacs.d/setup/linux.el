@@ -1,5 +1,5 @@
 (setq lsp-python-ms-executable
-      "~/src/python-language-server/output/bin/Release/linux-x64/publish/Microsoft.Python.LanguageServer")
+      "~/.nix-profile/bin/mspyls")
 
 (use-package nix-mode
   :straight t

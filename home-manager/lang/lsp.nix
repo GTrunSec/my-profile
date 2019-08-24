@@ -21,7 +21,9 @@ in
     # Bash
     # unstable.nodePackages.bash-language-server
     # Python
-     python37Packages.python-language-server
+    python37
+    python27
+    # python37Packages.python-language-server
     # Javascript
     nodePackages.javascript-typescript-langserver
     # Nix
