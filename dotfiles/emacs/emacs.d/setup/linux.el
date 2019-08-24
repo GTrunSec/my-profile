@@ -1,14 +1,3 @@
-;; (straight-use-package '(snails :type git
- ;;                                :host github
- ;;                                :repo "manateelazycat/snails"))
- ;;  (define-key snails-mode-map [remap next-line] #'snails-select-next-item)
-(use-package snails
- :load-path "./setup/snails"
- :config
- (define-key snails-mode-map [remap next-line] #'snails-select-next-item)
- (add-hook 'snails-mode-hook #'xah-fly-insert-mode-activate)
- )
-
 (setq lsp-python-ms-executable
       "~/src/python-language-server/output/bin/Release/linux-x64/publish/Microsoft.Python.LanguageServer")
 
@@ -64,21 +53,20 @@
 
 (setq-default cursor-type 'box)
 
-
  ;; librime 
 ;; (setq load-path (cons (file-truename "~/.config/nixpkgs/dotfiles/emacs/emacs.d/") load-path))
 
-;;  (require 'pyim)
+;;(require 'pyim)
 ;;  (require 'posframe)
 ;;  (require 'liberime)
 
-;;  (setq pyim-page-tooltip 'posframe)
+;; (setq pyim-page-tooltip 'posframe)
 ;;  (setq pyim-page-length 9)
 
-;;    (liberime-start
-;;     (expand-file-name "~/.emacs.d/pyim/rime/"))
-;;  (liberime-select-schema "luna_pinyin_simp")
-;;  (setq pyim-default-scheme 'rime-quanpin)
+;; (liberime-start
+;; (expand-file-name "~/.emacs.d/pyim/rime/"))
+;; (liberime-select-schema "luna_pinyin_simp")
+;; (setq pyim-default-scheme 'rime-quanpin)
 
  (blink-cursor-mode -1)
  (set-cursor-color "IndianRed3")

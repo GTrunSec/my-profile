@@ -1,10 +1,3 @@
-(use-package snails
-  :load-path "./setup/snails"
-  :config
-  (define-key snails-mode-map [remap next-line] #'snails-select-next-item)
-  (add-hook 'snails-mode-hook #'xah-fly-insert-mode-activate)
-  )
-
 (setq lsp-python-ms-executable
       "~/src/python-language-server/output/bin/Release/osx-x64/publish/Microsoft.Python.LanguageServer")
 

@@ -219,8 +219,16 @@
   :defer 10
   :hook
   (python-mode . highlight-indent-guides-mode)
+  :config
+  (setq highlight-indent-guides-auto-odd-face-perc 15)
+  (setq highlight-indent-guides-auto-even-face-perc 15)
+  (setq highlight-indent-guides-auto-character-face-perc 20)
   :custom
-  (highlight-indent-guides-method 'character))
+  (highlight-indent-guides-method 'character)
+    )
+
+;; (straight-use-package 'highlight-indentation) 
+;; (require 'highlight-indentation)
 
 (use-package beacon
   :straight t
@@ -832,6 +840,13 @@
   (yatemplate-fill-alist)
   (add-hook 'find-file-hook 'auto-insert)
   )
+
+;; (use-package snails
+;;   :load-path "./setup/snails"
+;;   :config
+;;   (define-key snails-mode-map [remap next-line] #'snails-select-next-item)
+;;   (add-hook 'snails-mode-hook #'xah-fly-insert-mode-activate)
+;;   )
 
 (straight-use-package 'request)
 (require 'request)
@@ -1583,12 +1598,6 @@ Inserted by installing org-mode or when a release is made."
     ("NSM-GTD/workflow.org" :agenda t :required t)
     ("NSM-GTD/NsmOrg.org" :agenda t :required t)
     )
-
-  ;; (org-starter-def "~/org-notes/NSM-GTD"
-  ;;   :files
-  ;;   ("NsmOrg.org" :agenda t)
-  ;;   ("workflow.org" :agenda t :required nil)
-  ;;   )
   (org-starter-def "~/.emacs.d"
     :files
     ("init.org" :key "i" :refile (:maxlevel . 5))
@@ -1711,6 +1720,68 @@ Inserted by installing org-mode or when a release is made."
                          :type git
                          :host github
                          :repo "alphapapa/org-ql"))
+
+(eval-after-load "calendar" '(progn
+  (define-key calendar-mode-map "<" 'jarfar/scroll-year-calendar-backward)
+  (define-key calendar-mode-map ">" 'jarfar/scroll-year-calendar-forward) ))
+
+(defun jarfar/year-calendar (&optional year)
+  "Generate a one year calendar that can be scrolled by year in each direction.
+This is a modification of:  http://homepage3.nifty.com/oatu/emacs/calendar.html
+See also: https://stackoverflow.com/questions/9547912/emacs-calendar-show-more-than-3-months"
+  (interactive)
+  (require 'calendar)
+  (let* (
+      (current-year (number-to-string (nth 5 (decode-time (current-time)))))
+      (month 0)
+      (year (if year year (string-to-number (format-time-string "%Y" (current-time))))))
+    (switch-to-buffer (get-buffer-create calendar-buffer))
+    (when (not (eq major-mode 'calendar-mode))
+      (calendar-mode))
+    (setq displayed-month month)
+    (setq displayed-year year)
+    (setq buffer-read-only nil)
+    (erase-buffer)
+    ;; horizontal rows
+    (dotimes (j 4)
+      ;; vertical columns
+      (dotimes (i 3)
+        (calendar-generate-month
+          (setq month (+ month 1))
+          year
+          ;; indentation / spacing between months
+          (+ 5 (* 25 i))))
+      (goto-char (point-max))
+      (insert (make-string (- 10 (count-lines (point-min) (point-max))) ?\n))
+      (widen)
+      (goto-char (point-max))
+      (narrow-to-region (point-max) (point-max)))
+    (widen)
+    (goto-char (point-min))
+    (setq buffer-read-only t)))
+
+(defun jarfar/scroll-year-calendar-forward (&optional arg event)
+  "Scroll the yearly calendar by year in a forward direction."
+  (interactive (list (prefix-numeric-value current-prefix-arg)
+                     last-nonmenu-event))
+  (unless arg (setq arg 0))
+  (save-selected-window
+    (if (setq event (event-start event)) (select-window (posn-window event)))
+    (unless (zerop arg)
+      (let* (
+              (year (+ displayed-year arg)))
+        (jarfar/year-calendar year)))
+    (goto-char (point-min))
+    (run-hooks 'calendar-move-hook)))
+
+(defun jarfar/scroll-year-calendar-backward (&optional arg event)
+  "Scroll the yearly calendar by year in a backward direction."
+  (interactive (list (prefix-numeric-value current-prefix-arg)
+                     last-nonmenu-event))
+  (jarfar/scroll-year-calendar-forward (- (or arg 1)) event))
+
+
+(defalias 'year-calendar #'jarfar/year-calendar)
 
 (defun gtrun-org/org-insert-src-block (src-code-type)
   "Insert a `SRC-CODE-TYPE' type source code block in org-mode."
@@ -2294,21 +2365,28 @@ _p_: projectile        _t_: travis status     _F_: flycheck
 
 ;;TODO: undo-tree-auto-save-history
 
-(custom-set-faces
-   '(ivy-current-match ((t (:background "grey70" :foreground "DarkOrchid3"))))
-'(ivy-highlight-face             ((t (:background nil :foreground nil :underline unspecified :weight unspecified))))
-   '(ivy-minibuffer-match-face-1 ((t (:underline t :foreground "LightGreen" :inherit bold))))
-   '(ivy-minibuffer-match-face-2 ((t (:underline t :foreground "LightGreen"))))
-   '(ivy-minibuffer-match-face-3 ((t (:underline t :foreground "LightGreen"))))
-   '(ivy-minibuffer-match-face-4 ((t (:underline t :foreground "LightGreen"))))
-   '(swiper-match-face-1 ((t (:underline t :foreground "LightGreen" :inherit bold))))
-   '(swiper-line-face ((t (:background "grey70" :foreground "DarkOrchid3"))))
-   '(centaur-tabs-close-selected((t ( :foreground "DarkGray"))))
-   '(centaur-tabs-modified-marker-selected ((t ( :foreground "yellow2"))))
-   '(centaur-tabs-selected ((t ( :foreground "LimeGreen"))))
-   '(centaur-tabs-unselected ((t ( :foreground "DarkSlateGray4"))))
-     ) 
-  (setq ivy-format-function 'ivy-format-function-line)
+(setq highlight-indent-guides-auto-enabled nil)
+
+        (custom-set-faces
+         '(ivy-current-match ((t (:background "grey70" :foreground "DarkOrchid3"))))
+      '(ivy-highlight-face             ((t (:background nil :foreground nil :underline unspecified :weight unspecified))))
+         '(ivy-minibuffer-match-face-1 ((t (:underline t :foreground "LightGreen" :inherit bold))))
+         '(ivy-minibuffer-match-face-2 ((t (:underline t :foreground "LightGreen"))))
+         '(ivy-minibuffer-match-face-3 ((t (:underline t :foreground "LightGreen"))))
+         '(ivy-minibuffer-match-face-4 ((t (:underline t :foreground "LightGreen"))))
+         '(swiper-match-face-1 ((t (:underline t :foreground "LightGreen" :inherit bold))))
+         '(swiper-line-face ((t (:background "grey70" :foreground "DarkOrchid3"))))
+         '(centaur-tabs-close-selected((t ( :foreground "DarkGray"))))
+         '(centaur-tabs-modified-marker-selected ((t ( :foreground "yellow2"))))
+         '(centaur-tabs-selected ((t ( :foreground "LimeGreen"))))
+         '(centaur-tabs-unselected ((t ( :foreground "DarkSlateGray4"))))
+         '(highlight-indent-guides-odd-face ((t ( :background "IndianRed"))))
+         '(highlight-indent-guides-even-face ((t ( :background "DarkSeaGreen4"))))
+;;         '(highlight-indent-guides-character-face ((t ( :background "DarkSeaGreen4"))))
+
+
+           ) 
+        (setq ivy-format-function 'ivy-format-function-line)
 
 (defun gtrun-open-in-terminal ()
   "Open the current dir in a new terminal window.

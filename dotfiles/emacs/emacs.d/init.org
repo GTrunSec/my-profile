@@ -16,6 +16,7 @@
 * learning emacs
 ** [[https://doc.endlessparentheses.com/functions.html#main_content][Emacs Online Documentation]]
 ** [[https://emacs.stackexchange.com/tags][Tags - Emacs Stack Exchange]]
+** [[https://github.com/squarepegsys/literate-dotfiles][squarepegsys/literate-dotfiles: My latest dotfiles, with documentation. and in fancy OrgMode]] 
 * Package management
 ** Emacs package configuration
    #+begin_src emacs-lisp :tangle yes
@@ -278,7 +279,7 @@ I would like use ErgoDox keyboard on my linux environment
                  ("2" . org-agenda)
                  ("q" . quit-window)
                  ("a" . counsel-M-x)
-                 ("w" . snails)
+;;                 ("w" . snails)
                  ("i" . previous-line)
                  ("k" . next-line )
                  ("b" . backward-word)
@@ -512,7 +513,7 @@ I would like use ErgoDox keyboard on my linux environment
            ("SPC" . xah-fly-leader-key-map)
            ("q" . quit-window)
            ("a" . counsel-M-x)
-           ("w" . snails)
+;;           ("w" . snails)
            ("i" . previous-line)
            ("k" . next-line )
            ("b" . backward-word)
@@ -724,17 +725,30 @@ If Emacs loads a plugin by default, instead of dynamically loading it at runtime
 
    #+end_src
 ** Edition
+*** ⚑ WAITING [[https://github.com/antonj/Highlight-Indentation-for-Emacs][antonj/Highlight-Indentation-for-Emacs: Minor modes to highlight indentation guides in emacs.]]
 *** Highlight Indent Guides
 
     #+begin_src emacs-lisp :tangle yes
-(use-package highlight-indent-guides
-  :straight t
-  :defer 10
-  :hook
-  (python-mode . highlight-indent-guides-mode)
-  :custom
-  (highlight-indent-guides-method 'character))
+      (use-package highlight-indent-guides
+        :straight t
+        :defer 10
+        :hook
+        (python-mode . highlight-indent-guides-mode)
+        :config
+        (setq highlight-indent-guides-auto-odd-face-perc 15)
+        (setq highlight-indent-guides-auto-even-face-perc 15)
+        (setq highlight-indent-guides-auto-character-face-perc 20)
+        :custom
+        (highlight-indent-guides-method 'character)
+          )
     #+end_src
+
+- indentation
+#+begin_src emacs-lisp :tangle yes
+
+  ;; (straight-use-package 'highlight-indentation) 
+  ;; (require 'highlight-indentation)
+#+end_src
 *** baacon
     #+begin_src emacs-lisp :tangle yes
 (use-package beacon
@@ -859,9 +873,7 @@ CLOSED: [2019-07-25 Thu 18:56]
 
     #+RESULTS:
     : centaur-tabs-select-visible-tab
-
-  
-
+** ⚑ WAITING [[https://gitlab.petton.fr/DamienCassou/navigel/][Damien Cassou / navigel · GitLab]]
 ** Column/line
 
    #+begin_src emacs-lisp :tangle yes
@@ -1501,26 +1513,13 @@ file type dedicated templates. The templates are available in =third_parties/tem
 * Compilation
 ** search frame
 *** [[https://github.com/manateelazycat/snails][manateelazycat/snails: A modern, easy-to-expand fuzzy search framework]]
-#+begin_src emacs-lisp :tangle "./setup/macos.el"
-(use-package snails
-  :load-path "./setup/snails"
-  :config
-  (define-key snails-mode-map [remap next-line] #'snails-select-next-item)
-  (add-hook 'snails-mode-hook #'xah-fly-insert-mode-activate)
-  )
-#+end_src
-
-#+begin_src emacs-lisp :tangle "./setup/linux.el"
-  ;; (straight-use-package '(snails :type git
-  ;;                                :host github
-  ;;                                :repo "manateelazycat/snails"))
-  ;;  (define-key snails-mode-map [remap next-line] #'snails-select-next-item)
- (use-package snails
-  :load-path "./setup/snails"
-  :config
-  (define-key snails-mode-map [remap next-line] #'snails-select-next-item)
-  (add-hook 'snails-mode-hook #'xah-fly-insert-mode-activate)
-  )
+#+begin_src emacs-lisp :tangle yes
+  ;; (use-package snails
+  ;;   :load-path "./setup/snails"
+  ;;   :config
+  ;;   (define-key snails-mode-map [remap next-line] #'snails-select-next-item)
+  ;;   (add-hook 'snails-mode-hook #'xah-fly-insert-mode-activate)
+  ;;   )
 
 #+end_src
 ** emacs-request
@@ -2452,7 +2451,7 @@ change ~CC~ PATH ~gcc~ to ~clang++~
                                        (latex . t)))
 #+end_src
 
-** Org-starte/Link org-field
+** Org-starter/Link org-field
 -  📄 REVIEW [[https://github.com/akirak/emacs.d/blob/master/main.org#org-ql][emacs.d/main.org at master · akrak/emacs.d]]
 ***  ❤ Love [[https://github.com/dfeich/helm-deft][dfeich/helm-deft: A helm based emacs module to help search in a predetermined list of directories. Inspired by the deft module.]]
 CLOSED: [2019-07-27 Sat 06:05]
@@ -2487,12 +2486,6 @@ CLOSED: [2019-07-27 Sat 06:05]
                ("NSM-GTD/workflow.org" :agenda t :required t)
                ("NSM-GTD/NsmOrg.org" :agenda t :required t)
                )
-
-             ;; (org-starter-def "~/org-notes/NSM-GTD"
-             ;;   :files
-             ;;   ("NsmOrg.org" :agenda t)
-             ;;   ("workflow.org" :agenda t :required nil)
-             ;;   )
              (org-starter-def "~/.emacs.d"
                :files
                ("init.org" :key "i" :refile (:maxlevel . 5))
@@ -2655,8 +2648,80 @@ CLOSED: [2019-07-27 Sat 06:05]
                          :repo "alphapapa/org-ql"))
 
     #+end_src
-*** [[https://github.com/legalnonsense/org-time-dependencies][legalnonsense/org-time-dependencies: Make orgmode deadline dependent on another deadline]]
+*** [[https://github.com/legalnonsense/org-deadsync][legalnonsense/org-deadsync: Sync deadlines in orgmode files]]
 *** [[https://github.com/alphapapa/org-auto-expand][alphapapa/org-auto-expand: Automatically expand certain Org headings]]
+*** calendar+
+- year
+#+begin_src emacs-lisp :tangle yes
+
+ (eval-after-load "calendar" '(progn
+  (define-key calendar-mode-map "<" 'jarfar/scroll-year-calendar-backward)
+  (define-key calendar-mode-map ">" 'jarfar/scroll-year-calendar-forward) ))
+
+(defun jarfar/year-calendar (&optional year)
+  "Generate a one year calendar that can be scrolled by year in each direction.
+This is a modification of:  http://homepage3.nifty.com/oatu/emacs/calendar.html
+See also: https://stackoverflow.com/questions/9547912/emacs-calendar-show-more-than-3-months"
+  (interactive)
+  (require 'calendar)
+  (let* (
+      (current-year (number-to-string (nth 5 (decode-time (current-time)))))
+      (month 0)
+      (year (if year year (string-to-number (format-time-string "%Y" (current-time))))))
+    (switch-to-buffer (get-buffer-create calendar-buffer))
+    (when (not (eq major-mode 'calendar-mode))
+      (calendar-mode))
+    (setq displayed-month month)
+    (setq displayed-year year)
+    (setq buffer-read-only nil)
+    (erase-buffer)
+    ;; horizontal rows
+    (dotimes (j 4)
+      ;; vertical columns
+      (dotimes (i 3)
+        (calendar-generate-month
+          (setq month (+ month 1))
+          year
+          ;; indentation / spacing between months
+          (+ 5 (* 25 i))))
+      (goto-char (point-max))
+      (insert (make-string (- 10 (count-lines (point-min) (point-max))) ?\n))
+      (widen)
+      (goto-char (point-max))
+      (narrow-to-region (point-max) (point-max)))
+    (widen)
+    (goto-char (point-min))
+    (setq buffer-read-only t)))
+
+(defun jarfar/scroll-year-calendar-forward (&optional arg event)
+  "Scroll the yearly calendar by year in a forward direction."
+  (interactive (list (prefix-numeric-value current-prefix-arg)
+                     last-nonmenu-event))
+  (unless arg (setq arg 0))
+  (save-selected-window
+    (if (setq event (event-start event)) (select-window (posn-window event)))
+    (unless (zerop arg)
+      (let* (
+              (year (+ displayed-year arg)))
+        (jarfar/year-calendar year)))
+    (goto-char (point-min))
+    (run-hooks 'calendar-move-hook)))
+
+(defun jarfar/scroll-year-calendar-backward (&optional arg event)
+  "Scroll the yearly calendar by year in a backward direction."
+  (interactive (list (prefix-numeric-value current-prefix-arg)
+                     last-nonmenu-event))
+  (jarfar/scroll-year-calendar-forward (- (or arg 1)) event))
+
+
+(defalias 'year-calendar #'jarfar/year-calendar)
+
+
+#+end_src
+
+#+RESULTS:
+: year-calendar
+
 ** Code
 
    #+BEGIN_SRC emacs-lisp :tangle yes
@@ -2720,6 +2785,7 @@ CLOSED: [2019-07-27 Sat 06:05]
 
 #+end_src
 ** [[https://github.com/gizmomogwai/org-kanban][gizmomogwai/org-kanban: Kanban table for org-mode]]
+** [[https://github.com/fuxialexander/org-pdftools][fuxialexander/org-pdftools]]                                     :PDF:READ:
 * Exporting
 ** latex
 *** ox-latex
@@ -3528,6 +3594,7 @@ please test your init file when you modified done.
    #+end_src
 ** Custom
 #+begin_src emacs-lisp :tangle yes
+(setq highlight-indent-guides-auto-enabled nil)
 
         (custom-set-faces
          '(ivy-current-match ((t (:background "grey70" :foreground "DarkOrchid3"))))
@@ -3542,11 +3609,19 @@ please test your init file when you modified done.
          '(centaur-tabs-modified-marker-selected ((t ( :foreground "yellow2"))))
          '(centaur-tabs-selected ((t ( :foreground "LimeGreen"))))
          '(centaur-tabs-unselected ((t ( :foreground "DarkSlateGray4"))))
+         '(highlight-indent-guides-odd-face ((t ( :background "IndianRed"))))
+         '(highlight-indent-guides-even-face ((t ( :background "DarkSeaGreen4"))))
+;;         '(highlight-indent-guides-character-face ((t ( :background "DarkSeaGreen4"))))
+
+
            ) 
         (setq ivy-format-function 'ivy-format-function-line)
 
 
 #+end_src
+
+#+RESULTS:
+: ivy-format-function-line
 
 ** open-terminal
 #+begin_src emacs-lisp :tangle yes
