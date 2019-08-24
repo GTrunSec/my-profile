@@ -27,6 +27,11 @@
     [ { device = "/dev/disk/by-uuid/d05ef9fb-1433-4819-b1a7-e15b5a7b9a90"; }
     ];
 
+    fileSystems."/qemu-img" =
+    { device = "/dev/disk/by-uuid/fa9cc949-bb39-4824-8acc-70c93ff0689c";
+      fsType = "xfs";
+    };
+
   nix.maxJobs = lib.mkDefault 12;
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
 }

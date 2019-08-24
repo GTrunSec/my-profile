@@ -114,16 +114,16 @@ bindsym Mod4+9 workspace $ws9
 bindsym Mod4+0 workspace $ws10
 
 # move focused container to workspace
-bindsym ctrl+Shift+1 move container to workspace $ws1
-bindsym ctrl+Shift+2 move container to workspace $ws2
-bindsym ctrl+Shift+3 move container to workspace $ws3
-bindsym ctrl+Shift+4 move container to workspace $ws4
-bindsym ctrl+Shift+5 move container to workspace $ws5
-bindsym $mod+Shift+6 move container to workspace $ws6
-bindsym $mod+Shift+7 move container to workspace $ws7
-bindsym $mod+Shift+8 move container to workspace $ws8
-bindsym $mod+Shift+9 move container to workspace $ws9
-bindsym $mod+Shift+0 move container to workspace $ws10
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym ctrl+Shift+6 move container to workspace $ws6
+bindsym ctrl+Shift+7 move container to workspace $ws7
+bindsym ctrl+Shift+8 move container to workspace $ws8
+bindsym ctrl+Shift+9 move container to workspace $ws9
+bindsym ctrl+Shift+0 move container to workspace $ws10
 
 # reload the configuration file
 bindsym $mod+ctrl+Shift+c reload
@@ -180,7 +180,7 @@ bindsym Mod4+r exec --no-startup-id spectacle -r
 ## floatings
 #for_window [class="XTerm"] floating enable, border normal
 for_window [class="feh"] floating enable, border normal
-
+#for_window [class=""] fullscreen enable
 # Compton
 exec --no-startup-id compton --config /home/gtrun/.compton.conf
 
@@ -197,6 +197,7 @@ exec_always --no-startup-id xset dpms 500
 #workspace
 assign [class="^Emacs$"] → 2
 assign [class="^Chromium-browser$"] → 3
+assign [class="^polar-bookshelf$"] → 4
 assign [class="^Okular$"] → 3
 
 mode "swap_windows" {

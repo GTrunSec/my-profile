@@ -31,5 +31,7 @@ environment.systemPackages = with pkgs; [
      goldendict
      #
      qt5.qtbase
+     #xdgrm
+     virtmanager
      ];
 }
