@@ -1,11 +1,12 @@
 { config, lib, pkgs, ... }:
 
-
+# https://marketplace.visualstudio.com
 let  
     vscode = pkgs.vscode-with-extensions.override {
       vscodeExtensions = with pkgs.vscode-extensions; [
         ms-vscode.cpptools
         bbenoist.Nix
+        ms-python.python
         (pkgs.vscode-utils.buildVscodeMarketplaceExtension {
           mktplcRef = {
             name = "tabnine-vscode";
@@ -24,6 +25,8 @@ let
           };
         })
 
+
+        
         (pkgs.vscode-utils.buildVscodeMarketplaceExtension {
           mktplcRef = {
             name = "bro";
@@ -52,14 +55,14 @@ let
           };
         })
 
-        (pkgs.vscode-utils.buildVscodeMarketplaceExtension {
-          mktplcRef = {
-            name = "python";
-            publisher = "ms-python";
-            version = "2019.8.30787";
-            sha256 = "078gmq57l91ny5panmr82yh46rmyqclqy05sdpvnidllkcfg8kcz";
-          };
-        })
+        # (pkgs.vscode-utils.buildVscodeMarketplaceExtension {
+        #   mktplcRef = {
+        #     name = "python";
+        #     publisher = "ms-python";
+        #     version = "2019.8.30787";
+        #     sha256 = "078gmq57l91ny5panmr82yh46rmyqclqy05sdpvnidllkcfg8kcz";
+        #   };
+        # })
 
         (pkgs.vscode-utils.buildVscodeMarketplaceExtension {
           mktplcRef = {

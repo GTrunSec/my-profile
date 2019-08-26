@@ -22,8 +22,9 @@ in
     # unstable.nodePackages.bash-language-server
     # Python
     python37
-    python27
     # python37Packages.python-language-server
+    python37Packages.pylint
+    python37Packages.flake8
     # Javascript
     nodePackages.javascript-typescript-langserver
     # Nix

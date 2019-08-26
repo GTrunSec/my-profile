@@ -34,8 +34,8 @@
     #lang
     lang/go.nix
     lang/lsp.nix
-
-    ./programs.nix
+    #programs
+    ./programs/vscode.nix
   ];
 
 }
