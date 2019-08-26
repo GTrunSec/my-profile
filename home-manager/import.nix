@@ -1,10 +1,10 @@
 { pkgs, config, substituteAll,... }:
 {
-
+  nixpkgs.config.allowUnfree = true;
+  
   home.packages = let
     nixpkgs-unstable = import <nixpkgs-unstable> { config = { allowUnfree = true; }; };
     nixpkgs-master = import (fetchGit { url = https://github.com/nixos/nixpkgs; ref = "master"; }) { config = { allowUnfree = true; }; };
-
 
   in with pkgs; [
     aria2
@@ -34,6 +34,8 @@
     #lang
     lang/go.nix
     lang/lsp.nix
+
+    ./programs.nix
   ];
 
 }

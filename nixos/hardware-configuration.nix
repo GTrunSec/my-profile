@@ -28,7 +28,7 @@
     ];
 
     fileSystems."/qemu-img" =
-    { device = "/dev/disk/by-uuid/fa9cc949-bb39-4824-8acc-70c93ff0689c";
+    { device = "/dev/disk/by-uuid/749df476-c355-469a-9d00-4565a07901bf";
       fsType = "xfs";
     };
 
