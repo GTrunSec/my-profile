@@ -161,6 +161,10 @@ bindsym Mod4+b mode "resize"
 
 exec_always --no-startup-id bash $HOME/.config/polybar/launch.sh
 
+# fix Blank screen
+# https://www.reddit.com/r/i3wm/comments/7cy60c/blank_save_screen/
+floating_minimum_size 500 x 300
+floating_maximum_size 2000 x 1500
 #i3-gaps
 for_window [class="^.*"] border pixel 0
 gaps inner 4
