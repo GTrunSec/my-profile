@@ -1,6 +1,11 @@
-{ pkgs, ... }:
+{ config, lib, pkgs, vscode-utils, ... }:
+let
+  customVscode = (import ./custom/vscode.nix { inherit pkgs; });
+in rec
+  
 {
   environment.systemPackages = with pkgs; [
+     customVscode
      w3m
      fantasque-sans-mono
      polybar

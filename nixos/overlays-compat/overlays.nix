@@ -1,4 +1,4 @@
-s: super:
+self: super:
 with super.lib;
 let
   # Using the nixos plumbing that's used to evaluate the config...

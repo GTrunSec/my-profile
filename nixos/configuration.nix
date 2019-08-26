@@ -16,6 +16,7 @@
       ./virtualisation/libvirtd.nix
       ./theme/desktop.nix
       ./pc-common.nix
+      
       # ./hydra.nix               
     ];
 

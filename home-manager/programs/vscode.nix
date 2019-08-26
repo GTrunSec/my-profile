@@ -6,7 +6,6 @@ let
       vscodeExtensions = with pkgs.vscode-extensions; [
         ms-vscode.cpptools
         bbenoist.Nix
-        ms-python.python
         (pkgs.vscode-utils.buildVscodeMarketplaceExtension {
           mktplcRef = {
             name = "tabnine-vscode";
