@@ -38,5 +38,9 @@ in rec
      qt5.qtbase
      #xdgrm
      virtmanager
+
+     cargo
+     rustup
+     rustc
      ];
 }

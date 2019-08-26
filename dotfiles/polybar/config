@@ -119,13 +119,21 @@ font-0 = hack:pixelsize=25;4
 font-1 = unifont:size=25;4
 font-2 = siji:pixelsize=25;4
 font-3 = FontAwesome:pixelsize=25;4
+font-4 = Weather Icons:size=25;4
 
-modules-left = 
+
+modules-left = weather
 modules-center = networkspeedup networkspeeddown
 modules-right = filesystem-slash cpu memory
 
 tray-position = right
 tray-padding = 2
+[module/weather]
+type = custom/script
+exec = ~/.config/nixpkgs/dotfiles/polybar/polybar-forecast/target/release/polybar-forecast
+exec-if = ping openweathermap.org -c 1
+interval = 600
+label-font = 5
 
 [module/xwindow]
 type = internal/xwindow
@@ -327,7 +335,7 @@ accumulate-stats = true
 
 [module/networkspeedup]
 type = internal/network
-interface = ens192
+interface = enp0s31f6
 label-connected = "%upspeed:9%"
 format-connected = <label-connected>
 format-connected-prefix = " "
@@ -335,7 +343,7 @@ format-connected-prefix-foreground = #5b
 
 [module/networkspeeddown]
 type = internal/network
-interface = ens192
+interface = enp0s31f6
 label-connected = "%downspeed:7%"
 format-connected = <label-connected>
 format-connected-prefix = " "
