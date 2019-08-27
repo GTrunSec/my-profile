@@ -3,7 +3,9 @@ let
   customVscode = (import ./custom/vscode.nix { inherit pkgs; });
 in rec
   
-{
+  {
+
+    hardware.brightnessctl.enable = true;
   environment.systemPackages = with pkgs; [
      customVscode
      w3m
@@ -42,5 +44,6 @@ in rec
      cargo
      rustup
      rustc
-     ];
+     #xbacklight
+  ];
 }

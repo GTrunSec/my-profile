@@ -14,11 +14,7 @@
     graphviz
     rofi
     termite
-    i3-gaps
-    xdotool
     compton
-    fish
-    fantasque-sans-mono
     fd
     ripgrep
     feh

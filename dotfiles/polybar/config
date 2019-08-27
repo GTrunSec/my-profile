@@ -68,7 +68,7 @@ font-3 = FontAwesome:pixelsize=34;4
 
 modules-left =  i3 xwindow
 modules-center =
-modules-right = pkg battery date powermenu
+modules-right = volume date powermenu 
 
 tray-position = right
 tray-padding = 4
@@ -122,9 +122,9 @@ font-3 = FontAwesome:pixelsize=25;4
 font-4 = Weather Icons:size=25;4
 
 
-modules-left = weather
+modules-left = weather xbacklight
 modules-center = networkspeedup networkspeeddown
-modules-right = filesystem-slash cpu memory
+modules-right = filesystem-slash cpu memory 
 
 tray-position = right
 tray-padding = 2
@@ -233,7 +233,7 @@ ws-icon-9 = 10;
 
 [module/github]
 type = internal/github
-token = ${env:GITHUB_TOKEN}
+token = 0410e33ed9cde86e415049d8817444b0d8abf20e
 
 label = "%notifications%"
 format-underline = #2aa198
@@ -268,13 +268,17 @@ bar-progress-indicator = |
 bar-progress-fill = ─
 bar-progress-empty = ─
 
-[module/backlight]
-type = internal/backlight
-card = intel_backlight
-click-left = connman-gtk
+[module/xbacklight]
+type = internal/xbacklight
+output = DP-0
+ormat = <ramp> <bar>
 
-format = <label> <bar>
-label = ""
+; Only applies if <ramp> is used
+ramp-0 = 🌕
+ramp-1 = 🌔
+ramp-2 = 🌓
+ramp-3 = 🌒
+ramp-4 = 🌑
 
 bar-width = 10
 bar-indicator = |
