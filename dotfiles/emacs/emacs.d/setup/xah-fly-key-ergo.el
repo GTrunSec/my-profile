@@ -68,7 +68,6 @@
 ;; iseach
 (define-key xah-fly-key-map (kbd "C-s") 'swiper-isearch)
 
-
 ;; scrolling
 (define-key xah-fly-key-map (kbd "C-v") 'scroll-up-command)
 

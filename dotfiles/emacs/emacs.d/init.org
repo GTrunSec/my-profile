@@ -242,23 +242,24 @@ I would like use ErgoDox keyboard on my linux environment
 **** define-xah-fly-key-map
     #+begin_src emacs-lisp :tangle "./setup/xah-fly-key-normal.el"
 
-;; edit
-(define-key xah-fly-key-map (kbd "C-a") 'beginning-of-visual-line)
-(define-key xah-fly-key-map (kbd "C-0") 'delete-region)
-(define-key xah-fly-key-map (kbd "C-n") 'next-line)
-(define-key xah-fly-key-map (kbd "C-;") 'maple-iedit-match-all)
+      ;; edit
+      (define-key xah-fly-key-map (kbd "C-a") 'beginning-of-visual-line)
+      (define-key xah-fly-key-map (kbd "C-0") 'delete-region)
+      (define-key xah-fly-key-map (kbd "C-n") 'next-line)
+      (define-key xah-fly-key-map (kbd "C-;") 'maple-iedit-match-all)
 
 
-;; org-mode
-(define-key xah-fly-key-map (kbd "C-c l") 'org-mac-grab-link)
-(define-key xah-fly-key-map (kbd "C-c a") 'org-agenda)
-(define-key xah-fly-key-map (kbd "C-c w") 'helm-deft)
+      ;; org-mode
+      (define-key xah-fly-key-map (kbd "C-c l") 'org-mac-grab-link)
+      (define-key xah-fly-key-map (kbd "C-c a") 'org-agenda)
+      (define-key xah-fly-key-map (kbd "C-c w") 'helm-deft)
 
-;; iseach
-(define-key xah-fly-key-map (kbd "C-s") 'swiper-isearch)
+      ;; iseach
+      (define-key xah-fly-key-map (kbd "C-s") 'swiper-isearch)
+    
 
-;; scrolling
-(define-key xah-fly-key-map (kbd "C-v") 'scroll-up-command)
+      ;; scrolling
+      (define-key xah-fly-key-map (kbd "C-v") 'scroll-up-command)
 
     #+end_src
 
@@ -477,23 +478,22 @@ I would like use ErgoDox keyboard on my linux environment
 **** define-xah-fly-key-map
     #+begin_src emacs-lisp :tangle "./setup/xah-fly-key-ergo.el"
 
-;; edit
-(define-key xah-fly-key-map (kbd "C-a") 'beginning-of-visual-line)
-(define-key xah-fly-key-map (kbd "C-0") 'delete-region)
-(define-key xah-fly-key-map (kbd "C-n") 'next-line)
+      ;; edit
+      (define-key xah-fly-key-map (kbd "C-a") 'beginning-of-visual-line)
+      (define-key xah-fly-key-map (kbd "C-0") 'delete-region)
+      (define-key xah-fly-key-map (kbd "C-n") 'next-line)
 
 
-;; org-mode
-(define-key xah-fly-key-map (kbd "C-c l") 'org-mac-grab-link)
-(define-key xah-fly-key-map (kbd "C-c a") 'org-agenda)
-(define-key xah-fly-key-map (kbd "C-c w") 'helm-deft)
+      ;; org-mode
+      (define-key xah-fly-key-map (kbd "C-c l") 'org-mac-grab-link)
+      (define-key xah-fly-key-map (kbd "C-c a") 'org-agenda)
+      (define-key xah-fly-key-map (kbd "C-c w") 'helm-deft)
 
-;; iseach
-(define-key xah-fly-key-map (kbd "C-s") 'swiper-isearch)
-
-
-;; scrolling
-(define-key xah-fly-key-map (kbd "C-v") 'scroll-up-command)
+      ;; iseach
+      (define-key xah-fly-key-map (kbd "C-s") 'swiper-isearch)
+    
+      ;; scrolling
+      (define-key xah-fly-key-map (kbd "C-v") 'scroll-up-command)
 
     #+end_src
 
@@ -1090,7 +1090,8 @@ elisp
 
 #+end_src
 **** [[https://github.com/bmag/emacs-purpose][bmag/emacs-purpose: Manage Windows and Buffers According to Purposes]]
-
+** window
+*** [[https://github.com/ch11ng/exwm][ch11ng/exwm: Emacs X Window Manager]]
 ** ✘ CANCELED [[https://github.com/jrblevin/deft][jrblevin/deft: Deft for Emacs]]
 - State "✘ CANCELED" from "❤ Love"     [2019-08-08 Thu 01:03] \\
   replaced it with helm-deft
@@ -1301,6 +1302,62 @@ elisp
           )
     )
    #+end_src
+*** helm-swoop
+#+begin_src emacs-lisp :tangle yes
+  (straight-use-package 'helm-swoop)
+  (require 'helm)
+
+  ;; Locate the helm-swoop folder to your path
+  (add-to-list 'load-path "~/.emacs.d/elisp/helm-swoop")
+  (require 'helm-swoop)
+
+  ;; Change the keybinds to whatever you like :)
+  (global-set-key (kbd "M-i") 'helm-swoop)
+  (global-set-key (kbd "M-I") 'helm-swoop-back-to-last-point)
+  (global-set-key (kbd "C-c M-i") 'helm-multi-swoop)
+  (global-set-key (kbd "C-x M-i") 'helm-multi-swoop-all)
+
+  ;; When doing isearch, hand the word over to helm-swoop
+  (define-key isearch-mode-map (kbd "M-i") 'helm-swoop-from-isearch)
+  ;; From helm-swoop to helm-multi-swoop-all
+  (define-key helm-swoop-map (kbd "M-i") 'helm-multi-swoop-all-from-helm-swoop)
+  ;; When doing evil-search, hand the word over to helm-swoop
+  ;; (define-key evil-motion-state-map (kbd "M-i") 'helm-swoop-from-evil-search)
+
+  ;; Instead of helm-multi-swoop-all, you can also use helm-multi-swoop-current-mode
+  (define-key helm-swoop-map (kbd "M-m") 'helm-multi-swoop-current-mode-from-helm-swoop)
+
+  ;; Move up and down like isearch
+  (define-key helm-swoop-map (kbd "C-r") 'helm-previous-line)
+  (define-key helm-swoop-map (kbd "C-s") 'helm-next-line)
+  (define-key helm-multi-swoop-map (kbd "C-r") 'helm-previous-line)
+  (define-key helm-multi-swoop-map (kbd "C-s") 'helm-next-line)
+
+  ;; Save buffer when helm-multi-swoop-edit complete
+  (setq helm-multi-swoop-edit-save t)
+
+  ;; If this value is t, split window inside the current window
+  (setq helm-swoop-split-with-multiple-windows nil)
+
+  ;; Split direcion. 'split-window-vertically or 'split-window-horizontally
+  (setq helm-swoop-split-direction 'split-window-vertically)
+
+  ;; If nil, you can slightly boost invoke speed in exchange for text color
+  (setq helm-swoop-speed-or-color nil)
+
+  ;; ;; Go to the opposite side of line from the end or beginning of line
+  (setq helm-swoop-move-to-line-cycle t)
+
+  ;; Optional face for line numbers
+  ;; Face name is `helm-swoop-line-number-face`
+  (setq helm-swoop-use-line-number-face t)
+
+  ;; If you prefer fuzzy matching
+  (setq helm-swoop-use-fuzzy-match t)
+
+  ;; If you would like to use migemo, enable helm's migemo feature
+  ;; (helm-migemo-mode 1)
+#+end_src
 ** imenu
 *** [[https://github.com/bmag/imenu-list][bmag/imenu-list: Emacs plugin to show the current buffer's imenu entries in a seperate buffer]]
 #+begin_src emacs-lisp :tangle yes
@@ -2097,8 +2154,13 @@ CLOSED: [2019-08-08 Thu 14:56]
 #+end_src
 
 #+begin_src emacs-lisp :tangle "./setup/linux.el"
+<<<<<<< HEAD
   (setq lsp-python-ms-executable
         "~/.nix-profile/bin/mspyls")
+=======
+(setq lsp-python-ms-executable
+      "$out/opt/mspyls/Microsoft.Python.LanguageServer")
+>>>>>>> emacs: helm-swoop
 #+end_src
 
 *** [[https://github.com/dzop/emacs-jupyter][dzop/emacs-jupyter: An interface to communicate with Jupyter kernels.]]

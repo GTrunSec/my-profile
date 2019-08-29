@@ -1,5 +1,9 @@
 (setq lsp-python-ms-executable
+<<<<<<< HEAD
       "~/.nix-profile/bin/mspyls")
+=======
+      "$out/opt/mspyls/Microsoft.Python.LanguageServer")
+>>>>>>> emacs: helm-swoop
 
 (use-package nix-mode
   :straight t
