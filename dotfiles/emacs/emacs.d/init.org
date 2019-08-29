@@ -2154,13 +2154,11 @@ CLOSED: [2019-08-08 Thu 14:56]
 #+end_src
 
 #+begin_src emacs-lisp :tangle "./setup/linux.el"
-<<<<<<< HEAD
   (setq lsp-python-ms-executable
         "~/.nix-profile/bin/mspyls")
-=======
+
 (setq lsp-python-ms-executable
       "$out/opt/mspyls/Microsoft.Python.LanguageServer")
->>>>>>> emacs: helm-swoop
 #+end_src
 
 *** [[https://github.com/dzop/emacs-jupyter][dzop/emacs-jupyter: An interface to communicate with Jupyter kernels.]]
