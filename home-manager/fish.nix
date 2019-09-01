@@ -19,5 +19,6 @@
 
   
   home.file.".config/fish/functions/hs.fish".source = ../dotfiles/fish/functions/hs.fish;
+  home.file.".config/fish/functions/confing.fish".source = ../dotfiles/fish/functions/config.fish;
   home.file.".config/fish/functions/clean-nix-store.fish".source = ../dotfiles/fish/functions/clean-nix-store.fish;
 }

@@ -5,6 +5,7 @@ in rec
   
   {
 
+    
     hardware.brightnessctl.enable = true;
   environment.systemPackages = with pkgs; [
      customVscode
@@ -45,5 +46,21 @@ in rec
      rustup
      rustc
      #xbacklight
+
+     #lang
+     go
+     go-langserver
+     gocode
+     go-outline
+     go-symbols
+     go2nix
+     go-tools
+     gocode-gomod
+     godef
+     gopkgs
+     delve
+     golint
   ];
+  environment.variables = { GOROOT = [ "${pkgs.go.out}/share/go" ]; };
+  
 }

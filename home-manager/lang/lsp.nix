@@ -15,7 +15,6 @@ in
 {
   home.packages = with pkgs;[
     #  Go
-    go-langserver
     # C / C++
     ccls
     # Bash

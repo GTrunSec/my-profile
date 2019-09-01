@@ -9,6 +9,20 @@ pkgs.vscode-with-extensions.override {
   ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
 
     {
+      publisher = "ms-vscode";
+      name = "Go";
+      version = "0.11.4";
+      sha256 = "0h0z4kgm0d2milbmna2j0saic3yq5p07l18dflyqwvm9zvjx9x5f";
+    }
+
+    {
+      publisher = "premparihar";
+      name = "gotestexplorer";
+      version = "0.1.10";
+      sha256 = "1z4n5hhm5qx97an6s2c7m7vlx5rqvzwqq1ywwz93zdnmlc3v0nks";
+    }
+
+    {
       publisher = "ms-python";
       name = "python";
       version = "2019.8.30787";
@@ -52,6 +66,13 @@ pkgs.vscode-with-extensions.override {
       publisher = "oderwat";
       version = "7.4.0";
       sha256 = "1xnsdwrcx24vlbpd2igjaqlk3ck5d6jzcfmxaisrgk7sac1aa81p";
+
+    }
+    {
+      name = "rainbow-brackets";
+      publisher = "2gua";
+      version = "0.0.6";
+      sha256 = "1m5c7jjxphawh7dmbzmrwf60dz4swn8c31svbzb5nhaazqbnyl2d";
 
     }
 

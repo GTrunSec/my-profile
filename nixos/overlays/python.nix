@@ -1,4 +1,5 @@
-s: super: let
+self: super:
+let
   overridePython = pypkgs: let
     pyDir = ../overlays/python;
     packageOverrides = pyself: pysuper: (builtins.foldl'
@@ -11,5 +12,4 @@ s: super: let
   in pypkgs.override { inherit packageOverrides; };
 in {
   python37 = overridePython super.python37;
-  python36 = overridePython super.python36;
 }
