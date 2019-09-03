@@ -5,8 +5,8 @@
 #+KEYWORDS: Emacs Profile
 #+LANGUAGE:  en cn
 #+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t pri:t
-#+SETUPFILE: ~/org-notes/setup/hugo.local
-#+SETUPFILE: ~/org-notes/setup/darkcss.local
+#+SETUPFILE: ~/Documents/org-notes/setup/hugo.local
+#+SETUPFILE: ~/Documents/org-notes/setup/darkcss.local
 #+hugo_publishdate: `org-time-stamp-rounding-minutes`
 #+hugo_auto_set_lastmod: t
 #+HUGO_categories: profile
@@ -2528,10 +2528,10 @@ CLOSED: [2019-07-27 Sat 06:05]
   (require 'helm-deft)
   (setq helm-deft-extension "org")
   (setq helm-deft-dir-list '(
-                             "~/org-notes/art"
-                             "~/org-notes/NSM-GTD"
-                             "~/org-notes/post"
-                             "~/org-notes/course"
+                             "~/Documents/org-notes/art"
+                             "~/Documents/org-notes/NSM-GTD"
+                             "~/Documents/org-notes/post"
+                             "~/Documents/org-notes/course"
                              "~/project/gtrun-profile/dotfiles/wallpaper"
                              "~/project/global-profile/global-doc"
                              ))
@@ -2539,28 +2539,28 @@ CLOSED: [2019-07-27 Sat 06:05]
 
 *** [[https://github.com/akirak/emacs-config-library/blob/master/org-starter/.org-config.el][emacs-config-library/.org-config.el at master · akirak/emacs-config-library]]
     #+begin_src emacs-lisp :tangle yes
-           (use-package org-starter
-             :straight t
-             :config
-             (org-starter-def "~/org-notes"
-               :files
-               ("gtd.org" :agenda t :key "g" :refile (:maxlevel . 5))
-               ("notes.org" :agenda t :key "n" :refile (:maxlevel .5 ))
-               ("myself.org" :agenda t)
-               ("NSM-GTD/workflow.org" :agenda t :required t)
-               ("NSM-GTD/NsmOrg.org" :agenda t :required t)
-               )
-             (org-starter-def "~/.emacs.d"
-               :files
-               ("init.org" :key "i" :refile (:maxlevel . 5))
-               ("nix.org" :key "x" :refile (:maxlevel . 5))
-               )
-             (org-starter-def "~/project/global-profile/global-doc/global-init.org")
-             :bind
-             (
-              ("C-c e" . org-starter-select-file))
-             ;; "C-c e" . org-starter-refile-by-key))
-             )
+      (use-package org-starter
+        :straight t
+        :config
+        (org-starter-def "~/Documents/org-notes"
+                         :files
+                         ("gtd.org" :agenda t :key "g" :refile (:maxlevel . 5))
+                         ("notes.org" :agenda t :key "n" :refile (:maxlevel .5 ))
+                         ("myself.org" :agenda t)
+                         ("NSM-GTD/workflow.org" :agenda t :required t)
+                         ("NSM-GTD/NsmOrg.org" :agenda t :required t)
+                         )
+        (org-starter-def "~/.emacs.d"
+                         :files
+                         ("init.org" :key "i" :refile (:maxlevel . 5))
+                         ("nix.org" :key "x" :refile (:maxlevel . 5))
+                         )
+        (org-starter-def "~/project/global-profile/global-doc/global-init.org")
+        :bind
+        (
+         ("C-c e" . org-starter-select-file))
+        ;; "C-c e" . org-starter-refile-by-key))
+        )
     #+end_src
 
 ** Calendar / Agenda
@@ -2887,7 +2887,7 @@ See also: https://stackoverflow.com/questions/9547912/emacs-calendar-show-more-t
 #+begin_src emacs-lisp :tangle yes
 (setq org-publish-project-alist
       '(("NSM"
-	 :base-directory "~/org-notes/NSM-GTD"
+	 :base-directory "~/Documents/org-notes/NSM-GTD"
 	 :publishing-function org-html-publish-to-html
 	 :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
 	 :include ["workflow.org"]
@@ -2901,7 +2901,7 @@ See also: https://stackoverflow.com/questions/9547912/emacs-calendar-show-more-t
 	 :exclude "Pattern.org"
 	 )
 	("art"
-	 :base-directory "~/org-notes/art"
+	 :base-directory "~/Documents/org-notes/art"
 	 :publishing-function org-html-publish-to-html
 	 :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
 	 :exclude "Pattern.org"
@@ -2909,7 +2909,7 @@ See also: https://stackoverflow.com/questions/9547912/emacs-calendar-show-more-t
 
 	 )
 	("course"
-	 :base-directory "~/org-notes/course"
+	 :base-directory "~/Documents/org-notes/course"
 	 :publishing-function org-html-publish-to-html
 	 :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
 	 :exclude "Pattern.org"
