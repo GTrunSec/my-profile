@@ -1097,6 +1097,8 @@ elisp
   replaced it with helm-deft
 **
 #+end_src
+** [[https://github.com/zaiste/zaiste-emacs-theme][zaiste/zaiste-emacs-theme: This is the theme I use for the Doomcasts (short screencasts about Emacs Doom) - work-in-progress]]
+
 * Completion
 ** Ivy/counsel
    #+begin_src emacs-lisp :tangle yes
