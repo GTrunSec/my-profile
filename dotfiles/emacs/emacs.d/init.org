@@ -764,14 +764,21 @@ If Emacs loads a plugin by default, instead of dynamically loading it at runtime
 
 ** icons
    #+begin_src emacs-lisp :tangle yes
-  (use-package all-the-icons
-    :straight t)
+     (use-package all-the-icons
+       :straight t)
 
-  (use-package all-the-icons-dired
-    :straight t)
+     (use-package all-the-icons-dired
+       :straight t)
 
-  (use-package all-the-icons-ivy
-    :straight t)
+     (use-package all-the-icons-ivy
+       :straight t)
+
+     (straight-use-package '(icons-in-terminal
+                            :type git
+                            :host github
+                            :repo "seagle0128/icons-in-terminal.el"))
+     (require 'icons-in-terminal)
+
    #+end_src
 ** [[https://github.com/iqbalansari/emacs-emojify][iqbalansari/emacs-emojify: Display emojis in Emacs]]
 #+begin_src emacs-lisp :tangle yes

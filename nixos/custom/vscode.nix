@@ -68,6 +68,7 @@ pkgs.vscode-with-extensions.override {
       sha256 = "1xnsdwrcx24vlbpd2igjaqlk3ck5d6jzcfmxaisrgk7sac1aa81p";
 
     }
+    
     {
       name = "rainbow-brackets";
       publisher = "2gua";
@@ -75,6 +76,15 @@ pkgs.vscode-with-extensions.override {
       sha256 = "1m5c7jjxphawh7dmbzmrwf60dz4swn8c31svbzb5nhaazqbnyl2d";
 
     }
+    
+    {
+      publisher = "formulahendry";
+      name = "code-runner";
+      version = "0.9.14";
+      sha256 = "15y5ngcncbhssikx90sx9v3z108w2q3bgvk3j7i7w1v04p5i6wsw";
 
+    }
+
+    
    ];
 }
