@@ -24,6 +24,7 @@ in
     # python37Packages.python-language-server
     python37Packages.pylint
     python37Packages.flake8
+    python37Packages.pip
     # Javascript
     nodePackages.javascript-typescript-langserver
     # Nix

@@ -14,8 +14,7 @@ with builtins;
   ];
   nixpkgs.config.allowUnfree = true;
   nixpkgs.overlays = [
-    (import ./overlays/ms-pyls.nix)
-    (import ./overlays/python.nix)
+    (import ./overlays/python/python.nix)
+    (import ./overlays/python/ms-pyls.nix)
   ];
-  
 }

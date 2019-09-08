@@ -5,7 +5,8 @@ let
         bookdown
         devtools
         dplyr
-        ggplot2 
+        ggplot2
+        xts
         #grid
         gtable
         htmltools
