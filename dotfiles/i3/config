@@ -189,7 +189,7 @@ for_window [class="feh"] floating enable, border normal
 exec --no-startup-id compton --config /home/gtrun/.compton.conf
 
 # Wallpaper
-exec_always --no-startup-id feh --randomize --bg-fill ~/.config/nixpkgs/dotfiles/wallpaper/Environments/grafit-studio-5_2019-07-27_08-31-07.jpeg
+exec_always --no-startup-id feh --randomize --bg-fill ~/.config/nixpkgs/dotfiles/wallpaper/Mountain-spring/ferdinand-ladera-torrent-of-gelion-2k_2019-07-27_16-17-26.jpeg
 exec --no-startup-id fcitx-autostart 
 
 

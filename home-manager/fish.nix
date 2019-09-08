@@ -15,6 +15,14 @@
       so = "pactl set-default-sink (pacmd list-sinks | awk \\\'/name:.*usb/{if (a != \"\") print a;} {a=$NF}\\\')";
       si = "pactl set-default-sink (pacmd list-sinks | awk \\\'/name:.*pci/{if (a != \"\") print a;} {a=$NF}\\\')";
     };
+    interactiveShellInit = ''
+    #infocmp | ssh $remote "cat > $TERM.ti ; tic -o ~/.terminfo $TERM.ti"
+    set -x -U GOPATH $HOME/go 
+    set -x -U GOBIN $GOPATH/go/bin
+    set -g -x PATH $PATH $GOBIN
+    source ~/.local/share/icons-in-terminal/icons.fish
+    kitty + complete setup fish | source
+    '';
   };
 
   

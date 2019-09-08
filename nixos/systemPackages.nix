@@ -67,7 +67,7 @@ in rec
       rxvt_unicode.terminfo
 
       ncurses.dev # infocmp/tic/etc
-
+      spectacle 
   ];
   environment.variables = { GOROOT = [ "${pkgs.go.out}/share/go" ]; };
   
