@@ -8,6 +8,29 @@ pkgs.vscode-with-extensions.override {
     # Concise version from the vscode market place when not available in the default set.
   ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
 
+    # Lang-R
+    {
+      publisher = "Ikuyadeu";
+      name = "r";
+      version = "1.1.1";
+      sha256 = "1rhwq830jyyxqic5a4mb8kyd29lzfjcz5ap51kb4s0s5y3v6l3m8";
+    }
+    {
+      publisher = "Mikhail-Arkhipov";
+      name = "r";
+      version = "0.0.6";
+      sha256 = "18a5w0nwicx84y5l14qbbvfd5yh9zi2dcbvclhc51kx3wgkmy29l";
+    }
+
+    {
+      publisher = "REditorSupport";
+      name = "r-lsp";
+      version = "0.1.0";
+      sha256 = "0kqh53jx314bsv3x48vyf29blkicr2jdwgz7vj5vklf9zxd3n1pa";
+    }
+
+
+    # Lang-Go
     {
       publisher = "ms-vscode";
       name = "Go";
@@ -25,8 +48,8 @@ pkgs.vscode-with-extensions.override {
     {
       publisher = "ms-python";
       name = "python";
-      version = "2019.8.30787";
-      sha256 = "078gmq57l91ny5panmr82yh46rmyqclqy05sdpvnidllkcfg8kcz";
+      version = "2019.9.34911";
+      sha256 = "18c806dk1chmcnklr8v74fawaal2lkd644yq27pbvffriwj98fib";
     }
     
     {

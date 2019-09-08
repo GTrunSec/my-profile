@@ -5,7 +5,6 @@ in rec
   
   {
 
-    
     hardware.brightnessctl.enable = true;
     environment.systemPackages = with pkgs; [
       customVscode
@@ -67,7 +66,10 @@ in rec
       rxvt_unicode.terminfo
 
       ncurses.dev # infocmp/tic/etc
-      spectacle 
+      spectacle
+
+      #
+      dotnet-sdk
   ];
   environment.variables = { GOROOT = [ "${pkgs.go.out}/share/go" ]; };
   

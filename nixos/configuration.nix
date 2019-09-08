@@ -8,15 +8,12 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./bluetool.nix
-      ./pulse.nix
       ./systemPackages.nix
-      ./fonts.nix
-      ./virtualisation/docker.nix
-      ./virtualisation/libvirtd.nix
-      ./theme/desktop.nix
       ./pc-common.nix
-      
+      ./virtualisation
+      ./theme
+      ./device-setting
+      ./lang
       # ./hydra.nix               
     ];
 
