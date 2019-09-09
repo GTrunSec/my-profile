@@ -1,8 +1,15 @@
 (setq lsp-python-ms-executable
+<<<<<<< HEAD
          "~/.nix-profile/bin/mspyls")
 
 ;; (setq lsp-python-ms-executable
 ;;       "$out/opt/mspyls/Microsoft.Python.LanguageServer")
+=======
+        "~/.nix-profile/bin/mspyls")
+
+(setq lsp-python-ms-executable
+      "$out/opt/mspyls/Microsoft.Python.LanguageServer")
+>>>>>>> update emacs
 
 (use-package nix-mode
   :straight t

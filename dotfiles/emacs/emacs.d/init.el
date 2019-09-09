@@ -1379,7 +1379,8 @@
 (use-package lsp-python-ms
   :straight t
   :demand t
-  :hook (python-mode . lsp))
+  :hook (python-mode . lsp)
+  )
 
 (use-package tex-site
   :ensure nil
@@ -1633,10 +1634,10 @@ Inserted by installing org-mode or when a release is made."
 (require 'helm-deft)
 (setq helm-deft-extension "org")
 (setq helm-deft-dir-list '(
-                           "~/org-notes/art"
-                           "~/org-notes/NSM-GTD"
-                           "~/org-notes/post"
-                           "~/org-notes/course"
+                           "~/Documents/org-notes/art"
+                           "~/Documents/org-notes/NSM-GTD"
+                           "~/Documents/org-notes/post"
+                           "~/Documents/org-notes/course"
                            "~/project/gtrun-profile/dotfiles/wallpaper"
                            "~/project/global-profile/global-doc"
                            ))
@@ -1644,19 +1645,19 @@ Inserted by installing org-mode or when a release is made."
 (use-package org-starter
   :straight t
   :config
-  (org-starter-def "~/org-notes"
-    :files
-    ("gtd.org" :agenda t :key "g" :refile (:maxlevel . 5))
-    ("notes.org" :agenda t :key "n" :refile (:maxlevel .5 ))
-    ("myself.org" :agenda t)
-    ("NSM-GTD/workflow.org" :agenda t :required t)
-    ("NSM-GTD/NsmOrg.org" :agenda t :required t)
-    )
+  (org-starter-def "~/Documents/org-notes"
+                   :files
+                   ("gtd.org" :agenda t :key "g" :refile (:maxlevel . 5))
+                   ("notes.org" :agenda t :key "n" :refile (:maxlevel .5 ))
+                   ("myself.org" :agenda t)
+                   ("NSM-GTD/workflow.org" :agenda t :required t)
+                   ("NSM-GTD/NsmOrg.org" :agenda t :required t)
+                   )
   (org-starter-def "~/.emacs.d"
-    :files
-    ("init.org" :key "i" :refile (:maxlevel . 5))
-    ("nix.org" :key "x" :refile (:maxlevel . 5))
-    )
+                   :files
+                   ("init.org" :key "i" :refile (:maxlevel . 5))
+                   ("nix.org" :key "x" :refile (:maxlevel . 5))
+                   )
   (org-starter-def "~/project/global-profile/global-doc/global-init.org")
   :bind
   (
@@ -1912,7 +1913,7 @@ See also: https://stackoverflow.com/questions/9547912/emacs-calendar-show-more-t
 
 (setq org-publish-project-alist
       '(("NSM"
-	 :base-directory "~/org-notes/NSM-GTD"
+	 :base-directory "~/Documents/org-notes/NSM-GTD"
 	 :publishing-function org-html-publish-to-html
 	 :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
 	 :include ["workflow.org"]
@@ -1926,7 +1927,7 @@ See also: https://stackoverflow.com/questions/9547912/emacs-calendar-show-more-t
 	 :exclude "Pattern.org"
 	 )
 	("art"
-	 :base-directory "~/org-notes/art"
+	 :base-directory "~/Documents/org-notes/art"
 	 :publishing-function org-html-publish-to-html
 	 :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
 	 :exclude "Pattern.org"
@@ -1934,7 +1935,7 @@ See also: https://stackoverflow.com/questions/9547912/emacs-calendar-show-more-t
 
 	 )
 	("course"
-	 :base-directory "~/org-notes/course"
+	 :base-directory "~/Documents/org-notes/course"
 	 :publishing-function org-html-publish-to-html
 	 :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
 	 :exclude "Pattern.org"

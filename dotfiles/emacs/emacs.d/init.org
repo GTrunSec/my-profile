@@ -3560,6 +3560,9 @@ please test your init file when you modified done.
 #+begin_src emacs-lisp :tangle yes
 ;(remove-hook 'find-file-hooks 'vc-find-file-hook)
 
+;; https://www.masteringemacs.org/article/making-deleted-files-trash-can
+(setq delete-by-moving-to-trash t)
+
  
 #+end_src
 
