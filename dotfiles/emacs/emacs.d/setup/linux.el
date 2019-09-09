@@ -1,8 +1,8 @@
 (setq lsp-python-ms-executable
-        "~/.nix-profile/bin/mspyls")
+         "~/.nix-profile/bin/mspyls")
 
-(setq lsp-python-ms-executable
-      "$out/opt/mspyls/Microsoft.Python.LanguageServer")
+;; (setq lsp-python-ms-executable
+;;       "$out/opt/mspyls/Microsoft.Python.LanguageServer")
 
 (use-package nix-mode
   :straight t
@@ -16,10 +16,11 @@
   :config
   (defun my-nix-mode-setup ()
     (setq-local company-backends
-                (append '((company-nixos-options company-files company-tabnine company-yasnippet ))
-                        company-backends)))
+                (append '((company-nixos-options company-files company-tabnine company-yasnippet )))))
 
   (add-hook 'nix-mode-hook 'my-nix-mode-setup))
+
+(setq python-shell-interpreter "~/.config/nixpkgs/nixos/overlays/python/result/bin/python")
 
 (use-package cnfonts
     :straight t

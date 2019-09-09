@@ -14,7 +14,16 @@ with builtins;
   ];
   nixpkgs.config.allowUnfree = true;
   nixpkgs.overlays = [
-    (import ./overlays/python/python.nix)
-    (import ./overlays/python/ms-pyls.nix)
+    (import ./overlays/youtube-dl.nix)
+    (import ./overlays/python/01-yapf.nix)
+    (import ./overlays/python/02-ms-pyls.nix)
+#    (import ./overlays/python/03-bat.nix)
+    (import ./overlays/python/04-test.nix)
+    (import ./overlays)
+    # (self: super:
+    #   {
+    #     bat = super.callPackage ./overlays/python/bat{ };
+    #   }
+    # )
   ];
 }

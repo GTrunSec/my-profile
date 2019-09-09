@@ -1,5 +1,5 @@
 with import <nixpkgs> {
-  overlays = [ (import ./python.nix) ];
+  overlays = [ (import ../python.nix) ];
 };
 
 (python3.withPackages (ps: with ps; [

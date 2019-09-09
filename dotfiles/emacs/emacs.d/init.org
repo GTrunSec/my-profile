@@ -2163,11 +2163,11 @@ CLOSED: [2019-08-08 Thu 14:56]
 #+end_src
 
 #+begin_src emacs-lisp :tangle "./setup/linux.el"
-  (setq lsp-python-ms-executable
-        "~/.nix-profile/bin/mspyls")
+     (setq lsp-python-ms-executable
+           "~/.nix-profile/bin/mspyls")
 
-(setq lsp-python-ms-executable
-      "$out/opt/mspyls/Microsoft.Python.LanguageServer")
+  ;; (setq lsp-python-ms-executable
+  ;;       "$out/opt/mspyls/Microsoft.Python.LanguageServer")
 #+end_src
 
 *** [[https://github.com/dzop/emacs-jupyter][dzop/emacs-jupyter: An interface to communicate with Jupyter kernels.]]
@@ -2312,12 +2312,16 @@ CLOSED: [2019-08-08 Thu 14:56]
   :config
   (defun my-nix-mode-setup ()
     (setq-local company-backends
-                (append '((company-nixos-options company-files company-tabnine company-yasnippet ))
-                        company-backends)))
+                (append '((company-nixos-options company-files company-tabnine company-yasnippet )))))
 
   (add-hook 'nix-mode-hook 'my-nix-mode-setup))
     #+end_src
+*** python
+#+begin_src emacs-lisp :tangle "./setup/linux.el"
+(setq python-shell-interpreter "~/.config/nixpkgs/nixos/overlays/python/result/bin/python")
+#+end_src
 *** ⚑ WAITING [[https://github.com/matthewbauer/bauer][matthewbauer/bauer: An Emacs+Nix IDE]]
+
 ** bro-mode
 #+begin_src emacs-lisp :tangle yes
   (use-package bro-mode

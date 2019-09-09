@@ -38,6 +38,6 @@ in
   home.file.".config/termite/config".source = ./dotfiles/termite/config;
 
   # Let Home Manager install and manage itself.
-  #programs.home-manager.enable = true;
+  programs.home-manager.enable = true;
 
 }
