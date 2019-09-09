@@ -6,7 +6,6 @@ let
 in rec
   
   {
-
     hardware.brightnessctl.enable = true;
     environment.systemPackages = with pkgs; [
       #customEmacs.emacs_26_3

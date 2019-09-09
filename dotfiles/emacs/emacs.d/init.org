@@ -1224,8 +1224,6 @@ elisp
 
     ;; Default backends
     (setq company-backends '((company-files
-                              company-keywords
-                              company-capf
                               company-yasnippet)
                              (company-abbrev company-dabbrev)))
     ;; Use the tab-and-go frontend.
@@ -2310,9 +2308,10 @@ CLOSED: [2019-08-08 Thu 14:56]
   :config
   (defun my-nix-mode-setup ()
     (setq-local company-backends
-                (append '((company-nixos-options company-files company-tabnine company-yasnippet )))))
+                (append '((company-files company-nixos-options company-tabnine company-yasnippet )))))
 
-  (add-hook 'nix-mode-hook 'my-nix-mode-setup))
+)
+  (add-hook 'nix-mode-hook 'my-nix-mode-setup)
     #+end_src
 *** python
 #+begin_src emacs-lisp :tangle "./setup/linux.el"

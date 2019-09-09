@@ -108,6 +108,14 @@ pkgs.vscode-with-extensions.override {
 
     }
 
+    {
+      publisher = "TabNine";
+      name = "tabnine-vscode";
+      version = "2.1.11";
+      sha256 = "0nr8wfxlbb613f29m34jnv1ldfhw6sf5s1pbarmxa7zkkyp46jam";
+
+    }
+
     
    ];
 }
