@@ -1,12 +1,16 @@
 { config, lib, pkgs, vscode-utils, ... }:
 let
   customVscode = (import ./custom/vscode.nix { inherit pkgs; });
+  customEmacs = (import ./custom/nix-emacs-ci { inherit pkgs; });
+  myEmacs = pkgs.emacs;
 in rec
   
   {
 
     hardware.brightnessctl.enable = true;
     environment.systemPackages = with pkgs; [
+      #customEmacs.emacs_26_3
+      emacs
       customVscode
       w3m
       fantasque-sans-mono

@@ -54,8 +54,6 @@ in
       polybar = pkgs.polybar.override {
         i3Support = true;
 	    };
-	    emacs = pkgs.emacs.override { gtk = pkgs.gtk3;
-	    	                          };
 		};
 	};
 

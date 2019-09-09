@@ -40,20 +40,20 @@
                                     ("read-book" . 8)))
 )
 
-(set-face-attribute
- 'default nil
- :font (font-spec :name "-PfEd-Fantasque Sans Mono-normal-italic-normal-*-*-*-*-*-m-0-iso10646-1"
-                  :weight 'normal
-                  :slant 'normal
-                  :size 16.0))
-(dolist (charset '(kana han symbol cjk-misc bopomofo))
-  (set-fontset-font
-   (frame-parameter nil 'font)
-   charset
-   (font-spec :name "-ADBO-Source Han Sans CN-normal-normal-normal-*-*-*-*-*-*-0-iso10646-1"
-              :weight 'normal
-              :slant 'normal
-              :size 20.5)))
+;; (set-face-attribute
+;;  'default nil
+;;  :font (font-spec :name "-PfEd-Fantasque Sans Mono-normal-italic-normal-*-*-*-*-*-m-0-iso10646-1"
+;;                   :weight 'normal
+;;                   :slant 'normal
+;;                   :size 16.0))
+;; (dolist (charset '(kana han symbol cjk-misc bopomofo))
+;;   (set-fontset-font
+;;    (frame-parameter nil 'font)
+;;    charset
+;;    (font-spec :name "-ADBO-Source Han Sans CN-normal-normal-normal-*-*-*-*-*-*-0-iso10646-1"
+;;               :weight 'normal
+;;               :slant 'normal
+;;               :size 20.5)))
 
 (setq-default cursor-type 'box)
 

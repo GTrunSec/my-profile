@@ -30,7 +30,6 @@
     #lang
     lang/lsp.nix
     #programs
-    #    ./programs/vscode.nix
   ];
 
 }
