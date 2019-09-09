@@ -1,0 +1,19 @@
+language: nix
+
+os:
+  - linux
+  - osx
+
+env:
+  matrix:
+    - ATTR=emacs_24_3
+    - ATTR=emacs_24_4
+    - ATTR=emacs_24_5
+    - ATTR=emacs_25_1
+    - ATTR=emacs_25_2
+    - ATTR=emacs_25_3
+    - ATTR=emacs_26_1
+    - ATTR=emacs_26_2
+    - ATTR=emacs_26_3
+
+script: nix-build -A $ATTR
