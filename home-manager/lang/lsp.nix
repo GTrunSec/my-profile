@@ -26,14 +26,16 @@ in
     #  Go
     # C / C++
     ccls
-    zeek
+    #zeek
     rocksdb
     sqlite
+    fish-foreign-env
     # Bash
     # unstable.nodePackages.bash-language-server
     nodePackages.javascript-typescript-langserver
     # Nix
     ghc
+    autojump
      #    hnix-lsp
   ];
 }

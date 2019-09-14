@@ -31,7 +31,7 @@ font pango:DejaVu Sans Mono,  Font Awesome 5 Free solid 18
 floating_modifier $mod
 
 # start a terminal
-bindsym Mod4+Return exec termite
+bindsym Mod4+Return exec kitty
 
 
 # kill focused window
@@ -186,7 +186,7 @@ bindsym Mod4+r exec --no-startup-id spectacle -r
 for_window [class="feh"] floating enable, border normal
 #for_window [class=""] fullscreen enable
 # Compton
-exec --no-startup-id compton --config /home/gtrun/.compton.conf
+# exec --no-startup-id compton --config /home/gtrun/.compton.conf
 
 # Wallpaper
 exec_always --no-startup-id feh --randomize --bg-fill ~/.config/nixpkgs/dotfiles/wallpaper/Mountain-spring/ferdinand-ladera-torrent-of-gelion-2k_2019-07-27_16-17-26.jpeg

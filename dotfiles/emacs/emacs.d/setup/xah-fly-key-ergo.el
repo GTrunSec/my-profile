@@ -58,7 +58,7 @@
 (define-key xah-fly-key-map (kbd "C-a") 'beginning-of-visual-line)
 (define-key xah-fly-key-map (kbd "C-0") 'delete-region)
 (define-key xah-fly-key-map (kbd "C-n") 'next-line)
-
+(define-key xah-fly-key-map (kbd "C-;") 'maple-iedit-match-all)
 
 ;; org-mode
 (define-key xah-fly-key-map (kbd "C-c l") 'org-mac-grab-link)

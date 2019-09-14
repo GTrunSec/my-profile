@@ -13,8 +13,7 @@
     ag
     graphviz
     rofi
-    termite
-    compton
+   # compton
     fd
     ripgrep
     feh

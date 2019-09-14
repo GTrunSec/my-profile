@@ -1,3 +1,2 @@
-ln -s ~/project/home-manager ~/.config/nixpkgs
- 
+ln -s ~/.config/nixpkgs/nixos /etc/nixos
 

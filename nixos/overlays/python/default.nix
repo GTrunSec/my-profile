@@ -1,4 +1,3 @@
-with import <nixpkgs> {
   overlays = [ (import ../python.nix) ];
 };
 

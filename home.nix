@@ -36,7 +36,8 @@ in
   home.file.".config/rofi/rofi-themes/themes/arthur.rasi".source = ./dotfiles/rofi/rofi-themes/themes/arthur.rasi;
   # termite
   home.file.".config/termite/config".source = ./dotfiles/termite/config;
-
+  # kitty
+  home.file.".config/kitty/kitty.conf".source = ./dotfiles/kitty/kitty.conf;
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
