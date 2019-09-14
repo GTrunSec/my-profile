@@ -132,7 +132,6 @@ CLOSED: [2019-07-24 Wed 23:42]
 ;;      (org-babel-tangle)
 
 ;;     ;; Recompile plugins
-;;      (byte-recompile-directory (expand-file-name user-emacs-directory) 0)
 
 ;;     ;; ;; Recompile init file (FIXME: commented as long as org-mode and matlab problem remains!)
 ;;     ;; (byte-recompile-file (format "%s/init.el" user-emacs-directory) t 0 nil)
