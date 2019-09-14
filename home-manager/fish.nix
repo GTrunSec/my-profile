@@ -18,8 +18,8 @@
     interactiveShellInit = ''
     #infocmp | ssh $remote "cat > $TERM.ti ; tic -o ~/.terminfo $TERM.ti"
     set -x -U GOPATH $HOME/go 
-    set -x -U GOBIN $GOPATH/go/bin
-    set -g -x PATH $PATH $GOBIN ~/.config/nixpkgs/nixos/overlays/python/result/bin/python
+    set -x -U GOBIN $GOPATH/bin
+    set -g -x PATH $PATH $GOBIN
     source ~/.local/share/icons-in-terminal/icons.fish
     kitty + complete setup fish | source
     '';

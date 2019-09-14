@@ -1,12 +1,13 @@
 { pkgs, ... }:
 with pkgs;
 let
-  R-with-my-packages = rWrapper.override{ packages = with rPackages;[ 
+  R-with-my-packages = rWrapper.override{ packages = with rPackages;[
         bookdown
         devtools
         dplyr
         ggplot2
         xts
+        languageserver
         #grid
         gtable
         htmltools

@@ -26,6 +26,7 @@ in rec
       chromium
       polar-bookshelf
       xdotool
+      enpass
       ditaa
       graphviz
       #terminal
@@ -50,7 +51,9 @@ in rec
       rustup
       rustc
       #xbacklight
-
+      
+      #overlay-package
+      #zeek
       #lang
       go
       go-langserver
@@ -73,7 +76,13 @@ in rec
 
       #
       dotnet-sdk
+      #libraries
+      caf
   ];
-  environment.variables = { GOROOT = [ "${pkgs.go.out}/share/go" ]; };
+    environment.variables = { GOROOT = [ "${pkgs.go.out}/share/go" ]; };
+
+  #   environment.etc."".source = pkgs.runCommandNoCC "lvm.conf" {} ''
+  #   sed ${pkgs.lvm2}/etc/lvm.conf -e "s/issue_discards = 0/issue_discards = 1/" > $out
+  # '';
   
 }

@@ -1,11 +1,13 @@
-{ config, pkgs, ... }:
-
+{ config, lib, pkgs, mod, ... }: 
 with builtins;
 
 {
   # Use local nixpkgs checkout
   # The first time, might have to run:
   # nixos-rebuild -I nixpkgs=/etc/nixos/nixpkgs -I nixos-config=/etc/nixos/configuration.nix switch
+  # imports = [
+  #   (mod "./overlays/zeek/zeek.nix")
+  # ];
   nix.nixPath = [
     
     "nixpkgs=/etc/nixos/nixpkgs"

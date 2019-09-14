@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
   #inherit (pkgs)  libyaml libiconv;
-  with pkgs;
+with pkgs;
 let
   my-python-packages = python-packages: with python-packages; [
     pylint

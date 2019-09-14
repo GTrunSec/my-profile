@@ -6,11 +6,12 @@
 python3Packages.buildPythonPackage rec {
 
   pname = "bat";
-  version = "0.3.6";
+  version = "master";
 
   src = fetchurl {
-    url = "https://github.com/SuperCowPowers/${pname}/archive/v${version}.tar.gz";
-    sha256 = "0829x9a2pbjcqzf78ki1fsbykzvnl6aazlpmq261y8r0n1fr1n1i";
+   # url = "https://github.com/SuperCowPowers/${pname}/archive/v${version}.tar.gz";
+    url = "https://github.com/SuperCowPowers/${pname}/archive/${version}.tar.gz";
+    sha256 = "0qp1xa6ksxwavmk0f2kfcj5sldrndwmlisx42mnrq3pn4hcf2qlf";
   };  
   # src = fetchPypi {
   #   inherit pname version;

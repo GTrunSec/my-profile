@@ -12,7 +12,6 @@
 in
   {
     home.packages = with pkgs;[
-    
     (python3.withPackages (pkgs: with pkgs; [
           # rl algorithms
          pip
@@ -22,10 +21,14 @@ in
          bat
          matplotlib
          sqlalchemy
+         pandas
       ]))   
     #  Go
     # C / C++
     ccls
+    zeek
+    rocksdb
+    sqlite
     # Bash
     # unstable.nodePackages.bash-language-server
     nodePackages.javascript-typescript-langserver
