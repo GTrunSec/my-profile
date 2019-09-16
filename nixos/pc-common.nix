@@ -18,6 +18,7 @@ with builtins;
   nixpkgs.overlays = [
     (import ./overlays/custom/youtube-dl.nix)
     (import ./overlays/custom/outline-client.nix)
+    (import ./overlays/custom/shadowsocks-qt5.nix)
     (import ./overlays/python/01-yapf.nix)
     (import ./overlays/python/02-ms-pyls.nix)
 #    (import ./overlays/python/03-bat.nix)

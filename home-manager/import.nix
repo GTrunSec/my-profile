@@ -19,6 +19,7 @@
     outline-client
     compton
     youtube-dl
+    shadowsocks-qt5
   ];
 
   
