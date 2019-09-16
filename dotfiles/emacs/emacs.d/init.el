@@ -65,13 +65,6 @@
  (use-package diminish
     :straight t)
 
-(use-package auto-package-update
-  :straight t
-  :config
-  (setq auto-package-update-delete-old-versions t
-        auto-package-update-hide-results t)
-  (auto-package-update-maybe))
-
 ;; Don't screw up my files with custom
 ;(setq custom-file (format "%s/custom.el" user-emacs-directory))
 (setq custom-file (no-littering-expand-etc-file-name "custom.el"))
@@ -79,6 +72,21 @@
  (load custom-file 'noerror)
  (defalias 'yes-or-no-p 'y-or-n-p)
  ;; Silence!!!!!!
+
+(use-package exec-path-from-shell
+  :straight t
+  :if (memq window-system '(mac ns))
+  :config
+  (exec-path-from-shell-initialize)
+
+  )
+
+(use-package auto-package-update
+  :straight t
+  :config
+  (setq auto-package-update-delete-old-versions t
+        auto-package-update-hide-results t)
+  (auto-package-update-maybe))
 
 ;; (defun gtrun-tangle-byte-compile-org ()
 ;;   "Tangles main.org and byte compiles ~/.emacs.d/"
@@ -88,19 +96,10 @@
 ;;      (org-babel-tangle)
 
 ;;     ;; Recompile plugins
-;;      (byte-recompile-directory (expand-file-name user-emacs-directory) 0)
 
 ;;     ;; ;; Recompile init file (FIXME: commented as long as org-mode and matlab problem remains!)
 ;;     ;; (byte-recompile-file (format "%s/init.el" user-emacs-directory) t 0 nil)
 ;;     ))
-
-(use-package exec-path-from-shell
-  :straight t
-  :if (memq window-system '(mac ns))
-  :config
-  (exec-path-from-shell-initialize)
-
-  )
 
 (use-package xah-fly-key-normal
  :load-path "./setup"
@@ -248,6 +247,12 @@
 (use-package all-the-icons-ivy
   :straight t)
 
+(straight-use-package '(icons-in-terminal
+                       :type git
+                       :host github
+                       :repo "seagle0128/icons-in-terminal.el"))
+(require 'icons-in-terminal)
+
 (use-package emojify
 :straight t
 :config
@@ -271,7 +276,7 @@
                              ((:eval (frame-title-format))))))
 
 (tool-bar-mode -1)
-(menu-bar-mode -1)
+ (menu-bar-mode -1)
 (scroll-bar-mode -1)
 
 (use-package eyebrowse
@@ -604,8 +609,6 @@
 
   ;; Default backends
   (setq company-backends '((company-files
-                            company-keywords
-                            company-capf
                             company-yasnippet)
                            (company-abbrev company-dabbrev)))
   ;; Use the tab-and-go frontend.
@@ -737,14 +740,14 @@
 (require 'imenu-list)
 (global-set-key (kbd "C-'") #'imenu-list-smart-toggle)
 
-(defun set-icon-fonts (CODE-FONT-ALIST)
-   "Utility to associate many unicode points with specified fonts."
-   (--each CODE-FONT-ALIST
-     (-let (((font . codes) it))
-       (--each codes
-         (set-fontset-font t `(,it . ,it) font)))))
+;; (defun set-icon-fonts (CODE-FONT-ALIST)
+;;    "Utility to associate many unicode points with specified fonts."
+;;    (--each CODE-FONT-ALIST
+;;      (-let (((font . codes) it))
+;;        (--each codes
+;;          (set-fontset-font t `(,it . ,it) font)))))
 
- (defun load-default-fonts ()
+;; (defun load-default-fonts ()
    ;;(setq doom-font (font-spec :family "Fantasque Sans Mono" :size 25))
    ;;(setq default-frame-alist '((font . "Iosevka-14")))
 
@@ -754,33 +757,33 @@
 
 
    ;; The icons you see are not the correct icons until this is evaluated!
-   (set-icon-fonts
-    '(("fontawesome"
-       ;;                         
-       #xf07c #xf0c9 #xf0c4 #xf0cb #xf017 #xf101)
+   ;; (set-icon-fonts
+   ;;  '(("fontawesome"
+   ;;     ;;                         
+   ;;     #xf07c #xf0c9 #xf0c4 #xf0cb #xf017 #xf101)
 
-      ("all-the-icons"
-       ;;    
-       #xe907 #xe928)
+   ;;    ("all-the-icons"
+   ;;     ;;    
+   ;;     #xe907 #xe928)
 
-      ("github-octicons"
-       ;;                        
-       #xf091 #xf059 #xf076 #xf075 #xf016 #xf00a)
+   ;;    ("github-octicons"
+   ;;     ;;                        
+   ;;     #xf091 #xf059 #xf076 #xf075 #xf016 #xf00a)
 
-      ("Symbola"
-       ;; 𝕊    ⨂      ∅      ⟻    ⟼     ⊙      𝕋       𝔽
-       #x1d54a #x2a02 #x2205 #x27fb #x27fc #x2299 #x1d54b #x1d53d
-       ;; 𝔹    𝔇       𝔗
-       #x1d539 #x1d507 #x1d517))))
+   ;;    ("Symbola"
+   ;;     ;; 𝕊    ⨂      ∅      ⟻    ⟼     ⊙      𝕋       𝔽
+   ;;     #x1d54a #x2a02 #x2205 #x27fb #x27fc #x2299 #x1d54b #x1d53d
+   ;;     ;; 𝔹    𝔇       𝔗
+   ;;     #x1d539 #x1d507 #x1d517))))
 
 
- (defun load-fonts (frame)
-   (select-frame frame)
-   (load-default-fonts))
+ ;; (defun load-fonts (frame)
+ ;;   (select-frame frame)
+ ;;   (load-default-fonts))
 
- (if (daemonp)
-     (add-hook 'after-make-frame-functions #'load-fonts)
-   (load-default-fonts))
+ ;; (if (daemonp)
+ ;;     (add-hook 'after-make-frame-functions #'load-fonts)
+ ;;   (load-default-fonts))
 
 (use-package amx
   :straight t
@@ -1245,56 +1248,62 @@
   :config (treemacs-icons-dired-mode))
 
 (use-package lsp-mode
-       :straight t
-       :commands lsp
-       :hook
-       (lsp-after-open-hook . lsp-enable-imenu)
-       :custom
-       (lsp-message-project-root-warning t)
-       :init
-       (require 'lsp-clients)
-       (add-hook 'python-mode-hook #'lsp)
-       (add-hook 'c++-mode-hook #'lsp)
-       (add-hook 'c-mode-hook #'lsp)
-       (add-hook 'go-mode-hook #'lsp)
-       :config
-       (setq lsp-auto-guess-root t)
-       (setq lsp-enable-eldoc t)
-       (setq lsp-enable-completion-at-point t))
+  :straight t
+  :commands lsp
+  :hook
+  (lsp-after-open-hook . lsp-enable-imenu)
+  :custom
+  (lsp-message-project-root-warning t)
+  :init
+  (require 'lsp-clients)
+  (add-hook 'python-mode-hook #'lsp)
+  (add-hook 'c++-mode-hook #'lsp)
+  (add-hook 'c-mode-hook #'lsp)
+  (add-hook 'go-mode-hook #'lsp)
+  (add-hook 'ess-r-mode-hook #'lsp)
+  :config
+  (lsp-register-client
+   (make-lsp-client :new-connection
+                    (lsp-stdio-connection '("R" "--slave" "-e" "languageserver::run()"))
+                    :major-modes '(ess-r-mode inferior-ess-r-mode)
+                    :server-id 'lsp-R))
+  (setq lsp-auto-guess-root t)
+  (setq lsp-enable-eldoc t)
+  (setq lsp-enable-completion-at-point t))
 
-     (use-package lsp-ui
-       :straight t
-       :after lsp-mode
-       :commands lsp-ui-mode
-       :hook
-       (lsp-mode . lsp-ui-mode)
-       :config
-       (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
-       (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
-       :bind
-       (:map lsp-ui-peek-mode-map
-             ("h" . lsp-ui-peek--select-prev-file)
-             ("j" . lsp-ui-peek--select-next)
-             ("k" . lsp-ui-peek--select-prev)
-             ("l" . lsp-ui-peek--select-next-file)
-             :map lsp-ui-imenu-mode-map
-             ("h" . lsp-ui-imenu--jump)
-             ("j" . lsp-ui-imenu--visit)
-             ("l" . lsp-ui-imenu--view))
+(use-package lsp-ui
+  :straight t
+  :after lsp-mode
+  :commands lsp-ui-mode
+  :hook
+  (lsp-mode . lsp-ui-mode)
+  :config
+  (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+  (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
+  :bind
+  (:map lsp-ui-peek-mode-map
+        ("h" . lsp-ui-peek--select-prev-file)
+        ("j" . lsp-ui-peek--select-next)
+        ("k" . lsp-ui-peek--select-prev)
+        ("l" . lsp-ui-peek--select-next-file)
+        :map lsp-ui-imenu-mode-map
+        ("h" . lsp-ui-imenu--jump)
+        ("j" . lsp-ui-imenu--visit)
+        ("l" . lsp-ui-imenu--view))
 
-       )
+  )
 
-     ;; (use-package company-lsp
-     ;;   :straight t
-     ;;   :after company lsp-mode latex-mode
-     ;;   :config
-     ;;   (add-to-list 'company-backends 'company-lsp)
-     ;; )
+;; (use-package company-lsp
+;;   :straight t
+;;   :after company lsp-mode latex-mode
+;;   :config
+;;   (add-to-list 'company-backends 'company-lsp)
+;; )
 
 
-     ;; (use-package lsp-treemacs
-     ;;   :straight (lsp-treemacs :type git :host github :repo "emacs-lsp/lsp-treemacs")
-     ;;   :commands lsp-treemacs-errors-list)
+;; (use-package lsp-treemacs
+;;   :straight (lsp-treemacs :type git :host github :repo "emacs-lsp/lsp-treemacs")
+;;   :commands lsp-treemacs-errors-list)
 (straight-use-package 'lsp-treemacs)
 
 ;; (use-package dap-mode
@@ -2382,6 +2391,8 @@ _p_: projectile        _t_: travis status     _F_: flycheck
                             :host github
                             :repo "Malabarba/elisp-bug-hunter"))
 
+(setq bookmark-save-flag 1)
+
 (setq-default default-tab-width 4)
 ;; 禁止响铃
 (setq ring-bell-function 'ignore)
@@ -2393,6 +2404,9 @@ _p_: projectile        _t_: travis status     _F_: flycheck
 ;; (setq org-hide-block-startup t)
 
 ;(remove-hook 'find-file-hooks 'vc-find-file-hook)
+
+;; https://www.masteringemacs.org/article/making-deleted-files-trash-can
+(setq delete-by-moving-to-trash t)
 
 (use-package eww
 :ensure nil
@@ -2574,8 +2588,13 @@ Null prefix argument turns off the mode."
   (("M-g" . goto-line-preview)))
 
 (ignore-errors
-    (dotimes (i 50)
-      (windmove-down)))
+      (dotimes (i 50)
+        (windmove-down)))
+
+(setq inhibit-splash-screen t)
+(require 'bookmark)
+(bookmark-bmenu-list)
+(switch-to-buffer "*Bookmark List*")
 
 (setq ad-redefinition-action 'accept)
 

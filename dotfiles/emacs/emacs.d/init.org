@@ -97,16 +97,6 @@
  (use-package diminish
     :straight t)
    #+end_src
-** Auto-update
-   #+begin_src emacs-lisp :tangle yes
-(use-package auto-package-update
-  :straight t
-  :config
-  (setq auto-package-update-delete-old-versions t
-        auto-package-update-hide-results t)
-  (auto-package-update-maybe))
-
-   #+end_src
 ** Define Coustom file
    #+begin_src emacs-lisp :tangle yes
  ;; Don't screw up my files with custom
@@ -119,6 +109,28 @@
 
    #+end_src
 
+** [[https://github.com/iqbalansari/restart-emacs][iqbalansari/restart-emacs: A simple emacs package to restart emacs from within emacs]]
+** Exec-path-from-shell
+    #+begin_src emacs-lisp :tangle yes
+      (use-package exec-path-from-shell
+        :straight t
+        :if (memq window-system '(mac ns))
+        :config
+        (exec-path-from-shell-initialize)
+
+        )
+    #+end_src
+
+** Auto-update
+   #+begin_src emacs-lisp :tangle yes
+     (use-package auto-package-update
+       :straight t
+       :config
+       (setq auto-package-update-delete-old-versions t
+             auto-package-update-hide-results t)
+       (auto-package-update-maybe))
+
+   #+end_src
 ** ✘ CANCELED tangling Emacs.init file
 CLOSED: [2019-07-24 Wed 23:42]
 - State "✘ CANCELED" from              [2019-07-24 Wed 23:42] \\
@@ -137,18 +149,6 @@ CLOSED: [2019-07-24 Wed 23:42]
 ;;     ;; (byte-recompile-file (format "%s/init.el" user-emacs-directory) t 0 nil)
 ;;     ))
    #+end_src
-** [[https://github.com/iqbalansari/restart-emacs][iqbalansari/restart-emacs: A simple emacs package to restart emacs from within emacs]]
-** Exec-path-from-shell
-    #+begin_src emacs-lisp :tangle yes
-      (use-package exec-path-from-shell
-        :straight t
-        :if (memq window-system '(mac ns))
-        :config
-        (exec-path-from-shell-initialize)
-
-        )
-    #+end_src
-
 * Keybinds
 ** Xah-lee-fly-key
 *** Normal-keyboard
@@ -3542,6 +3542,7 @@ please test your init file when you modified done.
 ** setting
 #+begin_src emacs-lisp :tangle yes
 
+(setq bookmark-save-flag 1)
 
 (setq-default default-tab-width 4)
 ;; 禁止响铃
@@ -3858,6 +3859,11 @@ Version 2017-10-09"
   (ignore-errors
       (dotimes (i 50)
         (windmove-down)))
+
+(setq inhibit-splash-screen t)
+(require 'bookmark)
+(bookmark-bmenu-list)
+(switch-to-buffer "*Bookmark List*")
 #+end_src
 
 #+RESULTS:
