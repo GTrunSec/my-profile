@@ -40,9 +40,9 @@ with lib;
     '';
   };
   
-  home.file.".config/fish/functions/hs.fish".source = ../dotfiles/fish/functions/hs.fish;
   home.activation.linkOMF = config.lib.dag.entryAfter [ "writeBoundary" ] ''
     ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/omf" ~/.config/omf
   '';
-  home.file.".config/fish/functions/clean-nix-store.fish".source = ../dotfiles/fish/functions/clean-nix-store.fish;
+  home.file.".config/fish/functions/hs.fish".source = ../../dotfiles/fish/functions/hs.fish;
+  home.file.".config/fish/functions/clean-nix-store.fish".source = ../../dotfiles/fish/functions/clean-nix-store.fish;
 }

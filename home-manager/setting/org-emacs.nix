@@ -7,12 +7,12 @@ in
 {
   # editors
   home.file.".emacs.d/init.org" = {
-    source = ../dotfiles/emacs/emacs.d/init.org;
+    source = ../../dotfiles/emacs/emacs.d/init.org;
     onChange = updateEmacs;
   };
-  home.file.".emacs.d/Makefile".source = ../dotfiles/emacs/emacs.d/Makefile;
+  home.file.".emacs.d/Makefile".source = ../../dotfiles/emacs/emacs.d/Makefile;
   #pyrime
-   home.file.".emacs.d/pyim".source = ../dotfiles/emacs/emacs.d/pyim;
+   home.file.".emacs.d/pyim".source = ../../dotfiles/emacs/emacs.d/pyim;
     home.activation.linkEmacsLisp = config.lib.dag.entryAfter [ "writeBoundary" ] ''
     ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/emacs/emacs.d/lisp" $HOME/.emacs.d/lisp
   '';

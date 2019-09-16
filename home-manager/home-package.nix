@@ -1,7 +1,8 @@
 { config, pkgs, lib, ... }:
 with import <nixpkgs> { };
 
- let
+let
+  nixpkgs.config.allowUnfree = true;  
   nixos = import <nixos> { };
   unstable = import <nixpkgs-unstable> { };
   # Currently not used in favour of nix-mode
@@ -15,6 +16,21 @@ with import <nixpkgs> { };
 in
   {
     home.packages = with pkgs;[
+      aria2
+      xclip
+      urxvt_perls
+      ag
+      graphviz
+      rofi
+      fd
+      ripgrep
+      compton
+      feh
+      #overlay
+      outline-client
+      youtube-dl
+      shadowsocks-qt5
+      
     (python3.withPackages (pkgs: with pkgs; [
           # rl algorithms
          pip
@@ -32,7 +48,6 @@ in
     #zeek
     rocksdb
     sqlite
-    
     fish-foreign-env
     # Bash
     # unstable.nodePackages.bash-language-server
@@ -41,6 +56,10 @@ in
     ghc
     autojump
     #    hnix-lsp
+
+    #Go-lang
+    dep
+    #blueman
     pkgs.blueman
   ];
 }
