@@ -1,13 +1,16 @@
 { config, pkgs, lib, ... }:
- let
+with import <nixpkgs> { };
 
+ let
+  nixos = import <nixos> { };
+  unstable = import <nixpkgs-unstable> { };
   # Currently not used in favour of nix-mode
-  hnix-lsp = import (pkgs.fetchFromGitHub {
-    owner = "domenkozar";
-    repo = "hnix-lsp";
-    rev = "d678f56639067f54144ae08cdf3657889348723c";
-    sha256 = "09vasf7kkbag1d1hd2v8wf7amglwbj3xq2qqinh1pv9hb8bdcsg2";
-  });
+  # hnix-lsp = import (pkgs.fetchFromGitHub {
+  #   owner = "domenkozar";
+  #   repo = "hnix-lsp";
+  #   rev = "d678f56639067f54144ae08cdf3657889348723c";
+  #   sha256 = "09vasf7kkbag1d1hd2v8wf7amglwbj3xq2qqinh1pv9hb8bdcsg2";
+  # });
   
 in
   {
@@ -29,6 +32,7 @@ in
     #zeek
     rocksdb
     sqlite
+    
     fish-foreign-env
     # Bash
     # unstable.nodePackages.bash-language-server
@@ -36,6 +40,7 @@ in
     # Nix
     ghc
     autojump
-     #    hnix-lsp
+    #    hnix-lsp
+    pkgs.blueman
   ];
 }

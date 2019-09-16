@@ -4,6 +4,5 @@
   imports = [
     ./fonts.nix
     ./pulse.nix
-    ./bluetool.nix
   ];
 }

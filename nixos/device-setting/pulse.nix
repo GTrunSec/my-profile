@@ -13,6 +13,10 @@
 	      FastConnectable=true
 	      '';
 	};
+	hardware.pulseaudio = {
+	  enable = true;
+	  support32Bit = true;
+	};
 
   nixpkgs.config = {
     packageOverrides = pkgs: {
@@ -20,7 +24,6 @@
 	  };
 	};
 
-  environment.systemPackages = [ pkgs.blueman ];
-
+  #environment.systemPackages = [ pkgs.blueman ];
   hardware.pulseaudio.package = pkgs.pulseaudioFull;
 }
