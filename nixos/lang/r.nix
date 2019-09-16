@@ -34,6 +34,8 @@ let
         xml2
         xopen
         yaml
+        summarytools
+        doBy
         ]; 
     };
 in

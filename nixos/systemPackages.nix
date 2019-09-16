@@ -74,6 +74,8 @@ in rec
       ncurses.dev # infocmp/tic/etc
       spectacle
 
+      mpv
+      rocksdb
       #
       dotnet-sdk
       #libraries

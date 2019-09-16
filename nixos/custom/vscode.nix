@@ -15,12 +15,13 @@ pkgs.vscode-with-extensions.override {
       version = "1.1.1";
       sha256 = "1rhwq830jyyxqic5a4mb8kyd29lzfjcz5ap51kb4s0s5y3v6l3m8";
     }
-    {
-      publisher = "Mikhail-Arkhipov";
-      name = "r";
-      version = "0.0.6";
-      sha256 = "18a5w0nwicx84y5l14qbbvfd5yh9zi2dcbvclhc51kx3wgkmy29l";
-    }
+    # dotnet-runtime
+    # {
+    #   publisher = "Mikhail-Arkhipov";
+    #   name = "r";
+    #   version = "0.0.6";
+    #   sha256 = "18a5w0nwicx84y5l14qbbvfd5yh9zi2dcbvclhc51kx3wgkmy29l";
+    # }
 
     {
       publisher = "REditorSupport";

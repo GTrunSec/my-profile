@@ -13,10 +13,12 @@
     ag
     graphviz
     rofi
-   # compton
     fd
     ripgrep
     feh
+    outline-client
+    compton
+    youtube-dl
   ];
 
   
