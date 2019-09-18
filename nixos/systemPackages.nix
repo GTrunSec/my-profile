@@ -9,6 +9,8 @@ in rec
     hardware.brightnessctl.enable = true;
     environment.systemPackages = with pkgs; [
       #customEmacs.emacs_26_3
+      # nur
+      nur.repos.ysndr.kde.breeze-blur
       emacs
       customVscode
       w3m

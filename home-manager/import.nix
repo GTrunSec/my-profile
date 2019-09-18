@@ -2,7 +2,6 @@
 {
 
   imports = [
-
     ./randr/work.nix
     ./setting
     #lang

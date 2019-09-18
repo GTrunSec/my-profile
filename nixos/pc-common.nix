@@ -8,8 +8,12 @@ with builtins;
   # imports = [
   #   (mod "./overlays/zeek/zeek.nix")
   # ];
+    nixpkgs.config.packageOverrides = pkgs: {
+    nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
+      inherit pkgs;
+    };
+  };
   nix.nixPath = [
-    
     "nixpkgs=/etc/nixos/nixpkgs"
     "nixos-config=/etc/nixos/configuration.nix"
     "nixpkgs-overlays=/etc/nixos/overlays-compat/"
@@ -23,7 +27,6 @@ with builtins;
     (import ./overlays/python/02-ms-pyls.nix)
 #    (import ./overlays/python/03-bat.nix)
     (import ./overlays/python/04-test.nix)
-
     (import ./overlays)
     # (self: super:
     #   {

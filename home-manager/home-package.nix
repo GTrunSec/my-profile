@@ -2,9 +2,11 @@
 with import <nixpkgs> { };
 
 let
-  nixpkgs.config.allowUnfree = true;  
   nixos = import <nixos> { };
   unstable = import <nixpkgs-unstable> { };
+  nixpkgs.config = {
+     allowUnfree = true;
+  };
   # Currently not used in favour of nix-mode
   # hnix-lsp = import (pkgs.fetchFromGitHub {
   #   owner = "domenkozar";
@@ -13,8 +15,7 @@ let
   #   sha256 = "09vasf7kkbag1d1hd2v8wf7amglwbj3xq2qqinh1pv9hb8bdcsg2";
   # });
   
-in
-  {
+in   {
     home.packages = with pkgs;[
       aria2
       xclip
@@ -26,22 +27,24 @@ in
       ripgrep
       compton
       feh
+      #skim
       #overlay
       outline-client
       youtube-dl
       shadowsocks-qt5
-      
+
+      #nur
     (python3.withPackages (pkgs: with pkgs; [
-          # rl algorithms
-         pip
-         pytest
-         numpy
-         scikitlearn
-         bat
-         matplotlib
-         sqlalchemy
-         pandas
-      ]))   
+      # rl algorithms
+      pip
+      pytest
+      numpy
+      scikitlearn
+      bat
+      matplotlib
+      sqlalchemy
+      pandas
+    ]))   
     #  Go
     # C / C++
     ccls

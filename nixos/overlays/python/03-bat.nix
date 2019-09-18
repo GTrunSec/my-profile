@@ -1,6 +1,6 @@
 self: super: {
 
-  bbbbbat = super.python3Packages.buildPythonPackage rec {
+  bat = super.python3Packages.buildPythonPackage rec {
     pname = "bat";
     version = "0.3.6";
 

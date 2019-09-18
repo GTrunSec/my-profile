@@ -159,6 +159,10 @@ mode "resize" {
 
 bindsym Mod4+b mode "resize"
 
+# https://www.reddit.com/r/i3wm/comments/b76zvi/autorandr_and_feh_not_playing_well_together/
+# Automatically detect screen resolution
+exec_always --no-startup-id autorandr home
+
 exec_always --no-startup-id bash $HOME/.config/polybar/launch.sh
 # Compton
 exec_always --no-startup-id bash $HOME/.config/nixpkgs/dotfiles/polybar/compton.sh
