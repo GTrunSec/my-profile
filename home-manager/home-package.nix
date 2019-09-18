@@ -25,9 +25,10 @@ in   {
       rofi
       fd
       ripgrep
-      compton
       feh
+      pkgs.compton
       #skim
+      screenfetch
       #overlay
       outline-client
       youtube-dl

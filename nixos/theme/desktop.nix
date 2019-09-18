@@ -25,11 +25,11 @@ in
     # Enable touchpad support.
     # libinput.enable = true;
 
-    displayManager.slim = {
+    displayManager.lightdm = {
       enable = true;
-	    autoLogin = true;
-      theme       = slim-theme;
-      defaultUser = "gtrun";
+#	    autoLogin = true;
+#      theme       = slim-theme;
+#      defaultUser = "gtrun";
 		};
     windowManager = {
       i3 = {
@@ -39,12 +39,18 @@ in
          #   ${pkgs.xlibs.xrdb}/bin/xrdb -load /etc/X11/Xresources
          # '';
       };
-      default = "i3";
+#      default = "i3";
     };
-    
-    videoDrivers = [ "nvidia" ];
-    desktopManager.default = "none";
+
+    videoDrivers = [ "nvidia" "amdgpu" "intel"];
+#    desktopManager.default = "Plasm";
   };
+  hardware.nvidia.optimus_prime.enable = true;
+  # Bus ID of the NVIDIA GPU. You can find it using lspci
+  hardware.nvidia.optimus_prime.nvidiaBusId = "PCI:1:0:0";
+  hardware.nvidia.optimus_prime.intelBusId = "PCI:0:2:0";
+  # Bus ID of the Intel GPU. You can find it using lspci
+
     # i3 gaps
   environment.pathsToLink = [ "/libexec"  ]; # links /libexec from derivations to /run/current-system/sw
 

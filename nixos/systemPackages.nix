@@ -11,6 +11,11 @@ in rec
       #customEmacs.emacs_26_3
       # nur
       nur.repos.ysndr.kde.breeze-blur
+      qtstyleplugin-kvantum-qt4
+      libsForQt5.qtstyleplugin-kvantum
+      qt5ct
+      wmctrl
+      glxinfo
       emacs
       customVscode
       w3m
