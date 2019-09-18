@@ -10,11 +10,15 @@ in rec
     environment.systemPackages = with pkgs; [
       #customEmacs.emacs_26_3
       # nur
-      nur.repos.ysndr.kde.breeze-blur
-      qtstyleplugin-kvantum-qt4
-      libsForQt5.qtstyleplugin-kvantum
-      qt5ct
-      wmctrl
+      # KDE
+      # nur.repos.ysndr.kde.breeze-blur
+      # qtstyleplugin-kvantum-qt4
+      # libsForQt5.qtstyleplugin-kvantum
+      # qt5ct
+      # latte-dock
+      # deepin.dde-dock
+      lxappearance
+      #wmctrl
       glxinfo
       emacs
       customVscode

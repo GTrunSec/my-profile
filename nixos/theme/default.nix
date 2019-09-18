@@ -3,6 +3,6 @@
 {
   imports = [
     ./desktop.nix
-#    ./kde/BreezeBlurred
+    #    ./kde/BreezeBlurred
   ];
 }

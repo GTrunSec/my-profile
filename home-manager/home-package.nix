@@ -33,7 +33,7 @@ in   {
       outline-client
       youtube-dl
       shadowsocks-qt5
-
+      sshfs
       #nur
     (python3.withPackages (pkgs: with pkgs; [
       # rl algorithms
@@ -64,6 +64,6 @@ in   {
     #Go-lang
     dep
     #blueman
-    pkgs.blueman
+    #pkgs.blueman
   ];
 }
