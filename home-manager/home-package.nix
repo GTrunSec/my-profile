@@ -1,12 +1,7 @@
 { config, pkgs, lib, ... }:
-with import <nixpkgs> { };
-
 let
-  nixos = import <nixos> { };
+#  nixos = import <nixos> { };
   unstable = import <nixpkgs-unstable> { };
-  nixpkgs.config = {
-     allowUnfree = true;
-  };
   # Currently not used in favour of nix-mode
   # hnix-lsp = import (pkgs.fetchFromGitHub {
   #   owner = "domenkozar";
@@ -34,8 +29,11 @@ in   {
       youtube-dl
       shadowsocks-qt5
       sshfs
+      ms-pyls
       #nur
-    (python3.withPackages (pkgs: with pkgs; [
+      imgcat
+      motrix
+      (python3.withPackages (pkgs: with pkgs; [
       # rl algorithms
       pip
       pytest
@@ -64,6 +62,6 @@ in   {
     #Go-lang
     dep
     #blueman
-    #pkgs.blueman
+      pkgs.blueman
   ];
 }

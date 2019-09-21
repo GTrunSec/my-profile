@@ -22,17 +22,16 @@ in
 
   services.xserver = {
     enable = true;
-
     layout = "us";
     desktopManager.plasma5.enable = true;
     # Enable touchpad support.
     # libinput.enable = true;
 
-    displayManager.lightdm = {
+    displayManager.slim = {
       enable = true;
-#	    autoLogin = true;
-#      theme       = slim-theme;
-#      defaultUser = "gtrun";
+	    autoLogin = true;
+      theme       = slim-theme;
+      defaultUser = "gtrun";
 		};
     windowManager = {
       i3 = {
@@ -42,12 +41,12 @@ in
          #   ${pkgs.xlibs.xrdb}/bin/xrdb -load /etc/X11/Xresources
          # '';
       };
-#      default = "i3";
+      default = "i3";
     };
 
     videoDrivers = [ "nvidia" "amdgpu" "intel"];
-    #    desktopManager.default = "Plasm";
-          desktopManager.xterm.enable = false;
+    desktopManager.default = "none";
+    desktopManager.xterm.enable = false;
   };
   hardware.nvidia.optimus_prime.enable = true;
   # Bus ID of the NVIDIA GPU. You can find it using lspci

@@ -11,7 +11,7 @@ python3Packages.buildPythonPackage rec {
   src = fetchurl {
    # url = "https://github.com/SuperCowPowers/${pname}/archive/v${version}.tar.gz";
     url = "https://github.com/SuperCowPowers/${pname}/archive/${version}.tar.gz";
-    sha256 = "0qp1xa6ksxwavmk0f2kfcj5sldrndwmlisx42mnrq3pn4hcf2qlf";
+    sha256 = "0qgqg2ijnyj5219znyi59pwrqvwaasqdwf342a9qrrb87i6sanvi";
   };  
   # src = fetchPypi {
   #   inherit pname version;

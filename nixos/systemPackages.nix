@@ -1,8 +1,10 @@
 { config, lib, pkgs, vscode-utils, ... }:
+with pkgs;
+
 let
   customVscode = (import ./custom/vscode.nix { inherit pkgs; });
   customEmacs = (import ./custom/nix-emacs-ci { inherit pkgs; });
-  myEmacs = pkgs.emacs;
+#  customlang = callPackages ./overlays/R/nix-config/withR.nix {};
 in rec
   
   {
@@ -17,7 +19,9 @@ in rec
       # qt5ct
       # latte-dock
       # deepin.dde-dock
+      jupyter
       lxappearance
+      appimage-run
       #wmctrl
       glxinfo
       emacs
@@ -29,6 +33,7 @@ in rec
       home-manager
       gnumake
       git
+      gitkraken
       wget
       curl
       gnupg
@@ -65,7 +70,13 @@ in rec
       
       #overlay-package
       #zeek
-      #lang
+      #JetBrains-IDE
+      jetbrains.pycharm-professional
+      #jetbrains.idea-ultimate
+      jetbrains.goland
+      jetbrains.datagrip
+      jetbrains.clion
+      #lang-go
       go
       go-langserver
       gocode

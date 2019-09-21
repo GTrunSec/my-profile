@@ -39,6 +39,6 @@ in
   # kitty
   home.file.".config/kitty/kitty.conf".source = ./dotfiles/kitty/kitty.conf;
   # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
+  #programs.home-manager.enable = true;
 
 }

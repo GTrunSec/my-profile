@@ -1,6 +1,7 @@
 #Enables bluetooth headset using bluez5 and pulseaudio
 { pkgs, ... }:
 {
+  #sudo rfkill unblock bluetooth    
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;

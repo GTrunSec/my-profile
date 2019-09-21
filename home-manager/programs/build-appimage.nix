@@ -1,5 +1,7 @@
-#{ stdenv, appimage-run, runCommand, fetchurl }:
-{ fetchurl }: {
+{ pkgs ? import <nixpkgs> {}
+}:
+{
+#{ fetchurl, runCommand }: {
   buildAppImage = { name, url, sha256, icon, categories }:
   let
     image = fetchurl {
