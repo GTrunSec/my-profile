@@ -2429,103 +2429,105 @@ change ~CC~ PATH ~gcc~ to ~clang++~
 - [[https://github.com/raxod502/org-emacs/blob/2388023a7070a437506b588eeb0c9ff74f6d372a/init.el][org-emacs/init.el at 2388023a7070a437506b588eeb0c9ff74f6d372a · raxod502/org-emacs]]
 #+begin_src emacs-lisp :tangle yes
 
-(straight-use-package 'org)
+  (straight-use-package 'org)
 
-  (push (expand-file-name "~/.emacs.d/straight/repos/org/contrib/lisp") load-path)
+    (push (expand-file-name "~/.emacs.d/straight/repos/org/contrib/lisp") load-path)
 
-    (require 'org-mac-link)
+      (require 'org-mac-link)
 
 
-        (define-key org-mode-map [remap org-set-tags-command] #'counsel-org-tag)
-        ;; Global
-        (setq org-startup-indented t
-              org-enforce-todo-dependencies t
-              org-cycle-separator-lines 2
-              org-blank-before-new-entry '((heading) (plain-list-item . auto))
-              org-insert-heading-respect-content nil
-              org-reverse-note-order nil
-              org-show-following-heading t
-              org-show-hierarchy-above t
-              org-show-siblings '((default))
-              org-id-method 'uuidgen
-              org-deadline-warning-days 30
-              org-table-export-default-format "orgtbl-to-csv"
-              org-src-window-setup 'other-window
-              org-clone-delete-id t
-              org-cycle-include-plain-lists t
-              org-src-fontify-natively t
-              org-src-tab-acts-natively t
-              org-display-inline-images nil
-              org-hide-emphasis-markers t)
+          (define-key org-mode-map [remap org-set-tags-command] #'counsel-org-tag)
+          ;; Global
+          (setq org-startup-indented t
+                org-enforce-todo-dependencies t
+                org-cycle-separator-lines 2
+                org-blank-before-new-entry '((heading) (plain-list-item . auto))
+                org-insert-heading-respect-content nil
+                org-reverse-note-order nil
+                org-show-following-heading t
+                org-show-hierarchy-above t
+                org-show-siblings '((default))
+                org-id-method 'uuidgen
+                org-deadline-warning-days 30
+                org-table-export-default-format "orgtbl-to-csv"
+                org-src-window-setup 'other-window
+                org-clone-delete-id t
+                org-cycle-include-plain-lists t
+                org-src-fontify-natively t
+                org-src-tab-acts-natively t
+                org-display-inline-images nil
+                org-hide-emphasis-markers t)
 
-        ;; Activate spelling
-        (add-hook 'org-mode 'flyspell-mode)
-        (add-to-list 'ispell-skip-region-alist '("^#+begin_src" . "^#+end_src"))
+          ;; Activate spelling
+          (add-hook 'org-mode 'flyspell-mode)
+          (add-to-list 'ispell-skip-region-alist '("^#+begin_src" . "^#+end_src"))
 
-        ;; Todo part
-        (setq org-todo-keywords '(;; Baseline sequence
-                                  (sequence "☞ TODO(t)" "☟ NEXT(n)" "✰ Important(i)" "⚑ WAITING(w)"  "💬 MEETING(M)" "|" "✔ DONE(d!)" "✘ CANCELED(c@)" "⚔ STARTED(s)")
+          ;; Todo part
+          (setq org-todo-keywords '(;; Baseline sequence
+                                    (sequence "☞ TODO(t)" "☟ NEXT(n)" "✰ Important(i)" "⚑ WAITING(w)"  "💬 MEETING(M)" "|" "✔ DONE(d!)" "✘ CANCELED(c@)" "⚔ STARTED(s)")
 
-                                  ;; Specific "to complete
-                                  (sequence "📄 REVIEW(r)" "📚 RELEASE(R)" " 📩 MAIL(m)" "|" "❤ Love(l)")
+                                    ;; Specific "to complete
+                                    (sequence "📄 REVIEW(r)" "📚 RELEASE(R)" " 📩 MAIL(m)" "|" "❤ Love(l)")
 
-                                  ;; Note information
-                                  (sequence "|" "✍ NOTE(N)" " 🔮 EVENT(E)" "☕ BREAK(b)"))
+                                    ;; Note information
+                                    (sequence "|" "✍ NOTE(N)" " 🔮 EVENT(E)" "☕ BREAK(b)" "FIXME"))
 
-              org-todo-state-tags-triggers '(("CANCELLED" ("CANCELLED" . t))
-                                             ("WAITING"   ("WAITING"   . t))
-                                             ("STARTED" ("STARTED" . t)))
+                org-todo-state-tags-triggers '(("CANCELLED" ("CANCELLED" . t))
+                                               ("WAITING"   ("WAITING"   . t))
+                                               ("STARTED" ("STARTED" . t)))
 
-              ;; Priority definition
-              org-highest-priority ?A
-              org-lowest-priority ?E
-              org-default-priority ?C
+                ;; Priority definition
+                org-highest-priority ?A
+                org-lowest-priority ?E
+                org-default-priority ?C
 
-              ;; Archiving
-              org-archive-mark-done t
-              org-log-done 'time
-                                                ;org-archive-location "%s_archive::* Archived Tasks"
-              org-time-clocksum-format '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t)
-              org-archive-location (concat "%s_archive_" (format-time-string "%Y" (current-time)) "::")
+                ;; Archiving
+                org-archive-mark-done t
+                org-log-done 'time
+                                                  ;org-archive-location "%s_archive::* Archived Tasks"
+                org-time-clocksum-format '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t)
+                org-archive-location (concat "%s_archive_" (format-time-string "%Y" (current-time)) "::")
 
-              ;; Refiling
-              org-refile-targets '((org-agenda-files . (:maxlevel . 6)))
-              org-completion-use-ido nil
-              org-refile-use-outline-path 'file
-              org-outline-path-complete-in-steps nil
-              org-refile-allow-creating-parent-nodes 'confirm)
+                ;; Refiling
+                org-refile-targets '((org-agenda-files . (:maxlevel . 6)))
+                org-completion-use-ido nil
+                org-refile-use-outline-path 'file
+                org-outline-path-complete-in-steps nil
+                org-refile-allow-creating-parent-nodes 'confirm)
 
-        ;; Change task state to STARTED when clocking in
-        (setq org-clock-in-switch-to-state "⚔ STARTED")
-        ;; Save clock data and notes in the LOGBOOK drawer
-        (setq org-clock-into-drawer t)
-        ;; Removes clocked tasks with 0:00 duration
-        (setq org-clock-out-remove-zero-time-clocks t) 
-        ;; Show the clocked-in task - if any - in the header line
-        (setq org-ellipsis "☯")
-        (setq org-todo-keyword-faces
-              '(("☞ TODO" . (:foreground "#ff39a3" :weight bold))
-                ("⚔ STARTED"  . "#E35DBF")
-                ("✘ CANCELED" . (:foreground "white" :background "#4d4d4d" :weight bold))
-                ("⚑ WAITING" . "pink")
-                ("☕ BREAK" . "gray")
-                ("❤ Love" . (:foreground "blue" 
-                                         ;; :background "#7A586A"
-                                         :weight bold))
-                ("✔ DONE" . "#008080")))
+          ;; Change task state to STARTED when clocking in
+          (setq org-clock-in-switch-to-state "⚔ STARTED")
+          ;; Save clock data and notes in the LOGBOOK drawer
+          (setq org-clock-into-drawer t)
+          ;; Removes clocked tasks with 0:00 duration
+          (setq org-clock-out-remove-zero-time-clocks t) 
+          ;; Show the clocked-in task - if any - in the header line
+          (setq org-ellipsis "☯")
+          (setq org-todo-keyword-faces
+                '(("☞ TODO" . (:foreground "#ff39a3" :weight bold))
+                  ("⚔ STARTED"  . "#E35DBF")
+                  ("✘ CANCELED" . (:foreground "white" :background "#4d4d4d" :weight bold))
+                  ("⚑ WAITING" . "pink")
+                  ("☕ BREAK" . "gray")
+                  ("❤ Love" . (:foreground "blue" 
+                                           ;; :background "#7A586A"
+                                           :weight bold))
+                  ("✔ DONE" . "#008080")
+                  ("FIXME" . "IndianRed")
+                  ))
 
-        (org-babel-do-load-languages 'org-babel-load-languages
-                                     '((emacs-lisp . t)
-                                       (dot . t)
-                                       (ditaa . t)
-                                       (R . t)
-                                       (python . t)
-                                       (gnuplot . t)
-                                       (lisp . t)
-                                       (shell . t)
-                                       (org . t)
-                                       (plantuml . t)
-                                       (latex . t)))
+          (org-babel-do-load-languages 'org-babel-load-languages
+                                       '((emacs-lisp . t)
+                                         (dot . t)
+                                         (ditaa . t)
+                                         (R . t)
+                                         (python . t)
+                                         (gnuplot . t)
+                                         (lisp . t)
+                                         (shell . t)
+                                         (org . t)
+                                         (plantuml . t)
+                                         (latex . t)))
 #+end_src
 
 ** Org-starter/Link org-field
@@ -3374,14 +3376,21 @@ e
 ** Magit-todos
 - [[https://github.com/alphapapa/magit-todos/tree/8f634a29cbd1f2b7cd7f3f62c96f14437327f29b#installation][alphapapa/magit-todos at 8f634a29cbd1f2b7cd7f3f62c96f14437327f29b]]
 #+begin_src emacs-lisp :tangle yes
-      (use-package magit-todos
-      :straight t
-      :after magit
-      :hook
-      (magit-mode . magit-todos-mode)
-      :config
-      (setq magit-todos-exclude-globs '("nixpkgs/*"))
-      )
+  (use-package magit-todos
+    :straight t
+    :after magit
+    :hook
+    (magit-mode . magit-todos-mode)
+    :config
+    (setq magit-todos-exclude-globs '("nixpkgs/*"))
+    (setq magit-no-confirm '(stage-all-changes unstage-all-changes)
+          hl-todo-keyword-faces '(("REVIEW" . "#d0bf8f")
+                                  ("STARTED" . "#d0bf8f")
+                                  ("TODO" . "#D98C32")
+                                  ("FIXME" . "#EF681F")
+                                  ("WAITING" . "#F8240E"))
+          magit-todos-keywords-list (mapcar #'car hl-todo-keyword-faces))
+    )
 #+end_src
 ** Magithub
 
