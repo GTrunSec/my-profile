@@ -3242,137 +3242,138 @@ e
 ** Magit
 
    #+begin_src emacs-lisp :tangle yes
-(use-package magit
-  :straight t;(magit :type git :host github :repo "magit/magit")
-  :commands (magit)
- ; :hook
- ; (magit-mode . (lambda () (local-set-key (kbd "o") 'magit-open-repo)))
+     (use-package magit
+       :straight t;(magit :type git :host github :repo "magit/magit")
+       :commands (magit)
+      ; :hook
+      ; (magit-mode . (lambda () (local-set-key (kbd "o") 'magit-open-repo)))
 
-  :config
+       :config
 
-  ;; Ignore recent commit
-  (setq magit-status-sections-hook
-        '(magit-insert-status-headers
-          magit-insert-merge-log
-          magit-insert-rebase-sequence
-          magit-insert-am-sequence
-          magit-insert-sequencer-sequence
-          magit-insert-bisect-output
-          magit-insert-bisect-rest
-          magit-insert-bisect-log
-          magit-insert-untracked-files
-          magit-insert-unstaged-changes
-          magit-insert-staged-changes
-          magit-insert-stashes
-          magit-insert-unpulled-from-upstream
-          magit-insert-unpulled-from-pushremote
-          magit-insert-unpushed-to-upstream
-          magit-insert-unpushed-to-pushremote))
-
-
-  ;; Update visualization
-  (setq pretty-magit-alist nil
-        pretty-magit-prompt nil)
-
-  (defmacro pretty-magit (WORD ICON PROPS &optional NO-PROMPT?)
-    "Replace sanitized WORD with ICON, PROPS and by default add to prompts."
-    `(prog1
-         (add-to-list 'pretty-magit-alist
-                      (list (rx bow (group ,WORD (eval (if ,NO-PROMPT? "" ":"))))
-                            ,ICON ',PROPS))
-       (unless ,NO-PROMPT?
-         (add-to-list 'pretty-magit-prompt (concat ,WORD ": ")))))
-
-  ;; Operations
-  (pretty-magit "add"   ? (:foreground "#375E97" :height 1.2) pretty-magit-prompt)
-  (pretty-magit "fix"   ? (:foreground "#FB6542" :height 1.2) pretty-magit-prompt)
-  (pretty-magit "clean" ? (:foreground "#FFBB00" :height 1.2) pretty-magit-prompt)
-  (pretty-magit "doc."  ? (:foreground "#3F681C" :height 1.2) pretty-magit-prompt)
-
-  ;; Meta information
-  (pretty-magit "master"  ? (:box nil :height 1.2) t)
-  (pretty-magit "origin"  ? (:box nil :height 1.2) t)
-  (pretty-magit "upstream"  ? (:box nil :height 1.2) t)
-
-  (defun add-magit-faces ()
-    "Add face properties and compose symbols for buffer from pretty-magit."
-    (interactive)
-    (with-silent-modifications
-      (--each pretty-magit-alist
-        (-let (((rgx icon props) it))
-          (save-excursion
-            (goto-char (point-min))
-            (while (search-forward-regexp rgx nil t)
-              (compose-region
-               (match-beginning 1) (match-end 1) icon)
-              (when props
-                (add-face-text-property
-                 (match-beginning 1) (match-end 1) props))))))))
-
-  (advice-add 'magit-status :after 'add-magit-faces)
-  (advice-add 'magit-refresh-buffer :after 'add-magit-faces)
+       ;; Ignore recent commit
+       (setq magit-status-sections-hook
+             '(magit-insert-status-headers
+               magit-insert-merge-log
+               magit-insert-rebase-sequence
+               magit-insert-am-sequence
+               magit-insert-sequencer-sequence
+               magit-insert-bisect-output
+               magit-insert-bisect-rest
+               magit-insert-bisect-log
+               magit-insert-untracked-files
+               magit-insert-unstaged-changes
+               magit-insert-staged-changes
+               magit-insert-stashes
+               magit-insert-unpulled-from-upstream
+               magit-insert-unpulled-from-pushremote
+               magit-insert-unpushed-to-upstream
+               magit-insert-unpushed-to-pushremote))
 
 
-  ;; Opening repo externally
-  (defun parse-url (url)
-    "convert a git remote location as a HTTP URL"
-    (if (string-match "^http" url)
-        url
-      (replace-regexp-in-string "\\(.*\\)@\\(.*\\):\\(.*\\)\\(\\.git?\\)"
-                                "https://\\2/\\3"
-                                url)))
-  (defun magit-open-repo ()
-    "open remote repo URL"
-    (interactive)
-    (let ((url (magit-get "remote" "origin" "url")))
-      (progn
-        (browse-url (parse-url url))
-        (message "opening repo %s" url))))
+       ;; Update visualization
+       (setq pretty-magit-alist nil
+             pretty-magit-prompt nil)
 
-  (setq magit-display-buffer-function #'+magit-display-buffer)
-  (defun +magit-display-buffer (buffer)
-    "Marries `magit-display-buffer-fullcolumn-most-v1' with
-`magit-display-buffer-same-window-except-diff-v1', except:
+       (defmacro pretty-magit (WORD ICON PROPS &optional NO-PROMPT?)
+         "Replace sanitized WORD with ICON, PROPS and by default add to prompts."
+         `(prog1
+              (add-to-list 'pretty-magit-alist
+                           (list (rx bow (group ,WORD (eval (if ,NO-PROMPT? "" ":"))))
+                                 ,ICON ',PROPS))
+            (unless ,NO-PROMPT?
+              (add-to-list 'pretty-magit-prompt (concat ,WORD ": ")))))
 
-1. Magit sub-buffers that aren't spawned from a status screen are opened as
-   popups.
-2. The status screen isn't buried when viewing diffs or logs from the status
-   screen."
-    (let ((buffer-mode (buffer-local-value 'major-mode buffer)))
-      (display-buffer
-       buffer (cond
-               ;; If opened from an eshell window or popup, use the same window.
-               ((or (derived-mode-p 'eshell-mode)
-                    (eq (window-dedicated-p) 'side))
-                '(display-buffer-same-window))
-               ;; Open target buffers below the current one (we want previous
-               ;; magit windows to be visible; especially magit-status).
-               ((or (bound-and-true-p git-commit-mode)
-                    (derived-mode-p 'magit-mode))
-                (let ((size (if (eq buffer-mode 'magit-process-mode)
-                                0.35
-                              0.7)))
-                  `(display-buffer-below-selected
-                    . ((window-height . ,(truncate (* (window-height) size)))))))
-               ;; log/stash/process buffers, unless opened from a magit-status
-               ;; window, should be opened in popups.
-               ((memq buffer-mode '(magit-process-mode
-                                    magit-log-mode
-                                    magit-stash-mode))
-                '(display-buffer-below-selected))
-               ;; Last resort: use current window
-               ('(display-buffer-same-window))))))
+       ;; Operations
+       (pretty-magit "add"   ? (:foreground "#375E97" :height 1.2) pretty-magit-prompt)
+       (pretty-magit "fix"   ? (:foreground "#FB6542" :height 1.2) pretty-magit-prompt)
+       (pretty-magit "clean" ? (:foreground "#FFBB00" :height 1.2) pretty-magit-prompt)
+       (pretty-magit "doc."  ? (:foreground "#3F681C" :height 1.2) pretty-magit-prompt)
+
+       ;; Meta information
+       (pretty-magit "master"  ? (:box nil :height 1.2) t)
+       (pretty-magit "origin"  ? (:box nil :height 1.2) t)
+       (pretty-magit "upstream"  ? (:box nil :height 1.2) t)
+
+       (defun add-magit-faces ()
+         "Add face properties and compose symbols for buffer from pretty-magit."
+         (interactive)
+         (with-silent-modifications
+           (--each pretty-magit-alist
+             (-let (((rgx icon props) it))
+               (save-excursion
+                 (goto-char (point-min))
+                 (while (search-forward-regexp rgx nil t)
+                   (compose-region
+                    (match-beginning 1) (match-end 1) icon)
+                   (when props
+                     (add-face-text-property
+                      (match-beginning 1) (match-end 1) props))))))))
+
+       (advice-add 'magit-status :after 'add-magit-faces)
+       (advice-add 'magit-refresh-buffer :after 'add-magit-faces)
 
 
-(defun magit-remove-git-lock-file ()
-  "Remove git's index lock file, if it exists."
-  (interactive)
-  (let ((base (magit-toplevel)))
-    (delete-file (concat base "/.git/index.lock"))))
+       ;; Opening repo externally
+       (defun parse-url (url)
+         "convert a git remote location as a HTTP URL"
+         (if (string-match "^http" url)
+             url
+           (replace-regexp-in-string "\\(.*\\)@\\(.*\\):\\(.*\\)\\(\\.git?\\)"
+                                     "https://\\2/\\3"
+                                     url)))
+       (defun magit-open-repo ()
+         "open remote repo URL"
+         (interactive)
+         (let ((url (magit-get "remote" "origin" "url")))
+           (progn
+             (browse-url (parse-url url))
+             (message "opening repo %s" url))))
 
-  )
+       (setq magit-display-buffer-function #'+magit-display-buffer)
+       (defun +magit-display-buffer (buffer)
+         "Marries `magit-display-buffer-fullcolumn-most-v1' with
+     `magit-display-buffer-same-window-except-diff-v1', except:
 
+     1. Magit sub-buffers that aren't spawned from a status screen are opened as
+        popups.
+     2. The status screen isn't buried when viewing diffs or logs from the status
+        screen."
+         (let ((buffer-mode (buffer-local-value 'major-mode buffer)))
+           (display-buffer
+            buffer (cond
+                    ;; If opened from an eshell window or popup, use the same window.
+                    ((or (derived-mode-p 'eshell-mode)
+                         (eq (window-dedicated-p) 'side))
+                     '(display-buffer-same-window))
+                    ;; Open target buffers below the current one (we want previous
+                    ;; magit windows to be visible; especially magit-status).
+                    ((or (bound-and-true-p git-commit-mode)
+                         (derived-mode-p 'magit-mode))
+                     (let ((size (if (eq buffer-mode 'magit-process-mode)
+                                     0.35
+                                   0.7)))
+                       `(display-buffer-below-selected
+                         . ((window-height . ,(truncate (* (window-height) size)))))))
+                    ;; log/stash/process buffers, unless opened from a magit-status
+                    ;; window, should be opened in popups.
+                    ((memq buffer-mode '(magit-process-mode
+                                         magit-log-mode
+                                         magit-stash-mode))
+                     '(display-buffer-below-selected))
+                    ;; Last resort: use current window
+	       
+                    ('(display-buffer-same-window))))))
+
+          (defun magit-remove-git-lock-file ()
+                 "Remove git's index lock file, if it exists."
+                 (interactive)
+                 (let ((base (magit-toplevel)))
+                   (delete-file (concat base "/.git/index.lock")))
+     (shell-command "./bin/clean-git-loch.sh"))
+
+       )
    #+end_src
+ git-lock remove
 ** Magit-todos
 - [[https://github.com/alphapapa/magit-todos/tree/8f634a29cbd1f2b7cd7f3f62c96f14437327f29b#installation][alphapapa/magit-todos at 8f634a29cbd1f2b7cd7f3f62c96f14437327f29b]]
 #+begin_src emacs-lisp :tangle yes

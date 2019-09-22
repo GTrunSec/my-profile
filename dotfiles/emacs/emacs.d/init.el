@@ -1579,7 +1579,7 @@ Inserted by installing org-mode or when a release is made."
                                   (sequence "📄 REVIEW(r)" "📚 RELEASE(R)" " 📩 MAIL(m)" "|" "❤ Love(l)")
 
                                   ;; Note information
-                                  (sequence "|" "✍ NOTE(N)" " 🔮 EVENT(E)" "☕ BREAK(b)"))
+                                  (sequence "|" "✍ NOTE(N)" " 🔮 EVENT(E)" "☕ BREAK(b)" "FIXME"))
 
               org-todo-state-tags-triggers '(("CANCELLED" ("CANCELLED" . t))
                                              ("WAITING"   ("WAITING"   . t))
@@ -1621,7 +1621,9 @@ Inserted by installing org-mode or when a release is made."
                 ("❤ Love" . (:foreground "blue" 
                                          ;; :background "#7A586A"
                                          :weight bold))
-                ("✔ DONE" . "#008080")))
+                ("✔ DONE" . "#008080")
+                ("FIXME" . "IndianRed")
+                ))
 
         (org-babel-do-load-languages 'org-babel-load-languages
                                      '((emacs-lisp . t)
@@ -2245,25 +2247,33 @@ See also: https://stackoverflow.com/questions/9547912/emacs-calendar-show-more-t
                                     magit-stash-mode))
                 '(display-buffer-below-selected))
                ;; Last resort: use current window
+
                ('(display-buffer-same-window))))))
 
-
-(defun magit-remove-git-lock-file ()
-  "Remove git's index lock file, if it exists."
-  (interactive)
-  (let ((base (magit-toplevel)))
-    (delete-file (concat base "/.git/index.lock"))))
+     (defun magit-remove-git-lock-file ()
+            "Remove git's index lock file, if it exists."
+            (interactive)
+            (let ((base (magit-toplevel)))
+              (delete-file (concat base "/.git/index.lock")))
+(shell-command "./bin/clean-git-loch.sh"))
 
   )
 
 (use-package magit-todos
-:straight t
-:after magit
-:hook
-(magit-mode . magit-todos-mode)
-:config
-(setq magit-todos-exclude-globs '("nixpkgs/*"))
-)
+  :straight t
+  :after magit
+  :hook
+  (magit-mode . magit-todos-mode)
+  :config
+  (setq magit-todos-exclude-globs '("nixpkgs/*"))
+  (setq magit-no-confirm '(stage-all-changes unstage-all-changes)
+        hl-todo-keyword-faces '(("REVIEW" . "#d0bf8f")
+                                ("STARTED" . "#d0bf8f")
+                                ("TODO" . "#D98C32")
+                                ("FIXME" . "#EF681F")
+                                ("WAITING" . "#F8240E"))
+        magit-todos-keywords-list (mapcar #'car hl-todo-keyword-faces))
+  )
 
 (use-package magithub
   :straight t
