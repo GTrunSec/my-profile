@@ -5,7 +5,8 @@ result
 dotfiles/emacs/emacs.d/var
 dotfiles/emacs/emacs.d/straight
 dotfiles/emacs/emacs.d/.*
-dotfiles/emacs/emacs.d/
+dotfiles/emacs/emacs.d/librime.so
+#dotfiles/emacs/emacs.d/se
 Pattern.org
 
 ## Emacs librime config

@@ -4,15 +4,9 @@
 [submodule "dotfiles/emacs/emacs.d/private/emacs-snippets"]
 	path = dotfiles/emacs/emacs.d/private/emacs-snippets
 	url = https://github.com/GTrunSec/emacs-snippets.git
-[submodule "dotfiles/emacs/emacs.d/setup/snails"]
-	path = dotfiles/emacs/emacs.d/setup/snails
-	url = https://github.com/manateelazycat/snails.git
 [submodule "dotfiles/wallpaper"]
 	path = dotfiles/wallpaper
 	url = https://github.com/GTrunSec/wallpaper.git
-[submodule "dotfiles/emacs/emacs.d/setup/point-history"]
-	path = dotfiles/emacs/emacs.d/setup/point-history
-	url = https://github.com/blue0513/point-history.git
 [submodule "own-nixpkgs/liberime/liberime"]
 	path = own-nixpkgs/liberime/liberime
 	url = https://github.com/tumashu/liberime.git
