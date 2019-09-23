@@ -10,3 +10,6 @@
 [submodule "nixos/nixpkgs"]
 	path = nixos/nixpkgs
 	url = https://github.com/NixOS/nixpkgs.git
+[submodule "nixos/overlays"]
+	path = nixos/nixpkgs
+	url = https://github.com/GTrunSec/nix-config.git
