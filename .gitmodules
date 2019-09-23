@@ -1,6 +1,3 @@
-[submodule "scel2pyim"]
-	path = dotfiles/emacs/emacs.d/pyim/scel2pyim
-	url = https://github.com/E-Neo/scel2pyim.git
 [submodule "dotfiles/emacs/emacs.d/private/emacs-snippets"]
 	path = dotfiles/emacs/emacs.d/private/emacs-snippets
 	url = https://github.com/GTrunSec/emacs-snippets.git
