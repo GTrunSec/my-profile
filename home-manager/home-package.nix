@@ -1,4 +1,5 @@
 { config, pkgs, lib, ... }:
+with import <nixpkgs> {};
 let
 #  nixos = import <nixos> { };
   unstable = import <nixpkgs-unstable> { };
@@ -11,29 +12,29 @@ let
   # });
   
 in   {
-    home.packages = with pkgs;[
-      aria2
-      xclip
-      urxvt_perls
-      ag
-      graphviz
-      rofi
-      fd
-      ripgrep
-      feh
-      pkgs.compton
-      #skim
-      screenfetch
-      #overlay
-      outline-client
-      youtube-dl
-      shadowsocks-qt5
-      sshfs
-      ms-pyls
-      #nur
-      imgcat
-      motrix
-      (python3.withPackages (pkgs: with pkgs; [
+  home.packages = with pkgs;[
+    aria2
+    xclip
+    urxvt_perls
+    ag
+    graphviz
+    rofi
+    fd
+    ripgrep
+    feh
+    pkgs.compton
+    #skim
+    screenfetch
+    #overlay
+    outline-client
+    youtube-dl
+    shadowsocks-qt5
+    sshfs
+    ms-pyls
+    #nur
+    imgcat
+    motrix
+    (python3.withPackages (pkgs: with pkgs; [
       # rl algorithms
       pip
       pytest
@@ -46,7 +47,7 @@ in   {
     ]))   
     #  Go
     # C / C++
-    ccls
+    pkgs.ccls
     #zeek
     rocksdb
     sqlite
@@ -58,10 +59,14 @@ in   {
     ghc
     autojump
     #    hnix-lsp
-
+    pkgs.jq
+    #dock
+    pkgs.dive
+    
     #Go-lang
-    dep
+    pkgs.dep
+    pkgs.gosec
     #blueman
-      pkgs.blueman
+    pkgs.blueman
   ];
 }

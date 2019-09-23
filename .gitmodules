@@ -10,3 +10,6 @@
 [submodule "own-nixpkgs/liberime/liberime"]
 	path = own-nixpkgs/liberime/liberime
 	url = https://github.com/tumashu/liberime.git
+[submodule "nixos/nixpkgs"]
+	path = nixos/nixpkgs
+	url = https://github.com/NixOS/nixpkgs.git

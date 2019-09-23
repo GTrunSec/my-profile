@@ -3,7 +3,7 @@
 result
 # Macos
 .DS_Store
-
+.ipynb*
 *.elc
 
 # Emacs dot-files
