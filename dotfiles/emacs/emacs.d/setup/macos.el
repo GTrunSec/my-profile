@@ -25,6 +25,42 @@
 (add-hook 'after-init-hook #'org-reload)
 (add-hook 'after-init-hook #'org-super-agenda-mode)
 
+(straight-use-package 'pyim)
+(require 'pyim)
+(require 'pyim-basedict) ; 拼音词库设置，五笔用户 *不需要* 此行设置
+(pyim-basedict-enable)   ; 拼音词库，五笔用户 *不需要* 此行设置
+(setq default-input-method "pyim")
+;; (setq pyim-default-scheme 'wubi)
+;; (setq pyim-default-scheme 'quanpin)
+
+;; 使用 pupup-el 来绘制选词框
+(if (>= emacs-major-version 26)
+    (setq pyim-page-tooltip 'child-frame)
+  (setq pyim-page-tooltip 'popup))
+
+;; 选词框显示 10 个候选词
+(setq pyim-page-length 5)
+
+(setq-default pyim-english-input-switch-functions
+              '(pyim-probe-org-structure-template))
+
+(setq-default pyim-punctuation-half-width-functions
+              '(pyim-probe-punctuation-line-beginning
+                pyim-probe-punctuation-after-punctuation))
+
+
+
+(global-set-key (kbd "s-;") 'pyim-convert-string-at-point)
+(define-key pyim-mode-map (kbd "<tab>") 'pyim-page-next-page)
+(define-key pyim-mode-map (kbd "C-j") 'pyim-page-next-page)
+(define-key pyim-mode-map (kbd "C-k") 'pyim-page-previous-page)
+(define-key pyim-mode-map (kbd "<escape>") 'pyim-quit-clear)
+
+;; (add-hook 'toggle-input-method #'xah-fly-insert-mode-activate)
+(setq pyim-dicts
+      `((:name "sougou-shiji" :file ,(expand-file-name "pyim/shiji.pyim" user-emacs-directory))
+        (:name "sougou-shijin" :file ,(expand-file-name "pyim/shijin.pyim" user-emacs-directory))))
+
 (use-package cnfonts
   :straight t
   :init

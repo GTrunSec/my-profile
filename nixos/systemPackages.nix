@@ -4,9 +4,7 @@ with pkgs;
 let
   customVscode = (import ./custom/vscode.nix { inherit pkgs; });
   customEmacs = (import ./custom/nix-emacs-ci { inherit pkgs; });
-#  customlang = callPackages ./overlays/R/nix-config/withR.nix {};
 in rec
-  
   {
     hardware.brightnessctl.enable = true;
     environment.systemPackages = with pkgs; [

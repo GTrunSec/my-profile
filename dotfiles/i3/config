@@ -211,7 +211,7 @@ for_window [class="feh"] floating enable, border normal
 #for_window [class=""] fullscreen enable
 
 # Wallpaper
-exec_always --no-startup-id feh --randomize --bg-fill ~/.config/nixpkgs/dotfiles/wallpaper/Mountain-spring/ferdinand-ladera-torrent-of-gelion-2k_2019-07-27_16-17-26.jpeg
+exec_always --no-startup-id feh --randomize --bg-fill ~/.config/nixpkgs/dotfiles/wallpaper/Fantasy/max-bedulenko-_2019-07-27_04-48-06.jpeg
 exec --no-startup-id fcitx-autostart 
 
 

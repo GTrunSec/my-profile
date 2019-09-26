@@ -2964,7 +2964,7 @@ See also: https://stackoverflow.com/questions/9547912/emacs-calendar-show-more-t
 #+end_src
 ** pyim
 *** default
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle "./setup/macos.el"
 (straight-use-package 'pyim)
 (require 'pyim)
 (require 'pyim-basedict) ; 拼音词库设置，五笔用户 *不需要* 此行设置
