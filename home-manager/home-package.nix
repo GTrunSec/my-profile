@@ -39,6 +39,8 @@ in   {
       pip
       pytest
       numpy
+      jupyter_core
+      ipynb-py-convert
       scikitlearn
       bat
       matplotlib
@@ -68,5 +70,6 @@ in   {
     pkgs.gosec
     #blueman
     pkgs.blueman
+    pkgs.nodejs
   ];
 }
