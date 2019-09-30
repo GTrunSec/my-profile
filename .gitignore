@@ -8,10 +8,10 @@ dotfiles/emacs/emacs.d/.*
 dotfiles/emacs/emacs.d/librime.so
 dotfiles/emacs/emacs.d/setup
 dotfiles/emacs/emacs.d/elpa
-Pattern.org
+
 
 ## Emacs librime config
-
+dotfiles/emacs/emacs.d/pyim/rime/build
 dotfiles/emacs/emacs.d/pyim/rime/easy_en.userdb
 dotfiles/emacs/emacs.d/pyim/rime/easy_en.userdb.old
 dotfiles/emacs/emacs.d/pyim/rime/luna_pinyin.userdb

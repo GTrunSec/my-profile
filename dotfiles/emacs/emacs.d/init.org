@@ -1,3 +1,4 @@
+#+TITLE: My Emacs configuration
 #+AUTHOR: GTrunSec
 #+EMAIL: gtrunsec@hardenedlinux.org
 #+DATE: 22 July 2019
@@ -16,6 +17,7 @@
 ** [[https://doc.endlessparentheses.com/functions.html#main_content][Emacs Online Documentation]]
 ** [[https://emacs.stackexchange.com/tags][Tags - Emacs Stack Exchange]]
 ** [[https://github.com/squarepegsys/literate-dotfiles][squarepegsys/literate-dotfiles: My latest dotfiles, with documentation. and in fancy OrgMode]] 
+** [[https://github.com/technomancy/better-defaults][technomancy/better-defaults: A small number of better defaults for Emacs]]
 * Package management
 ** Emacs package configuration
    #+begin_src emacs-lisp :tangle yes
@@ -3284,6 +3286,7 @@ e
                         :repo "manateelazycat/aweshell"))
 (require 'aweshell)
    #+end_src
+** [[https://github.com/killdash9/better-shell/blob/master/better-shell.el][better-shell/better-shell.el at master · killdash9/better-shell]]
 * Version control
 ** Magit
    #+begin_src emacs-lisp :tangle yes
