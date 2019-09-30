@@ -1,4 +1,3 @@
-#+TITLE: My Emacs configuration
 #+AUTHOR: GTrunSec
 #+EMAIL: gtrunsec@hardenedlinux.org
 #+DATE: 22 July 2019
@@ -490,9 +489,13 @@ I would like use ErgoDox keyboard on my linux environment
 
       ;; iseach
       (define-key xah-fly-key-map (kbd "C-s") 'swiper-isearch)
-    
+
       ;; scrolling
       (define-key xah-fly-key-map (kbd "C-v") 'scroll-up-command)
+
+      ;; bookmarks
+      (define-key xah-fly-key-map (kbd "C-x r b") 'helm-bookmarks)
+      (define-key xah-fly-key-map (kbd "C-x r s") 'bookmark-set)
 
     #+end_src
 
@@ -544,7 +547,7 @@ I would like use ErgoDox keyboard on my linux environment
         (define-key xah-fly-key-map (kbd ",") 'gtrun-xah-comma-fly-key)
         )
     #+end_src
-**** special-key-to-mode-map/
+**** special-key-to-mode-map
     #+begin_src emacs-lisp :tangle "./setup/xah-fly-key-ergo.el"
       (defun gtrun-xah-dot-fly-key ()
         "key `.'"
@@ -1101,8 +1104,6 @@ elisp
 ** ✘ CANCELED [[https://github.com/jrblevin/deft][jrblevin/deft: Deft for Emacs]]
 - State "✘ CANCELED" from "❤ Love"     [2019-08-08 Thu 01:03] \\
   replaced it with helm-deft
-**
-#+end_src
 ** [[https://github.com/zaiste/zaiste-emacs-theme][zaiste/zaiste-emacs-theme: This is the theme I use for the Doomcasts (short screencasts about Emacs Doom) - work-in-progress]]
 
 * Completion
@@ -2071,15 +2072,15 @@ CLOSED: [2019-08-08 Thu 14:56]
    #+end_src
 *** [[https://github.com/alphapapa/prism.el][alphapapa/prism.el: Highlight Lisp forms according to depth]]
 #+begin_src emacs-lisp :tangle yes
-   (straight-use-package '(prism :type git
-                                 :host github
-                                 :repo "alphapapa/prism.el"))
-(require 'prism)
-(require 'solarized-theme)
-(prism-set-faces :num 24
-  :desaturations (list 20 40) :lightens (list 0 20 40)
-  :colors (solarized-with-color-variables 'dark
-	    (list red orange yellow green blue cyan violet magenta)))
+     (straight-use-package '(prism :type git
+                                   :host github
+                                   :repo "alphapapa/prism.el"))
+  (require 'prism)
+  (require 'solarized-theme)
+  ;; (prism-set-faces :num 24
+  ;;   :desaturations (list 20 40) :lightens (list 0 20 40)
+  ;;   :colors (solarized-with-color-variables 'dark
+  ;; 	    (list red orange yellow green blue cyan violet magenta)))
 #+end_src
 *** Common lisp
 #+begin_src emacs-lisp :tangle yes
@@ -2872,6 +2873,44 @@ See also: https://stackoverflow.com/questions/9547912/emacs-calendar-show-more-t
 #+end_src
 ** [[https://github.com/gizmomogwai/org-kanban][gizmomogwai/org-kanban: Kanban table for org-mode]]
 ** [[https://github.com/fuxialexander/org-pdftools][fuxialexander/org-pdftools]]                                     :PDF:READ:
+** org-bookmark-heading
+#+begin_src emacs-lisp :tangle yes
+  (straight-use-package 'bm)
+  (require 'bm)
+  ;; restore on load (even before you require bm)
+  (setq bm-restore-repository-on-load t)
+
+  ;; Allow cross-buffer 'next'
+  (setq bm-cycle-all-buffers t)
+
+  ;; where to store persistant files
+  (setq bm-repository-file "~/.emacs.d/var/bm-repository")
+
+  ;; save bookmarks
+  (setq-default bm-buffer-persistence t)
+ ;; Loading the repository from file when on start up.
+         (add-hook 'after-init-hook 'bm-repository-load)
+
+         ;; Saving bookmarks
+         (add-hook 'kill-buffer-hook #'bm-buffer-save)
+
+         ;; Saving the repository to file when on exit.
+         ;; kill-buffer-hook is not called when Emacs is killed, so we
+         ;; must save all bookmarks first.
+         (add-hook 'kill-emacs-hook #'(lambda nil
+                                          (bm-buffer-save-all)
+                                          (bm-repository-save)))
+
+         ;; The `after-save-hook' is not necessary to use to achieve persistence,
+         ;; but it makes the bookmark data in repository more in sync with the file
+         ;; state.
+         (add-hook 'after-save-hook #'bm-buffer-save)
+
+         ;; Restoring bookmarks
+         (add-hook 'find-file-hooks   #'bm-buffer-restore)
+         (add-hook 'after-revert-hook #'bm-buffer-restore)
+
+#+end_src
 * Exporting
 ** latex
 *** ox-latex

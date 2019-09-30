@@ -71,6 +71,10 @@
 ;; scrolling
 (define-key xah-fly-key-map (kbd "C-v") 'scroll-up-command)
 
+;; bookmarks
+(define-key xah-fly-key-map (kbd "C-x r b") 'helm-bookmarks)
+(define-key xah-fly-key-map (kbd "C-x r s") 'bookmark-set)
+
 (defun xah-fly-command-mode-init ()
         "Set command mode keys.
       Version 2017-01-21"

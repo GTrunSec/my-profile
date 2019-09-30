@@ -25,11 +25,12 @@ in rec
       emacs
       customVscode
       w3m
-      fantasque-sans-mono
       polybar
       cmake
       home-manager
       gnumake
+
+      #git
       git
       gitkraken
       wget
@@ -37,10 +38,19 @@ in rec
       gnupg
       openssl
       killall
-      chromium
+      # Browser
+      # chromium
+      tor-browser-bundle-bin
+      firefox-bin
+      flashplayer
+      # book
       polar-bookshelf
       xdotool
+
+      #password
       enpass
+
+      # graph
       ditaa
       graphviz
       #terminal

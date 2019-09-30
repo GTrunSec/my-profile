@@ -64,7 +64,8 @@ in   {
     pkgs.jq
     #dock
     pkgs.dive
-    
+
+    #desktop
     #Go-lang
     pkgs.dep
     pkgs.gosec
