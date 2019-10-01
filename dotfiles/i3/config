@@ -223,7 +223,8 @@ exec_always --no-startup-id xset dpms 500
 #workspace
 assign [class="^Emacs$"] → 2
 for_window [title="^Enpass$"] move container to workspace $ws7
-assign [class="^Chromium-browser$"] → 3
+#assign [class="^Chromium-browser$"] → 3
+assign [class="^Firefox$"] → 3
 assign [class="^polar-bookshelf$"] → 4
 assign [class="^Okular$"] → 3
 #git workspace
