@@ -151,7 +151,6 @@
    ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
    ((eq major-mode 'dired-mode) (call-interactively 'vinegar/dired-diff))
    ((eq major-mode 'w3m-mode) (call-interactively 'w3m-bookmark-add-current-url))
-   ((eq major-mode 'org-mode) (call-interactively 'helm-org-in-buffer-headings))
    ((eq major-mode 'org-agenda-mode) (call-interactively 'org-agenda-filter-by-tag))
 
    (t nil)))

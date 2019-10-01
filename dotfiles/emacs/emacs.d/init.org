@@ -1,3 +1,4 @@
+#+TITLE: My Emacs configuration
 #+AUTHOR: GTrunSec
 #+EMAIL: gtrunsec@hardenedlinux.org
 #+DATE: 22 July 2019
@@ -16,6 +17,7 @@
 ** [[https://doc.endlessparentheses.com/functions.html#main_content][Emacs Online Documentation]]
 ** [[https://emacs.stackexchange.com/tags][Tags - Emacs Stack Exchange]]
 ** [[https://github.com/squarepegsys/literate-dotfiles][squarepegsys/literate-dotfiles: My latest dotfiles, with documentation. and in fancy OrgMode]] 
+** [[https://github.com/technomancy/better-defaults][technomancy/better-defaults: A small number of better defaults for Emacs]]
 * Package management
 ** Emacs package configuration
    #+begin_src emacs-lisp :tangle yes
@@ -344,7 +346,6 @@ I would like use ErgoDox keyboard on my linux environment
          ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
          ((eq major-mode 'dired-mode) (call-interactively 'vinegar/dired-diff))
          ((eq major-mode 'w3m-mode) (call-interactively 'w3m-bookmark-add-current-url))
-         ((eq major-mode 'org-mode) (call-interactively 'helm-org-in-buffer-headings))
          ((eq major-mode 'org-agenda-mode) (call-interactively 'org-agenda-filter-by-tag))
 
          (t nil)))
@@ -582,7 +583,6 @@ I would like use ErgoDox keyboard on my linux environment
          ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
          ((eq major-mode 'dired-mode) (call-interactively 'vinegar/dired-diff))
          ((eq major-mode 'w3m-mode) (call-interactively 'w3m-bookmark-add-current-url))
-         ((eq major-mode 'org-mode) (call-interactively 'helm-org-in-buffer-headings))
          (t nil)))
 
 
@@ -2321,7 +2321,7 @@ CLOSED: [2019-08-08 Thu 14:56]
     #+end_src
 *** python
 #+begin_src emacs-lisp :tangle "./setup/linux.el"
-(setq python-shell-interpreter "~/.config/nixpkgs/nixos/overlays/python/result/bin/python")
+;;(setq python-shell-interpreter "~/.config/nixpkgs/nixos/overlays/python/result/bin/python")
 #+end_src
 *** ⚑ WAITING [[https://github.com/matthewbauer/bauer][matthewbauer/bauer: An Emacs+Nix IDE]]
 
@@ -2555,7 +2555,7 @@ CLOSED: [2019-07-27 Sat 06:05]
                              "~/Documents/org-notes/NSM-GTD"
                              "~/Documents/org-notes/post"
                              "~/Documents/org-notes/course"
-                             "~/project/gtrun-profile/dotfiles/wallpaper"
+                             "~/project/my-profile/dotfiles/wallpaper"
                              "~/project/global-profile/global-doc"
                              ))
 #+end_src
@@ -3291,6 +3291,7 @@ e
                         :repo "manateelazycat/aweshell"))
 (require 'aweshell)
    #+end_src
+** [[https://github.com/killdash9/better-shell/blob/master/better-shell.el][better-shell/better-shell.el at master · killdash9/better-shell]]
 * Version control
 ** Magit
    #+begin_src emacs-lisp :tangle yes

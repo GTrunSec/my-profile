@@ -8,10 +8,10 @@ dotfiles/emacs/emacs.d/.*
 dotfiles/emacs/emacs.d/librime.so
 dotfiles/emacs/emacs.d/setup
 dotfiles/emacs/emacs.d/elpa
-Pattern.org
+dotfiles/emacs/emacs.d/pyim/rime
 
 ## Emacs librime config
-
+dotfiles/emacs/emacs.d/pyim/rime/build
 dotfiles/emacs/emacs.d/pyim/rime/easy_en.userdb
 dotfiles/emacs/emacs.d/pyim/rime/easy_en.userdb.old
 dotfiles/emacs/emacs.d/pyim/rime/luna_pinyin.userdb
@@ -23,4 +23,4 @@ dotfiles/emacs/emacs.d/pyim/rime/user.yaml
 ## lsp
 
 dotfiles/emacs/emacs.d/mspyls
-/dotfiles/emacs/emacs.d/SessionDesktop.el
+dotfiles/emacs/emacs.d/SessionDesktop.el
