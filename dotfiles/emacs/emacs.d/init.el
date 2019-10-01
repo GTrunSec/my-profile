@@ -1329,10 +1329,10 @@
                                  :repo "alphapapa/prism.el"))
 (require 'prism)
 (require 'solarized-theme)
-(prism-set-faces :num 24
-  :desaturations (list 20 40) :lightens (list 0 20 40)
-  :colors (solarized-with-color-variables 'dark
-	    (list red orange yellow green blue cyan violet magenta)))
+;; (prism-set-faces :num 24
+;;   :desaturations (list 20 40) :lightens (list 0 20 40)
+;;   :colors (solarized-with-color-variables 'dark
+;; 	    (list red orange yellow green blue cyan violet magenta)))
 
 (use-package slime
 :straight t
@@ -1504,6 +1504,9 @@
   (:map bro-mode-map
         ("C-c C-c" . bro-run)))
 
+(straight-use-package 'jupyter)
+(require 'jupyter)
+
 (straight-use-package 'jeison)
 
 (use-package space-vinegar
@@ -1636,7 +1639,8 @@ Inserted by installing org-mode or when a release is made."
                                        (shell . t)
                                        (org . t)
                                        (plantuml . t)
-                                       (latex . t)))
+                                       (latex . t)
+                                       (jupyter . t)))
 
 (straight-use-package '(helm-deft :type git
                                   :host github
@@ -1649,7 +1653,7 @@ Inserted by installing org-mode or when a release is made."
                            "~/Documents/org-notes/NSM-GTD"
                            "~/Documents/org-notes/post"
                            "~/Documents/org-notes/course"
-                           "~/project/gtrun-profile/dotfiles/wallpaper"
+                           "~/project/my-profile/dotfiles/wallpaper"
                            "~/project/global-profile/global-doc"
                            ))
 
@@ -1896,6 +1900,41 @@ See also: https://stackoverflow.com/questions/9547912/emacs-calendar-show-more-t
 (setq org-download-screenshot-file "~/Pictures/Monosnap/snap.png")
 )
 
+(straight-use-package 'bm)
+ (require 'bm)
+ ;; restore on load (even before you require bm)
+ (setq bm-restore-repository-on-load t)
+
+ ;; Allow cross-buffer 'next'
+ (setq bm-cycle-all-buffers t)
+
+ ;; where to store persistant files
+ (setq bm-repository-file "~/.emacs.d/var/bm-repository")
+
+ ;; save bookmarks
+ (setq-default bm-buffer-persistence t)
+;; Loading the repository from file when on start up.
+        (add-hook 'after-init-hook 'bm-repository-load)
+
+        ;; Saving bookmarks
+        (add-hook 'kill-buffer-hook #'bm-buffer-save)
+
+        ;; Saving the repository to file when on exit.
+        ;; kill-buffer-hook is not called when Emacs is killed, so we
+        ;; must save all bookmarks first.
+        (add-hook 'kill-emacs-hook #'(lambda nil
+                                         (bm-buffer-save-all)
+                                         (bm-repository-save)))
+
+        ;; The `after-save-hook' is not necessary to use to achieve persistence,
+        ;; but it makes the bookmark data in repository more in sync with the file
+        ;; state.
+        (add-hook 'after-save-hook #'bm-buffer-save)
+
+        ;; Restoring bookmarks
+        (add-hook 'find-file-hooks   #'bm-buffer-restore)
+        (add-hook 'after-revert-hook #'bm-buffer-restore)
+
 (use-package ox-latex
     :ensure nil
     :after ox
@@ -1973,42 +2012,6 @@ See also: https://stackoverflow.com/questions/9547912/emacs-calendar-show-more-t
 
 (straight-use-package 'posframe)
 (require 'posframe)
-
-(straight-use-package 'pyim)
-(require 'pyim)
-(require 'pyim-basedict) ; 拼音词库设置，五笔用户 *不需要* 此行设置
-(pyim-basedict-enable)   ; 拼音词库，五笔用户 *不需要* 此行设置
-(setq default-input-method "pyim")
-;; (setq pyim-default-scheme 'wubi)
-;; (setq pyim-default-scheme 'quanpin)
-
-;; 使用 pupup-el 来绘制选词框
-(if (>= emacs-major-version 26)
-    (setq pyim-page-tooltip 'child-frame)
-  (setq pyim-page-tooltip 'popup))
-
-;; 选词框显示 10 个候选词
-(setq pyim-page-length 5)
-
-(setq-default pyim-english-input-switch-functions
-              '(pyim-probe-org-structure-template))
-
-(setq-default pyim-punctuation-half-width-functions
-              '(pyim-probe-punctuation-line-beginning
-                pyim-probe-punctuation-after-punctuation))
-
-
-
-(global-set-key (kbd "s-;") 'pyim-convert-string-at-point)
-(define-key pyim-mode-map (kbd "<tab>") 'pyim-page-next-page)
-(define-key pyim-mode-map (kbd "C-j") 'pyim-page-next-page)
-(define-key pyim-mode-map (kbd "C-k") 'pyim-page-previous-page)
-(define-key pyim-mode-map (kbd "<escape>") 'pyim-quit-clear)
-
-;; (add-hook 'toggle-input-method #'xah-fly-insert-mode-activate)
-(setq pyim-dicts
-      `((:name "sougou-shiji" :file ,(expand-file-name "pyim/shiji.pyim" user-emacs-directory))
-        (:name "sougou-shijin" :file ,(expand-file-name "pyim/shijin.pyim" user-emacs-directory))))
 
 (use-package ace-pinyin
 :straight t

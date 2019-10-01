@@ -346,7 +346,6 @@ I would like use ErgoDox keyboard on my linux environment
          ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
          ((eq major-mode 'dired-mode) (call-interactively 'vinegar/dired-diff))
          ((eq major-mode 'w3m-mode) (call-interactively 'w3m-bookmark-add-current-url))
-         ((eq major-mode 'org-mode) (call-interactively 'helm-org-in-buffer-headings))
          ((eq major-mode 'org-agenda-mode) (call-interactively 'org-agenda-filter-by-tag))
 
          (t nil)))
@@ -584,7 +583,6 @@ I would like use ErgoDox keyboard on my linux environment
          ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
          ((eq major-mode 'dired-mode) (call-interactively 'vinegar/dired-diff))
          ((eq major-mode 'w3m-mode) (call-interactively 'w3m-bookmark-add-current-url))
-         ((eq major-mode 'org-mode) (call-interactively 'helm-org-in-buffer-headings))
          (t nil)))
 
 
@@ -2323,7 +2321,7 @@ CLOSED: [2019-08-08 Thu 14:56]
     #+end_src
 *** python
 #+begin_src emacs-lisp :tangle "./setup/linux.el"
-(setq python-shell-interpreter "~/.config/nixpkgs/nixos/overlays/python/result/bin/python")
+;;(setq python-shell-interpreter "~/.config/nixpkgs/nixos/overlays/python/result/bin/python")
 #+end_src
 *** ⚑ WAITING [[https://github.com/matthewbauer/bauer][matthewbauer/bauer: An Emacs+Nix IDE]]
 
@@ -2557,7 +2555,7 @@ CLOSED: [2019-07-27 Sat 06:05]
                              "~/Documents/org-notes/NSM-GTD"
                              "~/Documents/org-notes/post"
                              "~/Documents/org-notes/course"
-                             "~/project/gtrun-profile/dotfiles/wallpaper"
+                             "~/project/my-profile/dotfiles/wallpaper"
                              "~/project/global-profile/global-doc"
                              ))
 #+end_src

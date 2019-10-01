@@ -21,7 +21,7 @@
 )
   (add-hook 'nix-mode-hook 'my-nix-mode-setup)
 
-(setq python-shell-interpreter "~/.config/nixpkgs/nixos/overlays/python/result/bin/python")
+;;(setq python-shell-interpreter "~/.config/nixpkgs/nixos/overlays/python/result/bin/python")
 
 (use-package cnfonts
     :straight t
