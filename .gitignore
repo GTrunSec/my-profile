@@ -9,6 +9,7 @@ dotfiles/emacs/emacs.d/librime.so
 dotfiles/emacs/emacs.d/setup
 dotfiles/emacs/emacs.d/elpa
 dotfiles/emacs/emacs.d/pyim/rime
+Pattern.org
 
 ## Emacs librime config
 dotfiles/emacs/emacs.d/pyim/rime/build

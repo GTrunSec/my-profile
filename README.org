@@ -1,14 +1,26 @@
-#+TITLE: my hardware config
+#+TITLE: my global-hardware config
 #+AUTHOR: GTrunSec
 #+EMAIL: gtrunsec@hardenedlinux.org
 #+DATE: 22 July 2019
 #+DESCRIPTION: my computer configuration
 #+KEYWORDS: profile
 #+LANGUAGE:  en cn
-#+SETUPFILE: ~/org-notes/setup/hugo.local
+#+SETUPFILE: ~/Documents/org-notes/setup/hugo.local
 #+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
 #+SELECT_TAGS: export
 #+EXCLUDE_TAGS: noexport
+* ✰ Important Tool Pack
+** [[https://education.github.com/pack/offers][GitHub Student Developer Pack - GitHub Education]]
++ [X] GitKraken Glo
++ [[https://transloadit.com/github-students/][GitHub Student Pack | Transloadit]]
+  + [[https://transloadit.com/templates/edit/4d95ca8a3b614ed3a24c015895414b94][Templates | Transloadit]]
++ [[https://gtrunsec.carto.com/dashboard/get-started/cartoframes#step-2][Get Started | CARTO]]
+
+
+* Myself
+* Img/Photo
+** [[https://gtrunsec.imgur.com/all/?third_party=1][gtrunsec's uploaded images - Imgur]]
+** [[https://imgbb.com/][ImgBB — Upload Image — Free Image Hosting]]
 * virtual
 ** ESXI
 - SSD 225GB 
@@ -25,6 +37,7 @@ CLOSED: [2019-09-02 Mon 22:46]
 
 - State "✔ DONE"     from "⚔ STARTED"  [2019-09-03 Tue 00:16]
 **** [[https://sw.kovidgoyal.net/kitty/#quickstart][kitty - the fast, featureful, GPU based terminal emulator — kitty 0.14.4 documentation]]
+**** [[https://github.com/lcagustini/dotfiles/blob/master/.config/kitty/kitty.conf][dotfiles/kitty.conf at master · lcagustini/dotfiles]]
 
 *** ✘ CANCELED [[https://github.com/thestinger/termite][thestinger/termite: A keyboard-centric VTE-based terminal, aimed at use within a window manager with tiling and/or tabbing support.]]
 CLOSED: [2019-09-03 Tue 00:16]
@@ -32,10 +45,18 @@ CLOSED: [2019-09-03 Tue 00:16]
   to Kitty
 *** ✘ CANCELED [[https://www.iterm2.com/][iTerm2 - macOS Terminal Replacement]]
 CLOSED: [2019-09-03 Tue 00:17]
-
 - State "✘ CANCELED" from              [2019-09-03 Tue 00:17] \\
   to kitty
 *** [[https://github.com/nushell/nushell][nushell/nushell: A modern shell written in Rust]]
+** BASH/theme
+*** fish
+- [[https://github.com/fish-shell/fish-shell/issues/1060][SSH to machine with fish gives: `fish: Could not set up terminal` · Issue #1060 · fish-shell/fish-shell]]
+*** package
+#+begin_src sh :tangle yes
+brew install rxvt-unicode
+#+end_src
+** Download
+*** [[https://github.com/agalwood/Motrix/][agalwood/Motrix: A full-featured download manager.]]
 * window
 ** Login Manager
 *** [[https://github.com/adi1090x/slim_themes][adi1090x/slim_themes: A Beautiful Collection Of SLiM Themes...]]
@@ -48,11 +69,24 @@ CLOSED: [2019-09-03 Tue 00:17]
 ** [MacOS] [[https://github.com/koekeishiya/yabai][koekeishiya/yabai: A tiling window manager for macOS based on binary space partitioning]] 
 ** rofi
 *** [[https://github.com/davatorium/rofi-scripts/tree/master][davatorium/rofi-scripts: Small scripts for use with rofi]]
+** Kwin
+*** [[https://github.com/lingtjien/Grid-Tiling-Kwin][lingtjien/Grid-Tiling-Kwin: A kwin script that automatically tiles windows]]
+** Xmonad
+*** [[https://wiki.haskell.org/Xmonad/Using_xmonad_in_Gnome#Gnome3][Xmonad/Using xmonad in Gnome - HaskellWiki]]
+*** https://github.com/Gekkio/gnome-session-xmonad
+*** [[https://xmonad.org/manpage.html][https://xmonad.org/manpage.html]]
+** Polybar
+*** [[https://github.com/rmrfasterisk/dotfiles/blob/master/.config/polybar/scripts/colors-dark.sh][dotfiles/colors-dark.sh at master · rmrfasterisk/dotfiles]]
 * theme
 ** GTK
 *** [[https://www.reddit.com/r/unixporn/comments/crlaoo/fluxbox_blossom_theme/][[Fluxbox] Blossom theme : unixporn]]
 ** latex
 *** [[https://github.com/matze/mtheme][matze/mtheme: A modern LaTeX Beamer theme]]
+** KDE
+*** [[https://github.com/tsujan/Kvantum/tree/master/Kvantum][Kvantum/Kvantum at master · tsujan/Kvantum]]
+*** [[https://www.reddit.com/r/unixporn/comments/958f9b/kde_i3gaps_arc_dark_t/e3t2bt1/?context=8&depth=9][[KDE i3-gaps] Arc Dark T : unixporn]]
+*** [[https://github.com/Akava-Design/Akava-Kv][Akava-Design/Akava-Kv: User oriented Kvantum theme for KDE]]
+**** [[https://www.reddit.com/r/unixporn/comments/d4ytzc/plasma_simple_blurry/][[Plasma] Simple Blurry : unixporn]]
 * Brower
 ** [[https://github.com/atlas-engineer/next][
 atlas-engineer/next: Next Browser - Be Productive.]]
@@ -152,6 +186,7 @@ import_tables:
   - luna_pinyin.chat
   - luna_pinyin.biaoqing
 #+end_src
+- [[https://github.com/wzyboy/rime_config][wzyboy/rime_config]]
 *** Macos
 #+begin_src sh :tangle yes
 brew cask install squirrel
@@ -188,11 +223,13 @@ make install
 sudo cp /Library/Input\ Methods/Squirrel.app/Contents/Frameworks/librime.1.dylib /usr/local/lib
 #+end_src
 
-* Package Manager
+* Manager
 ** Python
 *** [[https://github.com/sdispater/poetry][sdispater/poetry: Python dependency management and packaging made easy.]] :manager:
 *** [[https://github.com/wyounas/homer][wyounas/homer: Homer, a text analyser in Python, can help make your text more clear, simple and useful for your readers.]] :read:dev:
 ** Cpython
+** PASSWORD_MANAGER
+*** enpass
 * Music
 ** https://github.com/willianjusten/awesome-audio-visualization
 + [ ] [] [[https://www.youtube.com/watch?v=2BIOINFSbMg][Charlie Roberts: Gibbering at Algoraves - JS in Live Audiovisual Performances - JSConf.Asia 2014 - YouTube]]
@@ -227,7 +264,13 @@ sudo dd bs=1m if=/Users/gtrun/Downloads/nixos-graphical-19.03.173292.65729e08178
 ** fish
 *** [[https://fishshell.com/docs/current/faq.html][fish: Frequently asked questions]]
 *** [[https://nicolas-van.github.io/programming-with-fish-shell][Progrxamming with fish shell | Nicolas Vanhoren’s Blog]]
+*** [[https://github.com/oh-my-fish/oh-my-fish][oh-my-fish/oh-my-fish: The Fish Shell Framework]]
+*** ✰ Important color
+**** [[http://fishshell.com/docs/current/index.html#variables-color][fish: Documentation]]
 * Version control
+** Client
+*** [[https://www.gitkraken.com/download/mac][Thank You for Downloading GitKraken | Axosoft GitKraken]]
+
 ** Git
 *** [[https://github.com/skeeto/lean-static-git][skeeto/lean-static-git: Lean, static Git build for Linux]]
 * Qemu
@@ -271,6 +314,7 @@ echo "
 auto lo
 iface lo inet loopback
 auto enp1s0
+auto enp8s0
 # The primary network interface
 
 #allow-hotplug enp1s0
@@ -278,6 +322,12 @@ iface enp1s0 inet static
 address 10.220.170.150
 netmask 255.255.255.0
 gateway 10.220.170.94
+
+#allow-hotplug enp1s0
+iface enp8s0 inet static
+address 192.168.122.20
+netmask 255.255.255.0
+gateway 192.168.122.1  
 
 " > /etc/network/interfaces
 #+end_src
@@ -308,6 +358,7 @@ echo "
 auto lo
 iface lo inet loopback
 auto enp1s0
+auto enp9s0
 # The primary network interface
 
 #allow-hotplug enp1s0
@@ -316,8 +367,17 @@ address 10.220.170.152
 netmask 255.255.255.0
 gateway 10.220.170.94
 
+
+iface enp9s0 inet static
+address 192.168.122.22                                                                                                  netmask 255.255.255.0
+gateway 192.168.122.1
+
 " > /etc/network/interfaces
 
 #+end_src
+* Network
+** [[https://github.com/StreisandEffect/streisand][StreisandEffect/streisand: Streisand sets up a new server running your choice of WireGuard, OpenConnect, OpenSSH, OpenVPN, Shadowsocks, sslh, Stunnel, or a Tor bridge. It also generates custom instructions for all of these services. At the end of the run you are given an HTML file with instructions that can be shared with friends, family members, and fellow activists.]]
+* Keyboard
+** [[https://configure.ergodox-ez.com/ergodox-ez/layouts/B4J9B/latest/0][Ergodox EZ Configurator]]<2019-09-16 Mon>
 * Blog
 ** [[https://github.com/getgridea/gridea][getgridea/gridea: ✍️一个静态博客写作客户端 (A static blog writing client)]]

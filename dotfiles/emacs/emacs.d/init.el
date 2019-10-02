@@ -1653,8 +1653,9 @@ Inserted by installing org-mode or when a release is made."
                            "~/Documents/org-notes/NSM-GTD"
                            "~/Documents/org-notes/post"
                            "~/Documents/org-notes/course"
-                           "~/project/my-profile/dotfiles/wallpaper"
-                           "~/project/global-profile/global-doc"
+                           "~/Documents/org-notes/post/myself"
+                           ;; "~/project/my-profile/dotfiles/wallpaper"
+                           ;; "~/project/global-profile/global-doc"
                            ))
 
 (use-package org-starter
@@ -1673,7 +1674,11 @@ Inserted by installing org-mode or when a release is made."
                    ("init.org" :key "i" :refile (:maxlevel . 5))
                    ("nix.org" :key "x" :refile (:maxlevel . 5))
                    )
-  (org-starter-def "~/project/global-profile/global-doc/global-init.org")
+  (org-starter-def "~/.config/nixpkgs"
+                   :files
+                   ("README.org" :agenda t)
+                   ("dotfiles/wallpaper/wallpaper.org" :agenda nil)
+                   )
   :bind
   (
    ("C-c e" . org-starter-select-file))
@@ -1908,8 +1913,6 @@ See also: https://stackoverflow.com/questions/9547912/emacs-calendar-show-more-t
  ;; Allow cross-buffer 'next'
  (setq bm-cycle-all-buffers t)
 
- ;; where to store persistant files
- (setq bm-repository-file "~/.emacs.d/var/bm-repository")
 
  ;; save bookmarks
  (setq-default bm-buffer-persistence t)
@@ -2134,8 +2137,8 @@ See also: https://stackoverflow.com/questions/9547912/emacs-calendar-show-more-t
 (use-package magit
   :straight t;(magit :type git :host github :repo "magit/magit")
   :commands (magit)
- ; :hook
- ; (magit-mode . (lambda () (local-set-key (kbd "o") 'magit-open-repo)))
+                                        ; :hook
+                                        ; (magit-mode . (lambda () (local-set-key (kbd "o") 'magit-open-repo)))
 
   :config
 
@@ -2253,13 +2256,12 @@ See also: https://stackoverflow.com/questions/9547912/emacs-calendar-show-more-t
 
                ('(display-buffer-same-window))))))
 
-     (defun magit-remove-git-lock-file ()
-            "Remove git's index lock file, if it exists."
-            (interactive)
-            (let ((base (magit-toplevel)))
-              (delete-file (concat base "/.git/index.lock")))
-(shell-command "./bin/clean-git-loch.sh"))
-
+  (defun magit-remove-git-lock-file ()
+    "Remove git's index lock file, if it exists."
+    (interactive)
+    (let ((base (magit-toplevel)))
+      (delete-file (concat base "/.git/index.lock")))
+    (shell-command "~/project/my-profile/dotfiles/emacs/emacs.d/bin/clean-git-loch.sh"))
   )
 
 (use-package magit-todos

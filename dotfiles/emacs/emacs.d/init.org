@@ -2555,35 +2555,40 @@ CLOSED: [2019-07-27 Sat 06:05]
                              "~/Documents/org-notes/NSM-GTD"
                              "~/Documents/org-notes/post"
                              "~/Documents/org-notes/course"
-                             "~/project/my-profile/dotfiles/wallpaper"
-                             "~/project/global-profile/global-doc"
+                             "~/Documents/org-notes/post/myself"
+                             ;; "~/project/my-profile/dotfiles/wallpaper"
+                             ;; "~/project/global-profile/global-doc"
                              ))
 #+end_src
 
 *** [[https://github.com/akirak/emacs-config-library/blob/master/org-starter/.org-config.el][emacs-config-library/.org-config.el at master · akirak/emacs-config-library]]
     #+begin_src emacs-lisp :tangle yes
-      (use-package org-starter
-        :straight t
-        :config
-        (org-starter-def "~/Documents/org-notes"
-                         :files
-                         ("gtd.org" :agenda t :key "g" :refile (:maxlevel . 5))
-                         ("notes.org" :agenda t :key "n" :refile (:maxlevel .5 ))
-                         ("myself.org" :agenda t)
-                         ("NSM-GTD/workflow.org" :agenda t :required t)
-                         ("NSM-GTD/NsmOrg.org" :agenda t :required t)
-                         )
-        (org-starter-def "~/.emacs.d"
-                         :files
-                         ("init.org" :key "i" :refile (:maxlevel . 5))
-                         ("nix.org" :key "x" :refile (:maxlevel . 5))
-                         )
-        (org-starter-def "~/project/global-profile/global-doc/global-init.org")
-        :bind
-        (
-         ("C-c e" . org-starter-select-file))
-        ;; "C-c e" . org-starter-refile-by-key))
-        )
+            (use-package org-starter
+              :straight t
+              :config
+              (org-starter-def "~/Documents/org-notes"
+                               :files
+                               ("gtd.org" :agenda t :key "g" :refile (:maxlevel . 5))
+                               ("notes.org" :agenda t :key "n" :refile (:maxlevel .5 ))
+                               ("myself.org" :agenda t)
+                               ("NSM-GTD/workflow.org" :agenda t :required t)
+                               ("NSM-GTD/NsmOrg.org" :agenda t :required t)
+                               )
+              (org-starter-def "~/.emacs.d"
+                               :files
+                               ("init.org" :key "i" :refile (:maxlevel . 5))
+                               ("nix.org" :key "x" :refile (:maxlevel . 5))
+                               )
+              (org-starter-def "~/.config/nixpkgs"
+                               :files
+                               ("README.org" :agenda t)
+                               ("dotfiles/wallpaper/wallpaper.org" :agenda nil)
+                               )
+              :bind
+              (
+               ("C-c e" . org-starter-select-file))
+              ;; "C-c e" . org-starter-refile-by-key))
+              )
     #+end_src
 
 ** Calendar / Agenda
@@ -3298,8 +3303,8 @@ e
      (use-package magit
        :straight t;(magit :type git :host github :repo "magit/magit")
        :commands (magit)
-      ; :hook
-      ; (magit-mode . (lambda () (local-set-key (kbd "o") 'magit-open-repo)))
+                                             ; :hook
+                                             ; (magit-mode . (lambda () (local-set-key (kbd "o") 'magit-open-repo)))
 
        :config
 
@@ -3414,16 +3419,15 @@ e
                                          magit-stash-mode))
                      '(display-buffer-below-selected))
                     ;; Last resort: use current window
-	       
+
                     ('(display-buffer-same-window))))))
 
-          (defun magit-remove-git-lock-file ()
-                 "Remove git's index lock file, if it exists."
-                 (interactive)
-                 (let ((base (magit-toplevel)))
-                   (delete-file (concat base "/.git/index.lock")))
-     (shell-command "./bin/clean-git-loch.sh"))
-
+       (defun magit-remove-git-lock-file ()
+         "Remove git's index lock file, if it exists."
+         (interactive)
+         (let ((base (magit-toplevel)))
+           (delete-file (concat base "/.git/index.lock")))
+         (shell-command "~/project/my-profile/dotfiles/emacs/emacs.d/bin/clean-git-loch.sh"))
        )
    #+end_src
  git-lock remove
