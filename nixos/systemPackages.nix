@@ -17,6 +17,8 @@ in rec
       # qt5ct
       # latte-dock
       # deepin.dde-dock
+      #latex
+      texlive.combined.scheme-basic
       jupyter
       lxappearance
       appimage-run

@@ -2348,6 +2348,8 @@ CLOSED: [2019-08-08 Thu 14:56]
 #+begin_src emacs-lisp :tangle yes
 (straight-use-package 'jupyter)
 (require 'jupyter)
+(setq jupyter-runtime-directory "~/.local/share/jupyter/runtime")
+(setq ob-async-no-async-languages-alist '("jupyter-python" "jupyter-julia"))
 #+end_src
 ** Json
 *** [[https://github.com/SavchenkoValeriy/jeison][SavchenkoValeriy/jeison: An Emacs library for declarative JSON parsing]]
@@ -2442,106 +2444,111 @@ change ~CC~ PATH ~gcc~ to ~clang++~
 - [[https://github.com/raxod502/org-emacs/blob/2388023a7070a437506b588eeb0c9ff74f6d372a/init.el][org-emacs/init.el at 2388023a7070a437506b588eeb0c9ff74f6d372a · raxod502/org-emacs]]
 #+begin_src emacs-lisp :tangle yes
 
-    (straight-use-package 'org)
+      (straight-use-package 'org)
 
-      (push (expand-file-name "~/.emacs.d/straight/repos/org/contrib/lisp") load-path)
+        (push (expand-file-name "~/.emacs.d/straight/repos/org/contrib/lisp") load-path)
 
-        (require 'org-mac-link)
+          (require 'org-mac-link)
 
 
-            (define-key org-mode-map [remap org-set-tags-command] #'counsel-org-tag)
-            ;; Global
-            (setq org-startup-indented t
-                  org-enforce-todo-dependencies t
-                  org-cycle-separator-lines 2
-                  org-blank-before-new-entry '((heading) (plain-list-item . auto))
-                  org-insert-heading-respect-content nil
-                  org-reverse-note-order nil
-                  org-show-following-heading t
-                  org-show-hierarchy-above t
-                  org-show-siblings '((default))
-                  org-id-method 'uuidgen
-                  org-deadline-warning-days 30
-                  org-table-export-default-format "orgtbl-to-csv"
-                  org-src-window-setup 'other-window
-                  org-clone-delete-id t
-                  org-cycle-include-plain-lists t
-                  org-src-fontify-natively t
-                  org-src-tab-acts-natively t
-                  org-display-inline-images nil
-                  org-hide-emphasis-markers t)
+              (define-key org-mode-map [remap org-set-tags-command] #'counsel-org-tag)
+              ;; Global
+              (setq org-startup-indented t
+                    org-enforce-todo-dependencies t
+                    org-cycle-separator-lines 2
+                    org-blank-before-new-entry '((heading) (plain-list-item . auto))
+                    org-insert-heading-respect-content nil
+                    org-reverse-note-order nil
+                    org-show-following-heading t
+                    org-show-hierarchy-above t
+                    org-show-siblings '((default))
+                    org-id-method 'uuidgen
+                    org-deadline-warning-days 30
+                    org-table-export-default-format "orgtbl-to-csv"
+                    org-src-window-setup 'other-window
+                    org-clone-delete-id t
+                    org-cycle-include-plain-lists t
+                    org-src-fontify-natively t
+                    org-src-tab-acts-natively t
+                    org-display-inline-images nil
+                    org-hide-emphasis-markers t)
 
-            ;; Activate spelling
-            (add-hook 'org-mode 'flyspell-mode)
-            (add-to-list 'ispell-skip-region-alist '("^#+begin_src" . "^#+end_src"))
+              ;; Activate spelling
+              (add-hook 'org-mode 'flyspell-mode)
+              (add-to-list 'ispell-skip-region-alist '("^#+begin_src" . "^#+end_src"))
 
-            ;; Todo part
-            (setq org-todo-keywords '(;; Baseline sequence
-                                      (sequence "☞ TODO(t)" "☟ NEXT(n)" "✰ Important(i)" "⚑ WAITING(w)"  "💬 MEETING(M)" "|" "✔ DONE(d!)" "✘ CANCELED(c@)" "⚔ STARTED(s)")
+              ;; Todo part
+              (setq org-todo-keywords '(;; Baseline sequence
+                                        (sequence "☞ TODO(t)" "☟ NEXT(n)" "✰ Important(i)" "⚑ WAITING(w)"  "💬 MEETING(M)" "|" "✔ DONE(d!)" "✘ CANCELED(c@)" "⚔ STARTED(s)")
 
-                                      ;; Specific "to complete
-                                      (sequence "📄 REVIEW(r)" "📚 RELEASE(R)" " 📩 MAIL(m)" "|" "❤ Love(l)")
+                                        ;; Specific "to complete
+                                        (sequence "📄 REVIEW(r)" "📚 RELEASE(R)" " 📩 MAIL(m)" "|" "❤ Love(l)")
 
-                                      ;; Note information
-                                      (sequence "|" "✍ NOTE(N)" " 🔮 EVENT(E)" "☕ BREAK(b)" "FIXME"))
+                                        ;; Note information
+                                        (sequence "|" "✍ NOTE(N)" " 🔮 EVENT(E)" "☕ BREAK(b)" "FIXME"))
 
-                  org-todo-state-tags-triggers '(("CANCELLED" ("CANCELLED" . t))
-                                                 ("WAITING"   ("WAITING"   . t))
-                                                 ("STARTED" ("STARTED" . t)))
+                    org-todo-state-tags-triggers '(("CANCELLED" ("CANCELLED" . t))
+                                                   ("WAITING"   ("WAITING"   . t))
+                                                   ("STARTED" ("STARTED" . t)))
 
-                  ;; Priority definition
-                  org-highest-priority ?A
-                  org-lowest-priority ?E
-                  org-default-priority ?C
+                    ;; Priority definition
+                    org-highest-priority ?A
+                    org-lowest-priority ?E
+                    org-default-priority ?C
 
-                  ;; Archiving
-                  org-archive-mark-done t
-                  org-log-done 'time
-                                                    ;org-archive-location "%s_archive::* Archived Tasks"
-                  org-time-clocksum-format '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t)
-                  org-archive-location (concat "%s_archive_" (format-time-string "%Y" (current-time)) "::")
+                    ;; Archiving
+                    org-archive-mark-done t
+                    org-log-done 'time
+                                                      ;org-archive-location "%s_archive::* Archived Tasks"
+                    org-time-clocksum-format '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t)
+                    org-archive-location (concat "%s_archive_" (format-time-string "%Y" (current-time)) "::")
 
-                  ;; Refiling
-                  org-refile-targets '((org-agenda-files . (:maxlevel . 6)))
-                  org-completion-use-ido nil
-                  org-refile-use-outline-path 'file
-                  org-outline-path-complete-in-steps nil
-                  org-refile-allow-creating-parent-nodes 'confirm)
+                    ;; Refiling
+                    org-refile-targets '((org-agenda-files . (:maxlevel . 6)))
+                    org-completion-use-ido nil
+                    org-refile-use-outline-path 'file
+                    org-outline-path-complete-in-steps nil
+                    org-refile-allow-creating-parent-nodes 'confirm)
 
-            ;; Change task state to STARTED when clocking in
-            (setq org-clock-in-switch-to-state "⚔ STARTED")
-            ;; Save clock data and notes in the LOGBOOK drawer
-            (setq org-clock-into-drawer t)
-            ;; Removes clocked tasks with 0:00 duration
-            (setq org-clock-out-remove-zero-time-clocks t) 
-            ;; Show the clocked-in task - if any - in the header line
-            (setq org-ellipsis "☯")
-            (setq org-todo-keyword-faces
-                  '(("☞ TODO" . (:foreground "#ff39a3" :weight bold))
-                    ("⚔ STARTED"  . "#E35DBF")
-                    ("✘ CANCELED" . (:foreground "white" :background "#4d4d4d" :weight bold))
-                    ("⚑ WAITING" . "pink")
-                    ("☕ BREAK" . "gray")
-                    ("❤ Love" . (:foreground "blue" 
-                                             ;; :background "#7A586A"
-                                             :weight bold))
-                    ("✔ DONE" . "#008080")
-                    ("FIXME" . "IndianRed")
-                    ))
+              ;; Change task state to STARTED when clocking in
+              (setq org-clock-in-switch-to-state "⚔ STARTED")
+              ;; Save clock data and notes in the LOGBOOK drawer
+              (setq org-clock-into-drawer t)
+              ;; Removes clocked tasks with 0:00 duration
+              (setq org-clock-out-remove-zero-time-clocks t) 
+              ;; Show the clocked-in task - if any - in the header line
+              (setq org-ellipsis "☯")
+              (setq org-todo-keyword-faces
+                    '(("☞ TODO" . (:foreground "#ff39a3" :weight bold))
+                      ("⚔ STARTED"  . "#E35DBF")
+                      ("✘ CANCELED" . (:foreground "white" :background "#4d4d4d" :weight bold))
+                      ("⚑ WAITING" . "pink")
+                      ("☕ BREAK" . "gray")
+                      ("❤ Love" . (:foreground "blue" 
+                                               ;; :background "#7A586A"
+                                               :weight bold))
+                      ("✔ DONE" . "#008080")
+                      ("FIXME" . "IndianRed")
+                      ))
 
-            (org-babel-do-load-languages 'org-babel-load-languages
-                                         '((emacs-lisp . t)
-                                           (dot . t)
-                                           (ditaa . t)
-                                           (R . t)
-                                           (python . t)
-                                           (gnuplot . t)
-                                           (lisp . t)
-                                           (shell . t)
-                                           (org . t)
-                                           (plantuml . t)
-                                           (latex . t)
-                                           (jupyter . t)))
+              (org-babel-do-load-languages 'org-babel-load-languages
+                                           '((emacs-lisp . t)
+                                             (dot . t)
+                                             (ditaa . t)
+                                             (R . t)
+                                             (python . t)
+                                             (gnuplot . t)
+                                             (lisp . t)
+                                             (shell . t)
+                                             (org . t)
+                                             (plantuml . t)
+                                             (latex . t)
+                                             (jupyter . t)
+
+  ))
+  ;;(org-babel-jupyter-override-src-block "python")
+  (org-babel-jupyter-restore-src-block "python")
+
 
 #+end_src
 
@@ -2570,6 +2577,7 @@ CLOSED: [2019-07-27 Sat 06:05]
 
 *** [[https://github.com/akirak/emacs-config-library/blob/master/org-starter/.org-config.el][emacs-config-library/.org-config.el at master · akirak/emacs-config-library]]
     #+begin_src emacs-lisp :tangle yes
+<<<<<<< Updated upstream
             (use-package org-starter
               :straight t
               :config
@@ -2596,6 +2604,30 @@ CLOSED: [2019-07-27 Sat 06:05]
                ("C-c e" . org-starter-select-file))
               ;; "C-c e" . org-starter-refile-by-key))
               )
+=======
+      (use-package org-starter
+        :straight t
+        :config
+        (org-starter-def "~/Documents/org-notes"
+                         :files
+                         ("gtd.org" :agenda t :key "g" :refile (:maxlevel . 5))
+                         ("notes.org" :agenda t :key "n" :refile (:maxlevel .5 ))
+                         ("myself.org" :agenda t)
+                         ("NSM-GTD/workflow.org" :agenda t :required t)
+                         ("NSM-GTD/NsmOrg.org" :agenda t :required t)
+                         )
+        (org-starter-def "~/.config/nixpkgs/dotfiles/emacs/emacs.d"
+                         :files
+                         ("init.org" :key "i" :refile (:maxlevel . 5))
+                         ("nix.org" :key "x" :refile (:maxlevel . 5))
+                         )
+        (org-starter-def "~/project/global-profile/global-doc/global-init.org")
+        :bind
+        (
+         ("C-c e" . org-starter-select-file))
+        ;; "C-c e" . org-starter-refile-by-key))
+        )
+>>>>>>> Stashed changes
     #+end_src
 
 ** Calendar / Agenda
@@ -3872,7 +3904,7 @@ Version 2017-10-09"
       (start-process "" nil "/Applications/iTerm.app/Contents/MacOS/iTerm2" default-directory)))
    ((string-equal system-type "gnu/linux")
     (let ((process-connection-type nil))
-      (start-process "" nil "termite"
+      (start-process "" nil "kitty"
                      (concat "--directory=" default-directory))))))
 #+end_src
 ** Editing as root
