@@ -16,7 +16,6 @@
   + [[https://transloadit.com/templates/edit/4d95ca8a3b614ed3a24c015895414b94][Templates | Transloadit]]
 + [[https://gtrunsec.carto.com/dashboard/get-started/cartoframes#step-2][Get Started | CARTO]]
 
-
 * Myself
 * Img/Photo
 ** [[https://gtrunsec.imgur.com/all/?third_party=1][gtrunsec's uploaded images - Imgur]]

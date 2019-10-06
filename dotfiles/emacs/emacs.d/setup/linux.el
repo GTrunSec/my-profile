@@ -24,6 +24,9 @@
 ;;(setq python-shell-interpreter "~/.config/nixpkgs/nixos/overlays/python/result/bin/python")
 
 ;; where to store persistant files
+(setq bm-repository-file "~/.emacs.d/var/bm-macos-repository")
+
+;; where to store persistant files
 (setq bm-repository-file "~/.emacs.d/var/bm-linux-repository")
 
 (use-package cnfonts

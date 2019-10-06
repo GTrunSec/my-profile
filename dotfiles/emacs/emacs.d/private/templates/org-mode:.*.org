@@ -5,7 +5,7 @@
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en cn
-#+SETUPFILE: ~/org-notes/setup/$5.local
+#+SETUPFILE: ~/Documents/org-notes/setup/$5.local
 #+hugo_publishdate: `org-time-stamp-rounding-minutes`
 #+hugo_auto_set_lastmod: t
 #+HUGO_categories: $3
