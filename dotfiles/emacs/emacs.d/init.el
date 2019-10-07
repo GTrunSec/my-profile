@@ -27,10 +27,9 @@
 
 ;;27 version unness
 (package-initialize)
-
 (straight-use-package 'use-package)
 (setq use-package-always-ensure t)
-
+(setq straight-vc-git-default-clone-depth 1)
 (setq inhibit-startup-message t)
 (setq initial-scratch-message "")
 
@@ -1367,6 +1366,13 @@
     (straight-use-package 'ess-R-data-view)
     (require 'ess-R-data-view)
 
+(straight-use-package 'polymode)
+(require 'polymode)
+
+(straight-use-package 'poly-markdown)
+(require 'poly-markdown)
+(add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
+
 (use-package go-mode
 :straight t
 :config
@@ -1514,32 +1520,32 @@
 
 (straight-use-package 'git)
 
-(defun org-git-version ()
-  "The Git version of org-mode.
-Inserted by installing org-mode or when a release is made."
-  (require 'git)
-  (let ((git-repo (expand-file-name
-                   "straight/repos/org/" user-emacs-directory)))
-    (string-trim
-     (git-run "describe"
-              "--match=release\*"
-              "--abbrev=6"
-              "HEAD"))))
-
-(defun org-release ()
-  "The release version of org-mode.
-Inserted by installing org-mode or when a release is made."
-  (require 'git)
-  (let ((git-repo (expand-file-name
-                   "straight/repos/org/" user-emacs-directory)))
-    (string-trim
-     (string-remove-prefix
-      "release_"
+ (defun org-git-version ()
+   "The Git version of org-mode.
+ Inserted by installing org-mode or when a release is made."
+   (require 'git)
+   (let ((git-repo (expand-file-name
+                    "straight/repos/org/" user-emacs-directory)))
+     (string-trim
       (git-run "describe"
                "--match=release\*"
-               "--abbrev=0"
-               "HEAD")))))
-(provide 'org-version)
+               "--abbrev=6"
+               "HEAD"))))
+
+ (defun org-release ()
+   "The release version of org-mode.
+ Inserted by installing org-mode or when a release is made."
+   (require 'git)
+   (let ((git-repo (expand-file-name
+                    "straight/repos/org/" user-emacs-directory)))
+     (string-trim
+      (string-remove-prefix
+       "release_"
+       (git-run "describe"
+                "--match=release\*"
+                "--abbrev=0"
+                "HEAD")))))
+ (provide 'org-version)
 
 (straight-use-package 'org)
 

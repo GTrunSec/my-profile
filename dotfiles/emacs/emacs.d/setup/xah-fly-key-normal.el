@@ -137,6 +137,7 @@
    ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
    ((eq major-mode 'dired-mode) (call-interactively 'hydra-dired/body))
    ((eq major-mode 'w3m-mode) (call-interactively 'scroll-up))
+   ((eq major-mode 'org-mode) (call-interactively 'org-edit-src-code))
    (t nil)))
 
 (defun gtrun-xah-comma-fly-key ()

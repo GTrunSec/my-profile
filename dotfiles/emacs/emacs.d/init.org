@@ -50,18 +50,15 @@
 
 ;;27 version unness
 (package-initialize)
-
 (straight-use-package 'use-package)
 (setq use-package-always-ensure t)
-
+(setq straight-vc-git-default-clone-depth 1)
 (setq inhibit-startup-message t)
 (setq initial-scratch-message "")
 
 (require 'server)
 (unless (server-running-p)
   (server-start))
-
-
    #+end_src
 ** Add keychord support
    #+begin_src emacs-lisp :tangle yes
@@ -332,6 +329,7 @@ I would like use ErgoDox keyboard on my linux environment
          ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
          ((eq major-mode 'dired-mode) (call-interactively 'hydra-dired/body))
          ((eq major-mode 'w3m-mode) (call-interactively 'scroll-up))
+         ((eq major-mode 'org-mode) (call-interactively 'org-edit-src-code))
          (t nil)))
 
       (defun gtrun-xah-comma-fly-key ()
@@ -563,6 +561,7 @@ I would like use ErgoDox keyboard on my linux environment
          ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
          ((eq major-mode 'dired-mode) (call-interactively 'hydra-dired/body))
          ((eq major-mode 'w3m-mode) (call-interactively 'scroll-up))
+         ((eq major-mode 'org-mode) (call-interactively 'org-edit-src-code))
          (t nil)))
 
       (defun gtrun-xah-fly-key ()
@@ -2131,6 +2130,19 @@ CLOSED: [2019-08-08 Thu 14:56]
       (straight-use-package 'ess-R-data-view)
       (require 'ess-R-data-view)
 #+end_src
+
+poly
+- [[https://polymode.github.io/usage/][Basic Usage - Polymode]]
+#+begin_src emacs-lisp :tangle yes
+(straight-use-package 'polymode)
+(require 'polymode)
+
+(straight-use-package 'poly-markdown)
+(require 'poly-markdown)
+(add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
+
+#+end_src
+** 
 ** Go
 *** default
    #+begin_src emacs-lisp :tangle yes
@@ -2411,34 +2423,34 @@ change ~CC~ PATH ~gcc~ to ~clang++~
 ** Global
 #+begin_src emacs-lisp :tangle yes
 
-    (straight-use-package 'git)
+     (straight-use-package 'git)
 
-    (defun org-git-version ()
-      "The Git version of org-mode.
-    Inserted by installing org-mode or when a release is made."
-      (require 'git)
-      (let ((git-repo (expand-file-name
-                       "straight/repos/org/" user-emacs-directory)))
-        (string-trim
-         (git-run "describe"
-                  "--match=release\*"
-                  "--abbrev=6"
-                  "HEAD"))))
+      (defun org-git-version ()
+        "The Git version of org-mode.
+      Inserted by installing org-mode or when a release is made."
+        (require 'git)
+        (let ((git-repo (expand-file-name
+                         "straight/repos/org/" user-emacs-directory)))
+          (string-trim
+           (git-run "describe"
+                    "--match=release\*"
+                    "--abbrev=6"
+                    "HEAD"))))
 
-    (defun org-release ()
-      "The release version of org-mode.
-    Inserted by installing org-mode or when a release is made."
-      (require 'git)
-      (let ((git-repo (expand-file-name
-                       "straight/repos/org/" user-emacs-directory)))
-        (string-trim
-         (string-remove-prefix
-          "release_"
-          (git-run "describe"
-                   "--match=release\*"
-                   "--abbrev=0"
-                   "HEAD")))))
-    (provide 'org-version)
+      (defun org-release ()
+        "The release version of org-mode.
+      Inserted by installing org-mode or when a release is made."
+        (require 'git)
+        (let ((git-repo (expand-file-name
+                         "straight/repos/org/" user-emacs-directory)))
+          (string-trim
+           (string-remove-prefix
+            "release_"
+            (git-run "describe"
+                     "--match=release\*"
+                     "--abbrev=0"
+                     "HEAD")))))
+      (provide 'org-version)
 #+end_src
 ** load/Org-mode
 - [[https://github.com/raxod502/org-emacs/blob/2388023a7070a437506b588eeb0c9ff74f6d372a/init.el][org-emacs/init.el at 2388023a7070a437506b588eeb0c9ff74f6d372a · raxod502/org-emacs]]
