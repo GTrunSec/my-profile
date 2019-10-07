@@ -2589,34 +2589,6 @@ CLOSED: [2019-07-27 Sat 06:05]
 
 *** [[https://github.com/akirak/emacs-config-library/blob/master/org-starter/.org-config.el][emacs-config-library/.org-config.el at master · akirak/emacs-config-library]]
     #+begin_src emacs-lisp :tangle yes
-<<<<<<< Updated upstream
-            (use-package org-starter
-              :straight t
-              :config
-              (org-starter-def "~/Documents/org-notes"
-                               :files
-                               ("gtd.org" :agenda t :key "g" :refile (:maxlevel . 5))
-                               ("notes.org" :agenda t :key "n" :refile (:maxlevel .5 ))
-                               ("myself.org" :agenda t)
-                               ("NSM-GTD/workflow.org" :agenda t :required t)
-                               ("NSM-GTD/NsmOrg.org" :agenda t :required t)
-                               )
-              (org-starter-def "~/.emacs.d"
-                               :files
-                               ("init.org" :key "i" :refile (:maxlevel . 5))
-                               ("nix.org" :key "x" :refile (:maxlevel . 5))
-                               )
-              (org-starter-def "~/.config/nixpkgs"
-                               :files
-                               ("README.org")
-                               ("dotfiles/wallpaper/wallpaper.org" :agenda nil)
-                               )
-              :bind
-              (
-               ("C-c e" . org-starter-select-file))
-              ;; "C-c e" . org-starter-refile-by-key))
-              )
-=======
       (use-package org-starter
         :straight t
         :config
@@ -2632,14 +2604,18 @@ CLOSED: [2019-07-27 Sat 06:05]
                          :files
                          ("init.org" :key "i" :refile (:maxlevel . 5))
                          ("nix.org" :key "x" :refile (:maxlevel . 5))
+
                          )
-        (org-starter-def "~/project/global-profile/global-doc/global-init.org")
+      (org-starter-def "~/.config/nixpkgs"
+                               :files
+                               ("README.org")
+                               ("dotfiles/wallpaper/wallpaper.org" :agenda nil)
+                               )
         :bind
         (
          ("C-c e" . org-starter-select-file))
         ;; "C-c e" . org-starter-refile-by-key))
         )
->>>>>>> Stashed changes
     #+end_src
 
 ** Calendar / Agenda
@@ -2660,7 +2636,7 @@ CLOSED: [2019-07-27 Sat 06:05]
   #+begin_src emacs-lisp :tangle "./setup/macos.el"
   ;; FIXME macos can't load org correctly by onece
 
-  (add-hook 'after-init-hook #'org-reload)
+  ;;(add-hook 'after-init-hook #'org-reload)
   (add-hook 'after-init-hook #'org-super-agenda-mode)
 
 #+end_src

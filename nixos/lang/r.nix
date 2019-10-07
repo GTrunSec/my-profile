@@ -8,13 +8,14 @@ let
         ggplot2
         xts
         languageserver
-        #grid
+        parallel
         gtable
         htmltools
         jsonlite
         kableExtra
         KernSmooth
-        #Knitr
+        knitr
+        rmarkdown
         labeling
         lazyeval
         magrittr
@@ -42,5 +43,6 @@ in
 {
   environment.systemPackages = with pkgs; [
     R-with-my-packages
+    rstudio
   ];
 }

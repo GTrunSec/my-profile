@@ -85,7 +85,7 @@
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
    users.users.gtrun = {
-     home = "/home/gtrun/";
+     home = "/home/gtrun";
      isNormalUser = true;
      extraGroups = [ "wheel" "audio" "pulse" "sound" "libvirtd"
                      "video"
