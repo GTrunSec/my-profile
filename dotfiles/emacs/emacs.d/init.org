@@ -2117,9 +2117,13 @@ CLOSED: [2019-08-08 Thu 14:56]
 
   (add-to-list 'auto-mode-alist '("\\.[rR]\\'" . ess-r-mode))
 
-
-  (add-hook 'ess-r-mode-hook 'gtrun/add-company-backend-global)
-  (add-hook 'go-mode-hook 'gtrun/add-company-backend-global)
+   (defun gtrun/add-company-backend-ess ()
+        (pop company-backends)
+        (setq-local company-backends
+                    (append '((:separate company-R-args company-R-objects company-R-library
+                                              company-tabnine))
+                            company-backends)))
+  (add-hook 'ess-r-mode-hook 'gtrun/add-company-backend-ess)
   ;; (require 'ess-r-mode)
   ;; (straight-use-package 'ess)
   ;; (require 'ess)
@@ -2190,13 +2194,14 @@ poly
 #+end_src
 
 #+begin_src emacs-lisp :tangle yes
-    (defun gtrun/add-company-backend-python ()
+    (defun gtrun/add-company-backend-global ()
       (pop company-backends)
       (setq-local company-backends
                   (append '((company-tabnine company-files company-yasnippet))
                           company-backends)))
 
-  (add-hook 'python-mode-hook 'gtrun/add-company-backend-python)
+  (add-hook 'go-mode-hook 'gtrun/add-company-backend-global)
+  (add-hook 'python-mode-hook 'gtrun/add-company-backend-global)
 
 #+end_src
 *** [[https://github.com/dzop/emacs-jupyter][dzop/emacs-jupyter: An interface to communicate with Jupyter kernels.]]
@@ -2597,7 +2602,6 @@ CLOSED: [2019-07-27 Sat 06:05]
 
 *** [[https://github.com/akirak/emacs-config-library/blob/master/org-starter/.org-config.el][emacs-config-library/.org-config.el at master · akirak/emacs-config-library]]
     #+begin_src emacs-lisp :tangle yes
-<<<<<<< Updated upstream
             (use-package org-starter
               :straight t
               :config

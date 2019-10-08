@@ -18,6 +18,7 @@ in rec
       # latte-dock
       # deepin.dde-dock
       #latex
+      dropbox
       texlive.combined.scheme-basic
       jupyter
       lxappearance
