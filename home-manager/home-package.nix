@@ -19,6 +19,7 @@ in   {
     ag
     graphviz
     rofi
+    pkgs.pandoc
     fd
     ripgrep
     feh

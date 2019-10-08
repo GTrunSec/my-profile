@@ -12,7 +12,6 @@
 #+HUGO_categories: profile
 #+HUGO_tags: Emacs
 #+PROPERTY: header-args :tangle "~/.emacs.d/init.el"
-
 * learning emacs
 ** [[https://doc.endlessparentheses.com/functions.html#main_content][Emacs Online Documentation]]
 ** [[https://emacs.stackexchange.com/tags][Tags - Emacs Stack Exchange]]
@@ -1207,54 +1206,58 @@ elisp
 ** compnay
 *** company-mode
 #+begin_src emacs-lisp :tangle yes
-  (use-package company
-    :straight t
-    :hook
-    (emacs-lisp-mode . (lambda () (add-to-list (make-local-variable 'company-backends) '(company-elisp))))
-    :config
+    (use-package company
+      :straight t
+      :hook
+      (emacs-lisp-mode . (lambda () (add-to-list (make-local-variable 'company-backends) '(company-elisp))))
+      :config
 
-    ;; Global
-    (setq company-idle-delay 1
-          company-minimum-prefix-length 1
-          company-show-numbers t
-          company-tooltip-limit 20)
+      ;; Global
+      (setq company-idle-delay 1
+            company-minimum-prefix-length 1
+            company-show-numbers t
+            company-tooltip-limit 20)
 
-    ;; Facing
-    (unless (face-attribute 'company-tooltip :background)
-      (set-face-attribute 'company-tooltip nil :background "black" :foreground "gray40")
-      (set-face-attribute 'company-tooltip-selection nil :inherit 'company-tooltip :background "gray15")
-      (set-face-attribute 'company-preview nil :background "black")
-      (set-face-attribute 'company-preview-common nil :inherit 'company-preview :foreground "gray40")
-      (set-face-attribute 'company-scrollbar-bg nil :inherit 'company-tooltip :background "gray20")
-      (set-face-attribute 'company-scrollbar-fg nil :background "gray40"))
+      ;; Facing
+      (unless (face-attribute 'company-tooltip :background)
+        (set-face-attribute 'company-tooltip nil :background "black" :foreground "gray40")
+        (set-face-attribute 'company-tooltip-selection nil :inherit 'company-tooltip :background "gray15")
+        (set-face-attribute 'company-preview nil :background "black")
+        (set-face-attribute 'company-preview-common nil :inherit 'company-preview :foreground "gray40")
+        (set-face-attribute 'company-scrollbar-bg nil :inherit 'company-tooltip :background "gray20")
+        (set-face-attribute 'company-scrollbar-fg nil :background "gray40"))
 
-    ;; Default backends
-    (setq company-backends '((company-files
-                              company-yasnippet)
-                             (company-abbrev company-dabbrev)))
-    ;; Use the tab-and-go frontend.
-    ;; Allows TAB to select and complete at the same time.
+      ;; Default backends
 
 
-    (defun company-smart-complete ()
-      (interactive)
-      (setq company-echo-metadata-frontend-bypass t)
-      (cond
-       (company-selection-changed
-        (company-complete-selection))
-       (company-candidates
-        (company-select-next)
-        (company-complete-selection))
-       (t
-        (company-auto-begin)
-        (company-select-next))))
+      (setq company-backends '((company-tabnine
+                                company-files
+                                company-yasnippet)
+                               ))
 
 
-    (add-to-list 'company-backends #'company-tabnine)
-    (add-hook 'comppany-mode #' company-smart-complete)
-    ;; Activating globally
-    (global-company-mode t)
-    )
+      ;; Use the tab-and-go frontend.
+      ;; Allows TAB to select and complete at the same time.
+
+
+      (defun company-smart-complete ()
+        (interactive)
+        (setq company-echo-metadata-frontend-bypass t)
+        (cond
+         (company-selection-changed
+          (company-complete-selection))
+         (company-candidates
+          (company-select-next)
+          (company-complete-selection))
+         (t
+          (company-auto-begin)
+          (company-select-next))))
+
+
+      ;; (add-hook 'comppany-mode #' company-smart-complete)
+      ;; Activating globally
+      (global-company-mode t)
+      )
 
 #+end_src
 *** company-quickhelp
@@ -1998,7 +2001,6 @@ http://endlessparentheses.com/improving-projectile-with-extra-commands.html?sour
        (lsp-message-project-root-warning t)
        :init
        (require 'lsp-clients)
-       (add-hook 'python-mode-hook #'lsp)
        (add-hook 'c++-mode-hook #'lsp)
        (add-hook 'c-mode-hook #'lsp)
        (add-hook 'go-mode-hook #'lsp)
@@ -2038,11 +2040,8 @@ http://endlessparentheses.com/improving-projectile-with-extra-commands.html?sour
 
      ;; (use-package company-lsp
      ;;   :straight t
-     ;;   :after company lsp-mode latex-mode
-     ;;   :config
-     ;;   (add-to-list 'company-backends 'company-lsp)
-     ;; )
-
+     ;;   :defer t
+     ;;   :commands company-lsp)
 
      ;; (use-package lsp-treemacs
      ;;   :straight (lsp-treemacs :type git :host github :repo "emacs-lsp/lsp-treemacs")
@@ -2107,7 +2106,7 @@ CLOSED: [2019-08-08 Thu 14:56]
 - [[https://github.com/enricoschumann/orgutils][enricoschumann/orgutils: R utilities for working with Org files]]
 #+begin_src emacs-lisp :tangle yes
   (straight-use-package 'ess)
-    ;;(require 'ess-site)
+  ;;(require 'ess-site)
   (require 'ess-r-mode)
   (when (not (boundp 'ess-r-mode-hook))
     (setq ess-r-mode-hook nil ))
@@ -2118,20 +2117,14 @@ CLOSED: [2019-08-08 Thu 14:56]
 
   (add-to-list 'auto-mode-alist '("\\.[rR]\\'" . ess-r-mode))
 
-      (defun gtrun/add-company-backend-ess ()
-        (pop company-backends)
-        (setq-local company-backends
-                    (append '((:separate company-R-args company-R-objects company-R-library
-                                              company-tabnine))
-                            company-backends)))
 
-      (add-hook 'ess-r-mode-hook 'gtrun/add-company-backend-ess)
-
-   ;; (require 'ess-r-mode)
-      ;; (straight-use-package 'ess)
-      ;; (require 'ess)
-      (straight-use-package 'ess-R-data-view)
-      (require 'ess-R-data-view)
+  (add-hook 'ess-r-mode-hook 'gtrun/add-company-backend-global)
+  (add-hook 'go-mode-hook 'gtrun/add-company-backend-global)
+  ;; (require 'ess-r-mode)
+  ;; (straight-use-package 'ess)
+  ;; (require 'ess)
+  (straight-use-package 'ess-R-data-view)
+  (require 'ess-R-data-view)
 #+end_src
 
 poly
@@ -2142,8 +2135,7 @@ poly
 
 (straight-use-package 'poly-markdown)
 (require 'poly-markdown)
-(add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
-
+(add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown-mode))
 #+end_src
 ** Go
 *** default
@@ -2158,15 +2150,15 @@ poly
 ** Python
 *** default
 #+begin_src emacs-lisp :tangle yes
-    (use-package python
+  (use-package python
     :ensure nil
     :config
-
-  (add-hook 'python-mode-hook 
-        (lambda () 
-          (unless (eq buffer-file-name nil) (flymake-mode 1)) ;dont invoke flymake on temporary buffers for the interpreter
-          (flycheck-mode 1)
-          (outline-minor-mode -1)))
+    
+    (add-hook 'python-mode-hook 
+              (lambda () 
+                (unless (eq buffer-file-name nil) (flymake-mode 1)) ;dont invoke flymake on temporary buffers for the interpreter
+                (flycheck-mode 1)
+                (outline-minor-mode -1)))
 
     )
 #+end_src
@@ -2175,7 +2167,11 @@ poly
   (use-package lsp-python-ms
     :straight t
     :demand t
-    :hook (python-mode . lsp)
+    :hook
+    (python-mode . (lambda ()
+                     (require 'lsp-python-ms)
+                     (lsp)))
+
     )
 #+end_src
 
@@ -2193,6 +2189,16 @@ poly
   ;;       "$out/opt/mspyls/Microsoft.Python.LanguageServer")
 #+end_src
 
+#+begin_src emacs-lisp :tangle yes
+    (defun gtrun/add-company-backend-python ()
+      (pop company-backends)
+      (setq-local company-backends
+                  (append '((company-tabnine company-files company-yasnippet))
+                          company-backends)))
+
+  (add-hook 'python-mode-hook 'gtrun/add-company-backend-python)
+
+#+end_src
 *** [[https://github.com/dzop/emacs-jupyter][dzop/emacs-jupyter: An interface to communicate with Jupyter kernels.]]
 ** Latex
 *** Acutex
