@@ -393,6 +393,7 @@
         (setq truncate-lines nil))
 
       (add-hook 'text-mode-hook 'gtrun/truncate-lines-hook)
+      (add-hook 'elfeed-show-mode-hook 'gtrun/truncate-lines-hook)
 
 (use-package dired-rainbow
    :straight t
@@ -1292,6 +1293,7 @@
 
   )
 
+
 ;; (use-package company-lsp
 ;;   :straight t
 ;;   :after company lsp-mode latex-mode
@@ -1354,7 +1356,7 @@
     (defun gtrun/add-company-backend-ess ()
       (pop company-backends)
       (setq-local company-backends
-                  (append '((company-R-args company-R-objects company-R-library
+                  (append '((:separate company-R-args company-R-objects company-R-library
                                             company-tabnine))
                           company-backends)))
 
@@ -1512,6 +1514,8 @@
 
 (straight-use-package 'jupyter)
 (require 'jupyter)
+(setq jupyter-runtime-directory "~/.local/share/jupyter/runtime")
+(setq ob-async-no-async-languages-alist '("jupyter-python" "jupyter-julia"))
 
 (straight-use-package 'jeison)
 
@@ -1520,133 +1524,137 @@
 
 (straight-use-package 'git)
 
- (defun org-git-version ()
-   "The Git version of org-mode.
+(defun org-git-version ()
+  "The Git version of org-mode.
  Inserted by installing org-mode or when a release is made."
-   (require 'git)
-   (let ((git-repo (expand-file-name
-                    "straight/repos/org/" user-emacs-directory)))
-     (string-trim
+  (require 'git)
+  (let ((git-repo (expand-file-name
+                   "straight/repos/org/" user-emacs-directory)))
+    (string-trim
+     (git-run "describe"
+              "--match=release\*"
+              "--abbrev=6"
+              "HEAD"))))
+
+(defun org-release ()
+  "The release version of org-mode.
+ Inserted by installing org-mode or when a release is made."
+  (require 'git)
+  (let ((git-repo (expand-file-name
+                   "straight/repos/org/" user-emacs-directory)))
+    (string-trim
+     (string-remove-prefix
+      "release_"
       (git-run "describe"
                "--match=release\*"
-               "--abbrev=6"
-               "HEAD"))))
-
- (defun org-release ()
-   "The release version of org-mode.
- Inserted by installing org-mode or when a release is made."
-   (require 'git)
-   (let ((git-repo (expand-file-name
-                    "straight/repos/org/" user-emacs-directory)))
-     (string-trim
-      (string-remove-prefix
-       "release_"
-       (git-run "describe"
-                "--match=release\*"
-                "--abbrev=0"
-                "HEAD")))))
- (provide 'org-version)
+               "--abbrev=0"
+               "HEAD")))))
+(provide 'org-version)
 
 (straight-use-package 'org)
 
-  (push (expand-file-name "~/.emacs.d/straight/repos/org/contrib/lisp") load-path)
+(push (expand-file-name "~/.emacs.d/straight/repos/org/contrib/lisp") load-path)
 
-    (require 'org-mac-link)
+(require 'org-mac-link)
 
 
-        (define-key org-mode-map [remap org-set-tags-command] #'counsel-org-tag)
-        ;; Global
-        (setq org-startup-indented t
-              org-enforce-todo-dependencies t
-              org-cycle-separator-lines 2
-              org-blank-before-new-entry '((heading) (plain-list-item . auto))
-              org-insert-heading-respect-content nil
-              org-reverse-note-order nil
-              org-show-following-heading t
-              org-show-hierarchy-above t
-              org-show-siblings '((default))
-              org-id-method 'uuidgen
-              org-deadline-warning-days 30
-              org-table-export-default-format "orgtbl-to-csv"
-              org-src-window-setup 'other-window
-              org-clone-delete-id t
-              org-cycle-include-plain-lists t
-              org-src-fontify-natively t
-              org-src-tab-acts-natively t
-              org-display-inline-images nil
-              org-hide-emphasis-markers t)
+(define-key org-mode-map [remap org-set-tags-command] #'counsel-org-tag)
+;; Global
+(setq org-startup-indented t
+      org-enforce-todo-dependencies t
+      org-cycle-separator-lines 2
+      org-blank-before-new-entry '((heading) (plain-list-item . auto))
+      org-insert-heading-respect-content nil
+      org-reverse-note-order nil
+      org-show-following-heading t
+      org-show-hierarchy-above t
+      org-show-siblings '((default))
+      org-id-method 'uuidgen
+      org-deadline-warning-days 30
+      org-table-export-default-format "orgtbl-to-csv"
+      org-src-window-setup 'other-window
+      org-clone-delete-id t
+      org-cycle-include-plain-lists t
+      org-src-fontify-natively t
+      org-src-tab-acts-natively t
+      org-display-inline-images nil
+      org-hide-emphasis-markers t)
 
-        ;; Activate spelling
-        (add-hook 'org-mode 'flyspell-mode)
-        (add-to-list 'ispell-skip-region-alist '("^#+begin_src" . "^#+end_src"))
+;; Activate spelling
+(add-hook 'org-mode 'flyspell-mode)
+(add-to-list 'ispell-skip-region-alist '("^#+begin_src" . "^#+end_src"))
 
-        ;; Todo part
-        (setq org-todo-keywords '(;; Baseline sequence
-                                  (sequence "☞ TODO(t)" "☟ NEXT(n)" "✰ Important(i)" "⚑ WAITING(w)"  "💬 MEETING(M)" "|" "✔ DONE(d!)" "✘ CANCELED(c@)" "⚔ STARTED(s)")
+;; Todo part
+(setq org-todo-keywords '(;; Baseline sequence
+                          (sequence "☞ TODO(t)" "☟ NEXT(n)" "✰ Important(i)" "⚑ WAITING(w)"  "💬 MEETING(M)" "|" "✔ DONE(d!)" "✘ CANCELED(c@)" "⚔ STARTED(s)")
 
-                                  ;; Specific "to complete
-                                  (sequence "📄 REVIEW(r)" "📚 RELEASE(R)" " 📩 MAIL(m)" "|" "❤ Love(l)")
+                          ;; Specific "to complete
+                          (sequence "📄 REVIEW(r)" "📚 RELEASE(R)" " 📩 MAIL(m)" "|" "❤ Love(l)")
 
-                                  ;; Note information
-                                  (sequence "|" "✍ NOTE(N)" " 🔮 EVENT(E)" "☕ BREAK(b)" "FIXME"))
+                          ;; Note information
+                          (sequence "|" "✍ NOTE(N)" " 🔮 EVENT(E)" "☕ BREAK(b)" "FIXME"))
 
-              org-todo-state-tags-triggers '(("CANCELLED" ("CANCELLED" . t))
-                                             ("WAITING"   ("WAITING"   . t))
-                                             ("STARTED" ("STARTED" . t)))
+      org-todo-state-tags-triggers '(("CANCELLED" ("CANCELLED" . t))
+                                     ("WAITING"   ("WAITING"   . t))
+                                     ("STARTED" ("STARTED" . t)))
 
-              ;; Priority definition
-              org-highest-priority ?A
-              org-lowest-priority ?E
-              org-default-priority ?C
+      ;; Priority definition
+      org-highest-priority ?A
+      org-lowest-priority ?E
+      org-default-priority ?C
 
-              ;; Archiving
-              org-archive-mark-done t
-              org-log-done 'time
-                                                ;org-archive-location "%s_archive::* Archived Tasks"
-              org-time-clocksum-format '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t)
-              org-archive-location (concat "%s_archive_" (format-time-string "%Y" (current-time)) "::")
+      ;; Archiving
+      org-archive-mark-done t
+      org-log-done 'time
+                                        ;org-archive-location "%s_archive::* Archived Tasks"
+      org-time-clocksum-format '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t)
+      org-archive-location (concat "%s_archive_" (format-time-string "%Y" (current-time)) "::")
 
-              ;; Refiling
-              org-refile-targets '((org-agenda-files . (:maxlevel . 6)))
-              org-completion-use-ido nil
-              org-refile-use-outline-path 'file
-              org-outline-path-complete-in-steps nil
-              org-refile-allow-creating-parent-nodes 'confirm)
+      ;; Refiling
+      org-refile-targets '((org-agenda-files . (:maxlevel . 6)))
+      org-completion-use-ido nil
+      org-refile-use-outline-path 'file
+      org-outline-path-complete-in-steps nil
+      org-refile-allow-creating-parent-nodes 'confirm)
 
-        ;; Change task state to STARTED when clocking in
-        (setq org-clock-in-switch-to-state "⚔ STARTED")
-        ;; Save clock data and notes in the LOGBOOK drawer
-        (setq org-clock-into-drawer t)
-        ;; Removes clocked tasks with 0:00 duration
-        (setq org-clock-out-remove-zero-time-clocks t) 
-        ;; Show the clocked-in task - if any - in the header line
-        (setq org-ellipsis "☯")
-        (setq org-todo-keyword-faces
-              '(("☞ TODO" . (:foreground "#ff39a3" :weight bold))
-                ("⚔ STARTED"  . "#E35DBF")
-                ("✘ CANCELED" . (:foreground "white" :background "#4d4d4d" :weight bold))
-                ("⚑ WAITING" . "pink")
-                ("☕ BREAK" . "gray")
-                ("❤ Love" . (:foreground "blue" 
-                                         ;; :background "#7A586A"
-                                         :weight bold))
-                ("✔ DONE" . "#008080")
-                ("FIXME" . "IndianRed")
-                ))
+;; Change task state to STARTED when clocking in
+(setq org-clock-in-switch-to-state "⚔ STARTED")
+;; Save clock data and notes in the LOGBOOK drawer
+(setq org-clock-into-drawer t)
+;; Removes clocked tasks with 0:00 duration
+(setq org-clock-out-remove-zero-time-clocks t) 
+;; Show the clocked-in task - if any - in the header line
+(setq org-ellipsis "☯")
+(setq org-todo-keyword-faces
+      '(("☞ TODO" . (:foreground "#ff39a3" :weight bold))
+        ("⚔ STARTED"  . "#E35DBF")
+        ("✘ CANCELED" . (:foreground "white" :background "#4d4d4d" :weight bold))
+        ("⚑ WAITING" . "pink")
+        ("☕ BREAK" . "gray")
+        ("❤ Love" . (:foreground "blue" 
+                                 ;; :background "#7A586A"
+                                 :weight bold))
+        ("✔ DONE" . "#008080")
+        ("FIXME" . "IndianRed")
+        ))
 
-        (org-babel-do-load-languages 'org-babel-load-languages
-                                     '((emacs-lisp . t)
-                                       (dot . t)
-                                       (ditaa . t)
-                                       (R . t)
-                                       (python . t)
-                                       (gnuplot . t)
-                                       (lisp . t)
-                                       (shell . t)
-                                       (org . t)
-                                       (plantuml . t)
-                                       (latex . t)
-                                       (jupyter . t)))
+(org-babel-do-load-languages 'org-babel-load-languages
+                             '((emacs-lisp . t)
+                               (dot . t)
+                               (ditaa . t)
+                               (R . t)
+                               (python . t)
+                               (gnuplot . t)
+                               (lisp . t)
+                               (shell . t)
+                               (org . t)
+                               (plantuml . t)
+                               (latex . t)
+                               (jupyter . t)
+
+                               ))
+;;(org-babel-jupyter-override-src-block "python")
+;;(org-babel-jupyter-restore-src-block "python")
 
 (straight-use-package '(helm-deft :type git
                                   :host github
@@ -2371,6 +2379,50 @@ _p_: Previous    _L_: List
 (straight-use-package 'w3m)
 (require 'w3m)
 
+(use-package elfeed
+  :straight t
+  :bind (:map elfeed-search-mode-map
+              ("q" . bjm/elfeed-save-db-and-bury)
+              ("Q" . bjm/elfeed-save-db-and-bury)
+              ("m" . elfeed-toggle-star)
+              ("M" . elfeed-toggle-star)
+              )
+  )
+(global-set-key (kbd "C-x w") 'elfeed)
+(setf url-queue-timeout 30)
+(setq elfeed-db-directory "~/Dropbox/shared/elfeeddb")
+;;functions to support syncing .elfeed between machines
+;;makes sure elfeed reads index from disk before launching
+(defun bjm/elfeed-load-db-and-open ()
+  "Wrapper to load the elfeed db from disk before opening"
+  (interactive)
+  (elfeed-db-load)
+  (elfeed)
+  (elfeed-search-update--force))
+
+;;write to disk when quiting
+
+(defun bjm/elfeed-save-db-and-bury ()
+  "Wrapper to save the elfeed db to disk before burying buffer"
+  (interactive)
+  (elfeed-db-save)
+  (quit-window))
+
+(defun elfeed-mark-all-as-read ()
+  (interactive)
+  (mark-whole-buffer)
+  (elfeed-search-untag-all-unread))
+
+(straight-use-package 'elfeed-org)
+(require 'elfeed)
+(require 'elfeed-org)
+(elfeed-org)
+(setq rmh-elfeed-org-files (list "~/Documents/org-notes/elfeed.org"))
+
+(straight-use-package 'elfeed-goodies)
+(require 'elfeed-goodies)
+(elfeed-goodies/setup)
+
 (straight-use-package 'helpful)
 
 (straight-use-package 'info-buffer)
@@ -2564,7 +2616,7 @@ Version 2017-10-09"
       (start-process "" nil "/Applications/iTerm.app/Contents/MacOS/iTerm2" default-directory)))
    ((string-equal system-type "gnu/linux")
     (let ((process-connection-type nil))
-      (start-process "" nil "termite"
+      (start-process "" nil "kitty"
                      (concat "--directory=" default-directory))))))
 
 (defun edit-current-file-as-root ()
