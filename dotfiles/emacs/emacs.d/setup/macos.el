@@ -25,6 +25,10 @@
 ;;(add-hook 'after-init-hook #'org-reload)
 (add-hook 'after-init-hook #'org-super-agenda-mode)
 
+;; where to store persistant files
+;;(setq bm-repository-file (f-join user-emacs-directory "bm-macos-data"))
+(setq bm-repository-file (f-join no-littering-var-directory "bm-macos-data"))
+
 (straight-use-package 'pyim)
 (require 'pyim)
 (require 'pyim-basedict) ; 拼音词库设置，五笔用户 *不需要* 此行设置
@@ -110,7 +114,6 @@
 
 (setq bookmark-default-file
       (concat user-emacs-directory "var/bookmark-macos-default.el"))
-
 (setq-default cursor-type 'bar)
 
 (blink-cursor-mode -1)

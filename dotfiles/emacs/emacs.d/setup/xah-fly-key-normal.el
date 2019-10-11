@@ -90,11 +90,9 @@
      ("SPC" . xah-fly-leader-key-map)
      ("2" . org-agenda)
      ("3". helm-bookmarks)
-     ("4". bm-show-all)
-
+     ("4". adq/helm-bm-list-all)
      ("q" . quit-window)
      ("a" . counsel-M-x)
-     ;;                 ("w" . snails)
      ("i" . previous-line)
      ("k" . next-line )
      ("b" . backward-word)
@@ -198,8 +196,6 @@
    ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
    ((eq major-mode 'dired-mode) (call-interactively 'vinegar/up-directory))
    (t nil)))
-
-
 
 
 

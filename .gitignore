@@ -1,6 +1,7 @@
 ## nixos
 result
 
+
 .DS_Store
 dotfiles/emacs/emacs.d/var
 dotfiles/emacs/emacs.d/straight
@@ -10,7 +11,8 @@ dotfiles/emacs/emacs.d/setup
 dotfiles/emacs/emacs.d/elpa
 dotfiles/emacs/emacs.d/pyim/rime
 Pattern.org
-
+##Emacs bookmarks
+bm-macos-data
 ## Emacs librime config
 dotfiles/emacs/emacs.d/pyim/rime/build
 dotfiles/emacs/emacs.d/pyim/rime/easy_en.userdb

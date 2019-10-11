@@ -259,7 +259,7 @@ I would like use ErgoDox keyboard on my linux environment
 
     #+end_src
 
-**** command-init(key)
+**** Normal-command-init(key)
     #+begin_src emacs-lisp :tangle "./setup/xah-fly-key-normal.el"
       (defun xah-fly-command-mode-init ()
         "Set command mode keys.
@@ -275,11 +275,9 @@ I would like use ErgoDox keyboard on my linux environment
            ("SPC" . xah-fly-leader-key-map)
            ("2" . org-agenda)
            ("3". helm-bookmarks)
-           ("4". bm-show-all)
-
+           ("4". adq/helm-bm-list-all)
            ("q" . quit-window)
            ("a" . counsel-M-x)
-           ;;                 ("w" . snails)
            ("i" . previous-line)
            ("k" . next-line )
            ("b" . backward-word)
@@ -392,8 +390,6 @@ I would like use ErgoDox keyboard on my linux environment
 
 
 
-
-
       (provide 'xah-fly-key-normal)
     #+end_src
 
@@ -500,7 +496,7 @@ I would like use ErgoDox keyboard on my linux environment
 
     #+end_src
 
-**** command-init(key)
+**** Ergo-command-init(key)
     #+begin_src emacs-lisp :tangle "./setup/xah-fly-key-ergo.el"
       (defun xah-fly-command-mode-init ()
         "Set command mode keys.
@@ -516,10 +512,9 @@ I would like use ErgoDox keyboard on my linux environment
            ("SPC" . xah-fly-leader-key-map)
            ("2" . org-agenda)
            ("3". helm-bookmarks)
-           ("4". bm-show-all)
+           ("4". adq/helm-bm-list-all)
            ("q" . quit-window)
            ("a" . counsel-M-x)
-           ;;           ("w" . snails)
            ("i" . previous-line)
            ("k" . next-line )
            ("b" . backward-word)
@@ -2920,13 +2915,11 @@ See also: https://stackoverflow.com/questions/9547912/emacs-calendar-show-more-t
 ** org-bookmark-heading
 - [[https://github.com/Soft/emacs.d/blob/master/init/init-bookmarks.el#L58:L155][emacs.d/init-bookmarks.el at master · Soft/emacs.d]]
 #+begin_src emacs-lisp :tangle yes
-
   (use-package bm
     :straight t
     :demand t
     :init
-    (setq bm-restore-repository-on-load t
-          bm-repository-file (f-join user-emacs-directory "bm-data"))
+    (setq bm-restore-repository-on-load t)
     :config
 
     (bind-keys
@@ -3029,16 +3022,17 @@ See also: https://stackoverflow.com/questions/9547912/emacs-calendar-show-more-t
     (bind-key "C-c m" #'adq/hydra-bm/body))
 #+end_src
 
-#+begin_src emacs-lisp :tangle "./setup/linux.el"
+#+begin_src emacs-lisp :tangle "./setup/macos.el"
   ;; where to store persistant files
-  (setq bm-repository-file "~/.emacs.d/var/bm-macos-repository")
+  ;;(setq bm-repository-file (f-join user-emacs-directory "bm-macos-data"))
+  (setq bm-repository-file (f-join no-littering-var-directory "bm-macos-data"))
 #+end_src
 
 #+begin_src emacs-lisp :tangle "./setup/linux.el"
   ;; where to store persistant files
-  (setq bm-repository-file "~/.emacs.d/var/bm-linux-repository")
+(setq bm-repository-file (f-join no-littering-var-directory "bm-linux-data"))
 #+end_src
-
+** [[https://github.com/alphapapa/org-sidebar][alphapapa/org-sidebar: A helpful sidebar for Org mode]]
 * Exporting
 ** latex
 *** ox-latex
@@ -3074,36 +3068,32 @@ See also: https://stackoverflow.com/questions/9547912/emacs-calendar-show-more-t
 #+end_src
 ** org-publish-alish
 #+begin_src emacs-lisp :tangle yes
-(setq org-publish-project-alist
-      '(("NSM"
-	 :base-directory "~/Documents/org-notes/NSM-GTD"
-	 :publishing-function org-html-publish-to-html
-	 :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
-	 :include ["workflow.org"]
-	 :exclude "Pattern.org"
-
-	 )
-	("init"
-	 :base-directory "~/.emacs.d"
-	 :publishing-function org-html-publish-to-html
-	 :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
-	 :exclude "Pattern.org"
-	 )
-	("art"
-	 :base-directory "~/Documents/org-notes/art"
-	 :publishing-function org-html-publish-to-html
-	 :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
-	 :exclude "Pattern.org"
-
-
-	 )
-	("course"
-	 :base-directory "~/Documents/org-notes/course"
-	 :publishing-function org-html-publish-to-html
-	 :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
-	 :exclude "Pattern.org"
-	 )
-	))
+  (setq org-publish-project-alist
+        '(("nsm"
+           :base-directory "~/Documents/org-notes/NSM-GTD"
+           :publishing-function org-html-publish-to-html
+           :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
+           :exclude "Pattern.org"
+           )
+          ("init"
+           :base-directory "~/.emacs.d"
+           :publishing-function org-html-publish-to-html
+           :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
+           :exclude "Pattern.org"
+           )
+          ("art"
+           :base-directory "~/Documents/org-notes/art"
+           :publishing-function org-html-publish-to-html
+           :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
+           :exclude "Pattern.org"
+           )
+          ("course"
+           :base-directory "~/Documents/org-notes/course"
+           :publishing-function org-html-publish-to-html
+           :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
+           :exclude "Pattern.org"
+           )
+          ))
 #+end_src
 ** org-mode : Mp3 HTML
 #+begin_src emacs-lisp :tangle yes
@@ -3816,49 +3806,49 @@ please test your init file when you modified done.
 #+end_src
 *** setup/macos.el
 #+begin_src emacs-lisp :tangle "./setup/macos.el"
-(setq bookmark-default-file
-      (concat user-emacs-directory "var/bookmark-macos-default.el"))
+  (setq bookmark-default-file
+        (concat user-emacs-directory "var/bookmark-macos-default.el"))
+  (setq-default cursor-type 'bar)
 
-(setq-default cursor-type 'bar)
+  (blink-cursor-mode -1)
+  (set-cursor-color "yellow1")
 
-(blink-cursor-mode -1)
-(set-cursor-color "yellow1")
-
-(setq insert-directory-program "/usr/local/bin/gls")
-(org-link-set-parameters "skim" :follow #'org-mac-skim-open)
-(defun org-mac-skim-open (uri)
-  "Visit page of pdf in Skim"
-  (let* ((page (when (string-match "::\\(.+\\)\\'" uri)
-                 (match-string 1 uri)))
-         (document (substring uri 0 (match-beginning 0))))
-    (do-applescript
-     (concat
-      "tell application \"Skim\"\n"
-      "activate\n"
-      "set theDoc to \"" document "\"\n"
-      "set thePage to " page "\n"
-      "open theDoc\n"
-      "go document 1 to page thePage of document 1\n"
-      "end tell"))))
+  (setq insert-directory-program "/usr/local/bin/gls")
+  (org-link-set-parameters "skim" :follow #'org-mac-skim-open)
+  (defun org-mac-skim-open (uri)
+    "Visit page of pdf in Skim"
+    (let* ((page (when (string-match "::\\(.+\\)\\'" uri)
+                   (match-string 1 uri)))
+           (document (substring uri 0 (match-beginning 0))))
+      (do-applescript
+       (concat
+        "tell application \"Skim\"\n"
+        "activate\n"
+        "set theDoc to \"" document "\"\n"
+        "set thePage to " page "\n"
+        "open theDoc\n"
+        "go document 1 to page thePage of document 1\n"
+        "end tell"))))
 
 
-;; librime 
-(setq load-path (cons (file-truename "~/.emacs.d/") load-path))
+  ;; librime 
+  (setq load-path (cons (file-truename "~/.emacs.d/") load-path))
 
-(require 'pyim)
-(require 'posframe)
-(require 'liberime)
+  (require 'pyim)
+  (require 'posframe)
+  (require 'liberime)
 
-(setq pyim-page-tooltip 'posframe)
-(setq pyim-page-length 9)
+  (setq pyim-page-tooltip 'posframe)
+  (setq pyim-page-length 9)
 
-(liberime-start "/Library/Input Methods/Squirrel.app/Contents/SharedSupport" (file-truename "~/.emacs.d/pyim/rime/"))
-(liberime-select-schema "luna_pinyin_simp")
-(setq pyim-default-scheme 'rime-quanpin)
+  (liberime-start "/Library/Input Methods/Squirrel.app/Contents/SharedSupport" (file-truename "~/.emacs.d/pyim/rime/"))
+  (liberime-select-schema "luna_pinyin_simp")
+  (setq pyim-default-scheme 'rime-quanpin)
 
-(provide 'macos)
+  (provide 'macos)
 
 #+end_src
+
 ** Linux
 #+begin_src emacs-lisp :tangle yes
 (use-package linux
@@ -3869,27 +3859,27 @@ please test your init file when you modified done.
 
 #+begin_src emacs-lisp :tangle "./setup/linux.el"
   (setq-default cursor-type 'box)
-(setq bookmark-default-file
-      (concat user-emacs-directory "var/bookmark-linux-default.el"))
-     ;; librime 
-    ;; (setq load-path (cons (file-truename "~/.config/nixpkgs/dotfiles/emacs/emacs.d/") load-path))
+  (setq bookmark-default-file
+        (concat user-emacs-directory "var/bookmark-linux-default.el"))
+  ;; librime 
+  ;; (setq load-path (cons (file-truename "~/.config/nixpkgs/dotfiles/emacs/emacs.d/") load-path))
 
-    ;;(require 'pyim)
-    ;;  (require 'posframe)
-    ;;  (require 'liberime)
+  ;;(require 'pyim)
+  ;;  (require 'posframe)
+  ;;  (require 'liberime)
 
-    ;; (setq pyim-page-tooltip 'posframe)
-    ;;  (setq pyim-page-length 9)
+  ;; (setq pyim-page-tooltip 'posframe)
+  ;;  (setq pyim-page-length 9)
 
-    ;; (liberime-start
-    ;; (expand-file-name "~/.emacs.d/pyim/rime/"))
-    ;; (liberime-select-schema "luna_pinyin_simp")
-    ;; (setq pyim-default-scheme 'rime-quanpin)
+  ;; (liberime-start
+  ;; (expand-file-name "~/.emacs.d/pyim/rime/"))
+  ;; (liberime-select-schema "luna_pinyin_simp")
+  ;; (setq pyim-default-scheme 'rime-quanpin)
 
-     (blink-cursor-mode -1)
-     (set-cursor-color "IndianRed3")
+  (blink-cursor-mode -1)
+  (set-cursor-color "IndianRed3")
 
-     (provide 'linux)
+  (provide 'linux)
 #+end_src
 ** Undo
    #+begin_src emacs-lisp :tangle yes

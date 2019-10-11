@@ -608,9 +608,14 @@
     (set-face-attribute 'company-scrollbar-fg nil :background "gray40"))
 
   ;; Default backends
-  (setq company-backends '((company-files
+
+
+  (setq company-backends '((company-tabnine
+                            company-files
                             company-yasnippet)
-                           (company-abbrev company-dabbrev)))
+                           ))
+
+
   ;; Use the tab-and-go frontend.
   ;; Allows TAB to select and complete at the same time.
 
@@ -629,8 +634,7 @@
       (company-select-next))))
 
 
-  (add-to-list 'company-backends #'company-tabnine)
-  (add-hook 'comppany-mode #' company-smart-complete)
+  ;; (add-hook 'comppany-mode #' company-smart-complete)
   ;; Activating globally
   (global-company-mode t)
   )
@@ -1256,7 +1260,6 @@
   (lsp-message-project-root-warning t)
   :init
   (require 'lsp-clients)
-  (add-hook 'python-mode-hook #'lsp)
   (add-hook 'c++-mode-hook #'lsp)
   (add-hook 'c-mode-hook #'lsp)
   (add-hook 'go-mode-hook #'lsp)
@@ -1296,11 +1299,8 @@
 
 ;; (use-package company-lsp
 ;;   :straight t
-;;   :after company lsp-mode latex-mode
-;;   :config
-;;   (add-to-list 'company-backends 'company-lsp)
-;; )
-
+;;   :defer t
+;;   :commands company-lsp)
 
 ;; (use-package lsp-treemacs
 ;;   :straight (lsp-treemacs :type git :host github :repo "emacs-lsp/lsp-treemacs")
@@ -1342,7 +1342,7 @@
 (setq slime-contribs '(slime-fancy)))
 
 (straight-use-package 'ess)
-  ;;(require 'ess-site)
+;;(require 'ess-site)
 (require 'ess-r-mode)
 (when (not (boundp 'ess-r-mode-hook))
   (setq ess-r-mode-hook nil ))
@@ -1353,27 +1353,25 @@
 
 (add-to-list 'auto-mode-alist '("\\.[rR]\\'" . ess-r-mode))
 
-    (defun gtrun/add-company-backend-ess ()
+ (defun gtrun/add-company-backend-ess ()
       (pop company-backends)
       (setq-local company-backends
                   (append '((:separate company-R-args company-R-objects company-R-library
                                             company-tabnine))
                           company-backends)))
-
-    (add-hook 'ess-r-mode-hook 'gtrun/add-company-backend-ess)
-
- ;; (require 'ess-r-mode)
-    ;; (straight-use-package 'ess)
-    ;; (require 'ess)
-    (straight-use-package 'ess-R-data-view)
-    (require 'ess-R-data-view)
+(add-hook 'ess-r-mode-hook 'gtrun/add-company-backend-ess)
+;; (require 'ess-r-mode)
+;; (straight-use-package 'ess)
+;; (require 'ess)
+(straight-use-package 'ess-R-data-view)
+(require 'ess-R-data-view)
 
 (straight-use-package 'polymode)
 (require 'polymode)
 
 (straight-use-package 'poly-markdown)
 (require 'poly-markdown)
-(add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown-mode))
 
 (use-package go-mode
 :straight t
@@ -1385,19 +1383,32 @@
   :ensure nil
   :config
 
-(add-hook 'python-mode-hook 
-      (lambda () 
-        (unless (eq buffer-file-name nil) (flymake-mode 1)) ;dont invoke flymake on temporary buffers for the interpreter
-        (flycheck-mode 1)
-        (outline-minor-mode -1)))
+  (add-hook 'python-mode-hook 
+            (lambda () 
+              (unless (eq buffer-file-name nil) (flymake-mode 1)) ;dont invoke flymake on temporary buffers for the interpreter
+              (flycheck-mode 1)
+              (outline-minor-mode -1)))
 
   )
 
 (use-package lsp-python-ms
   :straight t
   :demand t
-  :hook (python-mode . lsp)
+  :hook
+  (python-mode . (lambda ()
+                   (require 'lsp-python-ms)
+                   (lsp)))
+
   )
+
+(defun gtrun/add-company-backend-global ()
+    (pop company-backends)
+    (setq-local company-backends
+                (append '((company-tabnine company-files company-yasnippet))
+                        company-backends)))
+
+(add-hook 'go-mode-hook 'gtrun/add-company-backend-global)
+(add-hook 'python-mode-hook 'gtrun/add-company-backend-global)
 
 (use-package tex-site
   :ensure nil
@@ -1923,8 +1934,7 @@ See also: https://stackoverflow.com/questions/9547912/emacs-calendar-show-more-t
   :straight t
   :demand t
   :init
-  (setq bm-restore-repository-on-load t
-        bm-repository-file (f-join user-emacs-directory "bm-data"))
+  (setq bm-restore-repository-on-load t)
   :config
 
   (bind-keys
@@ -2053,35 +2063,31 @@ _p_: Previous    _L_: List
 (add-to-list 'org-export-filter-plain-text-functions 'my-html-mark-tag)
 
 (setq org-publish-project-alist
-      '(("NSM"
-	 :base-directory "~/Documents/org-notes/NSM-GTD"
-	 :publishing-function org-html-publish-to-html
-	 :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
-	 :include ["workflow.org"]
-	 :exclude "Pattern.org"
-
-	 )
-	("init"
-	 :base-directory "~/.emacs.d"
-	 :publishing-function org-html-publish-to-html
-	 :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
-	 :exclude "Pattern.org"
-	 )
-	("art"
-	 :base-directory "~/Documents/org-notes/art"
-	 :publishing-function org-html-publish-to-html
-	 :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
-	 :exclude "Pattern.org"
-
-
-	 )
-	("course"
-	 :base-directory "~/Documents/org-notes/course"
-	 :publishing-function org-html-publish-to-html
-	 :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
-	 :exclude "Pattern.org"
-	 )
-	))
+      '(("nsm"
+         :base-directory "~/Documents/org-notes/NSM-GTD"
+         :publishing-function org-html-publish-to-html
+         :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
+         :exclude "Pattern.org"
+         )
+        ("init"
+         :base-directory "~/.emacs.d"
+         :publishing-function org-html-publish-to-html
+         :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
+         :exclude "Pattern.org"
+         )
+        ("art"
+         :base-directory "~/Documents/org-notes/art"
+         :publishing-function org-html-publish-to-html
+         :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
+         :exclude "Pattern.org"
+         )
+        ("course"
+         :base-directory "~/Documents/org-notes/course"
+         :publishing-function org-html-publish-to-html
+         :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
+         :exclude "Pattern.org"
+         )
+        ))
 
 (org-add-link-type "audio" #'ignore #'endless/export-audio-link)
 

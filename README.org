@@ -272,6 +272,7 @@ sudo dd bs=1m if=/Users/gtrun/Downloads/nixos-graphical-19.03.173292.65729e08178
 
 ** Git
 *** [[https://github.com/skeeto/lean-static-git][skeeto/lean-static-git: Lean, static Git build for Linux]]
+** [[https://github.com/AGWA/git-crypt][AGWA/git-crypt: Transparent file encryption in git]]
 * Qemu
 ** Debian
 *** global

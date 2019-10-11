@@ -24,10 +24,7 @@
 ;;(setq python-shell-interpreter "~/.config/nixpkgs/nixos/overlays/python/result/bin/python")
 
 ;; where to store persistant files
-(setq bm-repository-file "~/.emacs.d/var/bm-macos-repository")
-
-;; where to store persistant files
-(setq bm-repository-file "~/.emacs.d/var/bm-linux-repository")
+(setq bm-repository-file (f-join no-littering-var-directory "bm-linux-data"))
 
 (use-package cnfonts
     :straight t
@@ -65,22 +62,22 @@
 (setq-default cursor-type 'box)
 (setq bookmark-default-file
       (concat user-emacs-directory "var/bookmark-linux-default.el"))
-     ;; librime 
-    ;; (setq load-path (cons (file-truename "~/.config/nixpkgs/dotfiles/emacs/emacs.d/") load-path))
+;; librime 
+;; (setq load-path (cons (file-truename "~/.config/nixpkgs/dotfiles/emacs/emacs.d/") load-path))
 
-    ;;(require 'pyim)
-    ;;  (require 'posframe)
-    ;;  (require 'liberime)
+;;(require 'pyim)
+;;  (require 'posframe)
+;;  (require 'liberime)
 
-    ;; (setq pyim-page-tooltip 'posframe)
-    ;;  (setq pyim-page-length 9)
+;; (setq pyim-page-tooltip 'posframe)
+;;  (setq pyim-page-length 9)
 
-    ;; (liberime-start
-    ;; (expand-file-name "~/.emacs.d/pyim/rime/"))
-    ;; (liberime-select-schema "luna_pinyin_simp")
-    ;; (setq pyim-default-scheme 'rime-quanpin)
+;; (liberime-start
+;; (expand-file-name "~/.emacs.d/pyim/rime/"))
+;; (liberime-select-schema "luna_pinyin_simp")
+;; (setq pyim-default-scheme 'rime-quanpin)
 
-     (blink-cursor-mode -1)
-     (set-cursor-color "IndianRed3")
+(blink-cursor-mode -1)
+(set-cursor-color "IndianRed3")
 
-     (provide 'linux)
+(provide 'linux)
