@@ -27,22 +27,22 @@
 (setq bm-repository-file (f-join no-littering-var-directory "bm-linux-data"))
 
 (use-package cnfonts
-    :straight t
-    :hook ((after-init . cnfonts-enable))
-    :config
+  :straight t
+  :hook ((after-init . cnfonts-enable))
+  :config
   (setq cnfonts-use-cache t)
-    (setq cnfonts-keep-frame-size nil)
-    (add-hook 'window-setup-hook (lambda ()
-                                   (setq cnfonts-keep-frame-size t)))
-    ;; Set profiles
-    (setq cnfonts-directory (concat no-littering-var-directory "cnfonts"))
-    (setq cnfonts-profiles '("program1" "program2" "program3" "org-mode" "read-book"))
-    (setq cnfonts--profiles-steps '(("program1" . 4)
-                                    ("program2" . 5)
-                                    ("program3" . 3)
-                                    ("org-mode" . 6)
-                                    ("read-book" . 8)))
-)
+  (setq cnfonts-keep-frame-size nil)
+  (add-hook 'window-setup-hook (lambda ()
+                                 (setq cnfonts-keep-frame-size t)))
+  ;; Set profiles
+  (setq cnfonts-directory (concat no-littering-var-directory "cnfonts"))
+  (setq cnfonts-profiles '("program1" "program2" "program3" "org-mode" "read-book"))
+  (setq cnfonts--profiles-steps '(("program1" . 4)
+                                  ("program2" . 5)
+                                  ("program3" . 3)
+                                  ("org-mode" . 6)
+                                  ("read-book" . 8)))
+  )
 
 ;; (set-face-attribute
 ;;  'default nil
