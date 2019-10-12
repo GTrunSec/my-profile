@@ -3118,6 +3118,18 @@ See also: https://stackoverflow.com/questions/9547912/emacs-calendar-show-more-t
 (require 'htmlize)
 #+end_src
 ** [[https://github.com/relevance/org-html-slideshow][relevance/org-html-slideshow: JavaScript presentation slides generated from Emacs org-mode]]
+** org-src
+#+begin_src emacs-lisp :tangle yes
+(defun my-org-confirm-babel-evaluate (lang _body)
+  "Return t if LANG is in whitelist."
+  (not (or (string= lang "ditaa")
+           (string= lang "dot")
+           (string= lang "R")
+           (string= lang "python")
+           (string= lang "jupyter-python")
+           (string= lang "plantuml"))))
+  (setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)
+#+end_src
 * Chinese
 ** [[https://github.com/redguardtoo/zhfreq][redguardtoo/zhfreq: processing chinese text using word frequency data]]
 ** [[https://github.com/tumashu/posframe/tree/fc90a1a558200e5c3688c65add9afdea695a2c10][tumashu/posframe at fc90a1a558200e5c3688c65add9afdea695a2c10]]

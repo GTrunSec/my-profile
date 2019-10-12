@@ -3,6 +3,6 @@
 {
   imports = [
     ./r.nix
-    ./python.nix
+    # ./python.nix
   ];
 }

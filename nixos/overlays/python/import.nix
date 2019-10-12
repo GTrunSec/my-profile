@@ -1,4 +1,3 @@
-  
 self: pkgs:
 with pkgs;
 
@@ -27,7 +26,6 @@ let gccOpts = {
     ignoreCollisions = true; # see #31080
   };
 
-  
   python3= python3.override {
     self = self.python3;
     CF = null;

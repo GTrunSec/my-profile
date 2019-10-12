@@ -8,17 +8,18 @@ let
     beautifulsoup4
     scipy
     numpy
-#    bat
+    ipython
+    #bat
 #    google-api-python-client
     # other python packages you want
   ]; 
-  python-with-my-packages = python3.withPackages my-python-packages;
+ python-with-my-packages = python37.withPackages my-python-packages;
 in {
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
     python-with-my-packages
-    #(python35.withPackages(ps: with ps; [bat]))
+    (python3.withPackages(ps: with ps; [ipykernel]))
   ];
 
 }

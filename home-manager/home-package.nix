@@ -35,7 +35,7 @@ in   {
     #nur
     imgcat
     motrix
-    (python3.withPackages (pkgs: with pkgs; [
+    (python37.withPackages (pkgs: with pkgs; [
       # rl algorithms
       pip
       pytest
@@ -47,6 +47,9 @@ in   {
       matplotlib
       sqlalchemy
       pandas
+      ipython
+      notebook
+      ipykernel
     ]))   
     #  Go
     # C / C++
