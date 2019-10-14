@@ -3551,7 +3551,7 @@ e
          (interactive)
          (let ((base (magit-toplevel)))
            (delete-file (concat base "/.git/index.lock")))
-         (shell-command "~/project/my-profile/dotfiles/emacs/emacs.d/bin/clean-git-loch.sh"))
+         (shell-command "~/.config/nixkgs/dotfiles/emacs/emacs.d/bin/clean-git-lock.sh"))
        )
    #+end_src
  git-lock remove
