@@ -1,24 +1,24 @@
 (setq lsp-python-ms-executable
       "~/src/python-language-server/output/bin/Release/osx-x64/publish/Microsoft.Python.LanguageServer")
 
-(use-package tree-sitter
-:load-path "~/project/emacs/tree-sitter.el/tree-sitter-0.0.3"
-:load-path "~/project/emacs/tree-sitter.el/langs/python"
-:load-path "~/project/emacs/tree-sitter.el/langs/go"
-:config
-(require 'tree-sitter)
-(require 'tree-sitter-live)
-(require 'tree-sitter-live-preview)
-(require 'tree-sitter-lang-python)
-(require 'tree-sitter-lang-go)
+;; (use-package tree-sitter
+;; :load-path "~/project/emacs/tree-sitter.el/tree-sitter-0.0.3"
+;; :load-path "~/project/emacs/tree-sitter.el/langs/python"
+;; :load-path "~/project/emacs/tree-sitter.el/langs/go"
+;; :config
+;; (require 'tree-sitter)
+;; (require 'tree-sitter-live)
+;; (require 'tree-sitter-live-preview)
+;; (require 'tree-sitter-lang-python)
+;; (require 'tree-sitter-lang-go)
 
 
-(setq tree-sitter-live-auto-alist
-      '((go-mode . tree-sitter-lang-go)
-        (python-mode . tree-sitter-lang-python)))
-(global-tree-sitter-live-mode t)
+;; (setq tree-sitter-live-auto-alist
+;;       '((go-mode . tree-sitter-lang-go)
+;;         (python-mode . tree-sitter-lang-python)))
+;; (global-tree-sitter-live-mode t)
 
-)
+;; )
 
 ;; FIXME macos can't load org correctly by onece
 
@@ -29,46 +29,46 @@
 ;;(setq bm-repository-file (f-join user-emacs-directory "bm-macos-data"))
 (setq bm-repository-file (f-join no-littering-var-directory "bm-macos-data"))
 
-(straight-use-package 'pyim)
-(require 'pyim)
-(require 'pyim-basedict) ; 拼音词库设置，五笔用户 *不需要* 此行设置
-(pyim-basedict-enable)   ; 拼音词库，五笔用户 *不需要* 此行设置
-(setq default-input-method "pyim")
-;; (setq pyim-default-scheme 'wubi)
-;; (setq pyim-default-scheme 'quanpin)
+;; (straight-use-package 'pyim)
+;; (require 'pyim)
+;; (require 'pyim-basedict) ; 拼音词库设置，五笔用户 *不需要* 此行设置
+;; (pyim-basedict-enable)   ; 拼音词库，五笔用户 *不需要* 此行设置
+;; (setq default-input-method "pyim")
+;; ;; (setq pyim-default-scheme 'wubi)
+;; ;; (setq pyim-default-scheme 'quanpin)
 
-;; 使用 pupup-el 来绘制选词框
-(if (>= emacs-major-version 26)
-    (setq pyim-page-tooltip 'child-frame)
-  (setq pyim-page-tooltip 'popup))
+;; ;; 使用 pupup-el 来绘制选词框
+;; (if (>= emacs-major-version 26)
+;;     (setq pyim-page-tooltip 'child-frame)
+;;   (setq pyim-page-tooltip 'popup))
 
-;; 选词框显示 10 个候选词
-(setq pyim-page-length 5)
+;; ;; 选词框显示 10 个候选词
+;; (setq pyim-page-length 5)
 
-(setq-default pyim-english-input-switch-functions
-              '(pyim-probe-org-structure-template))
+;; (setq-default pyim-english-input-switch-functions
+;;               '(pyim-probe-org-structure-template))
 
-(setq-default pyim-punctuation-half-width-functions
-              '(pyim-probe-punctuation-line-beginning
-                pyim-probe-punctuation-after-punctuation))
+;; (setq-default pyim-punctuation-half-width-functions
+;;               '(pyim-probe-punctuation-line-beginning
+;;                 pyim-probe-punctuation-after-punctuation))
 
 
 
-(global-set-key (kbd "s-;") 'pyim-convert-string-at-point)
-(define-key pyim-mode-map (kbd "<tab>") 'pyim-page-next-page)
-(define-key pyim-mode-map (kbd "C-j") 'pyim-page-next-page)
-(define-key pyim-mode-map (kbd "C-k") 'pyim-page-previous-page)
-(define-key pyim-mode-map (kbd "<escape>") 'pyim-quit-clear)
+;; (global-set-key (kbd "s-;") 'pyim-convert-string-at-point)
+;; (define-key pyim-mode-map (kbd "<tab>") 'pyim-page-next-page)
+;; (define-key pyim-mode-map (kbd "C-j") 'pyim-page-next-page)
+;; (define-key pyim-mode-map (kbd "C-k") 'pyim-page-previous-page)
+;; (define-key pyim-mode-map (kbd "<escape>") 'pyim-quit-clear)
 
-;; (add-hook 'toggle-input-method #'xah-fly-insert-mode-activate)
-(setq pyim-dicts
-      `((:name "sougou-shiji" :file ,(expand-file-name "pyim/shiji.pyim" user-emacs-directory))
-        (:name "sougou-shijin" :file ,(expand-file-name "pyim/shijin.pyim" user-emacs-directory))))
+;; ;; (add-hook 'toggle-input-method #'xah-fly-insert-mode-activate)
+;; (setq pyim-dicts
+;;       `((:name "sougou-shiji" :file ,(expand-file-name "pyim/shiji.pyim" user-emacs-directory))
+;;         (:name "sougou-shijin" :file ,(expand-file-name "pyim/shijin.pyim" user-emacs-directory))))
 
 (use-package cnfonts
   :straight t
   :init
- (defun cnfonts--set-all-the-icons-fonts (&optional _)
+  (defun cnfonts--set-all-the-icons-fonts (&optional _)
     "Show icons in all-the-icons."
     (when (featurep 'all-the-icons)
       (dolist (charset '(kana han cjk-misc bopomofo gb18030))
@@ -81,7 +81,7 @@
   :hook ((after-init . cnfonts-enable)
          (cnfonts-set-font-finish . cnfonts--set-all-the-icons-fonts))
   :config
-(setq cnfonts-use-cache t)
+  (setq cnfonts-use-cache t)
   (setq cnfonts-keep-frame-size nil)
   (add-hook 'window-setup-hook (lambda ()
                                  (setq cnfonts-keep-frame-size t)))
@@ -95,7 +95,7 @@
                                   ("read-book" . 8)))
 
 
-)
+  )
 
 (set-face-attribute
     'default nil
@@ -140,15 +140,15 @@
 ;; librime 
 (setq load-path (cons (file-truename "~/.emacs.d/") load-path))
 
-(require 'pyim)
-(require 'posframe)
-(require 'liberime)
+;; (require 'pyim)
+;; (require 'posframe)
+;; (require 'liberime)
 
-(setq pyim-page-tooltip 'posframe)
-(setq pyim-page-length 9)
+;; (setq pyim-page-tooltip 'posframe)
+;; (setq pyim-page-length 9)
 
-(liberime-start "/Library/Input Methods/Squirrel.app/Contents/SharedSupport" (file-truename "~/.emacs.d/pyim/rime/"))
-(liberime-select-schema "luna_pinyin_simp")
-(setq pyim-default-scheme 'rime-quanpin)
+;; (liberime-start "/Library/Input Methods/Squirrel.app/Contents/SharedSupport" (file-truename "~/.emacs.d/pyim/rime/"))
+;; (liberime-select-schema "luna_pinyin_simp")
+;; (setq pyim-default-scheme 'rime-quanpin)
 
 (provide 'macos)
