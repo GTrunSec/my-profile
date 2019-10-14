@@ -35,11 +35,12 @@ in   {
     #nur
     imgcat
     motrix
-    (python37.withPackages (pkgs: with pkgs; [
+    (python3.withPackages (pkgs: with pkgs; [
       # rl algorithms
       pip
       pytest
       numpy
+      orgparse
       jupyter_core
       ipynb-py-convert
       scikitlearn

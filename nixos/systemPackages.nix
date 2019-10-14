@@ -4,6 +4,8 @@ with pkgs;
 let
   customVscode = (import ./custom/vscode.nix { inherit pkgs; });
   customEmacs = (import ./custom/nix-emacs-ci { inherit pkgs; });
+  myEmacs = pkgs.emacs;
+  emacsWithPackages = (pkgs.emacsPackagesGen myEmacs).emacsWithPackages;
 in rec
   {
     hardware.brightnessctl.enable = true;
@@ -18,6 +20,26 @@ in rec
       # latte-dock
       # deepin.dde-dock
       #latex
+      ( texlive.combine # latex + packages
+        { inherit (texlive)
+          collection-plaingeneric
+          collection-latexextra
+          collection-fontsrecommended
+          collection-pictures
+          collection-bibtexextra
+          collection-mathscience
+          collection-langgerman
+          scheme-basic
+          xetex
+          cjk
+          ctex
+          xecjk
+          fontspec euenc;
+          
+        }
+      )
+      emacs
+      ispell
       dropbox
       texlive.combined.scheme-basic
       jupyter
@@ -25,7 +47,7 @@ in rec
       appimage-run
       #wmctrl
       glxinfo
-      emacs
+
       customVscode
       w3m
       polybar
@@ -87,6 +109,8 @@ in rec
       jetbrains.goland
       jetbrains.datagrip
       jetbrains.clion
+      #lang-haskell
+      cabal2nix # create nix expressions for haskell projects from cabal file
       #lang-go
       go
       go-langserver
