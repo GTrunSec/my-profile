@@ -7,6 +7,9 @@ let
         dplyr
         ggplot2
         xts
+        IRkernel
+        uuid
+        pbdZMQ
         languageserver
         parallel
         gtable

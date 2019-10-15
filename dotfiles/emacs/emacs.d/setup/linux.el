@@ -1,3 +1,6 @@
+;; where to store persistant files
+(setq bm-repository-file (f-join no-littering-var-directory "bm-linux-data"))
+
 (setq lsp-python-ms-executable
          "~/.nix-profile/bin/mspyls")
 
@@ -22,9 +25,6 @@
   (add-hook 'nix-mode-hook 'my-nix-mode-setup)
 
 ;;(setq python-shell-interpreter "~/.config/nixpkgs/nixos/overlays/python/result/bin/python")
-
-;; where to store persistant files
-(setq bm-repository-file (f-join no-littering-var-directory "bm-linux-data"))
 
 (use-package cnfonts
   :straight t

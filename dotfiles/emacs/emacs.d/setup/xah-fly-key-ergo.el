@@ -26,12 +26,14 @@
      ("tf" . treemacs-fine-file)
      ;; helm
      ("bb" . switch-to-buffer)
-     ;; isearch
+     ("bs" . bookmark-set)
+     ("bm" . bookmark-bmenu-list)
+     ;; Isearch
      ("y" . xah-search-current-word)
      ;; search
      ("sa" . counsel-ag)
      ("sr" . counsel-rg)
-   
+
      ))
 
 (xah-fly--define-keys

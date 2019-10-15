@@ -1,3 +1,7 @@
+;; where to store persistant files
+;;(setq bm-repository-file (f-join user-emacs-directory "bm-macos-data"))
+(setq bm-repository-file (f-join no-littering-var-directory "bm-macos-data"))
+
 (setq lsp-python-ms-executable
       "~/src/python-language-server/output/bin/Release/osx-x64/publish/Microsoft.Python.LanguageServer")
 
@@ -24,10 +28,6 @@
 
 ;;(add-hook 'after-init-hook #'org-reload)
 (add-hook 'after-init-hook #'org-super-agenda-mode)
-
-;; where to store persistant files
-;;(setq bm-repository-file (f-join user-emacs-directory "bm-macos-data"))
-(setq bm-repository-file (f-join no-littering-var-directory "bm-macos-data"))
 
 ;; (straight-use-package 'pyim)
 ;; (require 'pyim)
