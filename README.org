@@ -148,6 +148,21 @@ brew update
 brew install ccls
 #+end_src
 ** R 
+*** package
+#+begin_src sh :tangle yes
+install.packages('IRkernel')
+install.packages('repr')
+pbdZMQ
+install.packages('pbdZMQ')
+library(devtools)
+install_github("RBigData/pbdZMQ")
+
+#+end_src
+*** kernel
+#+begin_src sh :tangle yes
+install.packages('IRkernel')
+IRkernel::installspec()
+#+end_src
 *** Macos
 
 #+begin_src sh :tangle yes
@@ -229,6 +244,8 @@ sudo cp /Library/Input\ Methods/Squirrel.app/Contents/Frameworks/librime.1.dylib
 ** Cpython
 ** PASSWORD_MANAGER
 *** enpass
+** Notes & self
+*** [[https://github.com/zadam/trilium][zadam/trilium: Build your personal knowledge base with Trilium Notes]]
 * Music
 ** https://github.com/willianjusten/awesome-audio-visualization
 + [ ] [] [[https://www.youtube.com/watch?v=2BIOINFSbMg][Charlie Roberts: Gibbering at Algoraves - JS in Live Audiovisual Performances - JSConf.Asia 2014 - YouTube]]
