@@ -8,7 +8,11 @@ with builtins;
   # imports = [
   #   (mod "./overlays/zeek/zeek.nix")
   # ];
-    nixpkgs.config.packageOverrides = pkgs: {
+  networking.firewall.allowedTCPPorts = [ 80 443 53];
+  networking.firewall.allowedUDPPorts = [ 80 443 53];
+  networking.nameservers = ["10.220.170.137"];
+
+  nixpkgs.config.packageOverrides = pkgs: {
     nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
       inherit pkgs;
     };
@@ -44,5 +48,5 @@ with builtins;
     # or setup your own.
     #resolverName = "cs-de";
   };
-  networking.nameservers = ["10.220.170.137"];
+
 }

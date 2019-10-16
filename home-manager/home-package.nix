@@ -24,8 +24,9 @@ in   {
     fd
     ripgrep
     feh
-    pkgs.gnupg
     lsof
+    #music
+    pkgs.cmus
     pkgs.compton
     #skim
     screenfetch
@@ -64,7 +65,7 @@ in   {
     fish-foreign-env
     # Bash
     # unstable.nodePackages.bash-language-server
-    nodePackages.javascript-typescript-langserver
+    # nodePackages.javascript-typescript-langserver
     # Nix
     ghc
     autojump

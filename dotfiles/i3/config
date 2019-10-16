@@ -166,6 +166,9 @@ exec_always --no-startup-id autorandr home
 exec_always --no-startup-id bash $HOME/.config/polybar/launch.sh
 # Compton
 exec_always --no-startup-id bash $HOME/.config/nixpkgs/dotfiles/polybar/compton.sh
+
+# adguard-home
+exec --no-startup-id bash $HOME/.config/nixpkgs/sh/adguard-home.sh
 # exec --no-startup-id wmctrl -c Plasma
 # for_window [title="Desktop — Plasma"] kill; floating enable; border none
 # for_window [class="Plasma"] floating enable
@@ -212,7 +215,7 @@ for_window [class="feh"] floating enable, border normal
 
 # Wallpaper
 exec_always --no-startup-id feh --randomize --bg-fill ~/.config/nixpkgs/dotfiles/wallpaper/Fantasy/max-bedulenko-_2019-07-27_04-48-06.jpeg
-exec --no-startup-id fcitx-autostart 
+exec --no-startup-id fcitx -d -r
 
 
 ##nix-daemon
