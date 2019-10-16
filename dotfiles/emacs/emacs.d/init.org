@@ -418,7 +418,7 @@ I would like use ErgoDox keyboard on my linux environment
 
   (xah-fly-keys 1)
 #+end_src
-**** leader-key-map
+**** ergo-leader-key-map
 #+begin_src emacs-lisp :tangle "./setup/xah-fly-key-ergo.el"
 
 

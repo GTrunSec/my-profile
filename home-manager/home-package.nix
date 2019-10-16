@@ -17,6 +17,7 @@ in   {
     xclip
     urxvt_perls
     ag
+    dnsproxy
     graphviz
     rofi
     pkgs.pandoc
