@@ -35,4 +35,14 @@ with builtins;
     #   }
     # )
   ];
+  ##docker-adguard localhost:3000
+  services.dnscrypt-proxy = {
+    enable = true;
+    # the official default resolver is unreliable from time to time
+    # either use a different, trust-worthy one from here:
+    #   https://github.com/jedisct1/dnscrypt-proxy/blob/master/dnscrypt-resolvers.csv 
+    # or setup your own.
+    #resolverName = "cs-de";
+  };
+  networking.nameservers = ["10.220.170.137"];
 }

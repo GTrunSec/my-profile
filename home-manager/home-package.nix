@@ -24,6 +24,8 @@ in   {
     fd
     ripgrep
     feh
+    pkgs.gnupg
+    lsof
     pkgs.compton
     #skim
     screenfetch

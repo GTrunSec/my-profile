@@ -89,6 +89,7 @@
      isNormalUser = true;
      extraGroups = [ "wheel" "audio" "pulse" "sound" "libvirtd"
                      "video"
+                     "docker"
                    ]; # Enable ‘sudo’ for the user.
      shell = "/run/current-system/sw/bin/fish";
      uid = 1000;
