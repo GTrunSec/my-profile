@@ -3,6 +3,7 @@ result
 
 
 .DS_Store
+init.el
 dotfiles/emacs/emacs.d/var
 dotfiles/emacs/emacs.d/straight
 dotfiles/emacs/emacs.d/.*
