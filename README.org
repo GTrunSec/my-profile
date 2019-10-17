@@ -247,6 +247,9 @@ sudo cp /Library/Input\ Methods/Squirrel.app/Contents/Frameworks/librime.1.dylib
 ** Notes & self
 *** [[https://github.com/zadam/trilium][zadam/trilium: Build your personal knowledge base with Trilium Notes]]
 * Music
+ - download youtube-dle
+** ❤ Love [[https://linux.die.net/man/1/cmus][cmus(1): C* Music Player - Linux man page]]
+CLOSED: [2019-10-15 Tue 23:38]
 ** https://github.com/willianjusten/awesome-audio-visualization
 + [ ] [] [[https://www.youtube.com/watch?v=2BIOINFSbMg][Charlie Roberts: Gibbering at Algoraves - JS in Live Audiovisual Performances - JSConf.Asia 2014 - YouTube]]
 ** [[https://github.com/TimeTraveller-San/yTermPlayer][TimeTraveller-San/yTermPlayer: Stream youtube playlists as audio on linux terminal]]

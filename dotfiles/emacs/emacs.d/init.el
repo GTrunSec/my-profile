@@ -817,10 +817,10 @@
     ("T" maple-iedit-skip-and-match-previous "skip and previous")
     ("p" maple-iedit-match-previous "prev"))
   :bind (:map maple-iedit-mode-keymap
-              ("," . maple-iedit-match-next)
-              ("." . maple-iedit-match-previous)
-              (";" . maple-iedit-skip-and-match-next)
-              ("'" . maple-iedit-skip-and-match-previous)
+              ("C-n" . maple-iedit-match-next)
+              ("C-m" . maple-iedit-match-previous)
+              ("C-," . maple-iedit-skip-and-match-next)
+              ("C-." . maple-iedit-skip-and-match-previous)
               )
   )
 
@@ -852,6 +852,112 @@
 ;;(add-hook 'ivy-mode-hook #'ivy-prescient-mode)
 (require 'prescient)
 (add-hook 'after-init-hook #'prescient-persist-mode)
+
+(use-package bm
+  :straight t
+  :demand t
+  :init
+  (setq bm-restore-repository-on-load t)
+  :config
+
+  (bind-keys
+   :map bm-show-mode-map
+   ("j" . next-line)
+   ("k" . previous-line))
+
+  (setq bm-cycle-all-buffers t
+        bm-highlight-style 'bm-highlight-only-fringe
+        bm-repository-size 1000)
+  (setq-default bm-buffer-persistence t)
+
+  (defun adq/bm-save ()
+    "Save bookmarks to persistent repository."
+    (interactive)
+    (bm-buffer-save-all)
+    (bm-repository-save))
+
+  (advice-add 'bm-bookmark-add
+              :after (lambda (&rest args)
+                       (adq/bm-save)))
+  (advice-add 'bm-bookmark-remove
+              :after (lambda (&rest args)
+                       (adq/bm-save)))
+  (add-hook 'after-init-hook #'bm-repository-load)
+  (add-hook 'find-file-hooks #'bm-buffer-restore)
+  (add-hook 'after-rever-hook #'bm-buffer-restore)
+  (add-hook 'kill-buffer-hook #'bm-buffer-save)
+  (add-hook 'after-save-hook #'bm-buffer-save)
+  (add-hook 'kill-emacs-hook
+            (lambda ()
+              (bm-buffer-save-all)
+              (bm-repository-save)))
+
+  (defun adq/bm-list-all-bookmarks ()
+    "Generate a list of all bookmarks from all files."
+    (let ((bookmarks '()))
+      (cl-loop for entry in bm-repository
+               when (and (listp entry) (f-readable-p (car entry)))
+               do
+               (with-temp-buffer
+                 (insert-file-contents-literally (car entry))
+                 (cl-letf (((symbol-function 'bm-bookmark-add)
+                            (lambda (&optional annotation time temporary)
+                              (!cons (list (car entry)
+                                           (point)
+                                           (line-number-at-pos)
+                                           (string-trim (thing-at-point 'line t)))
+                                     bookmarks)))
+                           ((symbol-function 'message)
+                            (lambda (&rest _))))
+                   (bm-buffer-restore-2 (cdr entry)))))
+      bookmarks))
+
+    (defun adq/helm-bm-all-format-bookmark (bookmark)
+      "Format bookmark for display."
+      (let ((file (f-filename (car bookmark)))
+            (line (caddr bookmark))
+            (contents (cadddr bookmark)))
+        (cons
+         (format "%s:%s: %s"
+                 (propertize file 'face compilation-info-face)
+                 (propertize (format "%d" line) 'face compilation-line-face)
+                 contents)
+         bookmark)))
+
+    (defvar adq/helm-bm-all-source
+      (helm-build-sync-source "Helm All Bookmarks"
+        :candidates
+        (lambda ()
+          (mapcar #'adq/helm-bm-all-format-bookmark
+                  (adq/bm-list-all-bookmarks)))
+        :action
+        '(("Switch to buffer" .
+           (lambda (bookmark)
+             (find-file (car bookmark))
+             (goto-char (cadr bookmark))))))
+      "Helm source with all the bookmarks.")
+
+    (defun adq/helm-bm-list-all ()
+      "List all bookmarks usin Helm."
+      (interactive)
+      (helm :sources 'adq/helm-bm-all-source
+            :buffer "*helm bm all*"))
+
+  (defhydra adq/hydra-bm nil
+    "
+Bookmarks
+^^^^------------------------------------------------
+_m_: Toggle      _l_: Bookmarks from Buffers
+_n_: Next        _a_: Bookmarks form All Files
+_p_: Previous    _L_: List
+"
+    ("m" bm-toggle)
+    ("n" bm-next)
+    ("p" bm-previous)
+    ("a" adq/helm-bm-list-all :exit t)
+    ("l" helm-bm :exit t)
+    ("L" bm-show-all :exit t))
+  (bind-key "C-c m" #'adq/hydra-bm/body))
 
 (defvar my-private-dir  "~/.emacs.d/private")
 ;; (defvar +snippet-dir (format "%s/snippets" my-private-dir))
@@ -1410,8 +1516,8 @@
 (add-hook 'go-mode-hook 'gtrun/add-company-backend-global)
 (add-hook 'python-mode-hook 'gtrun/add-company-backend-global)
 
-(use-package tex-site
-  :ensure nil
+(use-package auctex
+  :straight
   :after (tex latex)
   :hook
   (LaTeX-mode . turn-off-auto-fill)
@@ -1445,66 +1551,75 @@
 (setq-default TeX-PDF-mode t)
 
 (require 'ox-latex)
-  (add-to-list 'org-latex-classes '("ctexart" "\\documentclass[11pt]{ctexart}
+  (add-to-list 'org-latex-classes '("article" "\\documentclass[a4paper,11pt]{article}
 
-  [NO-DEFAULT-PACKAGES]
-    \\usepackage[utf8]{inputenc}
-    \\usepackage[T1]{fontenc}
-    \\usepackage{fixltx2e}
-    \\usepackage{graphicx}
-    \\usepackage{longtable}
-    \\usepackage{float}
-    \\usepackage{wrapfig}
-    \\usepackage{rotating}
-    \\usepackage[normalem]{ulem}
-    \\usepackage{amsmath}
-    \\usepackage{textcomp}
-    \\usepackage{marvosym}
-    \\usepackage{wasysym}
-    \\usepackage{amssymb}
-    \\usepackage{booktabs}
-    \\usepackage[colorlinks,linkcolor=black,anchorcolor=black,citecolor=black]{hyperref}
-    \\tolerance=1000
-    \\usepackage{listings}
-    \\usepackage{xcolor}
-    \\lstset{
-    %行号
-    numbers=left,
-    %背景框
-    framexleftmargin=10mm,
-    frame=none,
-    %背景色
-    %backgroundcolor=\\color[rgb]{1,1,0.76},
-    backgroundcolor=\\color[RGB]{245,245,244},
-    %样式
-    keywordstyle=\\bf\\color{blue},
-    identifierstyle=\\bf,
-    numberstyle=\\color[RGB]{0,192,192},
-    commentstyle=\\it\\color[RGB]{0,96,96},
-    stringstyle=\\rmfamily\\slshape\\color[RGB]{128,0,0},
-    %显示空格
-    showstringspaces=false
-    }
-    "
-                                            ("\\section{%s}" . "\\section*{%s}")
-                                            ("\\subsection{%s}" . "\\subsection*{%s}")
-                                            ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-                                            ("\\paragraph{%s}" . "\\paragraph*{%s}")
-                                            ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+    [NO-DEFAULT-PACKAGES]
+      \\usepackage[utf8]{inputenc}
+      \\usepackage[T1]{fontenc}
+      \\usepackage{fixltx2e}
+      \\usepackage{graphicx}
+      \\usepackage{longtable}
+      \\usepackage{float}
+      \\usepackage{wrapfig}
+      \\usepackage{rotating}
+      \\usepackage[normalem]{ulem}
+      \\usepackage{amsmath}
+      \\usepackage{textcomp}
+      \\usepackage{marvosym}
+      \\usepackage{wasysym}
+      \\usepackage{amssymb}
+      \\usepackage{booktabs}
+      \\usepackage[colorlinks,linkcolor=black,anchorcolor=black,citecolor=black]{hyperref}
+      \\tolerance=1000
+      \\usepackage{listings}
+      \\usepackage{xcolor}
+      \\usepackage{fontspec}
+      \\usepackage{xeCJK}
+      \\setCJKmainfont{Weibei SC}
+      \\setmainfont{Fantasque Sans Mono}
+      \\lstset{
+      %行号
+      numbers=left,
+      %背景框
+      framexleftmargin=10mm,
+      frame=none,
+      %背景色
+      %backgroundcolor=\\color[rgb]{1,1,0.76},
+      backgroundcolor=\\color[RGB]{245,245,244},
+      %样式
+      keywordstyle=\\bf\\color{blue},
+      identifierstyle=\\bf,
+      numberstyle=\\color[RGB]{0,192,192},
+      commentstyle=\\it\\color[RGB]{0,96,96},
+      stringstyle=\\rmfamily\\slshape\\color[RGB]{128,0,0},
+      %显示空格
+      showstringspaces=false
+      }
+      "
+                                    ("\\section{%s}" . "\\section*{%s}")
+                                    ("\\subsection{%s}" . "\\subsection*{%s}")
+                                    ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                                    ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                                    ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
-          ;; {{ export org-mode in Chinese into PDF
-          ;; @see http://freizl.github.io/posts/tech/2012-04-06-export-orgmode-file-in-Chinese.html
-          ;; and you need install texlive-xetex on different platforms
-          ;; To install texlive-xetex:
-          ;;    `sudo USE="cjk" emerge texlive-xetex` on Gentoo Linux
-          ;; }}
-          (setq org-latex-default-class "ctexart")
-          (setq org-latex-pdf-process
-                '(
-                  "xelatex -interaction nonstopmode -output-directory %o %f"
-                  "xelatex -interaction nonstopmode -output-directory %o %f"
-                  "xelatex -interaction nonstopmode -output-directory %o %f"
-                  "rm -fr %b.out %b.log %b.tex auto"))
+  ;; {{ export org-mode in Chinese into PDF
+  ;; @see http://freizl.github.io/posts/tech/2012-04-06-export-orgmode-file-in-Chinese.html
+  ;; and you need install texlive-xetex on different platforms
+  ;; To install texlive-xetex:
+  ;;    `sudo USE="cjk" emerge texlive-xetex` on Gentoo Linux
+  ;; }}
+  ;;(setq org-latex-default-class "ctexart")
+(add-to-list 'org-latex-packages-alist '("" "minted"))
+(setq org-latex-listings 'minted) 
+(setq org-src-fontify-natively t)
+(setq org-latex-pdf-process
+        '("xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+          "xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+          "xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+          "xelatex -interaction nonstopmode -output-directory %o %f"
+          "xelatex -interaction nonstopmode -output-directory %o %f"
+          "xelatex -interaction nonstopmode -output-directory %o %f"
+          "rm -fr %b.out %b.log %b.tex auto"))
 
 (use-package company-math
 :straight t
@@ -1661,6 +1776,7 @@
                                (org . t)
                                (plantuml . t)
                                (latex . t)
+                               (haskell . t)
                                (jupyter . t)
 
                                ))
@@ -1679,7 +1795,7 @@
                            "~/Documents/org-notes/post"
                            "~/Documents/org-notes/course"
                            "~/Documents/org-notes/post/myself"
-                           ;; "~/project/my-profile/dotfiles/wallpaper"
+                           "~/project/my-code/my-nix"
                            ;; "~/project/global-profile/global-doc"
                            ))
 
@@ -1697,7 +1813,7 @@
   (org-starter-def "~/.emacs.d"
                    :files
                    ("init.org" :key "i" :refile (:maxlevel . 5))
-                   ("nix.org" :key "x" :refile (:maxlevel . 5))
+                   ;;("nix.org" :key "x" :refile (:maxlevel . 5))
                    )
   (org-starter-def "~/.config/nixpkgs"
                    :files
@@ -1930,120 +2046,14 @@ See also: https://stackoverflow.com/questions/9547912/emacs-calendar-show-more-t
 (setq org-download-screenshot-file "~/Pictures/Monosnap/snap.png")
 )
 
-(use-package bm
-  :straight t
-  :demand t
-  :init
-  (setq bm-restore-repository-on-load t)
-  :config
-
-  (bind-keys
-   :map bm-show-mode-map
-   ("j" . next-line)
-   ("k" . previous-line))
-
-  (setq bm-cycle-all-buffers t
-        bm-highlight-style 'bm-highlight-only-fringe
-        bm-repository-size 1000)
-  (setq-default bm-buffer-persistence t)
-
-  (defun adq/bm-save ()
-    "Save bookmarks to persistent repository."
-    (interactive)
-    (bm-buffer-save-all)
-    (bm-repository-save))
-
-  (advice-add 'bm-bookmark-add
-              :after (lambda (&rest args)
-                       (adq/bm-save)))
-  (advice-add 'bm-bookmark-remove
-              :after (lambda (&rest args)
-                       (adq/bm-save)))
-  (add-hook 'after-init-hook #'bm-repository-load)
-  (add-hook 'find-file-hooks #'bm-buffer-restore)
-  (add-hook 'after-rever-hook #'bm-buffer-restore)
-  (add-hook 'kill-buffer-hook #'bm-buffer-save)
-  (add-hook 'after-save-hook #'bm-buffer-save)
-  (add-hook 'kill-emacs-hook
-            (lambda ()
-              (bm-buffer-save-all)
-              (bm-repository-save)))
-
-  (defun adq/bm-list-all-bookmarks ()
-    "Generate a list of all bookmarks from all files."
-    (let ((bookmarks '()))
-      (cl-loop for entry in bm-repository
-               when (and (listp entry) (f-readable-p (car entry)))
-               do
-               (with-temp-buffer
-                 (insert-file-contents-literally (car entry))
-                 (cl-letf (((symbol-function 'bm-bookmark-add)
-                            (lambda (&optional annotation time temporary)
-                              (!cons (list (car entry)
-                                           (point)
-                                           (line-number-at-pos)
-                                           (string-trim (thing-at-point 'line t)))
-                                     bookmarks)))
-                           ((symbol-function 'message)
-                            (lambda (&rest _))))
-                   (bm-buffer-restore-2 (cdr entry)))))
-      bookmarks))
-
-    (defun adq/helm-bm-all-format-bookmark (bookmark)
-      "Format bookmark for display."
-      (let ((file (f-filename (car bookmark)))
-            (line (caddr bookmark))
-            (contents (cadddr bookmark)))
-        (cons
-         (format "%s:%s: %s"
-                 (propertize file 'face compilation-info-face)
-                 (propertize (format "%d" line) 'face compilation-line-face)
-                 contents)
-         bookmark)))
-
-    (defvar adq/helm-bm-all-source
-      (helm-build-sync-source "Helm All Bookmarks"
-        :candidates
-        (lambda ()
-          (mapcar #'adq/helm-bm-all-format-bookmark
-                  (adq/bm-list-all-bookmarks)))
-        :action
-        '(("Switch to buffer" .
-           (lambda (bookmark)
-             (find-file (car bookmark))
-             (goto-char (cadr bookmark))))))
-      "Helm source with all the bookmarks.")
-
-    (defun adq/helm-bm-list-all ()
-      "List all bookmarks usin Helm."
-      (interactive)
-      (helm :sources 'adq/helm-bm-all-source
-            :buffer "*helm bm all*"))
-
-  (defhydra adq/hydra-bm nil
-    "
-Bookmarks
-^^^^------------------------------------------------
-_m_: Toggle      _l_: Bookmarks from Buffers
-_n_: Next        _a_: Bookmarks form All Files
-_p_: Previous    _L_: List
-"
-    ("m" bm-toggle)
-    ("n" bm-next)
-    ("p" bm-previous)
-    ("a" adq/helm-bm-list-all :exit t)
-    ("l" helm-bm :exit t)
-    ("L" bm-show-all :exit t))
-  (bind-key "C-c m" #'adq/hydra-bm/body))
-
 (use-package ox-latex
-    :ensure nil
-    :after ox
-    :config
-    (setq org-latex-listings t
-          org-export-with-LaTeX-fragments t
-    ;      org-latex-pdf-process (list "latexmk -shell-escape -bibtex -f -pdf %f")
-))
+  :ensure nil
+  :after ox
+  :config
+  (setq 
+   org-export-with-LaTeX-fragments t
+   ;;      org-latex-pdf-process (list "latexmk -shell-escape -bibtex -f -pdf %f")
+   ))
 
 (require 'ox)
 (defun my-html-mark-tag (text backend info)
@@ -2106,6 +2116,17 @@ _p_: Previous    _L_: List
 
 (straight-use-package 'htmlize)
 (require 'htmlize)
+
+(defun my-org-confirm-babel-evaluate (lang _body)
+  "Return t if LANG is in whitelist."
+  (not (or (string= lang "ditaa")
+           (string= lang "dot")
+           (string= lang "R")
+           (string= lang "jupyter-R")
+           (string= lang "python")
+           (string= lang "jupyter-python")
+           (string= lang "plantuml"))))
+  (setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)
 
 (straight-use-package 'posframe)
 (require 'posframe)
@@ -2355,7 +2376,7 @@ _p_: Previous    _L_: List
     (interactive)
     (let ((base (magit-toplevel)))
       (delete-file (concat base "/.git/index.lock")))
-    (shell-command "~/project/my-profile/dotfiles/emacs/emacs.d/bin/clean-git-loch.sh"))
+    (shell-command "~/.config/nixkgs/dotfiles/emacs/emacs.d/bin/clean-git-lock.sh"))
   )
 
 (use-package magit-todos

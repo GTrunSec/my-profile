@@ -10,6 +10,7 @@
 [submodule "nixos/nixpkgs"]
 	path = nixos/nixpkgs
 	url = https://github.com/NixOS/nixpkgs.git
+	shallow = true
 [submodule "nixos/overlays/R-haskell/nix-config"]
 	path = nixos/overlays/R-haskell/nix-config
 	url = https://github.com/GTrunSec/nix-config.git

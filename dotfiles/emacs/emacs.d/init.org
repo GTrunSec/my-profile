@@ -597,8 +597,6 @@ I would like use ErgoDox keyboard on my linux environment
 
 (provide 'xah-fly-key-ergo)
     #+end_src
-** TODO-list
-*** ☞ TODO modify heading name make it easily jump by helm search
 ** 📚 RELEASE lazy-load
 *** default
      - [[https://github.com/manateelazycat/lazy-load][manateelazycat/lazy-load: Lazy load keys for speed ​​up Emacs startup.]]
@@ -1468,18 +1466,13 @@ elisp
       ("T" maple-iedit-skip-and-match-previous "skip and previous")
       ("p" maple-iedit-match-previous "prev"))
     :bind (:map maple-iedit-mode-keymap
-                ("," . maple-iedit-match-next)
-                ("." . maple-iedit-match-previous)
-                (";" . maple-iedit-skip-and-match-next)
-                ("'" . maple-iedit-skip-and-match-previous)
+                ("C-n" . maple-iedit-match-next)
+                ("C-m" . maple-iedit-match-previous)
+                ("C-," . maple-iedit-skip-and-match-next)
+                ("C-." . maple-iedit-skip-and-match-previous)
                 )
     )
 #+end_src
-
-#+RESULTS:
-: maple-iedit-skip-and-match-previous
-
-
 
 *** Whitespace
     #+begin_src emacs-lisp :tangle yes
@@ -2725,7 +2718,7 @@ CLOSED: [2019-07-27 Sat 06:05]
                              "~/Documents/org-notes/post"
                              "~/Documents/org-notes/course"
                              "~/Documents/org-notes/post/myself"
-                             ;; "~/project/my-profile/dotfiles/wallpaper"
+                             "~/project/my-code/my-nix"
                              ;; "~/project/global-profile/global-doc"
                              ))
 #+end_src
@@ -2746,7 +2739,7 @@ CLOSED: [2019-07-27 Sat 06:05]
               (org-starter-def "~/.emacs.d"
                                :files
                                ("init.org" :key "i" :refile (:maxlevel . 5))
-                               ("nix.org" :key "x" :refile (:maxlevel . 5))
+                               ;;("nix.org" :key "x" :refile (:maxlevel . 5))
                                )
               (org-starter-def "~/.config/nixpkgs"
                                :files
@@ -3058,30 +3051,29 @@ See also: https://stackoverflow.com/questions/9547912/emacs-calendar-show-more-t
     :after ox
     :config
     (setq 
-;;org-latex-listings t
-          org-export-with-LaTeX-fragments t
-    ;      org-latex-pdf-process (list "latexmk -shell-escape -bibtex -f -pdf %f")
-))
+     org-export-with-LaTeX-fragments t
+     ;;      org-latex-pdf-process (list "latexmk -shell-escape -bibtex -f -pdf %f")
+     ))
 #+end_src
 ** Hightlight org to HTML
 - [[http://www.gonsie.com/blorg/org-highlight.html][Highlighting in Org-Mode]]
 #+begin_src emacs-lisp :tangle yes
-(require 'ox)
-(defun my-html-mark-tag (text backend info)
-  "Transcode :blah: into <mark>blah</mark> in body text."
-  (when (org-export-derived-backend-p backend 'html)
-    (let ((text (replace-regexp-in-string "[^\\w]\\(:\\)[^\n\t\r]+\\(:\\)[^\\w]" "<mark>"  text nil nil 1 nil)))
-      (replace-regexp-in-string "[^\\w]\\(<mark>\\)[^\n\t\r]+\\(:\\)[^\\w]" "</mark>" text nil nil 2 nil))))
+  (require 'ox)
+  (defun my-html-mark-tag (text backend info)
+    "Transcode :blah: into <mark>blah</mark> in body text."
+    (when (org-export-derived-backend-p backend 'html)
+      (let ((text (replace-regexp-in-string "[^\\w]\\(:\\)[^\n\t\r]+\\(:\\)[^\\w]" "<mark>"  text nil nil 1 nil)))
+        (replace-regexp-in-string "[^\\w]\\(<mark>\\)[^\n\t\r]+\\(:\\)[^\\w]" "</mark>" text nil nil 2 nil))))
 
-(add-to-list 'org-export-filter-plain-text-functions 'my-html-mark-tag)
+  (add-to-list 'org-export-filter-plain-text-functions 'my-html-mark-tag)
 
-(defun my-html-mark-tag (text backend info)
-  "Transcode :blah: into <mark>blah</mark> in body text."
-  (when (org-export-derived-backend-p backend 'html)
-    (let ((text (replace-regexp-in-string "[^\\w]\\(:\\)[^\n\t\r]+\\(:\\)[^\\w]" "<mark>"  text nil nil 1 nil)))
-      (replace-regexp-in-string "[^\\w]\\(<mark>\\)[^\n\t\r]+\\(:\\)[^\\w]" "</mark>" text nil nil 2 nil))))
+  (defun my-html-mark-tag (text backend info)
+    "Transcode :blah: into <mark>blah</mark> in body text."
+    (when (org-export-derived-backend-p backend 'html)
+      (let ((text (replace-regexp-in-string "[^\\w]\\(:\\)[^\n\t\r]+\\(:\\)[^\\w]" "<mark>"  text nil nil 1 nil)))
+        (replace-regexp-in-string "[^\\w]\\(<mark>\\)[^\n\t\r]+\\(:\\)[^\\w]" "</mark>" text nil nil 2 nil))))
 
-(add-to-list 'org-export-filter-plain-text-functions 'my-html-mark-tag)
+  (add-to-list 'org-export-filter-plain-text-functions 'my-html-mark-tag)
 #+end_src
 ** org-publish-alish
 #+begin_src emacs-lisp :tangle yes
@@ -3563,7 +3555,7 @@ e
          (interactive)
          (let ((base (magit-toplevel)))
            (delete-file (concat base "/.git/index.lock")))
-         (shell-command "~/.config/nixkgs/dotfiles/emacs/emacs.d/bin/clean-git-lock.sh"))
+         (shell-command "~/.config/nixpkgs/dotfiles/emacs/emacs.d/bin/clean-git-lock.sh"))
        )
    #+end_src
  git-lock remove
