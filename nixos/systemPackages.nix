@@ -20,6 +20,7 @@ in rec
       # latte-dock
       # deepin.dde-dock
       #latex
+      texmacs
       ( texlive.combine # latex + packages
         { inherit (texlive)
           collection-plaingeneric
