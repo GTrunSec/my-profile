@@ -14,6 +14,17 @@ dotfiles/emacs/emacs.d/pyim/rime
 Pattern.org
 ##Emacs bookmarks
 bm-macos-data
+##system rime config
+dotfiles/fcitx/rime/build
+dotfiles/fcitx/rime/luna_pinyin.userdb
+dotfiles/fcitx/log
+dotfiles/fcitx/dbus
+dotfiles/fcitx/clipboard/history.dat
+dotfiles/fcitx/cached*
+dotfiles/fcitx/rime/.*
+dotfiles/fcitx/rime/sync
+dotfiles/fcitx/data
+dotfiles/fcitx/profile*
 ## Emacs librime config
 dotfiles/emacs/emacs.d/pyim/rime/build
 dotfiles/emacs/emacs.d/pyim/rime/easy_en.userdb

@@ -39,6 +39,8 @@ in
   # kitty
   home.file.".config/kitty/kitty.conf".source = ./dotfiles/kitty/kitty.conf;
   # Let Home Manager install and manage itself.
+  # fcitx
+  home.file.".config/fcitx".source = ./dotfiles/fcitx;
   #programs.home-manager.enable = true;
 
 }
