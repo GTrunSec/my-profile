@@ -5,7 +5,6 @@ let
   customVscode = (import ./custom/vscode.nix { inherit pkgs; });
   customEmacs = (import ./custom/nix-emacs-ci { inherit pkgs; });
   myEmacs = pkgs.emacs;
-  emacsWithPackages = (pkgs.emacsPackagesGen myEmacs).emacsWithPackages;
 in rec
   {
     hardware.brightnessctl.enable = true;
@@ -58,7 +57,12 @@ in rec
 
       #git
       git
-      gitkraken
+      (gitkraken.overrideDerivation (oldAttrs: {
+        src = fetchurl {
+          url = "https://release.axocdn.com/linux/GitKraken-v6.3.0.deb";
+          sha256 = "06hjzkkrg2f9lb72ik16zgv813cxsv679szfdzrfygbb6wxnkjyp";
+        };
+      }))
       wget
       curl
       gnupg
