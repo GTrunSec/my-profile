@@ -7,7 +7,14 @@ pkgs.vscode-with-extensions.override {
   ]
     # Concise version from the vscode market place when not available in the default set.
   ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-
+    # Lang-C
+    {
+      publisher = "ccls-project";
+      name = "ccls";
+      version = "0.1.28";
+      sha256 = "11zn2pbj4y1j2cnn0yhf2dvhkxy9am8d1ja92grh3h86wvz0mw8k";
+    }
+    
     # Lang-R
     {
       publisher = "Ikuyadeu";
@@ -49,8 +56,8 @@ pkgs.vscode-with-extensions.override {
     {
       publisher = "ms-python";
       name = "python";
-      version = "2019.9.34911";
-      sha256 = "18c806dk1chmcnklr8v74fawaal2lkd644yq27pbvffriwj98fib";
+      version = "2019.10.41019";
+      sha256 = "0szikd76vy8mgv8zc0m90rx1jrnwwphx5bb8928drln65xwbzs1q";
     }
     
     {
