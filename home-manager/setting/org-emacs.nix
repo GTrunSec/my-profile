@@ -1,10 +1,19 @@
 { config, lib, pkgs, ... }:
 
 
-let updateEmacs = ''bash .emacs.d/bin/emacs.sh'';
+let
+  updateEmacs = ''bash .emacs.d/bin/emacs.sh'';
+  updatefont = ''fc-cache -f -v'';
 
 in
 {
+
+  #fonts
+    home.file.".local/share/fonts/my-font" = {
+    source = ../../dotfiles/my-font;
+    onChange = updatefont;
+  };
+
   # editors
   home.file.".emacs.d/init.org" = {
     source = ../../dotfiles/emacs/emacs.d/init.org;
@@ -26,6 +35,8 @@ in
       home.activation.linkEmacsSetup = config.lib.dag.entryAfter [ "writeBoundary" ] ''
     ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/emacs/emacs.d/setup" $HOME/.emacs.d/setup
   '';
+
+
     # programs.emacs = {
     # enable = true;
 
