@@ -112,6 +112,8 @@ in rec
       jetbrains.clion
       #lang-haskell
       cabal2nix # create nix expressions for haskell projects from cabal file
+      #lang-c++
+      ccls  
       #lang-go
       go
       go-langserver

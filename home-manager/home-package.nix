@@ -57,8 +57,6 @@ in   {
       ipykernel
     ]))   
     #  Go
-    # C / C++
-    pkgs.ccls
     #zeek
     rocksdb
     sqlite
