@@ -30,9 +30,14 @@ font pango:DejaVu Sans Mono,  Font Awesome 5 Free solid 18
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+#applcation
+exec --no-startup-id polar-bookshel
+exec --no-startup-id emacs
+exec --no-startup-id firefox
+exec --no-startup-id gitKraken
+
 # start a terminal
 bindsym Mod4+Return exec kitty
-
 
 # kill focused window
 bindsym Mod4+q kill
