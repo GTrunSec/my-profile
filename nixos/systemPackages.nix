@@ -19,6 +19,9 @@ in rec
       # latte-dock
       # deepin.dde-dock
       #latex
+      (python3.withPackages (pkgs: with pkgs; [
+        trezor_agent wheel
+      ]))
       postgresql
       #openvpn
       texmacs
@@ -127,7 +130,14 @@ in rec
       #lang-c++
       llvmPackages.libclang
       clang
-      ccls
+      (ccls.overrideDerivation (oldAttrs: {
+        src = fetchFromGitHub{
+          owner = "MaskRay";
+               repo = "ccls";
+               rev = "eeda2882f313fd7e19a969e68544944041e44cae";
+               sha256 = "1rnr5cgm2v15gllazl9zrsbbg6kv6j22fivvmf4ibbzwl18g6sis";
+        };
+      }))
       gcc
       #lang-julia
       julia
