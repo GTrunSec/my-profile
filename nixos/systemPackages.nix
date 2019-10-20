@@ -20,6 +20,7 @@ in rec
       # deepin.dde-dock
       #latex
       postgresql
+      #openvpn
       texmacs
       ( texlive.combine # latex + packages
         { inherit (texlive)
