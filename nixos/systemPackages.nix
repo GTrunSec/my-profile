@@ -19,6 +19,7 @@ in rec
       # latte-dock
       # deepin.dde-dock
       #latex
+      postgresql
       texmacs
       ( texlive.combine # latex + packages
         { inherit (texlive)
@@ -81,7 +82,8 @@ in rec
         };
       }))
       xdotool
-
+      tmux
+      okular
       #password
       enpass
 
@@ -114,15 +116,20 @@ in rec
       #overlay-package
       #zeek
       #JetBrains-IDE
-      jetbrains.pycharm-professional
+      #jetbrains.pycharm-professional
       #jetbrains.idea-ultimate
-      jetbrains.goland
-      jetbrains.datagrip
-      jetbrains.clion
+      #jetbrains.goland
+      #jetbrains.datagrip
+      #jetbrains.clion
       #lang-haskell
       cabal2nix # create nix expressions for haskell projects from cabal file
       #lang-c++
-      ccls  
+      llvmPackages.libclang
+      clang
+      ccls
+      gcc
+      #lang-julia
+      julia
       #lang-go
       go
       go-langserver

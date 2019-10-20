@@ -8,8 +8,8 @@ with builtins;
   # imports = [
   #   (mod "./overlays/zeek/zeek.nix")
   # ];
-  networking.firewall.allowedTCPPorts = [ 80 443 53];
-  networking.firewall.allowedUDPPorts = [ 80 443 53];
+  networking.firewall.allowedTCPPorts = [ 80 443 53 1234];
+  networking.firewall.allowedUDPPorts = [ 80 443 53 1234];
   networking.nameservers = ["10.220.170.137"];
 
   nixpkgs.config.packageOverrides = pkgs: {

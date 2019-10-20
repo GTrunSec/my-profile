@@ -7,7 +7,7 @@ let
         dplyr
         ggplot2
         xts
-        IRkernel
+        #IRkernel
         uuid
         pbdZMQ
         languageserver
