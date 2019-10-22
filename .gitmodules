@@ -13,3 +13,7 @@
 [submodule "nixos/overlays"]
 	path = nixos/overlays
 	url = https://github.com/GTrunSec/nixpkgs-overlays.git
+[submodule "nixos/nixpkgs"]
+	path = nixos/nixpkgs
+	url = git@github.com:GTrunSec/nixpkgs.git
+	shallow = true
