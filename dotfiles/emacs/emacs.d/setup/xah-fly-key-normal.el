@@ -84,8 +84,8 @@
    xah-fly-key-map
    '(
      ;; IMPORTANT, These keys are all dvorak keys
-     ("~" . nil)
-     (":" . nil)
+     ("~"	.	nil)
+     (":"	.	nil)
 
      ("SPC" . xah-fly-leader-key-map)
      ("2" . org-agenda)

@@ -182,7 +182,7 @@ I would like use ErgoDox keyboard on my linux environment
 
  #+end_src
 
-**** ✍ NOTE leader-key-map
+*include coi sd dsds uds ncbiebfdb  dfo oejmkj dfgh lkh erhwslqpdnvngb  *** ✍ NOTE leader-key-map
 #+begin_src emacs-lisp :tangle "./setup/xah-fly-key-normal.el"
   (require 'xah-fly-keys)
 
@@ -269,8 +269,8 @@ I would like use ErgoDox keyboard on my linux environment
          xah-fly-key-map
          '(
            ;; IMPORTANT, These keys are all dvorak keys
-           ("~" . nil)
-           (":" . nil)
+           ("~"	.	nil)
+           (":"	.	nil)
 
            ("SPC" . xah-fly-leader-key-map)
            ("2" . org-agenda)
@@ -315,8 +315,6 @@ I would like use ErgoDox keyboard on my linux environment
         )
     #+end_src
 
-    #+RESULTS:
-    : xah-fly-command-mode-init
 
 **** special-key-to-mode-map
     #+begin_src emacs-lisp :tangle "./setup/xah-fly-key-normal.el"
@@ -2217,6 +2215,7 @@ CLOSED: [2019-08-08 Thu 14:56]
 (setq slime-contribs '(slime-fancy)))
 #+end_src
 *** [[https://github.com/DogLooksGood/parinfer-mode][DogLooksGood/parinfer-mode: Parinfer for Emacs :)]]
+*** [[https://github.com/emacs-helm/helm-sly][emacs-helm/helm-sly: Helm for SLY]]
 ** R
 - [[https://www.r-bloggers.com/using-r-with-emacs-and-ess/][Using R with Emacs and ESS | R-bloggers]]
 - [[http://ess.r-project.org/Manual/ess.html#Installation][ESS – Emacs Speaks Statistics]]
@@ -4138,4 +4137,4 @@ Version 2017-10-09"
   CLOSED: [2019-07-24 Wed 18:18]
   - State "✔ DONE"     from              [2019-07-24 Wed 18:18]
 *** [[https://github.com/raxod502/straight.el#integration-with-use-package-1][raxod502/straight.el: 🍀 Next-generation, purely functional package manager for the Emacs hacker.]]m
-
+** [[https://github.com/DarwinAwardWinner/dotemacs/blob/master/config.org][dotemacs/config.org at master · DarwinAwardWinner/dotemacs]]

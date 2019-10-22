@@ -243,6 +243,8 @@ sudo cp /Library/Input\ Methods/Squirrel.app/Contents/Frameworks/librime.1.dylib
 *** [[https://github.com/wyounas/homer][wyounas/homer: Homer, a text analyser in Python, can help make your text more clear, simple and useful for your readers.]] :read:dev:
 ** Cpython
 ** PASSWORD_MANAGER
+*** [[https://wiki.trezor.io/Apps:SSH_agent#Setup_.28NixOS.29][Apps:SSH agent - Trezor Wiki]]
+**** [[https://wiki.trezor.io/Trezor_Password_Manager][User manual:Password Manager - Trezor Wiki]]
 *** enpass
 ** Notes & self
 *** [[https://github.com/zadam/trilium][zadam/trilium: Build your personal knowledge base with Trilium Notes]]
@@ -280,6 +282,8 @@ sudo dd bs=1m if=/Users/gtrun/Downloads/nixos-graphical-19.03.173292.65729e08178
 #+end_src
 * Bash
 ** [[https://github.com/rothgar/awesome-tmux][rothgar/awesome-tmux: A list of awesome resources for tmux]]
+** zsh
+*** [[https://github.com/getantibody/antibody][getantibody/antibody: The fastest shell plugin manager.]]3
 ** fish
 *** [[https://fishshell.com/docs/current/faq.html][fish: Frequently asked questions]]
 *** [[https://nicolas-van.github.io/programming-with-fish-shell][Progrxamming with fish shell | Nicolas Vanhoren’s Blog]]
