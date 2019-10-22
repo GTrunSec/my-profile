@@ -39,6 +39,7 @@ with lib;
     set -x -U GOPATH $HOME/go 
     set -x -U GOBIN $GOPATH/bin
     set -g -x PATH $PATH $GOBIN
+    set -g theme_color_scheme gruvbox
     source ~/.local/share/icons-in-terminal/icons.fish
     kitty + complete setup fish | source
     alias ...='cd ../..'
@@ -46,7 +47,12 @@ with lib;
     alias .....='cd ../../../..'
     abbr -a g git
     abbr -a gr "git reset --hard"
-    abbr -a gl "git pull --rebase"    
+    abbr -a gl "git pull --rebase"   
+
+    if status is-interactive
+    and not set -q TMUX
+    exec tmux
+    end 
     '';
   };
   

@@ -86,7 +86,6 @@ in rec
         };
       }))
       xdotool
-      tmux
       okular
       #password
       enpass
