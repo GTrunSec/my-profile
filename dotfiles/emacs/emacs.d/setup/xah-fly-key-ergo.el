@@ -63,7 +63,7 @@
 (define-key xah-fly-key-map (kbd "C-;") 'maple-iedit-match-all)
 
 ;; org-mode
-(define-key xah-fly-key-map (kbd "C-c l") 'org-mac-grab-link)
+(define-key xah-fly-key-map (kbd "C-c l") 'grab-x-link)
 (define-key xah-fly-key-map (kbd "C-c a") 'org-agenda)
 (define-key xah-fly-key-map (kbd "C-c w") 'helm-deft)
 
@@ -79,7 +79,7 @@
 
 (defun xah-fly-command-mode-init ()
   "Set command mode keys.
-      Version 2017-01-21"
+           Version 2017-01-21"
   (interactive)
   (xah-fly--define-keys
    xah-fly-key-map
@@ -103,7 +103,8 @@
      ("f" . xah-fly-insert-mode-activate)
      ("[" . xah-backward-punct )
      ("]" . xah-forward-punct)
-     ("g" . set-mark-command)
+     ("gt"	.	vinegar/jump-to-bottom)
+     ("gg"	.	beginning-of-buffer)
      ("i" . undo)
      ("v" . xah-paste-or-paste-previous)
      ("c" . xah-copy-line-or-region)

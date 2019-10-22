@@ -30,11 +30,6 @@ font pango:DejaVu Sans Mono,  Font Awesome 5 Free solid 18
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-#applcation
-exec --no-startup-id polar-bookshel
-exec --no-startup-id emacs
-exec --no-startup-id firefox
-exec --no-startup-id gitKraken
 
 # start a terminal
 bindsym Mod4+Return exec kitty
@@ -171,9 +166,15 @@ exec_always --no-startup-id autorandr home
 exec_always --no-startup-id bash $HOME/.config/polybar/launch.sh
 # Compton
 exec_always --no-startup-id bash $HOME/.config/nixpkgs/dotfiles/polybar/compton.sh
-
 # adguard-home
 exec --no-startup-id bash $HOME/.config/nixpkgs/sh/adguard-home.sh
+
+#applcation
+exec --no-startup-id polar-bookshel
+exec --no-startup-id emacs
+exec --no-startup-id firefox
+exec --no-startup-id gitkraken
+
 # exec --no-startup-id wmctrl -c Plasma
 # for_window [title="Desktop — Plasma"] kill; floating enable; border none
 # for_window [class="Plasma"] floating enable

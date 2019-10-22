@@ -7,6 +7,7 @@ pkgs.vscode-with-extensions.override {
   ]
     # Concise version from the vscode market place when not available in the default set.
   ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+    # https://github.com/darkoperator/vscode-sysmon
     # Lang-C
     {
       publisher = "ccls-project";

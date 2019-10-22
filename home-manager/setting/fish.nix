@@ -18,15 +18,19 @@ with lib;
     in {
     enable = true;
     shellAliases = with pkgs; {
-      l = "exa -lah";
-      f = "rg --files";
-      E = "env SUDO_EDITOR=\"emacsclient\" sudo -e";
-      pcat = "${python3Packages.pygments}/bin/pygmentize";
-      so = "pactl set-default-sink (pacmd list-sinks | awk \\\'/name:.*usb/{if (a != \"\") print a;} {a=$NF}\\\')";
-      si = "pactl set-default-sink (pacmd list-sinks | awk \\\'/name:.*pci/{if (a != \"\") print a;} {a=$NF}\\\')";
+      l     = "exa -lah";
+      f     = "rg --files";
+      E     = "env SUDO_EDITOR=\"emacsclient\" sudo -e";
+      em    = "emacs";
+      cp    = "cp -i";
+      mv    = "mv -i";
+      ag0   = "rg --max-depth=1";
+      pcat  = "${python3Packages.pygments}/bin/pygmentize";
+      so    = "pactl set-default-sink (pacmd list-sinks | awk \\\'/name:.*usb/{if (a != \"\") print a;} {a=$NF}\\\')";
+      si    = "pactl set-default-sink (pacmd list-sinks | awk \\\'/name:.*pci/{if (a != \"\") print a;} {a=$NF}\\\')";
     };
     
-    interactiveShellInit = ''
+     interactiveShellInit = ''
       if not functions -q fundle; eval (curl -sfL https://git.io/fundle-install); end
       ${concatMapStringsSep "\n" (p: "fundle plugin '${p}'") plugins}
       fundle init
@@ -37,6 +41,12 @@ with lib;
     set -g -x PATH $PATH $GOBIN
     source ~/.local/share/icons-in-terminal/icons.fish
     kitty + complete setup fish | source
+    alias ...='cd ../..'
+    alias ....='cd ../../..'
+    alias .....='cd ../../../..'
+    abbr -a g git
+    abbr -a gr "git reset --hard"
+    abbr -a gl "git pull --rebase"    
     '';
   };
   

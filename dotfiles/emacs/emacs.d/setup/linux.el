@@ -59,6 +59,7 @@
 ;;               :slant 'normal
 ;;               :size 20.5)))
 
+(straight-use-package 'grab-x-link )
 (setq-default cursor-type 'box)
 (setq bookmark-default-file
       (concat user-emacs-directory "var/bookmark-linux-default.el"))

@@ -10,7 +10,6 @@ in rec
     hardware.brightnessctl.enable = true;
     environment.systemPackages = with pkgs; [
       #customEmacs.emacs_26_3
-      # nur
       # KDE
       # nur.repos.ysndr.kde.breeze-blur
       # qtstyleplugin-kvantum-qt4
@@ -19,6 +18,7 @@ in rec
       # latte-dock
       # deepin.dde-dock
       #latex
+      wireshark
       (python3.withPackages (pkgs: with pkgs; [
         trezor_agent wheel
       ]))
