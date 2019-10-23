@@ -13,6 +13,73 @@
 #+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
 #+SELECT_TAGS: export
 #+EXCLUDE_TAGS: noexport
+* Overview
+** Build system
+- system : ~NIXOS~
+#+begin_src sh :tangle yes
+git clone https://github.com/GTrunSec/my-profile.git --depth=1  --recursive --shallow-submodules ~/.config/nixpkgs
+
+ln -s  ~/.config/nixpkgs/nixos /etc/nixos
+
+sudo nixos-rebuild swith
+
+home-manager switch
+
+#+end_src
+** Emacs with Terminal
+#+NAME: emacs/ter1
+#+CAPTION:  
+#+ATTR_ORG: :width 600
+#+ATTR_LATEX: :width 5in
+
+#+DOWNLOADED: https://uc488a4713647ecaf9030874396d.previews.dropboxusercontent.com/p/thumb/AAkP8Y6UtLPPdJnUwXwEN5bgORsOJ1u4xsBXiNoHZW7ibJ4dB0qNzpUtxwl5rWGJH4OUYY5jjfOzR81ll2g6uKo15xxUpQNqUAq_UUPAUe_tDNpb8TgYoeccpVbxPduW7huFjwCKGVoO0A9hRcmU0MNakwF2aRczfhDvgSLKG1jSnBg6xD9MBGjUsAgHq1DxGd8D2G0g67lypXPJQfN3YZEjvx94uL8Vnd5Ar7nwk6n3lH9pxZmUnU8IwQV2RlrgnpvNPwuL_UwrwV43tK09Cm_fT8KqtkuDsJi4hkB2dDzrHpYiVrHtd9DxGGDoeMmKApGQ0_yYKSxbmD1S6AfKzS21IqVZHHdyDqJETAr1Hn7lv5AY-bjJvF14c0iESh-BgnnfJew0GtV7B1WUKrE4GPi0/p.jpeg?size=800x600&amp;size_mode=3 @ 2019-10-23 15:16:33
+[[file:Overview/p_2019-10-23_15-16-33.jpeg]]
+
+
+#+NAME: EMacs/ter
+#+CAPTION:  
+#+ATTR_ORG: :width 600
+#+ATTR_LATEX: :width 5in
+
+#+DOWNLOADED: https://uce1ab3a1a71763411c456ba5aa3.previews.dropboxusercontent.com/p/thumb/AAm2WvK6woDAmmnpXoaFmpPFea3go5k7cYH4ZN9AiwRQ3z-KUGADfwdhtJLf98ESxcchiqgkTWa1m59fGoT6epmQ1Abfun-JB-Ip5thnfnXaPxkw-0HiUx9I76xigpnhFH_GEJhyJRcL-KicYycHv8K9LPm7R-rKJscNa2asdkZ_HnXfAjzap1ewNUORWvgIkdMsuOwPwKc_DFw8jrUVVpWbcUtr2D_P4rUw0X5giOs68_rfh3eiER4Icz8H3T0PsOXh17iGya3HHwNRJX3yq3-ts8OAGcsUndd1Qz3ByxIdtlOQq2_whPqKL_VhOX7EUONJD18nmGkIRh1rFP8EOL-eQYYvNv93xo0NOnKbkZqWLfpIGi0bgr_VIq7uEXe8rUbZOtDGX4X_IgLcTn7kLO98/p.png?size=800x600&amp;size_mode=3 @ 2019-10-23 14:58:43
+[[file:Overview/p_2019-10-23_14-58-43.png]]
+** VScode with Rstudio
+** EMacs with Org-mode agenda
+#+NAME: org-agenda
+#+CAPTION:  
+#+ATTR_ORG: :width 600
+#+ATTR_LATEX: :width 5in
+
+
+#+DOWNLOADED: https://ucde3d23e87dba42823d4f655447.previews.dropboxusercontent.com/p/thumb/AAlODXlA7Y5tP4Puzh7gcB4uDAcNLKBFqAA15Dd_3DtYQcNDxIQYfvjyrHnK-zB3yTNQjJDBRFmX5YlJCpeZto1zUYkZs_T4dv0FFGtJ1I7_5zKjZ3ivB6FOx_uuNuK1RBEHSZYQvoiC74lSD200VY5xQhKtOmD7ADLeXLaJq2ZwQ-KugRlD4SSb0ijPiTObgZ7PFFbeKbna5XaOk9qfSOBazoDvUivgLp-dTwQuCSD6QJ-8NweCpJmz0s-1LaJUsuZyNzp3gTAWWnrxfHztCK7oNk0VwH10iEecU2N9w4d5NcjfofUecHIVbk_BPbycw4f50dHtoUzHmWvqsrWVKMozM9DGGEtjLyVhOdhjsVPyuIqM7c5uPUrajuZPrKLfJ8QXeSk7yhyrHMomAIhR01Xn/p.jpeg?size=800x600&amp;size_mode=3 @ 2019-10-23 15:02:35
+[[file:Overview/p_2019-10-23_15-02-35.jpeg]]
+** Latex with Emacs and Jupyter
+#+NAME: Latex with Emacs and Jupyte
+#+CAPTION:  
+#+ATTR_ORG: :width 600
+#+ATTR_LATEX: :width 5in
+
+#+DOWNLOADED: https://uc4dfe8d2f208364cb61677096c4.previews.dropboxusercontent.com/p/thumb/AAk_jEsA_S_mD_7bPLmEvXgvu3pbtwZ0N0zW1p90B3SLBNcYBHU0asbtIPVgp79KkCWAgW-PaYMDCvrtDCRgc7_GE5mYKe22YdQdtqjjbULjVS-yxPBODNq2TnZKylK7UB3QxiHvlT4Sl_BYtyj1xYAsL83Jc6Xwe1TUrGpcpKL1_Y4aWsVLtKWXwh6XH4_wKW9ptmdLPnXfpgU1sPxn82lQYZispl2d_3BoQWzG8t-owxHRw048KpN9iV-DSYSp-6nCmZuI-zCgLJ-80-6FeH-nyF2IkwNm6sI4IUldu9ivaysJucoSQbFjHeontvG0Eso8lvpZ2oNH3OAmTJ_MnVx7kIuxUSAnbFdAEuVYolMQSbNNu2zvj4ocxpvFS4lXRlZMXBPohW6hn5JfTa7KbnoE/p.png?size=800x600&amp;size_mode=3 @ 2019-10-23 15:14:41
+[[file:Overview/p_2019-10-23_15-14-41.png]]
+
+** Jupyter R/python/haskll
+#+NAME: Jupyter/lang
+#+CAPTION:  
+#+ATTR_ORG: :width 600
+#+ATTR_LATEX: :width 5in
+
+#+DOWNLOADED: https://uca369a6553db1e9ec71be545147.previews.dropboxusercontent.com/p/thumb/AAnsYYhJOfXIYvpDB5RCUbraUwNWY391FCDnZf4mSpDg-FlCa2vgPhBIdxrzisG-Y2gWFxt_a7ewoat1ZJ5XG273d74V9zAEbRdQXRUBVScH0uY699E-Kv4-K9OMnaL_0GBb1k_Oo2UaHIhGY-9XhYdlMxeOa51JgPKy24KIsvlFiWPN8ocW6POchUA5CQifQqV-IgBvzNHbFSMJxLIgXXvoGxVIyEcjQ_1eZ9WueKi1-4BFEevGtc35xwNU0mTBm-v5uX0nShJtgJ9v-_S5RInHCYX0gzO1kgaQ4_Emd3ZUS_fP1fQRqa3ocz1f0KpiXCvOKodpm2aPFUtpjCvynTlacXSk7deBltFmwK6tOm_SmtqFzGjMKlp781qTbaN5woYMUiR2DPxjBXS1wufe5Rqc/p.png?size=800x600&amp;size_mode=3 @ 2019-10-23 15:00:13
+[[file:Overview/p_2019-10-23_15-00-13.png]]
+** Dict / PDF
+- Chinese & English dict
+#+NAME: Linux/dict
+#+CAPTION:  
+#+ATTR_ORG: :width 600
+#+ATTR_LATEX: :width 5in
+
+#+DOWNLOADED: https://ucb1a54fedc54481a09aa0306067.previews.dropboxusercontent.com/p/thumb/AAkfjQqRgUxXVClUKuRhHfV8q832-sMxWWYAAQdyx6LDZiPKNWmM-P9bJQ5GHZDXIqEh8GmKLKrtIDtanG4Rto7uKu0MAwPaQXIFz0KKjWEs7-gVSvN89iF11yasDG7il-B0Wm7YbSc8KATTIl4tEq56JjGsGHx6FJwTqlF-jwhHrgv_4G-cigczr8TArNparhEPG3LXvswk3XZivUewJx0R_1HKMax8IV1rWWN8_bdGwMA3MJzmefgOBpzu03JaAI-R7apyJUG_pwC6Nfs21KSuAfRDF46ISrj64z9abCoYBJXjrQBEkT1nRA318BBNuUkxQh3NKb6WSZZUTF77vDegmuYdkes8RKvcOCchRUhHl4g9tpcPo0QsOMUAMf96y_vuHdoMqvPAMDgMmX_YmIya/p.png?size=800x600&amp;size_mode=3 @ 2019-10-23 15:17:37
+[[file:Overview/p_2019-10-23_15-17-37.png]]
+
 * Terminal & shell
 #+NAME: kitty*fish
 #+CAPTION:  
@@ -46,6 +113,32 @@ cd ~/emacs.d
 make compile
 run emacs
 #+end_src
+** LSP
+*** C++
+#+NAME: C++/emacs
+#+CAPTION:  
+#+ATTR_ORG: :width 600
+#+ATTR_LATEX: :width 5in
+
+#+DOWNLOADED: https://ucbec0b572c72df19347c1543a88.previews.dropboxusercontent.com/p/thumb/AAnAR-1MrAeaXLWdleUK8z5zBf0a6suKY1rs54oYfSkzDRad-uJJASVxvabCMht_3ywdmXqJKGnKuEq2VAr1doZwLFYHY-ckhElG-Y1-4-HG2OcKMlJgXIiPzA0cuCtou6Gt3jzpM9H9ixt7UTjxLgfSBrRcZO_W48upXN51CVVlAwsJTt7ORH0ECZj6XGv95D3REYW84Ipuz1bajsqY-CqP7LHO6cXt7Pfj_iENlM2P9jv6EBAjUCFomLFbZ-Bv4pZfhawJYcf0VpaPUjhpqoLHvdZV_7CltTm26VqPaF7G1X_2LrrSAusqxI44A5UZ61ZFgmB7IM4Qt05qA9SAtYf06KwbfbfONWjyIAMZe6aIkRvjwsGwAYhU1g989hYQFdBIGsS3mYX7lmMqjDSMjBuN/p.png?size=800x600&amp;size_mode=3 @ 2019-10-23 14:55:38
+[[file:Emacs/p_2019-10-23_14-55-38.png]]
+*** R/Rmarkdown
+#+NAME: R/emacs
+#+CAPTION:  
+#+ATTR_ORG: :width 600
+#+ATTR_LATEX: :width 5in
+
+#+DOWNLOADED: https://uc11573d1be457d283761f9408ca.previews.dropboxusercontent.com/p/thumb/AAkyQr0tuUTZHEsJ7B1LEFzGaf9ZDlsbpf_N6-YLxh7Np0zVF9nqDXGTayVjjnQR7J59M2ORTD9xcfSSKBXSsSO5NmhkphiQ9SdOgok4hiUwR3fA5qJQq8cvZys9urT9scLWCG-FHpTH-f9ieIilD-j8UnPywZuGFclIE-mV5fNTGqQUBvOpcTWp3J4Ui_0n6RzJELFr7AFwWYXWBNMmuoMp8g7gEssnLLgSpoZ0EnQD3q0TmE6c37A9wWEJgltl6Xg1fB8xZjrdM15A0t5spvYKk0cFCUP0_bzt4NqBrEzQ-AOSDbNdbDnzpDC6V1BNokOK_gF1sGwcqgEEJwuKeF5dg2zttqrBb3C6XmaRlvX_bgYHLiDw0s2JVabdMcnzzfSsdxYhA4xXPF-h5vvxrXQG/p.png?size=800x600&amp;size_mode=3 @ 2019-10-23 14:56:17
+[[file:Emacs/p_2019-10-23_14-56-17.png]]
+*** python
+#+NAME: python/emacs
+#+CAPTION:  
+#+ATTR_ORG: :width 600
+#+ATTR_LATEX: :width 5in
+
+#+DOWNLOADED: https://uc292709f0ddc245409ac95b7fd9.previews.dropboxusercontent.com/p/thumb/AAlOynvqtqMbwZBaJhCg-HXH9DLWEBSp5HNC2IageGh6rGfeVe9W7-_ev6W1751WF0f1uBQBP0osgzCm7qCCORYW_N05rb5IhxUyZExUHBY3aGps6BvCx2Lb6Th5hMcY0zzNBlqeG1nkzThRR7GVvTLIklBG6TThkLu6jJAX550OgrEZgLaLDyXAiuW-7deDo_LVy7XsMJt2MnlhMFcHcL2q5q-I6ORC1r6VhH4fTuxjQuTdzuXdpq96ANDVIqM33s_TTbQljveYTeuYZbrc9bmecgAZgTcKFX3xC1MRx0aPWkp0CSzsw5pw98aHrUHctnbzyc1NXOzm-ZTNwQfoDM29N1GtYH7daVk8aCaRwoxEdz6EJUNRG8wJLlfgmTBka5ScuhlnEIteR95hc44flPpV/p.png?size=800x600&amp;size_mode=3 @ 2019-10-23 14:56:52
+[[file:Emacs/p_2019-10-23_14-56-52.png]]
+*** Golang
 ** elfeed
 #+NAME: elfeed
 #+CAPTION:  
@@ -54,4 +147,15 @@ run emacs
 
 #+DOWNLOADED: https://uc3b3017ba5d36ede06571697cce.previews.dropboxusercontent.com/p/thumb/AAnwwLkhVmfqAd7rNzSX2ZG5-6uAz4yQH9-Qr7_m4jaCBC9L6Qq8sMaDnHqFMPQ5M2hIBCJwhZbxc0EFlGGZeiJkFgHyxEWQnm9bO9It-sXmCY65ZMBorLDxmb30_A4MbpvqmfSSnHhvwmv8NebqO4BbTvztUhsOiM0Vidf2bToNM0ZTsRGHOLY6Iev6VSWX_AbQzdvM0AjUW5i8Z5LZy3cu29fp2W-YUpztcbbLqsdIYnCVrupeeSQl1mmokg_MnIRNzViCzfl5HsNP9VhtzZ0erOZedM13-4vWl2UINlTpVEjdDC1IX-ubqWFJtOALfk2egBOF3HjbQJ7XKv-7UOBKc09r0YkSb200ty2f_0v-mEc60zaA3YcRyh-gQklCInLuotlviZ2dLacG8bmfTWIc/p.png?size=800x600&amp;size_mode=3 @ 2019-10-23 14:50:18
 [[file:Emacs/p_2019-10-23_14-50-18.png]]
+* Network
+** DNS
+*** Adguard-home
+#+NAME: adguard-home
+#+CAPTION:  
+#+ATTR_ORG: :width 600
+#+ATTR_LATEX: :width 5in
+
+#+DOWNLOADED: https://uc2bc8df3e6c0946443fb9968eb3.previews.dropboxusercontent.com/p/thumb/AAlEIZP-Y9JuCTeRdbngbI3fr3dZswWMvSugkrWKF5JqJLlv8KYsXGRhp0bx87eGmG6Wt1YhOW9_GyPGf3oZj7adkyRLpCkuDEA0qlzMX-Riq3tObJPxYWvbqIU7L3BVnyk9sF1016cfZxn7syI8IgN46xf0yV9eynPi1usuZtIwX8948j9MVZCzxEkb9691X0aBh-bnO0xnO_IyV9tKFxDiD0GT4fiLJW-com1STkDSCKO9-aWns_C6wJG9FUkO2hqNVr06UCFgtOUyb0dpe1CXHyslUbVBwxCeYOeslMdXTTryza80xoOW-firoDYH3nvXOERyuU7uW5Tmsiuu6BmCA0CQ40ITNI8tdWJahruUM30INmiK35x37QWYcCo26IJQM8G1Jq0Hn4YR8G-a2ssa/p.png?size=800x600&amp;size_mode=3 @ 2019-10-23 15:01:24
+[[file:Network/p_2019-10-23_15-01-24.png]]
+
 
