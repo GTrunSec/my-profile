@@ -2752,6 +2752,7 @@ CLOSED: [2019-07-27 Sat 06:05]
               (org-starter-def "~/.config/nixpkgs"
                                :files
                                ("README.org")
+                               ("global-readme.org")
                                ("dotfiles/wallpaper/wallpaper.org" :agenda nil)
                                )
               :bind

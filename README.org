@@ -70,7 +70,7 @@ home-manager switch
 
 #+DOWNLOADED: https://uca369a6553db1e9ec71be545147.previews.dropboxusercontent.com/p/thumb/AAnsYYhJOfXIYvpDB5RCUbraUwNWY391FCDnZf4mSpDg-FlCa2vgPhBIdxrzisG-Y2gWFxt_a7ewoat1ZJ5XG273d74V9zAEbRdQXRUBVScH0uY699E-Kv4-K9OMnaL_0GBb1k_Oo2UaHIhGY-9XhYdlMxeOa51JgPKy24KIsvlFiWPN8ocW6POchUA5CQifQqV-IgBvzNHbFSMJxLIgXXvoGxVIyEcjQ_1eZ9WueKi1-4BFEevGtc35xwNU0mTBm-v5uX0nShJtgJ9v-_S5RInHCYX0gzO1kgaQ4_Emd3ZUS_fP1fQRqa3ocz1f0KpiXCvOKodpm2aPFUtpjCvynTlacXSk7deBltFmwK6tOm_SmtqFzGjMKlp781qTbaN5woYMUiR2DPxjBXS1wufe5Rqc/p.png?size=800x600&amp;size_mode=3 @ 2019-10-23 15:00:13
 [[file:img/Overview/p_2019-10-23_15-00-13.png]]
-** Dict / PDF
+** Dict / polar-book/PDF
 - Chinese & English dict
 #+NAME: Linux/dict
 #+CAPTION:  
@@ -106,7 +106,7 @@ home-manager switch
 ** Build
 - [✓] home-manager switch
 - test emacs
-- [Blog post] [[https://www.gtrun.org/post/nsmorg/][My Security Intelligence and Monitoring Agenda List - GTruNSec | 光涛]]
+- [Blog post] [[https://www.gtrun.org/post/init/][My Emacs configuration - GTruNSec | 光涛]]
 #+begin_src sh :tangle yes
 cp ~/.config/nixpkgs/dotfiles/emacs/emacs.d ~/.emacs.d
 cd ~/emacs.d
