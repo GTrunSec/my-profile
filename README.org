@@ -188,6 +188,7 @@ ln -s /Users/gtrun/Dropbox/application/blog/content/static/ox-hugo /Users/gtrun/
 - [[https://github.com/rime/home/wiki/CustomizationGuide][CustomizationGuide · rime/home Wiki]]
 - [[https://github.com/scomper/Rime][scomper/Rime: 鼠须管配置]]
 - [[https://github.com/rime/plum][rime/plum: 東風破 /plum/: Rime configuration manager and input schema repository]]
+- [[https://github.com/LEOYoon-Tsaw/Rime_collections/blob/master/Rime_description.md][Rime_collections/Rime_description.md at master · LEOYoon-Tsaw/Rime_collections]]
 #+begin_src sh :tangle yes
 cd ~/Library/Rime
 import_tables:

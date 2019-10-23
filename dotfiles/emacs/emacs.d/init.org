@@ -3044,12 +3044,12 @@ See also: https://stackoverflow.com/questions/9547912/emacs-calendar-show-more-t
 (add-hook 'dired-mode-hook 'org-download-enable)
 (setq org-download-screenshot-file "~/Pictures/Monosnap/snap.png")
 )
-
 #+end_src
 ** [[https://github.com/gizmomogwai/org-kanban][gizmomogwai/org-kanban: Kanban table for org-mode]]
 ** [[https://github.com/fuxialexander/org-pdftools][fuxialexander/org-pdftools]]                                     :PDF:READ:
 
 ** [[https://github.com/alphapapa/org-sidebar][alphapapa/org-sidebar: A helpful sidebar for Org mode]]
+** 📄 REVIEW [[https://zzamboni.org/post/beautifying-org-mode-in-emacs/][zzamboni.org | Beautifying Org Mode in Emacs]]
 * Exporting
 ** latex
 *** ox-latex
