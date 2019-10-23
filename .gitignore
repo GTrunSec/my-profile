@@ -17,7 +17,9 @@ bm-macos-data
 
 ##system rime config
 dotfiles/fcitx/rime/build
-dotfiles/fcitx/rime/luna_pinyin.userdb
+dotfiles/fcitx/rime/luna_pinyin.userdb/LOG*
+dotfiles/fcitx/rime/luna_pinyin.userdb/LOCK
+dotfiles/fcitx/rime/luna_pinyin.userdb/*.log
 dotfiles/fcitx/log
 dotfiles/fcitx/dbus
 dotfiles/fcitx/clipboard/history.dat
