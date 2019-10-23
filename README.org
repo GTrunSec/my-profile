@@ -1,419 +1,57 @@
-#+TITLE: my global-hardware config
+#+TITLE: My-computer Profile
 #+AUTHOR: GTrunSec
 #+EMAIL: gtrunsec@hardenedlinux.org
-#+DATE: 22 July 2019
-#+DESCRIPTION: my computer configuration
-#+KEYWORDS: profile
+#+DATE: 23 October 2019
+#+DESCRIPTION:
+#+KEYWORDS:
 #+LANGUAGE:  en cn
-#+SETUPFILE: ~/Documents/org-notes/setup/hugo.local
+#+SETUPFILE: ~/Documents/org-notes/setup/darkcss.local
+#+hugo_publishdate: (0 5)
+#+hugo_auto_set_lastmod: t
+#+HUGO_categories: 
+#+HUGO_tags: 
 #+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
 #+SELECT_TAGS: export
 #+EXCLUDE_TAGS: noexport
-* ✰ Important Tool Pack
-** [[https://education.github.com/pack/offers][GitHub Student Developer Pack - GitHub Education]]
-+ [X] GitKraken Glo
-+ [[https://transloadit.com/github-students/][GitHub Student Pack | Transloadit]]
-  + [[https://transloadit.com/templates/edit/4d95ca8a3b614ed3a24c015895414b94][Templates | Transloadit]]
-+ [[https://gtrunsec.carto.com/dashboard/get-started/cartoframes#step-2][Get Started | CARTO]]
+* Terminal & shell
+#+NAME: kitty*fish
+#+CAPTION:  
+#+ATTR_ORG: :width 600
+#+ATTR_LATEX: :width 5in
 
-* Myself
-* Img/Photo
-** [[https://gtrunsec.imgur.com/all/?third_party=1][gtrunsec's uploaded images - Imgur]]
-** [[https://imgbb.com/][ImgBB — Upload Image — Free Image Hosting]]
-* virtual
-** ESXI
-- SSD 225GB 
-- 2T extended
+#+DOWNLOADED: https://uc663260cf77eaeb1da56a5776b6.previews.dropboxusercontent.com/p/thumb/AAlf8SEJ_FdWTFp0xn-oaTWzQQSRwDMFYCS56_dfOeQydiGQ8USJrYTWjBSKOWvDFZQCXs64nwVn0BGcNIk1g8u1bRCTsOhBEaKcwNw5ac5jIYpKPYW8AppquIC0n4AIPOlnr4Ki58E48YD4DxfdYCS068xgc7HtYTCtCFmz-g6bkGG74I-y9rGkoUSG7LkOoWxk8Du3Hn2SiJoKKy13FPM3ZtMe_klbAO08ospxrtAB4R0rr024FnoUB4dhaMmocStXwnrGfrm1Jh_vdE0a-a2FP8Ld09yU8e_mWRx_xTB9fWSrL8M5qsF7cClPMrfTqhETSy4XoJbUQUiA7VnRr47ZtGxLxXDigGqRHedsJYPWpJomfU_Kg1nFUc6hxZMQXNhUo5aYqQ1XdFNtvNVOLMYF/p.png?size=800x600&amp;size_mode=3 @ 2019-10-23 14:53:30
+[[file:Terminal_&_shell/p_2019-10-23_14-53-30.png]]
 
-* Global
-** font
-*** ttf-monaco
-*** [[https://github.com/vjpr/monaco-bold][vjpr/monaco-bold: The Monaco font with a bold variant]]
-*** [[https://www.archlinux.org/packages/?name=adobe-source-han-serif-cn-fonts][Arch Linux - Package Search]] 宋体
-** terminal
-*** ✔ DONE [[https://github.com/kovidgoyal/kitty/releases][Releases · kovidgoyal/kitty]]
-CLOSED: [2019-09-02 Mon 22:46]
 
-- State "✔ DONE"     from "⚔ STARTED"  [2019-09-03 Tue 00:16]
-**** [[https://sw.kovidgoyal.net/kitty/#quickstart][kitty - the fast, featureful, GPU based terminal emulator — kitty 0.14.4 documentation]]
-**** [[https://github.com/lcagustini/dotfiles/blob/master/.config/kitty/kitty.conf][dotfiles/kitty.conf at master · lcagustini/dotfiles]]
-
-*** ✘ CANCELED [[https://github.com/thestinger/termite][thestinger/termite: A keyboard-centric VTE-based terminal, aimed at use within a window manager with tiling and/or tabbing support.]]
-CLOSED: [2019-09-03 Tue 00:16]
-- State "✘ CANCELED" from              [2019-09-03 Tue 00:16] \\
-  to Kitty
-*** ✘ CANCELED [[https://www.iterm2.com/][iTerm2 - macOS Terminal Replacement]]
-CLOSED: [2019-09-03 Tue 00:17]
-- State "✘ CANCELED" from              [2019-09-03 Tue 00:17] \\
-  to kitty
-*** [[https://github.com/nushell/nushell][nushell/nushell: A modern shell written in Rust]]
-** BASH/theme
-*** fish
-- [[https://github.com/fish-shell/fish-shell/issues/1060][SSH to machine with fish gives: `fish: Could not set up terminal` · Issue #1060 · fish-shell/fish-shell]]
-*** package
+** Kitty
+** [disused] termite
+* Input Method
+- [✓] home-manager switch
+** fcitx
 #+begin_src sh :tangle yes
-brew install rxvt-unicode
+ ~/.config/nixpkgs/dotfiles/fcitx
 #+end_src
-** Download
-*** [[https://github.com/agalwood/Motrix/][agalwood/Motrix: A full-featured download manager.]]
-* window
-** Login Manager
-*** [[https://github.com/adi1090x/slim_themes][adi1090x/slim_themes: A Beautiful Collection Of SLiM Themes...]]
-** i3
-*** [[https://github.com/teto/i3-dispatch][teto/i3-dispatch: Allows i3 to move focus differently depending on the focused window]]
-*** [[https://github.com/resloved/i3][resloved/i3: 🔲 — Rounded i3-gaps]]
- - [[https://github.com/Airblader/i3/wiki/Building-from-source][Building from source · Airblader/i3 Wiki]]
-*** [[https://github.com/cornerman/i3-easyfocus][cornerman/i3-easyfocus: Focus and select windows in i3]]
-*** [[https://github.com/SuperPrower/i3lock-fancier][SuperPrower/i3lock-fancier: Yet another i3lock fork. Now with configuration file!]]
-** [MacOS] [[https://github.com/koekeishiya/yabai][koekeishiya/yabai: A tiling window manager for macOS based on binary space partitioning]] 
-** rofi
-*** [[https://github.com/davatorium/rofi-scripts/tree/master][davatorium/rofi-scripts: Small scripts for use with rofi]]
-** Kwin
-*** [[https://github.com/lingtjien/Grid-Tiling-Kwin][lingtjien/Grid-Tiling-Kwin: A kwin script that automatically tiles windows]]
-** Xmonad
-*** [[https://wiki.haskell.org/Xmonad/Using_xmonad_in_Gnome#Gnome3][Xmonad/Using xmonad in Gnome - HaskellWiki]]
-*** https://github.com/Gekkio/gnome-session-xmonad
-*** [[https://xmonad.org/manpage.html][https://xmonad.org/manpage.html]]
-** Polybar
-*** [[https://github.com/rmrfasterisk/dotfiles/blob/master/.config/polybar/scripts/colors-dark.sh][dotfiles/colors-dark.sh at master · rmrfasterisk/dotfiles]]
-* theme
-** GTK
-*** [[https://www.reddit.com/r/unixporn/comments/crlaoo/fluxbox_blossom_theme/][[Fluxbox] Blossom theme : unixporn]]
-** latex
-*** [[https://github.com/matze/mtheme][matze/mtheme: A modern LaTeX Beamer theme]]
-** KDE
-*** [[https://github.com/tsujan/Kvantum/tree/master/Kvantum][Kvantum/Kvantum at master · tsujan/Kvantum]]
-*** [[https://www.reddit.com/r/unixporn/comments/958f9b/kde_i3gaps_arc_dark_t/e3t2bt1/?context=8&depth=9][[KDE i3-gaps] Arc Dark T : unixporn]]
-*** [[https://github.com/Akava-Design/Akava-Kv][Akava-Design/Akava-Kv: User oriented Kvantum theme for KDE]]
-**** [[https://www.reddit.com/r/unixporn/comments/d4ytzc/plasma_simple_blurry/][[Plasma] Simple Blurry : unixporn]]
-* Brower
-** [[https://github.com/atlas-engineer/next][
-atlas-engineer/next: Next Browser - Be Productive.]]
-
-* Lang
-** grammer
-*** [[https://github.com/tree-sitter/tree-sitter/tree/master/cli][tree-sitter/cli at master · tree-sitter/tree-sitter]]
+** Rime
 #+begin_src sh :tangle yes
-cargo install tree-sitter-cli
+ ~/.config/nixpkgs/dotfiles/fcitx/rime/
 #+end_src
-** Python
-*** macos
-#+begin_src sh :tangle yes
-brew install libxml2v
-#+end_src
-*** LSP
-#+begin_src sh :tangle "macos.sh"
-brew cask install dotnet-sdk
-git clone https://github.com/Microsoft/python-language-server.git
-cd python-language-server/src/LanguageServer/Impl
-dotnet publish -c Release -r osx-x64   
-dotnet publish -c Release -r linux-x64
-chmod a+x $(git rev-parse --show-toplevel)/output/bin/Release/osx-x64/publish/Microsoft.Python.LanguageServer
-
-#+end_src
-
-#+begin_src sh :tangle "linux.sh"
-git clone https://github.com/Microsoft/python-language-server.git
-cd python-language-server/src/LanguageServer/Impl
-dotnet publish -c Release -r linux-x64
-chmod a+x $(git rev-parse --show-toplevel)/output/bin/Release/linux-x64/publish/Microsoft.Python.LanguageServer
-#+end_src
-*** Anaconda
-#+begin_src python :tangle yes
-pip3 install python-Levenshtein
-conda install -c conda-forge python-language-server 
-
-#+end_src
-** go
-*** LSP
-#+begin_src sh :tangle yes
-git clone -b bingo https://github.com/saibing/tools.git
-cd tools/gopls
-go install
-#+end_src
-** Rust
-*** macos
-**** Basic install
-#+begin_src sh :tangle yes
-brew install rust
-#+end_src
-
-** C++
-*** ccls
-**** linux
-[[https://github.com/MaskRay/ccls/wiki/Build][Build · MaskRay/ccls Wiki]]
-**** macos
-#+begin_src sh :tangle yes
-brew update
-brew install ccls
-#+end_src
-** R 
-*** package
-#+begin_src sh :tangle yes
-install.packages('IRkernel')
-install.packages('repr')
-pbdZMQ
-install.packages('pbdZMQ')
-library(devtools)
-install_github("RBigData/pbdZMQ")
-
-#+end_src
-*** kernel
-#+begin_src sh :tangle yes
-install.packages('IRkernel')
-IRkernel::installspec()
-#+end_src
-*** Macos
-
-#+begin_src sh :tangle yes
-brew tap homebrew/science
-brew install Caskroom/cask/xquartz
-brew install r
-#+end_src
-
 * Emacs
-** Download
-- [[https://emacsformacosx.com/][GNU Emacs For Mac OS X]]
-** OX-hugo
-*** macos
-link image to static
+** Build
+- [✓] home-manager switch
+- test emacs
+- [Blog post] [[https://www.gtrun.org/post/nsmorg/][My Security Intelligence and Monitoring Agenda List - GTruNSec | 光涛]]
 #+begin_src sh :tangle yes
-ln -s /Users/gtrun/Dropbox/application/blog/content/static/ox-hugo /Users/gtrun/Dropbox/application/blog/static
+cp ~/.config/nixpkgs/dotfiles/emacs/emacs.d ~/.emacs.d
+cd ~/emacs.d
+make compile
+run emacs
 #+end_src
-* exporting 
-** Latex
-*** [[https://github.com/posquit0/Awesome-CV][posquit0/Awesome-CV: Awesome CV is LaTeX template for your outstanding job application]]
-* Input method
-** Rime 输入法
-- [[https://github.com/rime/home/wiki/CustomizationGuide][CustomizationGuide · rime/home Wiki]]
-- [[https://github.com/scomper/Rime][scomper/Rime: 鼠须管配置]]
-- [[https://github.com/rime/plum][rime/plum: 東風破 /plum/: Rime configuration manager and input schema repository]]
-- [[https://github.com/LEOYoon-Tsaw/Rime_collections/blob/master/Rime_description.md][Rime_collections/Rime_description.md at master · LEOYoon-Tsaw/Rime_collections]]
-#+begin_src sh :tangle yes
-cd ~/Library/Rime
-import_tables:
-  - luna_pinyin
-  - luna_pinyin.sgmain
-  - luna_pinyin.poetry
-  - luna_pinyin.cn_en
-  - luna_pinyin.english
-  - luna_pinyin.computer
-  - luna_pinyin.chat
-  - luna_pinyin.biaoqing
-#+end_src
-- [[https://github.com/wzyboy/rime_config][wzyboy/rime_config]]
-*** Macos
-#+begin_src sh :tangle yes
-brew cask install squirrel
+** elfeed
+#+NAME: elfeed
+#+CAPTION:  
+#+ATTR_ORG: :width 600
+#+ATTR_LATEX: :width 5in
 
-curl -fsSL https://git.io/rime-install | bash
+#+DOWNLOADED: https://uc3b3017ba5d36ede06571697cce.previews.dropboxusercontent.com/p/thumb/AAnwwLkhVmfqAd7rNzSX2ZG5-6uAz4yQH9-Qr7_m4jaCBC9L6Qq8sMaDnHqFMPQ5M2hIBCJwhZbxc0EFlGGZeiJkFgHyxEWQnm9bO9It-sXmCY65ZMBorLDxmb30_A4MbpvqmfSSnHhvwmv8NebqO4BbTvztUhsOiM0Vidf2bToNM0ZTsRGHOLY6Iev6VSWX_AbQzdvM0AjUW5i8Z5LZy3cu29fp2W-YUpztcbbLqsdIYnCVrupeeSQl1mmokg_MnIRNzViCzfl5HsNP9VhtzZ0erOZedM13-4vWl2UINlTpVEjdDC1IX-ubqWFJtOALfk2egBOF3HjbQJ7XKv-7UOBKc09r0YkSb200ty2f_0v-mEc60zaA3YcRyh-gQklCInLuotlviZ2dLacG8bmfTWIc/p.png?size=800x600&amp;size_mode=3 @ 2019-10-23 14:50:18
+[[file:Emacs/p_2019-10-23_14-50-18.png]]
 
-#+END_SRC
-*** 扩展词库
-- [[https://github.com/xiaoTaoist/rime-dict][xiaoTaoist/rime-dict: RIME 输入法 增强词库]]
-*** librime 
-- [[https://manateelazycat.github.io/emacs/2019/07/24/use-rime-in-emacs.html][在 Mac 版的 Emacs 中使用 RIME 输入法]] 
-
-**** macos
-#+begin_src sh :tangle yes
-
-
-brew install yaml-cpp leveldb opencc
-
- git clone https://github.com/google/googletest
-cd googletest
-mkdir build
-cd build
-cmake ..
-make
-make install
-
-git clone git://github.com/s-yata/marisa-trie.git
-cd marisa-trie
-autoreconf -i
-./configure
-make
-make install
-
-sudo cp /Library/Input\ Methods/Squirrel.app/Contents/Frameworks/librime.1.dylib /usr/local/lib
-#+end_src
-
-* Manager
-** Python
-*** [[https://github.com/sdispater/poetry][sdispater/poetry: Python dependency management and packaging made easy.]] :manager:
-*** [[https://github.com/wyounas/homer][wyounas/homer: Homer, a text analyser in Python, can help make your text more clear, simple and useful for your readers.]] :read:dev:
-** Cpython
-** PASSWORD_MANAGER
-*** [[https://wiki.trezor.io/Apps:SSH_agent#Setup_.28NixOS.29][Apps:SSH agent - Trezor Wiki]]
-**** [[https://wiki.trezor.io/Trezor_Password_Manager][User manual:Password Manager - Trezor Wiki]]
-*** enpass
-** Notes & self
-*** [[https://github.com/zadam/trilium][zadam/trilium: Build your personal knowledge base with Trilium Notes]]
-* Music
- - download youtube-dle
-** ❤ Love [[https://linux.die.net/man/1/cmus][cmus(1): C* Music Player - Linux man page]]
-CLOSED: [2019-10-15 Tue 23:38]
-** https://github.com/willianjusten/awesome-audio-visualization
-+ [ ] [] [[https://www.youtube.com/watch?v=2BIOINFSbMg][Charlie Roberts: Gibbering at Algoraves - JS in Live Audiovisual Performances - JSConf.Asia 2014 - YouTube]]
-** [[https://github.com/TimeTraveller-San/yTermPlayer][TimeTraveller-San/yTermPlayer: Stream youtube playlists as audio on linux terminal]]
-#+begin_src sh :tangle yes
-brew install mpv
-#+end_src
-, just change all the relative import statements as follows from .music_api import YoutubePlayer to from music_api import YoutubePlayer
-* Version Control
-** visual
-*** [[https://www.gitmemory.com/][gitMemory :)]]
-** [[https://github.com/isacikgoz/gitbatch][isacikgoz/gitbatch: manage your git repositories in one place]]
-*** [[https://github.com/isacikgoz/gitbatch/wiki/Controls][Controls · isacikgoz/gitbatch Wiki]]
-
-* Macos
-** Clean
-*** [[https://stackoverflow.com/questions/107701/how-can-i-remove-ds-store-files-from-a-git-repository][macos - How can I Remove .DS_Store files from a Git repository? - Stack Overflow]]
-#+begin_src sh :tangle yes
-find . -name .DS_Store -print0 | xargs -0 git rm -f --ignore-unmatch
-#+end_src
-* Anaylsis
-** [[https://github.com/robcowart/influx_snmp][robcowart/influx_snmp: SNMP Data Collection and Analytics with the TICK Stack (Telegraf, InfluxDB, Chronograf and Kapacitor)]]
-* Data/Disk
-** Macos/IOS
-#+begin_src sh :tangle yes
-diskutil list
-diskutil unmountDisk /dev/disk5
-sudo dd bs=1m if=/Users/gtrun/Downloads/nixos-graphical-19.03.173292.65729e08178-x86_64-linux.iso of=/dev/rdisk4
-#+end_src
-* Bash
-** [[https://github.com/rothgar/awesome-tmux][rothgar/awesome-tmux: A list of awesome resources for tmux]]
-** zsh
-*** [[https://github.com/getantibody/antibody][getantibody/antibody: The fastest shell plugin manager.]]3
-** fish
-*** [[https://fishshell.com/docs/current/faq.html][fish: Frequently asked questions]]
-*** [[https://nicolas-van.github.io/programming-with-fish-shell][Progrxamming with fish shell | Nicolas Vanhoren’s Blog]]
-*** [[https://github.com/oh-my-fish/oh-my-fish][oh-my-fish/oh-my-fish: The Fish Shell Framework]]
-*** ✰ Important color
-**** [[http://fishshell.com/docs/current/index.html#variables-color][fish: Documentation]]
-* Version control
-** Client
-*** [[https://www.gitkraken.com/download/mac][Thank You for Downloading GitKraken | Axosoft GitKraken]]
-
-** Git
-*** [[https://github.com/skeeto/lean-static-git][skeeto/lean-static-git: Lean, static Git build for Linux]]
-** [[https://github.com/AGWA/git-crypt][AGWA/git-crypt: Transparent file encryption in git]]
-* Qemu
-** Debian
-*** global
-#+begin_src sh :tangle yes
-apt-get install sudo 
-echo "test ALL=(ALL:ALL) ALL" >> /etc/sudoers
-sudo apt-get update 
-sudo apt build-dep emacs25 -y
-sudo apt-get install mailutils
-
-mkdir ~/src
-cd ~/src
-wget https://github.com/emacs-mirror/emacs/archive/emacs-26.3-rc1.tar.gz
-
-tar -xvf emacs-26.3-rc1.tar.gz
-cd emacs-emacs-26.3-rc1/
-
-./autogen.sh
-./configure --with-mailutils
-make -j8 all & sudo make install
-
-sudo apt-get install zsh git curl ripgrep silversearcher-ag w3m -y
-sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
-git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt"
-ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
-#+end_src
-*** emacs
-#+begin_src sh :tangle yes
-git clone https://github.com/GTrunSec/my-nsm-emacs.git ~/.emacs.d
-rm -rf ~/.emacs.d
-scp -r  test@10.220.170.150:~/.emacs.d ~/.emacs.d
-#+end_src
-** machine ip
-*** NSM-manager
-#+begin_src sh :tangle yes
-ssh test@10.220.170.150 #NSM-sensor1
-
-echo "
-auto lo
-iface lo inet loopback
-auto enp1s0
-auto enp8s0
-# The primary network interface
-
-#allow-hotplug enp1s0
-iface enp1s0 inet static
-address 10.220.170.150
-netmask 255.255.255.0
-gateway 10.220.170.94
-
-#allow-hotplug enp1s0
-iface enp8s0 inet static
-address 192.168.122.20
-netmask 255.255.255.0
-gateway 192.168.122.1  
-
-" > /etc/network/interfaces
-#+end_src
-*** NSM-Sensor1
-#+begin_src sh :tangle yes
-ssh test@10.220.170.151 #NSM-sensor1
-
-echo "
-auto lo
-iface lo inet loopback
-auto enp1s0
-# The primary network interface
-
-#allow-hotplug enp1s0
-iface enp1s0 inet static
-address 10.220.170.151
-netmask 255.255.255.0
-gateway 10.220.170.94
-
-" > /etc/network/interfaces
-
-#+end_src
-*** NSM-Sensor2
-#+begin_src sh :tangle yes
-ssh test@10.220.170.152 #NSM-sensor2
-
-echo "
-auto lo
-iface lo inet loopback
-auto enp1s0
-auto enp9s0
-# The primary network interface
-
-#allow-hotplug enp1s0
-iface enp1s0 inet static
-address 10.220.170.152
-netmask 255.255.255.0
-gateway 10.220.170.94
-
-
-iface enp9s0 inet static
-address 192.168.122.22                                                                                                  netmask 255.255.255.0
-gateway 192.168.122.1
-
-" > /etc/network/interfaces
-
-#+end_src
-* Network
-** [[https://github.com/StreisandEffect/streisand][StreisandEffect/streisand: Streisand sets up a new server running your choice of WireGuard, OpenConnect, OpenSSH, OpenVPN, Shadowsocks, sslh, Stunnel, or a Tor bridge. It also generates custom instructions for all of these services. At the end of the run you are given an HTML file with instructions that can be shared with friends, family members, and fellow activists.]]
-** block-life
-*** Browser
-**** [[https://chrome.google.com/webstore/detail/hide-youtube-comments/kehdmnjmaakacofbgmjgjapbbibhafoh?hl=en][Hide YouTube Comments - Chrome Web Store]]
-**** [[https://addons.mozilla.org/en-US/firefox/addon/shut-up-comment-blocker/][Shut Up: Comment Blocker – Get this Extension for 🦊 Firefox (en-US)]]
-** ✰ Important docker-adguardhome
-#+begin_src sh :tangle yes
-  docker pull adguard/adguardhome
-  sudo docker stop adguardhome                                            
-   sudo docker rm adguardhome
-  sudo docker run --name adguardhome -v /my/own/workdir:/opt/adguardhome/work -v /my/own/confdir:/opt/adguardhome/conf --net=host -p 67:67/udp -p 80:80/tcp -p 443:443/tcp -p 853:853/tcp -p 3000:3000/tcp -d adguard/adguardhome
-#+end_src
-* Keyboard
-** [[https://configure.ergodox-ez.com/ergodox-ez/layouts/B4J9B/latest/0][Ergodox EZ Configurator]]<2019-09-16 Mon>
-* Blog
-** [[https://github.com/getgridea/gridea][getgridea/gridea: ✍️一个静态博客写作客户端 (A static blog writing client)]]
