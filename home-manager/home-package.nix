@@ -61,6 +61,7 @@ in   {
     rocksdb
     sqlite
     fish-foreign-env
+    pkgs.fzf
     # Bash
     # unstable.nodePackages.bash-language-server
     # nodePackages.javascript-typescript-langserver

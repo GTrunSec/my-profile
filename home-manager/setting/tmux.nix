@@ -26,6 +26,11 @@ in
   extraConfig = /* tmux */ ''
    set-option -g default-shell /run/current-system/sw/bin/fish
    bind r source-file ~/.tmux.conf \; display-message "Config reloaded..."
+   set -gu prefix2
+   unbind C-a
+   set -g prefix C-b
+   bind C-b send-prefix
+   setw -g mouse 
   '';
 
   plugins = with tmuxPlugins; [
