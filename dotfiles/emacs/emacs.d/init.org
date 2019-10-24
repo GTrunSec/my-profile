@@ -2258,6 +2258,8 @@ poly
 (straight-use-package 'poly-markdown)
 (require 'poly-markdown)
 (add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown-mode))
+(straight-use-package 'poly-R)
+(require 'poly-R)
 #+end_src
 ** Go
 *** default

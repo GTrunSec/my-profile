@@ -7,8 +7,23 @@ pkgs.vscode-with-extensions.override {
   ]
     # Concise version from the vscode market place when not available in the default set.
   ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+    #theme
+    {
+      publisher = "enkia";
+      name = "tokyo-night";
+      version = "0.3.3";
+      sha256 = "0kaqam5mvc7kfz74rajbncb7w2fjqqiimwmy583jnf5vlw2p21in";
+    }
 
     #markdown
+
+    {
+      publisher = "DavidAnson";
+      name = "vscode-markdownlint";
+      version = "0.31.1";
+      sha256 = "1jaqfvk09ykm3m7mi4kryhialfy8yxbn122dvrmzlsnyci3xpxzg";
+    }
+
     {
       publisher = "shd101wyy";
       name = "markdown-preview-enhanced";
@@ -52,8 +67,8 @@ pkgs.vscode-with-extensions.override {
     {
       publisher = "ms-vscode";
       name = "Go";
-      version = "0.11.4";
-      sha256 = "0h0z4kgm0d2milbmna2j0saic3yq5p07l18dflyqwvm9zvjx9x5f";
+      version = "0.11.7";
+      sha256 = "1l6jjdfivw1pn9y4d4i7zf80ls1k1b0ap1d828ah57ad3bgmyqfi";
     }
 
     {
