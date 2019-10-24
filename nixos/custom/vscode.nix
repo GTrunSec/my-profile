@@ -7,6 +7,15 @@ pkgs.vscode-with-extensions.override {
   ]
     # Concise version from the vscode market place when not available in the default set.
   ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+
+    #markdown
+    {
+      publisher = "shd101wyy";
+      name = "markdown-preview-enhanced";
+      version = "0.4.3";
+      sha256 = "0l7bp76xhcp017zch98gssrnwh6cc5adbp4d30fkvkf6ipap826s";
+    }
+
     # https://github.com/darkoperator/vscode-sysmon
     # Lang-C
     {

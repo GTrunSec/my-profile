@@ -18,6 +18,7 @@ in rec
       # latte-dock
       # deepin.dde-dock
       #latex
+      hugo
       wireshark
       (python3.withPackages (pkgs: with pkgs; [
         trezor_agent wheel
