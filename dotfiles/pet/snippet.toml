@@ -1,0 +1,4 @@
+[[snippets]]
+  description = "ls"
+  command = "pet-select"
+  output = ""

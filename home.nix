@@ -42,5 +42,7 @@ in
   # fcitx
   home.file.".config/fcitx".source = ./dotfiles/fcitx;
   #programs.home-manager.enable = true;
+  # pet
+  home.file.".config/pet".source = ./dotfiles/pet;
 
 }

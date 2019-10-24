@@ -3,12 +3,13 @@ with lib;
 {
 
   #fish
+  #      "oh-my-fish/theme-bobthefish"
   programs.direnv.enable = true;
   programs.fish = let
     plugins = [
       "edc/bass"
       "tuvistavie/fish-fastdir"
-      "oh-my-fish/theme-bobthefish"
+      "danhper/fish-theme-afowler"
       "oh-my-fish/plugin-bang-bang"
       "oh-my-fish/plugin-direnv"
       "jethrokuan/fzf"
@@ -59,6 +60,10 @@ with lib;
   home.activation.linkOMF = config.lib.dag.entryAfter [ "writeBoundary" ] ''
     ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/omf" ~/.config/omf
   '';
-  home.file.".config/fish/functions/hs.fish".source = ../../dotfiles/fish/functions/hs.fish;
-  home.file.".config/fish/functions/clean-nix-store.fish".source = ../../dotfiles/fish/functions/clean-nix-store.fish;
+    home.activation.linkFuncations = config.lib.dag.entryAfter [ "writeBoundary" ] ''
+    ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/fish/functions" ~/.config/fish/functions
+  '';
+    home.activation.linkCompletions = config.lib.dag.entryAfter [ "writeBoundary" ] ''
+    ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/fish/completions" ~/.config/fish/completions
+  '';
 }

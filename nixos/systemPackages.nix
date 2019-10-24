@@ -18,6 +18,7 @@ in rec
       # latte-dock
       # deepin.dde-dock
       #latex
+      pet
       hugo
       wireshark
       (python3.withPackages (pkgs: with pkgs; [
