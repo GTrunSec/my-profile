@@ -50,7 +50,7 @@ home-manager switch
 #+ATTR_LATEX: :width 5in
 
 #+DOWNLOADED: https://ucbac413bd787a82d56ad8dfce46.previews.dropboxusercontent.com/p/thumb/AAlJEggKVhVqVVBgSihOHGTEiYPxATOEe9bTE-Tax_p1vR1ZtEDvxDct0n_yV1xaXqABM4sG0GzUlIq6IeES4mBh8-3zQrN2UgjF2C2YygAm_PrZ6g4Zxw9Zj7soNfnA6mtTvfiOESXdzkY3c6r-2z_QMovxDfFilZKTmYXXGJUmKrxataQWtP2ddyRD0dZkI31PPIn62HZ56Si53DAwrGSq6_IMgPQ3o66ZbdfTuryGEfJcuzmkm45ClZZTXuutNjl47VUmdi85tHoEt9iKRsPJXVHrz1gXAiaHvmIjE_4hvfz2qlwAvBiPudcoZ8qLWk0KDRQAnmvMdhcPnpUvGcA1-fOZhBTx5pU8LnQOxICZsyixNMwdvHEHSoGRzCgnU6FGCZ2HV2BbFbfGNn0WZN6-/p.png?size=800x600&amp;size_mode=3 @ 2019-10-23 20:03:08
-[[file:Overview/p_2019-10-23_20-03-08.png]]
+[[file:img/Overview/p_2019-10-23_20-03-08.png]]
 
 ** EMacs with Org-mode agenda
 #+NAME: org-agenda
