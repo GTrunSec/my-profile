@@ -4,7 +4,7 @@ with builtins;
 {
   # Use local nixpkgs checkout
   # The first time, might have to run:
-  # nixos-rebuild -I nixpkgs=/etc/nixos/nixpkgs -I nixos-config=/etc/nixos/configuration.nix switch
+  # nixos-rebuild -I nixpkgs=/etc/nixos/channel/nixpkgs -I nixos-config=/etc/nixos/configuration.nix switch
   # imports = [
   #   (mod "./overlays/zeek/zeek.nix")
   # ];
@@ -22,6 +22,7 @@ with builtins;
     "nixpkgs=/etc/nixos/channel/nixpkgs"
     "nixos-config=/etc/nixos/configuration.nix"
     "nixpkgs-overlays=/etc/nixos/overlays-compat/"
+    "home-manager=/etc/nixos/channel/home-manager"
   ];
   nixpkgs.config.allowUnfree = true;
   nixpkgs.overlays = [
@@ -49,5 +50,12 @@ with builtins;
     # or setup your own.
     #resolverName = "cs-de";
   };
+  nix.trustedBinaryCaches = [
+    "http://hydra.nixos.org"
+    "http://cache.nixos.org"
+    "https://meow.cachix.org"
+    "https://nixfmt.cachix.org"
+    "https://all-hies.cachix.org"
+  ];
 
 }
