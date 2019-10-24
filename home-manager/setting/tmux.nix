@@ -30,7 +30,12 @@ in
    unbind C-a
    set -g prefix C-b
    bind C-b send-prefix
-   setw -g mouse 
+   set -g mouse on
+   # https://www.rushiagr.com/blog/2016/06/16/everything-you-need-to-know-about-tmux-copy-pasting-ubuntu/
+   bind P paste-buffer
+   bind-key -T copy-mode-vi v send-keys -X begin-selection
+   bind-key -T copy-mode-vi y send-keys -X copy-selection
+   bind-key -T copy-mode-vi r send-keys -X rectangle-toggle
   '';
 
   plugins = with tmuxPlugins; [

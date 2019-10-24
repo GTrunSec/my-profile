@@ -15,6 +15,7 @@ in   {
   home.packages = with pkgs;[
     aria2
     xclip
+    screenfetch
     urxvt_perls
     ag
     dnsproxy
