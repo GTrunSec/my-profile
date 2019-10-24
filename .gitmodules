@@ -13,7 +13,10 @@
 [submodule "nixos/overlays"]
 	path = nixos/overlays
 	url = https://github.com/GTrunSec/nixpkgs-overlays.git
-[submodule "nixos/nixpkgs"]
-	path = nixos/nixpkgs
+[submodule "nixos/channel/nixpkgs"]
+	path = nixos/channel/nixpkgs
 	url = git@github.com:GTrunSec/nixpkgs.git
 	shallow = true
+[submodule "nixos/channel/home-manager"]
+	path = nixos/channel/home-manager
+	url = https://github.com/GTrunSec/home-manager.git

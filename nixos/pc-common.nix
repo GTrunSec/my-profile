@@ -19,7 +19,7 @@ with builtins;
     };
   };
   nix.nixPath = [
-    "nixpkgs=/etc/nixos/nixpkgs"
+    "nixpkgs=/etc/nixos/channel/nixpkgs"
     "nixos-config=/etc/nixos/configuration.nix"
     "nixpkgs-overlays=/etc/nixos/overlays-compat/"
   ];
