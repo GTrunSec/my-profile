@@ -3050,6 +3050,7 @@ See also: https://stackoverflow.com/questions/9547912/emacs-calendar-show-more-t
 ** [[https://github.com/fuxialexander/org-pdftools][fuxialexander/org-pdftools]]                                     :PDF:READ:
 
 ** [[https://github.com/alphapapa/org-sidebar][alphapapa/org-sidebar: A helpful sidebar for Org mode]]
+** [[https://github.com/twlz0ne/play-code.el][twlz0ne/play-code.el: Play code with online playgrounds]]
 ** 📄 REVIEW [[https://zzamboni.org/post/beautifying-org-mode-in-emacs/][zzamboni.org | Beautifying Org Mode in Emacs]]
 * Exporting
 ** latex
