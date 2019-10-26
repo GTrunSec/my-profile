@@ -2,7 +2,8 @@
 with pkgs;
 let
   
-  R-with-my-packages = rstudioWrapper.override{ packages = with rPackages;[
+
+    customRPackages = with rPackages;[
     
         bookdown
         devtools
@@ -84,12 +85,19 @@ let
         summarytools
         doBy
         tidyverse
-  ]; 
-    };
+    ];
+      R-rstudio-with-my-packages = rstudioWrapper.override{
+            packages = customRPackages;
+      };
+      R-with-my-packages = rWrapper.override{
+            packages = customRPackages;
+      };
+      
 in
 {
   environment.systemPackages = with pkgs; [
     R-with-my-packages
     R
+    R-rstudio-with-my-packages
   ];
 }
