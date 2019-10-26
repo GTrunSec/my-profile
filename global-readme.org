@@ -291,6 +291,7 @@ sudo dd bs=1m if=/Users/gtrun/Downloads/nixos-graphical-19.03.173292.65729e08178
 *** [[https://github.com/oh-my-fish/oh-my-fish][oh-my-fish/oh-my-fish: The Fish Shell Framework]]
 *** ✰ Important color
 **** [[http://fishshell.com/docs/current/index.html#variables-color][fish: Documentation]]
+*** [[https://github.com/knqyf263/pet][knqyf263/pet: Simple command-line snippet manager, written in Go.]]
 * Version control
 ** Client
 *** [[https://www.gitkraken.com/download/mac][Thank You for Downloading GitKraken | Axosoft GitKraken]]
@@ -415,5 +416,6 @@ gateway 192.168.122.1
 #+end_src
 * Keyboard
 ** [[https://configure.ergodox-ez.com/ergodox-ez/layouts/B4J9B/latest/0][Ergodox EZ Configurator]]<2019-09-16 Mon>
+** [[https://configure.ergodox-ez.com/planck-ez/layouts/yoJYP/latest/0][[plank]Ergodox EZ Configurator]]<2019-10-25 Fri>
 * Blog
 ** [[https://github.com/getgridea/gridea][getgridea/gridea: ✍️一个静态博客写作客户端 (A static blog writing client)]]
