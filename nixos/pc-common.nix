@@ -11,7 +11,7 @@ with builtins;
   services.trezord.enable = true;  
   networking.firewall.allowedTCPPorts = [ 80 443 53];
   networking.firewall.allowedUDPPorts = [ 80 443 53];
-  networking.nameservers = ["10.220.170.137"];
+  #networking.nameservers = ["10.220.170.137"];
 
   nixpkgs.config.packageOverrides = pkgs: {
     nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {

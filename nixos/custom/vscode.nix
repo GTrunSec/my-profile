@@ -14,6 +14,13 @@ pkgs.vscode-with-extensions.override {
       version = "0.3.3";
       sha256 = "0kaqam5mvc7kfz74rajbncb7w2fjqqiimwmy583jnf5vlw2p21in";
     }
+    #pdf
+    {
+      publisher = "tomoki1207";
+      name = "pdf";
+      version = "0.5.1";
+      sha256 = "0bph7gnd6j55r997y62xb7n09cp08i46gmdk0lk5gjbpz3c03hvv";
+    }
 
     #markdown
 
