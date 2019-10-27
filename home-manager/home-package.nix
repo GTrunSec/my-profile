@@ -55,6 +55,7 @@ in   {
       pandas
       ipython
       notebook
+      orgbabelhelper
       ipykernel
     ]))   
     #  Go
