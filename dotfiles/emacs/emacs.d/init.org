@@ -2743,6 +2743,7 @@ CLOSED: [2019-07-27 Sat 06:05]
                                ("gtd.org" :agenda t :key "g" :refile (:maxlevel . 5))
                                ("notes.org" :agenda t :key "n" :refile (:maxlevel .5 ))
                                ("myself.org" :agenda t)
+                               ("Habit.org" :agenda t)
                                ("NSM-GTD/workflow.org" :agenda t :required t)
                                ("NSM-GTD/NsmOrg.org" :agenda t :required t)
                                )
@@ -3068,6 +3069,11 @@ See also: https://stackoverflow.com/questions/9547912/emacs-calendar-show-more-t
   ;; Include current clocking task in clock reports
   (setq org-clock-report-include-clocking-task t)
 
+#+end_src
+*** [[https://github.com/atheriel/org-clock-csv][atheriel/org-clock-csv: Export Emacs org-mode clock entries to CSV format.]]
+#+begin_src emacs-lisp :tangle yes
+(straight-use-package 'org-clock-csv)
+(require 'org-clock-csv)
 #+end_src
 ** [[https://github.com/gizmomogwai/org-kanban][gizmomogwai/org-kanban: Kanban table for org-mode]]
 ** [[https://github.com/fuxialexander/org-pdftools][fuxialexander/org-pdftools]]                                     :PDF:READ:
