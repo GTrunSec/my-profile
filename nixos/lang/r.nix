@@ -85,6 +85,10 @@ let
         summarytools
         doBy
         tidyverse
+        #map
+        rgeolocate
+        leaflet
+        glue
     ];
       R-rstudio-with-my-packages = rstudioWrapper.override{
             packages = customRPackages;
@@ -99,5 +103,6 @@ in
     R-with-my-packages
     R
     R-rstudio-with-my-packages
+    libmaxminddb
   ];
 }

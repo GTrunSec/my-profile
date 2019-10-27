@@ -2,3 +2,8 @@
   description = "ls"
   command = "pet-select"
   output = ""
+
+[[snippets]]
+  description = "cut zeek log"
+  command = "cat <log> | zeek-cut <field>"
+  output = ""

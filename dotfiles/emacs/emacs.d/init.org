@@ -3050,7 +3050,6 @@ See also: https://stackoverflow.com/questions/9547912/emacs-calendar-show-more-t
 #+end_src
 ** org-clock
 #+begin_src emacs-lisp :tangle yes
-
   ;; ;; Separate drawers for clocking and logs
   ;; (setq org-drawers (quote ("PROPERTIES" "LOGBOOK")))
   ;; Save clock data and state changes and notes in the LOGBOOK drawer
@@ -3634,7 +3633,6 @@ e
 #+begin_src emacs-lisp :tangle yes
   (straight-use-package 'w3m)
   (require 'w3m)
-
 #+end_src
 ** elfeed
 #+begin_src emacs-lisp :tangle yes

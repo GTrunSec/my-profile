@@ -1,5 +1,5 @@
 [General]
-  snippetfile = "/home/gtrun/.config/pet/snippet.toml"
+  snippetfile = "/home/gtrun/.config/nixpkgs/dotfiles/pet/snippet.toml"
   editor = "nano"
   column = 40
   selectcmd = "fzf --ansi"
