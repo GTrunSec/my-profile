@@ -2570,32 +2570,32 @@ change ~CC~ PATH ~gcc~ to ~clang++~
 #+begin_src emacs-lisp :tangle yes
   (straight-use-package 'git)
 
-  (defun org-git-version ()
-    "The Git version of org-mode.
-   Inserted by installing org-mode or when a release is made."
-    (require 'git)
-    (let ((git-repo (expand-file-name
-                     "straight/repos/org/" user-emacs-directory)))
-      (string-trim
-       (git-run "describe"
-                "--match=release\*"
-                "--abbrev=6"
-                "HEAD"))))
+  ;; (defun org-git-version ()
+  ;;   "The Git version of org-mode.
+  ;;  Inserted by installing org-mode or when a release is made."
+  ;;   (require 'git)
+  ;;   (let ((git-repo (expand-file-name
+  ;;                    "straight/repos/org/" user-emacs-directory)))
+  ;;     (string-trim
+  ;;      (git-run "describe"
+  ;;               "--match=release\*"
+  ;;               "--abbrev=6"
+  ;;               "HEAD"))))
 
-  (defun org-release ()
-    "The release version of org-mode.
-   Inserted by installing org-mode or when a release is made."
-    (require 'git)
-    (let ((git-repo (expand-file-name
-                     "straight/repos/org/" user-emacs-directory)))
-      (string-trim
-       (string-remove-prefix
-        "release_"
-        (git-run "describe"
-                 "--match=release\*"
-                 "--abbrev=0"
-                 "HEAD")))))
-  (provide 'org-version)
+  ;; (defun org-release ()
+  ;;   "The release version of org-mode.
+  ;;  Inserted by installing org-mode or when a release is made."
+  ;;   (require 'git)
+  ;;   (let ((git-repo (expand-file-name
+  ;;                    "straight/repos/org/" user-emacs-directory)))
+  ;;     (string-trim
+  ;;      (string-remove-prefix
+  ;;       "release_"
+  ;;       (git-run "describe"
+  ;;                "--match=release\*"
+  ;;                "--abbrev=0"
+  ;;                "HEAD")))))
+  ;; (provide 'org-version)
 #+end_src
 ** load/Org-mode
 - [[https://github.com/raxod502/org-emacs/blob/2388023a7070a437506b588eeb0c9ff74f6d372a/init.el][org-emacs/init.el at 2388023a7070a437506b588eeb0c9ff74f6d372a · raxod502/org-emacs]]
@@ -2670,13 +2670,14 @@ change ~CC~ PATH ~gcc~ to ~clang++~
   ;; Change task state to STARTED when clocking in
   (setq org-clock-in-switch-to-state "⚔ STARTED")
   ;; Save clock data and notes in the LOGBOOK drawer
-  (setq org-clock-into-drawer t)
+  (setq org-clock-into-drawer nil)
   ;; Removes clocked tasks with 0:00 duration
   (setq org-clock-out-remove-zero-time-clocks t) 
   ;; Show the clocked-in task - if any - in the header line
   (setq org-ellipsis "☯")
   (setq org-todo-keyword-faces
-        '(("☞ TODO" . (:foreground "#ff39a3" :weight bold))
+        '(
+          ("☞ TODO" . (:foreground "#ff39a3" :weight bold))
           ("⚔ STARTED"  . "#E35DBF")
           ("✘ CANCELED" . (:foreground "white" :background "#4d4d4d" :weight bold))
           ("⚑ WAITING" . "pink")
@@ -2701,13 +2702,12 @@ change ~CC~ PATH ~gcc~ to ~clang++~
                                  (plantuml . t)
                                  (latex . t)
                                  (haskell . t)
+                                 (julia . t)
                                  (jupyter . t)
 
                                  ))
   ;;(org-babel-jupyter-override-src-block "python")
   ;;(org-babel-jupyter-restore-src-block "python")
-
-
 #+end_src
 
 ** Org-starter/Link org-field
@@ -3068,19 +3068,58 @@ See also: https://stackoverflow.com/questions/9547912/emacs-calendar-show-more-t
   (setq org-clock-auto-clock-resolution (quote when-no-clock-is-running))
   ;; Include current clocking task in clock reports
   (setq org-clock-report-include-clocking-task t)
+  ;; Export org tables to CSV.
+  (setq org-table-export-default-format "orgtbl-to-csv")
+  ;; Log the time a task is completed.
+  (setq org-log-done 'time)
 
+  ;; Log in to the drawer.
+
+  (setq org-log-into-drawer t)
+  (setq org-log-state-notes-insert-after-drawers nil)
+  ;; position the habit graph on the agenda to the right of the default
+
+  (setq org-habit-graph-column 50)
+
+  ;; Show the habit table at 06:00; if it gets hidden during the day, we will have it unhidden in the morning.
+
+  (run-at-time "06:00" 86400 '(lambda () (setq org-habit-show-habits t)))
+
+  ;; If a date is incomplete, assume it is in the future.
+  (setq org-read-date-prefer-future 'time)
+
+  ;; Follow links on return.
+
+  (setq org-return-follows-link t)
+
+  ;; Format clock summary as x:xx
+
+  (setq org-time-clocksum-format
+        '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
+  ;; Save buffers every hour
+
+  (run-at-time "00:59" 3600 'org-save-all-org-buffers)
+
+  ;; Always make sure we have an ID in our Org entries
+
+  (setq org-id-link-to-org-use-id 'create-if-interactive-and-no-custom-id)
 #+end_src
 *** [[https://github.com/atheriel/org-clock-csv][atheriel/org-clock-csv: Export Emacs org-mode clock entries to CSV format.]]
 #+begin_src emacs-lisp :tangle yes
 (straight-use-package 'org-clock-csv)
 (require 'org-clock-csv)
 #+end_src
+** org-element
+*** [[https://github.com/floscr/emacs.d/blob/119bfd15319ba581793a66f8ee0417637f62298d/modules/languages/org/%2Bmy-agenda.el][emacs.d/+my-agenda.el at 119bfd15319ba581793a66f8ee0417637f62298d · floscr/emacs.d]]
 ** [[https://github.com/gizmomogwai/org-kanban][gizmomogwai/org-kanban: Kanban table for org-mode]]
 ** [[https://github.com/fuxialexander/org-pdftools][fuxialexander/org-pdftools]]                                     :PDF:READ:
 
 ** [[https://github.com/alphapapa/org-sidebar][alphapapa/org-sidebar: A helpful sidebar for Org mode]]
 ** [[https://github.com/twlz0ne/play-code.el][twlz0ne/play-code.el: Play code with online playgrounds]]
 ** 📄 REVIEW [[https://zzamboni.org/post/beautifying-org-mode-in-emacs/][zzamboni.org | Beautifying Org Mode in Emacs]]
+** ✰ Important [[http://doc.rix.si/cce/cce-org.html][Complete Computing Environment: Org-Mode]]
+** [[https://kitchingroup.cheme.cmu.edu/blog/category/org-mode/][The Kitchin Research Group: org-mode]]
+** [[https://kitchingroup.cheme.cmu.edu/blog/2016/11/04/New-link-features-in-org-9/][New link features in org 9]]
 * Exporting
 ** latex
 *** ox-latex
@@ -4172,3 +4211,4 @@ Version 2017-10-09"
   - State "✔ DONE"     from              [2019-07-24 Wed 18:18]
 *** [[https://github.com/raxod502/straight.el#integration-with-use-package-1][raxod502/straight.el: 🍀 Next-generation, purely functional package manager for the Emacs hacker.]]m
 ** [[https://github.com/DarwinAwardWinner/dotemacs/blob/master/config.org][dotemacs/config.org at master · DarwinAwardWinner/dotemacs]]
+** [[https://github.com/mpereira/.emacs.d/blob/master/configuration.org][.emacs.d/configuration.org at master · mpereira/.emacs.d]]
