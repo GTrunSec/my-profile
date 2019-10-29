@@ -12,7 +12,7 @@
 ;; found in modules/README.org.
 
 (doom! :input
-       ;;chinese
+       chinese
        ;;japanese
 
        :completion
@@ -214,6 +214,7 @@
 ** third-part
 #+begin_src emacs-lisp :tangle "packages.el"
 (package! eyebrowse)
+(package! cnfonts)
 #+end_src
 * config.el
 ** load-package
@@ -223,7 +224,6 @@
 #+end_src
 ** default
 #+begin_src emacs-lisp :tangle "config.el"
-(setq doom-font (font-spec :family "Fantasque Sans Mono" :size 35))
 (setq-default history-length 1000)
 (setq create-lockfiles nil)
 ;; (setq browse-url-browser-function 'browse-url-Chrome)
@@ -235,6 +235,35 @@
 #+begin_src emacs-lisp :tangle "my-org.el"
 (use-package! company-english-helper)
 (use-package! ox-hugo)
+#+end_src
+** setting
+*** org-global
+#+begin_src emacs-lisp :tangle "my-org.el"
+#+end_src
+***  org-babel
+#+begin_src emacs-lisp :tangle yes
+;; Todo part
+  (org-babel-do-load-languages 'org-babel-load-languages
+                               '((emacs-lisp . t)
+                                 (dot . t)
+                                 (ditaa . t)
+                                 (R . t)
+                                 (python . t)
+                                 (gnuplot . t)
+                                 (lisp . t)
+                                 (shell . t)
+                                 (org . t)
+                                 (plantuml . t)
+                                 (latex . t)
+                                 (haskell . t)
+                                 ;;(julia . t)
+                                 ;;(jupyter . t)
+                                 ))
+#+end_src
+
+#+begin_src emacs-lisp :tangle "my-org.el"
+;; 乾、坤、坎、離、震、巽、艮、兌
+(setq org-bullets-bullet-list '("☰" "☷" "☵" "☲"  "☳" "☴"  "☶"  "☱" ))
 #+end_src
 ** org-key
 #+begin_src emacs-lisp :tangle "my-org.el"
@@ -608,8 +637,6 @@ Version 2017-01-21"
 (setq centaur-tabs-set-modified-marker t)
 (setq centaur-tabs-set-close-button nil)
 (setq centaur-tabs-modified-marker "*")
-
-
 ;; ("C-c j" .  centaur-tabs-forward-group)
 ;; ("C-c k" .  centaur-tabs-backward-group)
 ;; ("C-c o" . centaur-tabs-switch-group)
@@ -623,7 +650,34 @@ Version 2017-01-21"
 ;; ("s-8" . centaur-tabs-select-visible-tab)
 ;; ("s-9" . centaur-tabs-select-visible-tab)
 #+end_src
-
+*** font
+#+begin_src emacs-lisp :tangle "config.el"
+;; (use-package! cnfonts)
+;;  (set-face-attribute
+;;    'default nil
+;;    :font (font-spec :name "-PfEd-Fantasque Sans Mono-normal-italic-normal-*-*-*-*-*-m-0-iso10646-1"
+;;                     :weight 'normal
+;;                     :slant 'normal
+;;                     :size 12.5))
+;; (defun s-font()
+;;   (interactive)
+;;   (dolist (charset '(kana han symbol cjk-misc bopomofo))
+;;     (set-fontset-font
+;;      (frame-parameter nil 'font)
+;;      charset
+;;      (font-spec :name "-GWIN-楷体_GB2312-normal-normal-normal-*-*-*-*-*-d-0-iso10646-1"
+;;                 :weight 'normal
+;;                 :slant 'normal
+;;                 :size 12.0)))
+;;   (add-to-list 'after-make-frame-functions
+;;              (lambda (new-frame)
+;;                (select-frame new-frame)
+;;                (if window-system
+;;                    (s-font))))
+;; (if window-system
+;;     (s-font))
+;;   )
+#+end_src
 * lang
 ** nix
 #+begin_src emacs-lisp :tangle "my-code.el"
@@ -643,7 +697,8 @@ Version 2017-01-21"
 #+end_src
 * load & unload
 ** after-init
-#+begin_src emacs-lisp :tangle "config.el"
+#+begin_src emacs-lisp :tangle "packages.el"
+(disable-packages! pyim)
 #+end_src
 * set face
 #+begin_src emacs-lisp :tangle "config.el"
