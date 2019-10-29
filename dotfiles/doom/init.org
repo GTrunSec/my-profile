@@ -221,6 +221,7 @@
 #+begin_src emacs-lisp :tangle "config.el"
 (load! "xah-fly.el")
 (load! "my-org.el")
+(load! "./modules/my-linux.el")
 #+end_src
 ** default
 #+begin_src emacs-lisp :tangle "config.el"
@@ -395,6 +396,9 @@
   (require 'xah-fly-keys)
   (xah-fly-keys 1)
   ;; (xah-fly-keys-set-layout "qwerty")
+ (add-hook! 'xah-fly-command-mode-activate-hook
+            (lambda ()
+              (setq xah-fly-insert-state-q nil)))
   (xah-fly--define-keys
    ;; create a keymap my-keymap
    (define-prefix-command 'my-keymap)
@@ -429,9 +433,16 @@
      ;; helm
      ("bb" . switch-to-buffer)
      ;; isearch
-     ("y" . xah-search-current-word)))
-  )
+     ("y" . xah-search-current-word)
+     ;; search
+     ("sa" . counsel-ag)
+     ("sr" . counsel-rg)
+)))
 
+
+#+END_SRC
+** one char key
+#+begin_src emacs-lisp :tangle "xah-fly.el"
 (defun xah-fly-command-mode-init ()
   "Set command mode keys.
 Version 2017-01-21"
@@ -461,6 +472,8 @@ Version 2017-01-21"
      ("c" . xah-copy-line-or-region)
      ("x" . xah-cut-line-or-region)
      ("t" . set-mark-command)
+     ("2" . org-agenda)
+     ("4". adq/helm-bm-list-all)
      ("6" . xah-select-block)
      ("7" . xah-select-line)
      ("8" . xah-extend-selection)
@@ -474,7 +487,7 @@ Version 2017-01-21"
     (define-key xah-fly-key-map (kbd ",") 'gtrun-xah-comma-fly-key)
     (define-key xah-fly-key-map (kbd ".") 'gtrun-xah-dot-fly-key)
   )
-#+END_SRC
+#+end_src
 ** key-map
 #+begin_src emacs-lisp :tangle "xah-fly.el"
 (define-key xah-fly-key-map (kbd "C-a") 'beginning-of-visual-line)
@@ -596,6 +609,113 @@ Version 2017-01-21"
   (define-key company-active-map (kbd "C-n") 'company-select-next-or-abort)
   (define-key company-active-map (kbd "C-p") 'company-select-previous-or-abort))
 #+end_src
+** BOOkmark
+#+begin_src emacs-lisp :tangle "config.el"
+  (def-package! bm
+    :demand t
+    :init
+    (setq bm-restore-repository-on-load t)
+    :config
+
+    (bind-keys
+     :map bm-show-mode-map
+     ("j" . next-line)
+     ("k" . previous-line))
+
+    (setq bm-cycle-all-buffers t
+          bm-highlight-style 'bm-highlight-only-fringe
+          bm-repository-size 1000)
+    (setq-default bm-buffer-persistence t)
+
+    (defun adq/bm-save ()
+      "Save bookmarks to persistent repository."
+      (interactive)
+      (bm-buffer-save-all)
+      (bm-repository-save))
+
+    (advice-add 'bm-bookmark-add
+                :after (lambda (&rest args)
+                         (adq/bm-save)))
+    (advice-add 'bm-bookmark-remove
+                :after (lambda (&rest args)
+                         (adq/bm-save)))
+    (add-hook 'after-init-hook #'bm-repository-load)
+    (add-hook 'find-file-hooks #'bm-buffer-restore)
+    (add-hook 'after-rever-hook #'bm-buffer-restore)
+    (add-hook 'kill-buffer-hook #'bm-buffer-save)
+    (add-hook 'after-save-hook #'bm-buffer-save)
+    (add-hook 'kill-emacs-hook
+              (lambda ()
+                (bm-buffer-save-all)
+                (bm-repository-save)))
+
+    (defun adq/bm-list-all-bookmarks ()
+      "Generate a list of all bookmarks from all files."
+      (let ((bookmarks '()))
+        (cl-loop for entry in bm-repository
+                 when (and (listp entry) (f-readable-p (car entry)))
+                 do
+                 (with-temp-buffer
+                   (insert-file-contents-literally (car entry))
+                   (cl-letf (((symbol-function 'bm-bookmark-add)
+                              (lambda (&optional annotation time temporary)
+                                (!cons (list (car entry)
+                                             (point)
+                                             (line-number-at-pos)
+                                             (string-trim (thing-at-point 'line t)))
+                                       bookmarks)))
+                             ((symbol-function 'message)
+                              (lambda (&rest _))))
+                     (bm-buffer-restore-2 (cdr entry)))))
+        bookmarks))
+
+      (defun adq/helm-bm-all-format-bookmark (bookmark)
+        "Format bookmark for display."
+        (let ((file (f-filename (car bookmark)))
+              (line (caddr bookmark))
+              (contents (cadddr bookmark)))
+          (cons
+           (format "%s:%s: %s"
+                   (propertize file 'face compilation-info-face)
+                   (propertize (format "%d" line) 'face compilation-line-face)
+                   contents)
+           bookmark)))
+
+      (defvar adq/helm-bm-all-source
+        (helm-build-sync-source "Helm All Bookmarks"
+          :candidates
+          (lambda ()
+            (mapcar #'adq/helm-bm-all-format-bookmark
+                    (adq/bm-list-all-bookmarks)))
+          :action
+          '(("Switch to buffer" .
+             (lambda (bookmark)
+               (find-file (car bookmark))
+               (goto-char (cadr bookmark))))))
+        "Helm source with all the bookmarks.")
+
+      (defun adq/helm-bm-list-all ()
+        "List all bookmarks usin Helm."
+        (interactive)
+        (helm :sources 'adq/helm-bm-all-source
+              :buffer "*helm bm all*"))
+
+    (defhydra adq/hydra-bm nil
+      "
+  Bookmarks
+  ^^^^------------------------------------------------
+  _m_: Toggle      _l_: Bookmarks from Buffers
+  _n_: Next        _a_: Bookmarks form All Files
+  _p_: Previous    _L_: List
+  "
+      ("m" bm-toggle)
+      ("n" bm-next)
+      ("p" bm-previous)
+      ("a" adq/helm-bm-list-all :exit t)
+      ("l" helm-bm :exit t)
+      ("L" bm-show-all :exit t))
+    (bind-key "C-c m" #'adq/hydra-bm/body))
+#+end_src
 * Visual
 ** Buffer
 *** Parenthesis
@@ -705,4 +825,20 @@ Version 2017-01-21"
 (custom-set-faces
   '(centaur-tabs-close-selected((t ( :foreground "DarkGray"))))
 )
+#+end_src
+* Linux & Macsos
+** Linux
+#+begin_src emacs-lisp :tangle "config.el"
+(use-package! my-linux
+:load-path "./modules"
+:if (eq system-type 'gnu/linux)
+)
+#+end_src
+
+#+begin_src emacs-lisp :tangle "./modules/my-linux.el"
+(setq-default cursor-type 'box)
+(blink-cursor-mode -1)
+(set-cursor-color "IndianRed3")
+(setq bm-repository-file (f-join doom-private-dir "etc/bm-linux-data"))
+(provide 'my-linux)
 #+end_src

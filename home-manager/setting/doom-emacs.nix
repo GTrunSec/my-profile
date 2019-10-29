@@ -28,7 +28,7 @@ in
    '';
 
     home.activation.linkEmacsPrivate = config.lib.dag.entryAfter [ "writeBoundary" ] ''
-     ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/doom/modles" $HOME/.doom.d/moudles
+     ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/doom/modules" $HOME/.doom.d/modules
    '';
     #     home.activation.linkEmacsSetup = config.lib.dag.entryAfter [ "writeBoundary" ] ''
     #   ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/emacs/emacs.d/setup" $HOME/.emacs.d/setup
