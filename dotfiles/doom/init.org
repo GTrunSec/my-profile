@@ -222,6 +222,7 @@
 (load! "xah-fly.el")
 (load! "my-org.el")
 (load! "./modules/my-linux.el")
+(load! "./modules/my-macos.el")
 #+end_src
 ** default
 #+begin_src emacs-lisp :tangle "config.el"
@@ -840,5 +841,27 @@ Version 2017-01-21"
 (blink-cursor-mode -1)
 (set-cursor-color "IndianRed3")
 (setq bm-repository-file (f-join doom-private-dir "etc/bm-linux-data"))
+(setq bookmark-default-file
+      (concat doom-private-dir "etc/bookmark-linux-default.el"))
 (provide 'my-linux)
+#+end_src
+** MacOS
+#+begin_src emacs-lisp :tangle "config.el"
+(use-package! my-macos
+:load-path "./modules"
+:if (memq window-system '(mac ns))
+)
+#+end_src
+#+begin_src emacs-lisp :tangle "./modules/my-macos.el"
+ (setq bookmark-default-file
+        (concat doom-private-dir "etc/bookmark-macos-default.el"))
+(setq-default cursor-type 'bar)
+
+(blink-cursor-mode -1)
+(set-cursor-color "yellow1")
+(setq bm-repository-file (f-join doom-private-dir "bm-linux-data"))
+(setq insert-directory-program "/usr/local/bin/gls")
+
+
+(provide 'my-macos)
 #+end_src
