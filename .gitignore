@@ -4,7 +4,7 @@ result
 
 .DS_Store
 init.el
-dotfiles/doom/modules
+dotfiles/doom/modules/*
 dotfiles/emacs/emacs.d/var
 dotfiles/emacs/emacs.d/straight
 dotfiles/emacs/emacs.d/.*

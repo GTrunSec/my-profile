@@ -199,7 +199,6 @@
 (package! company-english-helper :recipe (:host github :repo "manateelazycat/company-english-helper"))
 (package! org-super-agenda)
 (package! org-starter)
-
 #+end_src
 ** code
 #+begin_src emacs-lisp :tangle "packages.el"
@@ -850,9 +849,7 @@ Version 2017-01-21"
 (use-package! my-macos
 :load-path "./modules"
 :if (memq window-system '(mac ns))
-)
-#+end_src
-#+begin_src emacs-lisp :tangle "./modules/my-macos.el"
+:config
  (setq bookmark-default-file
         (concat doom-private-dir "etc/bookmark-macos-default.el"))
 (setq-default cursor-type 'bar)
@@ -861,7 +858,10 @@ Version 2017-01-21"
 (set-cursor-color "yellow1")
 (setq bm-repository-file (f-join doom-private-dir "bm-linux-data"))
 (setq insert-directory-program "/usr/local/bin/gls")
-
+)
+#+end_src
+** macos-setting
+#+begin_src emacs-lisp :tangle "./modules/my-macos.el"
 
 (provide 'my-macos)
 #+end_src
