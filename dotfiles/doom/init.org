@@ -1,0 +1,653 @@
+#+TITLE: My doom config
+* init.el
+#+begin_src emacs-lisp :tangle yes
+;;; init.el -*- lexical-binding: t; -*-
+
+;; Copy this file to ~/.doom.d/init.el or ~/.config/doom/init.el ('doom install'
+;; will do this for you). The `doom!' block below controls what modules are
+;; enabled and in what order they will be loaded. Remember to run 'doom refresh'
+;; after modifying it.
+;;
+;; More information about these modules (and what flags they support) can be
+;; found in modules/README.org.
+
+(doom! :input
+       ;;chinese
+       ;;japanese
+
+       :completion
+       company           ; the ultimate code completion backend
+       helm              ; the *other* search engine for love and life
+       ;;ido               ; the other *other* search engine...
+       ivy               ; a search engine for love and life
+
+       :ui
+       ;;deft              ; notational velocity for Emacs
+       doom              ; what makes DOOM look the way it does
+       doom-dashboard    ; a nifty splash screen for Emacs
+       doom-quit         ; DOOM quit-message prompts when you quit Emacs
+       ;;fill-column       ; a `fill-column' indicator
+       hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
+       ;;hydra
+       ;;indent-guides     ; highlighted indent columns
+       modeline          ; snazzy, Atom-inspired modeline, plus API
+       nav-flash         ; blink the current line after jumping
+       ;;neotree           ; a project drawer, like NERDTree for vim
+       ophints           ; highlight the region an operation acts on
+       (popup            ; tame sudden yet inevitable temporary windows
+        +all             ; catch all popups that start with an asterix
+        +defaults)       ; default popup rules
+       ;;pretty-code       ; replace bits of code with pretty symbols
+       tabs              ; an tab bar for Emacs
+       treemacs          ; a project drawer, like neotree but cooler
+       ;;unicode           ; extended unicode support for various languages
+       vc-gutter         ; vcs diff in the fringe
+       vi-tilde-fringe   ; fringe tildes to mark beyond EOB
+       window-select     ; visually switch windows
+       workspaces        ; tab emulation, persistence & separate workspaces
+
+       :editor
+       ;;(evil +everywhere); come to the dark side, we have cookies
+       file-templates    ; auto-snippets for empty files
+       ;;god               ; run Emacs commands without modifier keys
+       fold              ; (nigh) universal code folding
+       ;;(format +onsave)  ; automated prettiness
+       ;;lispy             ; vim for lisp, for people who dont like vim
+       ;;multiple-cursors  ; editing in many places at once
+       ;;objed             ; text object editing for the innocent
+       ;;parinfer          ; turn lisp into python, sort of
+       rotate-text       ; cycle region at point between text candidates
+       snippets          ; my elves. They type so I don't have to
+       ;;word-wrap         ; soft wrapping with language-aware indent
+
+       :emacs
+       dired             ; making dired pretty [functional]
+       electric          ; smarter, keyword-based electric-indent
+       ibuffer           ; interactive buffer management
+       vc                ; version-control and Emacs, sitting in a tree
+
+       :term
+       ;;eshell            ; a consistent, cross-platform shell (WIP)
+       ;;shell             ; a terminal REPL for Emacs
+       ;;term              ; terminals in Emacs
+       ;;vterm             ; another terminals in Emacs
+
+       :tools
+       ;;ansible
+       ;;debugger          ; FIXME stepping through code, to help you add bugs
+       ;;direnv
+       ;;docker
+       ;;editorconfig      ; let someone else argue about tabs vs spaces
+       ;;ein               ; tame Jupyter notebooks with emacs
+       (eval +overlay)     ; run code, run (also, repls)
+       flycheck          ; tasing you for every semicolon you forget
+       ;;flyspell          ; tasing you for misspelling mispelling
+       ;;gist              ; interacting with github gists
+       (lookup           ; helps you navigate your code and documentation
+        +docsets)        ; ...or in Dash docsets locally
+       ;;lsp
+       ;;macos             ; MacOS-specific commands
+       magit             ; a git porcelain for Emacs
+       ;;make              ; run make tasks from Emacs
+       ;;pass              ; password manager for nerds
+       ;;pdf               ; pdf enhancements
+       ;;prodigy           ; FIXME managing external services & code builders
+       ;;rgb               ; creating color strings
+       ;;terraform         ; infrastructure as code
+       ;;tmux              ; an API for interacting with tmux
+       ;;upload            ; map local to remote projects via ssh/ftp
+       ;;wakatime
+
+       :lang
+       ;;agda              ; types of types of types of types...
+       ;;assembly          ; assembly for fun or debugging
+       ;;cc                ; C/C++/Obj-C madness
+       ;;clojure           ; java with a lisp
+       ;;common-lisp       ; if you've seen one lisp, you've seen them all
+       ;;coq               ; proofs-as-programs
+       ;;crystal           ; ruby at the speed of c
+       ;;csharp            ; unity, .NET, and mono shenanigans
+       data              ; config/data formats
+       ;;erlang            ; an elegant language for a more civilized age
+       ;;elixir            ; erlang done right
+       ;;elm               ; care for a cup of TEA?
+       emacs-lisp        ; drown in parentheses
+       ;;ess               ; emacs speaks statistics
+       ;;faust             ; dsp, but you get to keep your soul
+       ;;fsharp           ; ML stands for Microsoft's Language
+       ;;go                ; the hipster dialect
+       ;;(haskell +intero) ; a language that's lazier than I am
+       ;;hy                ; readability of scheme w/ speed of python
+       ;;idris             ;
+       ;;(java +meghanada) ; the poster child for carpal tunnel syndrome
+       ;;javascript        ; all(hope(abandon(ye(who(enter(here))))))
+       ;;julia             ; a better, faster MATLAB
+       ;;kotlin            ; a better, slicker Java(Script)
+       ;;latex             ; writing papers in Emacs has never been so fun
+       ;;lean
+       ;;ledger            ; an accounting system in Emacs
+       ;;lua               ; one-based indices? one-based indices
+       markdown          ; writing docs for people to ignore
+       ;;nim               ; python + lisp at the speed of c
+       ;;nix               ; I hereby declare "nix geht mehr!"
+       ;;ocaml             ; an objective camel
+       (org              ; organize your plain life in plain text
+        +dragndrop       ; drag & drop files/images into org buffers
+        ;+hugo            ; use Emacs for hugo blogging
+        +ipython         ; ipython/jupyter support for babel
+        +pandoc          ; export-with-pandoc support
+        ;+pomodoro        ; be fruitful with the tomato technique
+        +present)        ; using org-mode for presentations
+       ;;perl              ; write code no one else can comprehend
+       ;;php               ; perl's insecure younger brother
+       ;;plantuml          ; diagrams for confusing people more
+       ;;purescript        ; javascript, but functional
+       ;;python            ; beautiful is better than ugly
+       ;;qt                ; the 'cutest' gui framework ever
+       ;;racket            ; a DSL for DSLs
+       ;;rest              ; Emacs as a REST client
+       ;;ruby              ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
+       ;;rust              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
+       ;;scala             ; java, but good
+       ;;scheme            ; a fully conniving family of lisps
+       sh                ; she sells {ba,z,fi}sh shells on the C xor
+       ;;solidity          ; do you need a blockchain? No.
+       ;;swift             ; who asked for emoji variables?
+       ;;terra             ; Earth and Moon in alignment for performance.
+       ;;web               ; the tubes
+
+       :email
+       ;;(mu4e +gmail)       ; WIP
+       ;;notmuch             ; WIP
+       ;;(wanderlust +gmail) ; WIP
+
+       ;; Applications are complex and opinionated modules that transform Emacs
+       ;; toward a specific purpose. They may have additional dependencies and
+       ;; should be loaded late.
+       :app
+       ;;calendar
+       ;;irc               ; how neckbeards socialize
+       ;;(rss +org)        ; emacs as an RSS reader
+       ;;twitter           ; twitter client https://twitter.com/vnought
+       ;;(write            ; emacs for writers (fiction, notes, papers, etc.)
+       ;; +wordnut         ; wordnet (wn) search
+       ;; +langtool)       ; a proofreader (grammar/style check) for Emacs
+
+       :config
+       ;; For literate config users. This will tangle+compile a config.org
+       ;; literate config in your `doom-private-dir' whenever it changes.
+       ;;literate
+
+       ;; The default module sets reasonable defaults for Emacs. It also
+       ;; provides a Spacemacs-inspired keybinding scheme and a smartparens
+       ;; config. Use it as a reference for your own modules.
+       (default +smartparens))
+#+end_src
+* package.el
+** basic package
+#+begin_src emacs-lisp :tangle "packages.el"
+(package! bm)
+(package! w3m)
+(package! discover :recipe (:host github :repo "mickeynp/discover.el"))
+(package! xah-fly-keys :recipe (:host github :repo "xahlee/xah-fly-keys"))
+(package! hungry-delete)
+(package! flymake-json)
+#+end_src
+** org-mode
+#+begin_src emacs-lisp :tangle "packages.el"
+(package! ox-hugo)
+(package! company-english-helper :recipe (:host github :repo "manateelazycat/company-english-helper"))
+(package! org-super-agenda)
+(package! org-starter)
+
+#+end_src
+** code
+#+begin_src emacs-lisp :tangle "packages.el"
+(package! awesome-pair :recipe (:host github :repo "manateelazycat/awesome-pair"))
+(package! plantuml-mode)
+(package! nix-mode)
+(package! company-nixos-options)
+#+end_src
+#+begin_src emacs-lisp :tangle "config.el"
+(use-package! awesome-pair)
+#+end_src
+** third-part
+#+begin_src emacs-lisp :tangle "packages.el"
+(package! eyebrowse)
+#+end_src
+* config.el
+** load-package
+#+begin_src emacs-lisp :tangle "config.el"
+(load! "xah-fly.el")
+(load! "my-org.el")
+#+end_src
+** default
+#+begin_src emacs-lisp :tangle "config.el"
+(setq doom-font (font-spec :family "Fantasque Sans Mono" :size 35))
+(setq-default history-length 1000)
+(setq create-lockfiles nil)
+;; (setq browse-url-browser-function 'browse-url-Chrome)
+;; https://emacs.stackexchange.com/questions/5603/how-to-quickly-copy-move-file-in-emacs-dired
+(setq dired-dwim-target t)
+#+end_src
+* org-mode
+** type
+#+begin_src emacs-lisp :tangle "my-org.el"
+(use-package! company-english-helper)
+(use-package! ox-hugo)
+#+end_src
+** org-key
+#+begin_src emacs-lisp :tangle "my-org.el"
+(eval-after-load "org"
+  '(require 'ox-md nil t))
+(define-key! org-mode-map (kbd "C-<return>") 'org-insert-heading-respect-content)
+#+end_src
+** super-agenda
+#+begin_src emacs-lisp :tangle "my-org.el"
+(use-package! org-super-agenda
+:config
+ (require 'org-habit)
+  ;; (setq org-agenda-time-grid
+  ;;       '((daily today)
+  ;;         ))
+  (setq
+   org-agenda-skip-scheduled-if-done t
+   org-agenda-skip-deadline-if-done t
+   org-agenda-include-deadlines t
+   org-agenda-include-diary nil
+   org-agenda-block-separator nil
+   org-agenda-compact-blo0cks t
+   org-agenda-start-with-log-mode t)
+
+
+
+  (setq org-agenda-custom-commands
+        '(("z" "GtruN Agenda"
+           ((agenda "" ((org-agenda-span 'day)
+                        (org-super-agenda-groups
+                         '((:habit t)
+                           (:log t)
+                           (:name "Today List"
+                                  :time-grid t
+                                  :date today
+                                  :todo "☞ TODO"
+                                  :scheduled today
+                                  :order 1)))))
+            (alltodo "" ((org-agenda-overriding-header "")
+                         (org-super-agenda-groups
+                          '((:name "Next to do"
+                                   :priority>= "B"
+                                   :order 1)
+                            (:name "Important"
+                                   :todo "✰ Important"
+                                   :order 6)
+                            (:name "Due Today"
+                                   :deadline today
+                                   :order 2)
+                            (:name "Due Soon"
+                                   :deadline future
+                                   :order 8)
+                            (:name "Overdue"
+                                   :deadline past
+                                   :order 7)
+                            (:name "Issues"
+                                   :tag "Issue"
+                                   :order 12)
+                            (:name "Projects"
+                                   :tag "Project"
+                                   :order 14)
+                            (:name "Emacs"
+                                   :tag "Emacs"
+                                   :order 13)
+                            (:name "Research"
+                                   :tag "Research"
+                                   :order 15)
+                            (:name "To read"
+                                   :tag "BOOK"
+                                   :order 30)
+                            (:name "Waiting"
+                                   :todo "⚑ WAITING"
+                                   :order 20)
+                            (:name "trivial"
+                                   :priority<= "C"
+                                   :todo ("SOMEDAY")
+                                   :order 90)
+                            (:discard (:tag ("Chore" "Routine" "Daily")))))))))
+
+          ("b" . "BOOK")
+
+          ("bb" "Search tags in todo, note, and archives"
+           search "+{:book\\|books:}")
+
+          ("bd" "BOOK TODO List"
+           search "+{^\\*+\\s-+\\(STARTED\\|☞ TODO\\|WAITING\\)\\s-} +{book\\|books}")
+
+          ("d" "ALL DONE OF TASKS"
+           search "+{^\\*+\\s-+\\(DONE\\|✘ CANCELED\\)\\s-}")
+          ))
+)
+#+end_src
+** org-starter
+#+begin_src emacs-lisp :tangle "my-org.el"
+(use-package org-starter
+  :config
+  (org-starter-def "~/Documents/org-notes"
+                   :files
+                   ("gtd.org" :agenda t :key "g" :refile (:maxlevel . 5))
+                   ("notes.org" :agenda t :key "n" :refile (:maxlevel .5 ))
+                   ("myself.org" :agenda t)
+                   ("Habit.org" :agenda t)
+                   ("NSM-GTD/workflow.org" :agenda t :required t)
+                   ("NSM-GTD/NsmOrg.org" :agenda t :required t)
+                   )
+  (org-starter-def "~/.doom.d"
+                   :files
+                   ("init.org" :key "i" :refile (:maxlevel . 5))
+                   ;;("nix.org" :key "x" :refile (:maxlevel . 5))
+                   )
+  (org-starter-def "~/.config/nixpkgs"
+                   :files
+                   ("README.org")
+                   ("global-readme.org")
+                   ("dotfiles/wallpaper/wallpaper.org" :agenda nil)
+                   )
+  :bind
+  (
+   ("C-c e" . org-starter-select-file))
+  ;; "C-c e" . org-starter-refile-by-key))
+  )
+#+end_src
+
+* xah fly key
+** pre setting
+#+begin_src emacs-lisp :tangle "xah-fly.el"
+(use-package! xah-fly-keys
+  :init
+  (require 'xah-fly-keys)
+  (xah-fly-keys 1)
+  ;; (xah-fly-keys-set-layout "qwerty")
+  (xah-fly--define-keys
+   ;; create a keymap my-keymap
+   (define-prefix-command 'my-keymap)
+   '(
+     ("a" . counsel-ag)
+     ("r" . counsel-rg)
+
+     ;;
+     ))
+   (xah-fly--define-keys
+   ;; create a keymap org-keymap
+    (define-prefix-command 'org-keymap)
+   '(
+     ("r" . org-journal-read-entry)
+     ("n" . org-journal-new-entry)
+     ;;
+     ))
+  ;; make xah-fly-keys 【leader 8】 as prefix for my-keymap
+  (xah-fly--define-keys
+   (define-prefix-command 'xah-fly-leader-key-map)
+   '(
+     ("2" . org-keymap)
+     ("8" . my-keymap)
+     ("fr" . counsel-recentf)
+     ("fp" . doom/find-file-in-private-config)
+     ("<tab>" . spacemacs/alternate-buffer)
+     ("ff" . counsel-file-jump)
+     ("RET" . helm-bookmarks)
+     ;; treemacs
+     ("tt" . +treemacs/toggle)
+     ("tf" . +treemacs/find-file)
+     ;; helm
+     ("bb" . switch-to-buffer)
+     ;; isearch
+     ("y" . xah-search-current-word)))
+  )
+
+(defun xah-fly-command-mode-init ()
+  "Set command mode keys.
+Version 2017-01-21"
+  (interactive)
+  (xah-fly--define-keys
+   xah-fly-key-map
+   '(
+     ;; IMPORTANT, These keys are all dvorak keys
+     ("~" . nil)
+     (":" . nil)
+
+     ("SPC" . xah-fly-leader-key-map)
+     ("q" . quit-window)
+     ("a" . counsel-M-x)
+     ("i" . previous-line)
+     ("k" . next-line )
+     ("b" . backward-word)
+     ("h" . forward-word)
+     ("l" . backward-char)
+     ("j" . forward-char)
+     ("f" . xah-fly-insert-mode-activate)
+     ("[" . xah-backward-punct )
+     ("]" . xah-forward-punct)
+     ("g" . set-mark-command)
+     ("y" . undo)
+     ("v" . xah-paste-or-paste-previous)
+     ("c" . xah-copy-line-or-region)
+     ("x" . xah-cut-line-or-region)
+     ("t" . set-mark-command)
+     ("6" . xah-select-block)
+     ("7" . xah-select-line)
+     ("8" . xah-extend-selection)
+     ("9" . xah-select-text-in-quote)
+     ("0" . xah-pop-local-mark-ring)
+     ("n" . isearch-forward)
+     ))
+    (define-key xah-fly-key-map (kbd "p") 'gtrun-xah-fly-key)
+    (define-key xah-fly-key-map (kbd "-") 'gtrun-xah-minus-fly-key)
+    (define-key xah-fly-key-map (kbd "/") 'gtrun-xah-slash-fly-key)
+    (define-key xah-fly-key-map (kbd ",") 'gtrun-xah-comma-fly-key)
+    (define-key xah-fly-key-map (kbd ".") 'gtrun-xah-dot-fly-key)
+  )
+#+END_SRC
+** key-map
+#+begin_src emacs-lisp :tangle "xah-fly.el"
+(define-key xah-fly-key-map (kbd "C-a") 'beginning-of-visual-line)
+(define-key xah-fly-key-map (kbd "C-0") 'delete-region)
+(define-key xah-fly-key-map (kbd "C-n") 'next-line)
+(define-key xah-fly-key-map (kbd "M-<SPC>") 'xah-fly-command-mode-activate)
+
+
+(define-key xah-fly-key-map (kbd "C-s") 'swiper-isearch)
+
+(define-key xah-fly-key-map (kbd "p") 'gtrun-xah-fly-key)
+(define-key xah-fly-key-map (kbd "-") 'gtrun-xah-minus-fly-key)
+(define-key xah-fly-key-map (kbd "/") 'gtrun-xah-slash-fly-key)
+(define-key xah-fly-key-map (kbd ",") 'gtrun-xah-comma-fly-key)
+(define-key xah-fly-key-map (kbd ".") 'gtrun-xah-dot-fly-key)
+#+end_src
+** special-key-to-mode-map
+#+begin_src emacs-lisp :tangle "xah-fly.el"
+   (defun gtrun-xah-dot-fly-key ()
+        "key `.'"
+        (interactive)
+        (cond
+         ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
+         ((eq major-mode 'dired-mode) (call-interactively 'hydra-dired/body))
+         ((eq major-mode 'w3m-mode) (call-interactively 'scroll-up))
+         ((eq major-mode 'org-mode) (call-interactively 'org-edit-src-code))
+         (t nil)))
+
+      (defun gtrun-xah-comma-fly-key ()
+        "key `,'"
+        (interactive)
+        (cond
+         ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
+         ((eq major-mode 'w3m-mode) (call-interactively 'scroll-down))
+         (t nil)))
+
+      (defun gtrun-xah-slash-fly-key ()
+        "key `/'"
+        (interactive)
+        (cond
+         ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
+         ((eq major-mode 'dired-mode) (call-interactively 'vinegar/dired-diff))
+         ((eq major-mode 'w3m-mode) (call-interactively 'w3m-bookmark-add-current-url))
+         ((eq major-mode 'org-agenda-mode) (call-interactively 'org-agenda-filter-by-tag))
+
+         (t nil)))
+
+      (defun gtrun-xah-semicolon-fly-key ()
+        "key `;'"
+        (interactive)
+        (cond
+         ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
+
+         (t nil)))
+
+      (defun gtrun-xah-apostrophe-fly-key ()
+        "key `''"
+        (interactive)
+        (cond
+         ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
+
+         (t nil)))
+      (defun gtrun-xah-equality-fly-key ()
+        "key `='"
+        (interactive)
+        (cond
+         ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
+         (t nil)))
+
+
+      (defun gtrun-xah-fly-key ()
+        "key `p'"
+        (interactive)
+        (cond
+         ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
+         ((eq major-mode 'dired-mode) (call-interactively 'xah-open-in-external-app))
+         (t nil)))
+
+
+      (defun gtrun-xah-minus-fly-key ()
+        "key `-'"
+        (interactive)
+        (cond
+         ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
+         ((eq major-mode 'dired-mode) (call-interactively 'vinegar/up-directory))
+         (t nil)))
+#+end_src
+* Completion
+** Ivy/counsel
+#+begin_src emacs-lisp :tangle "config.el"
+  (use-package! counsel
+    :hook
+    (after-init . ivy-mode)
+    (counsel-grep-post-action . better-jumper-set-jump)
+    :diminish ivy-mode
+    :config
+    (setq counsel-find-file-ignore-regexp "\\(?:^[#.]\\)\\|\\(?:[#~]$\\)\\|\\(?:^Icon?\\)"
+          counsel-describe-function-function #'helpful-callable
+          ncounsel-describe-variable-function #'helpful-variable
+          ;; Add smart-casing (-S) to default command arguments:
+          ncounsel-rg-base-command "rg -S --no-heading --line-number --color never %s ."
+          counsel-ag-base-command "ag -S --nocolor --nogroup %s"
+          counsel-pt-base-command "pt -S --nocolor --nogroup -e %s"
+          counsel-find-file-at-point t)
+       )
+
+     (use-package! ivy-rich
+       :config
+       (ivy-rich-mode 1)
+       (setq ivy-format-function #'ivy-format-function-line))
+     ;;[[https://github.com/gilbertw1/better-jumper][gilbertw1/better-jumper: A configurable jump list implementation for Emacs]]
+#+end_src
+** company
+#+begin_src emacs-lisp :tangle "config.el"
+(after! company
+  (setq company-idle-delay 0.5
+        company-minimum-prefix-length 2
+        company-transformers nil)
+  (define-key company-active-map (kbd "C-n") 'company-select-next-or-abort)
+  (define-key company-active-map (kbd "C-p") 'company-select-previous-or-abort))
+#+end_src
+* Visual
+** Buffer
+*** Parenthesis
+#+begin_src emacs-lisp :tangle "config.el"
+  (use-package! rainbow-delimiters
+    :config
+    (custom-set-faces
+     '(rainbow-delimiters-mismatched-face ((t (:foreground "white" :background "red" :weight bold))))
+     '(rainbow-delimiters-unmatched-face ((t (:foreground "white" :background "red" :weight bold))))
+
+     ;; show parents (in case of rainbow failing !)
+     '(show-paren-match ((t (:foreground "white" :background "green" :weight bold))))
+     '(show-paren-mismatch ((t (:foreground "white" :background "red" :weight bold)))))
+    ;;  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+)
+;; highlight brackets
+(setq show-paren-style 'parenthesis)
+#+end_src
+*** eysbrowse
+#+begin_src emacs-lisp :tangle "config.el"
+(use-package! eyebrowse
+  :config
+  (progn
+    (define-key eyebrowse-mode-map (kbd "M-1") 'eyebrowse-switch-to-window-config-1)
+    (define-key eyebrowse-mode-map (kbd "M-2") 'eyebrowse-switch-to-window-config-2)
+    (define-key eyebrowse-mode-map (kbd "M-3") 'eyebrowse-switch-to-window-config-3)
+    (define-key eyebrowse-mode-map (kbd "M-4") 'eyebrowse-switch-to-window-config-4)
+    (define-key eyebrowse-mode-map (kbd "M-5") 'eyebrowse-switch-to-window-config-5)
+    (eyebrowse-mode t)
+    (setq eyebrowse-new-workspace t)))
+    #+end_src
+** window
+*** tab
+#+begin_src emacs-lisp :tangle "config.el"
+(setq centaur-tabs-style "bar")
+(setq centaur-tabs-set-icons t)
+(setq centaur-tabs-set-bar t)
+(setq centaur-tabs-set-bar 'over)
+(setq centaur-tabs-set-modified-marker t)
+(setq centaur-tabs-set-close-button nil)
+(setq centaur-tabs-modified-marker "*")
+
+
+;; ("C-c j" .  centaur-tabs-forward-group)
+;; ("C-c k" .  centaur-tabs-backward-group)
+;; ("C-c o" . centaur-tabs-switch-group)
+;; ("s-1" . centaur-tabs-select-visible-tab)
+;; ("s-2" . centaur-tabs-select-visible-tab)
+;; ("s-3" . centaur-tabs-select-visible-tab)
+;; ("s-4" . centaur-tabs-select-visible-tab)
+;; ("s-5" . centaur-tabs-select-visible-tab)
+;; ("s-6" . centaur-tabs-select-visible-tab)
+;; ("s-7" . centaur-tabs-select-visible-tab)
+;; ("s-8" . centaur-tabs-select-visible-tab)
+;; ("s-9" . centaur-tabs-select-visible-tab)
+#+end_src
+
+* lang
+** nix
+#+begin_src emacs-lisp :tangle "my-code.el"
+(use-package! nix-mode
+  :config
+  (add-to-list 'auto-mode-alist '("\\.nix\\'" . nix-mode))
+)
+(use-package! company-nixos-options
+  :after nix-mode
+  :config
+  (defun my-nix-mode-setup ()
+    (setq-local company-backends
+                (append '((company-files company-nixos-options company-tabnine company-yasnippet )))))
+
+)
+(add-hook! 'nix-mode-hook 'my-nix-mode-setup)
+#+end_src
+* load & unload
+** after-init
+#+begin_src emacs-lisp :tangle "config.el"
+#+end_src
+* set face
+#+begin_src emacs-lisp :tangle "config.el"
+(custom-set-faces
+  '(centaur-tabs-close-selected((t ( :foreground "DarkGray"))))
+)
+#+end_src

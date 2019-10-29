@@ -5,6 +5,6 @@
     ./fish.nix
     ./tmux.nix
     ./cursor.nix
-    ./org-emacs.nix
+    ./doom-emacs.nix
    ];
 }

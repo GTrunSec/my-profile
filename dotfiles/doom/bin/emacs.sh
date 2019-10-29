@@ -1,3 +1,3 @@
 #!/usr/bin/env sh
-cd ~/.emacs.d
+cd ~/.doom.d
 make compile
