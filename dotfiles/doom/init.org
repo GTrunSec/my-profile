@@ -1,4 +1,5 @@
 #+TITLE: My doom config
+- [[https://github.com/hlissner/doom-emacs/blob/develop/docs/getting_started.org][doom-emacs/getting_started.org at develop · hlissner/doom-emacs]]
 * init.el
 #+begin_src emacs-lisp :tangle yes
 ;;; init.el -*- lexical-binding: t; -*-
@@ -199,6 +200,7 @@
 (package! company-english-helper :recipe (:host github :repo "manateelazycat/company-english-helper"))
 (package! org-super-agenda)
 (package! org-starter)
+(package! helm-deft :recipe (:host github :repo "dfeich/helm-deft"))
 #+end_src
 ** code
 #+begin_src emacs-lisp :tangle "packages.el"
@@ -240,8 +242,9 @@
 ** setting
 *** org-global
 #+begin_src emacs-lisp :tangle "my-org.el"
+  (setq org-clock-into-drawer nil)
 #+end_src
-***  org-babel
+*** org-babel
 #+begin_src emacs-lisp :tangle yes
 ;; Todo part
   (org-babel-do-load-languages 'org-babel-load-languages
@@ -276,6 +279,7 @@
 #+begin_src emacs-lisp :tangle "my-org.el"
 (use-package! org-super-agenda
 :config
+(add-hook! 'after-init-hook 'org-super-agenda-mode)
  (require 'org-habit)
   ;; (setq org-agenda-time-grid
   ;;       '((daily today)
@@ -388,6 +392,21 @@
   )
 #+end_src
 
+** helm-def
+#+begin_src emacs-lisp :tangle "my-org.el"
+(use-package! helm-deft
+  :config
+  (setq helm-deft-extension "org")
+  (setq helm-deft-dir-list '(
+                             "~/Documents/org-notes/art"
+                             "~/Documents/org-notes/NSM-GTD"
+                             "~/Documents/org-notes/post"
+                             "~/Documents/org-notes/course"
+                             "~/Documents/org-notes/post/myself"
+                             "~/project/my-code/my-nix"
+                             ;; "~/project/global-profile/global-doc"
+                             )))
+#+end_src
 * xah fly key
 ** pre setting
 #+begin_src emacs-lisp :tangle "xah-fly.el"
@@ -488,7 +507,7 @@ Version 2017-01-21"
     (define-key xah-fly-key-map (kbd ".") 'gtrun-xah-dot-fly-key)
   )
 #+end_src
-** key-map
+** xah-key-map
 #+begin_src emacs-lisp :tangle "xah-fly.el"
 (define-key xah-fly-key-map (kbd "C-a") 'beginning-of-visual-line)
 (define-key xah-fly-key-map (kbd "C-0") 'delete-region)
@@ -497,6 +516,7 @@ Version 2017-01-21"
 
 
 (define-key xah-fly-key-map (kbd "C-s") 'swiper-isearch)
+(define-key xah-fly-key-map (kbd "C-c w") 'helm-deft)
 
 (define-key xah-fly-key-map (kbd "p") 'gtrun-xah-fly-key)
 (define-key xah-fly-key-map (kbd "-") 'gtrun-xah-minus-fly-key)
@@ -750,25 +770,17 @@ Version 2017-01-21"
 ** window
 *** tab
 #+begin_src emacs-lisp :tangle "config.el"
-(setq centaur-tabs-style "bar")
+;; (setq centaur-tabs-style "bar")
 (setq centaur-tabs-set-icons t)
-(setq centaur-tabs-set-bar t)
-(setq centaur-tabs-set-bar 'over)
-(setq centaur-tabs-set-modified-marker t)
-(setq centaur-tabs-set-close-button nil)
-(setq centaur-tabs-modified-marker "*")
+;; (setq centaur-tabs-set-bar t)
+;; (setq centaur-tabs-set-bar 'over)
+;; (setq centaur-tabs-set-modified-marker t)
+;; (setq centaur-tabs-set-close-button nil)
+;; (setq centaur-tabs-modified-marker "*")
 ;; ("C-c j" .  centaur-tabs-forward-group)
 ;; ("C-c k" .  centaur-tabs-backward-group)
 ;; ("C-c o" . centaur-tabs-switch-group)
-;; ("s-1" . centaur-tabs-select-visible-tab)
-;; ("s-2" . centaur-tabs-select-visible-tab)
-;; ("s-3" . centaur-tabs-select-visible-tab)
-;; ("s-4" . centaur-tabs-select-visible-tab)
-;; ("s-5" . centaur-tabs-select-visible-tab)
-;; ("s-6" . centaur-tabs-select-visible-tab)
-;; ("s-7" . centaur-tabs-select-visible-tab)
-;; ("s-8" . centaur-tabs-select-visible-tab)
-;; ("s-9" . centaur-tabs-select-visible-tab)
+
 #+end_src
 *** font
 #+begin_src emacs-lisp :tangle "config.el"
@@ -878,5 +890,18 @@ Version 2017-01-21"
               :weight 'normal
               :slant 'normal
               :size 24.5)))
+(define-key! xah-fly-key-map (kbd "C-c l") 'org-mac-grab-link)
+
+(define-key! centaur-tabs-mode-map
+  "s-1" #'centaur-tabs-select-visible-tab
+  "s-2" #'centaur-tabs-select-visible-tab
+  "s-3" #'centaur-tabs-select-visible-tab
+  "s-4" #'centaur-tabs-select-visible-tab
+  "s-5" #'centaur-tabs-select-visible-tab
+  "s-6" #'centaur-tabs-select-visible-tab
+  "s-7" #'centaur-tabs-select-visible-tab
+  "s-8" #'centaur-tabs-select-visible-tab
+  "s-9" #'centaur-tabs-select-visible-tab
+  )
 (provide 'my-macos)
 #+end_src
