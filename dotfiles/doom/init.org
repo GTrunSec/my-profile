@@ -832,16 +832,17 @@ Version 2017-01-21"
 (use-package! my-linux
 :load-path "./modules"
 :if (eq system-type 'gnu/linux)
-)
-#+end_src
-
-#+begin_src emacs-lisp :tangle "./modules/my-linux.el"
+:config
 (setq-default cursor-type 'box)
 (blink-cursor-mode -1)
 (set-cursor-color "IndianRed3")
 (setq bm-repository-file (f-join doom-private-dir "etc/bm-linux-data"))
 (setq bookmark-default-file
       (concat doom-private-dir "etc/bookmark-linux-default.el"))
+)
+#+end_src
+
+#+begin_src emacs-lisp :tangle "./modules/my-linux.el"
 (provide 'my-linux)
 #+end_src
 ** MacOS
@@ -856,12 +857,26 @@ Version 2017-01-21"
 
 (blink-cursor-mode -1)
 (set-cursor-color "yellow1")
-(setq bm-repository-file (f-join doom-private-dir "bm-linux-data"))
+(setq bm-repository-file (f-join doom-private-dir "etc/bm-macos-data"))
 (setq insert-directory-program "/usr/local/bin/gls")
 )
 #+end_src
 ** macos-setting
 #+begin_src emacs-lisp :tangle "./modules/my-macos.el"
-
+(use-package! cnfonts)
+(set-face-attribute
+ 'default nil
+ :font (font-spec :name "-*-Fantasque Sans Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1"
+                  :weight 'normal
+                  :slant 'normal
+                  :size 24.0))
+(dolist (charset '(kana han symbol cjk-misc bopomofo))
+  (set-fontset-font
+   (frame-parameter nil 'font)
+   charset
+   (font-spec :name "-*-STFangsong-normal-normal-normal-*-*-*-*-*-p-0-iso10646-1"
+              :weight 'normal
+              :slant 'normal
+              :size 24.5)))
 (provide 'my-macos)
 #+end_src

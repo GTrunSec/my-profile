@@ -1,4 +1,4 @@
-r#+TITLE: My Emacs configuration
+#+TITLE: My Emacs configuration
 #+AUTHOR: GTrunSec
 #+EMAIL: gtrunsec@hardenedlinux.org
 #+DATE: 22 July 2019
