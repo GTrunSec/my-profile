@@ -416,6 +416,7 @@ gateway 192.168.122.1
 #+end_src
 * Keyboard
 ** [[https://configure.ergodox-ez.com/ergodox-ez/layouts/B4J9B/latest/0][Ergodox EZ Configurator]]<2019-09-16 Mon>
-** [[https://configure.ergodox-ez.com/planck-ez/layouts/yoJYP/latest/0][[plank]Ergodox EZ Configurator]]<2019-10-25 Fri>
+** [[https://configure.ergodox-ez.com/planck-ez/layouts/bvDzx/latest/0][Ergodox EZ Configurator]] <2019-10-29 Tue>[plank]
+
 * Blog
 ** [[https://github.com/getgridea/gridea][getgridea/gridea: ✍️一个静态博客写作客户端 (A static blog writing client)]]

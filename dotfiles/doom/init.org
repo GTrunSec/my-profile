@@ -86,7 +86,7 @@
        ;;gist              ; interacting with github gists
        (lookup           ; helps you navigate your code and documentation
         +docsets)        ; ...or in Dash docsets locally
-       ;;lsp
+       lsp
        ;;macos             ; MacOS-specific commands
        magit             ; a git porcelain for Emacs
        ;;make              ; run make tasks from Emacs
@@ -102,9 +102,9 @@
        :lang
        ;;agda              ; types of types of types of types...
        ;;assembly          ; assembly for fun or debugging
-       ;;cc                ; C/C++/Obj-C madness
+       cc                ; C/C++/Obj-C madness
        ;;clojure           ; java with a lisp
-       ;;common-lisp       ; if you've seen one lisp, you've seen them all
+       common-lisp       ; if you've seen one lisp, you've seen them all
        ;;coq               ; proofs-as-programs
        ;;crystal           ; ruby at the speed of c
        ;;csharp            ; unity, .NET, and mono shenanigans
@@ -113,24 +113,24 @@
        ;;elixir            ; erlang done right
        ;;elm               ; care for a cup of TEA?
        emacs-lisp        ; drown in parentheses
-       ;;ess               ; emacs speaks statistics
+       ess               ; emacs speaks statistics
        ;;faust             ; dsp, but you get to keep your soul
        ;;fsharp           ; ML stands for Microsoft's Language
-       ;;go                ; the hipster dialect
-       ;;(haskell +intero) ; a language that's lazier than I am
+       go                ; the hipster dialect
+       (haskell +intero) ; a language that's lazier than I am
        ;;hy                ; readability of scheme w/ speed of python
        ;;idris             ;
        ;;(java +meghanada) ; the poster child for carpal tunnel syndrome
        ;;javascript        ; all(hope(abandon(ye(who(enter(here))))))
-       ;;julia             ; a better, faster MATLAB
+       julia             ; a better, faster MATLAB
        ;;kotlin            ; a better, slicker Java(Script)
-       ;;latex             ; writing papers in Emacs has never been so fun
+       latex             ; writing papers in Emacs has never been so fun
        ;;lean
        ;;ledger            ; an accounting system in Emacs
        ;;lua               ; one-based indices? one-based indices
        markdown          ; writing docs for people to ignore
        ;;nim               ; python + lisp at the speed of c
-       ;;nix               ; I hereby declare "nix geht mehr!"
+       nix               ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
        (org              ; organize your plain life in plain text
         +dragndrop       ; drag & drop files/images into org buffers
@@ -143,7 +143,7 @@
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional
-       ;;python            ; beautiful is better than ugly
+       python            ; beautiful is better than ugly
        ;;qt                ; the 'cutest' gui framework ever
        ;;racket            ; a DSL for DSLs
        ;;rest              ; Emacs as a REST client
@@ -193,6 +193,7 @@
 (package! xah-fly-keys :recipe (:host github :repo "xahlee/xah-fly-keys"))
 (package! hungry-delete)
 (package! flymake-json)
+(package! maple-iedit :recipe (:host github :repo "honmaple/emacs-maple-iedit"))
 #+end_src
 ** org-mode
 #+begin_src emacs-lisp :tangle "packages.el"
@@ -206,8 +207,6 @@
 #+begin_src emacs-lisp :tangle "packages.el"
 (package! awesome-pair :recipe (:host github :repo "manateelazycat/awesome-pair"))
 (package! plantuml-mode)
-(package! nix-mode)
-(package! company-nixos-options)
 #+end_src
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! awesome-pair)
@@ -451,6 +450,9 @@
      ("tf" . +treemacs/find-file)
      ;; helm
      ("bb" . switch-to-buffer)
+     ("bs" . bookmark-set)
+     ("bm" . bookmark-bmenu-list)
+
      ;; isearch
      ("y" . xah-search-current-word)
      ;; search
@@ -512,6 +514,7 @@ Version 2017-01-21"
 (define-key xah-fly-key-map (kbd "C-a") 'beginning-of-visual-line)
 (define-key xah-fly-key-map (kbd "C-0") 'delete-region)
 (define-key xah-fly-key-map (kbd "C-n") 'next-line)
+(define-key xah-fly-key-map (kbd "C-j") 'previous-line)
 (define-key xah-fly-key-map (kbd "M-<SPC>") 'xah-fly-command-mode-activate)
 
 
@@ -597,6 +600,7 @@ Version 2017-01-21"
 #+end_src
 * Completion
 ** Ivy/counsel
+
 #+begin_src emacs-lisp :tangle "config.el"
   (use-package! counsel
     :hook
@@ -627,7 +631,28 @@ Version 2017-01-21"
         company-minimum-prefix-length 2
         company-transformers nil)
   (define-key company-active-map (kbd "C-n") 'company-select-next-or-abort)
-  (define-key company-active-map (kbd "C-p") 'company-select-previous-or-abort))
+  (define-key company-active-map (kbd "C-j") 'company-select-previous-or-abort))
+#+end_src
+** Edition
+*** Maple
+#+begin_src emacs-lisp :tangle "config.el"
+  (use-package! maple-iedit
+    :commands (maple-iedit-match-all maple-iedit-match-next maple-iedit-match-previous)
+    :config
+    (delete-selection-mode t)
+    (setq maple-iedit-ignore-case t)
+    (defhydra maple/iedit ()
+      ("n" maple-iedit-match-next "next")
+      ("t" maple-iedit-skip-and-match-next "skip and next")
+      ("T" maple-iedit-skip-and-match-previous "skip and previous")
+      ("p" maple-iedit-match-previous "prev"))
+    :bind (:map maple-iedit-mode-keymap
+                ("C-n" . maple-iedit-match-next)
+                ("C-m" . maple-iedit-match-previous)
+                ("C-," . maple-iedit-skip-and-match-next)
+                ("C-." . maple-iedit-skip-and-match-previous)
+                )
+    )
 #+end_src
 ** BOOkmark
 #+begin_src emacs-lisp :tangle "config.el"
@@ -813,19 +838,6 @@ Version 2017-01-21"
 * lang
 ** nix
 #+begin_src emacs-lisp :tangle "my-code.el"
-(use-package! nix-mode
-  :config
-  (add-to-list 'auto-mode-alist '("\\.nix\\'" . nix-mode))
-)
-(use-package! company-nixos-options
-  :after nix-mode
-  :config
-  (defun my-nix-mode-setup ()
-    (setq-local company-backends
-                (append '((company-files company-nixos-options company-tabnine company-yasnippet )))))
-
-)
-(add-hook! 'nix-mode-hook 'my-nix-mode-setup)
 #+end_src
 * load & unload
 ** after-init
@@ -866,11 +878,11 @@ Version 2017-01-21"
  (setq bookmark-default-file
         (concat doom-private-dir "etc/bookmark-macos-default.el"))
 (setq-default cursor-type 'bar)
-
 (blink-cursor-mode -1)
 (set-cursor-color "yellow1")
 (setq bm-repository-file (f-join doom-private-dir "etc/bm-macos-data"))
 (setq insert-directory-program "/usr/local/bin/gls")
+(define-key org-mode-map (kbd "C-c l") 'org-mac-grab-link)
 )
 #+end_src
 ** macos-setting
@@ -890,7 +902,8 @@ Version 2017-01-21"
               :weight 'normal
               :slant 'normal
               :size 24.5)))
-(define-key! xah-fly-key-map (kbd "C-c l") 'org-mac-grab-link)
+
+
 
 (define-key! centaur-tabs-mode-map
   "s-1" #'centaur-tabs-select-visible-tab
