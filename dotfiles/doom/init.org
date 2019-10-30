@@ -216,6 +216,7 @@
 #+begin_src emacs-lisp :tangle "packages.el"
 (package! eyebrowse)
 (package! cnfonts)
+(package! scrollkeeper :recipe (:host github :repo "alphapapa/scrollkeeper.el"))
 #+end_src
 * config.el
 ** load-package
@@ -490,7 +491,7 @@ Version 2017-01-21"
      ("f" . xah-fly-insert-mode-activate)
      ("[" . xah-backward-punct )
      ("]" . xah-forward-punct)
-     ("g" . set-mark-command)
+     ("g" . avy-goto-char-2)
      ("y" . undo)
      ("v" . xah-paste-or-paste-previous)
      ("c" . xah-copy-line-or-region)
@@ -529,6 +530,10 @@ Version 2017-01-21"
 (define-key xah-fly-key-map (kbd "/") 'gtrun-xah-slash-fly-key)
 (define-key xah-fly-key-map (kbd ",") 'gtrun-xah-comma-fly-key)
 (define-key xah-fly-key-map (kbd ".") 'gtrun-xah-dot-fly-key)
+
+;; scrolling
+(define-key xah-fly-key-map (kbd "C-v") 'scroll-up-command)
+
 #+end_src
 ** special-key-to-mode-map
 #+begin_src emacs-lisp :tangle "xah-fly.el"
@@ -780,6 +785,14 @@ Version 2017-01-21"
   )
 #+end_src
 
+** scroll
+#+begin_src emacs-lisp :tangle yes
+(use-package! scrollkeeper)
+
+(global-set-key [remap scroll-up-command] #'scrollkeeper-contents-up)
+(global-set-key [remap scroll-down-command] #'scrollkeeper-contents-down)
+#+end_src
+
 * Visual
 ** Buffer
 *** Parenthesis
@@ -858,6 +871,73 @@ Version 2017-01-21"
 ** nix
 #+begin_src emacs-lisp :tangle "my-code.el"
 #+end_src
+* chinese
+** pinyinlib
+#+begin_src emacs-lisp :tangle "config.el"
+(def-package! pinyinlib
+  :config
+
+  
+  (defun re-builder-extended-pattern (str)
+    (let* ((len (length str)))
+      (cond
+       ;; do nothing
+       ((<= (length str) 0))
+
+       ;; If the first charater of input in ivy is ":",
+       ;; remaining input is converted into Chinese pinyin regex.
+       ((string= (substring str 0 1) ":")
+        (setq str (pinyinlib-build-regexp-string (substring str 1 len) t)))
+
+       ;; If the first charater of input in ivy is "/",
+       ;; remaining input is converted to pattrn to search camel case word
+       ((string= (substring str 0 1) "/")
+        (let* ((rlt "")
+               (i 0)
+               (subs (substring str 1 len))
+               c)
+          (when (> len 2)
+            (setq subs (upcase subs))
+            (while (< i (length subs))
+              (setq c (elt subs i))
+              (setq rlt (concat rlt (cond
+                                     ((and (< c ?a) (> c ?z) (< c ?A) (> c ?Z))
+                                      (format "%c" c))
+                                     (t
+                                      (concat (if (= i 0) (format "[%c%c]" (+ c 32) c)
+                                                (format "%c" c))
+                                              "[a-z]+")))))
+              (setq i (1+ i))))
+          (setq str rlt))))
+      (ivy--regex-plus str)))
+
+
+  (eval-after-load 'ivy
+    '(progn
+       ;; better performance on everything (especially windows), ivy-0.10.0 required
+       ;; @see https://github.com/abo-abo/swiper/issues/1218
+       (setq ivy-dynamic-exhibit-delay-ms 250)
+
+       ;; Press C-p and Enter to select current input as candidate
+       ;; https://oremacs.com/2017/11/30/ivy-0.10.0/
+       (setq ivy-use-selectable-prompt t)
+
+       (setq ivy-re-builders-alist
+             '((t . re-builder-extended-pattern)))
+       ;; set actions when running C-x b
+       ;; replace "frame" with window to open in new window
+       (ivy-set-actions
+        'ivy-switch-buffer-by-pinyin
+        '(("j" switch-to-buffer-other-frame "other frame")
+          ("k" kill-buffer "kill")
+          ("r" ivy--rename-buffer-action "rename")))))
+  (with-eval-after-load "swiper-isearch"
+    (setq ivy-re-builders-alist
+          '((t . re-builder-extended-pattern)
+            (t . ivy-prescient-re-builder))))
+  )
+#+end_src
+
 * load & unload
 ** after-init
 #+begin_src emacs-lisp :tangle "packages.el"
@@ -896,7 +976,7 @@ Version 2017-01-21"
 :config
  (setq bookmark-default-file
         (concat doom-private-dir "etc/bookmark-macos-default.el"))
-(setq-default cursor-type 'bar)
+(setq-default cursor-type 'box)
 (blink-cursor-mode -1)
 (set-cursor-color "yellow1")
 (setq bm-repository-file (f-join doom-private-dir "etc/bm-macos-data"))
