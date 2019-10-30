@@ -194,6 +194,7 @@
 (package! hungry-delete)
 (package! flymake-json)
 (package! maple-iedit :recipe (:host github :repo "honmaple/emacs-maple-iedit"))
+(package! yatemplate)
 #+end_src
 ** org-mode
 #+begin_src emacs-lisp :tangle "packages.el"
@@ -763,6 +764,22 @@ Version 2017-01-21"
       ("L" bm-show-all :exit t))
     (bind-key "C-c m" #'adq/hydra-bm/body))
 #+end_src
+** templating
+#+begin_src emacs-lisp :tangle yes
+(use-package! yatemplate
+  :after yasnippet
+  :config
+
+  ;; Define template directory
+  (setq yatemplate-dir (concat doom-private-dir "modules/templates"))
+
+  ;; Coupling with auto-insert
+  (setq auto-insert-alist nil)
+  (yatemplate-fill-alist)
+  (add-hook 'find-file-hook 'auto-insert)
+  )
+#+end_src
+
 * Visual
 ** Buffer
 *** Parenthesis
