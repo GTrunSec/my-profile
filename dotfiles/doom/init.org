@@ -168,7 +168,7 @@
        :app
        ;;calendar
        ;;irc               ; how neckbeards socialize
-       ;;(rss +org)        ; emacs as an RSS reader
+       (rss +org)        ; emacs as an RSS reader
        ;;twitter           ; twitter client https://twitter.com/vnought
        ;;(write            ; emacs for writers (fiction, notes, papers, etc.)
        ;; +wordnut         ; wordnet (wn) search
@@ -216,7 +216,8 @@
 #+begin_src emacs-lisp :tangle "packages.el"
 (package! eyebrowse)
 (package! cnfonts)
-(package! scrollkeeper :recipe (:host github :repo "alphapapa/scrollkeeper.el"))
+(package! fast-scroll)
+(package! elfeed-goodies)
 #+end_src
 * config.el
 ** load-package
@@ -233,7 +234,9 @@
 ;; (setq browse-url-browser-function 'browse-url-Chrome)
 ;; https://emacs.stackexchange.com/questions/5603/how-to-quickly-copy-move-file-in-emacs-dired
 (setq dired-dwim-target t)
+(add-hook! 'xah-fly-command-mode-activate-hook 'xah-fly-save-buffer-if-file)
 #+end_src
+
 * org-mode
 ** type
 #+begin_src emacs-lisp :tangle "my-org.el"
@@ -410,17 +413,67 @@
                              ;; "~/project/global-profile/global-doc"
                              )))
 #+end_src
+
+** elfeed
+#+begin_src emacs-lisp :tangle "config.el"
+(use-package! elfeed
+  :bind (:map elfeed-search-mode-map
+          ("q" . bjm/elfeed-save-db-and-bury)
+          ("Q" . bjm/elfeed-save-db-and-bury)
+          ("m" . elfeed-toggle-star)
+          ("M" . elfeed-toggle-star)
+          )
+  :config
+(global-set-key (kbd "C-x w") 'elfeed)
+(setf url-queue-timeout 30)
+(setq elfeed-db-directory "~/Dropbox/shared/elfeeddb")
+;;functions to support syncing .elfeed between machines
+;;makes sure elfeed reads index from disk before launching
+(defun bjm/elfeed-load-db-and-open ()
+  "Wrapper to load the elfeed db from disk before opening"
+  (interactive)
+  (elfeed-db-load)
+  (elfeed)
+  (elfeed-search-update--force))
+
+;;write to disk when quiting
+
+(defun bjm/elfeed-save-db-and-bury ()
+  "Wrapper to save the elfeed db to disk before burying buffer"
+  (interactive)
+  (elfeed-db-save)
+  (quit-window))
+
+(defun elfeed-mark-all-as-read ()
+  (interactive)
+  (mark-whole-buffer)
+  (elfeed-search-untag-all-unread))
+
+
+
+  )
+
+(use-package! elfeed-goodies
+  :config
+  (elfeed-goodies/setup))
+
+(use-package! elfeed-org
+:config
+(setq rmh-elfeed-org-files (list "~/Documents/org-notes/elfeed.org")))
+#+end_src
 * xah fly key
 ** pre setting
 #+begin_src emacs-lisp :tangle "xah-fly.el"
 (use-package! xah-fly-keys
+:config
+(add-hook 'xah-fly-command-mode-activate-hook
+  (lambda ()
+    (setq xah-fly-insert-state-q nil)))
   :init
   (require 'xah-fly-keys)
   (xah-fly-keys 1)
   ;; (xah-fly-keys-set-layout "qwerty")
- (add-hook! 'xah-fly-command-mode-activate-hook
-            (lambda ()
-              (setq xah-fly-insert-state-q nil)))
+
   (xah-fly--define-keys
    ;; create a keymap my-keymap
    (define-prefix-command 'my-keymap)
@@ -462,10 +515,13 @@
      ;; search
      ("sa" . counsel-ag)
      ("sr" . counsel-rg)
-)))
-
-
+))
+)
 #+END_SRC
+
+#+RESULTS:
+: t
+
 ** one char key
 #+begin_src emacs-lisp :tangle "xah-fly.el"
 (defun xah-fly-command-mode-init ()
@@ -521,7 +577,7 @@ Version 2017-01-21"
 (define-key xah-fly-key-map (kbd "C-j") 'previous-line)
 (define-key xah-fly-key-map (kbd "M-<SPC>") 'xah-fly-command-mode-activate)
 
-
+(define-key xah-fly-key-map (kbd "C-.") 'xah-fly-save-buffer-if-file)
 (define-key xah-fly-key-map (kbd "C-s") 'swiper-isearch)
 (define-key xah-fly-key-map (kbd "C-c w") 'helm-deft)
 
@@ -532,8 +588,8 @@ Version 2017-01-21"
 (define-key xah-fly-key-map (kbd ".") 'gtrun-xah-dot-fly-key)
 
 ;; scrolling
-(define-key xah-fly-key-map (kbd "C-v") 'scroll-up-command)
-
+(define-key xah-fly-key-map (kbd "C-v") 'fast-scroll-scroll-up-command)
+(define-key xah-fly-key-map (kbd "M-v") 'fast-scroll-scroll-down-command)
 #+end_src
 ** special-key-to-mode-map
 #+begin_src emacs-lisp :tangle "xah-fly.el"
@@ -545,6 +601,7 @@ Version 2017-01-21"
          ((eq major-mode 'dired-mode) (call-interactively 'hydra-dired/body))
          ((eq major-mode 'w3m-mode) (call-interactively 'scroll-up))
          ((eq major-mode 'org-mode) (call-interactively 'org-edit-src-code))
+         ((eq major-mode 'elfeed-show-mode) (call-interactively 'scroll-up))
          (t nil)))
 
       (defun gtrun-xah-comma-fly-key ()
@@ -553,6 +610,7 @@ Version 2017-01-21"
         (cond
          ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
          ((eq major-mode 'w3m-mode) (call-interactively 'scroll-down))
+         ((eq major-mode 'elfeed-show-mode) (call-interactively 'scroll-down))
          (t nil)))
 
       (defun gtrun-xah-slash-fly-key ()
@@ -786,11 +844,15 @@ Version 2017-01-21"
 #+end_src
 
 ** scroll
-#+begin_src emacs-lisp :tangle yes
-(use-package! scrollkeeper)
-
-(global-set-key [remap scroll-up-command] #'scrollkeeper-contents-up)
-(global-set-key [remap scroll-down-command] #'scrollkeeper-contents-down)
+#+begin_src emacs-lisp :tangle "config.el"
+(use-package! fast-scroll
+:config
+(setq fast-scroll-throttle 0.5)
+(add-hook 'fast-scroll-start-hook (lambda () (flycheck-mode -1)))
+(add-hook 'fast-scroll-end-hook (lambda () (flycheck-mode 1)))
+(fast-scroll-config)
+(fast-scroll-mode 1)
+)
 #+end_src
 
 * Visual
@@ -867,6 +929,7 @@ Version 2017-01-21"
 ;;     (s-font))
 ;;   )
 #+end_src
+** mode
 * lang
 ** nix
 #+begin_src emacs-lisp :tangle "my-code.el"
@@ -1001,8 +1064,6 @@ Version 2017-01-21"
 ** macos-setting
 #+begin_src emacs-lisp :tangle "./modules/my-macos.el"
 (use-package! cnfonts)
-
-
 
 (define-key! centaur-tabs-mode-map
   "s-1" #'centaur-tabs-select-visible-tab
