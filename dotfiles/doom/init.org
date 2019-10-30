@@ -241,7 +241,9 @@
 ** setting
 *** org-global
 #+begin_src emacs-lisp :tangle "my-org.el"
-  (setq org-clock-into-drawer nil)
+(setq org-clock-into-drawer nil)
+(setq org-agenda-start-day "-1d")
+(setq org-agenda-span 5)
 #+end_src
 *** org-babel
 #+begin_src emacs-lisp :tangle yes
@@ -883,11 +885,6 @@ Version 2017-01-21"
 (setq bm-repository-file (f-join doom-private-dir "etc/bm-macos-data"))
 (setq insert-directory-program "/usr/local/bin/gls")
 (define-key org-mode-map (kbd "C-c l") 'org-mac-grab-link)
-)
-#+end_src
-** macos-setting
-#+begin_src emacs-lisp :tangle "./modules/my-macos.el"
-(use-package! cnfonts)
 (set-face-attribute
  'default nil
  :font (font-spec :name "-*-Fantasque Sans Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1"
@@ -902,6 +899,11 @@ Version 2017-01-21"
               :weight 'normal
               :slant 'normal
               :size 24.5)))
+)
+#+end_src
+** macos-setting
+#+begin_src emacs-lisp :tangle "./modules/my-macos.el"
+(use-package! cnfonts)
 
 
 
