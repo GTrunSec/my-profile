@@ -4,8 +4,7 @@
 let
   updatefont = ''fc-cache -f -v'';
   updateDoom = ".emacs.d/bin/doom refresh";
-  updateInit = "bash .doom.d/bin/emacs.sh
-             .emacs.d/bin/doom refresh";
+  updateInit = "bash .doom.d/bin/emacs.sh";
 in
 {
   #fonts
