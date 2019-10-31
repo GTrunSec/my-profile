@@ -9,6 +9,8 @@
     };
   };
   virtualisation.virtualbox.host.enable = true;
+  virtualisation.virtualbox.host.enableExtensionPack = true;
+   users.extraGroups.vboxusers.members = [ "gtrun" "nsm" "test"];
   boot.extraModprobeConfig = "options kvm_intel nested=1";
   #https://forum.level1techs.com/t/nixos-vfio-pcie-passthrough/130916
   boot.kernelParams = [ "intel_iommu=on" ];
