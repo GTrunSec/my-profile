@@ -216,7 +216,7 @@
 #+begin_src emacs-lisp :tangle "packages.el"
 (package! eyebrowse)
 (package! cnfonts)
-(package! fast-scroll)
+(package! scrollkeeper :recipe (:host github :repo "alphapapa/scrollkeeper.el"))
 (package! elfeed-goodies)
 #+end_src
 * config.el
@@ -474,8 +474,7 @@
   (mark-whole-buffer)
   (elfeed-search-untag-all-unread))
 
-(defalias 'elfeed-toggle-star
-  (elfeed-expose #'elfeed-search-toggle-all 'star))
+
 
   )
 
@@ -614,9 +613,9 @@ Version 2017-01-21"
 (define-key xah-fly-key-map (kbd ".") 'gtrun-xah-dot-fly-key)
 
 ;; scrolling
-(define-key xah-fly-key-map (kbd "C-v") 'fast-scroll-scroll-up-command)
-(define-key xah-fly-key-map (kbd "M-v") 'fast-scroll-scroll-down-command)
+(define-key xah-fly-key-map (kbd "C-v") 'scrollkeeper-contents-up)
 #+end_src
+
 ** special-key-to-mode-map
 #+begin_src emacs-lisp :tangle "xah-fly.el"
    (defun gtrun-xah-dot-fly-key ()
@@ -625,10 +624,10 @@ Version 2017-01-21"
         (cond
          ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
          ((eq major-mode 'dired-mode) (call-interactively 'hydra-dired/body))
-         ((eq major-mode 'w3m-mode) (call-interactively 'scroll-up))
+         ((eq major-mode 'w3m-mode) (call-interactively 'scrollkeeper-contents-up))
          ((eq major-mode 'org-mode) (call-interactively 'org-edit-src-code))
-         ((eq major-mode 'elfeed-show-mode) (call-interactively 'scroll-up))
-         ((eq major-mode 'elfeed-search-mode) (call-interactively 'scroll-up))
+         ((eq major-mode 'elfeed-show-mode) (call-interactively 'scrollkeeper-contents-up))
+         ((eq major-mode 'elfeed-search-mode) (call-interactively 'scrollkeeper-contents-up))
          (t nil)))
 
       (defun gtrun-xah-comma-fly-key ()
@@ -636,9 +635,9 @@ Version 2017-01-21"
         (interactive)
         (cond
          ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
-         ((eq major-mode 'w3m-mode) (call-interactively 'scroll-down))
-         ((eq major-mode 'elfeed-show-mode) (call-interactively 'scroll-down))
-         ((eq major-mode 'elfeed-search-mode) (call-interactively 'scroll-down))
+         ((eq major-mode 'w3m-mode) (call-interactively 'scrollkeeper-contents-down))
+         ((eq major-mode 'elfeed-show-mode) (call-interactively 'scrollkeeper-contents-down))
+         ((eq major-mode 'elfeed-search-mode) (call-interactively 'scrollkeeper-contents-down))
          (t nil)))
 
       (defun gtrun-xah-slash-fly-key ()
@@ -873,14 +872,17 @@ Version 2017-01-21"
 
 ** scroll
 #+begin_src emacs-lisp :tangle "config.el"
-(use-package! fast-scroll
-:config
-(setq fast-scroll-throttle 0.5)
-(add-hook 'fast-scroll-start-hook (lambda () (flycheck-mode -1)))
-(add-hook 'fast-scroll-end-hook (lambda () (flycheck-mode 1)))
-(fast-scroll-config)
-(fast-scroll-mode 1)
-)
+;; (use-package! fast-scroll
+;; :config
+;; (setq fast-scroll-throttle 0.5)
+;; (add-hook 'fast-scroll-start-hook (lambda () (flycheck-mode -1)))
+;; (add-hook 'fast-scroll-end-hook (lambda () (flycheck-mode 1)))
+;; (fast-scroll-config)
+;; (fast-scroll-mode 1)
+;; )
+(use-package! scrollkeeper)
+(global-set-key [remap scroll-up-command] #'scrollkeeper-contents-up)
+(global-set-key [remap scroll-down-command] #'scrollkeeper-contents-down)
 #+end_src
 
 * Visual
