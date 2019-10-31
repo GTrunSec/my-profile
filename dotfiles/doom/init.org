@@ -249,7 +249,22 @@
 (setq org-clock-into-drawer nil)
 (setq org-agenda-start-day "-1d")
 (setq org-agenda-span 5)
+(setq org-time-clocksum-format '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
+(setq org-archive-location (concat "%s_archive_" (format-time-string "%Y" (current-time)) "::"))
+;; Removes clocked tasks with 0:00 duration
+(setq org-clock-out-remove-zero-time-clocks t)
+;; Change task state to STARTED when clocking in
+(setq org-clock-in-switch-to-state "⚔ INPROCESS")
+(setq org-src-fontify-natively t
+      org-src-preserve-indentation t
+      org-src-tab-acts-natively t
+      org-src-window-setup 'current-window)
+(setq org-agenda-time-leading-zero t)
 #+end_src
+
+#+RESULTS:
+: t
+
 *** org-babel
 #+begin_src emacs-lisp :tangle yes
 ;; Todo part
@@ -275,6 +290,81 @@
 ;; 乾、坤、坎、離、震、巽、艮、兌
 (setq org-bullets-bullet-list '("☰" "☷" "☵" "☲"  "☳" "☴"  "☶"  "☱" ))
 #+end_src
+*** after org
+#+begin_src emacs-lisp :tangle "my-org.el"
+(after! org
+  (setq +org-dir  (expand-file-name "~/Documents/org-notes"))
+  ;; (setq-default
+  ;;  org-agenda-files (directory-files +org-dir t "\\.org$" t))
+
+  )
+
+(setq org-agenda-custom-commands
+      '(("z" "GtruN Agenda"
+         ((agenda "" ((org-agenda-span 'day)
+                      (org-super-agenda-groups
+                       '((:habit t)
+                         (:log t)
+                         (:name "Today List"
+                                :time-grid t
+                                :date today
+                                :todo "☞ TODO"
+                                :scheduled today
+                                :order 1)))))
+          (alltodo "" ((org-agenda-overriding-header "")
+                       (org-super-agenda-groups
+                        '((:name "Next to do"
+                                 :priority>= "B"
+                                 :order 1)
+                          (:name "Important"
+                                 :todo "✰ Important"
+                                 :order 6)
+                          (:name "Due Today"
+                                 :deadline today
+                                 :order 2)
+                          (:name "Due Soon"
+                                 :deadline future
+                                 :order 8)
+                          (:name "Overdue"
+                                 :deadline past
+                                 :order 7)
+                          (:name "Issues"
+                                 :tag "Issue"
+                                 :order 12)
+                          (:name "Projects"
+                                 :tag "Project"
+                                 :order 14)
+                          (:name "Emacs"
+                                 :tag "Emacs"
+                                 :order 13)
+                          (:name "Research"
+                                 :tag "Research"
+                                 :order 15)
+                          (:name "To read"
+                                 :tag "BOOK"
+                                 :order 30)
+                          (:name "Waiting"
+                                 :todo "⚑ WAITING"
+                                 :order 20)
+                          (:name "trivial"
+                                 :priority<= "C"
+                                 :todo ("SOMEDAY")
+                                 :order 90)
+                          (:discard (:tag ("Chore" "Routine" "Daily")))))))))
+
+        ("b" . "BOOK")
+
+        ("bb" "Search tags in todo, note, and archives"
+         search "+{:book\\|books:}")
+
+        ("bd" "BOOK TODO List"
+         search "+{^\\*+\\s-+\\(STARTED\\|☞ TODO\\|WAITING\\)\\s-} +{book\\|books}")
+
+        ("d" "ALL DONE OF TASKS"
+         search "+{^\\*+\\s-+\\(DONE\\|✘ CANCELED\\)\\s-}")
+        ))
+#+end_src
+
 ** org-key
 #+begin_src emacs-lisp :tangle "my-org.el"
 (eval-after-load "org"
@@ -301,70 +391,6 @@
 
 
 
-  (setq org-agenda-custom-commands
-        '(("z" "GtruN Agenda"
-           ((agenda "" ((org-agenda-span 'day)
-                        (org-super-agenda-groups
-                         '((:habit t)
-                           (:log t)
-                           (:name "Today List"
-                                  :time-grid t
-                                  :date today
-                                  :todo "☞ TODO"
-                                  :scheduled today
-                                  :order 1)))))
-            (alltodo "" ((org-agenda-overriding-header "")
-                         (org-super-agenda-groups
-                          '((:name "Next to do"
-                                   :priority>= "B"
-                                   :order 1)
-                            (:name "Important"
-                                   :todo "✰ Important"
-                                   :order 6)
-                            (:name "Due Today"
-                                   :deadline today
-                                   :order 2)
-                            (:name "Due Soon"
-                                   :deadline future
-                                   :order 8)
-                            (:name "Overdue"
-                                   :deadline past
-                                   :order 7)
-                            (:name "Issues"
-                                   :tag "Issue"
-                                   :order 12)
-                            (:name "Projects"
-                                   :tag "Project"
-                                   :order 14)
-                            (:name "Emacs"
-                                   :tag "Emacs"
-                                   :order 13)
-                            (:name "Research"
-                                   :tag "Research"
-                                   :order 15)
-                            (:name "To read"
-                                   :tag "BOOK"
-                                   :order 30)
-                            (:name "Waiting"
-                                   :todo "⚑ WAITING"
-                                   :order 20)
-                            (:name "trivial"
-                                   :priority<= "C"
-                                   :todo ("SOMEDAY")
-                                   :order 90)
-                            (:discard (:tag ("Chore" "Routine" "Daily")))))))))
-
-          ("b" . "BOOK")
-
-          ("bb" "Search tags in todo, note, and archives"
-           search "+{:book\\|books:}")
-
-          ("bd" "BOOK TODO List"
-           search "+{^\\*+\\s-+\\(STARTED\\|☞ TODO\\|WAITING\\)\\s-} +{book\\|books}")
-
-          ("d" "ALL DONE OF TASKS"
-           search "+{^\\*+\\s-+\\(DONE\\|✘ CANCELED\\)\\s-}")
-          ))
 )
 #+end_src
 ** org-starter
@@ -421,7 +447,6 @@
           ("q" . bjm/elfeed-save-db-and-bury)
           ("Q" . bjm/elfeed-save-db-and-bury)
           ("m" . elfeed-toggle-star)
-          ("M" . elfeed-toggle-star)
           )
   :config
 (global-set-key (kbd "C-x w") 'elfeed)
@@ -449,7 +474,8 @@
   (mark-whole-buffer)
   (elfeed-search-untag-all-unread))
 
-
+(defalias 'elfeed-toggle-star
+  (elfeed-expose #'elfeed-search-toggle-all 'star))
 
   )
 
@@ -602,6 +628,7 @@ Version 2017-01-21"
          ((eq major-mode 'w3m-mode) (call-interactively 'scroll-up))
          ((eq major-mode 'org-mode) (call-interactively 'org-edit-src-code))
          ((eq major-mode 'elfeed-show-mode) (call-interactively 'scroll-up))
+         ((eq major-mode 'elfeed-search-mode) (call-interactively 'scroll-up))
          (t nil)))
 
       (defun gtrun-xah-comma-fly-key ()
@@ -611,6 +638,7 @@ Version 2017-01-21"
          ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
          ((eq major-mode 'w3m-mode) (call-interactively 'scroll-down))
          ((eq major-mode 'elfeed-show-mode) (call-interactively 'scroll-down))
+         ((eq major-mode 'elfeed-search-mode) (call-interactively 'scroll-down))
          (t nil)))
 
       (defun gtrun-xah-slash-fly-key ()
@@ -621,7 +649,7 @@ Version 2017-01-21"
          ((eq major-mode 'dired-mode) (call-interactively 'vinegar/dired-diff))
          ((eq major-mode 'w3m-mode) (call-interactively 'w3m-bookmark-add-current-url))
          ((eq major-mode 'org-agenda-mode) (call-interactively 'org-agenda-filter-by-tag))
-
+         ((eq major-mode 'elfeed-search-mode) (call-interactively 'elfeed-update))
          (t nil)))
 
       (defun gtrun-xah-semicolon-fly-key ()
