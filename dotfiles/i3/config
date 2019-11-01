@@ -49,17 +49,17 @@ bindsym Mod4+d exec --no-startup-id rofi -show drun
 
 # change focus
 
-bindsym $mod+Shift+j exec --no-startup-id bash ~/.config/i3/move-cursor-window-center.sh focus left
-bindsym $mod+Shift+k exec --no-startup-id bash ~/.config/i3/move-cursor-window-center.sh focus down
-bindsym $mod+Shift+i exec --no-startup-id bash ~/.config/i3/move-cursor-window-center.sh focus up
-bindsym $mod+Shift+l exec --no-startup-id bash ~/.config/i3/move-cursor-window-center.sh focus right
+bindsym ctrl+Shift+j exec --no-startup-id bash ~/.config/i3/move-cursor-window-center.sh focus left
+bindsym ctrl+Shift+k exec --no-startup-id bash ~/.config/i3/move-cursor-window-center.sh focus down
+bindsym ctrl+Shift+i exec --no-startup-id bash ~/.config/i3/move-cursor-window-center.sh focus up
+bindsym ctrl+Shift+l exec --no-startup-id bash ~/.config/i3/move-cursor-window-center.sh focus right
 
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left exec --no-startup-id bash ~/.config/i3/move-cursor-window-center.sh move left
-bindsym $mod+Shift+Down exec --no-startup-id bash ~/.config/i3/move-cursor-window-center.sh move down
-bindsym $mod+Shift+Up exec --no-startup-id bash ~/.config/i3/move-cursor-window-center.sh move up
-bindsym $mod+Shift+Right exec --no-startup-id bash ~/.config/i3/move-cursor-window-center.sh move right
+bindsym ctrl+Shift+Left exec --no-startup-id bash ~/.config/i3/move-cursor-window-center.sh move left
+bindsym ctrl+Shift+Down exec --no-startup-id bash ~/.config/i3/move-cursor-window-center.sh move down
+bindsym ctrl+Shift+Up exec --no-startup-id bash ~/.config/i3/move-cursor-window-center.sh move up
+bindsym ctrl+Shift+Right exec --no-startup-id bash ~/.config/i3/move-cursor-window-center.sh move right
 
 
 # split in horizontal orientation

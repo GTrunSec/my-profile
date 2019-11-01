@@ -208,9 +208,29 @@
 #+begin_src emacs-lisp :tangle "packages.el"
 (package! awesome-pair :recipe (:host github :repo "manateelazycat/awesome-pair"))
 (package! plantuml-mode)
+(package! ccls)
+(package! company-tabnine)
 #+end_src
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! awesome-pair)
+(use-package! company-tabnine
+  :config
+  (setq company-tabnine--disable-next-transform nil)
+  (defun my-company--transform-candidates (func &rest args)
+    (if (not company-tabnine--disable-next-transform)
+        (apply func args)
+      (setq company-tabnine--disable-next-transform nil)
+      (car args)))
+
+  (defun my-company-tabnine (func &rest args)
+    (when (eq (car args) 'candidates)
+      (setq company-tabnine--disable-next-transform t))
+    (apply func args))
+
+  (advice-add #'company--transform-candidates :around #'my-company--transform-candidates)
+  (advice-add #'company-tabnine :around #'my-company-tabnine)
+)
+
 #+end_src
 ** third-part
 #+begin_src emacs-lisp :tangle "packages.el"
@@ -226,6 +246,7 @@
 (load! "my-org.el")
 (load! "./modules/my-linux.el")
 (load! "./modules/my-macos.el")
+(load! "my-code.el")
 #+end_src
 ** default
 #+begin_src emacs-lisp :tangle "config.el"
@@ -722,7 +743,24 @@ Version 2017-01-21"
         company-minimum-prefix-length 2
         company-transformers nil)
   (define-key company-active-map (kbd "C-n") 'company-select-next-or-abort)
-  (define-key company-active-map (kbd "C-j") 'company-select-previous-or-abort))
+  (define-key company-active-map (kbd "C-j") 'company-select-previous-or-abort)
+
+  )
+(use-package! company
+:config
+  ;; (defun company-smart-complete ()
+  ;;   (interactive)
+  ;;   (setq company-echo-metadata-frontend-bypass t)
+  ;;   (cond
+  ;;    (company-selection-changed
+  ;;     (company-complete-selection))
+  ;;    (company-candidates
+  ;;     (company-select-next)
+  ;;     (company-complete-selection))
+  ;;    (t
+  ;;     (company-auto-begin)
+  ;;     (company-select-next)))
+)
 #+end_src
 ** Edition
 *** Maple
@@ -959,8 +997,23 @@ Version 2017-01-21"
 #+end_src
 ** mode
 * lang
+setting
+** setting
+#+begin_src emacs-lisp :tangle "my-code.el"
+
+
+#+end_src
+
+
 ** nix
 #+begin_src emacs-lisp :tangle "my-code.el"
+#+end_src
+** ccls
+#+begin_src emacs-lisp :tangle "my-code.el"
+(use-package! ccls
+  :hook ((c-mode c++-mode objc-mode cuda-mode) .
+         (lambda () (require 'ccls) (lsp))))
+
 #+end_src
 * chinese
 ** pinyinlib
@@ -1033,6 +1086,7 @@ Version 2017-01-21"
 ** after-init
 #+begin_src emacs-lisp :tangle "packages.el"
 (disable-packages! pyim)
+(disable-packages! company-go)
 #+end_src
 * set face
 #+begin_src emacs-lisp :tangle "config.el"
@@ -1044,16 +1098,18 @@ Version 2017-01-21"
 ** Linux
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! my-linux
-:load-path "./modules"
-:if (eq system-type 'gnu/linux)
-:config
-(setq-default cursor-type 'box)
-(blink-cursor-mode -1)
-(set-cursor-color "IndianRed3")
-(setq bm-repository-file (f-join doom-private-dir "etc/bm-linux-data"))
-(setq bookmark-default-file
-      (concat doom-private-dir "etc/bookmark-linux-default.el"))
-)
+  :load-path "./modules"
+  :if (eq system-type 'gnu/linux)
+  :config
+  (setq-default cursor-type 'box)
+  (blink-cursor-mode -1)
+  (set-cursor-color "IndianRed3")
+  (setq bm-repository-file (f-join doom-private-dir "etc/bm-linux-data"))
+  (setq bookmark-default-file
+        (concat doom-private-dir "etc/bookmark-linux-default.el"))
+  (setq lsp-python-ms-executable
+        "~/.nix-profile/bin/mspyls")
+  )
 #+end_src
 
 #+begin_src emacs-lisp :tangle "./modules/my-linux.el"

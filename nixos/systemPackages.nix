@@ -143,7 +143,7 @@ in rec
       #lang-julia
       julia
       #lang-go
-      go
+      gotools
       go-langserver
       gocode
       go-outline
