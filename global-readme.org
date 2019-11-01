@@ -87,8 +87,7 @@ brew install rxvt-unicode
 *** [[https://github.com/Akava-Design/Akava-Kv][Akava-Design/Akava-Kv: User oriented Kvantum theme for KDE]]
 **** [[https://www.reddit.com/r/unixporn/comments/d4ytzc/plasma_simple_blurry/][[Plasma] Simple Blurry : unixporn]]
 * Brower
-** [[https://github.com/atlas-engineer/next][
-atlas-engineer/next: Next Browser - Be Productive.]]
+** [[https://github.com/atlas-engineer/next][atlas-engineer/next: Next Browser - Be Productive.]]
 
 * Lang
 ** grammer
