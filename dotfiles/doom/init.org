@@ -303,12 +303,10 @@
       '(("z" "GtruN Agenda"
          ((agenda "" ((org-agenda-span 'day)
                       (org-super-agenda-groups
-                       '((:habit t)
-                         (:log t)
-                         (:name "Today List"
+                       '((:name "Today List"
                                 :time-grid t
                                 :date today
-                                :todo "☞ TODO"
+                                :todo "⚔ INPROCESS"
                                 :scheduled today
                                 :order 1)))))
           (alltodo "" ((org-agenda-overriding-header "")
@@ -327,7 +325,7 @@
                                  :order 8)
                           (:name "Overdue"
                                  :deadline past
-                                 :order 7)
+                                 :order 20)
                           (:name "Issues"
                                  :tag "Issue"
                                  :order 12)
@@ -345,7 +343,7 @@
                                  :order 30)
                           (:name "Waiting"
                                  :todo "⚑ WAITING"
-                                 :order 20)
+                                 :order 18)
                           (:name "trivial"
                                  :priority<= "C"
                                  :todo ("SOMEDAY")
@@ -358,10 +356,10 @@
          search "+{:book\\|books:}")
 
         ("bd" "BOOK TODO List"
-         search "+{^\\*+\\s-+\\(STARTED\\|☞ TODO\\|WAITING\\)\\s-} +{book\\|books}")
+         search "+{^\\*+\\s-+\\(\\⚔ INPROCESS|☞ TODO\\|WAITING\\)\\s-} +{book\\|books}")
 
         ("d" "ALL DONE OF TASKS"
-         search "+{^\\*+\\s-+\\(DONE\\|✘ CANCELED\\)\\s-}")
+         search "+{^\\*+\\s-+\\(✔ DONE\\|✘ CANCELED\\)\\s-}")
         ))
 #+end_src
 
@@ -602,7 +600,7 @@ Version 2017-01-21"
 (define-key xah-fly-key-map (kbd "C-j") 'previous-line)
 (define-key xah-fly-key-map (kbd "M-<SPC>") 'xah-fly-command-mode-activate)
 
-(define-key xah-fly-key-map (kbd "C-.") 'xah-fly-save-buffer-if-file)
+(define-key xah-fly-key-map (kbd "C-.") 'xah-fly-command-mode-activate)
 (define-key xah-fly-key-map (kbd "C-s") 'swiper-isearch)
 (define-key xah-fly-key-map (kbd "C-c w") 'helm-deft)
 
