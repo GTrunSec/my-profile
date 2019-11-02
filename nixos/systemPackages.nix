@@ -60,8 +60,8 @@ in rec
       polybar
       cmake
       home-manager
-      gnumake
-
+      gnumake 
+      conda
       #git
       git
       (gitkraken.overrideDerivation (oldAttrs: {
@@ -141,7 +141,13 @@ in rec
       }))
       gcc
       #lang-julia
-      julia
+      # (julia.overrideDerivation (oldAttrs: {
+      #   src = fetchzip{
+      #   url = "https://github.com/JuliaLang/julia/releases/download/v1.3.0-rc4/julia-1.3.0-rc4.tar.gz";
+      #   sha256 = "15r0mhdrg9cvkm1jxyyxqnxj7q3k7zr92h8lfsb06abkflr8x59z";
+      #   };
+      # }))
+      julia_11
       #lang-go
       gotools
       go-langserver
