@@ -210,6 +210,7 @@
 (package! plantuml-mode)
 (package! ccls)
 (package! company-tabnine)
+(package! jupyter)
 #+end_src
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! awesome-pair)
@@ -286,7 +287,7 @@
 
 
 *** org-babel
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle "my-org.el"
 ;; Todo part
   (org-babel-do-load-languages 'org-babel-load-languages
                                '((emacs-lisp . t)
@@ -300,10 +301,23 @@
                                  (org . t)
                                  (plantuml . t)
                                  (latex . t)
+                                 (julia . t)
                                  (haskell . t)
-                                 ;;(julia . t)
-                                 ;;(jupyter . t)
+                                 (jupyter . t)
                                  ))
+
+
+(defun my-org-confirm-babel-evaluate (lang _body)
+  "Return t if LANG is in whitelist."
+  (not (or (string= lang "ditaa")
+           (string= lang "dot")
+           (string= lang "R")
+           (string= lang "jupyter-R")
+           (string= lang "python")
+           (string= lang "jupyter-julia")
+           (string= lang "jupyter-python")
+           (string= lang "plantuml"))))
+  (setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)
 #+end_src
 
 #+begin_src emacs-lisp :tangle "my-org.el"
@@ -1015,6 +1029,14 @@ setting
          (lambda () (require 'ccls) (lsp))))
 
 #+end_src
+** jupyter
+#+begin_src emacs-lisp :tangle "config.el"
+(use-package! jupyter
+:config
+(setq ob-async-no-async-languages-alist '("jupyter-python" "jupyter-julia"))
+)
+#+end_src
+
 * chinese
 ** pinyinlib
 #+begin_src emacs-lisp :tangle "config.el"
@@ -1109,6 +1131,8 @@ setting
         (concat doom-private-dir "etc/bookmark-linux-default.el"))
   (setq lsp-python-ms-executable
         "~/.nix-profile/bin/mspyls")
+  (setq jupyter-runtime-directory "~/.local/share/jupyter/runtime")
+
   )
 #+end_src
 
