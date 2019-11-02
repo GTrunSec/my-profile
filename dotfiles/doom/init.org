@@ -311,28 +311,7 @@
 #+end_src
 *** after org
 #+begin_src emacs-lisp :tangle "my-org.el"
-(after! org
-  (setq +org-dir  (expand-file-name "~/Documents/org-notes"))
-  ;; (setq-default
-  ;;  org-agenda-files (directory-files +org-dir t "\\.org$" t))
-  (setq inferior-julia-program-name "/usr/local/bin/julia")
-  (org-babel-do-load-languages 'org-babel-load-languages
-                               '((emacs-lisp . t)
-                                 (dot . t)
-                                 (ditaa . t)
-                                 (R . t)
-                                 (python . t)
-                                 (gnuplot . t)
-                                 (lisp . t)
-                                 (shell . t)
-                                 (org . t)
-                                 (plantuml . t)
-                                 (latex . t)
-                                 (julia . t)
-                                 (haskell . t)
-                                 (jupyter . t)
-                                 ))
-  )
+
 
 (setq org-agenda-custom-commands
       '(("z" "GtruN Agenda"
@@ -398,9 +377,6 @@
          search "+{^\\*+\\s-+\\(✔ DONE\\|✘ CANCELED\\)\\s-}")
         ))
 #+end_src
-
-#+RESULTS:
-: ((z GtruN Agenda ((agenda  ((org-agenda-span 5) (org-agenda-start-day -1d) (org-super-agenda-groups (quote ((:name Today List :time-grid t :date today :todo ⚔ INPROCESS :scheduled today :order 1)))))) (alltodo  ((org-agenda-overriding-header ) (org-super-agenda-groups (quote ((:name Next to do :priority>= B :order 2) (:name Important :todo ✰ Important :order 6) (:name Due Today :deadline today :order 3) (:name Due Soon :deadline future :order 8) (:name Overdue :deadline past :order 20) (:name Issues :tag Issue :order 12) (:name Projects :tag Project :order 14) (:name Emacs :tag Emacs :order 13) (:name Research :tag Research :order 15) (:name To read :tag BOOK :order 30) (:name Waiting :todo ⚑ WAITING :order 18) (:name trivial :priority<= C :todo (SOMEDAY) :order 90) (:discard (:tag (Chore Routine Daily)))))))))) (b . BOOK) (bb Search tags in todo, note, and archives search +{:book\|books:}) (bd BOOK TODO List search +{^\*+\s-+\(\⚔ INPROCESS|☞ TODO\|WAITING\)\s-} +{book\|books}) (d ALL DONE OF TASKS search +{^\*+\s-+\(✔ DONE\|✘ CANCELED\)\s-}))
 
 ** org-key
 #+begin_src emacs-lisp :tangle "my-org.el"
@@ -1137,7 +1113,28 @@ setting
   (setq lsp-python-ms-executable
         "~/.nix-profile/bin/mspyls")
   (setq jupyter-runtime-directory "~/.local/share/jupyter/runtime")
-  (setq inferior-julia-program-name "/nix/store/jq03h6f4zc1m4ixm3r5npc44cxhn5cvp-system-path/bin/julia ")
+  (after! org
+    (setq +org-dir  (expand-file-name "~/Documents/org-notes"))
+    ;; (setq-default
+    ;;  org-agenda-files (directory-files +org-dir t "\\.org$" t))
+    (setq inferior-julia-program-name "/nix/store/qzpr1kwkhnz55mdlq8skc5sqrc6l2j2b-system-path/bin/julia")
+    (org-babel-do-load-languages 'org-babel-load-languages
+                                 '((emacs-lisp . t)
+                                   (dot . t)
+                                   (ditaa . t)
+                                   (R . t)
+                                   (python . t)
+                                   (gnuplot . t)
+                                   (lisp . t)
+                                   (shell . t)
+                                   (org . t)
+                                   (plantuml . t)
+                                   (latex . t)
+                                   (julia . t)
+                                   (haskell . t)
+                                   (jupyter . t)
+                                   ))
+    )
   )
 #+end_src
 
@@ -1172,8 +1169,28 @@ setting
               :weight 'normal
               :slant 'normal
               :size 24.5)))
-
-(setq inferior-julia-program-name "~/anaconda3/bin/julia")
+(after! org
+  (setq +org-dir  (expand-file-name "~/Documents/org-notes"))
+  ;; (setq-default
+  ;;  org-agenda-files (directory-files +org-dir t "\\.org$" t))
+  (setq inferior-julia-program-name "/usr/local/bin/julia")
+  (org-babel-do-load-languages 'org-babel-load-languages
+                               '((emacs-lisp . t)
+                                 (dot . t)
+                                 (ditaa . t)
+                                 (R . t)
+                                 (python . t)
+                                 (gnuplot . t)
+                                 (lisp . t)
+                                 (shell . t)
+                                 (org . t)
+                                 (plantuml . t)
+                                 (latex . t)
+                                 (julia . t)
+                                 (haskell . t)
+                                 (jupyter . t)
+                                 ))
+  )
 )
 #+end_src
 ** macos-setting
