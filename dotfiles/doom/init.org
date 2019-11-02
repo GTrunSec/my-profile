@@ -737,9 +737,41 @@ Version 2017-01-21"
   (setq company-idle-delay 0.5
         company-minimum-prefix-length 2
         company-transformers nil)
+  (setq company-show-numbers t)
   (define-key company-active-map (kbd "C-n") 'company-select-next-or-abort)
   (define-key company-active-map (kbd "C-j") 'company-select-previous-or-abort)
 
+(defun ora-company-number ()
+  "Forward to `company-complete-number'.
+Unless the number is potentially part of the candidate.
+In that case, insert the number."
+  (interactive)
+  (let* ((k (this-command-keys))
+         (re (concat "^" company-prefix k)))
+    (if (or (cl-find-if (lambda (s) (string-match re s))
+                        company-candidates)
+            (> (string-to-number k)
+               (length company-candidates))
+            (looking-back "[0-9]+\\.[0-9]*" (line-beginning-position)))
+        (self-insert-command 1)
+      (company-complete-number
+       (if (equal k "0")
+           10
+         (string-to-number k))))))
+
+(defun ora--company-good-prefix-p (orig-fn prefix)
+  (unless (and (stringp prefix) (string-match-p "\\`[0-9]+\\'" prefix))
+    (funcall orig-fn prefix)))
+(advice-add 'company--good-prefix-p :around #'ora--company-good-prefix-p)
+
+(let ((map company-active-map))
+  (mapc (lambda (x) (define-key map (format "%d" x) 'ora-company-number))
+        (number-sequence 0 9))
+  (define-key map " " (lambda ()
+                        (interactive)
+                        (company-abort)
+                        (self-insert-command 1)))
+  (define-key map (kbd "<return>") nil))
   )
 (use-package! company
 :config
@@ -756,6 +788,7 @@ Version 2017-01-21"
   ;;     (company-auto-begin)
   ;;     (company-select-next)))
 )
+
 #+end_src
 ** Edition
 *** Maple
@@ -885,6 +918,8 @@ Version 2017-01-21"
       ("L" bm-show-all :exit t))
     (bind-key "C-c m" #'adq/hydra-bm/body))
 #+end_src
+
+
 ** templating
 #+begin_src emacs-lisp :tangle yes
 (use-package! yatemplate
