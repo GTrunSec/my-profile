@@ -645,6 +645,7 @@ Version 2017-01-21"
 (define-key xah-fly-key-map (kbd ",") 'gtrun-xah-comma-fly-key)
 (define-key xah-fly-key-map (kbd ".") 'gtrun-xah-dot-fly-key)
 
+(define-key xah-fly-key-map (kbd "C-;") 'maple-iedit-match-all)
 ;; scrolling
 (define-key xah-fly-key-map (kbd "C-v") 'scrollkeeper-contents-up)
 #+end_src

@@ -1,10 +1,10 @@
 with import <nixpkgs> {};  
 stdenv.mkDerivation rec {
-  name = "bro-2.6.2";
+  name = "zeek-3.0.0";
 
   src = fetchurl {
     url = "https://www.bro.org/downloads/${name}.tar.gz";
-    sha256 = "19n0xai1mndx2i28q9cnszam57r6p6zqhprxxfpxh7bv7xpqgxkd";
+    sha256 = "16pz5fh0z1hmvhn8pxqmdm5a9d8mqrp4gxpxkaywnaqk2h598lmm";
   };
 
   nativeBuildInputs = [ cmake flex bison file ];
