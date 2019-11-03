@@ -182,7 +182,10 @@
        ;; The default module sets reasonable defaults for Emacs. It also
        ;; provides a Spacemacs-inspired keybinding scheme and a smartparens
        ;; config. Use it as a reference for your own modules.
-       (default +smartparens))
+       (default +smartparens)
+         :private
+         spacemacs-default
+)
 #+end_src
 * package.el
 ** basic package
@@ -626,6 +629,7 @@ Version 2017-01-21"
 (define-key xah-fly-key-map (kbd ".") 'gtrun-xah-dot-fly-key)
 
 (define-key xah-fly-key-map (kbd "C-;") 'maple-iedit-match-all)
+(define-key xah-fly-key-map (kbd "C-c i") 'counsel-imenu)
 ;; scrolling
 (define-key xah-fly-key-map (kbd "C-v") 'scrollkeeper-contents-up)
 #+end_src
