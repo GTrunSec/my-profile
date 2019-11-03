@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: R_src
+# key: r_
+# --
+#+begin_src R :results file
+$1
+#+end_src

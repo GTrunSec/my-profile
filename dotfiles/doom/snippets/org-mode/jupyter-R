@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: jupyter-R
+# key: jupyter
+# --
+#+BEGIN_SRC jupyter-R :session R :exports both :results file
+$1
+#+END_SRC

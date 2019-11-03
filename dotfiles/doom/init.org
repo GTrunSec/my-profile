@@ -134,7 +134,7 @@
        ;;ocaml             ; an objective camel
        (org              ; organize your plain life in plain text
         +dragndrop       ; drag & drop files/images into org buffers
-        ;+hugo            ; use Emacs for hugo blogging
+        +hugo            ; use Emacs for hugo blogging
         +ipython         ; ipython/jupyter support for babel
         +pandoc          ; export-with-pandoc support
         ;+pomodoro        ; be fruitful with the tomato technique
@@ -1148,6 +1148,10 @@ setting
   (setq lsp-python-ms-executable
         "~/.nix-profile/bin/mspyls")
   (setq jupyter-runtime-directory "~/.local/share/jupyter/runtime")
+  (add-hook 'ob-async-pre-execute-src-block-hook
+            '(lambda ()
+               (setq inferior-julia-program-name "/nix/store/qzpr1kwkhnz55mdlq8skc5sqrc6l2j2b-system-path/bin/julia")
+               ))
   (after! org
     (setq +org-dir  (expand-file-name "~/Documents/org-notes"))
     ;; (setq-default

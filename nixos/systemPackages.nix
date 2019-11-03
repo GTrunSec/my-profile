@@ -83,8 +83,8 @@ in rec
       # book
       (polar-bookshelf.overrideDerivation (oldAttrs: {
         src = fetchurl {
-          url = "https://github.com/burtonator/polar-bookshelf/releases/download/v1.32.48/polar-bookshelf-1.32.48-amd64.deb";
-          sha256 = "1x4ls0vhkswzljyvqi59g75blmqah1dnz592ai5ydignh3l8vlj4";
+          url = "https://github.com/burtonator/polar-bookshelf/releases/download/v1.40.1/polar-bookshelf-1.40.1-amd64.deb";
+          sha256 = "1gbhh7h1q09dy6f8f91zdplv5a64kgpdywlnzzry51i1ilgdq009";
         };
       }))
       xdotool

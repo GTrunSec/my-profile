@@ -29,9 +29,9 @@ in
     home.activation.linkEmacsPrivate = config.lib.dag.entryAfter [ "writeBoundary" ] ''
      ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/doom/modules" $HOME/.doom.d/modules
    '';
-    #     home.activation.linkEmacsSetup = config.lib.dag.entryAfter [ "writeBoundary" ] ''
-    #   ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/emacs/emacs.d/setup" $HOME/.emacs.d/setup
-    # '';
+        home.activation.linkEmacsSnippets = config.lib.dag.entryAfter [ "writeBoundary" ] ''
+      ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/doom/snippets" $HOME/.doom.d/snippets
+    '';
 
 
     # programs.emacs = {
