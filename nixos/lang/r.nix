@@ -42,6 +42,7 @@ let
             propagatedBuildInputs = [ rlang lubridate];
             nativeBuildInputs = [ purrr crayon assertthat ]; 
           };
+
         in [
           llr
           patchwork
@@ -51,9 +52,9 @@ let
         dplyr
         ggplot2
         xts
-        #IRkernel
         uuid
-        pbdZMQ
+        IRdisplay
+        IRkernel
         languageserver
         parallel
         gtable
@@ -89,14 +90,17 @@ let
         rgeolocate
         leaflet
         glue
+        pbdZMQ
+
     ];
       R-rstudio-with-my-packages = rstudioWrapper.override{
             packages = customRPackages;
       };
-      R-with-my-packages = rWrapper.override{
-            packages = customRPackages;
-      };
       
+      R-with-my-packages = rWrapper.override{
+        packages = customRPackages;
+      };
+
 in
 {
   environment.systemPackages = with pkgs; [
@@ -105,4 +109,5 @@ in
     R-rstudio-with-my-packages
     libmaxminddb
   ];
+
 }
