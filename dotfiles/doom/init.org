@@ -39,7 +39,7 @@
         +all             ; catch all popups that start with an asterix
         +defaults)       ; default popup rules
        ;;pretty-code       ; replace bits of code with pretty symbols
-       tabs              ; an tab bar for Emacs
+       ;;tabs              ; an tab bar for Emacs
        treemacs          ; a project drawer, like neotree but cooler
        ;;unicode           ; extended unicode support for various languages
        vc-gutter         ; vcs diff in the fringe
@@ -243,6 +243,7 @@
 (package! cnfonts)
 (package! scrollkeeper :recipe (:host github :repo "alphapapa/scrollkeeper.el"))
 (package! elfeed-goodies)
+(package! awesome-tab :recipe (:host github :repo "manateelazycat/awesome-tab"))
 #+end_src
 * config.el
 ** load-package
@@ -628,6 +629,7 @@ Version 2017-01-21"
 (define-key xah-fly-key-map (kbd ",") 'gtrun-xah-comma-fly-key)
 (define-key xah-fly-key-map (kbd ".") 'gtrun-xah-dot-fly-key)
 
+(define-key xah-fly-key-map (kbd "C-,") 'awesome-tab-ace-jump)
 (define-key xah-fly-key-map (kbd "C-;") 'maple-iedit-match-all)
 (define-key xah-fly-key-map (kbd "C-c i") 'counsel-imenu)
 ;; scrolling
@@ -989,16 +991,68 @@ In that case, insert the number."
 ** window
 *** tab
 #+begin_src emacs-lisp :tangle "config.el"
-;; (setq centaur-tabs-style "bar")
-(setq centaur-tabs-set-icons t)
-;; (setq centaur-tabs-set-bar t)
-;; (setq centaur-tabs-set-bar 'over)
-;; (setq centaur-tabs-set-modified-marker t)
-;; (setq centaur-tabs-set-close-button nil)
-;; (setq centaur-tabs-modified-marker "*")
-;; ("C-c j" .  centaur-tabs-forward-group)
-;; ("C-c k" .  centaur-tabs-backward-group)
-;; ("C-c o" . centaur-tabs-switch-group)
+(use-package! awesome-tab
+:config
+(awesome-tab-mode t)
+(setq awesome-tab-style 'slant)
+;; winum users can use `winum-select-window-by-number' directly.
+(defun my-select-window-by-number (win-id)
+  "Use `ace-window' to select the window by using window index.
+WIN-ID : Window index."
+  (let ((wnd (nth (- win-id 1) (aw-window-list))))
+    (if wnd
+        (aw-switch-to-window wnd)
+      (message "No such window."))))
+
+(defun my-select-window ()
+  (interactive)
+  (let* ((event last-input-event)
+         (key (make-vector 1 event))
+         (key-desc (key-description key)))
+    (my-select-window-by-number
+     (string-to-number (car (nreverse (split-string key-desc "-")))))))
+
+(when (not (display-graphic-p))
+  (setq frame-background-mode 'dark))
+(defun awesome-tab-buffer-groups ()
+  "`awesome-tab-buffer-groups' control buffers' group rules.
+
+Group awesome-tab with mode if buffer is derived from `eshell-mode' `emacs-lisp-mode' `dired-mode' `org-mode' `magit-mode'.
+All buffer name start with * will group to \"Emacs\".
+Other buffer group by `awesome-tab-get-group-name' with project name."
+  (list
+   (cond
+    ((or (string-equal "*" (substring (buffer-name) 0 1))
+         (memq major-mode '(magit-process-mode
+                            magit-status-mode
+                            magit-diff-mode
+                            magit-log-mode
+                            magit-file-mode
+                            magit-blob-mode
+                            magit-blame-mode
+                            )))
+     "Emacs")
+    ((derived-mode-p 'eshell-mode)
+     "EShell")
+    ((derived-mode-p 'emacs-lisp-mode)
+     "Elisp")
+    ((derived-mode-p 'dired-mode)
+     "Dired")
+    ((memq major-mode '(org-mode org-agenda-mode diary-mode))
+     "OrgMode")
+    (t
+     (awesome-tab-get-group-name (current-buffer))))))
+)
+;; (setq awesome-tab-style "bar")
+;; (setq awesome-tab-set-icons t)
+;; (setq awesome-tab-set-bar t)
+;; (setq awesome-tab-set-bar 'over)
+;; (setq awesome-tab-set-modified-marker t)
+;; (setq awesome-tab-set-close-button nil)
+;; (setq awesome-tab-modified-marker "*")
+;; ("C-c j" .  awesome-tab-forward-group)
+;; ("C-c k" .  awesome-tab-backward-group)
+;; ("C-c o" . awesome-tab-switch-group)
 
 #+end_src
 *** font
@@ -1133,7 +1187,7 @@ setting
 * set face
 #+begin_src emacs-lisp :tangle "config.el"
 ;; (custom-set-faces
-;;   '(centaur-tabs-close-selected((t ( :foreground "DarkGray"))))
+;;   '(awesome-tab-close-selected((t ( :foreground "DarkGray"))))
 ;;   )
 #+end_src
 * Linux & Macsos
@@ -1240,16 +1294,16 @@ setting
 #+begin_src emacs-lisp :tangle "./modules/my-macos.el"
 (use-package! cnfonts)
 
-(define-key! centaur-tabs-mode-map
-  "s-1" #'centaur-tabs-select-visible-tab
-  "s-2" #'centaur-tabs-select-visible-tab
-  "s-3" #'centaur-tabs-select-visible-tab
-  "s-4" #'centaur-tabs-select-visible-tab
-  "s-5" #'centaur-tabs-select-visible-tab
-  "s-6" #'centaur-tabs-select-visible-tab
-  "s-7" #'centaur-tabs-select-visible-tab
-  "s-8" #'centaur-tabs-select-visible-tab
-  "s-9" #'centaur-tabs-select-visible-tab
+(define-key! awesome-tab-mode-map
+  "s-1" #'awesome-tab-select-visible-tab
+  "s-2" #'awesome-tab-select-visible-tab
+  "s-3" #'awesome-tab-select-visible-tab
+  "s-4" #'awesome-tab-select-visible-tab
+  "s-5" #'awesome-tab-select-visible-tab
+  "s-6" #'awesome-tab-select-visible-tab
+  "s-7" #'awesome-tab-select-visible-tab
+  "s-8" #'awesome-tab-select-visible-tab
+  "s-9" #'awesome-tab-select-visible-tab
   )
 (provide 'my-macos)
 #+end_src
