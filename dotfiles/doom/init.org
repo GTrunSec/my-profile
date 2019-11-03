@@ -205,7 +205,7 @@
 (package! company-english-helper :recipe (:host github :repo "manateelazycat/company-english-helper"))
 (package! org-super-agenda)
 (package! org-starter)
-(package! helm-deft :recipe (:host github :repo "dfeich/helm-deft"))
+(package! helm-org-rifle)
 #+end_src
 ** code
 #+begin_src emacs-lisp :tangle "packages.el"
@@ -417,6 +417,7 @@
 #+begin_src emacs-lisp :tangle "my-org.el"
 (use-package org-starter
   :config
+  ;; (add-hook! 'after-init-hook 'org-starter-load-all-files-in-path)
   (org-starter-def "~/Documents/org-notes"
                    :files
                    ("gtd.org" :agenda t :key "g" :refile (:maxlevel . 5))
@@ -425,6 +426,12 @@
                    ("Habit.org" :agenda t)
                    ("NSM-GTD/workflow.org" :agenda t :required t)
                    ("NSM-GTD/NsmOrg.org" :agenda t :required t)
+                   ("art/music.org" :agenda t :required t)
+                   ("post/myself/love.org")
+                   ("post/myself/qing.org")
+                   ("post/life-thing/life-things.org")
+                   ("post/myself/love.org")
+                   ("post/traveling/traveling.org")
                    )
   (org-starter-def "~/.doom.d"
                    :files
@@ -442,22 +449,6 @@
    ("C-c e" . org-starter-select-file))
   ;; "C-c e" . org-starter-refile-by-key))
   )
-#+end_src
-
-** helm-def
-#+begin_src emacs-lisp :tangle "my-org.el"
-(use-package! helm-deft
-  :config
-  (setq helm-deft-extension "org")
-  (setq helm-deft-dir-list '(
-                             "~/Documents/org-notes/art"
-                             "~/Documents/org-notes/NSM-GTD"
-                             "~/Documents/org-notes/post"
-                             "~/Documents/org-notes/course"
-                             "~/Documents/org-notes/post/myself"
-                             "~/project/my-code/my-nix"
-                             ;; "~/project/global-profile/global-doc"
-                             )))
 #+end_src
 
 ** elfeed
@@ -505,6 +496,11 @@
 (use-package! elfeed-org
 :config
 (setq rmh-elfeed-org-files (list "~/Documents/org-notes/elfeed.org")))
+#+end_src
+** [[https://github.com/alphapapa/org-rifle][alphapapa/org-rifle: Rifle through your Org-mode buffers and acquire your target]]
+
+#+begin_src emacs-lisp :tangle "config.el"
+(use-package! helm-org-rifle)
 #+end_src
 * xah fly key
 ** pre setting
@@ -624,7 +620,7 @@ Version 2017-01-21"
 
 (define-key xah-fly-key-map (kbd "C-.") 'xah-fly-command-mode-activate)
 (define-key xah-fly-key-map (kbd "C-s") 'swiper-isearch)
-(define-key xah-fly-key-map (kbd "C-c w") 'helm-deft)
+(define-key xah-fly-key-map (kbd "C-c w") 'helm-org-rifle)
 
 (define-key xah-fly-key-map (kbd "p") 'gtrun-xah-fly-key)
 (define-key xah-fly-key-map (kbd "-") 'gtrun-xah-minus-fly-key)
@@ -1214,7 +1210,7 @@ setting
                (setq inferior-julia-program-name "/nix/store/qzpr1kwkhnz55mdlq8skc5sqrc6l2j2b-system-path/bin/julia")
                ))
   (after! org
-    (setq +org-dir  (expand-file-name "~/Documents/org-notes"))
+    ;;u(setq +org-dir  (expand-file-name "~/Documents/org-notes"))
     ;; (setq-default
     ;;  org-agenda-files (directory-files +org-dir t "\\.org$" t))
     (setq inferior-julia-program-name "/nix/store/qzpr1kwkhnz55mdlq8skc5sqrc6l2j2b-system-path/bin/julia")
@@ -1270,7 +1266,7 @@ setting
               :slant 'normal
               :size 24.5)))
 (after! org
-  (setq +org-dir  (expand-file-name "~/Documents/org-notes"))
+  ;;(setq +org-dir  (expand-file-name "~/Documents/org-notes"))
   ;; (setq-default
   ;;  org-agenda-files (directory-files +org-dir t "\\.org$" t))
   (setq inferior-julia-program-name "/usr/local/bin/julia")
