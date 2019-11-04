@@ -2,6 +2,6 @@
 # name: jupyter-julia
 # key: jlp
 # --
-#+begin_src jupyter-julia :async :exports both :results output
+#+begin_src jupyter-julia :exports both
 $1
 #+end_src

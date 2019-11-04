@@ -273,8 +273,20 @@
 #+begin_src emacs-lisp :tangle "my-org.el"
 (use-package! company-english-helper)
 (use-package! ox-hugo)
-(use-package! ob-async)
-(use-package! ob-session-async)
+(defadvice! +org-init-doom-during-async-executation-a (orig-fn &rest args)
+    :around #'ob-async-org-babel-execute-src-block
+    (let ((ob-async-pre-execute-src-block-hook
+           ;; Ensure our hook is always first
+           (cons `(lambda () (load ,(concat doom-emacs-dir "init.el")))
+                 ob-async-pre-execute-src-block-hook)))
+      (apply orig-fn args)))
+(use-package! ob-async
+:config
+ (add-hook 'ob-async-pre-execute-src-block-hook
+            '(lambda ()
+               (setq inferior-julia-program-name "/nix/store/qzpr1kwkhnz55mdlq8skc5sqrc6l2j2b-system-path/bin/julia")
+               )))
+;;(use-package! ob-session-async)
 #+end_src
 ** setting
 *** org-global
@@ -1228,16 +1240,17 @@ setting
   (setq lsp-python-ms-executable
         "~/.nix-profile/bin/mspyls")
   (setq jupyter-runtime-directory "~/.local/share/jupyter/runtime")
-  (add-hook 'ob-async-pre-execute-src-block-hook
-            '(lambda ()
-               (setq inferior-julia-program-name "/nix/store/qzpr1kwkhnz55mdlq8skc5sqrc6l2j2b-system-path/bin/julia")
-               ))
+
+
+
+
   (after! org
     ;;u(setq +org-dir  (expand-file-name "~/Documents/org-notes"))
     ;; (setq-default
     ;;  org-agenda-files (directory-files +org-dir t "\\.org$" t))
-    (setq inferior-julia-program-name "/nix/store/qzpr1kwkhnz55mdlq8skc5sqrc6l2j2b-system-path/bin/julia")
-    (org-babel-do-load-languages 'org-babel-load-languages
+
+(setq inferior-julia-program-name "/nix/store/qzpr1kwkhnz55mdlq8skc5sqrc6l2j2b-system-path/bin/julia")
+ (org-babel-do-load-languages 'org-babel-load-languages
                                  '((emacs-lisp . t)
                                    (dot . t)
                                    (ditaa . t)
@@ -1249,16 +1262,21 @@ setting
                                    (org . t)
                                    (plantuml . t)
                                    (latex . t)
-                                   (julia . t)
+                                   ;;(julia . t)
                                    (haskell . t)
                                    (jupyter . t)
                                    ))
     )
+
+
 (setq org-babel-default-header-args:jupyter-julia '((:async . "yes")
                                                     (:session . "jl")
                                                     (:kernel . "julia-nodeps-1.1")))
   )
 #+end_src
+
+#+RESULTS:
+: t
 
 #+begin_src emacs-lisp :tangle "./modules/my-linux.el"
 (provide 'my-linux)
@@ -1308,7 +1326,7 @@ setting
                                  (org . t)
                                  (plantuml . t)
                                  (latex . t)
-                                 (julia . t)
+                                 ;;(julia . t)
                                  (haskell . t)
                                  (jupyter . t)
                                  ))

@@ -29,6 +29,7 @@ in   {
     #music
     pkgs.cmus
     pkgs.compton
+    pkgs.discord
     #skim
     screenfetch
     #overlay
