@@ -273,19 +273,7 @@
 #+begin_src emacs-lisp :tangle "my-org.el"
 (use-package! company-english-helper)
 (use-package! ox-hugo)
-(defadvice! +org-init-doom-during-async-executation-a (orig-fn &rest args)
-    :around #'ob-async-org-babel-execute-src-block
-    (let ((ob-async-pre-execute-src-block-hook
-           ;; Ensure our hook is always first
-           (cons `(lambda () (load ,(concat doom-emacs-dir "init.el")))
-                 ob-async-pre-execute-src-block-hook)))
-      (apply orig-fn args)))
-(use-package! ob-async
-:config
- (add-hook 'ob-async-pre-execute-src-block-hook
-            '(lambda ()
-               (setq inferior-julia-program-name "/nix/store/qzpr1kwkhnz55mdlq8skc5sqrc6l2j2b-system-path/bin/julia")
-               )))
+(use-package! ob-async)
 ;;(use-package! ob-session-async)
 #+end_src
 ** setting
@@ -521,6 +509,37 @@
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! helm-org-rifle)
 #+end_src
+** org publish
+#+begin_src emacs-lisp :tangle "my-org.el"
+  (setq org-publish-project-alist
+        '(("nsm"
+           :base-directory "~/Documents/org-notes/NSM-GTD"
+           :publishing-function org-html-publish-to-html
+           :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
+           :exclude "Pattern.org"
+           )
+          ("init"
+           :base-directory "~/.emacs.d"
+           :publishing-function org-html-publish-to-html
+           :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
+           :exclude "Pattern.org"
+           )
+          ("art"
+           :base-directory "~/Documents/org-notes/art"
+           :publishing-function org-html-publish-to-html
+           :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
+           :exclude "Pattern.org"
+           )
+          ("course"
+           :base-directory "~/Documents/org-notes/course"
+           :publishing-function org-html-publish-to-html
+           :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
+           :exclude "Pattern.org"
+           )
+          ))
+
+#+end_src
+
 * xah fly key
 ** pre setting
 #+begin_src emacs-lisp :tangle "xah-fly.el"
@@ -1242,8 +1261,9 @@ setting
   (setq jupyter-runtime-directory "~/.local/share/jupyter/runtime")
 
 
-
-
+ (add-hook! 'ob-async-pre-execute-src-block-hook
+               (setq inferior-julia-program-name "/nix/store/qzpr1kwkhnz55mdlq8skc5sqrc6l2j2b-system-path/bin/julia")
+)
   (after! org
     ;;u(setq +org-dir  (expand-file-name "~/Documents/org-notes"))
     ;; (setq-default
@@ -1309,10 +1329,16 @@ setting
               :weight 'normal
               :slant 'normal
               :size 24.5)))
+
+
+ (add-hook! 'ob-async-pre-execute-src-block-hook
+               (setq inferior-julia-program-name "/Applications/Julia-1.2.app/Contents/Resources/julia/bin/julia"
+               ))
 (after! org
   ;;(setq +org-dir  (expand-file-name "~/Documents/org-notes"))
   ;; (setq-default
   ;;  org-agenda-files (directory-files +org-dir t "\\.org$" t))
+
   (setq inferior-julia-program-name "/Applications/Julia-1.2.app/Contents/Resources/julia/bin/julia")
   (org-babel-do-load-languages 'org-babel-load-languages
                                '((emacs-lisp . t)
@@ -1331,6 +1357,9 @@ setting
                                  (jupyter . t)
                                  ))
   )
+(setq org-babel-default-header-args:jupyter-julia '((:async . "yes")
+                                                    (:session . "jl")
+                                                    (:kernel . "julia-1.2")))
 )
 #+end_src
 ** macos-setting
