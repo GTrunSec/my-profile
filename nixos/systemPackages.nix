@@ -62,6 +62,8 @@ in rec
       home-manager
       gnumake 
       conda
+      qt5.full
+      qtcreator
       #git
       git
       (gitkraken.overrideDerivation (oldAttrs: {

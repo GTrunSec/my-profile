@@ -1244,6 +1244,9 @@ setting
                                    (jupyter . t)
                                    ))
     )
+(setq org-babel-default-header-args:jupyter-julia '((:async . "yes")
+                                                    (:session . "jl")
+                                                    (:kernel . "julia-nodeps-1.1")))
   )
 #+end_src
 
