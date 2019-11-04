@@ -1,6 +1,3 @@
-[submodule "dotfiles/emacs/emacs.d/private/emacs-snippets"]
-	path = dotfiles/emacs/emacs.d/private/emacs-snippets
-	url = https://github.com/GTrunSec/emacs-snippets.git
 [submodule "dotfiles/wallpaper"]
 	path = dotfiles/wallpaper
 	url = https://github.com/GTrunSec/wallpaper.git
