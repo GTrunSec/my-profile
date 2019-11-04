@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: jupyter-julia
+# key: jlp
+# --
+#+begin_src jupyter-julia :async :exports both :results output
+$1
+#+end_src
