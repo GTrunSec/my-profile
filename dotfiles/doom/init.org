@@ -185,10 +185,11 @@
        (default +smartparens)
          :private
          spacemacs-default
+         my-org
+         my-code
 )
 #+end_src
 * package.el
-** basic package
 #+begin_src emacs-lisp :tangle "packages.el"
 (package! bm)
 (package! w3m)
@@ -198,45 +199,6 @@
 (package! flymake-json)
 (package! maple-iedit :recipe (:host github :repo "honmaple/emacs-maple-iedit"))
 (package! yatemplate)
-#+end_src
-** org-mode
-#+begin_src emacs-lisp :tangle "packages.el"
-(package! company-english-helper :recipe (:host github :repo "manateelazycat/company-english-helper"))
-(package! org-super-agenda)
-(package! org-starter)
-(package! helm-org-rifle)
-#+end_src
-** code
-#+begin_src emacs-lisp :tangle "packages.el"
-(package! awesome-pair :recipe (:host github :repo "manateelazycat/awesome-pair"))
-(package! lsp-julia :recipe (:host github :repo "non-Jedi/lsp-julia"))
-(package! plantuml-mode)
-(package! ccls)
-(package! company-tabnine)
-(package! jupyter)
-(package! polymode)
-(package! poly-markdown)
-#+end_src
-#+begin_src emacs-lisp :tangle "config.el"
-(use-package! awesome-pair)
-(use-package! company-tabnine
-  :config
-  (setq company-tabnine--disable-next-transform nil)
-  (defun my-company--transform-candidates (func &rest args)
-    (if (not company-tabnine--disable-next-transform)
-        (apply func args)
-      (setq company-tabnine--disable-next-transform nil)
-      (car args)))
-
-  (defun my-company-tabnine (func &rest args)
-    (when (eq (car args) 'candidates)
-      (setq company-tabnine--disable-next-transform t))
-    (apply func args))
-
-  (advice-add #'company--transform-candidates :around #'my-company--transform-candidates)
-  (advice-add #'company-tabnine :around #'my-company-tabnine)
-)
-
 #+end_src
 ** third-part
 #+begin_src emacs-lisp :tangle "packages.el"
@@ -248,16 +210,11 @@
 (package! ob-session-async :recipe (:host github :repo "jackkamm/ob-session-async"))
 #+end_src
 * config.el
-** load-package
 #+begin_src emacs-lisp :tangle "config.el"
-(load! "xah-fly.el")
-(load! "./modules/my-linux.el")
-(load! "./modules/my-macos.el")
-(load! "my-code.el")
-(load! "my-org.el")
+(load! "setting")
 #+end_src
 ** default
-#+begin_src emacs-lisp :tangle "config.el"
+#+begin_src emacs-lisp :tangle "setting.el"
 (setq-default history-length 1000)
 (setq create-lockfiles nil)
 ;; (setq browse-url-browser-function 'browse-url-Chrome)
@@ -265,17 +222,18 @@
 (setq dired-dwim-target t)
 (add-hook! 'xah-fly-command-mode-activate-hook 'xah-fly-save-buffer-if-file)
 #+end_src
-
 * org-mode
-** type
-#+begin_src emacs-lisp :tangle "my-org.el"
+** config
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+(load! "setting")
 (use-package! company-english-helper)
 (use-package! ox-hugo)
-;;(use-package! ob-session-async)
+(use-package! ob-session-async)
 #+end_src
 ** setting
 *** org-global
-#+begin_src emacs-lisp :tangle "my-org.el"
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/setting.el"
+
 (setq org-clock-into-drawer nil)
 (setq org-agenda-start-day "-1d")
 (setq org-agenda-span 2)
@@ -302,12 +260,9 @@
       (apply orig-fn args))))
 #+end_src
 
-
 *** org-babel
-#+begin_src emacs-lisp :tangle "my-org.el"
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/setting.el"
 ;; Todo part
-
-
 
 (defun my-org-confirm-babel-evaluate (lang _body)
   "Return t if LANG is in whitelist."
@@ -320,14 +275,11 @@
            (string= lang "jupyter-python")
            (string= lang "plantuml"))))
   (setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)
-#+end_src
 
-#+begin_src emacs-lisp :tangle "my-org.el"
-;; 乾、坤、坎、離、震、巽、艮、兌
 (setq org-bullets-bullet-list '("☰" "☷" "☵" "☲"  "☳" "☴"  "☶"  "☱" ))
 #+end_src
-*** after org
-#+begin_src emacs-lisp :tangle "my-org.el"
+*** agenda-custom-setting
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 
 
 (setq org-agenda-custom-commands
@@ -398,14 +350,22 @@
 #+RESULTS:
 : ((z GtruN Agenda ((agenda  ((org-agenda-span 2) (org-agenda-start-day -1d) (org-super-agenda-groups (quote ((:name Today List :time-grid t :date today :todo ⚔ INPROCESS :scheduled today :order 1)))))) (alltodo  ((org-agenda-overriding-header ) (org-super-agenda-groups (quote ((:name Next to do :priority>= B :order 2) (:name Important :todo ✰ Important :order 6) (:name Due Today :deadline today :order 3) (:name Due Soon :deadline future :order 8) (:name Overdue :deadline past :order 20) (:name Issues :tag Issue :order 12) (:name Projects :tag Project :order 14) (:name Emacs :tag Emacs :order 13) (:name Research :tag Research :order 15) (:name To read :tag BOOK :order 30) (:name Waiting :todo ⚑ WAITING :order 18) (:name trivial :priority<= C :todo (SOMEDAY) :order 90) (:discard (:tag (Chore Routine Daily)))))))))) (b . BOOK) (bb Search tags in todo, note, and archives search +{:book\|books:}) (bd BOOK TODO List search +{^\*+\s-+\(\⚔ INPROCESS|☞ TODO\|WAITING\)\s-} +{book\|books}) (d ALL DONE OF TASKS search +{^\*+\s-+\(✔ DONE\|✘ CANCELED\)\s-}))
 
-** org-key
-#+begin_src emacs-lisp :tangle "my-org.el"
+*** org-key
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/setting.el"
 (eval-after-load "org"
   '(require 'ox-md nil t))
 (define-key! org-mode-map (kbd "C-<return>") 'org-insert-heading-respect-content)
 #+end_src
+
+** Packages
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
+(package! company-english-helper :recipe (:host github :repo "manateelazycat/company-english-helper"))
+(package! org-super-agenda)
+(package! org-starter)
+(package! helm-org-rifle)
+#+end_src
 ** super-agenda
-#+begin_src emacs-lisp :tangle "my-org.el"
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-super-agenda
 :config
 (add-hook! 'after-init-hook 'org-super-agenda-mode)
@@ -421,13 +381,10 @@
    org-agenda-block-separator nil
    org-agenda-compact-blo0cks t
    org-agenda-start-with-log-mode t)
-
-
-
 )
 #+end_src
 ** org-starter
-#+begin_src emacs-lisp :tangle "my-org.el"
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package org-starter
   :config
   ;; (add-hook! 'after-init-hook 'org-starter-load-all-files-in-path)
@@ -465,7 +422,7 @@
 #+end_src
 
 ** elfeed
-#+begin_src emacs-lisp :tangle "config.el"
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! elfeed
   :bind (:map elfeed-search-mode-map
           ("q" . bjm/elfeed-save-db-and-bury)
@@ -512,11 +469,11 @@
 #+end_src
 ** [[https://github.com/alphapapa/org-rifle][alphapapa/org-rifle: Rifle through your Org-mode buffers and acquire your target]]
 
-#+begin_src emacs-lisp :tangle "config.el"
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! helm-org-rifle)
 #+end_src
 ** org publish
-#+begin_src emacs-lisp :tangle "my-org.el"
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/setting.el"
   (setq org-publish-project-alist
         '(("nsm"
            :base-directory "~/Documents/org-notes/NSM-GTD"
@@ -547,6 +504,10 @@
 #+end_src
 
 * xah fly key
+#+begin_src emacs-lisp :tangle "config.el"
+(load! "xah-fly.el")
+
+#+end_src
 ** pre setting
 #+begin_src emacs-lisp :tangle "xah-fly.el"
 (use-package! xah-fly-keys
@@ -822,22 +783,28 @@ In that case, insert the number."
                         (self-insert-command 1)))
   (define-key map (kbd "<return>") nil))
   )
-(use-package! company
-:config
-  ;; (defun company-smart-complete ()
-  ;;   (interactive)
-  ;;   (setq company-echo-metadata-frontend-bypass t)
-  ;;   (cond
-  ;;    (company-selection-changed
-  ;;     (company-complete-selection))
-  ;;    (company-candidates
-  ;;     (company-select-next)
-  ;;     (company-complete-selection))
-  ;;    (t
-  ;;     (company-auto-begin)
-  ;;     (company-select-next)))
+#+end_src
+** company-tabnine
+#+begin_src emacs-lisp :tangle "config.el"
+(use-package! company-tabnine
+  :config
+  (setq company-tabnine--disable-next-transform nil)
+  (defun my-company--transform-candidates (func &rest args)
+    (if (not company-tabnine--disable-next-transform)
+        (apply func args)
+      (setq company-tabnine--disable-next-transform nil)
+      (car args)))
+
+  (defun my-company-tabnine (func &rest args)
+    (when (eq (car args) 'candidates)
+      (setq company-tabnine--disable-next-transform t))
+    (apply func args))
+
+  (advice-add #'company--transform-candidates :around #'my-company--transform-candidates)
+  (advice-add #'company-tabnine :around #'my-company-tabnine)
 )
 
+#+end_src
 #+end_src
 ** Edition
 *** Maple
@@ -860,9 +827,14 @@ In that case, insert the number."
                 )
     )
 #+end_src
-** BOOkmark
+*** awesome-pair
 #+begin_src emacs-lisp :tangle "config.el"
-  (def-package! bm
+(use-package! awesome-pair)
+#+end_src
+
+** Bookmark
+#+begin_src emacs-lisp :tangle "config.el"
+  (use-package! bm
     :demand t
     :init
     (setq bm-restore-repository-on-load t)
@@ -967,7 +939,6 @@ In that case, insert the number."
       ("L" bm-show-all :exit t))
     (bind-key "C-c m" #'adq/hydra-bm/body))
 #+end_src
-
 
 ** templating
 #+begin_src emacs-lisp :tangle "config.el"
@@ -1098,82 +1069,55 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 ;; ("C-c o" . awesome-tab-switch-group)
 
 #+end_src
-*** font
-#+begin_src emacs-lisp :tangle "config.el"
-;; (use-package! cnfonts)
-;;  (set-face-attribute
-;;    'default nil
-;;    :font (font-spec :name "-PfEd-Fantasque Sans Mono-normal-italic-normal-*-*-*-*-*-m-0-iso10646-1"
-;;                     :weight 'normal
-;;                     :slant 'normal
-;;                     :size 12.5))
-;; (defun s-font()
-;;   (interactive)
-;;   (dolist (charset '(kana han symbol cjk-misc bopomofo))
-;;     (set-fontset-font
-;;      (frame-parameter nil 'font)
-;;      charset
-;;      (font-spec :name "-GWIN-楷体_GB2312-normal-normal-normal-*-*-*-*-*-d-0-iso10646-1"
-;;                 :weight 'normal
-;;                 :slant 'normal
-;;                 :size 12.0)))
-;;   (add-to-list 'after-make-frame-functions
-;;              (lambda (new-frame)
-;;                (select-frame new-frame)
-;;                (if window-system
-;;                    (s-font))))
-;; (if window-system
-;;     (s-font))
-;;   )
-#+end_src
-** mode
-* lang
-setting
-** setting
-#+begin_src emacs-lisp :tangle "my-code.el"
-
-
-#+end_src
-
-** nix
-#+begin_src emacs-lisp :tangle "my-code.el"
+* my-codes
+** packages
+#+begin_src emacs-lisp :tangle "./modules/private/my-code/packages.el"
+(package! awesome-pair :recipe (:host github :repo "manateelazycat/awesome-pair"))
+(package! lsp-julia :recipe (:host github :repo "non-Jedi/lsp-julia"))
+(package! plantuml-mode)
+(package! ccls)
+(package! company-tabnine)
+(package! jupyter)
+(package! polymode)
+(package! poly-markdown)
 #+end_src
 ** ccls
-#+begin_src emacs-lisp :tangle "my-code.el"
+#+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
 (use-package! ccls
   :hook ((c-mode c++-mode objc-mode cuda-mode) .
-         (lambda () (require 'ccls) (lsp))))
+         (lambda () (require 'ccls) (lsp)))
+  )
+
 
 #+end_src
 ** jupyter
-#+begin_src emacs-lisp :tangle "config.el"
+#+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
 (use-package! jupyter
-:config
-(setq ob-async-no-async-languages-alist '("jupyter-python" "jupyter-julia"))
-)
+  :config
+  (setq ob-async-no-async-languages-alist '("jupyter-python" "jupyter-julia"))
+  )
 #+end_src
 
 ** Poly
-#+begin_src emacs-lisp :tangle "config.el"
+#+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
 (use-package! polymode)
 (use-package! poly-markdown
   :config
   (add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown-mode))
-)
+  )
 #+end_src
 
 ** Julia
-#+begin_src emacs-lisp :tangle "config.el"
+#+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
 (use-package! lsp-julia
-:config
-(add-hook 'ess-julia-mode-hook #'lsp-mode)
-)
+  :config
+  (add-hook 'ess-julia-mode-hook #'lsp-mode)
+  )
 #+end_src
-
 * chinese
 ** pinyinlib
 #+begin_src emacs-lisp :tangle "config.el"
-(def-package! pinyinlib
+(use-package! pinyinlib
   :config
 
   
@@ -1250,6 +1194,10 @@ setting
 ;;   )
 #+end_src
 * Linux & Macsos
+#+begin_src emacs-lisp :tangle "config.el"
+(load! "./modules/my-linux.el")
+(load! "./modules/my-macos.el")
+#+end_src
 ** Linux
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! my-linux
@@ -1265,6 +1213,7 @@ setting
   (setq lsp-python-ms-executable
         "~/.nix-profile/bin/mspyls")
   (setq jupyter-runtime-directory "~/.local/share/jupyter/runtime")
+(setq inferior-julia-program-name "/nix/store/qzpr1kwkhnz55mdlq8skc5sqrc6l2j2b-system-path/bin/julia")
 
 
 
@@ -1314,7 +1263,7 @@ setting
                                                     (:kernel . "julia-1.2")))
 )
 #+end_src
-** macos-setting
+*** macos-setting
 #+begin_src emacs-lisp :tangle "./modules/my-macos.el"
 (use-package! cnfonts)
 
