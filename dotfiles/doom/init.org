@@ -210,6 +210,7 @@
 ** code
 #+begin_src emacs-lisp :tangle "packages.el"
 (package! awesome-pair :recipe (:host github :repo "manateelazycat/awesome-pair"))
+(package! lsp-julia :recipe (:host github :repo "non-Jedi/lsp-julia"))
 (package! plantuml-mode)
 (package! ccls)
 (package! company-tabnine)
@@ -292,6 +293,7 @@
       org-src-tab-acts-natively t
       org-src-window-setup 'current-window)
 (setq org-agenda-time-leading-zero t)
+
 #+end_src
 
 
@@ -1123,6 +1125,14 @@ setting
 )
 #+end_src
 
+** Julia
+#+begin_src emacs-lisp :tangle "config.el"
+(use-package! lsp-julia
+:config
+(add-hook 'ess-julia-mode-hook #'lsp-mode)
+)
+#+end_src
+
 * chinese
 ** pinyinlib
 #+begin_src emacs-lisp :tangle "config.el"
@@ -1285,7 +1295,7 @@ setting
   ;;(setq +org-dir  (expand-file-name "~/Documents/org-notes"))
   ;; (setq-default
   ;;  org-agenda-files (directory-files +org-dir t "\\.org$" t))
-  (setq inferior-julia-program-name "/usr/local/bin/julia")
+  (setq inferior-julia-program-name "/Applications/Julia-1.2.app/Contents/Resources/julia/bin/julia")
   (org-babel-do-load-languages 'org-babel-load-languages
                                '((emacs-lisp . t)
                                  (dot . t)
