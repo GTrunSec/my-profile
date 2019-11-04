@@ -621,7 +621,8 @@ Version 2017-01-21"
 (define-key xah-fly-key-map (kbd "C-0") 'delete-region)
 (define-key xah-fly-key-map (kbd "C-n") 'next-line)
 (define-key xah-fly-key-map (kbd "C-j") 'previous-line)
-(define-key xah-fly-key-map (kbd "M-<SPC>") 'xah-fly-command-mode-activate)
+(define-key key-translation-map (kbd "ESC") (kbd "C-."))
+
 
 (define-key xah-fly-key-map (kbd "C-.") 'xah-fly-command-mode-activate)
 (define-key xah-fly-key-map (kbd "C-s") 'swiper-isearch)

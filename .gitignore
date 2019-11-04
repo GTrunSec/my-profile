@@ -5,8 +5,8 @@ result
 .DS_Store
 init.el
 dotfiles/doom/modules/*.el
-dotfiles/doom/modules/private/my-code
-dotfiles/doom/modules/private/my-org
+dotfiles/doom/modules/private/my-code/*.el
+dotfiles/doom/modules/private/my-org/*.el
 dotfiles/doom/*.el
 dotfiles/doom/etc/b*
 dotfiles/emacs/emacs.d/var
