@@ -201,7 +201,6 @@
 #+end_src
 ** org-mode
 #+begin_src emacs-lisp :tangle "packages.el"
-(package! ox-hugo)
 (package! company-english-helper :recipe (:host github :repo "manateelazycat/company-english-helper"))
 (package! org-super-agenda)
 (package! org-starter)
@@ -217,7 +216,6 @@
 (package! jupyter)
 (package! polymode)
 (package! poly-markdown)
-;;(package! ob-julia :recipe (:host github :repo "gjkerns/ob-julia"))
 #+end_src
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! awesome-pair)
@@ -273,7 +271,6 @@
 #+begin_src emacs-lisp :tangle "my-org.el"
 (use-package! company-english-helper)
 (use-package! ox-hugo)
-(use-package! ob-async)
 ;;(use-package! ob-session-async)
 #+end_src
 ** setting
@@ -293,7 +290,16 @@
       org-src-tab-acts-natively t
       org-src-window-setup 'current-window)
 (setq org-agenda-time-leading-zero t)
-
+(after! org
+  (defadvice! +org-init-doom-during-async-executation-a (orig-fn &rest args)
+    :around #'ob-async-org-babel-execute-src-block
+    (let ((ob-async-pre-execute-src-block-hook
+           ;; Ensure our hook is always first
+           (cons `(lambda ()
+                    (let (noninteractive)
+                      (load ,(concat doom-emacs-dir "init.el"))))
+                 ob-async-pre-execute-src-block-hook)))
+      (apply orig-fn args))))
 #+end_src
 
 
@@ -964,7 +970,7 @@ In that case, insert the number."
 
 
 ** templating
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle "config.el"
 (use-package! yatemplate
   :after yasnippet
   :config
@@ -1261,38 +1267,11 @@ setting
   (setq jupyter-runtime-directory "~/.local/share/jupyter/runtime")
 
 
- (add-hook! 'ob-async-pre-execute-src-block-hook
-               (setq inferior-julia-program-name "/nix/store/qzpr1kwkhnz55mdlq8skc5sqrc6l2j2b-system-path/bin/julia")
-)
-  (after! org
-    ;;u(setq +org-dir  (expand-file-name "~/Documents/org-notes"))
-    ;; (setq-default
-    ;;  org-agenda-files (directory-files +org-dir t "\\.org$" t))
-
-(setq inferior-julia-program-name "/nix/store/qzpr1kwkhnz55mdlq8skc5sqrc6l2j2b-system-path/bin/julia")
- (org-babel-do-load-languages 'org-babel-load-languages
-                                 '((emacs-lisp . t)
-                                   (dot . t)
-                                   (ditaa . t)
-                                   (R . t)
-                                   (python . t)
-                                   (gnuplot . t)
-                                   (lisp . t)
-                                   (shell . t)
-                                   (org . t)
-                                   (plantuml . t)
-                                   (latex . t)
-                                   ;;(julia . t)
-                                   (haskell . t)
-                                   (jupyter . t)
-                                   ))
-    )
-
 
 (setq org-babel-default-header-args:jupyter-julia '((:async . "yes")
                                                     (:session . "jl")
                                                     (:kernel . "julia-nodeps-1.1")))
-  )
+ )
 #+end_src
 
 #+RESULTS:
@@ -1330,33 +1309,6 @@ setting
               :slant 'normal
               :size 24.5)))
 
-
- (add-hook! 'ob-async-pre-execute-src-block-hook
-               (setq inferior-julia-program-name "/Applications/Julia-1.2.app/Contents/Resources/julia/bin/julia"
-               ))
-(after! org
-  ;;(setq +org-dir  (expand-file-name "~/Documents/org-notes"))
-  ;; (setq-default
-  ;;  org-agenda-files (directory-files +org-dir t "\\.org$" t))
-
-  (setq inferior-julia-program-name "/Applications/Julia-1.2.app/Contents/Resources/julia/bin/julia")
-  (org-babel-do-load-languages 'org-babel-load-languages
-                               '((emacs-lisp . t)
-                                 (dot . t)
-                                 (ditaa . t)
-                                 (R . t)
-                                 (python . t)
-                                 (gnuplot . t)
-                                 (lisp . t)
-                                 (shell . t)
-                                 (org . t)
-                                 (plantuml . t)
-                                 (latex . t)
-                                 ;;(julia . t)
-                                 (haskell . t)
-                                 (jupyter . t)
-                                 ))
-  )
 (setq org-babel-default-header-args:jupyter-julia '((:async . "yes")
                                                     (:session . "jl")
                                                     (:kernel . "julia-1.2")))
