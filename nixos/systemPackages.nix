@@ -26,7 +26,12 @@ in rec
       ]))
       postgresql
       #openvpn
-      texmacs
+      (texmacs.overrideDerivation (oldAttrs: {
+        src = fetchurl {
+          url ="http://www.texmacs.org/Download/ftp/tmftp/source/TeXmacs-1.99.11-src.tar.gz";
+          sha256 = "12bp0f34izzqimz49lfpgf4lyz3h45s9xbmk8v6zsawdjki76alg";
+        };
+      }))
       ( texlive.combine # latex + packages
         { inherit (texlive)
           collection-plaingeneric
@@ -152,6 +157,7 @@ in rec
       julia_11
       #lang-go
       gotools
+      go_bootstrap
       go-langserver
       gocode
       go-outline

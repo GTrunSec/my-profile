@@ -277,6 +277,7 @@
   (setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)
 
 (setq org-bullets-bullet-list '("☰" "☷" "☵" "☲"  "☳" "☴"  "☶"  "☱" ))
+
 #+end_src
 *** agenda-custom-setting
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
@@ -1214,14 +1215,29 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   (setq lsp-python-ms-executable
         "~/.nix-profile/bin/mspyls")
   (setq jupyter-runtime-directory "~/.local/share/jupyter/runtime")
-(setq inferior-julia-program-name "/nix/store/qzpr1kwkhnz55mdlq8skc5sqrc6l2j2b-system-path/bin/julia")
+  (setq inferior-julia-program-name "/nix/store/qzpr1kwkhnz55mdlq8skc5sqrc6l2j2b-system-path/bin/julia")
+  (after! org
+    (org-babel-do-load-languages 'org-babel-load-languages
+                                 '((emacs-lisp . t)
+                                   (dot . t)
+                                   (ditaa . t)
+                                   (R . t)
+                                   (python . t)
+                                   (gnuplot . t)
+                                   (lisp . t)
+                                   (shell . t)
+                                   (org . t)
+                                   (plantuml . t)
+                                   (latex . t)
+                                   (haskell . t)
+                                   (jupyter . t)
+                                   ))
 
 
-
-(setq org-babel-default-header-args:jupyter-julia '((:async . "yes")
-                                                    (:session . "jl")
-                                                    (:kernel . "julia-nodeps-1.1")))
- )
+    (setq org-babel-default-header-args:jupyter-julia '((:async . "yes")
+                                                        (:session . "jl")
+                                                        (:kernel . "julia-nodeps-1.1")))
+    )
 #+end_src
 
 #+RESULTS:
@@ -1259,10 +1275,28 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
               :slant 'normal
               :size 24.5)))
 
+  ;;(setq inferior-julia-program-name "/nix/store/qzpr1kwkhnz55mdlq8skc5sqrc6l2j2b-system-path/bin/julia")
+  (after! org
+    (org-babel-do-load-languages 'org-babel-load-languages
+                                 '((emacs-lisp . t)
+                                   (dot . t)
+                                   (ditaa . t)
+                                   (R . t)
+                                   (python . t)
+                                   (gnuplot . t)
+                                   (lisp . t)
+                                   (shell . t)
+                                   (org . t)
+                                   (plantuml . t)
+                                   (latex . t)
+                                   (haskell . t)
+                                   (jupyter . t)
+                                   ))
 (setq org-babel-default-header-args:jupyter-julia '((:async . "yes")
                                                     (:session . "jl")
                                                     (:kernel . "julia-1.2")))
 )
+
 #+end_src
 *** macos-setting
 #+begin_src emacs-lisp :tangle "./modules/my-macos.el"
