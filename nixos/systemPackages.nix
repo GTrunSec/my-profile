@@ -32,6 +32,7 @@ in rec
           sha256 = "12bp0f34izzqimz49lfpgf4lyz3h45s9xbmk8v6zsawdjki76alg";
         };
       }))
+
       ( texlive.combine # latex + packages
         { inherit (texlive)
           collection-plaingeneric
