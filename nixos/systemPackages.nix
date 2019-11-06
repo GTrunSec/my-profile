@@ -74,8 +74,8 @@ in rec
       git
       (gitkraken.overrideDerivation (oldAttrs: {
         src = fetchurl {
-          url = "https://release.axocdn.com/linux/GitKraken-v6.3.0.deb";
-          sha256 = "06hjzkkrg2f9lb72ik16zgv813cxsv679szfdzrfygbb6wxnkjyp";
+          url = "https://release.axocdn.com/linux/GitKraken-v6.3.1.deb";
+          sha256 = "071i3z6jym6f5nfy2mq36m45jywpk53w1vpzr2n599pabdkavj89";
         };
       }))
       wget
