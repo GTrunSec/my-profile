@@ -248,7 +248,6 @@
       org-src-tab-acts-natively t
       org-src-window-setup 'current-window)
 (setq org-agenda-time-leading-zero t)
-      (apply orig-fn args))))
 #+end_src
 
 *** org-babel
