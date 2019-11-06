@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
 # name: julia
-# key: jl
+# key: jl                 
 # --
-#+begin_src julia :async :exports both :results output
+#+begin_src julia :async t :exports both :results output
 
 #+end_src
