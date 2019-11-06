@@ -248,15 +248,6 @@
       org-src-tab-acts-natively t
       org-src-window-setup 'current-window)
 (setq org-agenda-time-leading-zero t)
-(after! org
-  (defadvice! +org-init-doom-during-async-executation-a (orig-fn &rest args)
-    :around #'ob-async-org-babel-execute-src-block
-    (let ((ob-async-pre-execute-src-block-hook
-           ;; Ensure our hook is always first
-           (cons `(lambda ()
-                    (let (noninteractive)
-                      (load ,(concat doom-emacs-dir "init.el"))))
-                 ob-async-pre-execute-src-block-hook)))
       (apply orig-fn args))))
 #+end_src
 
@@ -1071,7 +1062,10 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 ;; ("C-c o" . awesome-tab-switch-group)
 
 #+end_src
-* my-code
+** theme
+*** [[https://github.com/vbuzin/berrys-theme][vbuzin/berrys-theme: A light, clean and elegant Emacs theme]]
+
+* my-codes
 ** packages
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/packages.el"
 (load! "my-latex")
