@@ -26,6 +26,8 @@ in   {
     ripgrep
     feh
     lsof
+    #chat
+    pkgs.signal-desktop
     #music
     pkgs.cmus
     pkgs.compton
