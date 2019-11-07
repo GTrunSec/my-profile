@@ -243,6 +243,7 @@
 (load! "setting")
 (use-package! company-english-helper)
 (use-package! ox-hugo)
+(use-package! ob-async)
 (use-package! ob-session-async)
 #+end_src
 ** setting
