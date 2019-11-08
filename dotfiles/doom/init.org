@@ -246,6 +246,14 @@
 (use-package! ob-async)
 (use-package! ob-session-async)
 #+end_src
+** Packages
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
+(package! company-english-helper :recipe (:host github :repo "manateelazycat/company-english-helper"))
+(package! org-super-agenda)
+(package! org-starter)
+(package! helm-org-rifle)
+(package! deft)
+#+end_src
 ** setting
 *** org-global
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/setting.el"
@@ -368,13 +376,6 @@
 (define-key! org-mode-map (kbd "C-<return>") 'org-insert-heading-respect-content)
 #+end_src
 
-** Packages
-#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
-(package! company-english-helper :recipe (:host github :repo "manateelazycat/company-english-helper"))
-(package! org-super-agenda)
-(package! org-starter)
-(package! helm-org-rifle)
-#+end_src
 ** super-agenda
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-super-agenda
@@ -514,6 +515,21 @@
 
 #+end_src
 
+** org-deft
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+
+(use-package! deft
+  :config
+  (setq deft-directory "~/Documents/org-notes")
+  (setq deft-extensions '("org"))
+  (setq deft-default-extension "org")
+  (setq deft-text-mode 'org-mode)
+  (setq deft-use-filename-as-title t)
+  (setq deft-use-filter-string-for-filename t)
+  (setq deft-auto-save-interval 0)
+  )
+#+end_src
+
 * xah fly key
 #+begin_src emacs-lisp :tangle "config.el"
 (load! "xah-fly.el")
@@ -613,6 +629,7 @@ Version 2017-01-21"
      ("x" . xah-cut-line-or-region)
      ("t" . set-mark-command)
      ("2" . org-agenda)
+     ("3" . deft)
      ("4". adq/helm-bm-list-all)
      ("6" . xah-select-block)
      ("7" . xah-select-line)

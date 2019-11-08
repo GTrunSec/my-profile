@@ -17,7 +17,7 @@ in   {
     screenfetch
     urxvt_perls
     ag
-    dnsproxy
+    #dnsproxy
     graphviz
     rofi
     pkgs.pandoc
@@ -26,11 +26,11 @@ in   {
     feh
     lsof
     #chat
-    pkgs.signal-desktop
+    signal-desktop
     #music
-    pkgs.cmus
-    pkgs.compton
-    pkgs.discord
+    cmus
+    compton
+    discord
     #skim
     screenfetch
     #overlay
@@ -73,16 +73,16 @@ in   {
     ghc
     autojump
     #    hnix-lsp
-    pkgs.jq
+    jq
     #dock
-    pkgs.dive
+    dive
 
     #desktop
     #Go-lang
-    pkgs.dep
-    pkgs.gosec
+    dep
+    gosec
     #blueman
-    pkgs.blueman
-    pkgs.nodejs
+    blueman
+    nodejs
   ];
 }

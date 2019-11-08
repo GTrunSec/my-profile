@@ -10,7 +10,7 @@ python3Packages.buildPythonPackage rec {
   src = fetchurl {
    # url = "https://github.com/SuperCowPowers/${pname}/archive/v${version}.tar.gz";
     url = "https://github.com/SuperCowPowers/bat/archive/${version}.tar.gz";
-    sha256 = "0ag7rvldfr741n5br50i85kh5mh3zqmrvwal31xyag846i6hh5zq";
+    sha256 = "0vgfvnm4j6xp1p16qis6zi1b3l9fkxpa6b4959hcsxps0zlby29d";
   };  
 
   # src = fetchPypi {
