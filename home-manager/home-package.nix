@@ -1,7 +1,6 @@
-{ config, pkgs, lib, ... }:
 with import <nixpkgs> {};
 let
-#  nixos = import <nixos> { };
+  nixpkgs = (import ~/.config/nixpkgs/nixos/channel/nixpkgs) { };
   unstable = import <nixpkgs-unstable> { };
   # Currently not used in favour of nix-mode
   # hnix-lsp = import (pkgs.fetchFromGitHub {
@@ -12,7 +11,7 @@ let
   # });
   
 in   {
-  home.packages = with pkgs;[
+  home.packages = with nixpkgs;[
     aria2
     xclip
     screenfetch

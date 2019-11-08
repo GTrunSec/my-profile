@@ -3,6 +3,9 @@ with pkgs;
 let
   
 
+  RPackages = with rPackages;[
+    tmap
+  ];
     customRPackages = with rPackages;[
     
         bookdown
@@ -53,6 +56,7 @@ let
         ggplot2
         xts
         uuid
+        htmlwidgets
         IRdisplay
         IRkernel
         languageserver
@@ -91,14 +95,16 @@ let
         leaflet
         glue
         pbdZMQ
+        #lwgeom
 
     ];
       R-rstudio-with-my-packages = rstudioWrapper.override{
-            packages = customRPackages;
+          packages = [customRPackages];
       };
       
       R-with-my-packages = rWrapper.override{
-        packages = customRPackages;
+              packages = customRPackages;
+
       };
 
 in

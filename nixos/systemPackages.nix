@@ -157,6 +157,7 @@ in rec
       # }))
       julia_11
       #lang-go
+      go
       gotools
       go_bootstrap
       go-langserver
