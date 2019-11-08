@@ -1,4 +1,5 @@
-#+TITLE: My doom config
+#+TITLE: My doo
+m config
 #+AUTHOR: GTrunSec
 #+EMAIL: gtrunsec@hardenedlinux.org
 #+DATE:  25 October 2019
@@ -252,7 +253,8 @@
 (package! org-super-agenda)
 (package! org-starter)
 (package! helm-org-rifle)
-(package! deft)
+;;(package! deft)
+(package! notdeft :recipe (:host github :repo "hasu/notdeft"))
 #+end_src
 ** setting
 *** org-global
@@ -515,20 +517,40 @@
 
 #+end_src
 
-** org-deft
+** org-notdeft
+- [[https://jingsi.space/post/2017/04/05/organizing-a-complex-directory-for-emacs-org-mode-and-deft/#configuring-deft][Organizing a Complex Directory for Emacs Org Mode and Deft]]
+- [[https://tero.hasu.is/notdeft/#org7b25462][NotDeft | Tero Hasu]]
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 
-(use-package! deft
-  :config
-  (setq deft-directory "~/Documents/org-notes")
-  (setq deft-extensions '("org"))
-  (setq deft-default-extension "org")
-  (setq deft-text-mode 'org-mode)
-  (setq deft-use-filename-as-title t)
-  (setq deft-use-filter-string-for-filename t)
-  (setq deft-auto-save-interval 0)
-  )
+;; (use-package! deft
+;;   :config
+;;   (setq deft-directory '("~/Documents/org-notes" "~/Documents/org-notes/post/myself"))
+;;   (setq deft-extensions '("org"))
+;;   (setq deft-default-extension "org")
+;;   (setq deft-text-mode 'org-mode)
+;;   (setq deft-use-filename-as-title t)
+;;   (setq deft-use-filter-string-for-filename t)
+;;   (setq deft-auto-save-interval 0)
+;;   )
+
+(use-package! notdeft
+:config
+(setq notdeft-extension "org")
+;;(setq notdeft-secondary-extensions '("md" "org" "scrbl"))
+(setq notdeft-directories '(;;"~/Documents/org-notes/post/myself"
+                            "~/project/my-code"
+                            "~/Documents/org-notes"
+                            ))
+;; (setq notdeft-xapian-program
+;;       (expand-file-name
+;;        "xapian/notdeft-xapian"
+;;        (package-desc-dir
+;;         (cadr (assq 'notdeft package-alist)))))
+)
 #+end_src
+- build
+cd ~/.emacs.d/.local/straight/repos/notdeft/xapian
+make
 
 * xah fly key
 #+begin_src emacs-lisp :tangle "config.el"
@@ -629,8 +651,8 @@ Version 2017-01-21"
      ("x" . xah-cut-line-or-region)
      ("t" . set-mark-command)
      ("2" . org-agenda)
-     ("3" . deft)
-     ("4". adq/helm-bm-list-all)
+     ("3" . notdeft)
+     ("4" . adq/helm-bm-list-all)
      ("6" . xah-select-block)
      ("7" . xah-select-line)
      ("8" . xah-extend-selection)
@@ -1396,6 +1418,8 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
               :weight 'normal
               :slant 'normal
               :size 24.5)))
+
+(setq notdeft-xapian-program "/Users/gtrun/src/notdeft/xapian/notdeft-xapian")
 
   ;;(setq inferior-julia-program-name "/nix/store/qzpr1kwkhnz55mdlq8skc5sqrc6l2j2b-system-path/bin/julia")
   (after! org
