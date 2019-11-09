@@ -18,6 +18,7 @@ in rec
       # latte-dock
       # deepin.dde-dock
       #latex
+      
       pet
       hugo
       wireshark
@@ -134,6 +135,10 @@ in rec
       #jetbrains.goland
       #jetbrains.datagrip
       #jetbrains.clion
+      #lang scheme
+      chez
+      guile
+      racket
       #lang-haskell
       cabal2nix # create nix expressions for haskell projects from cabal file
       #lang-c++

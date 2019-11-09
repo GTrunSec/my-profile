@@ -163,7 +163,7 @@
        ;;ruby              ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
        ;;rust              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
        ;;scala             ; java, but good
-       ;;scheme            ; a fully conniving family of lisps
+       scheme            ; a fully conniving family of lisps
        sh                ; she sells {ba,z,fi}sh shells on the C xor
        ;;solidity          ; do you need a blockchain? No.
        ;;swift             ; who asked for emoji variables?
@@ -213,6 +213,7 @@
 (package! maple-iedit :recipe (:host github :repo "honmaple/emacs-maple-iedit"))
 (package! yatemplate)
 (package! pinyin-search)
+(package! grab-x-link)
 #+end_src
 ** third-part
 #+begin_src emacs-lisp :tangle "packages.el"
@@ -262,7 +263,7 @@
 *** org-global
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/setting.el"
 
-(setq org-clock-into-drawer nil)
+(setq org-clock-into-drawer t)
 (setq org-agenda-start-day "-1d")
 (setq org-agenda-span 2)
 (setq org-time-clocksum-format '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
@@ -1294,6 +1295,18 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 )
 #+end_src
 
+** Scheme
+- https://gitlab.com/jaor/geiser
+#+begin_src emacs-lisp :tangle yes
+(use-package! geiser
+:config
+(setq geiser-default-implementation 'racket)
+)
+#+end_src
+
+#+RESULTS:
+: t
+
 * chinese
 ** pinyinlib
 #+begin_src emacs-lisp :tangle "config.el"
@@ -1392,7 +1405,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
         (concat doom-private-dir "etc/bookmark-linux-default.el"))
   (setq lsp-python-ms-executable
         "~/.nix-profile/bin/mspyls")
-
+  (define-key org-mode-map (kbd "C-c l") 'grab-x-link)
   (setq notdeft-xapian-program "/home/gtrun/src/notdeft/xapian/notdeft-xapian")
   (setq jupyter-runtime-directory "~/.local/share/jupyter/runtime")
   (setq inferior-julia-program-name "/nix/store/qzpr1kwkhnz55mdlq8skc5sqrc6l2j2b-system-path/bin/julia")
@@ -1418,6 +1431,10 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
                                                         (:session . "jl")
                                                         (:kernel . "julia-nodeps-1.1")))
     ))
+
+(use-package! grab-x-link
+  :if (memq window-system '(mac ns))
+ )
 #+end_src
 
 #+RESULTS:
@@ -1478,6 +1495,8 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
                                                     (:session . "jl")
                                                     (:kernel . "julia-1.2")))
 ))
+
+
 
 #+end_src
 *** macos-setting
