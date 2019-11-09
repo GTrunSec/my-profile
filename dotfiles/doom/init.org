@@ -1,5 +1,4 @@
-#+TITLE: My doo
-m config
+#+TITLE: My doom config
 #+AUTHOR: GTrunSec
 #+EMAIL: gtrunsec@hardenedlinux.org
 #+DATE:  25 October 2019
@@ -213,6 +212,7 @@ m config
 (package! flymake-json)
 (package! maple-iedit :recipe (:host github :repo "honmaple/emacs-maple-iedit"))
 (package! yatemplate)
+(package! pinyin-search)
 #+end_src
 ** third-part
 #+begin_src emacs-lisp :tangle "packages.el"
@@ -226,7 +226,9 @@ m config
 * config.el
 #+begin_src emacs-lisp :tangle "config.el"
 (load! "setting")
+(use-package! pinyin-search)
 #+end_src
+
 ** default
 #+begin_src emacs-lisp :tangle "setting.el"
 (setq user-full-name "GTrunSec"
@@ -541,6 +543,7 @@ m config
                             "~/project/my-code"
                             "~/Documents/org-notes"
                             ))
+
 ;; (setq notdeft-xapian-program
 ;;       (expand-file-name
 ;;        "xapian/notdeft-xapian"
