@@ -395,7 +395,7 @@
    org-agenda-include-deadlines t
    org-agenda-include-diary nil
    org-agenda-block-separator nil
-   org-agenda-compact-blo0cks t
+   org-agenda-compact-blocks t
    org-agenda-start-with-log-mode t)
 )
 #+end_src
@@ -406,18 +406,19 @@
   ;; (add-hook! 'after-init-hook 'org-starter-load-all-files-in-path)
   (org-starter-def "~/Documents/org-notes"
                    :files
-                   ("gtd.org" :agenda t :key "g" :refile (:maxlevel . 5))
-                   ("notes.org" :agenda t :key "n" :refile (:maxlevel .5 ))
-                   ("myself.org" :agenda t)
-                   ("Habit.org" :agenda t)
-                   ("NSM-GTD/workflow.org" :agenda t :required t)
-                   ("NSM-GTD/NsmOrg.org" :agenda t :required t)
-                   ("art/music.org" :agenda t :required t)
-                   ("post/myself/love.org")
-                   ("post/myself/qing.org")
+                   ("gtd.org"                      :agenda t :key "g" :refile (:maxlevel . 5))
+                   ("notes.org"                    :agenda t :key "n" :refile (:maxlevel .5 ))
+                   ("myself.org"                   :agenda t :key "m" :refile (:maxlevel .5 ) )
+                   ("Habit.org"                    :agenda t :key "h" :refile (:maxlevel .5 ))
+                   ("post/traveling/traveling.org" :key "t" :refile (:maxlevel .5 ))
+                   ("post/myself/love.org"         :key "l" :refile (:maxlevel .5 ))
+                   ("post/myself/qing.org"         :key "q" :refile (:maxlevel .5 ))
                    ("post/life-thing/life-things.org")
-                   ("post/myself/love.org")
-                   ("post/traveling/traveling.org")
+                   ("NSM-GTD/workflow.org"         :agenda t :required t)
+                   ("NSM-GTD/NsmOrg.org"           :agenda t :required t)
+                   ("art/music.org"                :agenda t :required t)
+
+
                    )
   (org-starter-def "~/.doom.d"
                    :files
@@ -430,12 +431,36 @@
                    ("global-readme.org")
                    ("dotfiles/wallpaper/wallpaper.org" :agenda nil)
                    )
-  :bind
-  (
-   ("C-c e" . org-starter-select-file))
-  ;; "C-c e" . org-starter-refile-by-key))
+
+
+ (defhydra gtrun/hydra-org-starter nil
+      "
+  Org-starter-files
+  ^^^^------------------------------------------------
+ _i_: init.org    _g_: gtd.org      _l_: love.org
+ _n_: note        _t_: traveling    _h_: Habit.org
+ _m_: myself      _q_: 情-qing
+  "
+      ("i" org-starter-find-file:init)
+      ("g" org-starter-find-file:gtd)
+      ("n" org-starter-find-file:notes)
+      ("m" org-starter-find-file:myself)
+      ("t" org-starter-find-file:traveling)
+      ("q" org-starter-find-file:qing)
+      ("l" org-starter-find-file:love)
+      ("h" org-starter-find-file:Habit)
+)
+ :bind
+ (
+  ("C-c e" . org-starter-select-file))
+ ;; "C-c e" . org-starter-refile-by-key))
+
+
   )
 #+end_src
+
+#+RESULTS:
+: org-starter-select-file
 
 ** elfeed
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
@@ -544,6 +569,10 @@
                             "~/Documents/org-notes"
                             ))
 
+:bind (:map notdeft-mode-map
+        ("q" . notdeft-quit)
+        ("r" . notdeft-refresh)
+        )
 ;; (setq notdeft-xapian-program
 ;;       (expand-file-name
 ;;        "xapian/notdeft-xapian"
@@ -694,6 +723,8 @@ Version 2017-01-21"
 (define-key xah-fly-key-map (kbd "C-c i") 'counsel-imenu)
 ;; scrolling
 (define-key xah-fly-key-map (kbd "C-v") 'scrollkeeper-contents-up)
+;; rekey  kmacro-start-macro-or-insert-counter
+(define-key xah-fly-key-map (kbd "<f3>") 'gtrun/hydra-org-starter/body)
 #+end_src
 
 ** special-key-to-mode-map
