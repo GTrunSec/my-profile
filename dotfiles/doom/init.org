@@ -1172,10 +1172,12 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 (package! jupyter)
 (package! polymode)
 (package! poly-markdown)
+(package! lsp-haskell)
 #+end_src
 
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
 (load! "my-latex")
+(use-package! lsp-haskell)
 #+end_src
 ** ccls
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
