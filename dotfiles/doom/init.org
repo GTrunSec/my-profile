@@ -223,6 +223,8 @@
 (package! elfeed-goodies)
 (package! awesome-tab :recipe (:host github :repo "manateelazycat/awesome-tab"))
 (package! ob-session-async :recipe (:host github :repo "jackkamm/ob-session-async"))
+(package! maple-explorer :recipe (:host github :repo "honmaple/emacs-maple-explorer"))
+(package! imenu-list)
 #+end_src
 * config.el
 #+begin_src emacs-lisp :tangle "config.el"
@@ -1087,6 +1089,23 @@ In that case, insert the number."
 
 ** [[https://github.com/TobiasZawada/elgrep/][TobiasZawada/elgrep: Emacs grep without external dependencies]]
 
+** maple-imenu
+#+begin_src emacs-lisp :tangle "config.el"
+;; (use-package! maple-explorer
+;;   :commands (maple-explorer-file maple-explorer-buffer maple-explorer-imenu maple-explorer-recentf)
+;;   :config
+;;   (setq maple-explorer-file-display-alist '((side . left) (slot . -1)))
+;; )
+
+(use-package! imenu-list
+:config
+(setq imenu-list-auto-resize t)
+(setq imenu-list-focus-after-activation t)
+(setq imenu-list-after-jump-hook nil)
+(add-hook 'imenu-list-after-jump-hook #'recenter-top-bottom)
+)
+#+end_src
+
 * Visual
 ** Buffer
 *** Parenthesis
@@ -1415,7 +1434,11 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 ;; (custom-set-faces
 ;;   '(awesome-tab-close-selected((t ( :foreground "DarkGray"))))
 ;;   )
+
+(set-popup-rule! "^\\*Ilist"
+  :side 'right :size 35 :quit nil :select nil :ttl 0)
 #+end_src
+
 * Linux & Macsos
 #+begin_src emacs-lisp :tangle "config.el"
 (load! "./modules/my-linux.el")
@@ -1460,6 +1483,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
     (setq org-babel-default-header-args:jupyter-julia '((:async . "yes")
                                                         (:session . "jl")
                                                         (:kernel . "julia-nodeps-1.1")))
+
     ))
 
 (use-package! grab-x-link
@@ -1487,6 +1511,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 (setq bm-repository-file (f-join doom-private-dir "etc/bm-macos-data"))
 (setq insert-directory-program "/usr/local/bin/gls")
 (define-key org-mode-map (kbd "C-c l") 'org-mac-grab-link)
+
 (set-face-attribute
  'default nil
  :font (font-spec :name "-*-Fantasque Sans Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1"
