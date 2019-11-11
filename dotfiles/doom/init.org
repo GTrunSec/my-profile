@@ -225,6 +225,7 @@
 (package! ob-session-async :recipe (:host github :repo "jackkamm/ob-session-async"))
 (package! maple-explorer :recipe (:host github :repo "honmaple/emacs-maple-explorer"))
 (package! imenu-list)
+(package! berrys-theme)
 #+end_src
 * config.el
 #+begin_src emacs-lisp :tangle "config.el"
@@ -1115,11 +1116,11 @@ In that case, insert the number."
 
 ** maple-imenu
 #+begin_src emacs-lisp :tangle "config.el"
-;; (use-package! maple-explorer
-;;   :commands (maple-explorer-file maple-explorer-buffer maple-explorer-imenu maple-explorer-recentf)
-;;   :config
-;;   (setq maple-explorer-file-display-alist '((side . left) (slot . -1)))
-;; )
+(use-package! maple-explorer
+  :commands (maple-explorer-file maple-explorer-buffer maple-explorer-imenu maple-explorer-recentf)
+  :config
+  (setq maple-explorer-file-display-alist '((side . left) (slot . -1)))
+)
 
 (use-package! imenu-list
 :config
@@ -1230,7 +1231,15 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 #+end_src
 ** theme
 *** [[https://github.com/vbuzin/berrys-theme][vbuzin/berrys-theme: A light, clean and elegant Emacs theme]]
+#+begin_src emacs-lisp :tangle yes
+;; (use-package! berrys-theme
+;;   :config
+;;   (load-theme 'berrys t)
 
+;;   :config ;; for good measure and clarity
+;;   (setq-default cursor-type '(bar . 2))
+;;   (setq-default line-spacing 2))
+#+end_src
 * my-codes
 ** packages
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/packages.el"
@@ -1461,6 +1470,11 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
 (set-popup-rule! "^\\*Ilist"
   :side 'right :size 35 :quit nil :select nil :ttl 0)
+
+(after! maple-explorer-imenu
+(set-popup-rule! "^\\*maple-explorer-imenu"
+  :side 'right :size 35 :quit nil :select nil :ttl 0)
+)
 #+end_src
 
 * Linux & Macsos
