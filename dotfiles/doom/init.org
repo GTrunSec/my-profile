@@ -242,6 +242,13 @@
 ;; https://emacs.stackexchange.com/questions/5603/how-to-quickly-copy-move-file-in-emacs-dired
 (setq dired-dwim-target t)
 (add-hook! 'xah-fly-command-mode-activate-hook 'xah-fly-save-buffer-if-file)
+
+(defun gtrun/truncate-lines-hook ()
+  (setq truncate-lines nil))
+
+(add-hook! 'text-mode-hook 'gtrun/truncate-lines-hook)
+(add-hook! 'elfeed-show-mode-hook 'gtrun/truncate-lines-hook)
+
 #+end_src
 * org-mode
 ** config
@@ -613,6 +620,23 @@ make
 
 #+RESULTS:
 | my-html-mark-tag |
+
+** org-crypt
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+;; 當被加密的部份要存入硬碟時，自動加密回去
+  ;; 設定要加密的 tag 標籤為 secret
+  (setq org-crypt-tag-matcher "secret")
+
+  ;; 避免 secret 這個 tag 被子項目繼承 造成重複加密
+  ;; (但是子項目還是會被加密喔)
+  (setq org-tags-exclude-from-inheritance (quote ("secret")))
+
+  ;; 用於加密的 GPG 金鑰
+  ;; 可以設定任何 ID 或是設成 nil 來使用對稱式加密 (symmetric encryption)
+  (setq org-crypt-key nil)
+#+end_src
+
+#+RESULTS:
 
 * xah fly key
 #+begin_src emacs-lisp :tangle "config.el"
