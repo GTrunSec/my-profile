@@ -1496,6 +1496,9 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
         (concat doom-private-dir "etc/bookmark-linux-default.el"))
   (setq lsp-python-ms-executable
         "~/.nix-profile/bin/mspyls")
+
+  (setq org-crypt-key "24945FE0DBD04F4C045025F96F92B3E8F942D425")
+
   (define-key org-mode-map (kbd "C-c l") 'grab-x-link)
   (setq notdeft-xapian-program "/home/gtrun/src/notdeft/xapian/notdeft-xapian")
   (setq jupyter-runtime-directory "~/.local/share/jupyter/runtime")
