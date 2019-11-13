@@ -250,7 +250,18 @@
 (add-hook! 'text-mode-hook 'gtrun/truncate-lines-hook)
 (add-hook! 'elfeed-show-mode-hook 'gtrun/truncate-lines-hook)
 
+
+(add-hook 'maple-explorer-imenu-mode-hook
+          (lambda() (setq cursor-type t
+                          cursor-in-non-selected-windows t)))
+
+(setenv "XAPIAN_CJK_NGRAM" "1")
+
 #+end_src
+
+#+RESULTS:
+: 1
+
 * org-mode
 ** config
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"

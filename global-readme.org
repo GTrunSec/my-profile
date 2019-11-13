@@ -9,6 +9,9 @@
 #+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
 #+SELECT_TAGS: export
 #+EXCLUDE_TAGS: noexport
+
+set -x XAPIAN_CJK_NGRAM 1
+
 * ✰ Important Tool Pack
 ** [[https://education.github.com/pack/offers][GitHub Student Developer Pack - GitHub Education]]
 + [X] GitKraken Glo
@@ -179,6 +182,9 @@ link image to static
 #+begin_src sh :tangle yes
 ln -s /Users/gtrun/Dropbox/application/blog/content/static/ox-hugo /Users/gtrun/Dropbox/application/blog/static
 #+end_src
+** mu4e
+[[https://github.com/pengpengxp/pengpengxp.github.io/blob/b22281c3fe3a337c6a6bf37785ebf07ec6ee9a94/archive/before-2018-11-10/source/2017-08-24-emacs-use-mu4e.org][pengpengxp.github.io/2017-08-24-emacs-use-mu4e.org at b22281c3fe3a337c6a6bf37785ebf07ec6ee9a94 · pengpengxp/pengpengxp.github.io]]
+
 * exporting 
 ** Latex
 *** [[https://github.com/posquit0/Awesome-CV][posquit0/Awesome-CV: Awesome CV is LaTeX template for your outstanding job application]]
