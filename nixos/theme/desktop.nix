@@ -23,16 +23,27 @@ in
   services.xserver = {
     enable = true;
     layout = "us";
+
+    
     desktopManager.plasma5.enable = true;
     # Enable touchpad support.
     # libinput.enable = true;
-
-    displayManager.slim = {
+    # displayManager.ssdm = {
+    #   enable = true;
+	  #   autoLogin = true;
+    #   #theme       = slim-theme;
+    #   defaultUser = "gtrun";
+		# };
+    
+    displayManager.sddm = {
       enable = true;
-	    autoLogin = true;
-      theme       = slim-theme;
-      defaultUser = "gtrun";
-		};
+      # theme = "";
+      autoLogin = {
+        enable = true;
+        user = "gtrun";
+      };
+    };
+    
     windowManager = {
       i3 = {
         package = pkgs.i3-gaps;
@@ -45,6 +56,7 @@ in
     };
 
     videoDrivers = [ "nvidia" "amdgpu" "intel"];
+
     desktopManager.default = "none";
     desktopManager.xterm.enable = false;
   };

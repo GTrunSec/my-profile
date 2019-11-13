@@ -139,6 +139,7 @@ in rec
       chez
       guile
       racket
+      gcc9
       #lang-haskell
       cabal2nix # create nix expressions for haskell projects from cabal file
       #lang-c++
@@ -152,7 +153,6 @@ in rec
                sha256 = "1rnr5cgm2v15gllazl9zrsbbg6kv6j22fivvmf4ibbzwl18g6sis";
         };
       }))
-      gcc
       #lang-julia
       # (julia.overrideDerivation (oldAttrs: {
       #   src = fetchzip{
