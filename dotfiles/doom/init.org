@@ -225,7 +225,7 @@
 (package! ob-session-async :recipe (:host github :repo "jackkamm/ob-session-async"))
 (package! maple-explorer :recipe (:host github :repo "honmaple/emacs-maple-explorer"))
 (package! imenu-list)
-(package! berrys-theme)
+;; (package! berrys-theme)
 #+end_src
 * config.el
 #+begin_src emacs-lisp :tangle "config.el"
@@ -258,9 +258,6 @@
 (setenv "XAPIAN_CJK_NGRAM" "1")
 
 #+end_src
-
-#+RESULTS:
-: 1
 
 * org-mode
 ** config
