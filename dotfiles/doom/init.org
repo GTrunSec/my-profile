@@ -252,7 +252,7 @@
 
 
 (add-hook 'maple-explorer-imenu-mode-hook
-          (lambda() (setq cursor-type t
+          (lambda() (setq cursor-type 'box
                           cursor-in-non-selected-windows t)))
 
 (setenv "XAPIAN_CJK_NGRAM" "1")

@@ -21,6 +21,7 @@ in rec
       
       pet
       hugo
+      desktop-file-utils
       wireshark
       (python3.withPackages (pkgs: with pkgs; [
         trezor_agent wheel
@@ -87,7 +88,7 @@ in rec
       # Browser
       # chromium
       tor-browser-bundle-bin
-      firefox-bin
+      #firefox-bin
       flashplayer
       # book
       (polar-bookshelf.overrideDerivation (oldAttrs: {

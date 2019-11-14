@@ -25,6 +25,8 @@ in   {
     ripgrep
     feh
     lsof
+    #brower
+    brave
     #chat
     signal-desktop
     #music
