@@ -89,7 +89,6 @@ in rec
       # chromium
       tor-browser-bundle-bin
       #firefox-bin
-      flashplayer
       # book
       (polar-bookshelf.overrideDerivation (oldAttrs: {
         src = fetchurl {

@@ -26,6 +26,13 @@ in   {
     feh
     lsof
     #brower
+    # (brave.overrideDerivation (oldAttrs: {
+    #   version = "1.3.4";
+    #   src = fetchurl {
+    #     url = "https://github.com/brave/brave-browser/releases/download/v1.3.4/brave-browser-nightly_1.3.4_amd64.deb";
+    #     sha256 = "093m2p046v89sisy5gs08qnqx8jf6d488a5ws8vcyg5h6hyfdcqr";
+    #   };
+    # }))
     brave
     #chat
     signal-desktop
