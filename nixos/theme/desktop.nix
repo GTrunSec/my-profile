@@ -28,7 +28,7 @@ in
     desktopManager.plasma5.enable = true;
     # Enable touchpad support.
     # libinput.enable = true;
-    # displayManager.ssdm = {
+    # displayManager.slim = {
     #   enable = true;
 	  #   autoLogin = true;
     #   #theme       = slim-theme;
@@ -55,7 +55,7 @@ in
       default = "i3";
     };
 
-    videoDrivers = [ "nvidia" "amdgpu" "intel"];
+    videoDrivers = [ "nvidia" "intel"];
 
     desktopManager.default = "none";
     desktopManager.xterm.enable = false;
