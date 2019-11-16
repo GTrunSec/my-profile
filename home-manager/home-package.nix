@@ -25,6 +25,8 @@ in   {
     ripgrep
     feh
     lsof
+    #image
+    gimp
     #brower
     # (brave.overrideDerivation (oldAttrs: {
     #   version = "1.3.4";

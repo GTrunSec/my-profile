@@ -92,8 +92,8 @@ in rec
       # book
       (polar-bookshelf.overrideDerivation (oldAttrs: {
         src = fetchurl {
-          url = "https://github.com/burtonator/polar-bookshelf/releases/download/v1.40.1/polar-bookshelf-1.40.1-amd64.deb";
-          sha256 = "1gbhh7h1q09dy6f8f91zdplv5a64kgpdywlnzzry51i1ilgdq009";
+          url = "https://github.com/burtonator/polar-bookshelf/releases/download/v1.50.10/polar-bookshelf-1.50.10-amd64.deb";
+          sha256 = "1qsz6iwim97zlhaddvdyqyxrqb5i088nc1qlcs7zc1vs3caqbaxm";
         };
       }))
       xdotool
@@ -149,8 +149,8 @@ in rec
         src = fetchFromGitHub{
           owner = "MaskRay";
                repo = "ccls";
-               rev = "eeda2882f313fd7e19a969e68544944041e44cae";
-               sha256 = "1rnr5cgm2v15gllazl9zrsbbg6kv6j22fivvmf4ibbzwl18g6sis";
+               rev = "bd609e89a29c508c8c763db2ecfad50e207391b3";
+               sha256 = "18ik5rzzbwn43dd0ri518i5vzsa5ix81fpcv7gd1s6zdv3nf9bl0";
         };
       }))
       #lang-julia

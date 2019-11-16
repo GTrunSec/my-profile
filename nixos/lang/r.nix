@@ -46,8 +46,22 @@ let
             nativeBuildInputs = [ purrr crayon assertthat ]; 
           };
 
+             ##emo
+          webreadr = buildRPackage {
+            name = "webreadr";
+            src = pkgs.fetchFromGitHub {
+              owner = "Ironholds";
+              repo = "webreadr";
+              rev = "5d6be5c6ecc08e09f2a64be1cdebbdea70c35bdb";
+              sha256 = "0skhglkf0xxf9lvx6zc0nih0caxrn4r0p1fpd96jji0grp648ayr";
+            };
+            propagatedBuildInputs = [ rlang];
+            nativeBuildInputs = [ Rcpp readr];
+          };
+
         in [
           llr
+          webreadr
           patchwork
           emo
         ])
