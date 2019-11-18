@@ -55,11 +55,13 @@ in
       default = "i3";
     };
 
-    videoDrivers = [ "nvidia" "intel"];
+    videoDrivers = [ "nvidiaBeta" "intel"];
 
     desktopManager.default = "none";
     desktopManager.xterm.enable = false;
   };
+  boot.blacklistedKernelModules = [ "nouveau" ];
+
   hardware.nvidia.optimus_prime.enable = true;
   # Bus ID of the NVIDIA GPU. You can find it using lspci
   hardware.nvidia.optimus_prime.nvidiaBusId = "PCI:1:0:0";
