@@ -284,9 +284,9 @@
 ** config
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (load! "setting")
+(add-hook! 'after-init-hook 'org-starter-load-all-files-in-path)
 (use-package! company-english-helper)
 (use-package! ox-hugo)
-(use-package! ob-async)
 (use-package! ob-session-async)
 #+end_src
 ** Packages
@@ -299,7 +299,6 @@
 (package! notdeft :recipe (:host github :repo "hasu/notdeft"))
 #+end_src
 ** setting
-
 *** org-global
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/setting.el"
 
@@ -329,16 +328,22 @@
   (not (or (string= lang "ditaa")
            (string= lang "dot")
            (string= lang "R")
+           (string= lang "julia")
+           (string= lang "C++")
+           (string= lang "C")
            (string= lang "jupyter-R")
            (string= lang "python")
            (string= lang "jupyter-julia")
            (string= lang "jupyter-python")
            (string= lang "plantuml"))))
-  (setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)
+(setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)
 
 (setq org-bullets-bullet-list '("☰" "☷" "☵" "☲"  "☳" "☴"  "☶"  "☱" ))
 
+(setq org-babel-C++-compiler 'g++-9)
+(setq org-babel-C-compiler 'gcc-9)
 #+end_src
+
 *** agenda-custom-setting
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 
@@ -420,6 +425,26 @@
 (eval-after-load "org"
   '(require 'ox-md nil t))
 (define-key! org-mode-map (kbd "C-<return>") 'org-insert-heading-respect-content)
+#+end_src
+
+*** org-link-type
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/setting.el"
+
+(defun endless/export-audio-link (path desc format)
+  "Export org audio links to hmtl."
+  (cl-case format
+    (html (format
+	   "<audio preload=\"auto\"> <source src=\"https://www.gtrun.org/music/%s\">%s</audio>"
+	   path (or desc "")))
+
+    ;; README: hugo music file path
+    (md (format
+	 "<audio class=\"wp-audio-shortcode\"  loop=\"1\"  preload=\"auto\" style=\"width: 100%%;\" controls> <source src=\"https://www.gtrun.org/music/%s\">%s</audio>"
+	 path (or desc "")))
+    (latex (format "(HOW DO I EXPORT AUDIO TO LATEX? \"%s\")" path))))
+(after! org
+(org-add-link-type "audio" #'ignore #'endless/export-audio-link)
+)
 #+end_src
 
 ** super-agenda
@@ -612,8 +637,8 @@
                             ))
 
 :bind (:map notdeft-mode-map
-        ("q" . notdeft-quit)
-        ("r" . notdeft-refresh)
+        ("C-q" . notdeft-quit)
+        ("C-r" . notdeft-refresh)
         )
 ;; (setq notdeft-xapian-program
 ;;       (expand-file-name
