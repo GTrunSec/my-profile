@@ -295,6 +295,8 @@
 (package! org-super-agenda)
 (package! org-starter)
 (package! helm-org-rifle)
+(package! org-wild-notifier)
+
 ;;(package! deft)
 (package! notdeft :recipe (:host github :repo "hasu/notdeft"))
 #+end_src
@@ -447,6 +449,16 @@
 )
 #+end_src
 
+** org-wild-notifier
+
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/packages.el"
+(use-package! org-wild-notifier
+  :defer t
+  :config
+  (add-hook! 'doomafter-init-hook 'org-wild-notifier-mode)
+  (setq org-wild-notifier-alert-time 15
+        alert-default-style (if IS-MAC 'osx-notifier 'libnotify)))
+#+end_src
 ** super-agenda
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-super-agenda
@@ -1560,6 +1572,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   (setq jupyter-runtime-directory "~/.local/share/jupyter/runtime")
   (setq inferior-julia-program-name "/nix/store/qzpr1kwkhnz55mdlq8skc5sqrc6l2j2b-system-path/bin/julia")
   (after! org
+
     (org-babel-do-load-languages 'org-babel-load-languages
                                  '((emacs-lisp . t)
                                    (dot . t)

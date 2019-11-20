@@ -7,7 +7,7 @@
 #    signing.key = "20C828B69E5458A0";
 #    signing.signByDefault = true;
     ignores = [ ".projectile" ".indium.json" ".ccls-cache"
-                ".Rhistory" ".notdeft*"
+                ".Rhistory" ".notdeft*" ".auctex-auto"
               ];
     extraConfig = {
       pull = {

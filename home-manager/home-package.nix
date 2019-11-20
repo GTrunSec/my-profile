@@ -25,6 +25,7 @@ in   {
     ripgrep
     feh
     lsof
+    lm_sensors
     #image
     gimp
     #brower
