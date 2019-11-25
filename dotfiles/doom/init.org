@@ -96,7 +96,7 @@
        ;;ein               ; tame Jupyter notebooks with emacs
        (eval +overlay)     ; run code, run (also, repls)
        flycheck          ; tasing you for every semicolon you forget
-       ;;flyspell          ; tasing you for misspelling mispelling
+       flyspell          ; tasing you for misspelling mispelling
        ;;gist              ; interacting with github gists
        (lookup           ; helps you navigate your code and documentation
         +docsets)        ; ...or in Dash docsets locally
@@ -227,6 +227,7 @@
 (package! maple-explorer :recipe (:host github :repo "honmaple/emacs-maple-explorer"))
 (package! imenu-list)
 (package! helm-tramp)
+(package! sunrise-commander :recipe (:host github :repo "sunrise-commander/sunrise-commander"))
 ;; (package! berrys-theme)
 #+end_src
 * config.el
@@ -249,6 +250,8 @@
 			      ;;(editorconfig-mode 1)
             ))
 )
+
+
 #+end_src
 
 #+RESULTS:
@@ -280,6 +283,31 @@
 
 #+end_src
 
+* autoload
+
+** misc
+
+*** time
+#+begin_src emacs-lisp :tangle "./autoload/misc.el"
+(defvar current-date-time-format "%a %b %d %H:%M:%S %Z %Y"
+  "Format of date to insert with `insert-current-date-time' func
+See help of `format-time-string' for possible replacements")
+
+;;;###autoload
+(defun insert-current-date-time ()
+  "insert the current date and time into current buffer.
+Uses `current-date-time-format' for the formatting the date/time."
+       (interactive)
+       ;;(insert "==========\n")
+;       (insert (let () (comment-start)))
+       (insert (format-time-string current-date-time-format (current-time)))
+       (insert "\n")
+       )
+#+end_src
+
+#+RESULTS:
+: insert-current-date-time
+
 * org-mode
 ** config
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
@@ -303,7 +331,6 @@
 ** setting
 *** org-global
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/setting.el"
-
 (setq org-clock-into-drawer t)
 (setq org-log-into-drawer t)
 (setq org-agenda-start-day "-1d")
@@ -319,6 +346,7 @@
       org-src-tab-acts-natively t
       org-src-window-setup 'current-window)
 (setq org-agenda-time-leading-zero t)
+(setq org-download-timestamp "%Y%m%d_%H%M%S")
 #+end_src
 
 *** org-babel
@@ -418,9 +446,6 @@
 
         ))
 #+end_src
-
-#+RESULTS:
-: ((z GtruN Agenda ((agenda  ((org-agenda-span 2) (org-agenda-start-day -1d) (org-super-agenda-groups (quote ((:name Today List :time-grid t :date today :todo ⚔ INPROCESS :scheduled today :order 1)))))) (alltodo  ((org-agenda-overriding-header ) (org-super-agenda-groups (quote ((:name Next to do :priority>= B :order 2) (:name Important :todo ✰ Important :order 6) (:name Due Today :deadline today :order 3) (:name Due Soon :deadline future :order 8) (:name Overdue :deadline past :order 20) (:name Issues :tag Issue :order 12) (:name Projects :tag Project :order 14) (:name Emacs :tag Emacs :order 13) (:name Research :tag Research :order 15) (:name To read :tag (BOOK READ) :order 30) (:name Waiting :todo ⚑ WAITING :order 18) (:name trivial :priority<= C :todo (SOMEDAY) :order 90) (:discard (:tag (Chore Routine Daily)))))))))) (b . BOOK) (bb Search tags in todo, note, and archives search +{:book\|books:}) (bd BOOK TODO List search +{^\*+\s-+\(\⚔ INPROCESS|☞ TODO\|WAITING\)\s-} +{book\|books}) (d ALL DONE OF TASKS search +{^\*+\s-+\(✔ DONE\|✘ CANCELED\)\s-}) (i ALL INPROCESS OF TASKS search +{^\*+\s-+\(⚔ INPROCESS\)\s-}))
 
 *** org-key
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/setting.el"
@@ -628,17 +653,6 @@
 - [[https://tero.hasu.is/notdeft/#org7b25462][NotDeft | Tero Hasu]]
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 
-;; (use-package! deft
-;;   :config
-;;   (setq deft-directory '("~/Documents/org-notes" "~/Documents/org-notes/post/myself"))
-;;   (setq deft-extensions '("org"))
-;;   (setq deft-default-extension "org")
-;;   (setq deft-text-mode 'org-mode)
-;;   (setq deft-use-filename-as-title t)
-;;   (setq deft-use-filter-string-for-filename t)
-;;   (setq deft-auto-save-interval 0)
-;;   )
-
 (use-package! notdeft
 :config
 (setq notdeft-extension "org")
@@ -669,22 +683,22 @@ make
 
 *** highlight
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
-  (require 'ox)
-  (defun my-html-mark-tag (text backend info)
-    "Transcode :blah: into <mark>blah</mark> in body text."
-    (when (org-export-derived-backend-p backend 'html)
-      (let ((text (replace-regexp-in-string "[^\\w]\\(:\\)[^\n\t\r]+\\(:\\)[^\\w]" "<mark>"  text nil nil 1 nil)))
-        (replace-regexp-in-string "[^\\w]\\(<mark>\\)[^\n\t\r]+\\(:\\)[^\\w]" "</mark>" text nil nil 2 nil))))
+  ;; (require 'ox)
+  ;; (defun my-html-mark-tag (text backend info)
+  ;;   "Transcode :blah: into <mark>blah</mark> in body text."
+  ;;   (when (org-export-derived-backend-p backend 'html)
+  ;;     (let ((text (replace-regexp-in-string "[^\\w]\\(:\\)[^\n\t\r]+\\(:\\)[^\\w]" "<mark>"  text nil nil 1 nil)))
+  ;;       (replace-regexp-in-string "[^\\w]\\(<mark>\\)[^\n\t\r]+\\(:\\)[^\\w]" "</mark>" text nil nil 2 nil))))
 
-  (add-to-list 'org-export-filter-plain-text-functions 'my-html-mark-tag)
+  ;; (add-to-list 'org-export-filter-plain-text-functions 'my-html-mark-tag)
 
-  (defun my-html-mark-tag (text backend info)
-    "Transcode :blah: into <mark>blah</mark> in body text."
-    (when (org-export-derived-backend-p backend 'html)
-      (let ((text (replace-regexp-in-string "[^\\w]\\(:\\)[^\n\t\r]+\\(:\\)[^\\w]" "<mark>"  text nil nil 1 nil)))
-        (replace-regexp-in-string "[^\\w]\\(<mark>\\)[^\n\t\r]+\\(:\\)[^\\w]" "</mark>" text nil nil 2 nil))))
+  ;; (defun my-html-mark-tag (text backend info)
+  ;;   "Transcode :blah: into <mark>blah</mark> in body text."
+  ;;   (when (org-export-derived-backend-p backend 'html)
+  ;;     (let ((text (replace-regexp-in-string "[^\\w]\\(:\\)[^\n\t\r]+\\(:\\)[^\\w]" "<mark>"  text nil nil 1 nil)))
+  ;;       (replace-regexp-in-string "[^\\w]\\(<mark>\\)[^\n\t\r]+\\(:\\)[^\\w]" "</mark>" text nil nil 2 nil))))
 
-  (add-to-list 'org-export-filter-plain-text-functions 'my-html-mark-tag)
+  ;; (add-to-list 'org-export-filter-plain-text-functions 'my-html-mark-tag)
 #+end_src
 
 #+RESULTS:
@@ -707,10 +721,10 @@ make
 
 #+RESULTS:
 
+** [[https://github.com/lepisma/org-books][lepisma/org-books: Reading list management with org mode]]
 * xah fly key
 #+begin_src emacs-lisp :tangle "config.el"
 (load! "xah-fly.el")
-
 #+end_src
 ** pre setting
 #+begin_src emacs-lisp :tangle "xah-fly.el"
@@ -1688,3 +1702,4 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 #+end_src
 * Cache
 ** [[https://github.com/bzg/dotemacs/blob/master/emacs.org][dotemacs/emacs.org at master · bzg/dotemacs]]
+** [[http://irfu.cea.fr/Pisp/vianney.lebouteiller/emacs.html][Everything with Emacs]]
