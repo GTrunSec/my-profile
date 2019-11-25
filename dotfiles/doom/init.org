@@ -215,6 +215,7 @@
 (package! yatemplate)
 (package! pinyin-search)
 (package! grab-x-link)
+(package! exec-path-from-shell :ignore (not IS-MAC))
 #+end_src
 ** third-part
 #+begin_src emacs-lisp :tangle "packages.el"
@@ -304,10 +305,6 @@ Uses `current-date-time-format' for the formatting the date/time."
        (insert "\n")
        )
 #+end_src
-
-#+RESULTS:
-: insert-current-date-time
-
 * org-mode
 ** config
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
@@ -480,7 +477,7 @@ Uses `current-date-time-format' for the formatting the date/time."
 (use-package! org-wild-notifier
   :defer t
   :config
-  (add-hook! 'doomafter-init-hook 'org-wild-notifier-mode)
+  (add-hook! 'after-init-hook 'org-wild-notifier-mode)
   (setq org-wild-notifier-alert-time 15
         alert-default-style (if IS-MAC 'osx-notifier 'libnotify)))
 #+end_src
@@ -666,11 +663,7 @@ Uses `current-date-time-format' for the formatting the date/time."
         ("C-q" . notdeft-quit)
         ("C-r" . notdeft-refresh)
         )
-;; (setq notdeft-xapian-program
-;;       (expand-file-name
-;;        "xapian/notdeft-xapian"
-;;        (package-desc-dir
-;;         (cadr (assq 'notdeft package-alist)))))
+
 )
 #+end_src
 - build
@@ -804,6 +797,7 @@ Version 2017-01-21"
      ("SPC" . xah-fly-leader-key-map)
      ("q" . quit-window)
      ("a" . counsel-M-x)
+     ("e" . sunrise-dired)
      ("i" . previous-line)
      ("k" . next-line )
      ("b" . backward-word)
@@ -836,16 +830,21 @@ Version 2017-01-21"
     (define-key xah-fly-key-map (kbd ".") 'gtrun-xah-dot-fly-key)
   )
 #+end_src
+
+#+RESULTS:
+: xah-fly-command-mode-init
+
 ** xah-key-map
 #+begin_src emacs-lisp :tangle "xah-fly.el"
 (define-key xah-fly-key-map (kbd "C-a") 'beginning-of-visual-line)
 (define-key xah-fly-key-map (kbd "C-0") 'delete-region)
 (define-key xah-fly-key-map (kbd "C-n") 'next-line)
 (define-key xah-fly-key-map (kbd "C-j") 'previous-line)
-(define-key key-translation-map (kbd "ESC") (kbd "C-."))
+
+(define-key key-translation-map (kbd "ESC") (kbd "C-x c"))
 
 
-(define-key xah-fly-key-map (kbd "C-.") 'xah-fly-command-mode-activate)
+(define-key xah-fly-key-map (kbd "C-x c") 'xah-fly-command-mode-activate)
 (define-key xah-fly-key-map (kbd "C-s") 'swiper-isearch)
 (define-key xah-fly-key-map (kbd "C-c w") 'helm-org-rifle)
 
@@ -863,6 +862,10 @@ Version 2017-01-21"
 ;; rekey  kmacro-start-macro-or-insert-counter
 (define-key xah-fly-key-map (kbd "<f3>") 'gtrun/hydra-org-starter/body)
 #+end_src
+
+#+RESULTS:
+: gtrun/hydra-org-starter/body
+
 ** special-key-to-mode-map
 #+begin_src emacs-lisp :tangle "xah-fly.el"
    (defun gtrun-xah-dot-fly-key ()
@@ -1637,6 +1640,9 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 (define-key org-mode-map (kbd "C-c l") 'org-mac-grab-link)
 (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
 
+(add-hook! 'after-init-hook 'exec-path-from-shell-initialize)
+
+
 (set-face-attribute
  'default nil
  :font (font-spec :name "-*-Fantasque Sans Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1"
@@ -1651,6 +1657,8 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
               :weight 'normal
               :slant 'normal
               :size 24.5)))
+
+(setq ispell-program-name "/usr/local/bin/ispell")
 
 (setq notdeft-xapian-program "/Users/gtrun/src/notdeft/xapian/notdeft-xapian")
 
