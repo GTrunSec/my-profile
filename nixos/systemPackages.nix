@@ -90,12 +90,7 @@ in rec
       tor-browser-bundle-bin
       #firefox-bin
       # book
-      (polar-bookshelf.overrideDerivation (oldAttrs: {
-        src = fetchurl {
-          url = "https://github.com/burtonator/polar-bookshelf/releases/download/v1.50.10/polar-bookshelf-1.50.10-amd64.deb";
-          sha256 = "1qsz6iwim97zlhaddvdyqyxrqb5i088nc1qlcs7zc1vs3caqbaxm";
-        };
-      }))
+
       xdotool
       okular
       #password
