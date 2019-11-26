@@ -1,6 +1,6 @@
 #+TITLE: my global-hardware config
 #+AUTHOR: GTrunSec
-#+EMAIL: gtrunsec@hardenedlinux.org
+#+EMAIL:c
 #+DATE: 22 July 2019
 #+DESCRIPTION: my computer configuration
 #+KEYWORDS: profile
