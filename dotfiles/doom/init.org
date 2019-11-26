@@ -313,6 +313,7 @@ Uses `current-date-time-format' for the formatting the date/time."
 (use-package! company-english-helper)
 (use-package! ox-hugo)
 (use-package! ob-session-async)
+(use-package! ob-async)
 #+end_src
 ** Packages
 #+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"

@@ -45,6 +45,12 @@ in   {
     discord
     #skim
     screenfetch
+    (polar-bookshelf.overrideDerivation (oldAttrs: {
+      src = fetchurl {
+        url = "https://github.com/burtonator/polar-bookshelf/releases/download/v1.60.11/polar-bookshelf-1.60.11-amd64.deb";
+        sha256 = "0iar1xjkwgld539c1glh9c7832iq6a5lq1g9ngk5r6bhmpx2szl9";
+      };
+    }))
     #overlay
     outline-client
     youtube-dl
