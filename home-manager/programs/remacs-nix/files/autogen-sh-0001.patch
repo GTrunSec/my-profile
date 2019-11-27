@@ -1,0 +1,48 @@
+diff --git a/autogen.sh b/autogen.sh
+index 9e22e92e99..80ecfdfebc 100755
+--- a/autogen.sh
++++ b/autogen.sh
+@@ -143,9 +143,6 @@ case $do_autoconf,$do_git in
+     test -r .git && do_git=true;;
+ esac
+
+-echo "Checking Rust toolchain install ..."
+-command -v rustup >/dev/null 2>&1 || { echo >&2 "Remacs requires the rustup command to be installed in order to build. Please see https://www.rustup.rs/; Aborting."; exit 1; }
+-
+ ## $1 = Remacs required version
+ ## Return 0 if Remacs Rust toolchain required version is installed and active
+ ## Return 1 if Remacs Rust toolchain required version is not installed
+@@ -155,23 +152,9 @@ check_rust_version ()
+ {
+     remacs_version=$1
+
+-    rustup_active_version=$(rustup show | awk '/active toolchain/ {getline; getline; getline; print}')
++    rustup_active_version=$(rustc --version)
+     echo $rustup_active_version | grep $remacs_version >/dev/null && return 0
+
+-    if rustup show | grep -e "active\|installed toolchain" >/dev/null; then
+-        rustup_installed=$(rustup show | awk '/installed/{flag=1; next} /active/{flag=0} flag')
+-        echo $rustup_installed | grep $remacs_version >/dev/null || return 1
+-    else
+-        rustup_installed=$(rustup show | grep "overridden by")
+-        if echo $rustup_installed | grep $remacs_version >/dev/null; then
+-            return 0
+-        else
+-            return 1
+-        fi
+-    fi
+-
+-    echo $rustup_active_version | grep 'directory override'  >/dev/null && return 2
+-
+     return 3
+ }
+
+@@ -183,5 +166,5 @@ if [ -n $rust_toolchain_vers_path ] ; then
+ 	exit 1
+     fi
+
+-    check_rust_version $(cat $rust_toolchain_vers_path)
++    check_rust_version $(echo "nightly")
+     retval=$?
+
+     case $retval in

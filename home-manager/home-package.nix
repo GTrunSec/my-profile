@@ -1,6 +1,7 @@
 with import <nixpkgs> {};
 let
   nixpkgs = (import ~/.config/nixpkgs/nixos/channel/nixpkgs) { };
+  remacs = (import ./programs/remacs-nix/build.nix) {};
   unstable = import <nixpkgs-unstable> { };
   # Currently not used in favour of nix-mode
   # hnix-lsp = import (pkgs.fetchFromGitHub {
@@ -12,6 +13,7 @@ let
   
 in   {
   home.packages = with nixpkgs;[
+    #remacs
     aria2
     xclip
     screenfetch
@@ -99,6 +101,7 @@ in   {
     #Go-lang
     dep
     gosec
+    gotty
     #blueman
     blueman
     nodejs
