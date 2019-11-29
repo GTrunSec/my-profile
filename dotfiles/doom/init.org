@@ -1588,6 +1588,10 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
   (setq org-crypt-key "24945FE0DBD04F4C045025F96F92B3E8F942D425")
 
+  (dolist (charset '(kana han cjk-misc bopomofo))
+    (set-fontset-font (frame-parameter nil 'font) charset
+                      (font-spec :family "Weibei SC" :size 70)))
+
   (define-key org-mode-map (kbd "C-c l") 'grab-x-link)
   (setq notdeft-xapian-program "/home/gtrun/src/notdeft/xapian/notdeft-xapian")
   (setq jupyter-runtime-directory "~/.local/share/jupyter/runtime")
