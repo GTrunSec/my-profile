@@ -215,7 +215,6 @@
 (package! yatemplate)
 (package! pinyin-search)
 (package! grab-x-link)
-(package! exec-path-from-shell :ignore (not IS-MAC))
 #+end_src
 ** third-part
 #+begin_src emacs-lisp :tangle "packages.el"
@@ -344,7 +343,7 @@ Uses `current-date-time-format' for the formatting the date/time."
       org-src-tab-acts-natively t
       org-src-window-setup 'current-window)
 (setq org-agenda-time-leading-zero t)
-(setq org-download-timestamp "%Y%m%d_%H%M%S")
+;;(setq org-download-timestamp "%Y%m%d_%H%M%S")
 #+end_src
 
 *** org-babel
@@ -857,7 +856,7 @@ Version 2017-01-21"
 (define-key xah-fly-key-map (kbd ",") 'gtrun-xah-comma-fly-key)
 (define-key xah-fly-key-map (kbd ".") 'gtrun-xah-dot-fly-key)
 
-(define-key xah-fly-key-map (kbd "C-,") 'awesome-tab-ace-jump)
+(define-key xah-fly-key-map (kbd "C-M-s-o") 'awesome-tab-ace-jump)
 (define-key xah-fly-key-map (kbd "C-;") 'maple-iedit-match-all)
 (define-key xah-fly-key-map (kbd "C-c i") 'counsel-imenu)
 ;; scrolling
@@ -1467,7 +1466,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
 ** Scheme
 - https://gitlab.com/jaor/geiser
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle "packages.el"
 (use-package! geiser
 :config
 (setq geiser-default-implementation 'racket)
@@ -1582,6 +1581,8 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   (setq bm-repository-file (f-join doom-private-dir "etc/bm-linux-data"))
   (setq bookmark-default-file
         (concat doom-private-dir "etc/bookmark-linux-default.el"))
+
+
   (setq lsp-python-ms-executable
         "~/.nix-profile/bin/mspyls")
 
@@ -1617,7 +1618,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
     ))
 
 (use-package! grab-x-link
-  :if (memq window-system '(mac ns))
+  :if (eq system-type 'gnu/linux)
  )
 #+end_src
 
@@ -1641,9 +1642,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 (setq bm-repository-file (f-join doom-private-dir "etc/bm-macos-data"))
 (setq insert-directory-program "/usr/local/bin/gls")
 (define-key org-mode-map (kbd "C-c l") 'org-mac-grab-link)
-(eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
-
-(add-hook! 'after-init-hook 'exec-path-from-shell-initialize)
+;;(eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
 
 
 (set-face-attribute
@@ -1682,9 +1681,10 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
                                    (haskell . t)
                                    (jupyter . t)
                                    ))
+
 (setq org-babel-default-header-args:jupyter-julia '((:async . "yes")
                                                     (:session . "jl")
-                                                    (:kernel . "julia-1.2")))
+                                                    (:kernel . "julia-1.3")))
 ))
 
 
