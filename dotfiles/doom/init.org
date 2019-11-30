@@ -273,7 +273,8 @@
 
 (add-hook! 'text-mode-hook 'gtrun/truncate-lines-hook)
 (add-hook! 'elfeed-show-mode-hook 'gtrun/truncate-lines-hook)
-
+(add-hook! 'w3m-mode-hook 'gtrun/truncate-lines-hook)
+(add-hook! 'sunrise-mode-hook 'xah-fly-insert-mode-activate)
 
 (add-hook 'maple-explorer-imenu-mode-hook
           (lambda() (setq cursor-type 'box
@@ -281,7 +282,10 @@
 
 (setenv "XAPIAN_CJK_NGRAM" "1")
 
+(setq w3m-use-tab-line nil)
 #+end_src
+
+#+RESULTS:
 
 * autoload
 
@@ -507,10 +511,10 @@ Uses `current-date-time-format' for the formatting the date/time."
   ;; (add-hook! 'after-init-hook 'org-starter-load-all-files-in-path)
   (org-starter-def "~/Documents/org-notes"
                    :files
-                   ("gtd.org"                      :agenda t :key "g" :refile (:maxlevel . 5))
-                   ("notes.org"                    :agenda t :key "n" :refile (:maxlevel .5 ))
-                   ("myself.org"                   :agenda t :key "m" :refile (:maxlevel .5 ) )
-                   ("Habit.org"                    :agenda t :key "h" :refile (:maxlevel .5 ))
+                   ("GTD/gtd.org"                      :agenda t :key "g" :refile (:maxlevel . 5))
+                   ("GTD/notes.org"                    :agenda t :key "n" :refile (:maxlevel .5 ))
+                   ("GTD/myself.org"                   :agenda t :key "m" :refile (:maxlevel .5 ) )
+                   ("GTD/Habit.org"                    :agenda t :key "h" :refile (:maxlevel .5 ))
                    ("post/traveling/traveling.org" :key "t" :refile (:maxlevel .5 ))
                    ("post/myself/love.org"         :key "l" :refile (:maxlevel .5 ))
                    ("post/myself/qing.org"         :key "q" :refile (:maxlevel .5 ))
@@ -519,8 +523,6 @@ Uses `current-date-time-format' for the formatting the date/time."
                    ("NSM-GTD/workflow.org"         :agenda t :required t)
                    ("NSM-GTD/NsmOrg.org"           :agenda t :required t)
                    ("art/music.org"                :agenda t :required t)
-
-
                    )
   (org-starter-def "~/.doom.d"
                    :files
@@ -656,9 +658,12 @@ Uses `current-date-time-format' for the formatting the date/time."
 :config
 (setq notdeft-extension "org")
 ;;(setq notdeft-secondary-extensions '("md" "org" "scrbl"))
-(setq notdeft-directories '(;;"~/Documents/org-notes/post/myself"
+(setq notdeft-directories '("~/Documents/org-notes/post/myself"
+                            "~/Documents/org-notes/post/lift-thing"
+                            "~/Documents/org-notes/post/traveling"
+                            "~/Documents/org-notes/post/agenda"
                             "~/project/my-code"
-                            "~/Documents/org-notes"
+                            "~/Documents/org-notes/GTD/"
                             ))
 
 :bind (:map notdeft-mode-map
@@ -1340,6 +1345,8 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 (package! polymode)
 (package! poly-markdown)
 (package! lsp-haskell)
+;;
+(package! bicycle)
 #+end_src
 
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
