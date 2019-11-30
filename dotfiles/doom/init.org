@@ -1590,7 +1590,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
   (dolist (charset '(kana han cjk-misc bopomofo))
     (set-fontset-font (frame-parameter nil 'font) charset
-                      (font-spec :family "Weibei SC" :size 70)))
+                      (font-spec :family "Weibei SC" :size 55)))
 
   (define-key org-mode-map (kbd "C-c l") 'grab-x-link)
   (setq notdeft-xapian-program "/home/gtrun/src/notdeft/xapian/notdeft-xapian")
