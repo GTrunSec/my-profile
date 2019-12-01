@@ -9,8 +9,8 @@ with builtins;
   #   (mod "./overlays/zeek/zeek.nix")
   # ];
   services.trezord.enable = true;  
-  networking.firewall.allowedTCPPorts = [ 80 443 53];
-  networking.firewall.allowedUDPPorts = [ 80 443 53];
+  networking.firewall.allowedTCPPorts = [ 80 443 53 8080];
+  networking.firewall.allowedUDPPorts = [ 80 443 53 8080];
   #networking.nameservers = ["10.220.170.137"];
 
   nixpkgs.config.packageOverrides = pkgs: {

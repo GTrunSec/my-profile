@@ -856,9 +856,11 @@ Version 2017-01-21"
 (define-key xah-fly-key-map (kbd "C-n") 'next-line)
 (define-key xah-fly-key-map (kbd "C-j") 'previous-line)
 
-(define-key key-translation-map (kbd "ESC") (kbd "C-x c"))
+(when (display-graphic-p)
+ (define-key key-translation-map (kbd "ESC") (kbd "C-x c"))
+)
 
-
+(define-key xah-fly-key-map (kbd "<f4>") 'xah-fly-command-mode-activate)
 (define-key xah-fly-key-map (kbd "C-x c") 'xah-fly-command-mode-activate)
 (define-key xah-fly-key-map (kbd "C-s") 'swiper-isearch)
 (define-key xah-fly-key-map (kbd "C-c w") 'helm-org-rifle)
@@ -1603,9 +1605,11 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
   (setq org-crypt-key "24945FE0DBD04F4C045025F96F92B3E8F942D425")
 
+(when (display-graphic-p)
   (dolist (charset '(kana han cjk-misc bopomofo))
     (set-fontset-font (frame-parameter nil 'font) charset
                       (font-spec :family "Weibei SC" :size 55)))
+  )
 
   (define-key org-mode-map (kbd "C-c l") 'grab-x-link)
   (setq notdeft-xapian-program "/home/gtrun/src/notdeft/xapian/notdeft-xapian")
