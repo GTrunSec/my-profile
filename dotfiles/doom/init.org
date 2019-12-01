@@ -227,13 +227,24 @@
 (package! maple-explorer :recipe (:host github :repo "honmaple/emacs-maple-explorer"))
 (package! imenu-list)
 (package! helm-tramp)
+(package! visual-fill-column)
 (package! sunrise-commander :recipe (:host github :repo "sunrise-commander/sunrise-commander"))
 ;; (package! berrys-theme)
 #+end_src
 * config.el
 #+begin_src emacs-lisp :tangle "config.el"
 (load! "setting")
+
+(add-hook 'visual-line-mode-hook #'visual-fill-column-mode)
+(add-hook 'visual-fill-column-mode-hook #'visual-line-mode)
+(add-hook 'w3m-display-hook #'visual-line-mode)
+
+
+(advice-add 'text-scale-adjust :after
+  #'visual-fill-column-adjust)
+
 (use-package! pinyin-search)
+
 
 (use-package! helm-tramp
   :config
@@ -254,9 +265,6 @@
 
 #+end_src
 
-#+RESULTS:
-: t
-
 ** default
 #+begin_src emacs-lisp :tangle "setting.el"
 (setq user-full-name "GTrunSec"
@@ -269,11 +277,11 @@
 (add-hook! 'xah-fly-command-mode-activate-hook 'xah-fly-save-buffer-if-file)
 
 (defun gtrun/truncate-lines-hook ()
-  (setq truncate-lines nil))
+  (setq-local truncate-lines nil)
+  )
 
 (add-hook! 'text-mode-hook 'gtrun/truncate-lines-hook)
 (add-hook! 'elfeed-show-mode-hook 'gtrun/truncate-lines-hook)
-(add-hook! 'w3m-mode-hook 'gtrun/truncate-lines-hook)
 (add-hook! 'sunrise-mode-hook 'xah-fly-insert-mode-activate)
 
 (add-hook 'maple-explorer-imenu-mode-hook
