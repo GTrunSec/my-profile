@@ -108,7 +108,6 @@ brew cask install dotnet-sdk
 git clone https://github.com/Microsoft/python-language-server.git
 cd python-language-server/src/LanguageServer/Impl
 dotnet publish -c Release -r osx-x64   
-dotnet publish -c Release -r linux-x64
 chmod a+x $(git rev-parse --show-toplevel)/output/bin/Release/osx-x64/publish/Microsoft.Python.LanguageServer
 
 #+end_src

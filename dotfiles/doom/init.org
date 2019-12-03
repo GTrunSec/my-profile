@@ -325,6 +325,10 @@ Uses `current-date-time-format' for the formatting the date/time."
 (use-package! ox-hugo)
 (use-package! ob-session-async)
 (use-package! ob-async)
+(use-package! org-books
+  :config
+(setq org-books-file "~/Documents/org-notes/GTD/my-books.org")
+)
 #+end_src
 ** Packages
 #+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
@@ -333,7 +337,7 @@ Uses `current-date-time-format' for the formatting the date/time."
 (package! org-starter)
 (package! helm-org-rifle)
 (package! org-wild-notifier)
-
+(package! org-books :recipe (:host github :repo "lepisma/org-books"))
 ;;(package! deft)
 (package! notdeft :recipe (:host github :repo "hasu/notdeft"))
 #+end_src
@@ -445,7 +449,7 @@ Uses `current-date-time-format' for the formatting the date/time."
          search "+{:book\\|books:}")
 
         ("bd" "BOOK TODO List"
-         search "+{^\\*+\\s-+\\(\\⚔ INPROCESS|☞ TODO\\|WAITING\\)\\s-} +{book\\|books}")
+         search "+{^\\*+\\s-+\\(⚔ INPROCESS\\|☞ TODO\\|⚑ WAITING\\)\\s-} +{:book\\|books:}")
 
         ("d" "ALL DONE OF TASKS"
          search "+{^\\*+\\s-+\\(✔ DONE\\|✘ CANCELED\\)\\s-}")
@@ -521,12 +525,13 @@ Uses `current-date-time-format' for the formatting the date/time."
                    :files
                    ("GTD/gtd.org"                      :agenda t :key "g" :refile (:maxlevel . 5))
                    ("GTD/notes.org"                    :agenda t :key "n" :refile (:maxlevel .5 ))
-                   ("GTD/myself.org"                   :agenda t :key "m" :refile (:maxlevel .5 ) )
+                   ("GTD/myself.org"                   :agenda t :key "m" :refile (:maxlevel .5 ))
                    ("GTD/Habit.org"                    :agenda t :key "h" :refile (:maxlevel .5 ))
                    ("post/traveling/traveling.org" :key "t" :refile (:maxlevel .5 ))
                    ("post/myself/love.org"         :key "l" :refile (:maxlevel .5 ))
                    ("post/myself/qing.org"         :key "q" :refile (:maxlevel .5 ))
                    ("post/myself/plan.org"         :key "p" :refile (:maxlevel .5 ))
+                   ("GTD/my-books.org"             :agenda t :key "b" :refile (:maxlevel .5 ))
                    ("post/life-thing/life-things.org")
                    ("NSM-GTD/workflow.org"         :agenda t :required t)
                    ("NSM-GTD/NsmOrg.org"           :agenda t :required t)
@@ -552,6 +557,8 @@ Uses `current-date-time-format' for the formatting the date/time."
  _i_: init.org    _g_: gtd.org      _l_: love.org
  _n_: note        _t_: traveling    _h_: Habit.org
  _m_: myself      _q_: 情-qing      _p_: Plan.org
+ _b_: my-books
+
   "
       ("i" org-starter-find-file:init)
       ("g" org-starter-find-file:gtd)
@@ -562,6 +569,7 @@ Uses `current-date-time-format' for the formatting the date/time."
       ("l" org-starter-find-file:love)
       ("h" org-starter-find-file:Habit)
       ("p" org-starter-find-file:plan)
+      ("b" org-starter-find-file:my-books)
 )
  :bind
  (
@@ -1362,6 +1370,50 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
 (load! "my-latex")
 (use-package! lsp-haskell)
+(use-package! lsp-mode
+  :config
+ ;; Support LSP in Org Babel with header argument `:file'.
+  ;; https://github.com/emacs-lsp/lsp-mode/issues/377
+  (defvar org-babel-lsp-explicit-lang-list
+    '("java")
+    "Org Mode Babel languages which need explicitly specify header argument :file.")
+  (cl-defmacro lsp-org-babel-enbale (lang)
+    "Support LANG in org source code block."
+    ;; (cl-check-type lang symbolp)
+    (let* ((edit-pre (intern (format "org-babel-edit-prep:%s" lang)))
+           (intern-pre (intern (format "lsp--%s" (symbol-name edit-pre)))))
+      `(progn
+         (defun ,intern-pre (info)
+           (let ((lsp-file (or (->> info caddr (alist-get :file))
+                               buffer-file-name
+                               (unless (member ,lang org-babel-lsp-explicit-lang-list)
+                                 (concat (org-babel-temp-file (format "lsp-%s-" ,lang))
+                                         (cdr (assoc ,lang org-babel-tangle-lang-exts)))))))
+             (setq-local buffer-file-name lsp-file)
+             (setq-local lsp-buffer-uri (lsp--path-to-uri lsp-file))
+             (lsp)))
+         (if (fboundp ',edit-pre)
+             (advice-add ',edit-pre :after ',intern-pre)
+           (progn
+             (defun ,edit-pre (info)
+               (,intern-pre info))
+             (put ',edit-pre 'function-documentation
+                  (format "Add LSP info to Org source block dedicated buffer (%s)."
+                          (upcase ,lang))))))))
+
+  (defvar org-babel-lsp-lang-list
+    '("shell"
+      "python"
+      ;;"ipython"
+      ;; "ruby"
+      "js" "css"
+      ;; "C" "C++"
+
+      "rust" "go" "java"))
+
+  (dolist (lang org-babel-lsp-lang-list)
+    (eval `(lsp-org-babel-enbale ,lang))))
+
 #+end_src
 ** ccls
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
