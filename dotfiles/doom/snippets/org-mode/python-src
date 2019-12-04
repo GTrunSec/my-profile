@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
 # name:python-src 
-# key: py-
+# key: py-                                               
 # --
-#+begin_src python :session
+#+begin_src python :results output :async t
 $1
 #+end_src
