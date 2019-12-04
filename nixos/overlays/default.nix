@@ -1,7 +1,7 @@
 self: super:
 {
   
-  bat = super.callPackage ./python/bat {};
+  zat = super.callPackage ./python/zat {};
   orgparse = super.callPackage ./python/orgparse {};
   ipynb-py-convert = super.callPackage ./python/ipynb-py-convert {};
   #zeek = super.callPackage ./zeek {};

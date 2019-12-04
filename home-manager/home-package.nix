@@ -71,7 +71,7 @@ in   {
       jupyter_core
       ipynb-py-convert
       scikitlearn
-      bat
+      zat
       matplotlib
       sqlalchemy
       pandas

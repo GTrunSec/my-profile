@@ -5,12 +5,12 @@
 
 python3Packages.buildPythonPackage rec {
 
-  pname = "bat";
-  version = "v0.3.7";
+  pname = "zat";
+  version = "v0.3.8";
   src = fetchurl {
    # url = "https://github.com/SuperCowPowers/${pname}/archive/v${version}.tar.gz";
-    url = "https://github.com/SuperCowPowers/bat/archive/${version}.tar.gz";
-    sha256 = "0vgfvnm4j6xp1p16qis6zi1b3l9fkxpa6b4959hcsxps0zlby29d";
+    url = "https://github.com/SuperCowPowers/zat/archive/${version}.tar.gz";
+    sha256 = "0a5w7zglayq955rxhc1rbq9vzyi0gwln5abwnwzra13bq86yrdgw";
   };  
 
   # src = fetchPypi {
