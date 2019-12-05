@@ -244,6 +244,7 @@
 (advice-add 'text-scale-adjust :after
   #'visual-fill-column-adjust)
 
+
 (use-package! pinyin-search)
 
 
@@ -1697,6 +1698,11 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 (use-package! grab-x-link
   :if (eq system-type 'gnu/linux)
  )
+
+(use-package! snails
+:if (eq system-type 'gnu/linux)
+:load-path "~/.doom.d/modules/private/snails")
+
 #+end_src
 
 #+RESULTS:

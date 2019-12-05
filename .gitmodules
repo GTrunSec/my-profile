@@ -17,3 +17,6 @@
 [submodule "nixos/channel/home-manager"]
 	path = nixos/channel/home-manager
 	url = https://github.com/GTrunSec/home-manager.git
+[submodule "dotfiles/doom/modules/private/snails"]
+	path = dotfiles/doom/modules/private/snails
+	url = https://github.com/manateelazycat/snails.git
