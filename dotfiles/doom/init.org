@@ -1782,9 +1782,19 @@ FACE defaults to inheriting from default and highlight."
         (concat doom-private-dir "etc/bookmark-linux-default.el"))
 
 
+
+
  (setq lsp-python-ms-executable  "~/.nix-profile/bin/mspyls")
 
  (setq org-crypt-key "24945FE0DBD04F4C045025F96F92B3E8F942D425")
+
+
+ (set-face-attribute
+  'default nil
+  :font (font-spec :name "-*-Fantasque Sans Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1"
+                   :weight 'normal
+                   :slant 'normal
+                   :size 12.0))
 
 (when (display-graphic-p)
   (dolist (charset '(kana han cjk-misc bopomofo))
