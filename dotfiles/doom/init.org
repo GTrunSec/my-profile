@@ -551,7 +551,7 @@ Uses `current-date-time-format' for the formatting the date/time."
                    ("NSM-GTD/NsmOrg.org"           :agenda t :required t)
                    ("art/music.org"                :agenda t :required t)
                    )
-  (org-starter-def "~/.doom.d"
+  (org-starter-def "~/.config/nixpkgs/dotfiles/doom/"
                    :files
                    ("init.org" :key "i" :refile (:maxlevel . 5))
                    ;;("nix.org" :key "x" :refile (:maxlevel . 5))
@@ -1079,7 +1079,7 @@ In that case, insert the number."
                company-files
                company-yasnippet))
 
-;;(setq +lsp-company-backend '(company-lsp :with company-tabnine :separate))
+(setq +lsp-company-backend '(company-lsp :with company-tabnine :separate))
 #+end_src
 ** company-tabnine
 #+begin_src emacs-lisp :tangle "config.el"
