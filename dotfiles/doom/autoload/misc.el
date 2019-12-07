@@ -1,3 +1,5 @@
+;;; ~/.doom.d/autoload/misc.el -*- lexical-binding: t; -*-
+
 (defvar current-date-time-format "%a %b %d %H:%M:%S %Z %Y"
   "Format of date to insert with `insert-current-date-time' func
 See help of `format-time-string' for possible replacements")

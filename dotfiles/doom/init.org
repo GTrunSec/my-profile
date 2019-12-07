@@ -1,5 +1,4 @@
 #+TITLE: My doom config
-#+AUTHOR: GTrunSec
 #+EMAIL: gtrunsec@hardenedlinux.org
 #+DATE:  25 October 2019
 #+KEYWORDS: Emacs Profile Doom-Emacs
@@ -96,7 +95,7 @@
        ;;ein               ; tame Jupyter notebooks with emacs
        (eval +overlay)     ; run code, run (also, repls)
        flycheck          ; tasing you for every semicolon you forget
-       flyspell          ; tasing you for misspelling mispelling
+       ;;flyspell          ; tasing you for misspelling mispelling
        ;;gist              ; interacting with github gists
        (lookup           ; helps you navigate your code and documentation
         +docsets)        ; ...or in Dash docsets locally
@@ -301,7 +300,9 @@
 ** misc
 
 *** time
-#+begin_src emacs-lisp :tangle "./autoload/misc.el"
+#+begin_src emacs-lisp :tangle "~/.doom.d/autoload/misc.el"
+;;; ~/.doom.d/autoload/misc.el -*- lexical-binding: t; -*-
+
 (defvar current-date-time-format "%a %b %d %H:%M:%S %Z %Y"
   "Format of date to insert with `insert-current-date-time' func
 See help of `format-time-string' for possible replacements")
@@ -316,6 +317,16 @@ Uses `current-date-time-format' for the formatting the date/time."
        (insert (format-time-string current-date-time-format (current-time)))
        (insert "\n")
        )
+
+
+
+
+#+end_src
+
+*** default
+#+begin_src emacs-lisp :tangle "~/.doom.d/autoload/+default.el"
+;;; ~/.doom.d/autoload/+default.el -*- lexical-binding: t; -*-
+
 #+end_src
 * org-mode
 ** config
@@ -1040,9 +1051,40 @@ In that case, insert the number."
   (define-key map (kbd "<return>") nil))
   )
 #+end_src
+** company-backend
+#+begin_src emacs-lisp :tangle "config.el"
+(set-company-backend! '(org-mode)
+  '(:separate company-english-helper-search
+              company-tabnine
+              company-files
+              company-yasnippet
+              ))
+(set-company-backend! '(c-mode
+                        c++-mode
+                        ess-mode
+                        haskell-mode
+                        ;;emacs-lisp-mode
+                        lisp-mode
+                        sh-mode
+                        php-mode
+                        python-mode
+                        go-mode
+                        ruby-mode
+                        rust-mode
+                        js-mode
+                        css-mode
+                        web-mode
+                        )
+  '(:separate  company-tabnine
+               company-files
+               company-yasnippet))
+
+;;(setq +lsp-company-backend '(company-lsp :with company-tabnine :separate))
+#+end_src
 ** company-tabnine
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! company-tabnine
+  :when (featurep! :completion company)
   :config
   (setq company-tabnine--disable-next-transform nil)
   (defun my-company--transform-candidates (func &rest args)
@@ -1058,7 +1100,20 @@ In that case, insert the number."
 
   (advice-add #'company--transform-candidates :around #'my-company--transform-candidates)
   (advice-add #'company-tabnine :around #'my-company-tabnine)
-)
+  ;; Trigger completion immediately.
+  ;; (setq company-idle-delay 0)
+
+  ;; Number the candidates (use M-1, M-2 etc to select completions).
+  (setq company-show-numbers t)
+
+  ;; Use the tab-and-go frontend.
+  ;; Allows TAB to select and complete at the same time.
+  (company-tng-configure-default)
+  (setq company-frontends
+        '(company-tng-frontend
+          company-pseudo-tooltip-frontend
+          company-echo-metadata-frontend))
+  )
 
 #+end_src
 #+end_src
@@ -1250,17 +1305,17 @@ In that case, insert the number."
 ** Buffer
 *** Parenthesis
 #+begin_src emacs-lisp :tangle "config.el"
-  (use-package! rainbow-delimiters
-    :config
-    (custom-set-faces
-     '(rainbow-delimiters-mismatched-face ((t (:foreground "white" :background "red" :weight bold))))
-     '(rainbow-delimiters-unmatched-face ((t (:foreground "white" :background "red" :weight bold))))
+(use-package! rainbow-delimiters
+  :config
+  (custom-set-faces
+   '(rainbow-delimiters-mismatched-face ((t (:foreground "white" :background "red" :weight bold))))
+   '(rainbow-delimiters-unmatched-face ((t (:foreground "white" :background "red" :weight bold))))
 
-     ;; show parents (in case of rainbow failing !)
-     '(show-paren-match ((t (:foreground "white" :background "green" :weight bold))))
-     '(show-paren-mismatch ((t (:foreground "white" :background "red" :weight bold)))))
-    ;;  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
-)
+   ;; show parents (in case of rainbow failing !)
+   '(show-paren-match ((t (:foreground "white" :background "green" :weight bold))))
+   '(show-paren-mismatch ((t (:foreground "white" :background "red" :weight bold)))))
+  ;;  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+  )
 ;; highlight brackets
 (setq show-paren-style 'parenthesis)
 #+end_src
@@ -1729,7 +1784,7 @@ FACE defaults to inheriting from default and highlight."
 
  (setq lsp-python-ms-executable  "~/.nix-profile/bin/mspyls")
 
-  (setq org-crypt-key "24945FE0DBD04F4C045025F96F92B3E8F942D425")
+ (setq org-crypt-key "24945FE0DBD04F4C045025F96F92B3E8F942D425")
 
 (when (display-graphic-p)
   (dolist (charset '(kana han cjk-misc bopomofo))
