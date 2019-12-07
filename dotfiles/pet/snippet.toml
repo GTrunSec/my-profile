@@ -7,3 +7,8 @@
   description = "cut zeek log"
   command = "cat <log> | zeek-cut <field>"
   output = ""
+
+[[snippets]]
+  description = "docker clean regex"
+  command = "docker rmi (docker images --filter=reference='<regex>' -q)"
+  output = ""

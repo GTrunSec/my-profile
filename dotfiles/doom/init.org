@@ -465,7 +465,7 @@ Version 2017-01-21"
 (define-key xah-fly-key-map (kbd "C-a") 'beginning-of-visual-line)
 (define-key xah-fly-key-map (kbd "C-0") 'delete-region)
 (define-key xah-fly-key-map (kbd "C-n") 'next-line)
-(define-key xah-fly-key-map (kbd "C-j") 'previous-line)
+
 
 (when (display-graphic-p)
  (define-key key-translation-map (kbd "ESC") (kbd "C-x c"))
