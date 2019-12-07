@@ -160,8 +160,7 @@
        (python
         +lsp)            ; beautiful is better than ugly
        ;;qt                ; the 'cutest' gui framework ever
-       ;;racket            ; a DSL for DSLs
-       ;;rest              ; Emacs as a REST client
+       ;;racket            ; a DSL for DSL
        ;;ruby              ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
        ;;rust              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
        ;;scala             ; java, but good
@@ -1557,6 +1556,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
 *** parentheses
 - [[https://with-emacs.com/posts/ui-hacks/show-matching-lines-when-parentheses-go-off-screen/][with-emacs · Show matching lines when parentheses go off-screen]]s
+- [[https://www.reddit.com/r/emacs/comments/bqyx6h/withemacs_show_matching_lines_when_parentheses_go/][(with-emacs · Show matching lines when parentheses go off-screen : emacs]]
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/show-parentheses.el"
 ;;; -*- lexical-binding: t; -*-
 
@@ -1771,9 +1771,11 @@ FACE defaults to inheriting from default and highlight."
  )
 
 (use-package! snails
-:if (eq system-type 'gnu/linux)
-:load-path "~/.doom.d/modules/private/snails")
-
+  :if (eq system-type 'gnu/linux)
+  :load-path "~/.doom.d/modules/private/snails"
+  :config
+  (define-key snails-mode-map [remap next-line] #'snails-select-next-item)
+  (add-hook 'snails-mode-hook #'xah-fly-insert-mode-activate))
 #+end_src
 
 #+RESULTS:
