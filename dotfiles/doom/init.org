@@ -1,11 +1,11 @@
-#+TITLE: My doom config
+#+TITLE: My Doom Emacs config
 #+EMAIL: gtrunsec@hardenedlinux.org
 #+DATE:  25 October 2019
 #+KEYWORDS: Emacs Profile Doom-Emacs
 #+LANGUAGE:  en cn
 #+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t pri:t
 #+SETUPFILE: ~/Documents/org-notes/setup/hugo.local
-#+SETUPFILE: ~/Documents/org-notes/setup/darkcss.local
+#+SETUPFILE: ~/Documents/my-blog/public/theme/org-html-themes/setup/theme-readtheorg.setup
 #+hugo_publishdate: `org-time-stamp-rounding-minutes`
 #+hugo_auto_set_lastmod: t
 #+HUGO_categories: profile Doom-Emacs
@@ -316,10 +316,6 @@ Uses `current-date-time-format' for the formatting the date/time."
        (insert (format-time-string current-date-time-format (current-time)))
        (insert "\n")
        )
-
-
-
-
 #+end_src
 
 *** default
@@ -572,6 +568,21 @@ Version 2017-01-21"
          ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
          ((eq major-mode 'dired-mode) (call-interactively 'vinegar/up-directory))
          (t nil)))
+#+end_src
+
+** Color
+#+begin_src emacs-lisp :tangle "xah-fly.el"
+;; (defun my-highlight-line-on () (global-hl-line-mode 1))
+;; (defun my-highlight-line-off () (global-hl-line-mode 0))
+
+;; (add-hook! 'xah-fly-command-mode-activate-hook 'my-highlight-line-on)
+;; (add-hook! 'xah-fly-insert-mode-activate-hook  'my-highlight-line-off)
+
+;; (defun my-xfk-command-color () (set-background-color "DeepSkyBlue"))
+;; (defun my-xfk-insert-color () (set-background-color "IndianRed"))
+
+;; (add-hook! 'xah-fly-command-mode-activate-hook 'my-xfk-command-color)
+;; (add-hook! 'xah-fly-insert-mode-activate-hook  'my-xfk-insert-color)
 #+end_src
 * org-mode
 ** config
@@ -900,25 +911,25 @@ Version 2017-01-21"
         '(("nsm"
            :base-directory "~/Documents/org-notes/NSM-GTD"
            :publishing-function org-html-publish-to-html
-           :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
+           :publishing-directory "~/Documents/my-blog/public/custom"
            :exclude "Pattern.org"
            )
           ("init"
-           :base-directory "~/.emacs.d"
+           :base-directory "~/.config/nixpkgs/dotfiles/doom"
            :publishing-function org-html-publish-to-html
-           :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
+           :publishing-directory "~/Documents/my-blog/public/custom"
            :exclude "Pattern.org"
            )
           ("art"
            :base-directory "~/Documents/org-notes/art"
            :publishing-function org-html-publish-to-html
-           :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
+           :publishing-directory "~/Documents/my-blog/public/custom"
            :exclude "Pattern.org"
            )
           ("course"
            :base-directory "~/Documents/org-notes/course"
            :publishing-function org-html-publish-to-html
-           :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
+           :publishing-directory "~/Documents/my-blog/public/custom"
            :exclude "Pattern.org"
            )
           ))
