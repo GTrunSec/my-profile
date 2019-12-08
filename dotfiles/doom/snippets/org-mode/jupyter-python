@@ -2,6 +2,6 @@
 # name: jupyter-python
 # key: jpy
 # --
-#+BEGIN_SRC jupyter-python :session py :exports both :results file :async yes
+#+BEGIN_SRC jupyter-python :session py :exports both :results file :async t
 $1
 #+END_SRC

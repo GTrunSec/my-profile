@@ -2,6 +2,6 @@
 # name:python-src 
 # key: py-                                               
 # --
-#+begin_src python :results output :async t
+#+begin_src python :results output :async t :file "~/Dropbox/Drop-project/my-code/my-python/main.py"
 $1
 #+end_src
