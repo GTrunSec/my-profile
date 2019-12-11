@@ -1,30 +1,47 @@
 with import <nixpkgs> {};
 
+let
+  python = python3Packages.python.withPackages( ps: with ps; [
+    coloredlogs
+    jsondiff
+    pyarrow
+    pyyaml
+    schema
+  ]);
+in
+
 stdenv.mkDerivation rec {
     version = "0.2";
     name = "vast";
     src = fetchgit {
       url = "https://github.com/tenzir/vast.git";
-      rev = "a4c6be45c12e4108dff96484ac66b6776581b0da";
+      rev = "f88106e04f78ed3432898457915d859c1dfe37d5";
       deepClone = true;
-      sha256 = "0z170iv6hpkpcfrfiax91f42i9sdcph9szpf7i0dvgbixidrzhzx";
-  };
+      sha256 = "1mjdi3pjlrczyv4f2j1q6j9fskdprw56h482qxx3a9mkwh0b84h7";
+    };
+
+
   nativeBuildInputs = [ cmake pkgconfig openssl arrow-cpp caf];
   buildInputs = [ cmake gcc caf arrow-cpp openssl doxygen libpcap pandoc
-                  gperftools clang git];
+                  gperftools];
+
+   cmakeFlags = [
+    "-DCMAKE_SKIP_BUILD_RPATH=OFF"
+    "-DNO_AUTO_LIBCPP=ON"
+    "-DENABLE_ZEEK_TO_VAST=OFF"
+    "-DNO_UNIT_TESTS=ON"
+  ];
 
 
   preConfigure = ''
-
-     export LD_LIBRARY_PATH=$PWD/build/aux/caf/lib:$LD_LIBRARY_PATH
-     echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     build-path=$PWD/lib"
-     echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     LD_LIBRARY_PATH=$LD_LIBRARY_PATH"
+     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PWD/lib
  '';
 
+   installCheckInputs = [ jq python tcpdump ];
 
-# cmakeFlags = [ "-DCAF_ROOT_DIR=${caf}" ];
+   installCheckPhase = ''
+    $PWD/integration/integration.py --app ${placeholder "out"}/bin/vast
+  '';
 
   enableParallelBuilding = true;
 
@@ -36,3 +53,4 @@ stdenv.mkDerivation rec {
     platforms = with platforms; linux;
   };
 }
+

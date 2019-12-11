@@ -25,7 +25,7 @@ stdenv.mkDerivation rec {
     
   nativeBuildInputs = [ cmake pkgconfig openssl arrow-cpp caf];
   buildInputs = [ cmake gcc caf arrow-cpp openssl doxygen libpcap pandoc
-                  gperftools clang git];
+                  gperftools];
 
    cmakeFlags = [
     "-DCMAKE_SKIP_BUILD_RPATH=OFF"
