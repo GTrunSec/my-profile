@@ -331,7 +331,7 @@ bar-used-indicator =
 
 [module/network]
 type = internal/network
-interface = ens192
+interface = eno1
 interval = 3.0
 udspeed-minwidth = 5
 accumulate-stats = true
@@ -339,7 +339,7 @@ accumulate-stats = true
 
 [module/networkspeedup]
 type = internal/network
-interface = enp0s31f6
+interface = eno1
 label-connected = "%upspeed:9%"
 format-connected = <label-connected>
 format-connected-prefix = " "
@@ -347,7 +347,7 @@ format-connected-prefix-foreground = #5b
 
 [module/networkspeeddown]
 type = internal/network
-interface = enp0s31f6
+interface = eno1
 label-connected = "%downspeed:7%"
 format-connected = <label-connected>
 format-connected-prefix = " "

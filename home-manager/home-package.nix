@@ -41,6 +41,7 @@ in   {
     brave
     #chat
     signal-desktop
+    #gitter
     #music
     cmus
     compton
@@ -62,6 +63,7 @@ in   {
     #nur
     imgcat
     motrix
+    vast
     (python3.withPackages (pkgs: with pkgs; [
       # rl algorithms
       pip

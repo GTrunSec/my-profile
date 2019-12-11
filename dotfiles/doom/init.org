@@ -4,7 +4,6 @@
 #+AUTHOR: GTrunSec
 #+KEYWORDS: Emacs Profile Doom-Emacs
 #+LANGUAGE:  en cn
-#+OPTIONS: ^:nil
 #+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t pri:t
 #+SETUPFILE: ~/Documents/org-notes/setup/hugo.local
 #+SETUPFILE: ~/Documents/my-blog/public/theme/org-html-themes/setup/theme-readtheorg.setup
@@ -1086,6 +1085,14 @@ In that case, insert the number."
 #+end_src
 ** company-backend
 #+begin_src emacs-lisp :tangle "config.el"
+(set-company-backend! '(nix-mode)
+  '(:separate company-nixos-options
+              company-tabnine
+              company-files
+              company-yasnippet
+              ))
+
+
 (set-company-backend! '(org-mode)
   '(:separate company-english-helper-search
               company-tabnine
