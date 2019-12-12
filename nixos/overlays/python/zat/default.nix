@@ -1,6 +1,7 @@
 { stdenv
 , python3Packages
 , fetchurl
+, gcc8
 }:
 
 python3Packages.buildPythonPackage rec {
@@ -13,17 +14,6 @@ python3Packages.buildPythonPackage rec {
     sha256 = "0a5w7zglayq955rxhc1rbq9vzyi0gwln5abwnwzra13bq86yrdgw";
   };  
 
-  # src = fetchPypi {
-  #   inherit pname version;
-  #   sha256 = "13i7mqg14zp63d52lckslvzgxi75div7864rd1m56dqyc4kwxq7d";
-  # };
-  # src = fetchFromGitHub {
-  #   inherit pname
-  #   owner = "r9y9";
-  #   rev = "$version";
-  #   sha256 = "1yjhvakz0ai65i7n4ah5kakfgpp1inz9fghdvchhhl1a1s2scqfp";
-  # };
-  
 
   propagatedBuildInputs = with python3Packages; [ pandas
                                                    scikitlearn
@@ -31,6 +21,7 @@ python3Packages.buildPythonPackage rec {
                                                    requests
                                                    watchdog
                                                   numpy
+                                                  gcc8
                                                   pyspark
                                                  ];
   doCheck = false;
