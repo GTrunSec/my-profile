@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
 # name: jupyter-julia
-# key: jlp
+# key: jj
 # --
-#+begin_src jupyter-julia :exports both
+#+BEGIN_SRC ein-julia :session localhost :exports both :results raw drawer
 $1
 #+end_src
