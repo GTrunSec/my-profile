@@ -3163,6 +3163,12 @@ See also: https://stackoverflow.com/questions/9547912/emacs-calendar-show-more-t
            :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
            :exclude "Pattern.org"
            )
+          ("nsm"
+           :base-directory "~/Dropbox/Drop-project/my-code"
+           :publishing-function org-html-publish-to-html
+           :publishing-directory "~/Dropbox/application/Bitcron/gtrun.bitcron.com/custom"
+           :exclude ".org"
+           )
           ("init"
            :base-directory "~/.emacs.d"
            :publishing-function org-html-publish-to-html

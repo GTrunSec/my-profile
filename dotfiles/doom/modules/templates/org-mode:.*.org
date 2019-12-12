@@ -5,7 +5,7 @@
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en cn
-#+SETUPFILE: ~/Documents/org-notes/setup/darkcss.local
+#+SETUPFILE: ~/Documents/my-blog/public/theme/org-html-themes/setup/theme-readtheorg.setup
 #+hugo_publishdate: `org-time-stamp-rounding-minutes`
 #+hugo_auto_set_lastmod: t
 #+HUGO_categories: $3

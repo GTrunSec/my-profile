@@ -12,6 +12,7 @@
 #+HUGO_categories: profile Doom-Emacs
 #+HUGO_tags: Emacs Config
 #+PROPERTY: header-args :tangle "~/.emacs.d/init.el"
+
 - [[https://github.com/hlissner/doom-emacs/blob/develop/docs/getting_started.org][doom-emacs/getting_started.org at develop · hlissner/doom-emacs]]
 * init.el
 #+begin_src emacs-lisp :tangle yes
@@ -92,7 +93,7 @@
        ;;direnv
        ;;docker
        ;;editorconfig      ; let someone else argue about tabs vs spaces
-       ;;ein               ; tame Jupyter notebooks with emacs
+       ein               ; tame Jupyter notebooks with emacs
        (eval +overlay)     ; run code, run (also, repls)
        flycheck          ; tasing you for every semicolon you forget
        ;;flyspell          ; tasing you for misspelling mispelling
@@ -914,9 +915,21 @@ Version 2017-01-21"
            :with-author "GTrunSec"
            :publishing-function org-html-publish-to-html
            :publishing-directory "~/Documents/my-blog/public/custom"
+           :exclude "README.org"
+           )
+          ("my-learning"
+           :base-directory "~/Documents/org-publish"
+           :publishing-function org-html-publish-to-html
+           :publishing-directory "~/Documents/my-blog/public/custom"
+           :exclude "README.org"
            )
           ("init"
            :base-directory "~/.config/nixpkgs/dotfiles/doom"
+           :publishing-function org-html-publish-to-html
+           :publishing-directory "~/Documents/my-blog/public/custom"
+           )
+          ("jupyter-math"
+           :base-directory "~/Dropbox/Drop-project/my-mathematic-env/math"
            :publishing-function org-html-publish-to-html
            :publishing-directory "~/Documents/my-blog/public/custom"
            )
@@ -933,12 +946,6 @@ Version 2017-01-21"
           ))
 #+end_src
 
-#+RESULTS:
-| nsm    | :base-directory | ~/Documents/org-notes/NSM-GTD   | :with-author         | GTrunSec                 | :publishing-function  | org-html-publish-to-html          | :publishing-directory | ~/Documents/my-blog/public/custom | :exclude | Pattern.org | :SETUPFILE: | ~/Documents/my-blog/public/theme/org-html-themes/setup/theme-readtheorg.setup |
-| init   | :base-directory | ~/.config/nixpkgs/dotfiles/doom | :publishing-function | org-html-publish-to-html | :publishing-directory | ~/Documents/my-blog/public/custom | :exclude              | Pattern.org                       |          |             |             |                                                                               |
-| art    | :base-directory | ~/Documents/org-notes/art       | :publishing-function | org-html-publish-to-html | :publishing-directory | ~/Documents/my-blog/public/custom | :exclude              | Pattern.org                       |          |             |             |                                                                               |
-| course | :base-directory | ~/Documents/org-notes/course    | :publishing-function | org-html-publish-to-html | :publishing-directory | ~/Documents/my-blog/public/custom | :exclude              | Pattern.org                       |          |             |             |                                                                               |
-
 ** org-notdeft
 - [[https://jingsi.space/post/2017/04/05/organizing-a-complex-directory-for-emacs-org-mode-and-deft/#configuring-deft][Organizing a Complex Directory for Emacs Org Mode and Deft]]
 - [[https://tero.hasu.is/notdeft/#org7b25462][NotDeft | Tero Hasu]]
@@ -949,11 +956,12 @@ Version 2017-01-21"
 (setq notdeft-extension "org")
 ;;(setq notdeft-secondary-extensions '("md" "org" "scrbl"))
 (setq notdeft-directories '("~/Documents/org-notes/post/myself"
-                            "~/Documents/org-notes/post/lift-thing"
+                            "~/Documents/org-notes/post/life-thing"
                             "~/Documents/org-notes/post/traveling"
                             "~/Documents/org-notes/post/agenda"
-                            "~/project/my-code"
-                            "~/Documents/org-notes/GTD/"
+                            "~/Documents/org-notes/post/game"
+                            "~/Dropbox/Drop-project/my-learning-list"
+                            "~/Documents/org-notes/GTD"
                             ))
 
 :bind (:map notdeft-mode-map
@@ -1458,11 +1466,9 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 (package! plantuml-mode)
 (package! ccls)
 (package! company-tabnine)
-(package! jupyter)
 (package! polymode)
 (package! poly-markdown)
 (package! lsp-haskell)
-;;
 (package! bicycle)
 #+end_src
 
@@ -1526,14 +1532,6 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
 
 #+end_src
-** jupyter
-#+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
-(use-package! jupyter
-  :config
-  (setq ob-async-no-async-languages-alist '("jupyter-python" "jupyter-julia"))
-  )
-#+end_src
-
 ** Poly
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
 (use-package! polymode)
@@ -1637,7 +1635,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
 ** Scheme
 - https://gitlab.com/jaor/geiser
-#+begin_src emacs-lisp :tangle "packages.el"
+#+begin_src emacs-lisp :tangle "config.el"
 (use-package! geiser
 :config
 (setq geiser-default-implementation 'racket)
@@ -1844,8 +1842,8 @@ FACE defaults to inheriting from default and highlight."
 
   (define-key org-mode-map (kbd "C-c l") 'grab-x-link)
   (setq notdeft-xapian-program "/home/gtrun/src/notdeft/xapian/notdeft-xapian")
-  (setq jupyter-runtime-directory "~/.local/share/jupyter/runtime")
-  (setq inferior-julia-program-name "/nix/store/qzpr1kwkhnz55mdlq8skc5sqrc6l2j2b-system-path/bin/julia")
+  ;; (setq jupyter-runtime-directory "~/.local/share/jupyter/runtime")
+  ;; (setq inferior-julia-program-name "/nix/store/qzpr1kwkhnz55mdlq8skc5sqrc6l2j2b-system-path/bin/julia")
   (after! org
 
     (org-babel-do-load-languages 'org-babel-load-languages
@@ -1861,7 +1859,7 @@ FACE defaults to inheriting from default and highlight."
                                    (plantuml . t)
                                    (latex . t)
                                    (haskell . t)
-                                   (jupyter . t)
+                                   (ein . t)
                                    ))
 
 
@@ -1943,12 +1941,12 @@ FACE defaults to inheriting from default and highlight."
                                    (plantuml . t)
                                    (latex . t)
                                    (haskell . t)
-                                   (jupyter . t)
+                                   (ein . t)
                                    ))
 
-(setq org-babel-default-header-args:jupyter-julia '((:async . "yes")
-                                                    (:session . "jl")
-                                                    (:kernel . "julia-1.3")))
+;; (setq org-babel-default-header-args:jupyter-julia '((:async . "yes")
+;;                                                     (:session . "jl")
+;;                                                     (:kernel . "julia-1.3")))
 ))
 
 
