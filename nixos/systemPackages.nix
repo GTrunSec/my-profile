@@ -1,13 +1,14 @@
 { config, lib, pkgs, vscode-utils, ... }:
 with pkgs;
-
 let
   customVscode = (import ./custom/vscode.nix { inherit pkgs; });
   customEmacs = (import ./custom/nix-emacs-ci { inherit pkgs; });
+  julia = (import ./custom/julia.nix {inherit pkgs;});
   myEmacs = pkgs.emacs;
 in rec
   {
     hardware.brightnessctl.enable = true;
+
     environment.systemPackages = with pkgs; [
       #customEmacs.emacs_26_3
       # KDE
@@ -155,7 +156,7 @@ in rec
       #   sha256 = "15r0mhdrg9cvkm1jxyyxqnxj7q3k7zr92h8lfsb06abkflr8x59z";
       #   };
       # }))
-      julia_11
+      julia
       #lang-go
       go
       gotools
