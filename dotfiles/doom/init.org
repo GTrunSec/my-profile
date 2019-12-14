@@ -430,7 +430,6 @@ Version 2017-01-21"
      ("q" . quit-window)
      ("a" . counsel-M-x)
      ("e" . sunrise-dired)
-     ("e" . eaf-open)
      ("i" . previous-line)
      ("k" . next-line )
      ("b" . backward-word)
@@ -1864,9 +1863,22 @@ FACE defaults to inheriting from default and highlight."
                                    ))
 
 
-    (setq org-babel-default-header-args:jupyter-julia '((:async . "yes")
-                                                        (:session . "jl")
-                                                        (:kernel . "julia-nodeps-1.1")))
+    ;; (setq org-babel-default-header-args:jupyter-julia '((:async . "yes")
+    ;;                                                     (:session . "jl")
+    ;;                                                     (:kernel . "julia-nodeps-1.1")))
+
+
+    (defun xah-fly-command-mode-init ()
+      "Set command mode keys.
+Version 2017-01-21"
+      (interactive)
+      (xah-fly--define-keys
+       xah-fly-key-map
+       '(
+
+         ("r" . eaf-open)
+         )))
+
 
     ))
 
@@ -1961,6 +1973,10 @@ FACE defaults to inheriting from default and highlight."
 ;; (setq org-babel-default-header-args:jupyter-julia '((:async . "yes")
 ;;                                                     (:session . "jl")
 ;;                                                     (:kernel . "julia-1.3")))
+
+
+
+
 ))
 
 
