@@ -460,6 +460,11 @@ Version 2017-01-21"
     (define-key xah-fly-key-map (kbd "/") 'gtrun-xah-slash-fly-key)
     (define-key xah-fly-key-map (kbd ",") 'gtrun-xah-comma-fly-key)
     (define-key xah-fly-key-map (kbd ".") 'gtrun-xah-dot-fly-key)
+
+    (when (eq system-type 'gnu/linux)
+      (define-key xah-fly-key-map (kbd "r") 'eaf-open)
+      (define-key xah-fly-key-map (kbd "w") 'snails)
+      )
   )
 #+end_src
 ** define-key xah-fly-key-map
@@ -473,16 +478,12 @@ Version 2017-01-21"
  (define-key key-translation-map (kbd "ESC") (kbd "C-x c"))
 )
 
+
 (define-key xah-fly-key-map (kbd "<f4>") 'xah-fly-command-mode-activate)
 (define-key xah-fly-key-map (kbd "C-x c") 'xah-fly-command-mode-activate)
 (define-key xah-fly-key-map (kbd "C-s") 'swiper-isearch)
 (define-key xah-fly-key-map (kbd "C-c w") 'helm-org-rifle)
 
-(define-key xah-fly-key-map (kbd "p") 'gtrun-xah-fly-key)
-(define-key xah-fly-key-map (kbd "-") 'gtrun-xah-minus-fly-key)
-(define-key xah-fly-key-map (kbd "/") 'gtrun-xah-slash-fly-key)
-(define-key xah-fly-key-map (kbd ",") 'gtrun-xah-comma-fly-key)
-(define-key xah-fly-key-map (kbd ".") 'gtrun-xah-dot-fly-key)
 
 (define-key xah-fly-key-map (kbd "C-M-s-o") 'awesome-tab-ace-jump)
 (define-key xah-fly-key-map (kbd "C-;") 'maple-iedit-match-all)
@@ -1820,25 +1821,23 @@ FACE defaults to inheriting from default and highlight."
         (concat doom-private-dir "etc/bookmark-linux-default.el"))
 
 
+  (setq lsp-python-ms-executable  "~/.nix-profile/bin/mspyls")
+
+  (setq org-crypt-key "24945FE0DBD04F4C045025F96F92B3E8F942D425")
 
 
- (setq lsp-python-ms-executable  "~/.nix-profile/bin/mspyls")
+  (set-face-attribute
+   'default nil
+   :font (font-spec :name "-PfEd-Fantasque Sans Mono-bold-italic-normal-*-*-*-*-*-m-0-iso10646-1"
+                    :weight 'normal
+                    :slant 'normal
+                    :size 12.0))
 
- (setq org-crypt-key "24945FE0DBD04F4C045025F96F92B3E8F942D425")
-
-
- (set-face-attribute
-  'default nil
-  :font (font-spec :name "-PfEd-Fantasque Sans Mono-bold-italic-normal-*-*-*-*-*-m-0-iso10646-1"
-                   :weight 'normal
-                   :slant 'normal
-                   :size 12.0))
-
-(when (display-graphic-p)
-  (dolist (charset '(kana han cjk-misc bopomofo))
-    (set-fontset-font (frame-parameter nil 'font) charset
-                      (font-spec :family "Weibei SC" :size 55)))
-  )
+  (when (display-graphic-p)
+    (dolist (charset '(kana han cjk-misc bopomofo))
+      (set-fontset-font (frame-parameter nil 'font) charset
+                        (font-spec :family "Weibei SC" :size 55)))
+    )
 
   (define-key org-mode-map (kbd "C-c l") 'grab-x-link)
   (setq notdeft-xapian-program "/home/gtrun/src/notdeft/xapian/notdeft-xapian")
@@ -1862,29 +1861,15 @@ FACE defaults to inheriting from default and highlight."
                                    (ein . t)
                                    ))
 
-
-    ;; (setq org-babel-default-header-args:jupyter-julia '((:async . "yes")
-    ;;                                                     (:session . "jl")
-    ;;                                                     (:kernel . "julia-nodeps-1.1")))
-
-
-    (defun xah-fly-command-mode-init ()
-      "Set command mode keys.
-Version 2017-01-21"
-      (interactive)
-      (xah-fly--define-keys
-       xah-fly-key-map
-       '(
-
-         ("r" . eaf-open)
-         )))
-
-
     ))
+;; (setq org-babel-default-header-args:jupyter-julia '((:async . "yes")
+;;                                                     (:session . "jl")
+;;                                                     (:kernel . "julia-nodeps-1.1")))
+
 
 (use-package! grab-x-link
   :if (eq system-type 'gnu/linux)
- )
+  )
 
 (use-package! eaf
   :if (eq system-type 'gnu/linux)

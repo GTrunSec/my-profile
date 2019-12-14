@@ -66,8 +66,10 @@ in   {
     vast
     #emacs elf
     lxqt.qtermwidget
+    deepsea
+    vgo2nix
     (python3.withPackages (pkgs: with pkgs; [
-      # rl algorithms
+      # rl algorithms 
       dbus
       qrcode
       pyqt5
