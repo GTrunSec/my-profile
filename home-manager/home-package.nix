@@ -64,9 +64,17 @@ in   {
     imgcat
     motrix
     vast
+    #emacs elf
+    lxqt.qtermwidget
     (python3.withPackages (pkgs: with pkgs; [
       # rl algorithms
-      pip
+      dbus
+      qrcode
+      pyqt5
+      pymupdf
+      xlib
+      grip
+      pyqtwebengine
       pytest
       numpy
       orgparse

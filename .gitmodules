@@ -20,3 +20,6 @@
 [submodule "dotfiles/doom/modules/private/snails"]
 	path = dotfiles/doom/modules/private/snails
 	url = https://github.com/manateelazycat/snails.git
+[submodule "dotfiles/doom/modules/private/emacs-application-framework"]
+	path = dotfiles/doom/modules/private/emacs-application-framework
+	url = https://github.com/manateelazycat/emacs-application-framework.git
