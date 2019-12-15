@@ -638,6 +638,9 @@ Version 2017-01-21"
 *** org-babel
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/setting.el"
 ;; Todo part
+(setq ein:output-type-preference
+      '(emacs-lisp svg png jpeg html text latex javascript))
+
 
 (defun my-org-confirm-babel-evaluate (lang _body)
   "Return t if LANG is in whitelist."
@@ -647,10 +650,10 @@ Version 2017-01-21"
            (string= lang "julia")
            (string= lang "C++")
            (string= lang "C")
-           (string= lang "jupyter-R")
+           (string= lang "ein-R")
            (string= lang "python")
-           (string= lang "jupyter-julia")
-           (string= lang "jupyter-python")
+           (string= lang "ein-julia")
+           (string= lang "ein-python")
            (string= lang "plantuml"))))
 (setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)
 
