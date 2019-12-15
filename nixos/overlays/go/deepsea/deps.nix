@@ -5,9 +5,9 @@
     goPackagePath = "deepsea";
     fetch = {
     type = "git";
-    rev = "59270d8d54f686ff6e41ca21d7c1d4b9a813bb1c";
-    url = "https://github.com/GTrunSec/deepsea";
-    sha256 = "16q2ng4ik3zv84gpzy2038skbcl6r5p0yy55rxx99q2bqyc4gqv1";
+    rev = "dafd8c60fcbe33e398a0cea01447f16a61476165";
+    url = "https://github.com/dsnezhkov/deepsea";
+    sha256 = "0b40dci28i5i2ap39dz9xpcnmr2nvasck4z2464zsg4qz8l9f803";
     };
   }
   {

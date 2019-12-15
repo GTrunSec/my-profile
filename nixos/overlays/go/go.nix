@@ -4,7 +4,7 @@ self: super:
 # https://blog.flyingcircus.io/2017/11/07/nixos-the-dos-and-donts-of-nixpkgs-overlays/
 
 {
-  gooutline    = super.callPackage ./package/gooutline {};
+a  gooutline    = super.callPackage ./package/gooutline {};
   gosymbols    = super.callPackage ./package/gosymbols {};
   gogetdoc     = super.callPackage ./package/gogetdoc {};
   gomodifytags = super.callPackage ./package/gomodifytags {};
