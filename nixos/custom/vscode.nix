@@ -88,8 +88,8 @@ pkgs.vscode-with-extensions.override {
     {
       publisher = "ms-python";
       name = "python";
-      version = "2019.10.41019";
-      sha256 = "0szikd76vy8mgv8zc0m90rx1jrnwwphx5bb8928drln65xwbzs1q";
+      version = "2019.11.50794";
+      sha256 = "1imc4gc3aq5x6prb8fxz70v4l838h22hfq2f8an4mldyragdz7ka";
     }
     
     {
@@ -155,7 +155,40 @@ pkgs.vscode-with-extensions.override {
       sha256 = "0nr8wfxlbb613f29m34jnv1ldfhw6sf5s1pbarmxa7zkkyp46jam";
 
     }
+    #haskell
+    {
+      publisher = "alanz";
+      name = "vscode-hie-server";
+      version = "0.0.31";
+      sha256 = "115h4b5fsyk1f31daa5r18dpimm0ck2gjg0bal272xbaddbg2idp";
 
-    
+    }
+
+      #haskell
+    {
+      publisher = "justusadam";
+      name = "language-haskell";
+      version = "2.6.0";
+      sha256 = "1891pg4x5qkh151pylvn93c4plqw6vgasa4g40jbma5xzq8pygr4";
+
+    }
+    #haskell
+    {
+      publisher = "hoovercj";
+      name = "haskell-linter";
+      version = "0.0.6";
+      sha256 = "0fb71cbjx1pyrjhi5ak29wj23b874b5hqjbh68njs61vkr3jlf1j";
+
+    }
+
+      #haskell
+    {
+      publisher = "ndmitchell";
+      name = "haskell-ghcid";
+      version = "0.2.1";
+      sha256 = "16ibf8ckcmsq000qlvn34ki16qxyvd2wcd76kpjbfk6p3jfcakca";
+
+    }
+
    ];
 }
