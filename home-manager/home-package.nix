@@ -62,6 +62,7 @@ in   {
     ms-pyls
     #nur
     imgcat
+    (import (builtins.fetchTarball "https://github.com/hercules-ci/ghcide-nix/tarball/master") {}).ghcide-ghc865
     motrix
     vast
     #emacs elf
