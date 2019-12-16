@@ -4,6 +4,7 @@ let
   customVscode = (import ./custom/vscode.nix { inherit pkgs; });
   customEmacs = (import ./custom/nix-emacs-ci { inherit pkgs; });
   julia = (import ./custom/julia.nix {inherit pkgs;});
+  #myHaskell = (import ./custom/haskell.nix {inherit pkgs;});
   myEmacs = pkgs.emacs;
 in rec
   {

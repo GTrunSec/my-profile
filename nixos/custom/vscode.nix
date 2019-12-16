@@ -156,20 +156,28 @@ pkgs.vscode-with-extensions.override {
 
     }
     #haskell
-    {
-      publisher = "alanz";
-      name = "vscode-hie-server";
-      version = "0.0.31";
-      sha256 = "115h4b5fsyk1f31daa5r18dpimm0ck2gjg0bal272xbaddbg2idp";
+    # {
+    #   publisher = "alanz";
+    #   name = "vscode-hie-server";
+    #   version = "0.0.31";
+    #   sha256 = "115h4b5fsyk1f31daa5r18dpimm0ck2gjg0bal272xbaddbg2idp";
 
-    }
+    # }
 
       #haskell
-    {
+    { #
       publisher = "justusadam";
       name = "language-haskell";
       version = "2.6.0";
       sha256 = "1891pg4x5qkh151pylvn93c4plqw6vgasa4g40jbma5xzq8pygr4";
+
+    }
+
+    {
+      publisher = "DigitalAssetHoldingsLLC";
+      name = "ghcide";
+      version = "0.0.2";
+      sha256 = "02gla0g11qcgd6sjvkiazzk3fq104b38skqrs6hvxcv2fzvm9zwf";
 
     }
     #haskell
@@ -178,15 +186,6 @@ pkgs.vscode-with-extensions.override {
       name = "haskell-linter";
       version = "0.0.6";
       sha256 = "0fb71cbjx1pyrjhi5ak29wj23b874b5hqjbh68njs61vkr3jlf1j";
-
-    }
-
-      #haskell
-    {
-      publisher = "ndmitchell";
-      name = "haskell-ghcid";
-      version = "0.2.1";
-      sha256 = "16ibf8ckcmsq000qlvn34ki16qxyvd2wcd76kpjbfk6p3jfcakca";
 
     }
 

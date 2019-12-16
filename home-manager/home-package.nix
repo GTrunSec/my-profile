@@ -11,6 +11,7 @@ let
   #   sha256 = "09vasf7kkbag1d1hd2v8wf7amglwbj3xq2qqinh1pv9hb8bdcsg2";
   # });
   
+  
 in   {
   home.packages = with nixpkgs;[
     #remacs
@@ -62,9 +63,29 @@ in   {
     ms-pyls
     #nur
     imgcat
+
+    #haskell
     (import (builtins.fetchTarball "https://github.com/hercules-ci/ghcide-nix/tarball/master") {}).ghcide-ghc865
+    haskellPackages.hlint
+    haskellPackages.hoogle
+    cabal-install
+
+    haskellPackages.alex
+    haskellPackages.happy
+    haskellPackages.zlib
+    haskellPackages.stack
+
+    haskellPackages.cabal2nix
+    haskellPackages.stylish-haskell
+    #multi-ghc-travis
+
+    niv
+    #downloader
     motrix
+
+    #log database
     vast
+    
     #emacs elf
     lxqt.qtermwidget
     deepsea
@@ -118,5 +139,6 @@ in   {
     #blueman
     blueman
     nodejs
+    
   ];
 }
