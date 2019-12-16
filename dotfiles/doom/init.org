@@ -1127,9 +1127,9 @@ In that case, insert the number."
                         css-mode
                         web-mode
                         )
-  '(:separate  company-tabnine
-               company-files
-               company-yasnippet))
+  '(:separate company-tabnine
+              company-files
+              company-yasnippet))
 
 (setq +lsp-company-backend '(company-lsp :with company-tabnine :separate))
 #+end_src
@@ -1480,7 +1480,12 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 (load! "my-latex")
 (load! "show-parentheses")
 
-(use-package! lsp-haskell)
+(use-package! lsp-haskell
+  :config
+  (setq lsp-haskell-process-path-hie "ghcide")
+  (setq lsp-haskell-process-args-hie '())
+  (add-hook 'haskell-mode-hook #'lsp)
+)
 
 (use-package! lsp-mode
   :config
@@ -1549,7 +1554,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
 (use-package! lsp-julia
   :config
-  (add-hook 'ess-julia-mode-hook #'lsp-mode)
+  (add-hook 'ess-julia-mode-hook #'lsp)
   )
 #+end_src
 
@@ -1789,6 +1794,7 @@ FACE defaults to inheriting from default and highlight."
 #+begin_src emacs-lisp :tangle "packages.el"
 (disable-packages! pyim)
 (disable-packages! company-go)
+(disable-packages! intero)
 #+end_src
 * set face
 #+begin_src emacs-lisp :tangle "config.el"
