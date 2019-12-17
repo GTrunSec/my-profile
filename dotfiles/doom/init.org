@@ -509,6 +509,7 @@ Version 2017-01-21"
          ((eq major-mode 'org-mode) (call-interactively 'org-edit-src-code))
          ((eq major-mode 'elfeed-show-mode) (call-interactively 'scrollkeeper-contents-up))
          ((eq major-mode 'elfeed-search-mode) (call-interactively 'scrollkeeper-contents-up))
+         ((eq major-mode 'julia-mode) (call-interactively 'ess-julia-mode))
          (t nil)))
 
       (defun gtrun-xah-comma-fly-key ()
@@ -530,6 +531,7 @@ Version 2017-01-21"
          ((eq major-mode 'w3m-mode) (call-interactively 'w3m-bookmark-add-current-url))
          ((eq major-mode 'org-agenda-mode) (call-interactively 'org-agenda-filter-by-tag))
          ((eq major-mode 'elfeed-search-mode) (call-interactively 'elfeed-update))
+         ((eq major-mode 'ess-julia-mode) (call-interactively 'julia-mode))
          (t nil)))
 
       (defun gtrun-xah-semicolon-fly-key ()
@@ -1555,7 +1557,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
 (use-package! lsp-julia
   :config
-  (add-hook 'ess-julia-mode-hook #'lsp)
+  (add-hook 'julia-mode-hook #'lsp)
   )
 #+end_src
 

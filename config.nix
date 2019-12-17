@@ -1,1 +1,3 @@
-{ allowUnfree = true; }
+{ allowUnfree = true;
+  allowBroken = true; # intero only?
+}

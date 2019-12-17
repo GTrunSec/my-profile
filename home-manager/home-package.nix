@@ -1,10 +1,10 @@
 let
-  ownpkgs = (import ~/.config/nixpkgs/nixos/channel/nixpkgs) { };
+  nixpkgs = (import ~/.config/nixpkgs/nixos/channel/nixpkgs) { };
   remacs = (import ./programs/remacs-nix/build.nix) {};
   unstable = import <nixpkgs-unstable> { };
 
 in   {
-  home.packages = with ownpkgs;[
+  home.packages = with nixpkgs;[
     #remacs
     aria2
     xclip
@@ -59,7 +59,7 @@ in   {
     haskellPackages.hlint
     haskellPackages.hoogle
     cabal-install
-
+    #(haskell.lib.dontCheck haskellPackages.intero)
     haskellPackages.alex
     haskellPackages.happy
     haskellPackages.zlib
