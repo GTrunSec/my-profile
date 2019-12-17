@@ -1026,6 +1026,7 @@ make
 ** [[https://github.com/lepisma/org-books][lepisma/org-books: Reading list management with org mode]]
 
 ** ☞ TODO [[https://github.com/ianxm/emacs-scrum][ianxm/emacs-scrum: dynamic scrum report generation for org-mode buffers]]
+** ☞ TODO [[https://github.com/jingtaozf/literate-elisp][jingtaozf/literate-elisp: a literate programming tool to load Emacs Lisp codes from org mode file directly]] :lisp:org:
 * Completion
 ** Ivy/counsel
 
