@@ -32,7 +32,13 @@ in   {
     # }))
     brave
     #chat
-    signal-desktop
+    (signal-desktop.overrideDerivation (oldAttrs: {
+      version = "1.29.0";
+      src = fetchurl {
+        url = "https://updates.signal.org/desktop/apt/pool/main/s/signal-desktop/signal-desktop_1.29.0_amd64.deb";
+        sha256 = "1zbj0z4bhmg6zf975bn67wpr1kdi0h05d90aniijnh5wqgnwhfqn";
+      };
+    }))
     #gitter
     #music
     cmus
