@@ -1,19 +1,10 @@
-with import <nixpkgs> {};
 let
-  nixpkgs = (import ~/.config/nixpkgs/nixos/channel/nixpkgs) { };
+  ownpkgs = (import ~/.config/nixpkgs/nixos/channel/nixpkgs) { };
   remacs = (import ./programs/remacs-nix/build.nix) {};
   unstable = import <nixpkgs-unstable> { };
-  # Currently not used in favour of nix-mode
-  # hnix-lsp = import (pkgs.fetchFromGitHub {
-  #   owner = "domenkozar";
-  #   repo = "hnix-lsp";
-  #   rev = "d678f56639067f54144ae08cdf3657889348723c";
-  #   sha256 = "09vasf7kkbag1d1hd2v8wf7amglwbj3xq2qqinh1pv9hb8bdcsg2";
-  # });
-  
-  
+
 in   {
-  home.packages = with nixpkgs;[
+  home.packages = with ownpkgs;[
     #remacs
     aria2
     xclip
@@ -65,7 +56,6 @@ in   {
     imgcat
 
     #haskell
-    (import (builtins.fetchTarball "https://github.com/hercules-ci/ghcide-nix/tarball/master") {}).ghcide-ghc865
     haskellPackages.hlint
     haskellPackages.hoogle
     cabal-install
@@ -75,14 +65,12 @@ in   {
     haskellPackages.zlib
     haskellPackages.stack
 
-    haskellPackages.cabal2nix
     haskellPackages.stylish-haskell
     #multi-ghc-travis
-
     niv
     #downloader
     motrix
-
+    #adguardhome
     #log database
     vast
     

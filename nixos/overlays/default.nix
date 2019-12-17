@@ -9,6 +9,6 @@ self: super:
   dnsproxy = super.callPackage ./system/adguard-dns.nix {};
   deepsea = super.callPackage ./go/deepsea {};
   orgbabelhelper = super.callPackage ./python/orgbabelhelper {};
-#  nuclear = super.callPackage ./custom/feh-nuclear.nix {};
+  adguardhome = super.callPackage ./go/adguard-home {};
 #  outline-client = super.callPackage ./custom/outline-client.nix {};
 }
