@@ -596,6 +596,7 @@ Version 2017-01-21"
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (load! "setting")
 (add-hook! 'after-init-hook 'org-starter-load-all-files-in-path)
+(add-hook! 'org-mode-hook 'auto-revert-mode)
 (use-package! company-english-helper)
 (use-package! ox-hugo)
 (use-package! ob-session-async)
