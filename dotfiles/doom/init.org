@@ -642,6 +642,23 @@ Version 2017-01-21"
 *** org-babel
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/setting.el"
 ;; Todo part
+
+(org-babel-do-load-languages 'org-babel-load-languages
+                             '((emacs-lisp . t)
+                               (dot . t)
+                               (ditaa . t)
+                               (R . t)
+                               (python . t)
+                               (gnuplot . t)
+                               (lisp . t)
+                               (julia . t)
+                               (shell . t)
+                               (org . t)
+                               (plantuml . t)
+                               (latex . t)
+                               (haskell . t)
+                               (ein . t)
+                               ))
 (setq ein:output-type-preference
       '(emacs-lisp svg png jpeg html text latex javascript))
 
@@ -1859,27 +1876,10 @@ FACE defaults to inheriting from default and highlight."
 
   (add-hook 'ob-async-pre-execute-src-block-hook
             '(lambda ()
-               (setq inferior-julia-program-name
-                     "/nix/store/qzpr1kwkhnz55mdlq8skc5sqrc6l2j2b-system-path/bin/julia")))
+               (setq inferior-julia-program-name "/nix/store/fi7c1417hcv093ffyf03rdrlw84qb6mi-system-path/bin/julia")))
 
-  (after! org
-    (org-babel-do-load-languages 'org-babel-load-languages
-                                 '((emacs-lisp . t)
-                                   (dot . t)
-                                   (ditaa . t)
-                                   (R . t)
-                                   (python . t)
-                                   (gnuplot . t)
-                                   (lisp . t)
-                                   (shell . t)
-                                   (org . t)
-                                   (plantuml . t)
-                                   (latex . t)
-                                   (haskell . t)
-                                   (ein . t)
-                                   ))
 
-    ))
+    )
 
 (use-package! grab-x-link
   :if (eq system-type 'gnu/linux)
@@ -1908,6 +1908,7 @@ FACE defaults to inheriting from default and highlight."
   (define-key snails-mode-map [remap next-line] #'snails-select-next-item)
   (add-hook 'snails-mode-hook #'xah-fly-insert-mode-activate))
 #+end_src
+
 
 #+begin_src emacs-lisp :tangle "./modules/my-linux.el"
 (provide 'my-linux)
@@ -1951,30 +1952,11 @@ FACE defaults to inheriting from default and highlight."
 
 (setq notdeft-xapian-program "/Users/gtrun/src/notdeft/xapian/notdeft-xapian")
 
-  ;;(setq inferior-julia-program-name "/nix/store/qzpr1kwkhnz55mdlq8skc5sqrc6l2j2b-system-path/bin/julia")
-  (after! org
-    (org-babel-do-load-languages 'org-babel-load-languages
-                                 '((emacs-lisp . t)
-                                   (dot . t)
-                                   (ditaa . t)
-                                   (R . t)
-                                   (python . t)
-                                   (gnuplot . t)
-                                   (lisp . t)
-                                   (shell . t)
-                                   (org . t)
-                                   (plantuml . t)
-                                   (latex . t)
-                                   (haskell . t)
-                                   (ein . t)
-                                   ))
-
-
 (add-hook 'ob-async-pre-execute-src-block-hook
         '(lambda ()
            (setq inferior-julia-program-name "/usr/local/bin/julia")))
 
-))
+)
 
 
 
