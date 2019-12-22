@@ -35,7 +35,7 @@ let
     linuxPackages.nvidia_x11
     git gitRepo gnupg autoconf curl
     procps gnumake utillinux m4 gperf unzip
-    libGLU_combined
+    #libGLU_combined
     xorg.libXi xorg.libXmu freeglut
     xorg.libXext xorg.libX11 xorg.libXv xorg.libXrandr zlib
     ncurses5 stdenv.cc binutils

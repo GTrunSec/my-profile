@@ -45,11 +45,14 @@
   
 
   # Select internationalisation properties.
+  console = {
+    font = "Lat2-Terminus16";
+  };
+
   i18n = {
-     defaultLocale = "en_US.UTF-8";
-     consoleFont = "Lat2-Terminus16";
-     inputMethod.enabled = "fcitx";
-     inputMethod.fcitx.engines = [ pkgs.fcitx-engines.rime ];
+    defaultLocale = "en_US.UTF-8";
+    inputMethod.enabled = "fcitx";
+    inputMethod.fcitx.engines = [ pkgs.fcitx-engines.rime ];
   };
 
   programs.fish.enable = true;

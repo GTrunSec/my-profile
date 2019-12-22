@@ -52,12 +52,11 @@ in
          #   ${pkgs.xlibs.xrdb}/bin/xrdb -load /etc/X11/Xresources
          # '';
       };
-      default = "i3";
     };
 
     videoDrivers = [ "nvidiaBeta" "intel"];
 
-    desktopManager.default = "none";
+    displayManager.defaultSession = "none+i3";
     desktopManager.xterm.enable = false;
   };
   boot.blacklistedKernelModules = [ "nouveau" ];

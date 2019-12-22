@@ -5,14 +5,14 @@
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
-	  extraConfig = ''
-	      ControllerMode = bredr
-	      AutoConnect=true
-	      [Headset]
-	      HFP=true
-	      MaxConnected=1
-	      FastConnectable=true
-	      '';
+	  # config = ''
+	  #     ControllerMode = bredr
+	  #     AutoConnect=true
+	  #     [Headset]
+	  #     HFP=true
+	  #     MaxConnected=1
+	  #     FastConnectable=true
+	  #     '';
 	};
 	hardware.pulseaudio = {
 	  enable = true;
