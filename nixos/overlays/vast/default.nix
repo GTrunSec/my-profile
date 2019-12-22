@@ -10,6 +10,7 @@ let
     pyyaml
     schema
   ]);
+
 in
 
 stdenv.mkDerivation rec {
@@ -19,7 +20,7 @@ stdenv.mkDerivation rec {
       url = "https://github.com/tenzir/vast.git";
       rev = "f88106e04f78ed3432898457915d859c1dfe37d5";
       deepClone = true;
-      sha256 = "1mjdi3pjlrczyv4f2j1q6j9fskdprw56h482qxx3a9mkwh0b84h7";
+      sha256 = "07r4ffbzj7618pj265fz2n4gq6zi98xb92k7vvk08axg6dw4wh74";
     };
 
     

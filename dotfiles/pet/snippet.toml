@@ -1,40 +1,34 @@
 [[snippets]]
   description = "cut zeek log"
   command = "cat <log> | zeek-cut <field>"
-  tag = ["zee-cut"]
   output = ""
 
 ###vast
 [[snippets]]
   description = "zeek|vast: import zeek logs to vast"
-  command = "zcat <ZeekLogsPath/*.log.gz | vast import zeek"
-  tag = ["zeek", "vast"]
+  command = "zcat <ZeekLogsPath/*.log.gz> | vast import zeek"
   output = ""
 
 [[snippets]]
   description = "zeek|vast: export zeek logs filtered by addr "
   command = " vast export zeek ':addr in <addr>'"
-  tag = ["zeek", "vast"]
   output = ""
 
 
 [[snippets]]
   description = "docker: clean regex"
-  tag = ["docker", "clean"]
   command = "docker rmi (docker images --filter=reference='<regex>' -q)"
   output = ""
 
 ### deepsea
 [[snippets]]
   description = "deepsea: Inline CSS with template"
-  tag = ["mail", "phishing", "smtp"]
   command = "deepsea --config template.yaml content inline"
   output = ""
 
 
 [[snippets]]
   description = "deepsea: Create a TXT verson from the HTML version (.ttpl)"
-  tag = ["mail", "phishing", "smtp"]
   command = "deepsea --config template.yaml content multipart"
   output = ""
 
@@ -42,23 +36,19 @@
 [[snippets]]
   description = "deepsea-Step1: create DB and createtable "
   command = "deepsea -t --config template.yaml storage -D template.db manager  -T createtable"
-  tag = ["mail", "phishing", "smtp"]
   output = "if this command failed, you can touch a db <name>.db file"
 
 [[snippets]]
   description = "deepsea: load marks from CSV"
-  tag = ["mail", "phishing", "smtp"]
   command = "deepsea -t --config template.yaml "
 
 [[snippets]]
   description = "deepsea: show the marks are loaded"
   command = "deepsea --config template.yaml  storage  -d template.db manager  -T showmarks"
-  tag = ["mail", "phishing", "smtp"]
   output = ""
 
 
 [[snippets]]
   description = "deepsea: mailclient"
   command = "deepsea mailclient --config template.yaml"
-  tag = ["mail", "phishing", "smtp"]
   output = ""
