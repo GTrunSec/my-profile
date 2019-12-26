@@ -644,22 +644,6 @@ Version 2017-01-21"
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/setting.el"
 ;; Todo part
 
-(org-babel-do-load-languages 'org-babel-load-languages
-                             '((emacs-lisp . t)
-                               (dot . t)
-                               (ditaa . t)
-                               (R . t)
-                               (python . t)
-                               (gnuplot . t)
-                               (lisp . t)
-                               (julia . t)
-                               (shell . t)
-                               (org . t)
-                               (plantuml . t)
-                               (latex . t)
-                               (haskell . t)
-                               (ein . t)
-                               ))
 (setq ein:output-type-preference
       '(emacs-lisp svg png jpeg html text latex javascript))
 
