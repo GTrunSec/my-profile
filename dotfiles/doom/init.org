@@ -217,6 +217,11 @@
 (package! yatemplate)
 (package! pinyin-search)
 (package! grab-x-link)
+
+;; window
+(package! dimmer)
+(package! beacon)
+(package! golden-ratio)
 #+end_src
 ** third-part
 #+begin_src emacs-lisp :tangle "packages.el"
@@ -1195,6 +1200,31 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 ;; ("C-c k" .  awesome-tab-backward-group)
 ;; ("C-c o" . awesome-tab-switch-group)
 
+#+end_src
+*** Dimming Unused Windows
+#+begin_src emacs-lisp :tangle "config.el"
+(use-package! dimmer
+  :config (dimmer-mode))
+#+end_src
+*** beacon
+#+begin_src emacs-lisp :tangle "config.el"
+(use-package! beacon
+  :diminish
+  :config (setq beacon-color "#666600")
+  :hook   ((org-mode text-mode) . beacon-mode))
+#+end_src
+
+*** Flashing when something goes wrong —no blinking
+#+begin_src emacs-lisp :tangle "config.el"
+(setq visible-bell 1)
+#+end_src
+
+*** golden-ratio
+#+begin_src emacs-lisp :tangle "config.el"
+(use-package golden-ratio
+  :disabled
+  :diminish golden-ratio-mode
+  :init (golden-ratio-mode 1))
 #+end_src
 ** theme
 *** [[https://github.com/vbuzin/berrys-theme][vbuzin/berrys-theme: A light, clean and elegant Emacs theme]]
