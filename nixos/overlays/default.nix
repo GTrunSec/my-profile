@@ -8,7 +8,8 @@ self: super:
   vast = super.callPackage ./vast {};
   dnsproxy = super.callPackage ./system/adguard-dns.nix {};
   deepsea = super.callPackage ./go/deepsea {};
+  horcrux = super.callPackage ./go/horcrux {};
   orgbabelhelper = super.callPackage ./python/orgbabelhelper {};
-  adguardhome = super.callPackage ./go/adguard-home {};
+#  adguardhome = super.callPackage ./go/adguard-home {};
 #  outline-client = super.callPackage ./custom/outline-client.nix {};
 }

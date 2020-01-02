@@ -110,6 +110,7 @@ in   {
       ipykernel
     ]))   
     #Go
+    horcrux
     #zeek
     rocksdb
     sqlite
