@@ -13,8 +13,7 @@
 #+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t
 #+SELECT_TAGS: export
 #+EXCLUDE_TAGS: noexport
-* xah fly key
-** pre setting && load
+* pre setting && load
 
 #+begin_src emacs-lisp :tangle "xah-fly.el"
 (require 'xah-fly-keys)
@@ -29,8 +28,8 @@
   (xah-fly-keys 1))
   ;; (xah-fly-keys-set-layout "qwerty")
 #+END_SRC
-** Xah lee prefix-command keymap
-*** xah-fly-leader-key-map
+
+* xah-fly-leader-key-map
 #+begin_src emacs-lisp :tangle "xah-fly.el"
   ;; make xah-fly-keys 【leader 8】 as prefix for my-keymap
   (xah-fly--define-keys
@@ -39,6 +38,7 @@
      ("8" . my-keymap)
      ("2" . org-keymap)
      ("m" . magit-key)
+     ("w" . window-key)
 
      ("fr" . counsel-recentf)
      ("fp" . doom/find-file-in-private-config)
@@ -64,42 +64,7 @@
 ))
 
 #+END_SRC
-*** my-keymap
-#+begin_src emacs-lisp :tangle "xah-fly.el"
-
-  (xah-fly--define-keys
-   ;; create a keymap my-keymap
-   (define-prefix-command 'my-keymap)
-   '(
-     ("a" . counsel-ag)
-     ("r" . counsel-rg)
-     ;;
-     ))
-#+END_SRC
-
-*** org-mode-xah-fly-key
-#+begin_src emacs-lisp :tangle "xah-fly.el"
-  (xah-fly--define-keys
-   ;; create a keymap org-keymap
-   (define-prefix-command 'org-keymap)
-   '(
-     ("i" . org-clock-in)
-     ("o" . org-clock-out)
-     ))
-;; (defun my-xah-fly-key-org-keymap ()
-;;   (interactive)
-;;   (require 'xah-fly-keys)
-;;   (xah-fly--define-keys
-;;    ;; create a keymap org-keymap
-;;    (define-prefix-command 'xah-fly-leader-key-map)
-;;    '(
-;;      ("i" . org-clock-in)
-;;      ("o" . org-clock-out)
-;;      ))
-;; )
-;; (add-hook! 'org-mode-hook 'my-xah-fly-key-org-keymap)
-#+end_src
-** xah-fly-command-mode-init
+* xah-fly-command-mode-init
 #+begin_src emacs-lisp :tangle "xah-fly.el"
 (defun xah-fly-command-mode-init ()
   "Set command mode keys.
@@ -153,7 +118,7 @@ Version 2017-01-21"
       )
   )
 #+end_src
-** define-key xah-fly-key-map
+* define-key xah-fly-key-map
 #+begin_src emacs-lisp :tangle "xah-fly.el"
 (define-key xah-fly-key-map (kbd "C-a") 'beginning-of-visual-line)
 (define-key xah-fly-key-map (kbd "C-0") 'delete-region)
@@ -284,4 +249,51 @@ Version 2017-01-21"
    '(
      ("s" . magit)
      ))
+#+end_src
+
+* window
+#+begin_src emacs-lisp :tangle "xah-fly.el"
+  (xah-fly--define-keys
+   ;; create a keymap org-keymap
+   (define-prefix-command 'window-key)
+   '(
+     ("r" . split-window-right)
+     ("b" . split-window-below)
+     ("d" . delete-window)
+     ("o" . delete-other-windows)
+     ))
+#+end_src
+* My-search
+#+begin_src emacs-lisp :tangle "xah-fly.el"
+
+  (xah-fly--define-keys
+   ;; create a keymap my-keymap
+   (define-prefix-command 'my-keymap)
+   '(
+     ("a" . counsel-ag)
+     ("r" . counsel-rg)
+     ;;
+     ))
+#+END_SRC
+* org-mode
+#+begin_src emacs-lisp :tangle "xah-fly.el"
+  (xah-fly--define-keys
+   ;; create a keymap org-keymap
+   (define-prefix-command 'org-keymap)
+   '(
+     ("i" . org-clock-in)
+     ("o" . org-clock-out)
+     ))
+;; (defun my-xah-fly-key-org-keymap ()
+;;   (interactive)
+;;   (require 'xah-fly-keys)
+;;   (xah-fly--define-keys
+;;    ;; create a keymap org-keymap
+;;    (define-prefix-command 'xah-fly-leader-key-map)
+;;    '(
+;;      ("i" . org-clock-in)
+;;      ("o" . org-clock-out)
+;;      ))
+;; )
+;; (add-hook! 'org-mode-hook 'my-xah-fly-key-org-keymap)
 #+end_src

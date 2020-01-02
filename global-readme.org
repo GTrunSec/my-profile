@@ -25,7 +25,8 @@
 ** ESXI
 - SSD 225GB 
 - 2T extended
-
+** devops
+*** [[https://github.com/dev-sec/puppet-os-hardening][dev-sec/puppet-os-hardening: This puppet module provides numerous security-related configurations, providing all-round base protection.]]
 * Global
 ** font
 *** ttf-monaco
@@ -58,6 +59,11 @@ brew install rxvt-unicode
 #+end_src
 ** Download
 *** [[https://github.com/agalwood/Motrix/][agalwood/Motrix: A full-featured download manager.]]
+*** [[https://github.com/iawia002/annie][iawia002/annie: 👾 Fast, simple and clean video downloader]] :video:
+** ssh
+*** [[https://github.com/bastillion-io/Bastillion][bastillion-io/Bastillion: Bastillion is a web-based SSH console that centrally manages administrative access to systems. Web-based administration is combined with management and distribution of user's public SSH keys.]]
+*** [[https://termius.com/][Termius]]
+
 * window
 ** Login Manager
 *** [[https://github.com/adi1090x/slim_themes][adi1090x/slim_themes: A Beautiful Collection Of SLiM Themes...]]
