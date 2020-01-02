@@ -358,6 +358,7 @@ Uses `current-date-time-format' for the formatting the date/time."
 *** org-global
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/setting.el"
 (setq org-clock-into-drawer t)
+(setq org-directory "~/Documents/org-notes")
 (setq org-log-into-drawer t)
 (setq org-agenda-start-day "-1d")
 (setq org-agenda-span 2)
