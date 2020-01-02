@@ -12,7 +12,6 @@
 #+HUGO_categories: profile Doom-Emacs
 #+HUGO_tags: Emacs Config
 #+PROPERTY: header-args :tangle "~/.emacs.d/init.el"
-#+INCLUDE: xah-fly.org
 - [[https://github.com/hlissner/doom-emacs/blob/develop/docs/getting_started.org][doom-emacs/getting_started.org at develop · hlissner/doom-emacs]]
 * init.el
 #+begin_src emacs-lisp :tangle yes
@@ -222,6 +221,7 @@
 (package! dimmer)
 (package! beacon)
 (package! golden-ratio)
+(package! writegood-mode)
 #+end_src
 ** third-part
 #+begin_src emacs-lisp :tangle "packages.el"
@@ -243,14 +243,6 @@
 #+begin_src emacs-lisp :tangle "config.el"
 (load! "setting")
 (load! "xah-fly.el")
-
-(add-hook 'visual-line-mode-hook #'visual-fill-column-mode)
-(add-hook 'visual-fill-column-mode-hook #'visual-line-mode)
-(add-hook 'w3m-display-hook #'visual-line-mode)
-(add-hook! 'after-init-hook #'global-hungry-delete-mode)
-
-(advice-add 'text-scale-adjust :after
-  #'visual-fill-column-adjust)
 
 
 (use-package! pinyin-search)
@@ -1135,6 +1127,18 @@ In that case, insert the number."
     (setq eyebrowse-new-workspace t)))
     #+end_src
 ** window
+*** setting
+#+begin_src emacs-lisp :tangle "config.el"
+(add-hook 'visual-line-mode-hook #'visual-fill-column-mode)
+(add-hook 'visual-fill-column-mode-hook #'visual-line-mode)
+(add-hook 'w3m-display-hook #'visual-line-mode)
+(add-hook! 'after-init-hook #'global-hungry-delete-mode)
+
+(add-hook 'before-save-hook 'whitespace-cleanup)
+
+(advice-add 'text-scale-adjust :after
+  #'visual-fill-column-adjust)
+#+end_src
 *** tab
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! awesome-tab
@@ -1221,7 +1225,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
 *** golden-ratio
 #+begin_src emacs-lisp :tangle "config.el"
-(use-package golden-ratio
+(use-package! golden-ratio
   :disabled
   :diminish golden-ratio-mode
   :init (golden-ratio-mode 1))
@@ -1237,6 +1241,24 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 ;;   (setq-default cursor-type '(bar . 2))
 ;;   (setq-default line-spacing 2))
 #+end_src
+** [[https://github.com/bnbeckwith/writegood-mode][bnbeckwith/writegood-mode: Minor mode for Emacs to improve English writing]]
+#+begin_src emacs-lisp :tangle "config.el"
+(use-package! writegood-mode
+  ;; Load this whenver I'm composing prose.
+  :hook (text-mode org-mode)
+  ;; Don't show me the “Wg” marker in the mode line
+  :diminish
+  ;; Some additional weasel words.
+  :config
+  (--map (push it writegood-weasel-words)
+         '("some" "simple" "simply" "easy" "often" "easily" "probably"
+           "clearly"               ;; Is the premise undeniably true?
+           "experience shows"      ;; Whose? What kind? How does it do so?
+           "may have"              ;; It may also have not!
+           "it turns out that")))  ;; How does it turn out so?
+           ;; ↯ What is the evidence of highighted phrase? ↯
+#+end_src
+
 * my-codes
 ** packages
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/packages.el"
