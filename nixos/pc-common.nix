@@ -31,8 +31,6 @@ with builtins;
     (import ./overlays/custom/Motrix.nix)
     (import ./overlays/custom/shadowsocks-qt5.nix)
     (import ./overlays/python/01-yapf.nix)
-    (import ./overlays/python/02-ms-pyls.nix)
-    #    (import ./overlays/python/03-bat.nix)
     (import ./overlays/python/04-test.nix)
     (import ./overlays)
     (import ./overlays/libvirtd.nix)

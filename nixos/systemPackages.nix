@@ -30,12 +30,6 @@ in rec
       ]))
       postgresql
       #openvpn
-      # (texmacs.overrideDerivation (oldAttrs: {
-      #   src = fetchurl {
-      #     url ="http://www.texmacs.org/Download/ftp/tmftp/source/TeXmacs-1.99.11-src.tar.gz";
-      #     sha256 = "12bp0f34izzqimz49lfpgf4lyz3h45s9xbmk8v6zsawdjki76alg";
-      #   };
-      # }))
       (texmacs.override {chineseFonts = true; extraFonts = true;})
       ( texlive.combine # latex + packages
         { inherit (texlive)
@@ -139,7 +133,7 @@ in rec
       gcc9
       #lang-haskell
       cabal2nix # create nix expressions for haskell projects from cabal file
-      (import (builtins.fetchTarball "https://github.com/GTrunSec/ghcide-nix/tarball/master") {}).ghcide-ghc865
+     #(import (builtins.fetchTarball "https://github.com/GTrunSec/ghcide-nix/tarball/master") {}).ghcide-ghc865
       #lang-c++
       llvmPackages.libclang
       clang

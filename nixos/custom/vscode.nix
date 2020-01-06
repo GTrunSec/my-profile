@@ -189,5 +189,14 @@ pkgs.vscode-with-extensions.override {
 
     }
 
+    # yara
+    {
+      publisher = "infosec-intern";
+      name = "yara";
+      version = "1.3.8";
+      sha256 = "0qflr3ajidczfksmpvbnvawcbcf835l4wyix9a9dfch5dj4x0h22";
+
+    }
+
    ];
 }
