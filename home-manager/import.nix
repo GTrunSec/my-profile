@@ -7,6 +7,5 @@
     #lang
     ./home-package.nix
     #programs
-  ];
-
+  ]; 
 }

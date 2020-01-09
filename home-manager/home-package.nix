@@ -3,6 +3,14 @@ let
   remacs = (import ./programs/remacs-nix/build.nix) {};
   unstable = import <nixpkgs-unstable> { };
 
+  
+  ownpkgs_git = builtins.fetchTarball {
+    url    = "https://github.com/GTrunSec/nixpkgs-channels/tarball/60e1709baefb8498103d598ca4f14ac39719d448";
+    sha256 = "15vsi0k65vjmr57jdjihad1yx0d8i83xnc0v7fpymgrwldvjblx4";
+  };
+
+  ownpkgs = (import ownpkgs_git) { };
+ 
 in   {
   home.packages = with nixpkgs;[
     #remacs
@@ -11,6 +19,7 @@ in   {
     screenfetch
     urxvt_perls
     ag
+    hunspell
     #dnsproxy
     graphviz
     rofi
@@ -84,8 +93,10 @@ in   {
     lxqt.qtermwidget
     deepsea
     vgo2nix
-    (python3.withPackages (pkgs: with pkgs; [
-      # rl algorithms 
+
+    ##https://github.com/NixOS/nixpkgs/issues/77304 reset to stable rev. cause of pandas test failed.
+    (ownpkgs.python3.withPackages (ownpkgs: with ownpkgs; [
+      # rl algorithms
       dbus
       qrcode
       pyqt5
@@ -108,7 +119,8 @@ in   {
       notebook
       orgbabelhelper
       ipykernel
-    ]))   
+    ]))
+
     #Go
     horcrux
     #zeek
