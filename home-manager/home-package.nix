@@ -87,7 +87,7 @@ in   {
     motrix
     #adguardhome
     #log database
-    vast
+    #vast
     
     #emacs elf
     lxqt.qtermwidget
@@ -95,7 +95,7 @@ in   {
     vgo2nix
 
     ##https://github.com/NixOS/nixpkgs/issues/77304 reset to stable rev. cause of pandas test failed.
-    (ownpkgs.python3.withPackages (ownpkgs: with ownpkgs; [
+    (python3.withPackages (pkgs: with pkgs; [
       # rl algorithms
       dbus
       qrcode
