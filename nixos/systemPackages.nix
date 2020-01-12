@@ -173,8 +173,10 @@ in rec
       rxvt_unicode.terminfo
 
       ncurses.dev # infocmp/tic/etc
-      spectacle
 
+      #screenhot
+      #spectacle
+      flameshot
       mpv
       rocksdb
       #

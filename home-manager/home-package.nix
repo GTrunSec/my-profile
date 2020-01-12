@@ -99,7 +99,7 @@ in   {
     (emacsPackages.emacsWithPackages (with pkgs.emacsPackagesNg; [
     emacs-libvterm
     ]))
-    ##https://github.com/NixOS/nixpkgs/issues/77304 reset to stable rev. cause of pandas test failed.
+
     (python3.withPackages (pkgs: with pkgs; [
       # rl algorithms
       dbus
