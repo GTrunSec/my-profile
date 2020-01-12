@@ -44,8 +44,8 @@ in   {
     (signal-desktop.overrideDerivation (oldAttrs: {
       version = "1.29.0";
       src = fetchurl {
-        url = "https://updates.signal.org/desktop/apt/pool/main/s/signal-desktop/signal-desktop_1.29.0_amd64.deb";
-        sha256 = "1zbj0z4bhmg6zf975bn67wpr1kdi0h05d90aniijnh5wqgnwhfqn";
+        url = "https://updates.signal.org/desktop/apt/pool/main/s/signal-desktop/signal-desktop_1.29.3_amd64.deb";
+        sha256 = "1rkj6rwmwwvyd5041r96j1dxlfbmc6xsdrza43c0ykdrhfj73h11";
       };
     }))
     #gitter
@@ -57,8 +57,8 @@ in   {
     screenfetch
     (polar-bookshelf.overrideDerivation (oldAttrs: {
       src = fetchurl {
-        url = "https://github.com/burtonator/polar-bookshelf/releases/download/v1.80.10/polar-bookshelf-1.80.10-amd64.deb";
-        sha256 = "1gbk2igk8k9kndvg2rrgfycrw4pdfiwi9fhpai6gh12dxj598l2w";
+        url = "https://github.com/burtonator/polar-bookshelf/releases/download/v1.90.0/polar-bookshelf-1.90.0-amd64.deb";
+        sha256 = "0l2knbrmz26h2c6wbgq7xlisiqrmaxkdbmmrfp6wlz83mnqzi0nb";
       };
     }))
     #overlay
@@ -93,7 +93,12 @@ in   {
     lxqt.qtermwidget
     deepsea
     vgo2nix
-
+    libvterm
+    libtool
+    #emacsPackages
+    (emacsPackages.emacsWithPackages (with pkgs.emacsPackagesNg; [
+    emacs-libvterm
+    ]))
     ##https://github.com/NixOS/nixpkgs/issues/77304 reset to stable rev. cause of pandas test failed.
     (python3.withPackages (pkgs: with pkgs; [
       # rl algorithms
