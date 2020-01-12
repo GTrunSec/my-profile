@@ -18,6 +18,19 @@
 + [[https://gtrunsec.carto.com/dashboard/get-started/cartoframes#step-2][Get Started | CARTO]]
 
 * Myself
+
+* Nix
+
+** Macos
+- [[https://github.com/NixOS/nix/issues/2925][/nix will not be writable on macOS Catalina · Issue #2925 · NixOS/nix]]
+#+begin_src sh :async t :exports both :results output
+sudo mount -uw / && sudo ln -s /System/Volumes/Data/nix /nix
+ curl https://nixos.org/nix/install | sh
+  . /Users/gtrun/.nix-profile/etc/profile.d/nix.sh
+#+end_src
+
+
+
 * Img/Photo
 ** [[https://gtrunsec.imgur.com/all/?third_party=1][gtrunsec's uploaded images - Imgur]]
 ** [[https://imgbb.com/][ImgBB — Upload Image — Free Image Hosting]]
@@ -423,10 +436,9 @@ gateway 192.168.122.1
   sudo docker run --name adguardhome -v /my/own/workdir:/opt/adguardhome/work -v /my/own/confdir:/opt/adguardhome/conf --net=host -p 67:67/udp -p 80:80/tcp -p 443:443/tcp -p 853:853/tcp -p 3000:3000/tcp -d adguard/adguardhome
 #+end_src
 * Keyboard
-** [[https://configure.ergodox-ez.com/ergodox-ez/layouts/B4J9B/latest/0][Ergodox EZ Configurator]]<2019-09-16 Mon>
 ** [[https://configure.ergodox-ez.com/planck-ez/layouts/bvDzx/latest/0][Ergodox EZ Configurator]] <2019-10-29 Tue>[plank]
 *** [[https://configure.ergodox-ez.com/planck-ez/layouts/EeEqb/latest/0][Ergodox EZ Configurator]]<2019-10-30 Wed>
-
+** https://configure.ergodox-ez.com/ergodox-ez/layouts/LMMVA/latest/0
 * Blog
 ** [[https://github.com/getgridea/gridea][getgridea/gridea: ✍️一个静态博客写作客户端 (A static blog writing client)]]
 ** [[https://github.com/panr/hugo-theme-hello-friend/][panr/hugo-theme-hello-friend: Pretty basic theme for Hugo that covers all of the essentials. All you have to do is start typing!]]
@@ -435,3 +447,7 @@ gateway 192.168.122.1
 * Book
 ** Polar BookShelf
 *** [[https://github.com/mozilla/pdf.js/wiki/Frequently-Asked-Questions#faq-shortcuts][Frequently Asked Questions · mozilla/pdf.js Wiki]]'
+* encrypt
+** [[https://github.com/jesseduffield/horcrux][jesseduffield/horcrux: Split your file into encrypted fragments so that you don't need to remember a passcode]]
+* check
+** spell
