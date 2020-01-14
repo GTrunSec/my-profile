@@ -116,18 +116,19 @@ module-margin-left = 1
 module-margin-right = 2
 
 font-0 = hack:pixelsize=25;4
-font-1 = unifont:size=25;4
+font-1 = unifont:fontformat=truetype:size=25:antialias=false;0
 font-2 = siji:pixelsize=25;4
 font-3 = FontAwesome:pixelsize=25;4
 font-4 = Weather Icons:size=25;4
 
 
-modules-left = weather xbacklight
+modules-left = weather 
 modules-center = networkspeedup networkspeeddown
 modules-right = filesystem-slash cpu memory 
 
 tray-position = right
 tray-padding = 2
+
 [module/weather]
 type = custom/script
 exec = ~/.config/nixpkgs/dotfiles/polybar/polybar-forecast/target/release/polybar-forecast

@@ -86,6 +86,12 @@
        ;;term              ; terminals in Emacs
        vterm             ; another terminals in Emacs
 
+
+       :checkers
+       syntax              ; tasing you for every semicolon you forget
+       ;;spell             ; tasing you for misspelling mispelling
+       ;;grammar           ; tasing grammar mistake every you make
+
        :tools
        ;;ansible
        ;;debugger          ; FIXME stepping through code, to help you add bugs
@@ -94,7 +100,7 @@
        ;;editorconfig      ; let someone else argue about tabs vs spaces
        ein               ; tame Jupyter notebooks with emacs
        (eval +overlay)     ; run code, run (also, repls)
-       flycheck          ; tasing you for every semicolon you forget
+       ;;flycheck          ; tasing you for every semicolon you forget
        ;;flyspell          ; tasing you for misspelling mispelling
        ;;gist              ; interacting with github gists
        (lookup           ; helps you navigate your code and documentation
@@ -1628,10 +1634,10 @@ FACE defaults to inheriting from default and highlight."
 
 
   (setq lsp-python-ms-executable  "~/.nix-profile/bin/mspyls")
-
+  (when (not window-system)
+    (xterm-mouse-mode 1)
+)
   (setq org-crypt-key "24945FE0DBD04F4C045025F96F92B3E8F942D425")
-
-
   (set-face-attribute
    'default nil
    :font (font-spec :name "-PfEd-Fantasque Sans Mono-bold-italic-normal-*-*-*-*-*-m-0-iso10646-1"

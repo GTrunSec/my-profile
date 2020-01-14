@@ -1,5 +1,5 @@
 { pkgs ? import <nixpkgs> {} }: epkgs:
-(with epkgs.melpaPackages; [
+ (with epkgs.melpaPackages; [
   alchemist
   all-the-icons
   all-the-icons-dired

@@ -10,7 +10,7 @@
 #+SELECT_TAGS: export
 #+EXCLUDE_TAGS: noexport
 
-* ✰ Important Tool Pack
+* Tool Pack
 ** [[https://education.github.com/pack/offers][GitHub Student Developer Pack - GitHub Education]]
 + [X] GitKraken Glo
 + [[https://transloadit.com/github-students/][GitHub Student Pack | Transloadit]]
@@ -449,5 +449,5 @@ gateway 192.168.122.1
 *** [[https://github.com/mozilla/pdf.js/wiki/Frequently-Asked-Questions#faq-shortcuts][Frequently Asked Questions · mozilla/pdf.js Wiki]]'
 * encrypt
 ** [[https://github.com/jesseduffield/horcrux][jesseduffield/horcrux: Split your file into encrypted fragments so that you don't need to remember a passcode]]
-* check
+* chck
 ** spell

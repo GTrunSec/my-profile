@@ -131,9 +131,10 @@ in rec
       guile
       racket
       gcc9
+      busybox
       #lang-haskell
       cabal2nix # create nix expressions for haskell projects from cabal file
-     #(import (builtins.fetchTarball "https://github.com/GTrunSec/ghcide-nix/tarball/master") {}).ghcide-ghc865
+      #(import (builtins.fetchTarball "https://github.com/GTrunSec/ghcide-nix/tarball/master") {}).ghcide-ghc865
       #lang-c++
       llvmPackages.libclang
       clang
