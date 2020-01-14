@@ -18,6 +18,10 @@ in
       source = ../../dotfiles/doom/init.org;
       onChange = updateInit;
     };
+      home.file.".doom.d/xah-fly.org" = {
+        source = ../../dotfiles/doom/xah-fly.org;
+      onChange = updateInit;
+    };
     home.file.".doom.d/Makefile".source = ../../dotfiles/doom/Makefile;
     home.activation.linkEmacsLisp = config.lib.dag.entryAfter [ "writeBoundary" ] ''
      ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/doom/lisp" $HOME/.doom.d/lisp
