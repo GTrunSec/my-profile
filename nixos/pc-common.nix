@@ -34,7 +34,6 @@ with builtins;
     (import ./overlays/python/04-test.nix)
     (import ./overlays/python/02-ms-pyls.nix)
     (import ./overlays)
-    (import ./overlays/libvirtd.nix)
     # (self: super:
     #   {
     #     bat = super.callPackage ./overlays/python/bat{ };
