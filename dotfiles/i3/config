@@ -167,7 +167,7 @@ exec_always --no-startup-id bash $HOME/.config/polybar/launch.sh
 # Compton
 exec_always --no-startup-id bash $HOME/.config/nixpkgs/dotfiles/polybar/compton.sh
 # adguard-home
-exec --no-startup-id bash $HOME/.config/nixpkgs/sh/adguard-home.sh
+#exec --no-startup-id bash $HOME/.config/nixpkgs/sh/adguard-home.sh
 
 #applcation
 # exec --no-startup-id polar-bookshel

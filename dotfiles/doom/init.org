@@ -882,6 +882,10 @@ In that case, insert the number."
 
 (setq +lsp-company-backend '(company-lsp :with company-tabnine :separate))
 #+end_src
+
+#+RESULTS:
+| company-lsp | :with | company-tabnine | :separate |
+
 ** company-tabnine
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! company-tabnine

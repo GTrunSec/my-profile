@@ -32,6 +32,7 @@ in
    bind C-b send-prefix
    set -g mouse on
    set-option -g status-style fg=colour136,bg=colour235
+   set -g default-terminal "xterm-256color"
    # default window title colors
    set-window-option -g window-status-style fg=colour244,bg=default #base0 and default
    #set-window-option -g window-status-style dim
