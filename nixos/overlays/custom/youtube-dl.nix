@@ -7,8 +7,8 @@ self: super: {
     src = super.fetchFromGitHub {
       owner = "ytdl-org";
       repo = "youtube-dl";
-      rev = "f5629946608861097b6ce5095efb9a9e8ac7f056";
-      sha256 = "17pch9i49xcgp9522gm8jn1i8r53k9gqqii78ayswa37qcx8wmf1";
+      rev = "48ff5590c160b89e4596b706f2b33c69557063a0";
+      sha256 = "0chrk798112phqr4dwascflmkmyajspcb664w3y35p8aagwpagzf";
     };
 
     nativeBuildInputs = [ super.makeWrapper ];
