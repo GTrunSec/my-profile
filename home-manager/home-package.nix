@@ -1,5 +1,5 @@
 let
-  nixpkgs = (import ~/.config/nixpkgs/nixos/channel/nixpkgs) { };
+  nixpkgs = (import ~/.config/nixpkgs/channel/nixpkgs) { };
   remacs = (import ./programs/remacs-nix/build.nix) {};
   unstable = import <nixpkgs-unstable> { };
 
