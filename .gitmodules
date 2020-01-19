@@ -4,10 +4,6 @@
 [submodule "own-nixpkgs/liberime/liberime"]
 	path = own-nixpkgs/liberime/liberime
 	url = https://github.com/tumashu/liberime.git
-[submodule "nixos/channel/nixpkgs"]
-	path = nixos/channel/nixpkgs
-	url = git@github.com:GTrunSec/nixpkgs.git
-	shallow = true
 [submodule "nixos/channel/home-manager"]
 	path = nixos/channel/home-manager
 	url = https://github.com/GTrunSec/home-manager.git
