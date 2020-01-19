@@ -20,7 +20,6 @@
 * Myself
 
 * Nix
-
 ** Macos
 - [[https://github.com/NixOS/nix/issues/2925][/nix will not be writable on macOS Catalina · Issue #2925 · NixOS/nix]]
 #+begin_src sh :async t :exports both :results output
@@ -28,7 +27,20 @@ sudo mount -uw / && sudo ln -s /System/Volumes/Data/nix /nix
  curl https://nixos.org/nix/install | sh
   . /Users/gtrun/.nix-profile/etc/profile.d/nix.sh
 #+end_src
+** Debian
+#+begin_src sh :async t :exports both :results output
+wget https://github.com/hardenedlinux/NSM-data-analysis/releases/download/nix/nix_2.3_master_e3eecb5_amd64.deb
+sudo dpkg -i nix_2.3_master_e3eecb5_amd64.deb
+sudo ln -s /opt/nix-multiuser/nix/bin/nix* /usr/local/bin
 
+nix-channel --add https://nixos.org/channels/nixos-19.09 nixpkgs
+nix-channel --update
+export NIX_PATH="$HOME/.nix-defexpr/channels/nixpkgs"
+##for Julia CUDA
+export NIXPKGS_ALLOW_UNFREE=1
+
+source /opt/nix-multiuser/nix/etc/profile.d/nix.sh
+#+end_src
 
 
 * Img/Photo
@@ -202,7 +214,7 @@ ln -s /Users/gtrun/Dropbox/application/blog/content/static/ox-hugo /Users/gtrun/
 ** mu4e
 [[https://github.com/pengpengxp/pengpengxp.github.io/blob/b22281c3fe3a337c6a6bf37785ebf07ec6ee9a94/archive/before-2018-11-10/source/2017-08-24-emacs-use-mu4e.org][pengpengxp.github.io/2017-08-24-emacs-use-mu4e.org at b22281c3fe3a337c6a6bf37785ebf07ec6ee9a94 · pengpengxp/pengpengxp.github.io]]
 
-* exporting 
+* exporting
 ** Latex
 *** [[https://github.com/posquit0/Awesome-CV][posquit0/Awesome-CV: Awesome CV is LaTeX template for your outstanding job application]]
 * Input method
@@ -438,7 +450,7 @@ gateway 192.168.122.1
 * Keyboard
 ** [[https://configure.ergodox-ez.com/planck-ez/layouts/bvDzx/latest/0][Ergodox EZ Configurator]] <2019-10-29 Tue>[plank]
 *** [[https://configure.ergodox-ez.com/planck-ez/layouts/EeEqb/latest/0][Ergodox EZ Configurator]]<2019-10-30 Wed>
-** https://configure.ergodox-ez.com/ergodox-ez/layouts/LMMVA/latest/0
+** [[https://configure.ergodox-ez.com/ergodox-ez/layouts/N4y36/latest/config/debounce][Ergodox EZ Configurator]]
 * Blog
 ** [[https://github.com/getgridea/gridea][getgridea/gridea: ✍️一个静态博客写作客户端 (A static blog writing client)]]
 ** [[https://github.com/panr/hugo-theme-hello-friend/][panr/hugo-theme-hello-friend: Pretty basic theme for Hugo that covers all of the essentials. All you have to do is start typing!]]
@@ -449,5 +461,8 @@ gateway 192.168.122.1
 *** [[https://github.com/mozilla/pdf.js/wiki/Frequently-Asked-Questions#faq-shortcuts][Frequently Asked Questions · mozilla/pdf.js Wiki]]'
 * encrypt
 ** [[https://github.com/jesseduffield/horcrux][jesseduffield/horcrux: Split your file into encrypted fragments so that you don't need to remember a passcode]]
-* chck
+* check
 ** spell
+* Organize
+** [[https://tmsu.org/][TMSU]] :org:tag:
+- [[https://github.com/oniony/TMSU][oniony/TMSU: TMSU lets you tags your files and then access them through a nifty virtual filesystem from any other application.]]

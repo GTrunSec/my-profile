@@ -4,9 +4,6 @@
 [submodule "own-nixpkgs/liberime/liberime"]
 	path = own-nixpkgs/liberime/liberime
 	url = https://github.com/tumashu/liberime.git
-[submodule "nixos/overlays/R-haskell/nix-config"]
-	path = nixos/overlays/R-haskell/nix-config
-	url = https://github.com/GTrunSec/nix-config.git
 [submodule "nixos/overlays"]
 	path = nixos/overlays
 	url = https://github.com/GTrunSec/nixpkgs-overlays.git
