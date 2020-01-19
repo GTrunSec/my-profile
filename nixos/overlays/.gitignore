@@ -1,0 +1,14 @@
+# -*- mode: gitignore; -*-
+# nixos
+result
+# Macos
+.DS_Store
+
+*.elc
+
+# Emacs dot-files
+dotfiles/emacs/emacs.d/var
+dotfiles/emacs/emacs.d/straight
+dotfiles/emacs/emacs.d/.*
+dotfiles/emacs/emacs.d/elpa
+

@@ -1,0 +1,3 @@
+[submodule "R-haskell/nix-config"]
+	path = R-haskell/nix-config
+	url = git@github.com:GTrunSec/nix-config.git

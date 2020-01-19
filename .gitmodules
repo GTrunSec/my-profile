@@ -10,3 +10,6 @@
 [submodule "dotfiles/doom/modules/private/emacs-application-framework"]
 	path = dotfiles/doom/modules/private/emacs-application-framework
 	url = https://github.com/manateelazycat/emacs-application-framework.git
+[submodule "channel/nixpkgs"]
+	path = channel/nixpkgs
+	url = git@github.com:GTrunSec/nixpkgs.git
