@@ -6,8 +6,8 @@ self: super: {
 
     # Impossible to build anything offline with dotnet
     src = super.fetchurl {
-      url = "https://github.com/wiedzmin/python-language-server/releases/download/${version}/python-language-server-${version}.tar.gz";
-      sha256 = "1inqab80495z838yrnplp7g3j6vbnvbd46rjbdzcv76qckjpvprr";
+      url = "https://github.com/GTrunSec/python-language-server/releases/download/donet-build/python-language-server-1-17.tar.gz";
+      sha256 = "1hiw0hz7bv0w7pcrpb17gv8zwd6p0nzvjxd9mkqn7fnv5rymqjlj";
     };
  buildInputs = with super; [ unzip makeWrapper ];
 
