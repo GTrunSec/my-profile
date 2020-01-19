@@ -14,5 +14,6 @@
 	                             source-han-sans-simplified-chinese
 	                             source-han-sans-traditional-chinese
                                material-icons
+                               weather-icons
 	];
 }

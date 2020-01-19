@@ -119,10 +119,10 @@ font-0 = hack:pixelsize=25;4
 font-1 = unifont:fontformat=truetype:size=25:antialias=false;0
 font-2 = siji:pixelsize=25;4
 font-3 = FontAwesome:pixelsize=25;4
-font-4 = Weather Icons:size=25;4
+font-4 = Weather Icons:size=25;0
 
 
-modules-left = weather 
+modules-left = weather   
 modules-center = networkspeedup networkspeeddown
 modules-right = filesystem-slash cpu memory 
 
