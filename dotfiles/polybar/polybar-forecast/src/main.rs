@@ -1,26 +1,40 @@
+mod types;
 mod weather;
 
-use std::fmt::{self, Display};
 use std::{env, fs, process};
 
-use weather::{get_info, QueryType, WeatherInfo};
+use handlebars::Handlebars;
+use types::{Configuration, Error, Output, Unit};
+use weather::{get_info, QueryType};
 
-use serde::Deserialize;
-
-#[derive(Debug, Deserialize, Clone)]
-pub struct Configuration {
-    pub api_key: String,
-    pub city_id: String,
-    pub units: String,
-    pub display_symbol: String,
+fn main() {
+    match get_forecast() {
+        Ok(forecast) => println!("{}", forecast),
+        Err(e) => {
+            // Line break prevents massive errors from trashing the bar,
+            // Polybar displays everything until the first line break
+            eprintln!("\n{}", e);
+            process::exit(1);
+        }
+    }
 }
 
 pub fn get_config() -> Result<Configuration, Error> {
-    let mut dir = env::current_exe()?;
-    dir.pop();
-    dir.push("config.toml");
+    let content = dirs::config_dir()
+        .and_then(|mut path| {
+            // Check in .config first
+            path.push("polybar-forecast/config.toml");
+            fs::read_to_string(&path).ok()
+        })
+        .or_else(|| {
+            // Otherwise, check in the same folder as the executable
+            let mut dir = env::current_exe().ok()?;
+            dir.pop();
+            dir.push("config.toml");
+            fs::read_to_string(&dir).ok()
+        })
+        .ok_or(Error::MissingConfigFile)?;
 
-    let content = fs::read_to_string(&dir)?;
     let decoded: Configuration = toml::from_str(&content)?;
 
     Ok(decoded)
@@ -28,75 +42,28 @@ pub fn get_config() -> Result<Configuration, Error> {
 
 fn get_forecast() -> Result<String, Error> {
     let config = get_config()?;
-    let c = get_info(&config, QueryType::Current)?;
-    let f = get_info(&config, QueryType::Forecast)?;
+    let current = get_info(&config, QueryType::Current)?;
+    let forecast = get_info(&config, QueryType::Forecast)?;
 
-    if c.temperature < f.temperature {
-        Ok(format_output(c, f, &config.display_symbol, ''))
-    } else if c.temperature > f.temperature {
-        Ok(format_output(c, f, &config.display_symbol, ''))
-    } else {
-        Ok(format_output(c, f, &config.display_symbol, ''))
-    }
-}
+    let mut reg = Handlebars::new();
+    reg.set_strict_mode(true);
 
-fn format_output(current: WeatherInfo, forecast: WeatherInfo, unit: &str, trend: char) -> String {
-    format!(
-        "{ci} {ct}{u} {trend} {fi} {ft}{u}",
-        ct = current.temperature,
-        ci = current.icon,
-        ft = forecast.temperature,
-        fi = forecast.icon,
-        u = unit,
-        trend = trend
-    )
-}
+    let output = Output {
+        temp_celcius: current.temperature.0,
+        temp_kelvin: current.temperature.as_unit(Unit::Kelvin).0,
+        temp_fahrenheit: current.temperature.as_unit(Unit::Fahrenheit).0,
+        temp_icon: current.icon,
+        trend: match (current.temperature, forecast.temperature) {
+            (c, f) if c < f => '',
+            (c, f) if c > f => '',
+            _ => '',
+        },
+        forecast_celcius: forecast.temperature.0,
+        forecast_kelvin: forecast.temperature.as_unit(Unit::Kelvin).0,
+        forecast_fahrenheit: forecast.temperature.as_unit(Unit::Fahrenheit).0,
+        forecast_icon: forecast.icon,
+    };
 
-fn main() {
-    match get_forecast() {
-        Ok(forecast) => println!("{}", forecast),
-        Err(e) => {
-            eprintln!("Forecast unavailable ({})", e);
-            process::exit(1);
-        }
-    }
-}
-
-#[derive(Debug)]
-pub enum Error {
-    HttpError(reqwest::Error),
-    MissingConfigFile(std::io::Error),
-    InvalidConfigFile(toml::de::Error),
-    InvalidResponse,
-}
-
-impl Display for Error {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        use self::Error::*;
-
-        match self {
-            HttpError(e) => write!(f, "Failed to query OpenWeatherMap: {:?}", e),
-            MissingConfigFile(e) => write!(f, "Could not find config file: {:?}", e),
-            InvalidConfigFile(e) => write!(f, "Could not parse config file as TOML: {:?}", e),
-            InvalidResponse => write!(f, "Invalid response format from OpenWeatherMap"),
-        }
-    }
-}
-
-impl From<reqwest::Error> for Error {
-    fn from(err: reqwest::Error) -> Error {
-        Error::HttpError(err)
-    }
-}
-
-impl From<toml::de::Error> for Error {
-    fn from(err: toml::de::Error) -> Error {
-        Error::InvalidConfigFile(err)
-    }
-}
-
-impl From<std::io::Error> for Error {
-    fn from(err: std::io::Error) -> Error {
-        Error::MissingConfigFile(err)
-    }
+    let rendered = reg.render_template(&config.display, &output)?;
+    Ok(rendered)
 }
