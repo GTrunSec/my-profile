@@ -17,7 +17,7 @@ in rec
       # qtstyleplugin-kvantum-qt4
       # libsForQt5.qtstyleplugin-kvantum
       # qt5ct
-      # latte-dock
+      # latte-dock 
       # deepin.dde-dock
       #latex
       
@@ -175,8 +175,8 @@ in rec
       ncurses.dev # infocmp/tic/etc
 
       #screenhot
-      #spectacle
-      flameshot
+      spectacle
+      #flameshot
       mpv
       rocksdb
       #

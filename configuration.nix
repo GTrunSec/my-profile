@@ -51,8 +51,10 @@
 
   i18n = {
     defaultLocale = "en_US.UTF-8";
-    inputMethod.enabled = "fcitx";
-    inputMethod.fcitx.engines = [ pkgs.fcitx-engines.rime ];
+    inputMethod = {
+     enabled = "fcitx";
+     fcitx.engines = with pkgs.fcitx-engines; [ cloudpinyin rime];
+    };
   };
 
   programs.fish.enable = true;

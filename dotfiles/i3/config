@@ -210,8 +210,8 @@ bindsym Mod4+Shift+q exec bash ~/.config/rofi/powermenu.sh
 
 #Screenshot
 
-bindsym Mod4+r exec --no-startup-id flameshot gui -p ~/Dropbox/Pictures/snap
-
+#bindsym Mod4+r exec --no-startup-id flameshot gui -p ~/Dropbox/Pictures/snap
+bindsym Mod4+r exec --no-startup-id spectacle -r
 ## floatings
 #for_window [class="XTerm"] floating enable, border normal
 for_window [class="feh"] floating enable, border normal
