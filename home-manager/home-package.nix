@@ -139,6 +139,7 @@ in   {
     # nodePackages.javascript-typescript-langserver
     # Nix
     ghc
+    (import ~/.config/nixpkgs/nixos/overlays/rust/cargo2nix {}).package
     autojump
     #    hnix-lsp
     jq

@@ -11,5 +11,5 @@ self: super:
   horcrux = super.callPackage ./go/horcrux {};
   orgbabelhelper = super.callPackage ./python/orgbabelhelper {};
 #  adguardhome = super.callPackage ./go/adguard-home {};
-#  outline-client = super.callPackage ./custom/outline-client.nix {};
+  #  outline-client = super.callPackage ./custom/outline-client.nix {};
 }

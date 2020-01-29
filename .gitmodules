@@ -13,3 +13,6 @@
 [submodule "channel/nixpkgs"]
 	path = channel/nixpkgs
 	url = git@github.com:GTrunSec/nixpkgs.git
+[submodule "nixos/overlays/rust/cargo2nix"]
+	path = nixos/overlays/rust/cargo2nix
+	url = https://github.com/tenx-tech/cargo2nix.git
