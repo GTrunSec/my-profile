@@ -45,8 +45,8 @@ with lib;
     set -g -x PATH $PATH $GOBIN
     set -g theme_color_scheme gruvbox
     source ~/.local/share/icons-in-terminal/icons.fish
-    direnv allow fish | source
     kitty + complete setup fish | source
+    direnv hook fish | source
     alias ...='cd ../..'
     alias ....='cd ../../..'
     alias .....='cd ../../../..'
