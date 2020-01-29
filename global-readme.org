@@ -448,8 +448,10 @@ gateway 192.168.122.1
   sudo docker run --name adguardhome -v /my/own/workdir:/opt/adguardhome/work -v /my/own/confdir:/opt/adguardhome/conf --net=host -p 67:67/udp -p 80:80/tcp -p 443:443/tcp -p 853:853/tcp -p 3000:3000/tcp -d adguard/adguardhome
 #+end_src
 * Keyboard
-** [[https://configure.ergodox-ez.com/planck-ez/layouts/bvDzx/latest/0][Ergodox EZ Configurator]] <2019-10-29 Tue>[plank]
-*** [[https://configure.ergodox-ez.com/planck-ez/layouts/EeEqb/latest/0][Ergodox EZ Configurator]]<2019-10-30 Wed>
+** Plank
+*** [[https://configure.ergodox-ez.com/planck-ez/layouts/QaBlB/latest/3][Ergodox EZ Configurator]]n<2020-01-28 Tue>
+*** ✔ DONE [[https://configure.ergodox-ez.com/planck-ez/layouts/bvDzx/latest/0][Ergodox EZ Configurator]] <2019-10-29 Tue>[plank]
+*** ✔ DONE [[https://configure.ergodox-ez.com/planck-ez/layouts/EeEqb/latest/0][Ergodox EZ Configurator]]<2019-10-30 Wed>
 ** [[https://configure.ergodox-ez.com/ergodox-ez/layouts/N4y36/latest/config/debounce][Ergodox EZ Configurator]]
 * Blog
 ** [[https://github.com/getgridea/gridea][getgridea/gridea: ✍️一个静态博客写作客户端 (A static blog writing client)]]
