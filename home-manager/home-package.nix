@@ -33,14 +33,14 @@ in   {
     #image
     gimp
     #brower
-    # (brave.overrideDerivation (oldAttrs: {
-    #   version = "1.3.4";
-    #   src = fetchurl {
-    #     url = "https://github.com/brave/brave-browser/releases/download/v1.3.4/brave-browser-nightly_1.3.4_amd64.deb";
-    #     sha256 = "093m2p046v89sisy5gs08qnqx8jf6d488a5ws8vcyg5h6hyfdcqr";
-    #   };
-    # }))
-    brave
+    (brave.overrideDerivation (oldAttrs: {
+      version = "1.2.43";
+
+      src = fetchurl {
+        url = "https://github.com/brave/brave-browser/releases/download/v1.2.43/brave-browser_1.2.43_amd64.deb";
+        sha256 = "10wqzxka3v0dhfqwa3a3m4p4wrdj1cajd7cpyw2337b0a1hh9j78";
+      };
+    }))
     #chat
     (signal-desktop.overrideDerivation (oldAttrs: {
       version = "1.29.0";
@@ -129,7 +129,7 @@ in   {
 
     #Go
     horcrux
-    #zeek
+    zeek
     rocksdb
     sqlite
     fish-foreign-env
@@ -139,7 +139,7 @@ in   {
     # nodePackages.javascript-typescript-langserver
     # Nix
     ghc
-    #(import ~/.config/nixpkgs/nixos/overlays/rust/cargo2nix {}).package
+    #( import ~/.config/nixpkgs/nixos/overlays/rust/cargo2nix {}).package
     autojump
     #    hnix-lsp
     jq
