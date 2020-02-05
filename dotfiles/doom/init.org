@@ -713,8 +713,9 @@ Uses `current-date-time-format' for the formatting the date/time."
                             "~/Documents/org-notes/post/traveling"
                             "~/Documents/org-notes/post/agenda"
                             "~/Documents/org-notes/post/game"
-                            "~/Dropbox/Drop-project/my-learning-list"
+                            "~/Dropbox/project/my-learning-list"
                             "~/Documents/org-notes/GTD"
+                            "~/Documents/org-notes/art"
                             ))
 
 :bind (:map notdeft-mode-map
@@ -1532,6 +1533,9 @@ FACE defaults to inheriting from default and highlight."
       show-paren-when-point-in-periphery t)
 (show-paren-mode 1)
 #+end_src
+
+** julia
+*** [[https://github.com/gcv/julia-snail][gcv/julia-snail: An Emacs development environment for Julia]]
 
 * chinese
 ** pinyinlib
