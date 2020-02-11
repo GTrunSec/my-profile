@@ -15,7 +15,8 @@
       ./nixos/device-setting
       ./nixos/lang
       ./nixos/nsm
-      # ./nixos/hydra.nix
+      ./nixos/nsm
+      ./cachix.nix
     ];
 
   boot.extraModprobeConfig = ''
@@ -86,7 +87,6 @@
 
   # Enable sound.
   sound.enable = true;
-
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
    users.users.gtrun = {

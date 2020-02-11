@@ -16,3 +16,6 @@
 [submodule "nixos/overlays/rust/cargo2nix"]
 	path = nixos/overlays/rust/cargo2nix
 	url = https://github.com/tenx-tech/cargo2nix.git
+[submodule "channel/ghcide-nix"]
+	path = channel/ghcide-nix
+	url = https://github.com/cachix/ghcide-nix.git
