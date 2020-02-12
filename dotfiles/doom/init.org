@@ -777,6 +777,7 @@ make
 
 ** ☞ TODO [[https://github.com/ianxm/emacs-scrum][ianxm/emacs-scrum: dynamic scrum report generation for org-mode buffers]]
 ** ☞ TODO [[https://github.com/jingtaozf/literate-elisp][jingtaozf/literate-elisp: a literate programming tool to load Emacs Lisp codes from org mode file directly]] :lisp:org:
+** [[https://github.com/abrochard/walkman][abrochard/walkman: Write HTTP requests in Org mode and replay them at will using cURL]]
 * Completion
 ** Ivy/counsel
 
