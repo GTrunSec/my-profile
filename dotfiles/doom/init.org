@@ -380,7 +380,7 @@ Uses `current-date-time-format' for the formatting the date/time."
       org-src-tab-acts-natively t
       org-src-window-setup 'current-window)
 (setq org-agenda-time-leading-zero t)
-;;(setq org-download-timestamp "%Y%m%d_%H%M%S")
+(setq org-download-timestamp "%Y%m%d_%H%M%S")
 #+end_src
 
 *** org-babel

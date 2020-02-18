@@ -3925,7 +3925,8 @@ please test your init file when you modified done.
 
   (setq insert-directory-program "/usr/local/bin/gls")
   (org-link-set-parameters "skim" :follow #'org-mac-skim-open)
-  (defun org-mac-skim-open (uri)
+  (defun org-mac-skim
+-open (uri)
     "Visit page of pdf in Skim"
     (let* ((page (when (string-match "::\\(.+\\)\\'" uri)
                    (match-string 1 uri)))

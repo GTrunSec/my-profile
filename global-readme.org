@@ -469,3 +469,5 @@ gateway 192.168.122.1
 ** [[https://tmsu.org/][TMSU]] :org:tag:
 - [[https://github.com/oniony/TMSU][oniony/TMSU: TMSU lets you tags your files and then access them through a nifty virtual filesystem from any other application.]]
 * [[https://github.com/amosbird/serverconfig][amosbird/serverconfig]]
+* Monitor
+** [[https://github.com/nicolargo/glances][nicolargo/glances: Glances an Eye on your system. A top/htop alternative for GNU/Linux, BSD, Mac OS and Windows operating systems.]]
