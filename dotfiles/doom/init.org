@@ -1108,7 +1108,14 @@ In that case, insert the number."
 (add-hook 'imenu-list-after-jump-hook #'recenter-top-bottom)
 )
 #+end_src
-
+* Writing
+** grammarly
+#+begin_src emacs-lisp :tangle "packages.el"
+(package! flycheck-grammarly :recipe (:host github :repo "jcs-elpa/flycheck-grammarly"))
+#+end_src
+#+begin_src emacs-lisp :tangle "config.el"
+(use-package! flycheck-grammarly)
+#+end_src
 * Visual
 ** Buffer
 *** Parenthesis
