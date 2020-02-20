@@ -1,7 +1,7 @@
 {pkgs, ...}:
 with pkgs;
 let
-  julia = julia_11;
+  julia = julia_13;
   d = version: "v${lib.concatStringsSep "." (lib.take 2 (lib.splitString "." version))}";
   extraLibs = [
     # IJulia.jl

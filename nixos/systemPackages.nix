@@ -8,8 +8,6 @@ let
   myEmacs = pkgs.emacs;
 in rec
   {
-    hardware.brightnessctl.enable = true;
-
     environment.systemPackages = with pkgs; [
       #customEmacs.emacs_26_3
       # KDE
@@ -70,12 +68,12 @@ in rec
       qtcreator
       #git
       git
-      (gitkraken.overrideDerivation (oldAttrs: {
-        src = fetchurl {
-          url = "https://release.axocdn.com/linux/GitKraken-v6.3.1.deb";
-          sha256 = "071i3z6jym6f5nfy2mq36m45jywpk53w1vpzr2n599pabdkavj89";
-        };
-      }))
+      # (gitkraken.overrideDerivation (oldAttrs: {
+      #   src = fetchurl {
+      #     url = "https://release.axocdn.com/linux/GitKraken-v6.3.1.deb";
+      #     sha256 = "071i3z6jym6f5nfy2mq36m45jywpk53w1vpzr2n599pabdkavj89";
+      #   };
+      # }))
       wget
       curl
       gnupg
@@ -152,7 +150,7 @@ in rec
       #   sha256 = "15r0mhdrg9cvkm1jxyyxqnxj7q3k7zr92h8lfsb06abkflr8x59z";
       #   };
       # }))
-      julia
+      #julia
       #lang-go
       go
       gotools

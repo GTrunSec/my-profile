@@ -7,8 +7,11 @@ let
     };
     nixpkgs  = import pkgs.nixpkgs { };
 in
-nixpkgs.stdenv.mkDerivation {
+nixpkgs.mkShell rec {
   name = "env";
   #cargo 1.38
   buildInputs = [ nixpkgs.cargo nixpkgs.gcc nixpkgs.rustup nixpkgs.rustc ];
+  shellHook = ''
+  cargo build --release
+  '';
 }

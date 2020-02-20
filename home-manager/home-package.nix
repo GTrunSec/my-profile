@@ -19,6 +19,7 @@ in   {
     urxvt_perls
     ag
     hunspell
+    gitkraken
     #dnsproxy
     # tags your files
     tmsu
@@ -96,6 +97,7 @@ in   {
     vgo2nix
     libvterm
     libtool
+
     #emacsPackages
     (emacsPackages.emacsWithPackages (with pkgs.emacsPackagesNg; [
     emacs-libvterm
@@ -114,7 +116,7 @@ in   {
       numpy
       orgparse
       jupyter_core
-      ipynb-py-convert
+      #ipynb-py-convert
       scikitlearn
       zat
       matplotlib

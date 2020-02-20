@@ -35,8 +35,8 @@ with lib;
     };
     
      interactiveShellInit = ''
-      if not functions -q fundle; eval (curl -sfL https://git.io/fundle-install); end
-      ${concatMapStringsSep "\n" (p: "fundle plugin '${p}'") plugins}
+       if not functions -q fundle; eval (curl -sfL https://git.io/fundle-install); end
+        ${concatMapStringsSep "\n" (p: "fundle plugin '${p}'") plugins}
       fundle init
     #infocmp | ssh $remote "cat > $TERM.ti ; tic -o ~/.terminfo $TERM.ti"
     source ${pkgs.autojump}/share/autojump/autojump.fish
