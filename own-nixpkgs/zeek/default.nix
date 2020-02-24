@@ -1,18 +1,29 @@
 with import <nixpkgs> {};  
 stdenv.mkDerivation rec {
-  name = "zeek-3.0.0";
-
+  pname = "zeek";
+  version = "3.0.1";
+  
   src = fetchurl {
-    url = "https://www.bro.org/downloads/${name}.tar.gz";
-    sha256 = "16pz5fh0z1hmvhn8pxqmdm5a9d8mqrp4gxpxkaywnaqk2h598lmm";
+    url = "https://www.zeek.org/downloads/zeek-${version}.tar.gz";
+    sha256 = "1lhik212wrbi092qizc08f3i0b9pj318sxwm0abc5jc3v3pz7x3r";
   };
 
   nativeBuildInputs = [ cmake flex bison file ];
-  buildInputs = [ openssl libpcap perl zlib curl geoip gperftools python swig ];
-
+  buildInputs = [ openssl libpcap zlib curl libmaxminddb gperftools python swig rocksdb ];
   # Indicate where to install the python bits, since it can't put them in the "usual"
   # locations as those paths are read-only.
-  cmakeFlags = [ "-DPY_MOD_INSTALL_DIR=${placeholder "out"}/${python.sitePackages}" ];
+
+  postInstall = ''
+  sed -i '1i@load base/frameworks/dpd' $out/share/zeek/base/protocols/dce-rpc/__load__.zeek
+  sed -i "1i@load $out/share/zeek/base/frameworks/dpd" $out/share/zeek/base/protocols/dce-rpc/__load__.zeek
+  sed -i "1i@load /home/gtrun/src/zeek-3.0.1/scripts/base/frameworks/dpd" $out/share/zeek/base/protocols/dce-rpc/main.zeek
+'';
+
+  cmakeFlags = [
+    "-DPY_MOD_INSTALL_DIR=${placeholder "out"}/${python.sitePackages}"
+    "-DENABLE_PERFTOOLS=true"
+    "-DINSTALL_AUX_TOOLS=true"
+  ];
 
   enableParallelBuilding = true;
 

@@ -1,7 +1,7 @@
 {pkgs, ...}:
 with pkgs;
 let
-  julia = julia_13;
+  julia = pkgs.julia_13.overrideAttrs(oldAttrs: {checkTarget = "";});
   d = version: "v${lib.concatStringsSep "." (lib.take 2 (lib.splitString "." version))}";
   extraLibs = [
     # IJulia.jl

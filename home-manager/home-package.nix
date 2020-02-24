@@ -90,7 +90,7 @@ in   {
     #adguardhome
     #log database
     #vast
-    
+    tree
     #emacs elf
     lxqt.qtermwidget
     deepsea

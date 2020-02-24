@@ -150,7 +150,7 @@ in rec
       #   sha256 = "15r0mhdrg9cvkm1jxyyxqnxj7q3k7zr92h8lfsb06abkflr8x59z";
       #   };
       # }))
-      #julia
+      julia
       #lang-go
       go
       gotools
