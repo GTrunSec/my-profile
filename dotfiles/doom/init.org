@@ -3,7 +3,6 @@
 #+DATE:  25 October 2019
 #+AUTHOR: GTrunSec
 #+KEYWORDS: Emacs Profile Doom-Emacs
-#+LANGUAGE:  en cn
 #+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t pri:t
 #+SETUPFILE: ~/Documents/org-notes/setup/hugo.local
 #+SETUPFILE: ~/Documents/my-blog/public/theme/org-html-themes/setup/theme-readtheorg.setup
@@ -212,6 +211,9 @@
 )
 #+end_src
 * package.el
+:PROPERTIES:
+:ID:       F2FFBBA8-3EFB-4336-81A5-0BE0A548EAC7
+:END:
 #+begin_src emacs-lisp :tangle "packages.el"
 (package! bm)
 (package! w3m)
@@ -856,7 +858,7 @@ In that case, insert the number."
               company-yasnippet
               ))
 
-
+;;  (set-company-backend! 'sh-mode nil) ; unsets backends for sh-mode
 (set-company-backend! '(org-mode)
   '(:separate company-english-helper-search
               company-tabnine
@@ -1111,10 +1113,10 @@ In that case, insert the number."
 * Writing
 ** grammarly
 #+begin_src emacs-lisp :tangle "packages.el"
-(package! flycheck-grammarly :recipe (:host github :repo "jcs-elpa/flycheck-grammarly"))
+;;(package! flycheck-grammarly :recipe (:host github :repo "jcs-elpa/flycheck-grammarly"))
 #+end_src
 #+begin_src emacs-lisp :tangle "config.el"
-(use-package! flycheck-grammarly)
+;;(use-package! flycheck-grammarly)
 #+end_src
 * Visual
 ** Buffer
@@ -1782,3 +1784,4 @@ FACE defaults to inheriting from default and highlight."
 * Cache
 ** [[https://github.com/bzg/dotemacs/blob/master/emacs.org][dotemacs/emacs.org at master · bzg/dotemacs]]
 ** [[http://irfu.cea.fr/Pisp/vianney.lebouteiller/emacs.html][Everything with Emacs]]
+** [[https://github.com/munen/emacs.d/blob/master/configuration.org][emacs.d/configuration.org at master · munen/emacs.d]]
