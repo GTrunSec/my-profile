@@ -26,7 +26,6 @@ with builtins;
   ];
   nixpkgs.config.allowUnfree = true;
   nixpkgs.overlays = [
-    (import ./overlays/custom/youtube-dl.nix)
     (import ./overlays/custom/outline-client.nix)
     (import ./overlays/custom/Motrix.nix)
     (import ./overlays/custom/shadowsocks-qt5.nix)
