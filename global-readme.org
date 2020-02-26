@@ -471,3 +471,9 @@ gateway 192.168.122.1
 * [[https://github.com/amosbird/serverconfig][amosbird/serverconfig]]
 * Monitor
 ** [[https://github.com/nicolargo/glances][nicolargo/glances: Glances an Eye on your system. A top/htop alternative for GNU/Linux, BSD, Mac OS and Windows operating systems.]]
+* Macos Nix
+#+begin_src sh :async t :exports both :results output
+sh <(curl https://nixos.org/nix/install) --daemon
+nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer
+ln -s ~/.config/nixpkgs/darwin/ ~/.nixpkgs
+#+end_src
