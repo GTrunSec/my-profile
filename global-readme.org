@@ -477,3 +477,8 @@ sh <(curl https://nixos.org/nix/install) --daemon
 nix-build https://github.com/LnL7/nix-darwin/archive/master.tar.gz -A installer
 ln -s ~/.config/nixpkgs/darwin/ ~/.nixpkgs
 #+end_src
+
+#+begin_src sh :async t :exports both :results output
+sudo launchctl stop org.nixos.nix-daemon
+sudo launchctl start org.nixos.nix-daemon
+#+end_src

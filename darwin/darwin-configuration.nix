@@ -1,11 +1,31 @@
 { config, pkgs, ... }:
 
+let
+
+  my-python-packages = python-packages: with python-packages; [
+    pylint
+    scipy
+    numpy
+    ipython
+    pyqt5
+    qrcode
+    pyqt5
+   #pymupdf
+    xlib
+    grip
+    # other python packages you want
+  ];
+  python-with-my-packages = pkgs.python37.withPackages my-python-packages;
+in
+
 {
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages =
     [
+      python-with-my-packages
       pkgs.emacs
+      pkgs.dbus
     ];
 
   # Use a custom configuration.nix location.
