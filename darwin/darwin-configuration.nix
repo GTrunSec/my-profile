@@ -1,33 +1,24 @@
 { config, pkgs, ... }:
-
-let
-
-  my-python-packages = python-packages: with python-packages; [
-    pylint
-    scipy
-    numpy
-    ipython
-    pyqt5
-    qrcode
-    pyqt5
-   #pymupdf
-    xlib
-    grip
-    # other python packages you want
-  ];
-  python-with-my-packages = pkgs.python37.withPackages my-python-packages;
-in
-
 {
+
+    imports =
+    [ # Include the results of the hardware scan.
+      ~/.config/nixpkgs/nixos/lang/r-darwin.nix
+      ~/.config/nixpkgs/nixos/lang/python-darwin.nix
+      ~/.config/nixpkgs/nixos/lang/go-darwin.nix
+    ];
+
+
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages =
     [
-      python-with-my-packages
       pkgs.emacs
       pkgs.dbus
+      pkgs.go
     ];
 
+  environment.variables = { GOROOT = [ "${pkgs.go.out}/share/go" ]; };
   # Use a custom configuration.nix location.
   # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
   # environment.darwinConfig = "$HOME/.config/nixpkgs/darwin/configuration.nix";
