@@ -1,23 +1,21 @@
-with import <nixpkgs> {};  
+with import <nixpkgs> {};
+let
+  preConfigure = (import ./shell.nix);
+in
 stdenv.mkDerivation rec {
   pname = "zeek";
-  version = "3.0.1";
+  version = "3.0.2";
   
   src = fetchurl {
     url = "https://www.zeek.org/downloads/zeek-${version}.tar.gz";
-    sha256 = "1lhik212wrbi092qizc08f3i0b9pj318sxwm0abc5jc3v3pz7x3r";
+    sha256 = "0d5agk6yc4xyx2lwfx6r1psks1373h53m0icyka1jf15b4zjg3m7";
   };
 
   nativeBuildInputs = [ cmake flex bison file ];
-  buildInputs = [ openssl libpcap zlib curl libmaxminddb gperftools python swig rocksdb ];
+  buildInputs = [ openssl libpcap zlib curl libmaxminddb gperftools python swig rocksdb];
   # Indicate where to install the python bits, since it can't put them in the "usual"
   # locations as those paths are read-only.
-
-  postInstall = ''
-  sed -i '1i@load base/frameworks/dpd' $out/share/zeek/base/protocols/dce-rpc/__load__.zeek
-  sed -i "1i@load $out/share/zeek/base/frameworks/dpd" $out/share/zeek/base/protocols/dce-rpc/__load__.zeek
-  sed -i "1i@load /home/gtrun/src/zeek-3.0.1/scripts/base/frameworks/dpd" $out/share/zeek/base/protocols/dce-rpc/main.zeek
-'';
+  inherit preConfigure;
 
   cmakeFlags = [
     "-DPY_MOD_INSTALL_DIR=${placeholder "out"}/${python.sitePackages}"
@@ -26,6 +24,7 @@ stdenv.mkDerivation rec {
   ];
 
   enableParallelBuilding = true;
+
 
   meta = with stdenv.lib; {
     description = "Powerful network analysis framework much different from a typical IDS";

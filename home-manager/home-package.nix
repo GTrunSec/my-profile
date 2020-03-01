@@ -91,10 +91,11 @@ in   {
     #log database
     #vast
     tree
-    #emacs elf
-    lxqt.qtermwidget
-    deepsea
     vgo2nix
+    #emacs eaf
+    lxqt.qtermwidget
+
+    deepsea
     libvterm
     libtool
 

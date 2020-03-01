@@ -18,6 +18,8 @@ with builtins;
       inherit pkgs;
     };
   };
+
+  nix.trustedUsers = [ "gtrun"];
   nix.nixPath = [
     "nixpkgs=/etc/nixos/channel/nixpkgs"
     "nixos-config=/etc/nixos/configuration.nix"
