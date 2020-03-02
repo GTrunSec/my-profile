@@ -80,7 +80,7 @@ in   {
     haskellPackages.alex
     haskellPackages.happy
     haskellPackages.zlib
-    haskellPackages.stack
+    #haskellPackages.stack
 
     haskellPackages.stylish-haskell
     #multi-ghc-travis
@@ -90,6 +90,7 @@ in   {
     #adguardhome
     #log database
     #vast
+    #(import (builtins.fetchTarball "https://github.com/tenzir/vast/tarball/924b05aadaad113a827fa3126bc30b2a9603baa5"){})
     tree
     vgo2nix
     #emacs eaf

@@ -19,3 +19,6 @@
 [submodule "channel/ghcide-nix"]
 	path = channel/ghcide-nix
 	url = https://github.com/cachix/ghcide-nix.git
+[submodule "bin/nix-bundle"]
+	path = bin/nix-bundle
+	url = https://github.com/matthewbauer/nix-bundle.git
