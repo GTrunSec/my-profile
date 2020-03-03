@@ -9,7 +9,7 @@ let
 in rec
   {
     environment.systemPackages = with pkgs; [
-      #customEmacs.emacs_26_3
+      customEmacs.emacs_27_0
       # KDE
       # nur.repos.ysndr.kde.breeze-blur
       # qtstyleplugin-kvantum-qt4

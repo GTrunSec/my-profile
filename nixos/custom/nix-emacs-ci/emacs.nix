@@ -1,6 +1,6 @@
 { version
 , sha256
-, libcxxStdenv, llvmPackages, lib, fetchurl, ncurses, autoreconfHook
+, libcxxStdenv, llvmPackages, lib, fetchurl, ncurses, autoreconfHook, texinfo
 , pkgconfig, libxml2, gettext, gnutls
 , withAutoReconf ? false
 }:
@@ -14,7 +14,8 @@ stdenv.mkDerivation rec {
 
   src = fetchurl {
     inherit sha256;
-    url = "mirror://gnu/emacs/${name}.tar.gz";
+    #url = "mirror://gnu/emacs/${name}.tar.gz";
+    url = "https://github.com/emacs-mirror/emacs/archive/emacs-27.0.90.tar.gz";
   };
 
   enableParallelBuilding = true;
@@ -24,20 +25,21 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ pkgconfig (if withAutoReconf then autoreconfHook else null) ];
 
   buildInputs =
-    [ ncurses libxml2 gnutls gettext ];
+    [ ncurses libxml2 gnutls gettext texinfo];
 
   hardeningDisable = [ "format" ];
 
   configureFlags = [
     # "--disable-build-details" # for a (more) reproducible build
-    # "--with-modules"
-    # "--with-x=yes"
-    # #"--with-x11"
-    # "--with-xpm=no"
-    # "--with-jpeg=yes"
-    # "--with-png=yes"
-    # "--with-gif=no"
-    # "--with-tiff=no"
+     "--with-modules"
+     "--with-x=yes"#
+     "--with-x11"
+     "--with-xft"
+     # "--with-xpm=no"
+     # "--with-jpeg=no"
+     #  "--with-png=no"
+     # "--with-gif=no"
+     # "--with-tiff=no"
   ];
 
   preConfigure = ''
