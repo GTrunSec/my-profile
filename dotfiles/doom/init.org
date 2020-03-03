@@ -704,28 +704,27 @@ Uses `current-date-time-format' for the formatting the date/time."
 ** org-notdeft
 - [[https://jingsi.space/post/2017/04/05/organizing-a-complex-directory-for-emacs-org-mode-and-deft/#configuring-deft][Organizing a Complex Directory for Emacs Org Mode and Deft]]
 - [[https://tero.hasu.is/notdeft/#org7b25462][NotDeft | Tero Hasu]]
+- [[https://github.com/EFLS/zetteldeft][EFLS/zetteldeft: A Zettelkasten system! Or rather, some functions on top of the emacs deft package.]]
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
-
 (use-package! notdeft
-:config
-(setq notdeft-extension "org")
-;;(setq notdeft-secondary-extensions '("md" "org" "scrbl"))
-(setq notdeft-directories '("~/Documents/org-notes/post/myself"
-                            "~/Documents/org-notes/post/life-thing"
-                            "~/Documents/org-notes/post/traveling"
-                            "~/Documents/org-notes/post/agenda"
-                            "~/Documents/org-notes/post/game"
-                            "~/Dropbox/project/my-learning-list"
-                            "~/Documents/org-notes/GTD"
-                            "~/Documents/org-notes/art"
-                            ))
+  :config
+  (setq notdeft-extension "org")
+  ;;(setq notdeft-secondary-extensions '("md" "org" "scrbl"))
+  (setq notdeft-directories '("~/Documents/org-notes/post/myself"
+                              "~/Documents/org-notes/post/life-thing"
+                              "~/Documents/org-notes/post/traveling"
+                              "~/Documents/org-notes/post/agenda"
+                              "~/Documents/org-notes/post/game"
+                              "~/Dropbox/project/my-learning-list"
+                              "~/Documents/org-notes/GTD"
+                              "~/Documents/org-notes/art"
+                              ))
 
-:bind (:map notdeft-mode-map
-        ("C-q" . notdeft-quit)
-        ("C-r" . notdeft-refresh)
-        )
-
-)
+  :bind (:map notdeft-mode-map
+          ("C-q" . notdeft-quit)
+          ("C-r" . notdeft-refresh)
+          )
+  )
 #+end_src
 - build
 cd ~/.emacs.d/.local/straight/repos/notdeft/xapian
@@ -1110,6 +1109,8 @@ In that case, insert the number."
 (add-hook 'imenu-list-after-jump-hook #'recenter-top-bottom)
 )
 #+end_src
+* minor mode and major mode
+** [[https://github.com/rnkn/binder][rnkn/binder: Emacs global minor mode facilitating multi-file writing projects]]
 * Writing
 ** grammarly
 #+begin_src emacs-lisp :tangle "packages.el"

@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
-{
 
-    imports =
+{
+  imports =
     [ # Include the results of the hardware scan.
       ~/.config/nixpkgs/nixos/lang/r-darwin.nix
       ~/.config/nixpkgs/nixos/lang/python-darwin.nix
@@ -11,11 +11,29 @@
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
-  environment.systemPackages =
-    [
-      pkgs.emacs
-      pkgs.dbus
-      pkgs.go
+  environment.systemPackages = with pkgs; [
+    emacs
+    dbus
+    go
+    zeek
+    libxml2
+    (texlive.combine # latex + packages
+      { inherit (texlive)
+        collection-plaingeneric
+        collection-latexextra
+        collection-fontsrecommended
+        collection-pictures
+        collection-bibtexextra
+        collection-mathscience
+        collection-langgerman
+        scheme-basic
+        xetex
+        cjk
+        ctex
+        xecjk
+        fontspec euenc;
+      }
+    )
     ];
 
   environment.variables = { GOROOT = [ "${pkgs.go.out}/share/go" ]; };
@@ -35,7 +53,8 @@
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
   system.stateVersion = 4;
-    nix = {
+
+  nix = {
       nixPath = [
       "darwin-config=$HOME/.config/nixpkgs/darwin/darin-configuration.nix"
       "home-manager=$HOME/.config/nixpkgs/home-manager"
@@ -48,6 +67,7 @@
     binaryCaches = [
     ];
 
+    
     binaryCachePublicKeys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       "nsm-data-analysis.cachix.org-1:GhKJmne4IPk5C78jG980Dijd+XGFZgOGULp3UKHkJ8M="
