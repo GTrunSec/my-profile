@@ -1111,6 +1111,8 @@ In that case, insert the number."
 #+end_src
 * minor mode and major mode
 ** [[https://github.com/rnkn/binder][rnkn/binder: Emacs global minor mode facilitating multi-file writing projects]]
+** [[https://github.com/emacs-taskrunner/emacs-taskrunner][emacs-taskrunner/emacs-taskrunner: A universal task runner for emacs]]
+
 * Writing
 ** grammarly
 #+begin_src emacs-lisp :tangle "packages.el"
