@@ -3,6 +3,7 @@
 {
   imports = [
     ./docker.nix
-    ./libvirtd.nix
+    #./libvirtd.nix
+    ./vbox.nix
   ];
 }

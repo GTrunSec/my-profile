@@ -110,7 +110,8 @@ in rec
       qt5.qtbase
       #xdgrm
       virtmanager
-
+      nixops
+      nix-index
       cargo
       rustup
       rustc
