@@ -35,11 +35,10 @@ in   {
     gimp
     #brower
     (brave.overrideDerivation (oldAttrs: {
-      version = "1.2.43";
-
+      version = "1.4.96";
       src = fetchurl {
-        url = "https://github.com/brave/brave-browser/releases/download/v1.2.43/brave-browser_1.2.43_amd64.deb";
-        sha256 = "10wqzxka3v0dhfqwa3a3m4p4wrdj1cajd7cpyw2337b0a1hh9j78";
+        url = "https://github.com/brave/brave-browser/releases/download/v1.4.96/brave-browser_1.4.96_amd64.deb";
+        sha256 = "1z449a9fq89r00yhpg7sfmj0r2jndrcg07yn1lbrbll0f50yzz8j";
       };
     }))
     #chat
