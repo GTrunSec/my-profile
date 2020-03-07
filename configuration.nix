@@ -15,7 +15,6 @@
       ./nixos/device-setting
       ./nixos/lang
       ./nixos/nsm
-      ./nixos/nsm
       ./nixos/module
       ./cachix.nix
     ];

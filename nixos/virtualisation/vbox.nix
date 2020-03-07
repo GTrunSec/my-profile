@@ -6,9 +6,6 @@
         enable = true;
         enableExtensionPack = true;
       };
-      guest = {
-        enable = true;
-      };
     };
     kvmgt.enable = true;
   };
