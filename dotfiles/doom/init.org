@@ -528,9 +528,9 @@ Uses `current-date-time-format' for the formatting the date/time."
 ** super-agenda
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-super-agenda
-:config
-(add-hook! 'after-init-hook 'org-super-agenda-mode)
- (require 'org-habit)
+  :config
+  (add-hook! 'after-init-hook 'org-super-agenda-mode)
+  (require 'org-habit)
   ;; (setq org-agenda-time-grid
   ;;       '((daily today)
   ;;         ))
@@ -542,7 +542,7 @@ Uses `current-date-time-format' for the formatting the date/time."
    org-agenda-block-separator nil
    org-agenda-compact-blocks t
    org-agenda-start-with-log-mode t)
-)
+  )
 #+end_src
 ** org-starter
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
@@ -779,6 +779,8 @@ make
 ** ☞ TODO [[https://github.com/ianxm/emacs-scrum][ianxm/emacs-scrum: dynamic scrum report generation for org-mode buffers]]
 ** ☞ TODO [[https://github.com/jingtaozf/literate-elisp][jingtaozf/literate-elisp: a literate programming tool to load Emacs Lisp codes from org mode file directly]] :lisp:org:
 ** [[https://github.com/abrochard/walkman][abrochard/walkman: Write HTTP requests in Org mode and replay them at will using cURL]]
+** [[https://github.com/niklasfasching/go-org][niklasfasching/go-org: Org mode parser with html & pretty printed org rendering]]
+
 * Completion
 ** Ivy/counsel
 
@@ -1112,7 +1114,7 @@ In that case, insert the number."
 * minor mode and major mode
 ** [[https://github.com/rnkn/binder][rnkn/binder: Emacs global minor mode facilitating multi-file writing projects]]
 ** [[https://github.com/emacs-taskrunner/emacs-taskrunner][emacs-taskrunner/emacs-taskrunner: A universal task runner for emacs]]
-
+** [[https://github.com/jerrypnz/major-mode-hydra.el][jerrypnz/major-mode-hydra.el: Spacemacs-esque major mode leader key powered by Hydra]]
 * Writing
 ** grammarly
 #+begin_src emacs-lisp :tangle "packages.el"
@@ -1159,7 +1161,7 @@ In that case, insert the number."
 (add-hook 'visual-fill-column-mode-hook #'visual-line-mode)
 (add-hook 'w3m-display-hook #'visual-line-mode)
 (add-hook! 'after-init-hook #'global-hungry-delete-mode)
-
+(add-hook! 'after-init-hook #'cua-mode)
 (add-hook 'before-save-hook 'whitespace-cleanup)
 
 (advice-add 'text-scale-adjust :after
