@@ -136,7 +136,7 @@ Version 2017-01-21"
 (define-key xah-fly-key-map (kbd "C-c w") 'helm-org-rifle)
 
 
-(define-key xah-fly-key-map (kbd "C-M-s-o") 'awesome-tab-ace-jump)
+(define-key xah-fly-key-map (kbd "<f5>") 'awesome-tab-ace-jump)
 (define-key xah-fly-key-map (kbd "C-;") 'maple-iedit-match-all)
 (define-key xah-fly-key-map (kbd "C-c i") 'counsel-imenu)
 ;; scrolling
