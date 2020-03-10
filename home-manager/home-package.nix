@@ -125,6 +125,7 @@ in   {
       sqlalchemy
       pandas
       ipython
+      python-language-server
       pygments
       notebook
       orgbabelhelper
