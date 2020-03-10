@@ -25,6 +25,7 @@ with builtins;
     "nixos-config=/etc/nixos/configuration.nix"
     "nixpkgs-overlays=/etc/nixos/overlays-compat/"
     "home-manager=/etc/nixos/channel/home-manager"
+    "ci=https://github.com/arcnmx/ci/archive/master.tar.gz"
   ];
   nixpkgs.config.allowUnfree = true;
   nixpkgs.overlays = [

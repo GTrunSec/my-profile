@@ -42,6 +42,7 @@ in   {
       };
     }))
     #chat
+    riot-desktop
     (signal-desktop.overrideDerivation (oldAttrs: {
       version = "1.29.0";
       src = fetchurl {
