@@ -11,11 +11,16 @@
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
+  # bugs sudo mount -uw /
   environment.systemPackages = with pkgs; [
     emacs
     dbus
     go
     zeek
+    bundler
+    jekyll
+    glib
+    vips
     libxml2
     (texlive.combine # latex + packages
       { inherit (texlive)
@@ -59,7 +64,7 @@
       "darwin-config=$HOME/.config/nixpkgs/darwin/darin-configuration.nix"
       "home-manager=$HOME/.config/nixpkgs/home-manager"
       "darwin=$HOME/.config/nixpkgs/darwin/"
-      "nixpkgs=$HOME/src/nix/nixpkgs"
+      "nixpkgs=$HOME/.config/nixpkgs/channel/nixpkgs"
       "ssh-config-file=$HOME/.ssh/config"
       #"ssh-auth-sock=${xdg_configHome}/gnupg/S.gpg-agent.ssh"
     ];
