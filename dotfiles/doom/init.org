@@ -1123,6 +1123,7 @@ In that case, insert the number."
 #+begin_src emacs-lisp :tangle "config.el"
 ;;(use-package! flycheck-grammarly)
 #+end_src
+** [[https://github.com/arnm/ob-mermaid][arnm/ob-mermaid: Generate mermaid diagrams within Emacs org-mode babel]]
 * Visual
 ** Buffer
 *** Parenthesis

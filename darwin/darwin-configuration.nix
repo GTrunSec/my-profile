@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs,  ... }:
 
 {
   imports =
@@ -17,7 +17,13 @@
     dbus
     go
     zeek
-    bundler
+    (bundler.overrideAttrs(old:  {
+      name = "bundler-2.1.4";
+      src = pkgs.fetchurl {
+        url = "https://rubygems.org/gems/bundler-2.1.4.gem";
+        sha256 = "12glbb1357x91fvd004jgkw7ihlkpc9dwr349pd7j83isqhls0ah";
+      };
+    }))
     jekyll
     glib
     vips
