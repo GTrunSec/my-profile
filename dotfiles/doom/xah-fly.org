@@ -40,6 +40,12 @@
      ("m" . magit-key)
      ("w" . window-key)
 
+
+     ;;timer
+     ("ti" . insert-current-date-time-inactive)
+     ("ta" . insert-current-date-time-active)
+     ("tc" . insert-current-date-time)
+     ;;find file
      ("fr" . counsel-recentf)
      ("fp" . doom/find-file-in-private-config)
      ("<tab>" . spacemacs/alternate-buffer)
