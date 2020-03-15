@@ -1,6 +1,6 @@
 ''
-    #substituteInPlace zeek-config.in --subst-var ZEEK_DIST
-    #export PATH=$PATH:$out/bin
+    substituteInPlace zeek-config.in --subst-var ZEEK_DIST
+    cat $PWD/aux/zeekctl/CMakeLists.txt
    sed -i "1i##! test dpd" $PWD/scripts/base/frameworks/dpd/__load__.zeek
    sed -i "1i##! test x509" $PWD/scripts/base/files/x509/__load__.zeek
    sed -i "1i##! test files-extract" $PWD/scripts/base/files/extract/__load__.zeek

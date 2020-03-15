@@ -140,6 +140,8 @@ in   {
     fish-foreign-env
     pkgs.fzf
     # Bash
+    #(jq.overrideAttrs (addMetaAttrs : { priority = 10;}))
+    jq
     # unstable.nodePackages.bash-language-server
     # nodePackages.javascript-typescript-langserver
     # Nix
@@ -147,7 +149,6 @@ in   {
     #( import ~/.config/nixpkgs/nixos/overlays/rust/cargo2nix {}).package
     autojump
     #    hnix-lsp
-    jq
     #dock
     dive
 
