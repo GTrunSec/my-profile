@@ -117,6 +117,7 @@ in   {
       pyinotify
       pyqtwebengine
       markdown
+      feedparser
       ##
       pytest
       numpy
@@ -148,6 +149,7 @@ in   {
     jq
     # unstable.nodePackages.bash-language-server
     # nodePackages.javascript-typescript-langserver
+    nodePackages.mermaid-cli
     # Nix
     ghc
     #( import ~/.config/nixpkgs/nixos/overlays/rust/cargo2nix {}).package

@@ -35,6 +35,7 @@ with builtins;
     (import ./overlays/python/01-yapf.nix)
     (import ./overlays/python/04-test.nix)
     (import ./overlays/python/02-ms-pyls.nix)
+    (import ./overlays/10-node-packages)
     (import ./overlays)
     # (self: super:
     #   {
