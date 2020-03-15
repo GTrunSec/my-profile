@@ -106,14 +106,18 @@ in   {
     ]))
 
     (python3.withPackages (pkgs: with pkgs; [
-      # rl algorithms
+
+      # eaf
       dbus
       qrcode
       pyqt5
       pymupdf
       xlib
       grip
+      pyinotify
       pyqtwebengine
+      markdown
+      ##
       pytest
       numpy
       orgparse
