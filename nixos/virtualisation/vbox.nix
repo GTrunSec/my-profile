@@ -7,7 +7,7 @@
         enableExtensionPack = true;
       };
     };
-    kvmgt.enable = true;
+   # kvmgt.enable = true;
   };
   users.extraUsers.myuser.extraGroups = ["vboxusers"];
 }
