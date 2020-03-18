@@ -35,10 +35,9 @@ in   {
     gimp
     #brower
     (brave.overrideDerivation (oldAttrs: {
-      version = "1.4.96";
       src = fetchurl {
-        url = "https://github.com/brave/brave-browser/releases/download/v1.4.96/brave-browser_1.4.96_amd64.deb";
-        sha256 = "1z449a9fq89r00yhpg7sfmj0r2jndrcg07yn1lbrbll0f50yzz8j";
+        url = "https://github.com/brave/brave-browser/releases/download/v1.5.112/brave-browser_1.5.112_amd64.deb";
+        sha256 = "0am7qr09pvy6v720rngfxilh4yalxzp7vcq2yndcz6726wnhw9zx";
       };
     }))
     #chat
@@ -106,7 +105,6 @@ in   {
     ]))
 
     (python3.withPackages (pkgs: with pkgs; [
-
       # eaf
       dbus
       qrcode
