@@ -1,20 +1,26 @@
 with import <nixpkgs> {};
+
+# {stdenv, fetchurl, cmake, flex, bison, openssl, libpcap, zlib, file, curl
+# , libmaxminddb, gperftools, python, swig, rocksdb, system-sendmail, caf, makeWrapper}:
 let
   preConfigure = (import ./shell.nix);
 in
 stdenv.mkDerivation rec {
   pname = "zeek";
-  version = "3.0.2";
-  
+  version = "3.0.3";
+  confdir = "/var/db/${pname}";
   src = fetchurl {
-    url = "https://www.zeek.org/downloads/zeek-${version}.tar.gz";
-    sha256 = "0d5agk6yc4xyx2lwfx6r1psks1373h53m0icyka1jf15b4zjg3m7";
+    url = "https://old.zeek.org/downloads/zeek-${version}.tar.gz";
+    sha256 = "0xlw5v83qbgy23wdcddmvan2pid28mw745g4fc1z5r18kp67i8a2";
   };
 
   nativeBuildInputs = [ cmake flex bison file ];
-  buildInputs = [ openssl libpcap zlib curl libmaxminddb gperftools python swig rocksdb];
+  buildInputs = [ openssl libpcap zlib curl libmaxminddb gperftools python swig rocksdb system-sendmail caf makeWrapper];
   # Indicate where to install the python bits, since it can't put them in the "usual"
   # locations as those paths are read-only.
+  ZEEK_DIST = "${placeholder "out"}";
+
+  patches = [ ./zeekctl1.patch];
 
   inherit preConfigure;
 
@@ -23,10 +29,14 @@ stdenv.mkDerivation rec {
     "-DENABLE_PERFTOOLS=true"
     "-DINSTALL_AUX_TOOLS=true"
     "-DINSTALL_ZEEKCTL=true"
+    "-DZEEK_ETC_INSTALL_DIR=${placeholder "out"}/etc"
+    "-DCAF_ROOT_DIR=${caf}"
+    "-DZEEK_SPOOL_DIR=${confdir}/spool"
+    "-DZEEK_LOG_DIR=${confdir}/logs"
   ];
 
-  enableParallelBuilding = true;
 
+  enableParallelBuilding = true;
 
   meta = with stdenv.lib; {
     description = "Powerful network analysis framework much different from a typical IDS";

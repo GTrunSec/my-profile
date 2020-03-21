@@ -397,6 +397,7 @@ Uses `current-date-time-format' for the formatting the date/time."
 #+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
 (package! company-english-helper :recipe (:host github :repo "manateelazycat/company-english-helper"))
 (package! org-super-agenda)
+(package! ob-mermaid)
 (package! org-starter)
 (package! helm-org-rifle)
 (package! org-wild-notifier)
@@ -822,6 +823,14 @@ make
 ** ☞ TODO [[https://github.com/jingtaozf/literate-elisp][jingtaozf/literate-elisp: a literate programming tool to load Emacs Lisp codes from org mode file directly]] :lisp:org:
 ** [[https://github.com/abrochard/walkman][abrochard/walkman: Write HTTP requests in Org mode and replay them at will using cURL]]
 ** [[https://github.com/niklasfasching/go-org][niklasfasching/go-org: Org mode parser with html & pretty printed org rendering]]
+** ob-mermaid
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/config.el"
+(use-package! ob-mermaid
+  :config
+  (setq ob-mermaid-cli-path "~/.nix-profile/bin/mmdc")
+  )
+
+#+end_src
 
 * Completion
 ** Ivy/counsel
@@ -1743,16 +1752,17 @@ FACE defaults to inheriting from default and highlight."
     :custom
     (eaf-find-alternate-file-in-dired t)
     :config
-    (eaf-bind-key scroll_up "RET" eaf-pdf-viewer-keybinding)
-    (eaf-bind-key scroll_down_page "DEL" eaf-pdf-viewer-keybinding)
+    (add-hook! 'eaf-mode-hook 'xah-fly-keys-off)
+
     (eaf-bind-key scroll_up "C-n" eaf-pdf-viewer-keybinding)
     (eaf-bind-key scroll_down "C-p" eaf-pdf-viewer-keybinding)
-    (eaf-bind-key take_photo "p" eaf-camera-keybinding)
+
     (defun eaf-open-google ()
       "Open Google using EAF."
       (interactive)
       (eaf-open-browser "https://www.google.com")))
   )
+
 (use-package! snails
   :if (eq system-type 'gnu/linux)
   :load-path "~/.doom.d/modules/private/snails"

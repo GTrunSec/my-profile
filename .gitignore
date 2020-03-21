@@ -1,6 +1,9 @@
 ## nixos
 result
 
+#fish
+fundle.fish
+fish_prompt.fish
 
 .DS_Store
 init.el

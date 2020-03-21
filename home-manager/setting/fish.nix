@@ -15,6 +15,7 @@ with lib;
       "jethrokuan/fzf"
       "rominf/omf-plugin-fzf-autojump"
       "rominf/omf-plugin-autojump"
+      "otms61/fish-pet"
     ];
     in {
     enable = true;
