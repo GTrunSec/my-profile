@@ -482,3 +482,5 @@ ln -s ~/.config/nixpkgs/darwin/ ~/.nixpkgs
 sudo launchctl stop org.nixos.nix-daemon
 sudo launchctl start org.nixos.nix-daemon
 #+end_src
+* editing
+** [[https://www.openshot.org/][OpenShot Video Editor | Free, Open, and Award-Winning Video Editor for Linux, Mac, and Windows!]]

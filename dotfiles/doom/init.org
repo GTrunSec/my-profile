@@ -225,6 +225,7 @@
 (package! yatemplate)
 (package! pinyin-search)
 (package! grab-x-link)
+(package! ctrlf :recipe (:host github :repo "raxod502/ctrlf"))
 
 ;; window
 (package! dimmer)
@@ -252,6 +253,11 @@
 #+begin_src emacs-lisp :tangle "config.el"
 (load! "setting")
 (load! "xah-fly.el")
+
+
+(use-package! ctrlf
+  :hook
+  (after-init . ctrlf-mode))
 
 
 (use-package! pinyin-search)
@@ -294,7 +300,6 @@
 (add-hook! 'text-mode-hook 'gtrun/truncate-lines-hook)
 (add-hook! 'elfeed-show-mode-hook 'gtrun/truncate-lines-hook)
 (add-hook! 'sunrise-start-hook 'xah-fly-insert-mode-activate)
-
 (add-hook 'maple-explorer-imenu-mode-hook
           (lambda() (setq cursor-type 'box
                           cursor-in-non-selected-windows t)))
@@ -1309,7 +1314,6 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   ("C-k" kill-current-buffer)
   ("C-S-k" awesome-tab-kill-other-buffers-in-current-group)
   ("q" nil "quit"))
-
 )
 ;; (setq awesome-tab-style "bar")
 ;; (setq awesome-tab-set-icons t)
@@ -1855,6 +1859,10 @@ FACE defaults to inheriting from default and highlight."
 (add-hook 'ob-async-pre-execute-src-block-hook
         '(lambda ()
            (setq inferior-julia-program-name "/usr/local/bin/julia")))
+
+
+(add-hook! 'emacs-startup-hook 'doom-modeline-mode)
+
 
 )
 
