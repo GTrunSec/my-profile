@@ -80,7 +80,7 @@ in rec
       openssl
       killall
       # Browser
-      # chromium
+      chromium
       tor-browser-bundle-bin
       #firefox-bin
       # book
