@@ -172,7 +172,6 @@ exec_always --no-startup-id bash $HOME/.config/nixpkgs/dotfiles/polybar/compton.
 #applcation
 # exec --no-startup-id polar-bookshel
 # exec --no-startup-id emacs
-# exec --no-startup-id firefox
 # exec --no-startup-id gitkraken
 
 # exec --no-startup-id wmctrl -c Plasma

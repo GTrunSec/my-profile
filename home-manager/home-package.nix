@@ -36,21 +36,20 @@ in   {
     #brower
     (brave.overrideDerivation (oldAttrs: {
       src = fetchurl {
-        url = "https://github.com/brave/brave-browser/releases/download/v1.5.112/brave-browser_1.5.112_amd64.deb";
-        sha256 = "0am7qr09pvy6v720rngfxilh4yalxzp7vcq2yndcz6726wnhw9zx";
+        url = "https://github.com/brave/brave-browser/releases/download/v1.5.115/brave-browser_1.5.115_amd64.deb";
+        sha256 = "04zyv5amqxax1z0da4bcgxwsq596zfs416nshg6ffg4ci9nfbiab";
       };
     }))
     #chat
     riot-desktop
     (signal-desktop.overrideDerivation (oldAttrs: {
-      version = "1.29.0";
       src = fetchurl {
-        url = "https://updates.signal.org/desktop/apt/pool/main/s/signal-desktop/signal-desktop_1.29.3_amd64.deb";
-        sha256 = "1rkj6rwmwwvyd5041r96j1dxlfbmc6xsdrza43c0ykdrhfj73h11";
+        url = "https://updates.signal.org/desktop/apt/pool/main/s/signal-desktop/signal-desktop_1.32.1_amd64.deb";
+        sha256 = "0sfzz1z57l20prj2s8hdl8ip1hrlzb5fqnccqcfd101a6mjnp9i9";
       };
     }))
     #gitter
-    #music
+    #msusic
     cmus
     compton
     discord
@@ -58,8 +57,8 @@ in   {
     screenfetch
     (polar-bookshelf.overrideDerivation (oldAttrs: {
       src = fetchurl {
-        url = "https://github.com/burtonator/polar-bookshelf/releases/download/v1.90.0/polar-bookshelf-1.90.0-amd64.deb";
-        sha256 = "0l2knbrmz26h2c6wbgq7xlisiqrmaxkdbmmrfp6wlz83mnqzi0nb";
+        url = "https://github.com/burtonator/polar-bookshelf/releases/download/v1.90.18/polar-bookshelf-1.90.18-amd64.deb";
+        sha256 = "1yl679szhb38a4dkb0aviyyp5qi7sc5vxhpjrrzzkrbzqrgnx1x2";
       };
     }))
     #overlay
@@ -105,6 +104,7 @@ in   {
     ]))
 
     (python3.withPackages (pkgs: with pkgs; [
+      shapely
       # eaf
       dbus
       qrcode
