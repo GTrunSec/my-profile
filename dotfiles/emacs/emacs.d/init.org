@@ -3146,13 +3146,6 @@ See also: https://stackoverflow.com/questions/9547912/emacs-calendar-show-more-t
 
   (add-to-list 'org-export-filter-plain-text-functions 'my-html-mark-tag)
 
-  (defun my-html-mark-tag (text backend info)
-    "Transcode :blah: into <mark>blah</mark> in body text."
-    (when (org-export-derived-backend-p backend 'html)
-      (let ((text (replace-regexp-in-string "[^\\w]\\(:\\)[^\n\t\r]+\\(:\\)[^\\w]" "<mark>"  text nil nil 1 nil)))
-        (replace-regexp-in-string "[^\\w]\\(<mark>\\)[^\n\t\r]+\\(:\\)[^\\w]" "</mark>" text nil nil 2 nil))))
-
-  (add-to-list 'org-export-filter-plain-text-functions 'my-html-mark-tag)
 #+end_src
 ** org-publish-alish
 #+begin_src emacs-lisp :tangle yes

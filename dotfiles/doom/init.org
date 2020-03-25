@@ -1167,6 +1167,22 @@ In that case, insert the number."
 (add-hook 'imenu-list-after-jump-hook #'recenter-top-bottom)
 )
 #+end_src
+
+* format
+** html file to ox-hugo
+#+begin_src emacs-lisp :tangle "config.el"
+  ;; (require 'ox)
+  ;; (defun my-html-ox-hugo (text backend info)
+  ;;   "Transcode :blah: into <mark>blah</mark> in body text."
+  ;;   (when (org-export-derived-backend-p backend 'html)
+  ;;     (let ((text (replace-regexp-in-string "file" "/ox-hugo/"  text nil nil 1 nil))))))
+
+  ;; (add-to-list 'org-export-filter-plain-text-functions 'my-html-ox-hugo)
+#+end_src
+
+#+RESULTS:
+| my-html-ox-hugo |
+
 * minor mode and major mode
 ** [[https://github.com/rnkn/binder][rnkn/binder: Emacs global minor mode facilitating multi-file writing projects]]
 ** [[https://github.com/emacs-taskrunner/emacs-taskrunner][emacs-taskrunner/emacs-taskrunner: A universal task runner for emacs]]
