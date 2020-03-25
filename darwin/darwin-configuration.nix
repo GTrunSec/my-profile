@@ -6,6 +6,7 @@
       ~/.config/nixpkgs/nixos/lang/r-darwin.nix
       ~/.config/nixpkgs/nixos/lang/python-darwin.nix
       ~/.config/nixpkgs/nixos/lang/go-darwin.nix
+      ./tmux.nix
     ];
 
 
@@ -45,6 +46,7 @@
         fontspec euenc;
       }
     )
+    julia_13
     ];
 
   environment.variables = { GOROOT = [ "${pkgs.go.out}/share/go" ]; };
@@ -54,13 +56,13 @@
 
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
-  # nix.package = pkgs.nix;
+  nix.package = pkgs.nix;
 
   # Create /etc/bashrc that loads the nix-darwin environment.
   programs.bash.enable = true;
   # programs.zsh.enable = true;
   programs.fish.enable = true;
-
+  #environment.interactiveShellInit = "source /etc/tmux.conf";
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
   system.stateVersion = 4;
@@ -94,6 +96,10 @@
       trustedUsers = [ "gtrun"];
   };
 
+  users.users.gtrun = {
+    home = "/home/gtrun";
+    shell = "/run/current-system/sw/bin/fish";
+       };
   # You should generally set this to the total number of logical cores in your system.
   # $ sysctl -n hw.ncpu
   nix.maxJobs = 15;
