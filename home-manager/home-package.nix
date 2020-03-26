@@ -160,10 +160,10 @@ in   {
     #Go-lang
     dep
     gosec
+    gotests
     gotty
     #blueman
     blueman
     nodejs
-    
   ];
 }

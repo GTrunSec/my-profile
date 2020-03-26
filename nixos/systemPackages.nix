@@ -1,11 +1,12 @@
 { config, lib, pkgs, vscode-utils, ... }:
 with pkgs;
 let
-  customVscode = (import ./custom/vscode.nix { inherit pkgs; });
-  customEmacs = (import ./custom/nix-emacs-ci { inherit pkgs; });
-  julia = (import ./custom/julia.nix {inherit pkgs;});
-  #myHaskell = (import ./custom/haskell.nix {inherit pkgs;});
-  myEmacs = pkgs.emacs;
+      unstable = import (fetchTarball https://nixos.org/channels/nixos-unstable/nixexprs.tar.xz) { };
+      customVscode = (import ./custom/vscode.nix { inherit pkgs; });
+      customEmacs = (import ./custom/nix-emacs-ci { inherit pkgs; });
+      julia = (import ./custom/julia.nix {inherit pkgs;});
+      #myHaskell = (import ./custom/haskell.nix {inherit pkgs;});
+      myEmacs = pkgs.emacs;
 in rec
   {
     environment.systemPackages = with pkgs; [
@@ -153,7 +154,7 @@ in rec
       # }))
       julia
       #lang-go
-      go
+      unstable.go
       gotools
       go_bootstrap
       go-langserver

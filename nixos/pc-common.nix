@@ -25,7 +25,7 @@ with builtins;
     "nixos-config=/etc/nixos/configuration.nix"
     "nixpkgs-overlays=/etc/nixos/overlays-compat/"
     "home-manager=/etc/nixos/channel/home-manager"
-    "ci=https://github.com/arcnmx/ci/archive/master.tar.gz"
+    #"ci=https://github.com/arcnmx/ci/archive/master.tar.gz"
   ];
   nixpkgs.config.allowUnfree = true;
   nixpkgs.overlays = [
@@ -37,6 +37,7 @@ with builtins;
     (import ./overlays/python/02-ms-pyls.nix)
     (import ./overlays/10-node-packages)
     (import ./overlays)
+    (import ./overlays/go/go.nix)
     # (self: super:
     #   {
     #     bat = super.callPackage ./overlays/python/bat{ };
