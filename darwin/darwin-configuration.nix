@@ -71,7 +71,6 @@
       nixPath = [
       "darwin-config=$HOME/.config/nixpkgs/darwin/darin-configuration.nix"
       "home-manager=$HOME/.config/nixpkgs/home-manager"
-      "darwin=$HOME/.config/nixpkgs/darwin/"
       "nixpkgs=$HOME/.config/nixpkgs/channel/nixpkgs"
       "ssh-config-file=$HOME/.ssh/config"
       #"ssh-auth-sock=${xdg_configHome}/gnupg/S.gpg-agent.ssh"
