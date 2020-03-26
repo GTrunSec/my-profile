@@ -245,6 +245,7 @@
 (package! imenu-list)
 (package! helm-tramp)
 (package! visual-fill-column)
+(package! wakatime-mode)
 (package! sunrise-commander :recipe (:host github :repo "sunrise-commander/sunrise-commander"))
 ;; (package! berrys-theme)
 #+end_src
@@ -259,9 +260,10 @@
   :hook
   (after-init . ctrlf-mode))
 
-
+;;[2020-03-26 Thu 16:39]
+(use-package! wakatime-mode
+:hook (after-init . global-wakatime-mode))
 (use-package! pinyin-search)
-
 
 (use-package! helm-tramp
   :config
