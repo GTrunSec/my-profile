@@ -133,6 +133,7 @@ in   {
       notebook
       orgbabelhelper
       ipykernel
+      wakatime
     ]))
 
     #Go

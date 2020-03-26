@@ -10,6 +10,7 @@ self: super:
   deepsea = super.callPackage ./go/deepsea {};
   horcrux = super.callPackage ./go/horcrux {};
   orgbabelhelper = super.callPackage ./python/orgbabelhelper {};
+  wakatime = super.callPackage ./python/wakatime {};
 #  adguardhome = super.callPackage ./go/adguard-home {};
   #  outline-client = super.callPackage ./custom/outline-client.nix {};
 }
