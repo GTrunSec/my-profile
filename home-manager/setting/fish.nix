@@ -36,9 +36,9 @@ with lib;
     };
     
      interactiveShellInit = ''
-       if not functions -q fundle; eval (curl -sfL https://git.io/fundle-install); end
-        ${concatMapStringsSep "\n" (p: "fundle plugin '${p}'") plugins}
-      fundle init
+    if not functions -q fundle; eval (curl -sfL https://git.io/fundle-install); end
+      ${concatMapStringsSep "\n" (p: "fundle plugin '${p}'") plugins}
+    fundle init
     #infocmp | ssh $remote "cat > $TERM.ti ; tic -o ~/.terminfo $TERM.ti"
     source ${pkgs.autojump}/share/autojump/autojump.fish
     set -x -U GOPATH $HOME/go 
@@ -53,8 +53,14 @@ with lib;
     alias .....='cd ../../../..'
     abbr -a g git
     abbr -a gr "git reset --hard"
-    abbr -a gl "git pull --rebase"   
-
+    abbr -a gl "git pull --rebase"
+    set -l project
+     if echo (pwd) | grep -qEi "^/Users/$USER/Sites/"
+         set  project (echo (pwd) | sed "s#^/Users/$USER/Sites/\\([^/]*\\).*#\\1#")
+     else
+       set  project "Terminal"
+     end
+     wakatime --write --plugin "fish-wakatime/0.0.1" --entity-type app --project "$project" --entity (echo $history[1] | cut -d ' ' -f1) 2>&1 > /dev/null&
     if status is-interactive
     and not set -q TMUX
     exec tmux
