@@ -7,8 +7,8 @@
       ~/.config/nixpkgs/nixos/lang/python-darwin.nix
       ~/.config/nixpkgs/nixos/lang/go-darwin.nix
       ./tmux.nix
+      ./home-file.nix
     ];
-
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
@@ -47,6 +47,7 @@
       }
     )
     julia_13
+    wakatime
     ];
 
   environment.variables = { GOROOT = [ "${pkgs.go.out}/share/go" ]; };
