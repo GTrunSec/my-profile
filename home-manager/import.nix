@@ -6,6 +6,7 @@
     ./setting
     #lang
     ./home-package.nix
+    ./my3rd-scripts.nix
     #programs
   ]; 
 }
