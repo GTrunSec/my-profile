@@ -1406,7 +1406,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 ** packages
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/packages.el"
 (package! awesome-pair :recipe (:host github :repo "manateelazycat/awesome-pair"))
-(package! lsp-julia :recipe (:host github :repo "non-Jedi/lsp-julia"))
+(package! lsp-julia :recipe (:host github :repo "gdkrmr/lsp-julia"))
 (package! plantuml-mode)
 (package! ccls)
 (package! company-tabnine)
@@ -1664,6 +1664,8 @@ FACE defaults to inheriting from default and highlight."
   (add-hook 'julia-mode-hook #'lsp)
   (setq lsp-julia-package-dir nil)
   (setq lsp-julia-default-environment "~/.julia/environments/v1.3")
+  (setq lsp-julia-flags '("--startup-file=no" "--history-file=no"))
+  (setq lsp-folding-range-limit 100)
   )
 #+end_src
 

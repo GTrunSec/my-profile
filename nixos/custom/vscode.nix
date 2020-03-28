@@ -22,6 +22,15 @@ pkgs.vscode-with-extensions.override {
       sha256 = "0bph7gnd6j55r997y62xb7n09cp08i46gmdk0lk5gjbpz3c03hvv";
     }
 
+    #time does not work on nixos
+    # {
+    #   publisher = "WakaTime";
+    #   name = "vscode-wakatime";
+    #   version = "4.0.0";
+    #   sha256 = "0bwxz8dg00k8frnvkvcngll5yaf9k7z13dg309vmw8xbdgkiyid4";
+    # }
+
+
     #markdown
 
     {
@@ -46,7 +55,22 @@ pkgs.vscode-with-extensions.override {
       version = "0.1.28";
       sha256 = "11zn2pbj4y1j2cnn0yhf2dvhkxy9am8d1ja92grh3h86wvz0mw8k";
     }
-    
+
+    # Lang-julia
+    {
+      publisher = "julialang";
+      name = "language-julia";
+      version = "0.15.18";
+      sha256 = "06m0k4dcl1zs7zzr5lqyx5jn79lw5y7zxf6vyxlbjs3hly4wmz44";
+    }
+
+    {
+      publisher = "cameronbieganek";
+      name = "julia-color-themes";
+      version = "0.1.1";
+      sha256 = "18116yjfxbig6mhbswkx66l207mqks510f70yb36vla23bnw0r6v";
+    }
+
     # Lang-R
     {
       publisher = "Ikuyadeu";
@@ -74,8 +98,8 @@ pkgs.vscode-with-extensions.override {
     {
       publisher = "ms-vscode";
       name = "Go";
-      version = "0.11.7";
-      sha256 = "1l6jjdfivw1pn9y4d4i7zf80ls1k1b0ap1d828ah57ad3bgmyqfi";
+      version = "0.13.1";
+      sha256 = "18x89g4b085crfm1wnfnsznwlvc30xqcivzf5nw9d1z5rg2dva5h";
     }
 
     {
