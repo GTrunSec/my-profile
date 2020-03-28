@@ -17,7 +17,7 @@
       ^__pycache__
       ^/zeek
       ^/.notdeft-db/
-    include = .*
+    include =
     include_only_with_project_file = false
     [projectmap]
     ^~/project/hardenedlinux-zeek-script/NSM-data-analysis(\d+)/ = project{0}

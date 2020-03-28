@@ -1490,14 +1490,6 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   )
 #+end_src
 
-** Julia
-#+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
-(use-package! lsp-julia
-  :config
-  (add-hook 'julia-mode-hook #'lsp)
-  )
-#+end_src
-
 ** Latex
 
 *** auctex
@@ -1663,7 +1655,17 @@ FACE defaults to inheriting from default and highlight."
 
 *** [[https://github.com/jacktasia/dumb-jump][jacktasia/dumb-jump: an Emacs "jump to definition" package for 40+ languages]]
 ** julia
-*** [[https://github.com/gcv/julia-snail][gcv/julia-snail: An Emacs development environment for Julia]]
+*** [[https://github.com/gcv/julia-snail][julia-snail: An Emacs development environment for Julia]]
+*** lsp-julia
+#+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
+(use-package! lsp-julia
+  :config
+  (add-hook 'ess-julia-mode-hook #'lsp)
+  (add-hook 'julia-mode-hook #'lsp)
+  (setq lsp-julia-package-dir nil)
+  (setq lsp-julia-default-environment "~/.julia/environments/v1.3")
+  )
+#+end_src
 
 * chinese
 ** pinyinlib
