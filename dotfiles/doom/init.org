@@ -1660,7 +1660,6 @@ FACE defaults to inheriting from default and highlight."
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
 (use-package! lsp-julia
   :config
-  (add-hook 'ess-julia-mode-hook #'lsp)
   (add-hook 'julia-mode-hook #'lsp)
   (setq lsp-julia-package-dir nil)
   (setq lsp-julia-default-environment "~/.julia/environments/v1.3")
