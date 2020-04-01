@@ -24,6 +24,10 @@
         url = "https://rubygems.org/gems/bundler-2.1.4.gem";
         sha256 = "12glbb1357x91fvd004jgkw7ihlkpc9dwr349pd7j83isqhls0ah";
       };
+      postFixup = ''
+          mv $out/bin/bundle $out/bin/ruby-bundle
+          sed -i -e "s/activate_bin_path/bin_path/g" $out/bin/ruby-bundle
+            '';
     }))
     jekyll
     glib
