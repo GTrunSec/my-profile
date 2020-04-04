@@ -5,7 +5,10 @@ let
 in
 
 {
-    environment.systemPackages = with pkgs; [
-      deepsea
+  environment.systemPackages = with pkgs; [
+    deepsea
+    gocode
+    go-langserver
+    gotools
     ];
 }
