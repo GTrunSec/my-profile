@@ -1414,6 +1414,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 (package! poly-markdown)
 (package! lsp-haskell)
 (package! bicycle)
+(package! jsonrpc)
 #+end_src
 
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
@@ -1665,6 +1666,29 @@ FACE defaults to inheriting from default and highlight."
   (setq lsp-julia-default-environment "~/.julia/environments/v1.3")
   (setq lsp-julia-flags '("--startup-file=no" "--history-file=no"))
   (setq lsp-folding-range-limit 100)
+  )
+#+end_src
+** nox
+#+begin_src emacs-lisp :tangle "./modules/private/my-code/packages.el"
+(package! awesome-nox :recipe (:host github :repo "manateelazycat/nox"))
+#+end_src
+#+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
+(use-package! nox
+  ;; :config
+  ;; (dolist (hook (list
+  ;;                'js-mode-hook
+  ;;                'rust-mode-hook
+  ;;                'python-mode-hook
+  ;;                'ruby-mode-hook
+  ;;                'java-mode-hook
+  ;;                'sh-mode-hook
+  ;;                'php-mode-hook
+  ;;                'c-mode-common-hook
+  ;;                'c-mode-hook
+  ;;                'c++-mode-hook
+  ;;                'haskell-mode-hook
+  ;;                ))
+  ;;   (add-hook hook '(lambda () (nox-ensure))))
   )
 #+end_src
 

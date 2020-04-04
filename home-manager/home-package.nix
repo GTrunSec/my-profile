@@ -135,7 +135,7 @@ in   {
       ipykernel
       wakatime
     ]))
-
+    ncat
     #Go
     horcrux
     zeek

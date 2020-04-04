@@ -17,12 +17,13 @@
       ./nixos/nsm
       ./nixos/module
       ./cachix.nix
+      #./nixos/hydra.nix
     ];
 
   boot.extraModprobeConfig = ''
        options snd-hda-intel model=ALC1220
        '';
-  
+  nixpkgs.config.allowBroken = true;
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

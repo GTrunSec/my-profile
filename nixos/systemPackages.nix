@@ -154,7 +154,7 @@ in rec
       # }))
       julia
       #lang-go
-      unstable.go
+      go
       gotools
       go_bootstrap
       go-langserver
