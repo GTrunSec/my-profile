@@ -14,6 +14,8 @@ let
     #pymupdf
     xlib
     grip
+    mypy
+    flake8
     # other python packages you want
   ];
  python-with-my-packages = python37.withPackages my-python-packages;

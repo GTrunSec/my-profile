@@ -13,6 +13,8 @@
 #+PROPERTY: header-args :tangle "~/.emacs.d/init.el"
 
 - [[https://github.com/hlissner/doom-emacs/blob/develop/docs/getting_started.org][doom-emacs/getting_started.org at develop · hlissner/doom-emacs]]
+
+
 * init.el
 #+begin_src emacs-lisp :tangle yes
 ;;; init.el -*- lexical-binding: t; -*-
@@ -210,10 +212,12 @@
          my-code
 )
 #+end_src
+
 * package.el
 :PROPERTIES:
 :ID:       F2FFBBA8-3EFB-4336-81A5-0BE0A548EAC7
 :END:
+
 #+begin_src emacs-lisp :tangle "packages.el"
 (package! bm)
 (package! w3m)
@@ -233,6 +237,7 @@
 (package! golden-ratio)
 (package! writegood-mode)
 #+end_src
+
 ** third-part
 #+begin_src emacs-lisp :tangle "packages.el"
 (package! eyebrowse)
@@ -249,6 +254,7 @@
 (package! sunrise-commander :recipe (:host github :repo "sunrise-commander/sunrise-commander"))
 ;; (package! berrys-theme)
 #+end_src
+
 *** [[https://github.com/jackkamm/undo-propose-el][jackkamm/undo-propose-el: Navigate the emacs undo history by staging undo's in a temporary buffer]]
 * config.el
 #+begin_src emacs-lisp :tangle "config.el"
@@ -314,9 +320,7 @@
 #+RESULTS:
 
 * autoload
-
 ** misc
-
 *** time
 #+begin_src emacs-lisp :tangle "~/.doom.d/autoload/misc.el"
 ;;; ~/.doom.d/autoload/misc.el -*- lexical-binding: t; -*-
@@ -384,6 +388,7 @@ Uses `current-date-time-format' for the formatting the date/time."
 ;;; ~/.doom.d/autoload/+default.el -*- lexical-binding: t; -*-
 
 #+end_src
+
 * org-mode
 ** config
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
@@ -400,6 +405,7 @@ Uses `current-date-time-format' for the formatting the date/time."
 )
 ;;(use-package emacs-powerthesaurus)
 #+end_src
+
 ** Packages
 #+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
 (package! company-english-helper :recipe (:host github :repo "manateelazycat/company-english-helper"))
@@ -413,6 +419,7 @@ Uses `current-date-time-format' for the formatting the date/time."
 (package! notdeft :recipe (:host github :repo "hasu/notdeft"))
 (package! emacs-powerthesaurus :recipe (:host github :repo "SavchenkoValeriy/emacs-powerthesaurus"))
 #+end_src
+
 ** setting
 *** org-global
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/setting.el"
@@ -565,7 +572,6 @@ Uses `current-date-time-format' for the formatting the date/time."
 #+end_src
 
 ** org-wild-notifier
-
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/packages.el"
 (use-package! org-wild-notifier
   :defer t
@@ -594,6 +600,7 @@ Uses `current-date-time-format' for the formatting the date/time."
    org-agenda-start-with-log-mode t)
   )
 #+end_src
+
 ** org-starter
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package org-starter
@@ -707,11 +714,11 @@ Uses `current-date-time-format' for the formatting the date/time."
 :config
 (setq rmh-elfeed-org-files (list "~/Documents/org-notes/elfeed.org")))
 #+end_src
-** [[https://github.com/alphapapa/org-rifle][alphapapa/org-rifle: Rifle through your Org-mode buffers and acquire your target]]
 
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! helm-org-rifle)
 #+end_src
+
 ** org publish
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/setting.el"
   (setq org-publish-project-alist
@@ -753,8 +760,14 @@ Uses `current-date-time-format' for the formatting the date/time."
 
 ** org-notdeft
 - [[https://jingsi.space/post/2017/04/05/organizing-a-complex-directory-for-emacs-org-mode-and-deft/#configuring-deft][Organizing a Complex Directory for Emacs Org Mode and Deft]]
+
+
 - [[https://tero.hasu.is/notdeft/#org7b25462][NotDeft | Tero Hasu]]
+
+
 - [[https://github.com/EFLS/zetteldeft][EFLS/zetteldeft: A Zettelkasten system! Or rather, some functions on top of the emacs deft package.]]
+
+
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! notdeft
   :config
@@ -776,14 +789,16 @@ Uses `current-date-time-format' for the formatting the date/time."
           )
   )
 #+end_src
+
 - build
+
+
 cd ~/.emacs.d/.local/straight/repos/notdeft/xapian
 make
 
 ** [[https://github.com/alphapapa/org-protocol-capture-html][alphapapa/org-protocol-capture-html: Capture HTML from the browser selection into Emacs as org-mode content]]
 
 ** org-export
-
 *** highlight
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
   ;; (require 'ox)
@@ -839,9 +854,22 @@ make
 
 #+end_src
 
+** [[https://github.com/dustinlacewell/org-spacer.el][dustinlacewell/org-spacer.el: Enforce the number of blank lines between elements in an org-mode document]]
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/packages.el"
+(package! org-spacer.el :recipe (:host github :repo "dustinlacewell/org-spacer.el"))
+#+end_src
+
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+(use-package! org-spacer
+  :config
+  (add-hook 'org-mode-hook
+            (lambda () (add-hook 'before-save-hook
+                                 'org-spacer-enforce nil 'make-it-local)))
+  )
+#+end_src
+
 * Completion
 ** Ivy/counsel
-
 #+begin_src emacs-lisp :tangle "config.el"
   (use-package! counsel
     :hook
@@ -865,6 +893,7 @@ make
        (setq ivy-format-function #'ivy-format-function-line))
      ;;[[https://github.com/gilbertw1/better-jumper][gilbertw1/better-jumper: A configurable jump list implementation for Emacs]]
 #+end_src
+
 ** company
 #+begin_src emacs-lisp :tangle "config.el"
 (after! company
@@ -908,6 +937,7 @@ In that case, insert the number."
   (define-key map (kbd "<return>") nil))
   )
 #+end_src
+
 ** company-backend
 #+begin_src emacs-lisp :tangle "config.el"
 (set-company-backend! '(nix-mode)
@@ -985,7 +1015,9 @@ In that case, insert the number."
   )
 
 #+end_src
+
 #+end_src
+
 ** Edition
 *** Maple
 #+begin_src emacs-lisp :tangle "config.el"
@@ -1007,6 +1039,7 @@ In that case, insert the number."
                 )
     )
 #+end_src
+
 *** awesome-pair
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! awesome-pair)
@@ -1194,9 +1227,11 @@ In that case, insert the number."
 #+begin_src emacs-lisp :tangle "packages.el"
 ;;(package! flycheck-grammarly :recipe (:host github :repo "jcs-elpa/flycheck-grammarly"))
 #+end_src
+
 #+begin_src emacs-lisp :tangle "config.el"
 ;;(use-package! flycheck-grammarly)
 #+end_src
+
 ** [[https://github.com/arnm/ob-mermaid][arnm/ob-mermaid: Generate mermaid diagrams within Emacs org-mode babel]]
 * Visual
 ** Buffer
@@ -1216,6 +1251,7 @@ In that case, insert the number."
 ;; highlight brackets
 (setq show-paren-style 'parenthesis)
 #+end_src
+
 *** eysbrowse
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! eyebrowse
@@ -1229,6 +1265,7 @@ In that case, insert the number."
     (eyebrowse-mode t)
     (setq eyebrowse-new-workspace t)))
     #+end_src
+
 ** window
 *** setting
 #+begin_src emacs-lisp :tangle "config.el"
@@ -1242,6 +1279,7 @@ In that case, insert the number."
 (advice-add 'text-scale-adjust :after
   #'visual-fill-column-adjust)
 #+end_src
+
 *** tab
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! awesome-tab
@@ -1344,11 +1382,13 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 (global-set-key (kbd "C-c k") 'awesome-tab-backward-tab)
 (global-set-key (kbd "C-c o") 'awesome-tab-switch-group)
 #+end_src
+
 *** Dimming Unused Windows
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! dimmer
   :config (dimmer-mode))
 #+end_src
+
 *** beacon
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! beacon
@@ -1369,6 +1409,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   :diminish golden-ratio-mode
   :init (golden-ratio-mode 1))
 #+end_src
+
 ** theme
 *** [[https://github.com/vbuzin/berrys-theme][vbuzin/berrys-theme: A light, clean and elegant Emacs theme]]
 #+begin_src emacs-lisp :tangle yes
@@ -1380,8 +1421,10 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 ;;   (setq-default cursor-type '(bar . 2))
 ;;   (setq-default line-spacing 2))
 #+end_src
+
 ** [[https://github.com/bnbeckwith/writegood-mode][bnbeckwith/writegood-mode: Minor mode for Emacs to improve English writing
 ]]
+
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! writegood-mode
   ;; Load this whenver I'm composing prose.
@@ -1398,6 +1441,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
            "it turns out that")))  ;; How does it turn out so?
            ;; ↯ What is the evidence of highighted phrase? ↯
 #+end_src
+
 ** [[https://github.com/seagle0128/grip-mode][seagle0128/grip-mode: Instant Github-flavored Markdown/Org preview using grip]]
 
 * git
@@ -1472,7 +1516,9 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   (dolist (lang org-babel-lsp-lang-list)
     (eval `(lsp-org-babel-enbale ,lang))))
 
+
 #+end_src
+
 ** ccls
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
 (use-package! ccls
@@ -1482,6 +1528,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
 
 #+end_src
+
 ** Poly
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
 (use-package! polymode)
@@ -1492,7 +1539,6 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 #+end_src
 
 ** Latex
-
 *** auctex
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/my-latex.el"
 
@@ -1577,6 +1623,8 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
 ** Scheme
 - https://gitlab.com/jaor/geiser
+
+
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! geiser
 :config
@@ -1590,7 +1638,11 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 ** Code misc
 *** parentheses
 - [[https://with-emacs.com/posts/ui-hacks/show-matching-lines-when-parentheses-go-off-screen/][with-emacs · Show matching lines when parentheses go off-screen]]s
+
+
 - [[https://www.reddit.com/r/emacs/comments/bqyx6h/withemacs_show_matching_lines_when_parentheses_go/][(with-emacs · Show matching lines when parentheses go off-screen : emacs]]
+
+
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/show-parentheses.el"
 ;;; -*- lexical-binding: t; -*-
 
@@ -1668,13 +1720,15 @@ FACE defaults to inheriting from default and highlight."
   (setq lsp-folding-range-limit 100)
   )
 #+end_src
+
 ** nox
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/packages.el"
-(package! awesome-nox :recipe (:host github :repo "manateelazycat/nox"))
+(package! nox :recipe (:host github :repo "manateelazycat/nox"))
 #+end_src
+
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
 (use-package! nox
-  ;; :config
+  :config
   ;; (dolist (hook (list
   ;;                'js-mode-hook
   ;;                'rust-mode-hook
@@ -1690,6 +1744,11 @@ FACE defaults to inheriting from default and highlight."
   ;;                ))
   ;;   (add-hook hook '(lambda () (nox-ensure))))
   )
+#+end_src
+
+** python
+#+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
+(setq flycheck-python-pylint-executable "pylint")
 #+end_src
 
 * chinese
@@ -1764,7 +1823,9 @@ FACE defaults to inheriting from default and highlight."
 #+begin_src emacs-lisp :tangle "packages.el"
 (disable-packages! pyim)
 (disable-packages! company-go)
+(disable-packages! lsp-python-ms)
 #+end_src
+
 * set face
 #+begin_src emacs-lisp :tangle "config.el"
 ;; (custom-set-faces
@@ -1785,6 +1846,7 @@ FACE defaults to inheriting from default and highlight."
 (load! "./modules/my-linux.el")
 (load! "./modules/my-macos.el")
 #+end_src
+
 ** Linux
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! my-linux
@@ -1858,10 +1920,10 @@ FACE defaults to inheriting from default and highlight."
   (add-hook 'snails-mode-hook #'xah-fly-insert-mode-activate))
 #+end_src
 
-
 #+begin_src emacs-lisp :tangle "./modules/my-linux.el"
 (provide 'my-linux)
 #+end_src
+
 ** MacOS
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! my-macos
@@ -1914,6 +1976,7 @@ FACE defaults to inheriting from default and highlight."
 
 
 #+end_src
+
 *** macos-setting
 #+begin_src emacs-lisp :tangle "./modules/my-macos.el"
 (use-package! cnfonts)
@@ -1931,6 +1994,7 @@ FACE defaults to inheriting from default and highlight."
   )
 (provide 'my-macos)
 #+end_src
+
 * Cache
 ** [[https://github.com/bzg/dotemacs/blob/master/emacs.org][dotemacs/emacs.org at master · bzg/dotemacs]]
 ** [[http://irfu.cea.fr/Pisp/vianney.lebouteiller/emacs.html][Everything with Emacs]]
