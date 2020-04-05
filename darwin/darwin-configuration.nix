@@ -73,7 +73,7 @@
   system.stateVersion = 4;
 
   nix = {
-      nixPath = [
+    nixPath = [
       "darwin-config=$HOME/.config/nixpkgs/darwin/darin-configuration.nix"
       "home-manager=$HOME/.config/nixpkgs/home-manager"
       "nixpkgs=$HOME/.config/nixpkgs/channel/nixpkgs"
@@ -88,16 +88,18 @@
     binaryCachePublicKeys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       "nsm-data-analysis.cachix.org-1:GhKJmne4IPk5C78jG980Dijd+XGFZgOGULp3UKHkJ8M="
+      "10.220.170.113:qJ56F7LuZnSS8LrgNnikUK8OfgI7nQXwYwa/8dA6wW8="
     ];
 
-      trustedBinaryCaches = [
-        https://cache.nixos.org
-        https://nsm-data-analysis.cachix.org
-      ];
+    trustedBinaryCaches = [
+      https://cache.nixos.org
+      https://nsm-data-analysis.cachix.org
+      http://10.220.170.113
+    ];
 
-      
 
-      trustedUsers = [ "gtrun"];
+
+    trustedUsers = [ "gtrun"];
   };
 
   users.users.gtrun = {
