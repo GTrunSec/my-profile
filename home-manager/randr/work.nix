@@ -3,6 +3,7 @@
 
   programs = {
     autorandr ={
+      enable = true;
       hooks.postswitch ={
         "fix_screen" = "${pkgs.stumpish}/bin/stumpish refresh-heads";
         "fix_kb" = "${pkgs.xorg.setxkbmap}/bin/setxkbmap -option \"ctrl:nocaps\"";
