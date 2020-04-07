@@ -44,7 +44,7 @@ in
   };
   programs.home-manager = {
     enable = true;
-    path = "./channel/home-manager";
+    path = "${home_directory}/.nix-defexpr/channels/home-mananger";
   };
 
   services.lorri.enable = true;
