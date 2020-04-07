@@ -1,27 +1,12 @@
 [submodule "dotfiles/wallpaper"]
 	path = dotfiles/wallpaper
 	url = https://github.com/GTrunSec/wallpaper.git
-[submodule "own-nixpkgs/liberime/liberime"]
-	path = own-nixpkgs/liberime/liberime
-	url = https://github.com/tumashu/liberime.git
-[submodule "dotfiles/doom/modules/private/snails"]
-	path = dotfiles/doom/modules/private/snails
-	url = https://github.com/manateelazycat/snails.git
-[submodule "dotfiles/doom/modules/private/emacs-application-framework"]
-	path = dotfiles/doom/modules/private/emacs-application-framework
-	url = https://github.com/manateelazycat/emacs-application-framework.git
 [submodule "channel/nixpkgs"]
 	path = channel/nixpkgs
 	url = git@github.com:GTrunSec/nixpkgs.git
-[submodule "nixos/overlays/rust/cargo2nix"]
-	path = nixos/overlays/rust/cargo2nix
-	url = https://github.com/tenx-tech/cargo2nix.git
 [submodule "channel/ghcide-nix"]
 	path = channel/ghcide-nix
 	url = https://github.com/cachix/ghcide-nix.git
-[submodule "bin/nix-bundle"]
-	path = bin/nix-bundle
-	url = https://github.com/matthewbauer/nix-bundle.git
 [submodule "channel/home-manager"]
 	path = channel/home-manager
 	url = https://github.com/rycee/home-manager.git

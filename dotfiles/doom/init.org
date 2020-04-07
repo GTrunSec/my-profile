@@ -1900,7 +1900,7 @@ FACE defaults to inheriting from default and highlight."
 (when (display-graphic-p)
   (use-package! eaf
     :if (eq system-type 'gnu/linux)
-    :load-path "~/.doom.d/modules/private/emacs-application-framework"
+    :load-path "~/.myscript/eaf"
     :custom
     (eaf-find-alternate-file-in-dired t)
     :config
@@ -1917,7 +1917,7 @@ FACE defaults to inheriting from default and highlight."
 
 (use-package! snails
   :if (eq system-type 'gnu/linux)
-  :load-path "~/.doom.d/modules/private/snails"
+  :load-path "~/.myscript/snails"
   :config
   (define-key snails-mode-map [remap next-line] #'snails-select-next-item)
   (add-hook 'snails-mode-hook #'xah-fly-insert-mode-activate))

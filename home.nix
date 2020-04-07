@@ -13,9 +13,12 @@ in
     ./home-manager/import.nix
   ];
 
+
   programs.autorandr = {
     enable = true;
   };
+
+
   xdg = {
     enable = true;
     cacheHome = "${home_directory}/.local/cache";
@@ -45,6 +48,7 @@ in
   };
 
   services.lorri.enable = true;
+
   systemd.user.startServices = true;
   # home.sessionVariables = {
 
