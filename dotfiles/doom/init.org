@@ -1714,12 +1714,15 @@ FACE defaults to inheriting from default and highlight."
 (use-package! lsp-julia
   :config
   (add-hook 'julia-mode-hook #'lsp)
-  (setq lsp-julia-package-dir nil)
   (setq lsp-julia-default-environment "~/.julia/environments/v1.3")
-  (setq lsp-julia-flags '("--startup-file=no" "--history-file=no"))
   (setq lsp-folding-range-limit 100)
+  (setq lsp-julia-package-dir nil)
+  (setq lsp-julia-flags '("--project=/Users/gtrun/.julia/packages/languageserver"  "--startup-file=no" "--history-file=no"))
   )
 #+end_src
+
+#+RESULTS:
+: t
 
 ** nox
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/packages.el"
