@@ -1,5 +1,8 @@
 { config, pkgs,  ... }:
-
+let
+  ##nix-channel --add https://github.com/NixOS/nixpkgs/archive/nixpkgs-19.09-darwin.tar.gz nix-darwin
+  nixpkgs = (import <nix-darwin> { config.allowUnfree = true; config.ignoreCollisions = true;});
+in
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -8,13 +11,13 @@
       ~/.config/nixpkgs/nixos/lang/go-darwin.nix
       ./tmux.nix
       ./home-file.nix
+      ./zsh.nix
     ];
-
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   # bugs sudo mount -uw /
   environment.systemPackages = with pkgs; [
-    emacs
+    nixpkgs.emacs
     dbus
     go
     zeek
@@ -50,7 +53,7 @@
         fontspec euenc;
       }
     )
-    julia_13
+    (julia_13.overrideAttrs(oldAttrs: {checkTarget = "";}))
     wakatime
     ];
 
@@ -66,7 +69,6 @@
   # Create /etc/bashrc that loads the nix-darwin environment.
   programs.bash.enable = true;
   # programs.zsh.enable = true;
-  programs.fish.enable = true;
   #environment.interactiveShellInit = "source /etc/tmux.conf";
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
@@ -75,7 +77,7 @@
   nix = {
     nixPath = [
       "darwin-config=$HOME/.config/nixpkgs/darwin/darin-configuration.nix"
-      "home-manager=$HOME/.config/nixpkgs/home-manager"
+      "home-manager=$HOME/.nix-defexpr/channels/home-manager/"
       "nixpkgs=$HOME/.config/nixpkgs/channel/nixpkgs"
       "ssh-config-file=$HOME/.ssh/config"
       #"ssh-auth-sock=${xdg_configHome}/gnupg/S.gpg-agent.ssh"

@@ -3,7 +3,7 @@
 {
   programs.tmux.enable = true;
   programs.tmux.enableVim = true;
-  programs.tmux.tmuxConfig = ''
+  programs.tmux.extraConfig = ''
    set -g default-shell /run/current-system/sw/bin/fish
    set -g default-command /run/current-system/sw/bin/fish
 

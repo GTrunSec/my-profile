@@ -868,6 +868,18 @@ make
   )
 #+end_src
 
+** [[https://github.com/mtekman/org-density.el][mtekman/org-density.el: Examine the density of org headings]]
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/packages.el"
+(package! org-density :recipe (:host github :repo "mtekman/org-density.el"))
+#+end_src
+
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+(use-package! org-density
+  :config
+  (define-key org-mode-map (kbd "C-d") 'org-density-mode)
+  )
+#+end_src
+
 * Completion
 ** Ivy/counsel
 #+begin_src emacs-lisp :tangle "config.el"
@@ -1721,9 +1733,6 @@ FACE defaults to inheriting from default and highlight."
   )
 #+end_src
 
-#+RESULTS:
-: t
-
 ** nox
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/packages.el"
 (package! nox :recipe (:host github :repo "manateelazycat/nox"))
@@ -1999,6 +2008,10 @@ FACE defaults to inheriting from default and highlight."
 #+end_src
 
 * Cache
-** [[https://github.com/bzg/dotemacs/blob/master/emacs.org][dotemacs/emacs.org at master · bzg/dotemacs]]
-** [[http://irfu.cea.fr/Pisp/vianney.lebouteiller/emacs.html][Everything with Emacs]]
-** [[https://github.com/munen/emacs.d/blob/master/configuration.org][emacs.d/configuration.org at master · munen/emacs.d]]
+-  [[https://github.com/bzg/dotemacs/blob/master/emacs.org][dotemacs/emacs.org at master · bzg/dotemacs]]
+
+
+-  [[http://irfu.cea.fr/Pisp/vianney.lebouteiller/emacs.html][Everything with Emacs]]
+
+
+-  [[https://github.com/munen/emacs.d/blob/master/configuration.org][emacs.d/configuration.org at master · munen/emacs.d]]
