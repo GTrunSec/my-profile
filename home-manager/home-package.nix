@@ -145,7 +145,6 @@ in   {
     rocksdb
     sqlite
     fish-foreign-env
-    pkgs.fzf
     # Bash
     #(jq.overrideAttrs (addMetaAttrs : { priority = 10;}))
     jq

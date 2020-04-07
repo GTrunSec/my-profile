@@ -4,7 +4,6 @@ with lib;
 
   #fish
   #      "oh-my-fish/theme-bobthefish"
-  programs.direnv.enable = true;
   programs.fish = let
     plugins = [
       "edc/bass"
