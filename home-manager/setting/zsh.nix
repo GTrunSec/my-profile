@@ -13,7 +13,7 @@ in
     oh-my-zsh = {
       enable = true;
       plugins = [ "git" "sudo" "z" ];
-      theme = "robbyrussell";
+      theme = "xiong-chiamiov";
     };
     history = {
       share = true;

@@ -10,14 +10,4 @@
     ./home-files.nix
     #programs
   ];
-
-  programs.direnv = {
-    enableBashIntegration = true;
-    enableZshIntegration = true;
-  };
-  programs.fzf = {
-    enable = true;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
-  };
 }
