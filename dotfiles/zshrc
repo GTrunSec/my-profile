@@ -36,6 +36,5 @@ function cd() {
                                 }
 
 
-
 # nix direnv hook
 eval "$(direnv hook zsh)"

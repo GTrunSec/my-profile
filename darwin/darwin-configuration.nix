@@ -1,7 +1,6 @@
 { config, pkgs,  ... }:
 let
-  ##nix-channel --add https://github.com/NixOS/nixpkgs/archive/nixpkgs-19.09-darwin.tar.gz nix-darwin
-  nixpkgs = (import <nix-darwin> { config.allowUnfree = true; config.ignoreCollisions = true;});
+  pkgs = (import ~/.config/nixpkgs/channel/nixpkgs) { };
 in
 {
   imports =
@@ -9,15 +8,14 @@ in
       ~/.config/nixpkgs/nixos/lang/r-darwin.nix
       ~/.config/nixpkgs/nixos/lang/python-darwin.nix
       ~/.config/nixpkgs/nixos/lang/go-darwin.nix
-      ./tmux.nix
-      ./home-file.nix
-      ./zsh.nix
+      ./darwin-pkgs.nix
+      #./tmux.nix
     ];
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   # bugs sudo mount -uw /
   environment.systemPackages = with pkgs; [
-    nixpkgs.emacs
+    (import ~/.nix-defexpr/channels/home-manager {}).home-manager
     dbus
     go
     zeek
@@ -68,7 +66,7 @@ in
 
   # Create /etc/bashrc that loads the nix-darwin environment.
   programs.bash.enable = true;
-  # programs.zsh.enable = true;
+  programs.zsh.enable = true;
   #environment.interactiveShellInit = "source /etc/tmux.conf";
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
@@ -106,7 +104,7 @@ in
 
   users.users.gtrun = {
     home = "/home/gtrun";
-    shell = "/run/current-system/sw/bin/fish";
+    shell = "/run/current-system/sw/bin/zsh";
        };
   # You should generally set this to the total number of logical cores in your system.
   # $ sysctl -n hw.ncpu

@@ -24,7 +24,8 @@ in
   clock24 = true;
   keyMode = "vi";
   extraConfig = /* tmux */ ''
-   set-option -g default-shell /run/current-system/sw/bin/fish
+   set-option -g default-shell /run/current-system/sw/bin/zsh
+   set -g default-command /run/current-system/sw/bin/zsh
    bind r source-file ~/.tmux.conf \; display-message "Config reloaded..."
    set -gu prefix2
    unbind C-a

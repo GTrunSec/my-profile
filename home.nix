@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let
   
@@ -14,30 +14,33 @@ in
     ./home-manager/randr
   ];
 
+  config = with lib; mkMerge [
+    ({
+      programs.direnv = {
+        enable = true;
+        enableBashIntegration = true;
+        enableZshIntegration = true;
+      };
 
-  programs.direnv = {
-    enable = true;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
-  };
 
-  
-  programs.fzf = {
-    enable = true;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
-  };
+      programs.fzf = {
+        enable = true;
+        enableBashIntegration = true;
+        enableZshIntegration = true;
+      };
 
-  programs.home-manager = {
-    enable = true;
-    path = "${home_directory}/.nix-defexpr/channels/home-mananger";
-  };
+      programs.home-manager = {
+        enable = true;
+        path = "${home_directory}/.nix-defexpr/channels/home-mananger";
+      };
 
-  services.lorri.enable = true;
+      home.sessionVariables = {
+      };
+    })
 
-  systemd.user.startServices = true;
-  # home.sessionVariables = {
+    (mkIf pkgs.stdenv.isLinux {
+      systemd.user.startServices = true;
+    })
 
-  # };
-
+  ];
 }
