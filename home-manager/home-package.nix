@@ -57,10 +57,12 @@ in   {
     screenfetch
     (polar-bookshelf.overrideDerivation (oldAttrs: {
       src = fetchurl {
-        url = "https://github.com/burtonator/polar-bookshelf/releases/download/v1.90.18/polar-bookshelf-1.90.18-amd64.deb";
-        sha256 = "1yl679szhb38a4dkb0aviyyp5qi7sc5vxhpjrrzzkrbzqrgnx1x2";
+        url = "https://github.com/burtonator/polar-bookshelf/releases/download/v1.100.13/polar-bookshelf-1.100.13-amd64.deb";
+        sha256 = "0i60np4akhvzqpspg5k2mz8q4ccmz19j43x1sisbdw7iml1a1rsd";
       };
     }))
+    deepin.deepin-screenshot
+    deepin.deepin-turbo
     #overlay
     outline-client
     youtube-dl

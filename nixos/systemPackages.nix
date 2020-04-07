@@ -51,7 +51,6 @@ in rec
       emacs
       ispell
       dropbox
-      texlive.combined.scheme-basic
       jupyter
       lxappearance
       appimage-run
@@ -113,7 +112,6 @@ in rec
       virtmanager
       nixops
       nix-index
-      cargo
       rustup
       rustc
       #xbacklight

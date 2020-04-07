@@ -8,7 +8,7 @@
 #    signing.signByDefault = true;
     ignores = [ ".projectile" ".indium.json" ".ccls-cache"
                 ".Rhistory" ".notdeft*" ".auctex-auto" "__pycache__"
-                "vast.db"
+                "vast.db" "eaf"
                 ".ipynb_checkpoints"
               ];
     extraConfig = {
