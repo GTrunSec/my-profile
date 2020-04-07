@@ -61,6 +61,7 @@ in   {
         sha256 = "0i60np4akhvzqpspg5k2mz8q4ccmz19j43x1sisbdw7iml1a1rsd";
       };
     }))
+    exa
     deepin.deepin-screenshot
     deepin.deepin-turbo
     #overlay

@@ -13,7 +13,6 @@ in
     ./home-manager/import.nix
   ];
 
-    
   programs.autorandr = {
     enable = true;
   };

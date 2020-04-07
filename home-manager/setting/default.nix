@@ -6,5 +6,6 @@
     ./tmux.nix
     ./cursor.nix
     ./doom-emacs.nix
+    ./zsh.nix
    ];
 }
