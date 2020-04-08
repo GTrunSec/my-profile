@@ -79,12 +79,11 @@ in
 
     (mkIf pkgs.stdenv.isLinux {
       programs.zsh.initExtra = ''
-      eval tmux
      '';
     })
     (mkIf pkgs.stdenv.isDarwin {
       programs.zsh.sessionVariables ={
-        PATH =  "$HOME/.nix-profile/bin:/bin:/usr/bin:/run/current-system/sw/bin/:/usr/local/bin:/Applications/kitty.app/Contents/MacOS";
+        PATH =  "$HOME/.nix-profile/bin:/bin:/usr/bin:/run/current-system/sw/bin/:/usr/local/bin:/Applications/kitty.app/Contents/MacOS:/sbin/:/usr/sbin/";
         TMUX_TMPDIR = "$HOME/.config/.";
       };
     })
