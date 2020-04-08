@@ -13,7 +13,7 @@ in
         dotDir = ".config/zsh";
         oh-my-zsh = {
           enable = true;
-          plugins = [ "git" "sudo" "z" "docker" "git-flow" "tmux"
+          plugins = [ "git" "sudo" "z" "docker" "git-flow" "tmux" "history-substring-search" "python"
                     ];
           theme = "xiong-chiamiov";
         };
@@ -54,6 +54,15 @@ in
                 sha256 = "0y0jgkj9va8ns479x3dhzk8bwd58a1kcvm4s2mk6x3n19w7ynmnv";
               };
             }
+            (mkIf pkgs.stdenv.isLinux {
+              name = "spaceship";
+              file = "spaceship.zsh";
+              src = pkgs.fetchgit {
+                url = "https://github.com/denysdovhan/spaceship-prompt";
+                rev = "v3.11.1";
+                sha256 = "0habry3r6wfbd9xbhw10qfdar3h5chjffr5pib4bx7j4iqcl8lw8";
+              };
+            })
             {
               name = "fzf-z";
               src = pkgs.fetchFromGitHub {
