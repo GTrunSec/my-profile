@@ -298,7 +298,7 @@
 ;; https://emacs.stackexchange.com/questions/5603/how-to-quickly-copy-move-file-in-emacs-dired
 (setq dired-dwim-target t)
 (add-hook! 'xah-fly-command-mode-activate-hook 'xah-fly-save-buffer-if-file)
-(add-hook! 'xah-fly-command-mode-activate-hook 'bookmark-save)
+;;(add-hook! 'xah-fly-command-mode-activate-hook 'bookmark-save)
 (defun gtrun/truncate-lines-hook ()
   (setq-local truncate-lines nil)
   )
@@ -1871,6 +1871,7 @@ FACE defaults to inheriting from default and highlight."
   (setq bookmark-default-file
         (concat doom-private-dir "etc/bookmark-linux-default.el"))
 
+  (bookmark-load bookmark-default-file t)
 
   (setq lsp-python-ms-executable  "~/.nix-profile/bin/mspyls")
   (when (not window-system)
@@ -1943,6 +1944,8 @@ FACE defaults to inheriting from default and highlight."
 :config
  (setq bookmark-default-file
         (concat doom-private-dir "etc/bookmark-macos-default.el"))
+ (bookmark-load bookmark-default-file t)
+
 (setq-default cursor-type 'box)
 (blink-cursor-mode -1)
 (set-cursor-color "yellow1")
