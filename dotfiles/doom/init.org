@@ -870,14 +870,15 @@ make
 
 ** [[https://github.com/mtekman/org-density.el][mtekman/org-density.el: Examine the density of org headings]]
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/packages.el"
-(package! org-density :recipe (:host github :repo "mtekman/org-density.el"))
+(package! org-treeusage :recipe (:host github :repo "mtekman/org-treeusage.el"))
 #+end_src
 
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
-(use-package! org-density
+(use-package! org-treeusage
   :config
   (define-key org-mode-map (kbd "C-d") 'org-density-mode)
   )
+
 #+end_src
 
 * Completion
