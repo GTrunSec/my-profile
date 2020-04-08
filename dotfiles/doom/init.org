@@ -11,7 +11,6 @@
 #+HUGO_categories: profile Doom-Emacs
 #+HUGO_tags: Emacs Config
 #+PROPERTY: header-args :tangle "~/.emacs.d/init.el"
-
 - [[https://github.com/hlissner/doom-emacs/blob/develop/docs/getting_started.org][doom-emacs/getting_started.org at develop · hlissner/doom-emacs]]
 
 
@@ -265,7 +264,6 @@
 (use-package! ctrlf
   :hook
   (after-init . ctrlf-mode))
-
 ;;[2020-03-26 Thu 16:39]
 (use-package! wakatime-mode
 :hook (after-init . global-wakatime-mode))
@@ -876,7 +874,7 @@ make
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-treeusage
   :config
-  (define-key org-mode-map (kbd "C-d") 'org-density-mode)
+  (define-key org-mode-map (kbd "C-c d") 'org-treeusage-mode)
   )
 
 #+end_src
