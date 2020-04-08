@@ -81,6 +81,16 @@ in
                 sha256 = "1ib98j7v6hy3x43dcli59q5rpg9bamrg335zc4fw91hk6jcxvy45";
               };
             }
+
+            {
+              name = "wakatime";
+              src = pkgs.fetchFromGitHub {
+                owner = "sobolevn";
+                repo = "wakatime-zsh-plugin";
+                rev = "b8d661ae7e7522eb1240782c584c148ce6bf6e5f";
+                sha256 = "1a5lhfpimhb9rdinqgrwk1zq7qx8hh23ld451fvv9ycq0crjskh5";
+              };
+            }
           ];
       };
     })
@@ -88,6 +98,12 @@ in
 
     (mkIf pkgs.stdenv.isLinux {
       programs.zsh.initExtra = ''
+        SPACESHIP_TIME_SHOW=true
+        SPACESHIP_EXIT_CODE_SHOW=true
+        SPACESHIP_VI_MODE_SHOW=false
+        SPACESHIP_BATTERY_THRESHOLD=30
+        ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=238'
+        setopt HIST_IGNORE_ALL_DUPS
      '';
     })
     (mkIf pkgs.stdenv.isDarwin {
