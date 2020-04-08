@@ -7,6 +7,7 @@
     ./home-package.nix
     ./my3rd-scripts.nix
     ./home-files.nix
+    ./home-darwin.nix
     #programs
   ];
 }

@@ -12,6 +12,7 @@ in   {
         screenfetch
         urxvt_perls
         ag
+        bat
         hunspell
         gitkraken
         #dnsproxy
