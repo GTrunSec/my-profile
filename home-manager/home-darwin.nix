@@ -11,8 +11,8 @@ in
 
       home.packages = with nixpkgs;[
         bat
+        gron
       ];
-
 
     })
   ];
