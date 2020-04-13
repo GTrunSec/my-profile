@@ -1728,7 +1728,7 @@ FACE defaults to inheriting from default and highlight."
   (setq lsp-julia-default-environment "~/.julia/environments/v1.3")
   (setq lsp-folding-range-limit 100)
   (setq lsp-julia-package-dir nil)
-  (setq lsp-julia-flags '("--project=/Users/gtrun/.julia/packages/languageserver"  "--startup-file=no" "--history-file=no"))
+  ;;(setq lsp-julia-flags '("--project=/Users/gtrun/.julia/packages/languageserver"  "--startup-file=no" "--history-file=no"))
   )
 #+end_src
 
