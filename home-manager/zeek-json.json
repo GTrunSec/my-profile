@@ -1,4 +1,12 @@
 {
+    "hardenedlinux-zeek-script": {
+        "url": "https://github.com/hardenedlinux/hardenedlinux-zeek-script",
+        "rev": "26e7527cf172c4ee08b650da198ac1ba1e9eace1",
+        "sha256": "13scgymb5bn2hbd8x59gs7ghm5bnd5llg6xzjj2yn2pqr622sar1",
+        "deepClone": false,
+        "fetchSubmodules": false
+    },
+
     "IRC-Behavioral-Analysis": {
         "owner": "GTrunSec",
         "repo": "IRC-Behavioral-Analysis",
