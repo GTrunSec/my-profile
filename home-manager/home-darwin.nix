@@ -15,6 +15,7 @@ in
         bat
         gron
         (all-hies.unstable.selection { selector = p: { inherit (p) ghc865; }; })
+        exa
 
       ];
     })

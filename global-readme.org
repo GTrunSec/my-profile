@@ -14,9 +14,11 @@
 ** [[https://education.github.com/pack/offers][GitHub Student Developer Pack - GitHub Education]]
 + [X] GitKraken Glo
 
+
 + [[https://transloadit.com/github-students/][GitHub Student Pack | Transloadit]]
 
   + [[https://transloadit.com/templates/edit/4d95ca8a3b614ed3a24c015895414b94][Templates | Transloadit]]
+
 
 
 + [[https://gtrunsec.carto.com/dashboard/get-started/cartoframes#step-2][Get Started | CARTO]]
@@ -61,6 +63,7 @@ source /opt/nix-multiuser/nix/etc/profile.d/nix.sh
 * virtual
 ** ESXI
 - SSD 225GB 
+
 
 - 2T extended
 
@@ -229,7 +232,6 @@ install.packages('IRkernel')
 IRkernel::installspec()
 #+end_src
 
-
 #+begin_src sh :tangle yes
 brew tap homebrew/science
 brew install Caskroom/cask/xquartz
@@ -259,9 +261,12 @@ ln -s /Users/gtrun/Dropbox/application/blog/content/static/ox-hugo /Users/gtrun/
 ** Rime 输入法
 - [[https://github.com/rime/home/wiki/CustomizationGuide][CustomizationGuide · rime/home Wiki]]
 
+
 - [[https://github.com/scomper/Rime][scomper/Rime: 鼠须管配置]]
 
+
 - [[https://github.com/rime/plum][rime/plum: 東風破 /plum/: Rime configuration manager and input schema repository]]
+
 
 - [[https://github.com/LEOYoon-Tsaw/Rime_collections/blob/master/Rime_description.md][Rime_collections/Rime_description.md at master · LEOYoon-Tsaw/Rime_collections]]
 
@@ -294,7 +299,7 @@ curl -fsSL https://git.io/rime-install | bash
 - [[https://github.com/xiaoTaoist/rime-dict][xiaoTaoist/rime-dict: RIME 输入法 增强词库]]
 
 
-*** librime 
+*** librime
 - [[https://manateelazycat.github.io/emacs/2019/07/24/use-rime-in-emacs.html][在 Mac 版的 Emacs 中使用 RIME 输入法]] 
 
 
@@ -377,6 +382,9 @@ sudo dd bs=1m if=/Users/gtrun/Downloads/nixos-graphical-19.03.173292.65729e08178
 ** [[https://github.com/rothgar/awesome-tmux][rothgar/awesome-tmux: A list of awesome resources for tmux]]
 ** zsh
 *** [[https://github.com/getantibody/antibody][getantibody/antibody: The fastest shell plugin manager.]]3
+*** [[https://github.com/unixorn/awesome-zsh-plugins/#oh-my-zsh][unixorn/awesome-zsh-plugins: A collection of ZSH frameworks, plugins, themes and tutorials.]]
+*** [[https://github.com/psprint/zsh-editing-workbench][psprint/zsh-editing-workbench: Sane, sophisticated command line editing]]
+
 ** fish
 *** [[https://fishshell.com/docs/current/faq.html][fish: Frequently asked questions]]
 *** [[https://nicolas-van.github.io/programming-with-fish-shell][Progrxamming with fish shell | Nicolas Vanhoren’s Blog]]

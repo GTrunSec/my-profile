@@ -41,17 +41,40 @@ in
           si    = "pactl set-default-sink (pacmd list-sinks | awk \\\'/name:.*pci/{if (a != \"\") print a;} {a=$NF}\\\')";
         };
 
-        initExtra = builtins.readFile "${home_directory}/.config/nixpkgs/dotfiles/keys.sh" + builtins.readFile "${home_directory}/.config/nixpkgs/dotfiles/zshrc";
+        initExtra = builtins.readFile "${home_directory}/.config/nixpkgs/dotfiles/keys.sh" + builtins.readFile "${home_directory}/.config/nixpkgs/dotfiles/zshrc" +
+                    ''
+                     ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#fdf6e3,bg=#586e75,bold,underline"
+                    ''
+        ;
 
         plugins =
           [
+            {
+              name = "bd";
+              src = pkgs.fetchFromGitHub {
+                owner = "Tarrasch";
+                repo = "zsh-bd";
+                rev = "d4a55e661b4c9ef6ae4568c6abeff48bdf1b1af7";
+                sha256 = "020f8nq86g96cps64hwrskppbh2dapfw2m9np1qbs5pgh16z4fcb";
+              };
+            }
+
+            {
+              name = "zsh-256color";
+              src = pkgs.fetchFromGitHub {
+                owner = "chrissicool";
+                repo = "zsh-256color";
+                rev = "9d8fa1015dfa895f2258c2efc668bc7012f06da6";
+                sha256 = "14pfg49mzl32ia9i9msw9412301kbdjqrm7gzcryk4wh6j66kps1";
+              };
+            }
             {
               name = "fast-syntax-highlighting";
               src = pkgs.fetchFromGitHub {
                 owner = "zdharma";
                 repo = "fast-syntax-highlighting";
-                rev = "303eeee81859094385605f7c978801748d71056c";
-                sha256 = "0y0jgkj9va8ns479x3dhzk8bwd58a1kcvm4s2mk6x3n19w7ynmnv";
+                rev = "a3242a93399535faccda4896ab5c61a7a6dca1fe";
+                sha256 = "17f8ysyvp0bpr6hbcg32mqpy91da6m9xgd3b5kdyk4mp8scwfbn1";
               };
             }
             (mkIf pkgs.stdenv.isLinux {
@@ -93,7 +116,6 @@ in
         SPACESHIP_EXIT_CODE_SHOW=true
         SPACESHIP_VI_MODE_SHOW=false
         SPACESHIP_BATTERY_THRESHOLD=30
-        ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=238'
         setopt HIST_IGNORE_ALL_DUPS
      '';
     })
