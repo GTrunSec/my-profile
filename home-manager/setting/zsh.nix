@@ -72,15 +72,6 @@ in
                 sha256 = "1ib98j7v6hy3x43dcli59q5rpg9bamrg335zc4fw91hk6jcxvy45";
               };
             }
-            {
-              name = "fzf-z";
-              src = pkgs.fetchFromGitHub {
-                owner = "andrewferrier";
-                repo = "fzf-z";
-                rev = "2db04c704360b5b303fb5708686cbfd198c6bf4f";
-                sha256 = "1ib98j7v6hy3x43dcli59q5rpg9bamrg335zc4fw91hk6jcxvy45";
-              };
-            }
 
             {
               name = "wakatime";
