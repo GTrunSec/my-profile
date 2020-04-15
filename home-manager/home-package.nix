@@ -4,6 +4,15 @@ let
 in   {
 
   config = with lib; mkMerge [
+
+    ##public pkgs
+    (mkIf (pkgs.stdenv.isLinux || pkgs.stdenv.isDarwin) {
+      home.packages = with nixpkgs;[
+        gopass
+      ];
+    })
+
+
     (mkIf pkgs.stdenv.isLinux {
       home.packages = with nixpkgs;[
         #remacs

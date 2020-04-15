@@ -994,6 +994,11 @@ In that case, insert the number."
               company-yasnippet))
 
 (setq +lsp-company-backend '(company-lsp :with company-tabnine :separate))
+
+
+(after! nox
+  (setq company-backends '(company-capf :with company-tabnine :separate))
+)
 #+end_src
 
 #+RESULTS:
@@ -1748,6 +1753,8 @@ FACE defaults to inheriting from default and highlight."
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
 (use-package! nox
   :config
+  (add-to-list 'nox-server-programs '(haskell-mode . ("ghcide" "--lsp")))
+
   ;; (dolist (hook (list
   ;;                'js-mode-hook
   ;;                'rust-mode-hook
@@ -2025,5 +2032,3 @@ FACE defaults to inheriting from default and highlight."
 
 
 -  [[https://github.com/munen/emacs.d/blob/master/configuration.org][emacs.d/configuration.org at master · munen/emacs.d]]
-
-
