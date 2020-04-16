@@ -28,6 +28,11 @@
       home.file.".config/pet".source = ../dotfiles/pet;
     })
 
+    (mkIf pkgs.stdenv.isDarwin {
+      home.file.".config/pet/config.toml".source = ../dotfiles/pet/darwin-config.toml;
+      home.file.".config/pet/snippet.toml".source = ../dotfiles/pet/snippet.toml;
+    })
+
     ({
       home.file.".wakatime.cfg".text = ''
     [settings]
