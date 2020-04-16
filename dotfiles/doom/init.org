@@ -965,14 +965,14 @@ In that case, insert the number."
               company-files
               company-yasnippet
               ))
-
-;;  (set-company-backend! 'sh-mode nil) ; unsets backends for sh-mode
-(set-company-backend! '(org-mode)
-  '(:separate company-english-helper-search
+(set-company-backend! '(julia-mode)
+  '(:separate company-lsp
               company-tabnine
               company-files
               company-yasnippet
               ))
+
+;;  (set-company-backend! 'sh-mode nil) ; unsets backends for sh-mode
 (set-company-backend! '(c-mode
                         c++-mode
                         ess-mode
@@ -995,10 +995,6 @@ In that case, insert the number."
 
 (setq +lsp-company-backend '(company-lsp :with company-tabnine :separate))
 
-
-(after! nox
-  (setq company-backends '(company-capf :with company-tabnine :separate))
-)
 #+end_src
 
 #+RESULTS:

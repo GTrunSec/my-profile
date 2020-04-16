@@ -44,6 +44,12 @@ with builtins;
     #   }
     # )
   ];
+  services.zookeeper = {
+    enable = true;
+  };
+  services.apache-kafka = {
+    enable = true;
+  };
   ##docker-adguard localhost:3000
   # services.dnscrypt-proxy2 = {
   #   enable = true;

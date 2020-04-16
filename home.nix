@@ -60,6 +60,10 @@ in
         enableSshSupport = true;
         grabKeyboardAndMouse = false;
       };
+
+        services.dunst = {
+          enable = true;
+        };
     })
 
     (mkIf pkgs.stdenv.isDarwin {
