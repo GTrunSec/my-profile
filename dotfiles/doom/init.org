@@ -229,7 +229,7 @@ HTML them READ org
 (package! bm)
 (package! w3m)
 (package! discover :recipe (:host github :repo "mickeynp/discover.el"))
-(package! xah-fly-keys :recipe (:host github :repo "xahlee/xah-fly-keys"))
+(package! xah-fly-keys :recipe (:host github :repo "GTrunSec/xah-fly-keys"))
 (package! hungry-delete)
 (package! flymake-json)
 (package! maple-iedit :recipe (:host github :repo "honmaple/emacs-maple-iedit"))
@@ -267,7 +267,15 @@ HTML them READ org
 #+begin_src emacs-lisp :tangle "config.el"
 (load! "setting")
 (load! "xah-fly.el")
-
+;; (use-package! xah-fly-keys
+;;   :config
+;;   (require 'xah-fly-keys)
+;;   (xah-fly-keys 1)
+;;   (xah-fly-keys-set-layout 'dvorak)
+;;   (add-hook 'xah-fly-command-mode-activate-hook
+;;             (lambda ()
+;;               (setq xah-fly-insert-state-q nil)))
+;;   )
 
 (use-package! ctrlf
   :hook

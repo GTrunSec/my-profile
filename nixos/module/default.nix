@@ -2,7 +2,8 @@
 
 {
   imports = [
-   ./dropbox.nix
+    ./dropbox.nix
+    ./elk.nix
   ];
    services.postgresql = {
     enable = true ;
