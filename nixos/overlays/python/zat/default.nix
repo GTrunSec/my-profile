@@ -7,23 +7,23 @@
 python3Packages.buildPythonPackage rec {
 
   pname = "zat";
-  version = "v0.3.8";
+  version = "v0.3.9";
   src = fetchurl {
    # url = "https://github.com/SuperCowPowers/${pname}/archive/v${version}.tar.gz";
     url = "https://github.com/SuperCowPowers/zat/archive/${version}.tar.gz";
-    sha256 = "0a5w7zglayq955rxhc1rbq9vzyi0gwln5abwnwzra13bq86yrdgw";
+    sha256 = "1p9p4zy7xryvzmsjn7f4q95gxmkf05vkg053ixp2js48x7dznry0";
   };  
 
 
   propagatedBuildInputs = with python3Packages; [ pandas
-                                                   scikitlearn
-                                                   pyarrow
-                                                   requests
-                                                   watchdog
+                                                  scikitlearn
+                                                  pyarrow
+                                                  requests
+                                                  watchdog
                                                   numpy
                                                   gcc8
                                                   pyspark
-                                                 ];
+                                                ];
   doCheck = false;
   
   meta = with stdenv.lib; {

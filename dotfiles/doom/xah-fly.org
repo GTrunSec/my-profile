@@ -14,7 +14,6 @@
 #+SELECT_TAGS: export
 #+EXCLUDE_TAGS: noexport
 * pre setting && load
-
 #+begin_src emacs-lisp :tangle "xah-fly.el"
 (require 'xah-fly-keys)
 
@@ -70,6 +69,7 @@
 ))
 
 #+END_SRC
+
 * xah-fly-command-mode-init
 #+begin_src emacs-lisp :tangle "xah-fly.el"
 (defun xah-fly-command-mode-init ()
@@ -124,6 +124,7 @@ Version 2017-01-21"
       )
   )
 #+end_src
+
 * define-key xah-fly-key-map
 #+begin_src emacs-lisp :tangle "xah-fly.el"
 (define-key xah-fly-key-map (kbd "C-a") 'beginning-of-visual-line)
@@ -269,6 +270,7 @@ Version 2017-01-21"
      ("o" . delete-other-windows)
      ))
 #+end_src
+
 * My-search
 #+begin_src emacs-lisp :tangle "xah-fly.el"
 
@@ -281,6 +283,7 @@ Version 2017-01-21"
      ;;
      ))
 #+END_SRC
+
 * org-mode
 #+begin_src emacs-lisp :tangle "xah-fly.el"
   (xah-fly--define-keys

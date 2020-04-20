@@ -9,6 +9,7 @@ let
     scipy
     numpy
     ipython
+    jupyterlab
     #bat
 #    google-api-python-client
     # other python packages you want
@@ -21,6 +22,4 @@ in {
     python-with-my-packages
     (python3.withPackages(ps: with ps; [ipykernel]))
   ];
-
 }
- 
