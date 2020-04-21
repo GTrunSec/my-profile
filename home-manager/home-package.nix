@@ -9,6 +9,14 @@ in   {
     (mkIf (pkgs.stdenv.isLinux || pkgs.stdenv.isDarwin) {
       home.packages = with nixpkgs;[
         gopass
+        (python3.withPackages (pkgs: with pkgs; [
+          shapely
+          matplotlib
+          sqlalchemy
+          pandas
+          numpy
+          scikitlearn
+        ]))
       ];
     })
 

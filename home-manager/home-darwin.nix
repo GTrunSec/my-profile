@@ -7,7 +7,6 @@ let
 in
 
 {
-
   config = with lib; mkMerge [
     (mkIf pkgs.stdenv.isDarwin {
       home.packages = with nixpkgs;[
@@ -18,6 +17,7 @@ in
         (all-hies.unstable.selection { selector = p: { inherit (p) ghc865; }; })
         exa
         pet
+        vscode
       ];
     })
   ];
