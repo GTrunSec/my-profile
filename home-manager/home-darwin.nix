@@ -10,6 +10,15 @@ in
   config = with lib; mkMerge [
     (mkIf pkgs.stdenv.isDarwin {
       home.packages = with nixpkgs;[
+        (python3.withPackages (pkgs: with pkgs; [
+          shapely
+          matplotlib
+          sqlalchemy
+          pandas
+          numpy
+          scikitlearn
+        ]))
+
         ##cachix use ghcide-nix
         (import ../channel/ghcide-nix {}).ghcide-ghc865
         bat
