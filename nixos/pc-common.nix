@@ -12,6 +12,8 @@ with builtins;
   networking.firewall.allowedTCPPorts = [ 80 443 53 8080 9000 8888 9999];
   networking.firewall.allowedUDPPorts = [ 80 443 53 8080 9000 8888 9999];
   #networking.nameservers = ["10.220.170.137"];
+  networking.nameservers = [ "8.8.8.8" ];
+  networking.networkmanager.enable = true;
 
   nixpkgs.config.packageOverrides = pkgs: {
     nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
