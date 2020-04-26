@@ -3,11 +3,11 @@ self: super:
 {
   outline-client= super.stdenv.mkDerivation rec {
     name = "outline-client-${version}";
-    version = "v0.5.1";
+    version = "2020-04-22";
     src = super.fetchurl {
     name   = "outline-client";
-    url    = "https://github.com/Jigsaw-Code/outline-client/releases/download/daily-2019-09-15/Outline-Client.AppImage";
-    sha256 = "18p2g7fwq7h5dllwrqv54d677c7anqikqx6abmknyggkbginlsj4";
+    url    = "https://github.com/Jigsaw-Code/outline-client/releases/download/daily-2020-04-22/Outline-Client.AppImage";
+    sha256 = "0ynp98lzij58cgjkf5ygmm65rxa008p1hj6fgwr10l1jccw6w4ff";
     };
 
     buildInputs = [ super.appimage-run ];

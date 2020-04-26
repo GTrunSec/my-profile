@@ -12,14 +12,10 @@ with builtins;
   networking.firewall.allowedTCPPorts = [ 80 443 53 8080 9000 8888 9999];
   networking.firewall.allowedUDPPorts = [ 80 443 53 8080 9000 8888 9999];
   #networking.nameservers = ["10.220.170.137"];
-  networking.nameservers = [ "8.8.8.8" ];
   networking.networkmanager.enable = true;
 
-  nixpkgs.config.packageOverrides = pkgs: {
-    nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
-      inherit pkgs;
-    };
-  };
+  # nixpkgs.config.packageOverrides = pkgs: {
+  # };
 
   nix.trustedUsers = [ "gtrun"];
   nix.nixPath = [
@@ -33,6 +29,7 @@ with builtins;
   nixpkgs.overlays = [
     (import ./overlays/custom/outline-client.nix)
     (import ./overlays/custom/Motrix.nix)
+    #(import ./overlays/custom/nteract.nix)
     (import ./overlays/custom/shadowsocks-qt5.nix)
     (import ./overlays/python/01-yapf.nix)
     (import ./overlays/python/04-test.nix)

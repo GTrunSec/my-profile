@@ -29,7 +29,8 @@
   boot.loader.efi.canTouchEfiVariables = true;
   
   networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  #networking.nameservers = [ "10.220.170.94" "8.8.8.8" ];
+  #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   #networking.useDHCP = true;
   #networking.dhcpcd.persistent = true;
   # ssd trimming

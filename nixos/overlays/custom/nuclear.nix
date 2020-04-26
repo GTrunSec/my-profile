@@ -1,4 +1,3 @@
-#with import <nixpkgs> {};
 {pkgs, appimage-run, fetchurl, writeScriptBin}:
 let
   name   = "nuclear";

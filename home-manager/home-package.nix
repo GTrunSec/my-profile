@@ -71,6 +71,8 @@ in   {
         deepin.deepin-screenshot
         deepin.deepin-turbo
         #overlay
+        nteract
+        gsettings-desktop-schemas
         outline-client
         youtube-dl
         shadowsocks-qt5

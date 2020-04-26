@@ -1,5 +1,6 @@
 self: super:
 {
+
   zat = super.callPackage ./python/zat {};
   orgparse = super.callPackage ./python/orgparse {};
   ipynb-py-convert = super.callPackage ./python/ipynb-py-convert {};
@@ -8,4 +9,5 @@ self: super:
   deepsea = super.callPackage ./go/deepsea {};
   horcrux = super.callPackage ./go/horcrux {};
   orgbabelhelper = super.callPackage ./python/orgbabelhelper {};
+  nteract = super.callPackage ./custom/nteract.nix {};
 }
