@@ -24,6 +24,6 @@ in appimageTools.wrapType2 rec {
   extraInstallCommands = "mv $out/bin/{${name},${pname}}";
 
   meta = with lib; {
-    description = "An open source note taking and to-do application with synchronisation capabilities";
+    description = "The interactive computing suite for you";
   };
 }

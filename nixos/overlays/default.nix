@@ -10,4 +10,5 @@ self: super:
   horcrux = super.callPackage ./go/horcrux {};
   orgbabelhelper = super.callPackage ./python/orgbabelhelper {};
   nteract = super.callPackage ./custom/nteract.nix {};
+  voila = super.callPackage ./python/voila {};
 }

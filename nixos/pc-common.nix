@@ -29,7 +29,6 @@ with builtins;
   nixpkgs.overlays = [
     (import ./overlays/custom/outline-client.nix)
     (import ./overlays/custom/Motrix.nix)
-    #(import ./overlays/custom/nteract.nix)
     (import ./overlays/custom/shadowsocks-qt5.nix)
     (import ./overlays/python/01-yapf.nix)
     (import ./overlays/python/04-test.nix)

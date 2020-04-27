@@ -114,7 +114,8 @@ in   {
           emacs-libvterm
         ]))
 
-        (python3.withPackages (pkgs: with pkgs; [
+        (python3.buildEnv.override {
+          extraLibs = with python3Packages; [
           shapely
           # eaf
           dbus
@@ -139,13 +140,16 @@ in   {
           sqlalchemy
           pandas
           ipython
+          jupyterlab
+          voila
           python-language-server
           pygments
-          notebook
           orgbabelhelper
           ipykernel
           wakatime
-        ]))
+          ];
+          ignoreCollisions = true;
+        })
         ncat
         #Go
         wakatime
