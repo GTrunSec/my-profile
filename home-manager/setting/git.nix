@@ -21,6 +21,18 @@
       rebase = {
         autostash = true;
       };
+      core = {
+        pager = [ ''
+        delta --plus-color="#012800" --minus-color="#340001"
+              ''
+                ];
+      };
+
+      interactive = {
+
+        diffFilter = "delta --color-only";
+
+      };
     };
   };
 }

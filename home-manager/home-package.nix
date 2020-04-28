@@ -11,6 +11,7 @@ in   {
         gopass
         xapian
         tclap
+        gitAndTools.delta
       ];
     })
 
