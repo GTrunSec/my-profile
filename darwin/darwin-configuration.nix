@@ -51,7 +51,6 @@ in
         fontspec euenc;
       }
     )
-    (julia_13.overrideAttrs(oldAttrs: {checkTarget = "";}))
     wakatime
     ];
 

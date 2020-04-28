@@ -257,6 +257,7 @@ HTML them READ org
 (package! imenu-list)
 (package! helm-tramp)
 (package! visual-fill-column)
+(package! vlf)
 (package! wakatime-mode)
 (package! sunrise-commander :recipe (:host github :repo "sunrise-commander/sunrise-commander"))
 ;; (package! berrys-theme)
@@ -267,16 +268,13 @@ HTML them READ org
 #+begin_src emacs-lisp :tangle "config.el"
 (load! "setting")
 (load! "xah-fly.el")
-;; (use-package! xah-fly-keys
-;;   :config
-;;   (require 'xah-fly-keys)
-;;   (xah-fly-keys 1)
-;;   (xah-fly-keys-set-layout 'dvorak)
-;;   (add-hook 'xah-fly-command-mode-activate-hook
-;;             (lambda ()
-;;               (setq xah-fly-insert-state-q nil)))
-;;   )
 
+(use-package! vlf
+  :config
+  (require 'vlf-setup)
+  (custom-set-variables
+   '(vlf-application 'dont-ask))
+)
 (use-package! ctrlf
   :hook
   (after-init . ctrlf-mode))
@@ -321,7 +319,13 @@ HTML them READ org
 
 (add-hook! 'text-mode-hook 'gtrun/truncate-lines-hook)
 (add-hook! 'elfeed-show-mode-hook 'gtrun/truncate-lines-hook)
+
+(add-hook 'nix-mode-hook 'vlf-mode)
+(add-hook 'json-mode-hook 'vlf-mode)
+(add-hook 'org-mode-hook 'vlf-mode)
 (add-hook! 'sunrise-start-hook 'xah-fly-insert-mode-activate)
+
+
 (add-hook 'maple-explorer-imenu-mode-hook
           (lambda() (setq cursor-type 'box
                           cursor-in-non-selected-windows t)))
@@ -933,6 +937,7 @@ make
   (setq company-show-numbers t)
   (define-key company-active-map (kbd "C-n") 'company-select-next-or-abort)
   (define-key company-active-map (kbd "C-j") 'company-select-previous-or-abort)
+
 
 (defun ora-company-number ()
   "Forward to `company-complete-number'.

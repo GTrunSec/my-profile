@@ -3,7 +3,14 @@ let
 
   nixpkgs = (import ~/.config/nixpkgs/channel/nixpkgs) { };
   all-hies = import (fetchTarball "https://github.com/infinisil/all-hies/tarball/master") {};
+  my-pkgs = pkgs.fetchFromGitHub {
+    owner = "hardenedlinux";
+    repo = "NSM-data-analysis";
+    rev = "1bc6bc22c63c034d272150a26d74b149cc677ab8";
+    sha256 = "18yrwg6xyhwmf02l6j7rcmqyckfqg0xy3nx4lcf6lbhc16mfncnf";
+  };
 
+  juliaEnv = (import "${my-pkgs}/pkgs/julia-non-cuda.nix" {});
 in
 
 {
@@ -27,6 +34,7 @@ in
         exa
         pet
         vscode
+        juliaEnv
       ];
     })
   ];
