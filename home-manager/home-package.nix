@@ -1,7 +1,9 @@
 { config, lib, pkgs, ... }:
 let
   nixpkgs = (import ~/.config/nixpkgs/channel/nixpkgs) { };
-in   {
+  clean-nix-store = nixpkgs.writeScriptBin "clean-nix-store" (import ../bin/clean-nix-store.nix { });
+in
+{
 
   config = with lib; mkMerge [
 
@@ -12,6 +14,8 @@ in   {
         xapian
         tclap
         gitAndTools.delta
+        clean-nix-store
+        nodePackages.node2nix
       ];
     })
 
