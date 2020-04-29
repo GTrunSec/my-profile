@@ -40,10 +40,9 @@ HTML them READ org
 
        :completion
        company           ; the ultimate code completion backend
-       helm              ; the *other* search engine for love and life
+       ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
        ivy               ; a search engine for love and life
-
        :ui
        ;;deft              ; notational velocity for Emacs
        doom              ; what makes DOOM look the way it does
@@ -320,9 +319,6 @@ HTML them READ org
 (add-hook! 'text-mode-hook 'gtrun/truncate-lines-hook)
 (add-hook! 'elfeed-show-mode-hook 'gtrun/truncate-lines-hook)
 
-(add-hook 'nix-mode-hook 'vlf-mode)
-(add-hook 'json-mode-hook 'vlf-mode)
-(add-hook 'org-mode-hook 'vlf-mode)
 (add-hook! 'sunrise-start-hook 'xah-fly-insert-mode-activate)
 
 
@@ -555,7 +551,7 @@ Uses `current-date-time-format' for the formatting the date/time."
 
         ("d" "ALL DONE OF TASKS"
          search "+{^\\*+\\s-+\\(✔ DONE\\|✘ CANCELED\\)\\s-}")
-        
+
         ("i" "ALL INPROCESS OF TASKS"
          search "+{^\\*+\\s-+\\(⚔ INPROCESS\\)\\s-}")
 
@@ -1795,7 +1791,7 @@ FACE defaults to inheriting from default and highlight."
 (use-package! pinyinlib
   :config
 
-  
+
   (defun re-builder-extended-pattern (str)
     (let* ((len (length str)))
       (cond
