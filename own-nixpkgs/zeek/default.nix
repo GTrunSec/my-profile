@@ -1,9 +1,9 @@
 with import <nixpkgs> {};
-
-# {stdenv, fetchurl, cmake, flex, bison, openssl, libpcap, zlib, file, curl
-# , libmaxminddb, gperftools, python, swig, rocksdb, system-sendmail, caf, makeWrapper}:
 let
   preConfigure = (import ./shell.nix);
+  metron-bro-plugin-kafka = pkgs.fetchFromGitHub (builtins.fromJSON (builtins.readFile ./zeek-plugin.json)).metron-bro-plugin-kafka;
+  zeek-postgresql = pkgs.fetchFromGitHub (builtins.fromJSON (builtins.readFile ./zeek-plugin.json)).zeek-postgresql;
+  install_plugin = pkgs.writeScript "install_plugin" (import ./install_plugin.nix { });
 in
 stdenv.mkDerivation rec {
   pname = "zeek";
@@ -15,12 +15,14 @@ stdenv.mkDerivation rec {
   };
 
   nativeBuildInputs = [ cmake flex bison file ];
-  buildInputs = [ openssl libpcap zlib curl libmaxminddb gperftools python swig rocksdb system-sendmail caf makeWrapper];
+  buildInputs = [ openssl libpcap zlib curl libmaxminddb gperftools python swig rocksdb system-sendmail caf makeWrapper
+                  rdkafka postgresql
+                ];
   # Indicate where to install the python bits, since it can't put them in the "usual"
   # locations as those paths are read-only.
   ZEEK_DIST = "${placeholder "out"}";
 
-  patches = [ ./zeekctl1.patch];
+  patches = [ ./zeekctl.patch];
 
   inherit preConfigure;
 
@@ -39,6 +41,9 @@ stdenv.mkDerivation rec {
         substituteInPlace $out/etc/zeekctl.cfg \
          --replace "CfgDir = $out/etc" "CfgDir = ${confdir}/etc"
          echo "scriptsdir = ${confdir}/scripts" >> $out/etc/zeekctl.cfg
+
+         bash ${install_plugin} metron-bro-plugin-kafka ${metron-bro-plugin-kafka} ${version}
+         bash ${install_plugin} zeek-postgresql ${zeek-postgresql} ${version}
   '';
 
   enableParallelBuilding = true;
