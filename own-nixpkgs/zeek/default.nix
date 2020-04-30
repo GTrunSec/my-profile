@@ -35,6 +35,11 @@ stdenv.mkDerivation rec {
     "-DZEEK_LOG_DIR=${confdir}/logs"
   ];
 
+  postFixup = ''
+        substituteInPlace $out/etc/zeekctl.cfg \
+         --replace "CfgDir = $out/etc" "CfgDir = ${confdir}/etc"
+         echo "scriptsdir = ${confdir}/scripts" >> $out/etc/zeekctl.cfg
+  '';
 
   enableParallelBuilding = true;
 
