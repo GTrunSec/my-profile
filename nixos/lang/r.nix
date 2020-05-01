@@ -1,7 +1,6 @@
 { pkgs, ... }:
 with pkgs;
 let
-  
 
   RPackages = with rPackages;[
     tmap
@@ -63,7 +62,7 @@ let
           llr
           webreadr
           patchwork
-          emo
+          #emo
         ])
         ##--------------------------------------
         dplyr
@@ -120,7 +119,6 @@ let
               packages = customRPackages;
 
       };
-
 in
 {
   environment.systemPackages = with pkgs; [

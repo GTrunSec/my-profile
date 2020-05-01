@@ -1,16 +1,17 @@
 { config, lib, pkgs, vscode-utils, ... }:
 with pkgs;
 let
+      stable  = import ./stable.nix { config={ allowUnfree=true; allowBroken=true; ignoreCollisions = true;};};
       unstable = import (fetchTarball https://nixos.org/channels/nixos-unstable/nixexprs.tar.xz) { };
       customVscode = (import ./custom/vscode.nix { inherit pkgs; });
       customEmacs = (import ./custom/nix-emacs-ci { inherit pkgs; });
-      julia = (import ./custom/julia.nix {inherit pkgs;});
+      julia = (import ./lang/julia.nix {pkgs=stable;});
       #myHaskell = (import ./custom/haskell.nix {inherit pkgs;});
       myEmacs = pkgs.emacs;
 in rec
   {
     environment.systemPackages = with pkgs; [
-      customEmacs.emacs_27_0
+      customEmacs.emacs_27_0          
       # KDE
       # nur.repos.ysndr.kde.breeze-blur
       # qtstyleplugin-kvantum-qt4
@@ -144,12 +145,6 @@ in rec
         };
       }))
       #lang-julia
-      # (julia.overrideDerivation (oldAttrs: {
-      #   src = fetchzip{
-      #   url = "https://github.com/JuliaLang/julia/releases/download/v1.3.0-rc4/julia-1.3.0-rc4.tar.gz";
-      #   sha256 = "15r0mhdrg9cvkm1jxyyxqnxj7q3k7zr92h8lfsb06abkflr8x59z";
-      #   };
-      # }))
       julia
       #lang-go
       go
