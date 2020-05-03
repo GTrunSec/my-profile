@@ -59,6 +59,10 @@ bindkey -M emacs '^N' history-substring-search-down
 
 export TERM=xterm-256color
 
+#https://stackoverflow.com/questions/32057760/is-it-possible-to-not-share-history-between-panes-windows-in-tmux-with-zsh
+setopt sharehistory
+setopt incappendhistory
+
 [[ -n "$key[Up]"   ]] && bindkey -- "$key[Up]" up-line-or-beginning-search
 [[ -n "$key[Down]" ]] && bindkey -- "$key[Down]" down-line-or-beginning-search
 # nix direnv hook
