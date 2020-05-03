@@ -16,6 +16,8 @@ in
         gitAndTools.delta
         clean-nix-store
         nodePackages.node2nix
+        system-sendmail
+        zeek
       ];
     })
 
@@ -159,7 +161,6 @@ in
         #Go
         wakatime
         horcrux
-        zeek
         rocksdb
         sqlite
         fish-foreign-env

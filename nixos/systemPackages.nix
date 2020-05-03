@@ -118,7 +118,6 @@ in rec
       #xbacklight
       
       #overlay-package
-      #zeek
       #JetBrains-IDE
       #jetbrains.pycharm-professional
       #jetbrains.idea-ultimate
