@@ -27,15 +27,15 @@ stdenv.mkDerivation rec {
 
   enableParallelBuilding = true;
 
-  patches = stdenv.lib.optionals stdenv.cc.isClang [
-    # Fix pybind c++17 build with Clang. See: https://github.com/pybind/pybind11/issues/1604
-    (fetchpatch {
-      url = "https://github.com/pybind/pybind11/commit/759221f5c56939f59d8f342a41f8e2d2cacbc8cf.patch";
-      sha256 = "0l8z7d7chq1awd8dnfarj4c40wx36hkhcan0702p5l89x73wqk54";
-      extraPrefix = "aux/broker/bindings/python/3rdparty/pybind11/";
-      stripLen = 1;
-    })
-  ];
+  # patches = stdenv.lib.optionals stdenv.cc.isClang [
+  #   # Fix pybind c++17 build with Clang. See: https://github.com/pybind/pybind11/issues/1604
+  #   (fetchpatch {
+  #     url = "https://github.com/pybind/pybind11/commit/759221f5c56939f59d8f342a41f8e2d2cacbc8cf.patch";
+  #     sha256 = "0l8z7d7chq1awd8dnfarj4c40wx36hkhcan0702p5l89x73wqk54";
+  #     extraPrefix = "aux/broker/bindings/python/3rdparty/pybind11/";
+  #     stripLen = 1;
+  #   })
+  # ];
 
   cmakeFlags = [
     "-DPY_MOD_INSTALL_DIR=${placeholder "out"}/${python.sitePackages}"

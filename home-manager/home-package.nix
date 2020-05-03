@@ -2,7 +2,7 @@
 let
   nixpkgs = (import ~/.config/nixpkgs/channel/nixpkgs) { };
   clean-nix-store = nixpkgs.writeScriptBin "clean-nix-store" (import ../bin/clean-nix-store.nix { });
-  zeek-own = pkgs.callPackages ../own-nixpkgs/zeek {};
+  zeek-own = pkgs.callPackage ../own-nixpkgs/zeek {};
 in
 {
 
