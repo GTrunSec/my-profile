@@ -19,7 +19,9 @@ stdenv.mkDerivation rec {
   };
 
   nativeBuildInputs = [ cmake flex bison file ];
-  buildInputs = [ openssl libpcap zlib curl libmaxminddb gperftools python swig caf rocksdb rdkafka ];
+  buildInputs = [ openssl libpcap zlib curl libmaxminddb gperftools python swig caf rocksdb rdkafka
+                  postgresql
+                ];
 
   ZEEK_DIST = "${placeholder "out"}";
   #see issue https://github.com/zeek/zeek/issues/804 to modify hardlinking duplicate files.
