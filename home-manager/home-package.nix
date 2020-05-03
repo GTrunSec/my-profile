@@ -2,6 +2,7 @@
 let
   nixpkgs = (import ~/.config/nixpkgs/channel/nixpkgs) { };
   clean-nix-store = nixpkgs.writeScriptBin "clean-nix-store" (import ../bin/clean-nix-store.nix { });
+  zeek-own = pkgs.callPackages ../own-nixpkgs/zeek {};
 in
 {
 
@@ -17,7 +18,8 @@ in
         clean-nix-store
         nodePackages.node2nix
         system-sendmail
-        zeek
+        zeek-own
+        #vips
       ];
     })
 

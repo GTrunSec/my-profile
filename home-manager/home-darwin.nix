@@ -25,7 +25,7 @@ in
           numpy
           scikitlearn
         ]))
-
+        #vips
         ##cachix use ghcide-nix
         (import ../channel/ghcide-nix {}).ghcide-ghc865
         bat
@@ -35,6 +35,23 @@ in
         pet
         vscode
         juliaEnv
+        (texlive.combine # latex + packages
+          { inherit (texlive)
+            collection-plaingeneric
+            collection-latexextra
+            collection-fontsrecommended
+            collection-pictures
+            collection-bibtexextra
+            collection-mathscience
+            collection-langgerman
+            scheme-basic
+            xetex
+            cjk
+            ctex
+            xecjk
+            fontspec euenc;
+          }
+        )
       ];
     })
   ];

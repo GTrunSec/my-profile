@@ -1,4 +1,7 @@
-with import <nixpkgs> {};
+{stdenv, fetchurl, cmake, flex, bison, openssl, libpcap, zlib, file, curl
+, libmaxminddb, gperftools, python, swig, writeScript, fetchFromGitHub
+, rocksdb, rdkafka, postgresql, pkgs, system-sendmail, caf, fetchpatch}:
+
 let
   preConfigure = (import ./script.nix);
   install_plugin = writeScript "install_plugin" (import ./install_plugin.nix { });

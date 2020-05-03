@@ -18,7 +18,6 @@ in
     (import ~/.nix-defexpr/channels/home-manager {}).home-manager
     dbus
     go
-    zeek
     (bundler.overrideAttrs(old:  {
       name = "bundler-2.1.4";
       src = pkgs.fetchurl {
@@ -32,25 +31,8 @@ in
     }))
     jekyll
     glib
-    vips
+    #vips
     libxml2
-    (texlive.combine # latex + packages
-      { inherit (texlive)
-        collection-plaingeneric
-        collection-latexextra
-        collection-fontsrecommended
-        collection-pictures
-        collection-bibtexextra
-        collection-mathscience
-        collection-langgerman
-        scheme-basic
-        xetex
-        cjk
-        ctex
-        xecjk
-        fontspec euenc;
-      }
-    )
     wakatime
     ];
 

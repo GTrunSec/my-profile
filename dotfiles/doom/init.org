@@ -2040,4 +2040,4 @@ FACE defaults to inheriting from default and highlight."
 -  [[http://irfu.cea.fr/Pisp/vianney.lebouteiller/emacs.html][Everything with Emacs]]
 
 
--  [[https://github.com/munen/emacs.d/blob/master/configuration.org][emacs.d/configuration.org at master · munen/emacs.d]]
+-  [[https://github.com/munen/emacs.d/blob/master/configuration.org][emacs.d/configuration.org  atmaster · munen/]]
