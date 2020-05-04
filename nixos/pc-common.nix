@@ -15,8 +15,8 @@ with builtins;
   #   '';
   # };
   services.trezord.enable = true;
-  networking.firewall.allowedTCPPorts = [ 80 443 53 8080 9000 8888 9999];
-  networking.firewall.allowedUDPPorts = [ 80 443 53 8080 9000 8888 9999];
+  networking.firewall.allowedTCPPorts = [ 80 443 53 8080 9000 8888 9999 ];
+  networking.firewall.allowedUDPPorts = [ 80 443 53 8080 9000 8888 9999 ];
   #networking.nameservers = ["10.220.170.137"];
   networking.networkmanager.enable = true;
 

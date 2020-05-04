@@ -971,12 +971,6 @@ In that case, insert the number."
 
 ** company-backend
 #+begin_src emacs-lisp :tangle "config.el"
-(set-company-backend! '(nix-mode)
-  '(:separate company-nixos-options
-              company-tabnine
-              company-files
-              company-yasnippet
-              ))
 (set-company-backend! '(julia-mode)
   '(:separate company-lsp
               company-tabnine
@@ -1897,6 +1891,14 @@ FACE defaults to inheriting from default and highlight."
 
   (bookmark-load bookmark-default-file t)
 
+(set-company-backend! '(nix-mode)
+  '(:separate company-nixos-options
+              company-tabnine
+              company-files
+              company-yasnippet
+              ))
+
+
   (setq lsp-python-ms-executable  "~/.nix-profile/bin/mspyls")
   (when (not window-system)
     (xterm-mouse-mode 1)
@@ -1977,6 +1979,12 @@ FACE defaults to inheriting from default and highlight."
 (setq insert-directory-program "/usr/local/bin/gls")
 (define-key org-mode-map (kbd "C-c l") 'org-mac-grab-link)
 ;;(eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
+
+(set-company-backend! '(nix-mode)
+  '(:separate company-tabnine
+              company-files
+              company-yasnippet
+              ))
 
 
 (set-face-attribute

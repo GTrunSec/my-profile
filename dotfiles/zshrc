@@ -48,6 +48,12 @@ function pet-select() {
   zle redisplay
 }
 
+
+function juputer-env() {
+  cd ~/data/Jupyter-data-science-environment
+  nix-shell default.nix --option build-use-sandbox false
+}
+
 zle -N pet-select
 stty -ixon
 bindkey '^s' pet-select

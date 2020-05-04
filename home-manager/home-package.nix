@@ -28,6 +28,7 @@ in
       home.packages = with nixpkgs;[
         #remacs
         aria2
+        #zeek
         xclip
         screenfetch
         urxvt_perls
