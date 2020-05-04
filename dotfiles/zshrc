@@ -68,6 +68,15 @@ export TERM=xterm-256color
 #https://stackoverflow.com/questions/32057760/is-it-possible-to-not-share-history-between-panes-windows-in-tmux-with-zsh
 setopt sharehistory
 setopt incappendhistory
+setopt hist_verify              # reload full command when runing from history
+setopt notify                   # report the status of backgrounds jobs immediately
+setopt hist_ignore_space        # do not remember commands starting with space
+setopt hist_reduce_blanks       # reduce whitespace in history
+
+
+setopt auto_continue            #automatically send SIGCON to disowned jobs
+setopt extended_glob            # so that patterns like ^() *~() ()# can be used
+
 
 [[ -n "$key[Up]"   ]] && bindkey -- "$key[Up]" up-line-or-beginning-search
 [[ -n "$key[Down]" ]] && bindkey -- "$key[Down]" down-line-or-beginning-search
