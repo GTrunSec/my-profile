@@ -2,11 +2,19 @@
 let
   nixpkgs = (import ~/.config/nixpkgs/channel/nixpkgs) { };
   clean-nix-store = nixpkgs.writeScriptBin "clean-nix-store" (import ../bin/clean-nix-store.nix { });
+  stable  = import ./stable-pkgs.nix { config={ allowUnfree=true; allowBroken=true; ignoreCollisions = true;};};
   zeek-own = pkgs.callPackage ../own-nixpkgs/zeek {};
 in
 {
 
   config = with lib; mkMerge [
+
+    (mkIf (pkgs.stdenv.isLinux || pkgs.stdenv.isDarwin) {
+      home.packages = with stable;[
+        vips
+      ];
+    })
+
 
     ##public pkgs
     (mkIf (pkgs.stdenv.isLinux || pkgs.stdenv.isDarwin) {
@@ -19,7 +27,6 @@ in
         nodePackages.node2nix
         system-sendmail
         zeek-own
-        tcpreplay
         #vips
       ];
     })
@@ -30,6 +37,7 @@ in
         #remacs
         aria2
         #zeek
+        tcpreplay
         xclip
         screenfetch
         urxvt_perls
