@@ -29,9 +29,12 @@ in
           l     = "exa -lah";
           f     = "rg --files";
           E     = "env SUDO_EDITOR=\"emacsclient\" sudo -e";
+          e     = "emacsclient";
           em    = "emacs";
           cp    = "cp -i";
           mv    = "mv -i";
+          ##update Nixpkgs 
+          un    = "~/.config/nixpkgs  && git fetch && git pull";
           overlay-go   = "cd ~/.config/nixpkgs/nixos/overlays/go";
           overlay-python   = "cd ~/.config/nixpkgs/nixos/overlays/python";
           overlay-custom   = "cd ~/.config/nixpkgs/nixos/overlays/custom";

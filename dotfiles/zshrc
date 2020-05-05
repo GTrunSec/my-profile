@@ -49,9 +49,10 @@ function pet-select() {
 }
 
 
-function juputer-env() {
+function jupyter-env() {
   cd ~/data/Jupyter-data-science-environment
   nix-shell default.nix --option build-use-sandbox false
+  jupyter lab --ip $1
 }
 
 zle -N pet-select
