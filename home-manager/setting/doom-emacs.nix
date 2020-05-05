@@ -8,37 +8,43 @@ let
 in
 {
   #fonts
-    home.file.".local/share/fonts/my-font" = {
+  home.file.".local/share/fonts/my-font" = {
     source = ../../dotfiles/my-font;
     onChange = updatefont;
   };
 
-    # editors
-    home.file.".doom.d/init.org" = {
-      source = ../../dotfiles/doom/init.org;
-      onChange = updateInit;
-    };
-      home.file.".doom.d/xah-fly.org" = {
-        source = ../../dotfiles/doom/xah-fly.org;
-      onChange = updateInit;
-    };
-    home.file.".doom.d/Makefile".source = ../../dotfiles/doom/Makefile;
-    home.activation.linkEmacsLisp = config.lib.dag.entryAfter [ "writeBoundary" ] ''
+  home.activation.linkEmacsPrivate = config.lib.dag.entryAfter [ "writeBoundary" ] ''
+     if [ ! -d "$HOME/.emacs.d" ];then
+         ${pkgs.git}/bin/git clone https://github.com/GTrunSec/doom-emacs.git --depth=1 ~/.emacs.d
+      if [ ! -d "$HOME/.emacs.d/bin/doom" ];then
+       mv $HOME/.emacs.d $HOME/.emacs.d-backup
+       ${pkgs.git}/bin/git clone https://github.com/GTrunSec/doom-emacs.git --depth=1 ~/.emacs.d
+       fi
+     fi
+     if [ ! -d "$HOME/.doom.d" ];then
+     mkdir -p $HOME/.doom.d/
+     mkdir -p $HOME/.doom.d/autoload
+     mkdir -p $HOME/.doom.d/etc
+     mkdir -p $HOME/.doom.d/.modules/private/my-code
+     mkdir -p $HOME/.doom.d/.modules/private/my-org
+     fi
      ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/doom/lisp" $HOME/.doom.d/lisp
-   '';
-    home.activation.linkEmacsBin = config.lib.dag.entryAfter [ "writeBoundary" ] ''
      ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/doom/bin" $HOME/.doom.d/bin
-   '';
-
-    home.activation.linkEmacsPrivate = config.lib.dag.entryAfter [ "writeBoundary" ] ''
+     ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/doom/snippets" $HOME/.doom.d/snippets
      ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/doom/modules" $HOME/.doom.d/modules
    '';
-        home.activation.linkEmacsSnippets = config.lib.dag.entryAfter [ "writeBoundary" ] ''
-      ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/doom/snippets" $HOME/.doom.d/snippets
-    '';
+  # editors
+  home.file.".doom.d/init.org" = {
+    source = ../../dotfiles/doom/init.org;
+    onChange = updateInit;
+  };
+  home.file.".doom.d/xah-fly.org" = {
+    source = ../../dotfiles/doom/xah-fly.org;
+    onChange = updateInit;
+  };
 
 
-    # programs.emacs = {
+  # programs.emacs = {
     # enable = true;
 
     # package = pkgs.emacs.overrideAttrs (old: rec {
