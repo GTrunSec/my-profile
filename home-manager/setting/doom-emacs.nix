@@ -21,18 +21,23 @@ in
        ${pkgs.git}/bin/git clone https://github.com/GTrunSec/doom-emacs.git --depth=1 ~/.emacs.d
        fi
      fi
+
      if [ ! -d "$HOME/.doom.d" ];then
      mkdir -p $HOME/.doom.d/
      mkdir -p $HOME/.doom.d/autoload
      mkdir -p $HOME/.doom.d/etc
-     mkdir -p $HOME/.doom.d/.modules/private/my-code
-     mkdir -p $HOME/.doom.d/.modules/private/my-org
      fi
+
      ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/doom/lisp" $HOME/.doom.d/lisp
      ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/doom/bin" $HOME/.doom.d/bin
      ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/doom/snippets" $HOME/.doom.d/snippets
      ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/doom/modules" $HOME/.doom.d/modules
      ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/doom/Makefile" $HOME/.doom.d/Makefile
+
+     if [ ! -d "$HOME/.doom.d/modules/my-code" ];then
+          mkdir -p $HOME/.doom.d/modules/private/my-org
+          mkdir -p $HOME/.doom.d/modules/private/my-code
+     fi
    '';
   # editors
   home.file.".doom.d/init.org" = {
