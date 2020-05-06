@@ -23,5 +23,4 @@
     rev = "7e83f3822c00ee496cce42cf69331436cb3b1379";
     sha256 = "1448d333vny2gq4jaldl9zy62jy81ih5166l0aak3p49vv8g38bz";
   };
-
 }
