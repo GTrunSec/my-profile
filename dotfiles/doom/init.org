@@ -173,7 +173,7 @@ HTML them READ org
        ;;plantuml          ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional
        (python
-        +lsp)            ; beautiful is better than ugly
+        +poetry)            ; beautiful is better than ugly
        ;;qt                ; the 'cutest' gui framework ever
        ;;racket            ; a DSL for DSL
        ;;ruby              ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
@@ -215,7 +215,7 @@ HTML them READ org
          :private
          spacemacs-default
          my-org
-         my-code
+         ;;my-code
 )
 #+end_src
 
@@ -229,39 +229,27 @@ HTML them READ org
 (package! xah-fly-keys :recipe (:host github :repo "GTrunSec/xah-fly-keys"))
 (package! maple-iedit :recipe (:host github :repo "honmaple/emacs-maple-iedit"))
 (package! ctrlf :recipe (:host github :repo "raxod502/ctrlf"))
-
-#+end_src
-
-** third-part
-#+begin_src emacs-lisp :tangle "packages.el"
 (package! scrollkeeper :recipe (:host github :repo "alphapapa/scrollkeeper.el"))
 (package! awesome-tab :recipe (:host github :repo "manateelazycat/awesome-tab"))
 (package! ob-session-async :recipe (:host github :repo "jackkamm/ob-session-async"))
 (package! maple-explorer :recipe (:host github :repo "honmaple/emacs-maple-explorer"))
 (package! sunrise-commander :recipe (:host github :repo "sunrise-commander/sunrise-commander"))
+(package! awesome-pair :recipe (:host github :repo "manateelazycat/awesome-pair"))
 ;; (package! berrys-theme)
 #+end_src
 
 *** [[https://github.com/jackkamm/undo-propose-el][jackkamm/undo-propose-el: Navigate the emacs undo history by staging undo's in a temporary buffer]]
 * config.el
 #+begin_src emacs-lisp :tangle "config.el"
-(load! "setting")
+;;; config.el -*- lexical-binding: t; -*-
+
 (load! "xah-fly.el")
+;;(load! "show-parentheses.el")
+#+end_src
 
-(use-package! vlf
-  :config
-  (require 'vlf-setup)
-  (custom-set-variables
-   '(vlf-application 'dont-ask))
-)
-(use-package! ctrlf
-  :hook
-  (after-init . ctrlf-mode))
-;;[2020-03-26 Thu 16:39]
-(use-package! wakatime-mode
-:hook (after-init . global-wakatime-mode))
-(use-package! pinyin-search)
-
+* use-package
+** helm-tramp
+#+begin_src emacs-lisp :tangle "config.el"
 (use-package! helm-tramp
   :config
   (setq tramp-default-method "sshx")
@@ -278,47 +266,65 @@ HTML them READ org
                   ;;(editorconfig-mode 1)
             ))
 )
-
-
 #+end_src
 
-** default
-#+begin_src emacs-lisp :tangle "setting.el"
-(setq user-full-name "GTrunSec"
-      user-mail-address "gtrunsec@hardenedlinux.org")
-(setq-default history-length 1000)
-(setq create-lockfiles nil)
-;; (setq browse-url-browser-function 'browse-url-Chrome)
-;; https://emacs.stackexchange.com/questions/5603/how-to-quickly-copy-move-file-in-emacs-dired
-(setq dired-dwim-target t)
-(add-hook! 'xah-fly-command-mode-activate-hook 'xah-fly-save-buffer-if-file)
-;;(add-hook! 'xah-fly-command-mode-activate-hook 'bookmark-save)
-(defun gtrun/truncate-lines-hook ()
-  (setq-local truncate-lines nil)
-  )
-
-(add-hook! 'text-mode-hook 'gtrun/truncate-lines-hook)
-(add-hook! 'elfeed-show-mode-hook 'gtrun/truncate-lines-hook)
-
-(add-hook! 'sunrise-start-hook 'xah-fly-insert-mode-activate)
-
-(add-hook 'maple-explorer-imenu-mode-hook
-          (lambda() (setq cursor-type 'box
-                          cursor-in-non-selected-windows t)))
-
-(setenv "XAPIAN_CJK_NGRAM" "1")
-
-(setq w3m-use-tab-line nil)
+** Pinyin
+#+begin_src emacs-lisp :tangle "config.el"
+(use-package! pinyin-search)
 #+end_src
 
-#+RESULTS:
+** wakatime-mode
+#+begin_src emacs-lisp :tangle "config.el"
+(use-package! wakatime-mode
+:hook (after-init . global-wakatime-mode))
+#+end_src
+
+** ctrlf
+#+begin_src emacs-lisp :tangle "config.el"
+(use-package! ctrlf
+  :config
+  (add-hook! 'after-init-hook #'ctrlf-mode)
+)
+#+end_src
+
+** vlf
+#+begin_src emacs-lisp :tangle "config.el"
+(use-package! vlf
+  :config
+  (require 'vlf-setup)
+  (custom-set-variables
+   '(vlf-application 'dont-ask))
+)
+#+end_src
+
+** maple-explorer
+#+begin_src emacs-lisp :tangle "config.el"
+(use-package! maple-explorer
+  :commands (maple-explorer-file maple-explorer-buffer maple-explorer-imenu maple-explorer-recentf)
+  :config
+  (setq maple-explorer-file-display-alist '((side . left) (slot . -1)))
+  (add-hook 'maple-explorer-imenu-mode-hook
+            (lambda() (setq cursor-type 'box
+                            cursor-in-non-selected-windows t)))
+)
+#+end_src
+
+** imenu-list
+#+begin_src emacs-lisp :tangle "config.el"
+(use-package! imenu-list
+  :config
+  (setq imenu-list-auto-resize t)
+  (setq imenu-list-focus-after-activation t)
+  (setq imenu-list-after-jump-hook nil)
+  (add-hook 'menu-list-after-jump-hook #'recenter-top-bottom)
+)
+#+end_src
 
 * autoload
 ** misc
 *** time
 #+begin_src emacs-lisp :tangle "~/.doom.d/autoload/misc.el"
 ;;; ~/.doom.d/autoload/misc.el -*- lexical-binding: t; -*-
-
 (defvar current-date-time-format "%a %b %d %H:%M:%S %Z %Y"
 
   "Format of date to insert with `insert-current-date-time' func
@@ -374,514 +380,36 @@ Uses `current-date-time-format' for the formatting the date/time."
        )
 #+end_src
 
-#+RESULTS:
-: insert-current-date-time-test
-
 *** default
 #+begin_src emacs-lisp :tangle "~/.doom.d/autoload/+default.el"
 ;;; ~/.doom.d/autoload/+default.el -*- lexical-binding: t; -*-
 
 #+end_src
 
-* org-mode
-** config
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
-(load! "setting")
-(add-hook! 'after-init-hook 'org-starter-load-all-files-in-path)
-;;(setq org-bullets-bullet-list '("☰" "☷" "☵" "☲"  "☳" "☴"  "☶"  "☱" ))
-(use-package! company-english-helper)
-(use-package! ox-hugo)
-(use-package! ob-session-async)
-(use-package! ob-async)
-(use-package! org-books
-  :config
-  (setq org-books-file "~/Documents/org-notes/GTD/my-books.org")
+* default-setting
+** Global
+#+begin_src emacs-lisp :tangle "config.el"
+(setq user-full-name "GTrunSec"
+      user-mail-address "gtrunsec@hardenedlinux.org")
+(setq-default history-length 1000)
+(setq create-lockfiles nil)
+;; (setq browse-url-browser-function 'browse-url-Chrome)
+;; https://emacs.stackexchange.com/questions/5603/how-to-quickly-copy-move-file-in-emacs-dired
+(setq dired-dwim-target t)
+(add-hook! 'xah-fly-command-mode-activate-hook 'xah-fly-save-buffer-if-file)
+;;(add-hook! 'xah-fly-command-mode-activate-hook 'bookmark-save)
+(defun gtrun/truncate-lines-hook ()
+  (setq-local truncate-lines nil)
   )
 
+(add-hook! 'text-mode-hook 'gtrun/truncate-lines-hook)
+(add-hook! 'elfeed-show-mode-hook 'gtrun/truncate-lines-hook)
 
-;;(use-package emacs-powerthesaurus)
-#+end_src
+(add-hook! 'sunrise-start-hook 'xah-fly-insert-mode-activate)
 
-** Packages
-#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
-(package! company-english-helper :recipe (:host github :repo "manateelazycat/company-english-helper"))
-;; (package! org-super-agenda)
-;; (package! ob-mermaid)
-;; (package! helm-org-rifle)
-;; (package! deft)
-;; (package! org-wild-notifier)
-(package! org-books :recipe (:host github :repo "lepisma/org-books"))
+(setenv "XAPIAN_CJK_NGRAM" "1")
 
-(package! notdeft :recipe (:host github :repo "hasu/notdeft"))
-(package! emacs-powerthesaurus :recipe (:host github :repo "SavchenkoValeriy/emacs-powerthesaurus"))
-(package! org-starter)
-
-#+end_src
-
-** setting
-*** org-global
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/setting.el"
-(setq org-clock-into-drawer t)
-(setq-hook! 'org-mode-hook fill-column 80)
-(setq-hook! 'org-mode-hook org-superstar-mode 1)
-(setq org-directory "~/Documents/org-notes")
-(setq org-log-into-drawer t)
-(setq org-agenda-start-day "-1d")
-(setq org-agenda-span 2)
-(setq org-time-clocksum-format '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
-(setq org-archive-location (concat "%s_archive_" (format-time-string "%Y" (current-time)) "::"))
-;; Removes clocked tasks with 0:00 duration
-(setq org-clock-out-remove-zero-time-clocks t)
-;; Change task state to STARTED when clocking in
-(setq org-clock-in-switch-to-state "⚔ INPROCESS")
-(setq org-src-fontify-natively t
-      org-src-preserve-indentation t
-      org-src-tab-acts-natively t
-      org-src-window-setup 'current-window)
-(setq org-agenda-time-leading-zero t)
-(setq org-download-timestamp "%Y%m%d_%H%M%S")
-#+end_src
-
-*** org-babel
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/setting.el"
-;; Todo part
-
-(setq ein:output-type-preference
-      '(emacs-lisp svg png jpeg html text latex javascript))
-
-
-(defun my-org-confirm-babel-evaluate (lang _body)
-  "Return t if LANG is in whitelist."
-  (not (or (string= lang "ditaa")
-           (string= lang "dot")
-           (string= lang "R")
-           (string= lang "julia")
-           (string= lang "C++")
-           (string= lang "C")
-           (string= lang "ein-R")
-           (string= lang "python")
-           (string= lang "ein-julia")
-           (string= lang "ein-python")
-           (string= lang "plantuml"))))
-(setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)
-
-
-(setq org-babel-C++-compiler 'g++-9)
-(setq org-babel-C-compiler 'gcc-9)
-#+end_src
-
-*** agenda-custom-setting
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
-
-
-(setq org-agenda-custom-commands
-      '(("z" "GtruN Agenda"
-         ((agenda "" ((org-agenda-span 2)
-                      (org-agenda-start-day "-1d")
-                      (org-super-agenda-groups
-                       '((:name "Today List"
-                                :time-grid t
-                                :date today
-                                :todo "⚔ INPROCESS"
-                                :scheduled today
-                                :order 1)))))
-          (alltodo "" ((org-agenda-overriding-header "")
-                       (org-super-agenda-groups
-                        '((:name "Next to do"
-                                 :priority>= "B"
-                                 :order 2)
-                          (:name "Important"
-                                 :todo "✰ Important"
-                                 :order 6)
-                          (:name "Due Today"
-                                 :deadline today
-                                 :order 3)
-                          (:name "Due Soon"
-                                 :deadline future
-                                 :order 8)
-                          (:name "Overdue"
-                                 :deadline past
-                                 :order 20)
-                          (:name "Issues"
-                                 :tag "Issue"
-                                 :order 12)
-                          (:name "Projects"
-                                 :tag "Project"
-                                 :order 14)
-                          (:name "Emacs"
-                                 :tag "Emacs"
-                                 :order 13)
-                          (:name "Research"
-                                 :tag "Research"
-                                 :order 15)
-                          (:name "To read"
-                                 :tag ("BOOK" "READ")
-                                 :order 30)
-                          (:name "Waiting"
-                                 :todo "⚑ WAITING"
-                                 :order 18)
-                          (:name "trivial"
-                                 :priority<= "C"
-                                 :todo ("SOMEDAY")
-                                 :order 90)
-                          (:discard (:tag ("Chore" "Routine" "Daily")))))))))
-
-        ("b" . "BOOK")
-
-        ("bb" "Search tags in todo, note, and archives"
-         search "+{:book\\|books:}")
-
-        ("bd" "BOOK TODO List"
-         search "+{^\\*+\\s-+\\(⚔ INPROCESS\\|☞ TODO\\|⚑ WAITING\\)\\s-} +{:book\\|books:}")
-
-        ("d" "ALL DONE OF TASKS"
-         search "+{^\\*+\\s-+\\(✔ DONE\\|✘ CANCELED\\)\\s-}")
-
-        ("i" "ALL INPROCESS OF TASKS"
-         search "+{^\\*+\\s-+\\(⚔ INPROCESS\\)\\s-}")
-
-        ))
-#+end_src
-
-*** org-key
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/setting.el"
-(eval-after-load "org"
-  '(require 'ox-md nil t))
-(define-key! org-mode-map (kbd "C-<return>") 'org-insert-heading-respect-content)
-#+end_src
-
-*** org-link-type
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/setting.el"
-
-(defun endless/export-audio-link (path desc format)
-  "Export org audio links to hmtl."
-  (cl-case format
-    (html (format
-       "<audio preload=\"auto\"> <source src=\"https://www.gtrun.org/music/%s\">%s</audio>"
-       path (or desc "")))
-
-    ;; README: hugo music file path
-    (md (format
-     "<audio class=\"wp-audio-shortcode\"  loop=\"1\"  preload=\"auto\" style=\"width: 100%%;\" controls> <source src=\"https://www.gtrun.org/music/%s\">%s</audio>"
-     path (or desc "")))
-    (latex (format "(HOW DO I EXPORT AUDIO TO LATEX? \"%s\")" path))))
-(after! org
-  (org-eldoc-load)
-  (org-add-link-type "audio" #'ignore #'endless/export-audio-link)
-)
-#+end_src
-
-** org-wild-notifier
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/packages.el"
-(use-package! org-wild-notifier
-  :defer t
-  :config
-  (add-hook! 'after-init-hook 'org-wild-notifier-mode)
-  (setq org-wild-notifier-alert-time 15
-        alert-default-style (if IS-MAC 'osx-notifier 'libnotify)))
-#+end_src
-
-** super-agenda
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
-(use-package! org-super-agenda
-  :config
-  (add-hook! 'after-init-hook 'org-super-agenda-mode)
-  (require 'org-habit)
-  ;; (setq org-agenda-time-grid
-  ;;       '((daily today)
-  ;;         ))
-  (setq
-   org-agenda-skip-scheduled-if-done t
-   org-agenda-skip-deadline-if-done t
-   org-agenda-include-deadlines t
-   org-agenda-include-diary nil
-   org-agenda-block-separator nil
-   org-agenda-compact-blocks t
-   org-agenda-start-with-log-mode t)
-  )
-#+end_src
-
-** org-starter
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
-(use-package! org-starter
-  :config
-  ;; (add-hook! 'after-init-hook 'org-starter-load-all-files-in-path)
-  (org-starter-def "~/Documents/org-notes"
-                   :files
-                   ("GTD/gtd.org"                      :agenda t :key "g" :refile (:maxlevel . 5))
-                   ("GTD/notes.org"                    :agenda t :key "n" :refile (:maxlevel .5 ))
-                   ("GTD/myself.org"                   :agenda t :key "m" :refile (:maxlevel .5 ))
-                   ("GTD/Habit.org"                    :agenda t :key "h" :refile (:maxlevel .5 ))
-                   ("post/traveling/traveling.org" :key "t" :refile (:maxlevel .5 ))
-                   ("post/myself/love.org"         :key "l" :refile (:maxlevel .5 ))
-                   ("post/myself/qing.org"         :key "q" :refile (:maxlevel .5 ))
-                   ("post/myself/plan.org"         :key "p" :refile (:maxlevel .5 ))
-                   ("elfeed.org"         :key "e" :refile (:maxlevel .5 ))
-                   ("GTD/my-books.org"             :agenda t :key "b" :refile (:maxlevel .5 ))
-                   ("post/life-thing/life-things.org")
-                   ("NSM-GTD/workflow.org"         :agenda t :required t)
-                   ("NSM-GTD/NsmOrg.org"           :agenda t :required t)
-                   ("art/learn-music.org"          :agenda t :key "M" :refile (:maxlevel .5 ))
-                   )
-  (org-starter-def "~/.config/nixpkgs/dotfiles/doom/"
-                   :files
-                   ("init.org" :key "i" :refile (:maxlevel . 5))
-                   ;;("nix.org" :key "x" :refile (:maxlevel . 5))
-                   )
-  (org-starter-def "~/.config/nixpkgs"
-                   :files
-                   ("README.org")
-                   ("global-readme.org")
-                   ("dotfiles/wallpaper/wallpaper.org" :agenda nil)
-                   )
-
-
- (defhydra gtrun/hydra-org-starter nil
-      "
-  Org-starter-files
-  ^^^^------------------------------------------------
- _i_: init.org    _g_: gtd.org      _l_: love.org
- _n_: note        _t_: traveling    _h_: Habit.org
- _m_: myself      _q_: 情-qing      _p_: Plan.org
- _b_: my-books    _e_: elfeed       _M_: learn music
-
-  "
-      ("i" org-starter-find-file:init)
-      ("g" org-starter-find-file:gtd)
-      ("n" org-starter-find-file:notes)
-      ("e" org-starter-find-file:elfeed)
-      ("M" org-starter-find-file:learn-music)
-      ("m" org-starter-find-file:myself)
-      ("t" org-starter-find-file:traveling)
-      ("q" org-starter-find-file:qing)
-      ("l" org-starter-find-file:love)
-      ("h" org-starter-find-file:Habit)
-      ("p" org-starter-find-file:plan)
-      ("b" org-starter-find-file:my-books)
-)
- :bind
- (
-  ("C-c e" . org-starter-select-file))
- ;; "C-c e" . org-starter-refile-by-key))
-
-
-  )
-#+end_src
-
-#+RESULTS:
-: org-starter-select-file
-
-** elfeed
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
-(use-package! elfeed
-  :bind (:map elfeed-search-mode-map
-          ("q" . bjm/elfeed-save-db-and-bury)
-          ("Q" . bjm/elfeed-save-db-and-bury)
-          ("m" . elfeed-toggle-star)
-          )
-  :config
-(global-set-key (kbd "C-x w") 'elfeed)
-(setf url-queue-timeout 30)
-(setq elfeed-db-directory "~/Dropbox/shared/elfeeddb")
-;;functions to support syncing .elfeed between machines
-;;makes sure elfeed reads index from disk before launching
-(defun bjm/elfeed-load-db-and-open ()
-  "Wrapper to load the elfeed db from disk before opening"
-  (interactive)
-  (elfeed-db-load)
-  (elfeed)
-  (elfeed-search-update--force))
-
-;;write to disk when quiting
-
-(defun bjm/elfeed-save-db-and-bury ()
-  "Wrapper to save the elfeed db to disk before burying buffer"
-  (interactive)
-  (elfeed-db-save)
-  (quit-window))
-
-(defun elfeed-mark-all-as-read ()
-  (interactive)
-  (mark-whole-buffer)
-  (elfeed-search-untag-all-unread))
-
-
-
-  )
-
-(use-package! elfeed-goodies
-  :config
-  (elfeed-goodies/setup))
-
-(use-package! elfeed-org
-:config
-(setq rmh-elfeed-org-files (list "~/Documents/org-notes/elfeed.org")))
-#+end_src
-
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
-(use-package! helm-org-rifle)
-#+end_src
-
-** org publish
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/setting.el"
-  (setq org-publish-project-alist
-        '(("nsm"
-           :base-directory "~/Documents/org-notes/NSM-GTD"
-           :with-author "GTrunSec"
-           :publishing-function org-html-publish-to-html
-           :publishing-directory "~/Documents/my-blog/public/custom"
-           :exclude "README.org"
-           )
-          ("my-learning"
-           :base-directory "~/Documents/org-publish"
-           :publishing-function org-html-publish-to-html
-           :publishing-directory "~/Documents/my-blog/public/custom"
-           :exclude "README.org"
-           )
-          ("init"
-           :base-directory "~/.config/nixpkgs/dotfiles/doom"
-           :publishing-function org-html-publish-to-html
-           :publishing-directory "~/Documents/my-blog/public/custom"
-           )
-          ("jupyter-math"
-           :base-directory "~/Dropbox/Drop-project/my-mathematic-env/math"
-           :publishing-function org-html-publish-to-html
-           :publishing-directory "~/Documents/my-blog/public/custom"
-           )
-          ("art"
-           :base-directory "~/Documents/org-notes/art"
-           :publishing-function org-html-publish-to-html
-           :publishing-directory "~/Documents/my-blog/public/custom"
-           )
-          ("course"
-           :base-directory "~/Documents/org-notes/course"
-           :publishing-function org-html-publish-to-html
-           :publishing-directory "~/Documents/my-blog/public/custom"
-           )
-          ))
-#+end_src
-
-** org-notdeft
-- [[https://jingsi.space/post/2017/04/05/organizing-a-complex-directory-for-emacs-org-mode-and-deft/#configuring-deft][Organizing a Complex Directory for Emacs Org Mode and Deft]]
-
-
-- [[https://tero.hasu.is/notdeft/#org7b25462][NotDeft | Tero Hasu]]
-
-
-- [[https://github.com/EFLS/zetteldeft][EFLS/zetteldeft: A Zettelkasten system! Or rather, some functions on top of the emacs deft package.]]
-
-
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
-(use-package! notdeft
-  :config
-  (setq notdeft-extension "org")
-  ;;(setq notdeft-secondary-extensions '("md" "org" "scrbl"))
-  (setq notdeft-directories '("~/Documents/org-notes/post/myself"
-                              "~/Documents/org-notes/post/life-thing"
-                              "~/Documents/org-notes/post/traveling"
-                              "~/Documents/org-notes/post/agenda"
-                              "~/Documents/org-notes/post/game"
-                              "~/Dropbox/project/my-learning-list"
-                              "~/Documents/org-notes/GTD"
-                              "~/Documents/org-notes/art"
-                              ))
-
-  :bind (:map notdeft-mode-map
-          ("C-q" . notdeft-quit)
-          ("C-r" . notdeft-refresh)
-          )
-  )
-#+end_src
-
-- build
-
-
-cd ~/.emacs.d/.local/straight/repos/notdeft/xapian
-make
-
-** [[https://github.com/alphapapa/org-protocol-capture-html][alphapapa/org-protocol-capture-html: Capture HTML from the browser selection into Emacs as org-mode content]]
-
-** org-export
-*** highlight
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
-  ;; (require 'ox)
-  ;; (defun my-html-mark-tag (text backend info)
-  ;;   "Transcode :blah: into <mark>blah</mark> in body text."
-  ;;   (when (org-export-derived-backend-p backend 'html)
-  ;;     (let ((text (replace-regexp-in-string "[^\\w]\\(:\\)[^\n\t\r]+\\(:\\)[^\\w]" "<mark>"  text nil nil 1 nil)))
-  ;;       (replace-regexp-in-string "[^\\w]\\(<mark>\\)[^\n\t\r]+\\(:\\)[^\\w]" "</mark>" text nil nil 2 nil))))
-
-  ;; (add-to-list 'org-export-filter-plain-text-functions 'my-html-mark-tag)
-
-  ;; (defun my-html-mark-tag (text backend info)
-  ;;   "Transcode :blah: into <mark>blah</mark> in body text."
-  ;;   (when (org-export-derived-backend-p backend 'html)
-  ;;     (let ((text (replace-regexp-in-string "[^\\w]\\(:\\)[^\n\t\r]+\\(:\\)[^\\w]" "<mark>"  text nil nil 1 nil)))
-  ;;       (replace-regexp-in-string "[^\\w]\\(<mark>\\)[^\n\t\r]+\\(:\\)[^\\w]" "</mark>" text nil nil 2 nil))))
-
-  ;; (add-to-list 'org-export-filter-plain-text-functions 'my-html-mark-tag)
-#+end_src
-
-#+RESULTS:
-| my-html-mark-tag |
-
-** org-crypt
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
-;; 當被加密的部份要存入硬碟時，自動加密回去
-  ;; 設定要加密的 tag 標籤為 secret
-  (setq org-crypt-tag-matcher "secret")
-
-  ;; 避免 secret 這個 tag 被子項目繼承 造成重複加密
-  ;; (但是子項目還是會被加密喔)
-  (setq org-tags-exclude-from-inheritance (quote ("secret")))
-
-  ;; 用於加密的 GPG 金鑰
-  ;; 可以設定任何 ID 或是設成 nil 來使用對稱式加密 (symmetric encryption)
-  (setq org-crypt-key nil)
-#+end_src
-
-#+RESULTS:
-
-** [[https://github.com/lepisma/org-books][lepisma/org-books: Reading list management with org mode]]
-
-** ☞ TODO [[https://github.com/ianxm/emacs-scrum][ianxm/emacs-scrum: dynamic scrum report generation for org-mode buffers]]
-** ☞ TODO [[https://github.com/jingtaozf/literate-elisp][jingtaozf/literate-elisp: a literate programming tool to load Emacs Lisp codes from org mode file directly]] :lisp:org:
-** [[https://github.com/abrochard/walkman][abrochard/walkman: Write HTTP requests in Org mode and replay them at will using cURL]]
-** [[https://github.com/niklasfasching/go-org][niklasfasching/go-org: Org mode parser with html & pretty printed org rendering]]
-** ob-mermaid
-#+begin_src emacs-lisp :tangle  "./modules/private/my-org/config.el"
-(use-package! ob-mermaid
-  :config
-  (setq ob-mermaid-cli-path "~/.nix-profile/bin/mmdc")
-  )
-
-#+end_src
-
-** [[https://github.com/dustinlacewell/org-spacer.el][dustinlacewell/org-spacer.el: Enforce the number of blank lines between elements in an org-mode document]]
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/packages.el"
-(package! org-spacer.el :recipe (:host github :repo "dustinlacewell/org-spacer.el"))
-#+end_src
-
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
-(use-package! org-spacer
-  :config
-  (add-hook 'org-mode-hook
-            (lambda () (add-hook 'before-save-hook
-                                 'org-spacer-enforce nil 'make-it-local)))
-  )
-#+end_src
-
-** [[https://github.com/mtekman/org-density.el][mtekman/org-density.el: Examine the density of org headings]]
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/packages.el"
-(package! org-treeusage :recipe (:host github :repo "mtekman/org-treeusage.el"))
-#+end_src
-
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
-(use-package! org-treeusage
-  :config
-  (define-key org-mode-map (kbd "C-c d") 'org-treeusage-mode)
-  )
-
+(setq w3m-use-tab-line nil)
 #+end_src
 
 * Completion
@@ -955,44 +483,6 @@ In that case, insert the number."
   )
 #+end_src
 
-** company-backend
-#+begin_src emacs-lisp :tangle "config.el"
-(set-company-backend! '(julia-mode)
-  '(:separate company-lsp
-              company-tabnine
-              company-files
-              company-yasnippet
-              ))
-
-;;  (set-company-backend! 'sh-mode nil) ; unsets backends for sh-mode
-(set-company-backend! '(c-mode
-                        c++-mode
-                        ess-mode
-                        haskell-mode
-                        ;;emacs-lisp-mode
-                        lisp-mode
-                        sh-mode
-                        php-mode
-                        python-mode
-                        go-mode
-                        ruby-mode
-                        rust-mode
-                        js-mode
-                        css-mode
-                        web-mode
-                        org-mode
-                        )
-  '(:separate company-tabnine
-              company-files
-              company-yasnippet))
-
-(setq +lsp-company-backend '(company-lsp :with company-tabnine :separate))
-
-#+end_src
-
-#+RESULTS:
-| company-lsp | :with | company-tabnine | :separate |
-
 ** company-tabnine
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! company-tabnine
@@ -1029,10 +519,43 @@ In that case, insert the number."
 
 #+end_src
 
+** company-backend
+#+begin_src emacs-lisp :tangle "config.el"
+(set-company-backend! '(julia-mode)
+  '(:separate company-lsp
+              company-tabnine
+              company-files
+              company-yasnippet
+              ))
+
+;;  (set-company-backend! 'sh-mode nil) ; unsets backends for sh-mode
+(set-company-backend! '(c-mode
+                        c++-mode
+                        ess-mode
+                        haskell-mode
+                        ;;emacs-lisp-mode
+                        lisp-mode
+                        sh-mode
+                        php-mode
+                        python-mode
+                        go-mode
+                        ruby-mode
+                        rust-mode
+                        js-mode
+                        css-mode
+                        org-mode
+                        web-mode
+                        )
+  '(:separate company-tabnine
+              company-files
+              company-yasnippet))
+
+(setq +lsp-company-backend '(company-lsp :with company-tabnine :separate))
+
 #+end_src
 
 ** Edition
-*** Maple
+*** maple-iedit
 #+begin_src emacs-lisp :tangle "config.el"
   (use-package! maple-iedit
     :commands (maple-iedit-match-all maple-iedit-match-next maple-iedit-match-previous)
@@ -1053,9 +576,99 @@ In that case, insert the number."
     )
 #+end_src
 
+*** highlight
+#+begin_src emacs-lisp :tangle "config.el"
+(use-package! highlight-indent-guides
+:config
+(setq highlight-indent-guides-method 'column)
+(setq highlight-indent-guides-auto-enabled nil)
+(set-face-background 'highlight-indent-guides-odd-face "darkgray")
+(set-face-background 'highlight-indent-guides-even-face "dimgray")
+(set-face-foreground 'highlight-indent-guides-character-face "dimgray")
+)
+
+#+end_src
+
+*** parentheses
+- [[https://with-emacs.com/posts/ui-hacks/show-matching-lines-when-parentheses-go-off-screen/][with-emacs · Show matching lines when parentheses go off-screen]]s
+
+
+- [[https://www.reddit.com/r/emacs/comments/bqyx6h/withemacs_show_matching_lines_when_parentheses_go/][(with-emacs · Show matching lines when parentheses go off-screen : emacs]]
+
+
+#+begin_src emacs-lisp :tangle "show-parentheses.el"
+;;; -*- lexical-binding: t; -*-
+;; we will call `blink-matching-open` ourselves...
+
+(remove-hook 'post-self-insert-hook
+             #'blink-paren-post-self-insert-function)
+;; this still needs to be set for `blink-matching-open` to work
+(setq blink-matching-paren 'show)
+
+(let ((ov nil)) ; keep track of the overlay
+  (advice-add
+   #'show-paren-function
+   :after
+    (defun show-paren--off-screen+ (&rest _args)
+      "Display matching line for off-screen paren."
+      (when (overlayp ov)
+        (delete-overlay ov))
+      ;; check if it's appropriate to show match info,
+      ;; see `blink-paren-post-self-insert-function'
+      (when (and (overlay-buffer show-paren--overlay)
+                 (not (or cursor-in-echo-area
+                          executing-kbd-macro
+                          noninteractive
+                          (minibufferp)
+                          this-command))
+                 (and (not (bobp))
+                      (memq (char-syntax (char-before)) '(?\) ?\$)))
+                 (= 1 (logand 1 (- (point)
+                                   (save-excursion
+                                     (forward-char -1)
+                                     (skip-syntax-backward "/\\")
+                                     (point))))))
+        ;; rebind `minibuffer-message' called by
+        ;; `blink-matching-open' to handle the overlay display
+        (cl-letf (((symbol-function #'minibuffer-message)
+                   (lambda (msg &rest args)
+                     (let ((msg (apply #'format-message msg args)))
+                       (setq ov (display-line-overlay+
+                                 (window-start) msg ))))))
+          (blink-matching-open))))))
+
+(defun display-line-overlay+ (pos str &optional face)
+  "Display line at POS as STR with FACE.
+
+FACE defaults to inheriting from default and highlight."
+  (let ((ol (save-excursion
+              (goto-char pos)
+              (make-overlay (line-beginning-position)
+                            (line-end-position)))))
+    (overlay-put ol 'display str)
+    (overlay-put ol 'face
+                 (or face '(:inherit default :inherit highlight)))
+    ol))
+
+(setq show-paren-style 'paren
+      show-paren-delay 0.03
+      show-paren-highlight-openparen t
+      show-paren-when-point-inside-paren nil
+      show-paren-when-point-in-periphery t)
+(show-paren-mode 1)
+#+end_src
+
 *** awesome-pair
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! awesome-pair)
+#+end_src
+
+*** hungry-delete
+#+begin_src emacs-lisp :tangle "config.el"
+(use-package! hungry-delete
+  :config
+  (add-hook! 'after-init-hook #'global-hungry-delete-mode)
+)
 #+end_src
 
 ** Bookmark
@@ -1166,22 +779,6 @@ In that case, insert the number."
     (bind-key "C-c m" #'adq/hydra-bm/body))
 #+end_src
 
-** templating
-#+begin_src emacs-lisp :tangle "config.el"
-(use-package! yatemplate
-  :after yasnippet
-  :config
-
-  ;; Define template directory
-  (setq yatemplate-dir (concat doom-private-dir "modules/templates"))
-
-  ;; Coupling with auto-insert
-  (setq auto-insert-alist nil)
-  (yatemplate-fill-alist)
-  (add-hook 'find-file-hook 'auto-insert)
-  )
-#+end_src
-
 ** scroll
 #+begin_src emacs-lisp :tangle "config.el"
 ;; (use-package! fast-scroll
@@ -1197,301 +794,476 @@ In that case, insert the number."
 (global-set-key [remap scroll-down-command] #'scrollkeeper-contents-down)
 #+end_src
 
-** [[https://github.com/TobiasZawada/elgrep/][TobiasZawada/elgrep: Emacs grep without external dependencies]]
-
-** maple-imenu
+** templating
 #+begin_src emacs-lisp :tangle "config.el"
-(use-package! maple-explorer
-  :commands (maple-explorer-file maple-explorer-buffer maple-explorer-imenu maple-explorer-recentf)
+(use-package! yatemplate
+  :after yasnippet
   :config
-  (setq maple-explorer-file-display-alist '((side . left) (slot . -1)))
-)
-
-(use-package! imenu-list
-:config
-(setq imenu-list-auto-resize t)
-(setq imenu-list-focus-after-activation t)
-(setq imenu-list-after-jump-hook nil)
-(add-hook 'imenu-list-after-jump-hook #'recenter-top-bottom)
-)
+  ;; Define template directory
+  (setq yatemplate-dir (concat doom-private-dir "modules/templates"))
+  ;; Coupling with auto-insert
+  (setq auto-insert-alist nil)
+  (yatemplate-fill-alist)
+  (add-hook 'find-file-hook 'auto-insert)
+  )
 #+end_src
 
-* format
-** html file to ox-hugo
-#+begin_src emacs-lisp :tangle "config.el"
-  ;; (require 'ox)
-  ;; (defun my-html-ox-hugo (text backend info)
-  ;;   "Transcode :blah: into <mark>blah</mark> in body text."
-  ;;   (when (org-export-derived-backend-p backend 'html)
-  ;;     (let ((text (replace-regexp-in-string "file" "/ox-hugo/"  text nil nil 1 nil))))))
+* org-mode
+** Packages
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
+(package! company-english-helper :recipe (:host github :repo "manateelazycat/company-english-helper"))
+(package! org-books :recipe (:host github :repo "lepisma/org-books"))
+(package! notdeft :recipe (:host github :repo "hasu/notdeft"))
+(package! emacs-powerthesaurus :recipe (:host github :repo "SavchenkoValeriy/emacs-powerthesaurus"))
+(package! org-spacer.el :recipe (:host github :repo "dustinlacewell/org-spacer.el"))
+(package! org-treeusage :recipe (:host github :repo "mtekman/org-treeusage.el"))
+#+end_src
 
-  ;; (add-to-list 'org-export-filter-plain-text-functions 'my-html-ox-hugo)
+** config Use-package
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+(load! "setting")
+;;(setq org-bullets-bullet-list '("☰" "☷" "☵" "☲"  "☳" "☴"  "☶"  "☱" ))
+(use-package! company-english-helper)
+(use-package! ox-hugo)
+(use-package! ob-session-async)
+(use-package! ob-async)
+(use-package! org-books
+  :config
+  (setq org-books-file "~/Documents/org-notes/GTD/my-books.org")
+  )
+;;(use-package emacs-powerthesaurus)
+#+end_src
+
+** org-setting
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+(setq org-clock-into-drawer t)
+(setq-hook! 'org-mode-hook fill-column 80)
+(setq-hook! 'org-mode-hook org-superstar-mode 1)
+(setq org-directory "~/Documents/org-notes")
+(setq org-log-into-drawer t)
+(setq org-agenda-start-day "-1d")
+(setq org-agenda-span 2)
+(setq org-time-clocksum-format '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
+(setq org-archive-location (concat "%s_archive_" (format-time-string "%Y" (current-time)) "::"))
+;; Removes clocked tasks with 0:00 duration
+(setq org-clock-out-remove-zero-time-clocks t)
+;; Change task state to STARTED when clocking in
+(setq org-clock-in-switch-to-state "⚔ INPROCESS")
+(setq org-src-fontify-natively t
+      org-src-preserve-indentation t
+      org-src-tab-acts-natively t
+      org-src-window-setup 'current-window)
+(setq org-agenda-time-leading-zero t)
+(setq org-download-timestamp "%Y%m%d_%H%M%S")
+;;Markdown
+(eval-after-load "org"
+  '(require 'ox-md nil t))
+
+;;https://orgmode.org/worg/org-contrib/babel/examples/fontify-src-code-blocks.html
+#+end_src
+
+** org-starter
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+(use-package! org-starter
+  :custom
+  ;; Enable external configuration files loaded from org-starter-path
+  (org-starter-load-config-files t)
+  :config
+  (org-starter-def "~/Documents/org-notes"
+                   :files
+                   ("GTD/gtd.org"                      :agenda t :key "g" :refile (:maxlevel . 5))
+                   ("GTD/notes.org"                    :agenda t :key "n" :refile (:maxlevel .5 ))
+                   ("GTD/myself.org"                   :agenda t :key "m" :refile (:maxlevel .5 ))
+                   ("GTD/Habit.org"                    :agenda t :key "h" :refile (:maxlevel .5 ))
+                   ("post/traveling/traveling.org" :key "t" :refile (:maxlevel .5 ))
+                   ("post/myself/love.org"         :key "l" :refile (:maxlevel .5 ))
+                   ("post/myself/qing.org"         :key "q" :refile (:maxlevel .5 ))
+                   ("post/myself/plan.org"         :key "p" :refile (:maxlevel .5 ))
+                   ("elfeed.org"         :key "e" :refile (:maxlevel .5 ))
+                   ("GTD/my-books.org"             :agenda t :key "b" :refile (:maxlevel .5 ))
+                   ("post/life-thing/life-things.org")
+                   ("NSM-GTD/workflow.org"         :agenda t :required t)
+                   ("NSM-GTD/NsmOrg.org"           :agenda t :required t)
+                   ("art/learn-music.org"          :agenda t :key "M" :refile (:maxlevel .5 ))
+                   )
+  (org-starter-def "~/.config/nixpkgs/dotfiles/doom/"
+                   :files
+                   ("init.org" :key "i" :refile (:maxlevel . 5))
+                   ;;("nix.org" :key "x" :refile (:maxlevel . 5))
+                   )
+  (org-starter-def "~/.config/nixpkgs"
+                   :files
+                   ("README.org")
+                   ("global-readme.org")
+                   ("dotfiles/wallpaper/wallpaper.org" :agenda nil)
+                   )
+
+
+ (defhydra gtrun/hydra-org-starter nil
+      "
+  Org-starter-files
+  ^^^^------------------------------------------------
+ _i_: init.org    _g_: gtd.org      _l_: love.org
+ _n_: note        _t_: traveling    _h_: Habit.org
+ _m_: myself      _q_: 情-qing      _p_: Plan.org
+ _b_: my-books    _e_: elfeed       _M_: learn music
+
+  "
+      ("i" org-starter-find-file:init)
+      ("g" org-starter-find-file:gtd)
+      ("n" org-starter-find-file:notes)
+      ("e" org-starter-find-file:elfeed)
+      ("M" org-starter-find-file:learn-music)
+      ("m" org-starter-find-file:myself)
+      ("t" org-starter-find-file:traveling)
+      ("q" org-starter-find-file:qing)
+      ("l" org-starter-find-file:love)
+      ("h" org-starter-find-file:Habit)
+      ("p" org-starter-find-file:plan)
+      ("b" org-starter-find-file:my-books)
+)
+:commands org-starter-load-all-files-in-path
+:hook
+(after-init . org-starter-load-all-files-in-path)
+ :bind
+ (
+  ("C-c e" . org-starter-select-file))
+ ;; "C-c e" . org-starter-refile-by-key))
+ )
+#+end_src
+
+** super-agenda
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+(use-package! org-super-agenda
+  :config
+  (add-hook! 'after-init-hook 'org-super-agenda-mode)
+  (require 'org-habit)
+  (setq
+   org-agenda-skip-scheduled-if-done t
+   org-agenda-skip-deadline-if-done t
+   org-agenda-include-deadlines t
+   org-agenda-include-diary nil
+   org-agenda-block-separator nil
+   org-agenda-compact-blocks t
+   org-agenda-start-with-log-mode t)
+  )
+#+end_src
+
+** org-wild-notifier
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+(use-package! org-wild-notifier
+  :defer t
+  :config
+  (add-hook! 'after-init-hook 'org-wild-notifier-mode)
+  (setq org-wild-notifier-alert-time 15
+        alert-default-style (if IS-MAC 'osx-notifier 'libnotify)))
+#+end_src
+
+** agenda-custom-setting
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+(setq org-agenda-custom-commands
+      '(("z" "GtruN Agenda"
+         ((agenda "" ((org-agenda-span 2)
+                      (org-agenda-start-day "-1d")
+                      (org-super-agenda-groups
+                       '((:name "Today List"
+                                :time-grid t
+                                :date today
+                                :todo "⚔ INPROCESS"
+                                :scheduled today
+                                :order 1)))))
+          (alltodo "" ((org-agenda-overriding-header "")
+                       (org-super-agenda-groups
+                        '((:name "Next to do"
+                                 :priority>= "B"
+                                 :order 2)
+                          (:name "Important"
+                                 :todo "✰ Important"
+                                 :order 6)
+                          (:name "Due Today"
+                                 :deadline today
+                                 :order 3)
+                          (:name "Due Soon"
+                                 :deadline future
+                                 :order 8)
+                          (:name "Overdue"
+                                 :deadline past
+                                 :order 20)
+                          (:name "Issues"
+                                 :tag "Issue"
+                                 :order 12)
+                          (:name "Projects"
+                                 :tag "Project"
+                                 :order 14)
+                          (:name "Emacs"
+                                 :tag "Emacs"
+                                 :order 13)
+                          (:name "Research"
+                                 :tag "Research"
+                                 :order 15)
+                          (:name "To read"
+                                 :tag ("BOOK" "READ")
+                                 :order 30)
+                          (:name "Waiting"
+                                 :todo "⚑ WAITING"
+                                 :order 18)
+                          (:name "trivial"
+                                 :priority<= "C"
+                                 :todo ("SOMEDAY")
+                                 :order 90)
+                          (:discard (:tag ("Chore" "Routine" "Daily")))))))))
+
+        ("b" . "BOOK")
+
+        ("bb" "Search tags in todo, note, and archives"
+         search "+{:book\\|books:}")
+
+        ("bd" "BOOK TODO List"
+         search "+{^\\*+\\s-+\\(⚔ INPROCESS\\|☞ TODO\\|⚑ WAITING\\)\\s-} +{:book\\|books:}")
+
+        ("d" "ALL DONE OF TASKS"
+         search "+{^\\*+\\s-+\\(✔ DONE\\|✘ CANCELED\\)\\s-}")
+
+        ("i" "ALL INPROCESS OF TASKS"
+         search "+{^\\*+\\s-+\\(⚔ INPROCESS\\)\\s-}")
+
+        ))
+#+end_src
+
+** elfeed
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+(use-package! elfeed
+  :bind (:map elfeed-search-mode-map
+          ("q" . bjm/elfeed-save-db-and-bury)
+          ("Q" . bjm/elfeed-save-db-and-bury)
+          ("m" . elfeed-toggle-star)
+          )
+  :config
+(global-set-key (kbd "C-x w") 'elfeed)
+(setf url-queue-timeout 30)
+(setq elfeed-db-directory "~/Dropbox/shared/elfeeddb")
+;;functions to support syncing .elfeed between machines
+;;makes sure elfeed reads index from disk before launching
+(defun bjm/elfeed-load-db-and-open ()
+  "Wrapper to load the elfeed db from disk before opening"
+  (interactive)
+  (elfeed-db-load)
+  (elfeed)
+  (elfeed-search-update--force))
+
+;;write to disk when quiting
+
+(defun bjm/elfeed-save-db-and-bury ()
+  "Wrapper to save the elfeed db to disk before burying buffer"
+  (interactive)
+  (elfeed-db-save)
+  (quit-window))
+
+(defun elfeed-mark-all-as-read ()
+  (interactive)
+  (mark-whole-buffer)
+  (elfeed-search-untag-all-unread))
+
+
+
+  )
+
+(use-package! elfeed-goodies
+  :config
+  (elfeed-goodies/setup))
+
+(use-package! elfeed-org
+:config
+(setq rmh-elfeed-org-files (list "~/Documents/org-notes/elfeed.org")))
+#+end_src
+
+# #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+# (use-package! helm-org-rifle)
+# #+end_src
+
+** Org-babel
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+(defun my-org-confirm-babel-evaluate (lang _body)
+  "Return t if LANG is in whitelist."
+  (not (or (string= lang "ditaa")
+           (string= lang "dot")
+           (string= lang "R")
+           (string= lang "julia")
+           (string= lang "C++")
+           (string= lang "C")
+           (string= lang "ein-R")
+           (string= lang "python")
+           (string= lang "ein-julia")
+           (string= lang "ein-python")
+           (string= lang "plantuml"))))
+
+(setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)
+
+(setq org-babel-C++-compiler 'g++-9)
+(setq org-babel-C-compiler 'gcc-9)
+#+end_src
+
+** org publish
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/setting.el"
+  (setq org-publish-project-alist
+        '(("nsm"
+           :base-directory "~/Documents/org-notes/NSM-GTD"
+           :with-author "GTrunSec"
+           :publishing-function org-html-publish-to-html
+           :publishing-directory "~/Documents/my-blog/public/custom"
+           :exclude "README.org"
+           )
+          ("my-learning"
+           :base-directory "~/Documents/org-publish"
+           :publishing-function org-html-publish-to-html
+           :publishing-directory "~/Documents/my-blog/public/custom"
+           :exclude "README.org"
+           )
+          ("init"
+           :base-directory "~/.config/nixpkgs/dotfiles/doom"
+           :publishing-function org-html-publish-to-html
+           :publishing-directory "~/Documents/my-blog/public/custom"
+           )
+          ("jupyter-math"
+           :base-directory "~/Dropbox/Drop-project/my-mathematic-env/math"
+           :publishing-function org-html-publish-to-html
+           :publishing-directory "~/Documents/my-blog/public/custom"
+           )
+          ("art"
+           :base-directory "~/Documents/org-notes/art"
+           :publishing-function org-html-publish-to-html
+           :publishing-directory "~/Documents/my-blog/public/custom"
+           )
+          ("course"
+           :base-directory "~/Documents/org-notes/course"
+           :publishing-function org-html-publish-to-html
+           :publishing-directory "~/Documents/my-blog/public/custom"
+           )
+          ))
+#+end_src
+
+** org-crypt
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+;; 當被加密的部份要存入硬碟時，自動加密回去
+  ;; 設定要加密的 tag 標籤為 secret
+  (setq org-crypt-tag-matcher "secret")
+
+  ;; 避免 secret 這個 tag 被子項目繼承 造成重複加密
+  ;; (但是子項目還是會被加密喔)
+  (setq org-tags-exclude-from-inheritance (quote ("secret")))
+
+  ;; 用於加密的 GPG 金鑰
+  ;; 可以設定任何 ID 或是設成 nil 來使用對稱式加密 (symmetric encryption)
+  (setq org-crypt-key nil)
 #+end_src
 
 #+RESULTS:
-| my-html-ox-hugo |
+** org-notdeft
+- [[https://jingsi.space/post/2017/04/05/organizing-a-complex-directory-for-emacs-org-mode-and-deft/#configuring-deft][Organizing a Complex Directory for Emacs Org Mode and Deft]]
 
-* minor mode and major mode
-** [[https://github.com/rnkn/binder][rnkn/binder: Emacs global minor mode facilitating multi-file writing projects]]
-** [[https://github.com/emacs-taskrunner/emacs-taskrunner][emacs-taskrunner/emacs-taskrunner: A universal task runner for emacs]]
-** [[https://github.com/jerrypnz/major-mode-hydra.el][jerrypnz/major-mode-hydra.el: Spacemacs-esque major mode leader key powered by Hydra]]
-* Writing
-** grammarly
-#+begin_src emacs-lisp :tangle "packages.el"
-;;(package! flycheck-grammarly :recipe (:host github :repo "jcs-elpa/flycheck-grammarly"))
-#+end_src
 
-#+begin_src emacs-lisp :tangle "config.el"
-;;(use-package! flycheck-grammarly)
-#+end_src
+- [[https://tero.hasu.is/notdeft/#org7b25462][NotDeft | Tero Hasu]]
 
-** [[https://github.com/arnm/ob-mermaid][arnm/ob-mermaid: Generate mermaid diagrams within Emacs org-mode babel]]
-* Visual
-** Buffer
-*** Parenthesis
-#+begin_src emacs-lisp :tangle "config.el"
-(use-package! rainbow-delimiters
+
+- [[https://github.com/EFLS/zetteldeft][EFLS/zetteldeft: A Zettelkasten system! Or rather, some functions on top of the emacs deft package.]]
+
+
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+(use-package! notdeft
   :config
-  (custom-set-faces
-   '(rainbow-delimiters-mismatched-face ((t (:foreground "white" :background "red" :weight bold))))
-   '(rainbow-delimiters-unmatched-face ((t (:foreground "white" :background "red" :weight bold))))
+  (setq notdeft-extension "org")
+  ;;(setq notdeft-secondary-extensions '("md" "org" "scrbl"))
+  (setq notdeft-directories '("~/Documents/org-notes/post/myself"
+                              "~/Documents/org-notes/post/life-thing"
+                              "~/Documents/org-notes/post/traveling"
+                              "~/Documents/org-notes/post/agenda"
+                              "~/Documents/org-notes/post/game"
+                              "~/Dropbox/project/my-learning-list"
+                              "~/Documents/org-notes/GTD"
+                              "~/Documents/org-notes/art"
+                              ))
 
-   ;; show parents (in case of rainbow failing !)
-   '(show-paren-match ((t (:foreground "white" :background "green" :weight bold))))
-   '(show-paren-mismatch ((t (:foreground "white" :background "red" :weight bold)))))
-  ;;  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+  :bind (:map notdeft-mode-map
+          ("C-q" . notdeft-quit)
+          ("C-r" . notdeft-refresh)
+          )
   )
-;; highlight brackets
-(setq show-paren-style 'parenthesis)
 #+end_src
 
-*** eysbrowse
-#+begin_src emacs-lisp :tangle "config.el"
-(use-package! eyebrowse
-  :config
-  (progn
-    (define-key eyebrowse-mode-map (kbd "M-1") 'eyebrowse-switch-to-window-config-1)
-    (define-key eyebrowse-mode-map (kbd "M-2") 'eyebrowse-switch-to-window-config-2)
-    (define-key eyebrowse-mode-map (kbd "M-3") 'eyebrowse-switch-to-window-config-3)
-    (define-key eyebrowse-mode-map (kbd "M-4") 'eyebrowse-switch-to-window-config-4)
-    (define-key eyebrowse-mode-map (kbd "M-5") 'eyebrowse-switch-to-window-config-5)
-    (eyebrowse-mode t)
-    (setq eyebrowse-new-workspace t)))
-    #+end_src
+- build
 
-** window
-*** setting
-#+begin_src emacs-lisp :tangle "config.el"
-(use-package! visual-fill-column
+
+cd ~/.emacs.d/.local/straight/repos/notdeft/xapian
+make
+
+** org-protocal
+- [[https://github.com/alphapapa/org-protocol-capture-html][alphapapa/org-protocol-capture-html: Capture HTML from the browser selection into Emacs as org-mode content]]
+
+
+** ob-mermaid
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/config.el"
+(use-package! ob-mermaid
   :config
-  (add-hook 'visual-line-mode-hook #'visual-fill-column-mode)
-  (add-hook 'visual-fill-column-mode-hook #'visual-line-mode)
-  (add-hook 'w3m-display-hook #'visual-line-mode)
+  (setq ob-mermaid-cli-path "~/.nix-profile/bin/mmdc")
+  )
+#+end_src
+
+** org-spacer :edit:
+- [[https://github.com/dustinlacewell/org-spacer.el][dustinlacewell/org-spacer.el: Enforce the number of blank lines between elements in an org-mode document]]
+
+
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+(use-package! org-spacer
+  :config
+  (add-hook 'org-mode-hook
+            (lambda () (add-hook 'before-save-hook
+                                 'org-spacer-enforce nil 'make-it-local)))
+  )
+#+end_src
+
+** org-density.el :summary:statistic:
+- [[https://github.com/mtekman/org-density.el][mtekman/org-density.el: Examine the density of org headings]]
+
+
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+(use-package! org-treeusage
+  :config
+  (define-key org-mode-map (kbd "C-c d") 'org-treeusage-mode)
+  )
+
+#+end_src
+
+** org-format
+*** org-link-type
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/setting.el"
+(defun endless/export-audio-link (path desc format)
+  "Export org audio links to hmtl."
+  (cl-case format
+    (html (format
+       "<audio preload=\"auto\"> <source src=\"https://www.gtrun.org/music/%s\">%s</audio>"
+       path (or desc "")))
+
+    ;; README: hugo music file path
+    (md (format
+     "<audio class=\"wp-audio-shortcode\"  loop=\"1\"  preload=\"auto\" style=\"width: 100%%;\" controls> <source src=\"https://www.gtrun.org/music/%s\">%s</audio>"
+     path (or desc "")))
+    (latex (format "(HOW DO I EXPORT AUDIO TO LATEX? \"%s\")" path))))
+
+(after! org
+  (org-add-link-type "audio" #'ignore #'endless/export-audio-link)
 )
-
-
-(use-package! hungry-delete
-  :config
-  (add-hook! 'after-init-hook #'global-hungry-delete-mode)
-)
-(add-hook! 'after-init-hook #'cua-mode)
-(add-hook 'before-save-hook 'whitespace-cleanup)
-
-(advice-add 'text-scale-adjust :after
-  #'visual-fill-column-adjust)
 #+end_src
 
-*** tab
-#+begin_src emacs-lisp :tangle "config.el"
-(use-package! awesome-tab
-:config
-(awesome-tab-mode t)
-(setq awesome-tab-style 'slant)
-;; winum users can use `winum-select-window-by-number' directly.
-(defun my-select-window-by-number (win-id)
-  "Use `ace-window' to select the window by using window index.
-WIN-ID : Window index."
-  (let ((wnd (nth (- win-id 1) (aw-window-list))))
-    (if wnd
-        (aw-switch-to-window wnd)
-      (message "No such window."))))
-
-(defun my-select-window ()
-  (interactive)
-  (let* ((event last-input-event)
-         (key (make-vector 1 event))
-         (key-desc (key-description key)))
-    (my-select-window-by-number
-     (string-to-number (car (nreverse (split-string key-desc "-")))))))
-
-(when (not (display-graphic-p))
-  (setq frame-background-mode 'dark))
-(defun awesome-tab-buffer-groups ()
-  "`awesome-tab-buffer-groups' control buffers' group rules.
-
-Group awesome-tab with mode if buffer is derived from `eshell-mode' `emacs-lisp-mode' `dired-mode' `org-mode' `magit-mode'.
-All buffer name start with * will group to \"Emacs\".
-Other buffer group by `awesome-tab-get-group-name' with project name."
-  (list
-   (cond
-    ((or (string-equal "*" (substring (buffer-name) 0 1))
-         (memq major-mode '(magit-process-mode
-                            magit-status-mode
-                            magit-diff-mode
-                            magit-log-mode
-                            magit-file-mode
-                            magit-blob-mode
-                            magit-blame-mode
-                            )))
-     "Emacs")
-    ((derived-mode-p 'eshell-mode)
-     "EShell")
-    ((derived-mode-p 'emacs-lisp-mode)
-     "Elisp")
-    ((derived-mode-p 'dired-mode)
-     "Dired")
-    ((memq major-mode '(org-mode org-agenda-mode diary-mode))
-     "OrgMode")
-    (t
-     (awesome-tab-get-group-name (current-buffer))))))
-
-
-
-(defhydra awesome-fast-switch (:hint nil)
-  "
- ^^^^Fast Move             ^^^^Tab                    ^^Search            ^^Misc
--^^^^--------------------+-^^^^---------------------+-^^----------------+-^^---------------------------
-   ^_k_^   prev group    | _C-a_^^     select first | _b_ search buffer | _C-k_   kill buffer
- _h_   _l_  switch tab   | _C-e_^^     select last  | _g_ search group  | _C-S-k_ kill others in group
-   ^_j_^   next group    | _C-j_^^     ace jump     | ^^                | ^^
- ^^0 ~ 9^^ select window | _C-h_/_C-l_ move current | ^^                | ^^
--^^^^--------------------+-^^^^---------------------+-^^----------------+-^^---------------------------
-"
-  ("h" awesome-tab-backward-tab)
-  ("j" awesome-tab-forward-group)
-  ("k" awesome-tab-backward-group)
-  ("l" awesome-tab-forward-tab)
-  ("0" my-select-window)
-  ("1" my-select-window)
-  ("2" my-select-window)
-  ("3" my-select-window)
-  ("4" my-select-window)
-  ("5" my-select-window)
-  ("6" my-select-window)
-  ("7" my-select-window)
-  ("8" my-select-window)
-  ("9" my-select-window)
-  ("C-a" awesome-tab-select-beg-tab)
-  ("C-e" awesome-tab-select-end-tab)
-  ("C-j" awesome-tab-ace-jump)
-  ("C-h" awesome-tab-move-current-tab-to-left)
-  ("C-l" awesome-tab-move-current-tab-to-right)
-  ("b" ivy-switch-buffer)
-  ("g" awesome-tab-counsel-switch-group)
-  ("C-k" kill-current-buffer)
-  ("C-S-k" awesome-tab-kill-other-buffers-in-current-group)
-  ("q" nil "quit"))
-)
-;; (setq awesome-tab-style "bar")
-;; (setq awesome-tab-set-icons t)
-;; (setq awesome-tab-set-bar t)
-;; (setq awesome-tab-set-bar 'over)
-;; (setq awesome-tab-set-modified-marker t)
-;; (setq awesome-tab-set-close-button nil)
-;; (setq awesome-tab-modified-marker "*")
-(global-set-key (kbd "C-c j") 'awesome-tab-forward-tab)
-(global-set-key (kbd "C-c k") 'awesome-tab-backward-tab)
-(global-set-key (kbd "C-c o") 'awesome-tab-switch-group)
-#+end_src
-
-*** Dimming Unused Windows
-#+begin_src emacs-lisp :tangle "config.el"
-(use-package! dimmer
-  :config (dimmer-mode))
-#+end_src
-
-*** beacon
-#+begin_src emacs-lisp :tangle "config.el"
-(use-package! beacon
-  :diminish
-  :config (setq beacon-color "#666600")
-  :hook   ((org-mode text-mode) . beacon-mode))
-#+end_src
-
-*** Flashing when something goes wrong —no blinking
-#+begin_src emacs-lisp :tangle "config.el"
-(setq visible-bell 1)
-#+end_src
-
-*** golden-ratio
-#+begin_src emacs-lisp :tangle "config.el"
-(use-package! golden-ratio
-  :disabled
-  :diminish golden-ratio-mode
-  :init (golden-ratio-mode 1))
-#+end_src
-
-** theme
-*** [[https://github.com/vbuzin/berrys-theme][vbuzin/berrys-theme: A light, clean and elegant Emacs theme]]
-#+begin_src emacs-lisp :tangle yes
-;; (use-package! berrys-theme
-;;   :config
-;;   (load-theme 'berrys t)
-
-;;   :config ;; for good measure and clarity
-;;   (setq-default cursor-type '(bar . 2))
-;;   (setq-default line-spacing 2))
-#+end_src
-
-** [[https://github.com/bnbeckwith/writegood-mode][bnbeckwith/writegood-mode: Minor mode for Emacs to improve English writing
-]]
-
-#+begin_src emacs-lisp :tangle "config.el"
-(use-package! writegood-mode
-  ;; Load this whenver I'm composing prose.
-  :hook (text-mode org-mode)
-  ;; Don't show me the “Wg” marker in the mode line
-  :diminish
-  ;; Some additional weasel words.
-  :config
-  (--map (push it writegood-weasel-words)
-         '("some" "simple" "simply" "easy" "often" "easily" "probably"
-           "clearly"               ;; Is the premise undeniably true?
-           "experience shows"      ;; Whose? What kind? How does it do so?
-           "may have"              ;; It may also have not!
-           "it turns out that")))  ;; How does it turn out so?
-           ;; ↯ What is the evidence of highighted phrase? ↯
-#+end_src
-
-** [[https://github.com/seagle0128/grip-mode][seagle0128/grip-mode: Instant Github-flavored Markdown/Org preview using grip]]
-
-* git
-** [[https://github.com/syohex/emacs-git-messenger2][syohex/emacs-git-messenger2: My own git-messenger.el implementation]]
 * my-codes
 ** packages
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/packages.el"
-(package! awesome-pair :recipe (:host github :repo "manateelazycat/awesome-pair"))
 (package! lsp-julia :recipe (:host github :repo "gdkrmr/lsp-julia"))
-(package! plantuml-mode)
-(package! ccls)
-(package! company-tabnine)
-(package! polymode)
-(package! poly-markdown)
-(package! lsp-haskell)
-(package! bicycle)
-(package! jsonrpc)
+(package! nox :recipe (:host github :repo "manateelazycat/nox"))
 #+end_src
 
+** lsp
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
 (load! "my-latex")
-(load! "show-parentheses")
-
-(use-package! lsp-haskell
-  :config
-  (setq lsp-haskell-process-path-hie "ghcide")
-  (setq lsp-haskell-process-args-hie '())
-  (add-hook 'haskell-mode-hook #'lsp)
-)
 
 (use-package! lsp-mode
   :config
@@ -1536,42 +1308,19 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
   (dolist (lang org-babel-lsp-lang-list)
     (eval `(lsp-org-babel-enbale ,lang))))
-
-
 #+end_src
 
-** ccls
-#+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
-(use-package! ccls
-  :hook ((c-mode c++-mode objc-mode cuda-mode) .
-         (lambda () (require 'ccls) (lsp)))
-  )
-
-
-#+end_src
-
-** Poly
-#+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
-(use-package! polymode)
-(use-package! poly-markdown
-  :config
-  (add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown-mode))
-  )
-#+end_src
-
+** latex
 ** Latex
 *** auctex
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/my-latex.el"
-
- ;; (use-package! auctex)
-
+(use-package! auctex)
 #+end_src
 
 *** chinese-latex
 #+begin_src emacs-lisp :tangle  "./modules/private/my-code/my-latex.el"
 (after! latex
       (add-to-list 'org-latex-classes '("article" "\\documentclass[a4paper,11pt]{article}
-
         [NO-DEFAULT-PACKAGES]
           \\usepackage[utf8]{inputenc}
           \\usepackage[T1]{fontenc}
@@ -1642,92 +1391,46 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 )
 #+end_src
 
+** haskell
+#+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
+(use-package! lsp-haskell
+  :config
+  (setq lsp-haskell-process-path-hie "ghcide")
+  (setq lsp-haskell-process-args-hie '())
+  (add-hook 'haskell-mode-hook #'lsp)
+)
+#+end_src
+
+** ccls
+#+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
+(use-package! ccls
+  :hook ((c-mode c++-mode objc-mode cuda-mode) .
+         (lambda () (require 'ccls) (lsp)))
+  )
+
+
+#+end_src
+
+** Poly
+#+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
+(use-package! polymode)
+(use-package! poly-markdown
+  :config
+  (add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown-mode))
+  )
+#+end_src
+
 ** Scheme
 - https://gitlab.com/jaor/geiser
 
 
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! geiser
-:config
-(setq geiser-default-implementation 'racket)
+  :config
+  (setq geiser-default-implementation 'racket)
 )
 #+end_src
 
-#+RESULTS:
-: t
-
-** Code misc
-*** parentheses
-- [[https://with-emacs.com/posts/ui-hacks/show-matching-lines-when-parentheses-go-off-screen/][with-emacs · Show matching lines when parentheses go off-screen]]s
-
-
-- [[https://www.reddit.com/r/emacs/comments/bqyx6h/withemacs_show_matching_lines_when_parentheses_go/][(with-emacs · Show matching lines when parentheses go off-screen : emacs]]
-
-
-#+begin_src emacs-lisp :tangle "./modules/private/my-code/show-parentheses.el"
-;;; -*- lexical-binding: t; -*-
-(add-hook! 'org--mode-hook 'org-superstar-mode)
-;; we will call `blink-matching-open` ourselves...
-
-(remove-hook 'post-self-insert-hook
-             #'blink-paren-post-self-insert-function)
-;; this still needs to be set for `blink-matching-open` to work
-(setq blink-matching-paren 'show)
-
-(let ((ov nil)) ; keep track of the overlay
-  (advice-add
-   #'show-paren-function
-   :after
-    (defun show-paren--off-screen+ (&rest _args)
-      "Display matching line for off-screen paren."
-      (when (overlayp ov)
-        (delete-overlay ov))
-      ;; check if it's appropriate to show match info,
-      ;; see `blink-paren-post-self-insert-function'
-      (when (and (overlay-buffer show-paren--overlay)
-                 (not (or cursor-in-echo-area
-                          executing-kbd-macro
-                          noninteractive
-                          (minibufferp)
-                          this-command))
-                 (and (not (bobp))
-                      (memq (char-syntax (char-before)) '(?\) ?\$)))
-                 (= 1 (logand 1 (- (point)
-                                   (save-excursion
-                                     (forward-char -1)
-                                     (skip-syntax-backward "/\\")
-                                     (point))))))
-        ;; rebind `minibuffer-message' called by
-        ;; `blink-matching-open' to handle the overlay display
-        (cl-letf (((symbol-function #'minibuffer-message)
-                   (lambda (msg &rest args)
-                     (let ((msg (apply #'format-message msg args)))
-                       (setq ov (display-line-overlay+
-                                 (window-start) msg ))))))
-          (blink-matching-open))))))
-
-(defun display-line-overlay+ (pos str &optional face)
-  "Display line at POS as STR with FACE.
-
-FACE defaults to inheriting from default and highlight."
-  (let ((ol (save-excursion
-              (goto-char pos)
-              (make-overlay (line-beginning-position)
-                            (line-end-position)))))
-    (overlay-put ol 'display str)
-    (overlay-put ol 'face
-                 (or face '(:inherit default :inherit highlight)))
-    ol))
-
-(setq show-paren-style 'paren
-      show-paren-delay 0.03
-      show-paren-highlight-openparen t
-      show-paren-when-point-inside-paren nil
-      show-paren-when-point-in-periphery t)
-(show-paren-mode 1)
-#+end_src
-
-*** [[https://github.com/jacktasia/dumb-jump][jacktasia/dumb-jump: an Emacs "jump to definition" package for 40+ languages]]
 ** julia
 *** [[https://github.com/gcv/julia-snail][julia-snail: An Emacs development environment for Julia]]
 *** lsp-julia
@@ -1738,8 +1441,12 @@ FACE defaults to inheriting from default and highlight."
   (setq lsp-julia-default-environment "~/.julia/environments/v1.3")
   (setq lsp-folding-range-limit 100)
   (setq lsp-julia-package-dir nil)
-  ;;(setq lsp-julia-flags '("--project=/Users/gtrun/.julia/packages/languageserver"  "--startup-file=no" "--history-file=no"))
-  )
+)
+#+end_src
+
+** python
+#+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
+(setq flycheck-python-pylint-executable "pylint")
 #+end_src
 
 ** nox
@@ -1751,7 +1458,6 @@ FACE defaults to inheriting from default and highlight."
 (use-package! nox
   :config
   (add-to-list 'nox-server-programs '(haskell-mode . ("ghcide" "--lsp")))
-
   ;; (dolist (hook (list
   ;;                'js-mode-hook
   ;;                'rust-mode-hook
@@ -1769,18 +1475,215 @@ FACE defaults to inheriting from default and highlight."
   )
 #+end_src
 
-** python
-#+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
-(setq flycheck-python-pylint-executable "pylint")
+* Visual
+** Buffer
+*** Parenthesis
+#+begin_src emacs-lisp :tangle "config.el"
+(use-package! rainbow-delimiters
+  :config
+  ;; (custom-set-faces
+  ;;  '(rainbow-delimiters-mismatched-face ((t (:foreground "white" :background "red" :weight bold))))
+  ;;  '(rainbow-delimiters-unmatched-face ((t (:foreground "white" :background "red" :weight bold))))
+
+  ;;  ;; show parents (in case of rainbow failing !)
+  ;;  '(show-paren-match ((t (:foreground "white" :background "green" :weight bold))))
+  ;;  '(show-paren-mismatch ((t (:foreground "white" :background "red" :weight bold)))))
+  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+  (add-hook 'org-mode-hook #'rainbow-delimiters-mode)
+;; highlight brackets
+  )
+
 #+end_src
+
+*** eysbrowse
+#+begin_src emacs-lisp :tangle "config.el"
+(use-package! eyebrowse
+  :config
+  (progn
+    (define-key eyebrowse-mode-map (kbd "M-1") 'eyebrowse-switch-to-window-config-1)
+    (define-key eyebrowse-mode-map (kbd "M-2") 'eyebrowse-switch-to-window-config-2)
+    (define-key eyebrowse-mode-map (kbd "M-3") 'eyebrowse-switch-to-window-config-3)
+    (define-key eyebrowse-mode-map (kbd "M-4") 'eyebrowse-switch-to-window-config-4)
+    (define-key eyebrowse-mode-map (kbd "M-5") 'eyebrowse-switch-to-window-config-5)
+    (eyebrowse-mode t)
+    (setq eyebrowse-new-workspace t)))
+    #+end_src
+
+** window
+*** awesome-tab
+#+begin_src emacs-lisp :tangle "config.el"
+(use-package! awesome-tab
+  :config
+  (awesome-tab-mode t)
+  (setq awesome-tab-style 'slant)
+  ;; winum users can use `winum-select-window-by-number' directly.
+  (defun my-select-window-by-number (win-id)
+    "Use `ace-window' to select the window by using window index.
+WIN-ID : Window index."
+    (let ((wnd (nth (- win-id 1) (aw-window-list))))
+      (if wnd
+          (aw-switch-to-window wnd)
+        (message "No such window."))))
+
+  (defun my-select-window ()
+    (interactive)
+    (let* ((event last-input-event)
+           (key (make-vector 1 event))
+           (key-desc (key-description key)))
+      (my-select-window-by-number
+       (string-to-number (car (nreverse (split-string key-desc "-")))))))
+
+  (when (not (display-graphic-p))
+    (setq frame-background-mode 'dark))
+  (defun awesome-tab-buffer-groups ()
+    "`awesome-tab-buffer-groups' control buffers' group rules.
+
+Group awesome-tab with mode if buffer is derived from `eshell-mode' `emacs-lisp-mode' `dired-mode' `org-mode' `magit-mode'.
+All buffer name start with * will group to \"Emacs\".
+Other buffer group by `awesome-tab-get-group-name' with project name."
+    (list
+     (cond
+      ((or (string-equal "*" (substring (buffer-name) 0 1))
+           (memq major-mode '(magit-process-mode
+                              magit-status-mode
+                              magit-diff-mode
+                              magit-log-mode
+                              magit-file-mode
+                              magit-blob-mode
+                              magit-blame-mode
+                              )))
+       "Emacs")
+      ((derived-mode-p 'eshell-mode)
+       "EShell")
+      ((derived-mode-p 'emacs-lisp-mode)
+       "Elisp")
+      ((derived-mode-p 'dired-mode)
+       "Dired")
+      ((memq major-mode '(org-mode org-agenda-mode diary-mode))
+       "OrgMode")
+      (t
+       (awesome-tab-get-group-name (current-buffer))))))
+
+
+
+  (defhydra awesome-fast-switch (:hint nil)
+    "
+ ^^^^Fast Move             ^^^^Tab                    ^^Search            ^^Misc
+-^^^^--------------------+-^^^^---------------------+-^^----------------+-^^---------------------------
+   ^_k_^   prev group    | _C-a_^^     select first | _b_ search buffer | _C-k_   kill buffer
+ _h_   _l_  switch tab   | _C-e_^^     select last  | _g_ search group  | _C-S-k_ kill others in group
+   ^_j_^   next group    | _C-j_^^     ace jump     | ^^                | ^^
+ ^^0 ~ 9^^ select window | _C-h_/_C-l_ move current | ^^                | ^^
+-^^^^--------------------+-^^^^---------------------+-^^----------------+-^^---------------------------
+"
+    ("h" awesome-tab-backward-tab)
+    ("j" awesome-tab-forward-group)
+    ("k" awesome-tab-backward-group)
+    ("l" awesome-tab-forward-tab)
+    ("0" my-select-window)
+    ("1" my-select-window)
+    ("2" my-select-window)
+    ("3" my-select-window)
+    ("4" my-select-window)
+    ("5" my-select-window)
+    ("6" my-select-window)
+    ("7" my-select-window)
+    ("8" my-select-window)
+    ("9" my-select-window)
+    ("C-a" awesome-tab-select-beg-tab)
+    ("C-e" awesome-tab-select-end-tab)
+    ("C-j" awesome-tab-ace-jump)
+    ("C-h" awesome-tab-move-current-tab-to-left)
+    ("C-l" awesome-tab-move-current-tab-to-right)
+    ("b" ivy-switch-buffer)
+    ("g" awesome-tab-counsel-switch-group)
+    ("C-k" kill-current-buffer)
+    ("C-S-k" awesome-tab-kill-other-buffers-in-current-group)
+    ("q" nil "quit"))
+  )
+;; (setq awesome-tab-style "bar")
+;; (setq awesome-tab-set-icons t)
+;; (setq awesome-tab-set-bar t)
+;; (setq awesome-tab-set-bar 'over)
+;; (setq awesome-tab-set-modified-marker t)
+;; (setq awesome-tab-set-close-button nil)
+;; (setq awesome-tab-modified-marker "*")
+(global-set-key (kbd "C-c j") 'awesome-tab-forward-tab)
+(global-set-key (kbd "C-c k") 'awesome-tab-backward-tab)
+(global-set-key (kbd "C-c o") 'awesome-tab-switch-group)
+#+end_src
+
+*** Dimming Unused Windows
+#+begin_src emacs-lisp :tangle "config.el"
+(use-package! dimmer
+  :config (dimmer-mode))
+#+end_src
+
+*** beacon
+#+begin_src emacs-lisp :tangle "config.el"
+(use-package! beacon
+  :diminish
+  :config (setq beacon-color "#666600")
+  :hook   ((org-mode text-mode) . beacon-mode))
+#+end_src
+
+*** Flashing when something goes wrong —no blinking
+#+begin_src emacs-lisp :tangle "config.el"
+(setq visible-bell 1)
+#+end_src
+
+*** golden-ratio
+#+begin_src emacs-lisp :tangle "config.el"
+(use-package! golden-ratio
+  :disabled
+  :diminish golden-ratio-mode
+  :init (golden-ratio-mode 1))
+#+end_src
+
+** theme
+*** [[https://github.com/vbuzin/berrys-theme][vbuzin/berrys-theme: A light, clean and elegant Emacs theme]]
+#+begin_src emacs-lisp :tangle yes
+;; (use-package! berrys-theme
+;;   :config
+;;   (load-theme 'berrys t)
+
+;;   :config ;; for good measure and clarity
+;;   (setq-default cursor-type '(bar . 2))
+;;   (setq-default line-spacing 2))
+#+end_src
+
+**  writegood
+- [[https://github.com/bnbeckwith/writegood-mode][bnbeckwith/writegood-mode: Minor mode for Emacs to improve English writing
+
+
+]]
+
+#+begin_src emacs-lisp :tangle "config.el"
+(use-package! writegood-mode
+  ;; Load this whenver I'm composing prose.
+  ;;:hook (text-mode org-mode)
+  ;; Don't show me the “Wg” marker in the mode line
+  :diminish
+  ;; Some additional weasel words.
+  :config
+  (--map (push it writegood-weasel-words)
+         '("some" "simple" "simply" "easy" "often" "easily" "probably"
+           "clearly"               ;; Is the premise undeniably true?
+           "experience shows"      ;; Whose? What kind? How does it do so?
+           "may have"              ;; It may also have not!
+           "it turns out that")))  ;; How does it turn out so?
+           ;; ↯ What is the evidence of highighted phrase? ↯
+#+end_src
+
+** grip-mode
+- [[https://github.com/seagle0128/grip-mode][seagle0128/grip-mode: Instant Github-flavored Markdown/Org preview using grip]]
+
 
 * chinese
 ** pinyinlib
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! pinyinlib
   :config
-
-
   (defun re-builder-extended-pattern (str)
     (let* ((len (length str)))
       (cond
@@ -1841,8 +1744,22 @@ FACE defaults to inheriting from default and highlight."
   )
 #+end_src
 
+* minor mode and major mode
+** [[https://github.com/rnkn/binder][rnkn/binder: Emacs global minor mode facilitating multi-file writing projects]]
+** [[https://github.com/jerrypnz/major-mode-hydra.el][jerrypnz/major-mode-hydra.el: Spacemacs-esque major mode leader key powered by Hydra]]
+* Writing
+** grammarly
+#+begin_src emacs-lisp :tangle "packages.el"
+;;(package! flycheck-grammarly :recipe (:host github :repo "jcs-elpa/flycheck-grammarly"))
+#+end_src
+
+#+begin_src emacs-lisp :tangle "config.el"
+;;(use-package! flycheck-grammarly)
+#+end_src
+
+** [[https://github.com/arnm/ob-mermaid][arnm/ob-mermaid: Generate mermaid diagrams within Emacs org-mode babel]]
 * load & unload
-** after-init
+** disbale-package
 #+begin_src emacs-lisp :tangle "packages.el"
 (disable-packages! pyim)
 (disable-packages! company-go)
@@ -1876,7 +1793,7 @@ FACE defaults to inheriting from default and highlight."
   :load-path "./modules"
   :if (eq system-type 'gnu/linux)
   :config
-  (add-hook! 'emacs-startup-hook 'doom-modeline-mode)
+  ;;(add-hook! 'emacs-startup-hook 'doom-modeline-mode)
   (setq-default cursor-type 'box)
   (blink-cursor-mode -1)
   (set-cursor-color "IndianRed3")
@@ -1886,19 +1803,20 @@ FACE defaults to inheriting from default and highlight."
 
   (bookmark-load bookmark-default-file t)
 
-(set-company-backend! '(nix-mode)
-  '(:separate company-nixos-options
-              company-tabnine
-              company-files
-              company-yasnippet
-              ))
+  (set-company-backend! '(nix-mode)
+    '(:separate company-nixos-options
+      company-tabnine
+      company-files
+      company-yasnippet
+      ))
 
 
   (setq lsp-python-ms-executable  "~/.nix-profile/bin/mspyls")
   (when (not window-system)
     (xterm-mouse-mode 1)
-)
+    )
   (setq org-crypt-key "24945FE0DBD04F4C045025F96F92B3E8F942D425")
+
   (set-face-attribute
    'default nil
    :font (font-spec :name "-PfEd-Fantasque Sans Mono-bold-italic-normal-*-*-*-*-*-m-0-iso10646-1"
@@ -1920,9 +1838,7 @@ FACE defaults to inheriting from default and highlight."
   (add-hook 'ob-async-pre-execute-src-block-hook
             '(lambda ()
                (setq inferior-julia-program-name "/nix/store/fi7c1417hcv093ffyf03rdrlw84qb6mi-system-path/bin/julia")))
-
-
-    )
+  )
 
 (use-package! grab-x-link
   :if (eq system-type 'gnu/linux)
@@ -2006,12 +1922,10 @@ FACE defaults to inheriting from default and highlight."
 
 (add-hook 'ob-async-pre-execute-src-block-hook
         '(lambda ()
-           (setq inferior-julia-program-name "/usr/local/bin/julia")))
+           (setq inferior-julia-program-name "~/.nix-profile/bin/julia")))
 
 
-(add-hook! 'emacs-startup-hook 'doom-modeline-mode)
-
-
+;;(add-hook! 'emacs-startup-hook 'doom-modeline-mode)
 )
 
 

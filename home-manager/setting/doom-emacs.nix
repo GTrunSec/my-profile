@@ -27,7 +27,6 @@ in
 
      if [ ! -d "$HOME/.doom.d" ];then
      mkdir -p $HOME/.doom.d/
-     mkdir -p $HOME/.doom.d/autoload
      mkdir -p $HOME/.doom.d/etc
      fi
 
@@ -40,6 +39,7 @@ in
      if [ ! -d "$HOME/.doom.d/modules/my-code" ];then
           mkdir -p $HOME/.doom.d/modules/private/my-org
           mkdir -p $HOME/.doom.d/modules/private/my-code
+          mkdir -p $HOME/.doom.d/autoload
      fi
       ##modules
      if [ ! -d "$HOME/.emacs.d/.local/straight" ];then
@@ -48,14 +48,17 @@ in
      sed -e 's/^/;;/' -i ~/.emacs.d/modules/tools/lsp/packages.el
      sed -e 's/^/;;/' -i ~/.emacs.d/modules/tools/ein/packages.el
      sed -e 's/^/;;/' -i ~/.emacs.d/modules/lang/nix/packages.el
+     sed -e 's/^/;;/' -i ~/.emacs.d/modules/lang/python/packages.el
      sed -e 's/^/;;/' -i ~/.emacs.d/modules/lang/markdown/packages.el
      sed -e 's/^/;;/' -i ~/.emacs.d/modules/lang/julia/packages.el
      sed -e 's/^/;;/' -i ~/.emacs.d/modules/lang/latex/packages.el
      sed -e 's/^/;;/' -i ~/.emacs.d/modules/lang/haskell/packages.el
+     sed -e 's/^/;;/' -i ~/.emacs.d/modules/lang/scheme/packages.el
      sed -e 's/^/;;/' -i ~/.emacs.d/modules/lang/go/packages.el
      sed -e 's/^/;;/' -i ~/.emacs.d/modules/lang/data/packages.el
      sed -e 's/^/;;/' -i ~/.emacs.d/modules/ui/modeline/packages.el
      sed -e 's/^/;;/' -i ~/.emacs.d/modules/ui/modeline/packages.el
+     sed -e 's/^/;;/' -i ~/.emacs.d/modules/completion/ivy/packages.el
      fi
    '';
       # editors
@@ -70,8 +73,16 @@ in
       programs.emacs = {
         enable = true;
         extraPackages = epkgs: with epkgs;[
-          #
+          #editon
+          scrollkeeper
           #org
+          #python
+          flycheck-cython
+          cython-mode
+          pip-requirements
+          poetry
+          nose
+          python-pytest
           #data
           graphql-mode
           json-mode
@@ -160,6 +171,8 @@ in
           anzu
           doom-modeline
           shrink-path
+          #scheme
+          geiser
           ##lsp
           lsp-mode
           lsp-ui
@@ -170,6 +183,17 @@ in
           company
           company-dict
           company-prescient
+          #ivy
+          swiper
+          ivy
+          ivy-rich
+          ivy-hydra
+          counsel
+          amx
+          counsel-projectile
+          wgrep
+          ivy-prescient
+          flx
         ];
         # package = pkgs.emacs.overrideAttrs (old: rec {
         #   wrapperPath = with pkgs; stdenv.lib.makeBinPath ([
