@@ -580,9 +580,8 @@ In that case, insert the number."
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! highlight-indent-guides
 :config
-(setq highlight-indent-guides-method 'column)
+(setq highlight-indent-guides-method 'character)
 (setq highlight-indent-guides-auto-enabled nil)
-(set-face-background 'highlight-indent-guides-odd-face "darkgray")
 (set-face-background 'highlight-indent-guides-even-face "dimgray")
 (set-face-foreground 'highlight-indent-guides-character-face "dimgray")
 )
@@ -1105,7 +1104,7 @@ FACE defaults to inheriting from default and highlight."
 (setq org-babel-C-compiler 'gcc-9)
 #+end_src
 
-** org publish
+** org publish 
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/setting.el"
   (setq org-publish-project-alist
         '(("nsm"
@@ -1259,7 +1258,7 @@ make
 * my-codes
 ** packages
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/packages.el"
-(package! lsp-julia :recipe (:host github :repo "gdkrmr/lsp-julia"))
+;;(package! lsp-julia :recipe (:host github :repo "gdkrmr/lsp-julia"))
 (package! nox :recipe (:host github :repo "manateelazycat/nox"))
 #+end_src
 
@@ -1479,15 +1478,14 @@ make
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! rainbow-delimiters
   :config
-  ;; (custom-set-faces
-  ;;  '(rainbow-delimiters-mismatched-face ((t (:foreground "white" :background "red" :weight bold))))
-  ;;  '(rainbow-delimiters-unmatched-face ((t (:foreground "white" :background "red" :weight bold))))
+  (custom-set-faces
+   '(rainbow-delimiters-mismatched-face ((t (:foreground "white" :background "red" :weight bold))))
+   '(rainbow-delimiters-unmatched-face ((t (:foreground "white" :background "red" :weight bold))))
 
-  ;;  ;; show parents (in case of rainbow failing !)
-  ;;  '(show-paren-match ((t (:foreground "white" :background "green" :weight bold))))
-  ;;  '(show-paren-mismatch ((t (:foreground "white" :background "red" :weight bold)))))
+   ;; show parents (in case of rainbow failing !)
+   '(show-paren-match ((t (:foreground "white" :background "green" :weight bold))))
+   '(show-paren-mismatch ((t (:foreground "white" :background "red" :weight bold)))))
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
-  (add-hook 'org-mode-hook #'rainbow-delimiters-mode)
 ;; highlight brackets
   )
 

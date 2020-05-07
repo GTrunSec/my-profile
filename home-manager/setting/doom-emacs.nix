@@ -42,25 +42,6 @@ in
           mkdir -p $HOME/.doom.d/autoload
      fi
       ##modules
-     if [ ! -d "$HOME/.emacs.d/.local/autoloads.el" ];then
-     sed -e 's/^/;;/' -i ~/.emacs.d/modules/completion/company/packages.el
-     sed -e 's/^/;;/' -i ~/.emacs.d/modules/tools/magit/packages.el
-     sed -e 's/^/;;/' -i ~/.emacs.d/modules/app/rss/packages.el
-     sed -e 's/^/;;/' -i ~/.emacs.d/modules/tools/lsp/packages.el
-     sed -e 's/^/;;/' -i ~/.emacs.d/modules/tools/ein/packages.el
-     sed -e 's/^/;;/' -i ~/.emacs.d/modules/lang/nix/packages.el
-     sed -e 's/^/;;/' -i ~/.emacs.d/modules/lang/python/packages.el
-     sed -e 's/^/;;/' -i ~/.emacs.d/modules/lang/markdown/packages.el
-     sed -e 's/^/;;/' -i ~/.emacs.d/modules/lang/julia/packages.el
-     sed -e 's/^/;;/' -i ~/.emacs.d/modules/lang/latex/packages.el
-     sed -e 's/^/;;/' -i ~/.emacs.d/modules/lang/haskell/packages.el
-     sed -e 's/^/;;/' -i ~/.emacs.d/modules/lang/scheme/packages.el
-     sed -e 's/^/;;/' -i ~/.emacs.d/modules/lang/go/packages.el
-     sed -e 's/^/;;/' -i ~/.emacs.d/modules/lang/data/packages.el
-     sed -e 's/^/;;/' -i ~/.emacs.d/modules/ui/modeline/packages.el
-     sed -e 's/^/;;/' -i ~/.emacs.d/modules/ui/modeline/packages.el
-     sed -e 's/^/;;/' -i ~/.emacs.d/modules/completion/ivy/packages.el
-     fi
    '';
       # editors
       home.file.".doom.d/init.org" = {
@@ -76,68 +57,11 @@ in
         extraPackages = epkgs: with epkgs;[
           #editon
           scrollkeeper
-          #org
-          #python
-          flycheck-cython
-          cython-mode
-          pip-requirements
-          poetry
-          nose
-          python-pytest
-          #data
-          graphql-mode
-          json-mode
-          jsonnet-mode
-          yaml-mode
-          csv-mode
-          dhall-mode
-          protobuf-mode
-          #ein
-          ein
-          #go
-          go-eldoc
-          go-guru
-          go-mode
-          gorepl-mode
-          go-tag
-          go-gen-test
-          company-go
-          flycheck-golangci-lint
-          #haskell
-          haskell-mode
-          lsp-haskell
-          #latex
-          ivy-bibtex
-          company-auctex
-          company-reftex
-          company-math
-          auctex
-          adaptive-wrap
-          latex-preview-pane
-          #julia
-          julia-mode
-          julia-repl
           lsp-julia
-          #markdown
-          markdown-mode
-          markdown-toc
-          edit-indirect
-          grip-mode
-          #nix
-          nix-mode
-          nix-update
-          company-nixos-options
-          #helm-nixos-options
-          ##vterm
+          lsp-haskell
           vterm
           emacs-libvterm
-          ##magit
-          magit
-          forge
-          magit-todos
-          github-review
-          magit-gitflow
-          ##
+
           helm-tramp
           visual-fill-column
           vlf
@@ -172,32 +96,8 @@ in
           poly-markdown
           bicycle
           jsonrpc
-          anzu
-          doom-modeline
-          shrink-path
           #scheme
-          geiser
           ##lsp
-          lsp-mode
-          lsp-ui
-          company-lsp
-          lsp-ivy
-          ##helm-lsp
-          ##company-module
-          company
-          company-dict
-          company-prescient
-          #ivy
-          swiper
-          ivy
-          ivy-rich
-          ivy-hydra
-          counsel
-          amx
-          counsel-projectile
-          wgrep
-          ivy-prescient
-          flx
         ];
         # package = pkgs.emacs.overrideAttrs (old: rec {
         #   wrapperPath = with pkgs; stdenv.lib.makeBinPath ([
