@@ -962,6 +962,7 @@ FACE defaults to inheriting from default and highlight."
 
 ** agenda-custom-setting
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+(require 'org-super-agenda)
 (setq org-agenda-custom-commands
       '(("z" "GtruN Agenda"
          ((agenda "" ((org-agenda-span 2)
