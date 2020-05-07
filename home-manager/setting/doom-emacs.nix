@@ -162,6 +162,7 @@ in
           org-super-agenda
           ob-mermaid
           org-starter
+          org-superstar
           helm-org-rifle
           org-wild-notifier
           plantuml-mode
