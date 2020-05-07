@@ -46,6 +46,7 @@ in
      sed -e 's/^/;;/' -i ~/.emacs.d/modules/completion/company/packages.el
      sed -e 's/^/;;/' -i ~/.emacs.d/modules/tools/magit/packages.el
      sed -e 's/^/;;/' -i ~/.emacs.d/modules/tools/lsp/packages.el
+     sed -e 's/^/;;/' -i ~/.emacs.d/modules/tools/ein/packages.el
      sed -e 's/^/;;/' -i ~/.emacs.d/modules/lang/nix/packages.el
      sed -e 's/^/;;/' -i ~/.emacs.d/modules/lang/markdown/packages.el
      sed -e 's/^/;;/' -i ~/.emacs.d/modules/lang/julia/packages.el
@@ -53,6 +54,7 @@ in
      sed -e 's/^/;;/' -i ~/.emacs.d/modules/lang/haskell/packages.el
      sed -e 's/^/;;/' -i ~/.emacs.d/modules/lang/go/packages.el
      sed -e 's/^/;;/' -i ~/.emacs.d/modules/lang/data/packages.el
+     sed -e 's/^/;;/' -i ~/.emacs.d/modules/ui/modeline/packages.el
      sed -e 's/^/;;/' -i ~/.emacs.d/modules/ui/modeline/packages.el
      fi
    '';

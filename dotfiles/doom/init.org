@@ -980,6 +980,7 @@ In that case, insert the number."
                         js-mode
                         css-mode
                         web-mode
+                        org-mode
                         )
   '(:separate company-tabnine
               company-files
