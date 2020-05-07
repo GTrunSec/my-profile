@@ -837,6 +837,7 @@ FACE defaults to inheriting from default and highlight."
 ** org-setting
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (setq org-clock-into-drawer t)
+(add-hook! 'org-mode-hook 'auto-revert-mode)
 ;; (setq-hook! 'org-mode-hook fill-column 80)
 ;; (setq-hook! 'org-mode-hook org-superstar-mode 1)
 (setq org-directory "~/Documents/org-notes")
