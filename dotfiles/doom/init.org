@@ -837,8 +837,8 @@ FACE defaults to inheriting from default and highlight."
 ** org-setting
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (setq org-clock-into-drawer t)
-(setq-hook! 'org-mode-hook fill-column 80)
-(setq-hook! 'org-mode-hook org-superstar-mode 1)
+;; (setq-hook! 'org-mode-hook fill-column 80)
+;; (setq-hook! 'org-mode-hook org-superstar-mode 1)
 (setq org-directory "~/Documents/org-notes")
 (setq org-log-into-drawer t)
 (setq org-agenda-start-day "-1d")
@@ -1652,7 +1652,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 ;;   (setq-default line-spacing 2))
 #+end_src
 
-**  writegood
+** writegood
 - [[https://github.com/bnbeckwith/writegood-mode][bnbeckwith/writegood-mode: Minor mode for Emacs to improve English writing
 
 
