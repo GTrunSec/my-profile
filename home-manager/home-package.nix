@@ -128,11 +128,6 @@ in
         libvterm
         libtool
 
-        #emacsPackages
-        (emacsPackages.emacsWithPackages (with pkgs.emacsPackagesNg; [
-          emacs-libvterm
-        ]))
-
         (python3.buildEnv.override {
           extraLibs = with python3Packages; [
           shapely

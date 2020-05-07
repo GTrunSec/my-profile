@@ -225,19 +225,39 @@ HTML them READ org
 :END:
 
 #+begin_src emacs-lisp :tangle "packages.el"
+(package! bm)
+(package! w3m)
 (package! discover :recipe (:host github :repo "mickeynp/discover.el"))
 (package! xah-fly-keys :recipe (:host github :repo "GTrunSec/xah-fly-keys"))
+(package! hungry-delete)
+(package! flymake-json)
 (package! maple-iedit :recipe (:host github :repo "honmaple/emacs-maple-iedit"))
+(package! yatemplate)
+(package! pinyin-search)
+(package! grab-x-link)
 (package! ctrlf :recipe (:host github :repo "raxod502/ctrlf"))
 
+;; window
+(package! dimmer)
+(package! beacon)
+(package! golden-ratio)
+(package! writegood-mode)
 #+end_src
 
 ** third-part
 #+begin_src emacs-lisp :tangle "packages.el"
+(package! eyebrowse)
+(package! cnfonts)
 (package! scrollkeeper :recipe (:host github :repo "alphapapa/scrollkeeper.el"))
+(package! elfeed-goodies)
 (package! awesome-tab :recipe (:host github :repo "manateelazycat/awesome-tab"))
 (package! ob-session-async :recipe (:host github :repo "jackkamm/ob-session-async"))
 (package! maple-explorer :recipe (:host github :repo "honmaple/emacs-maple-explorer"))
+(package! imenu-list)
+(package! helm-tramp)
+(package! visual-fill-column)
+(package! vlf)
+(package! wakatime-mode)
 (package! sunrise-commander :recipe (:host github :repo "sunrise-commander/sunrise-commander"))
 ;; (package! berrys-theme)
 #+end_src
@@ -301,6 +321,7 @@ HTML them READ org
 (add-hook! 'elfeed-show-mode-hook 'gtrun/truncate-lines-hook)
 
 (add-hook! 'sunrise-start-hook 'xah-fly-insert-mode-activate)
+
 
 (add-hook 'maple-explorer-imenu-mode-hook
           (lambda() (setq cursor-type 'box
@@ -388,15 +409,22 @@ Uses `current-date-time-format' for the formatting the date/time."
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (load! "setting")
 (add-hook! 'after-init-hook 'org-starter-load-all-files-in-path)
-;;(setq org-bullets-bullet-list '("☰" "☷" "☵" "☲"  "☳" "☴"  "☶"  "☱" ))
+(add-hook! 'org-mode-hook 'auto-revert-mode)
+
+(use-package! org-bullets ; "prettier" bullets
+  :hook (org-mode . org-bullets-mode)
+  :config
+  (setq org-bullets-bullet-list '("☰" "☷" "☵" "☲"  "☳" "☴"  "☶"  "☱" ))
+)
+
 (use-package! company-english-helper)
 (use-package! ox-hugo)
 (use-package! ob-session-async)
 (use-package! ob-async)
 (use-package! org-books
   :config
-  (setq org-books-file "~/Documents/org-notes/GTD/my-books.org")
-  )
+(setq org-books-file "~/Documents/org-notes/GTD/my-books.org")
+)
 
 
 ;;(use-package emacs-powerthesaurus)
@@ -422,8 +450,6 @@ Uses `current-date-time-format' for the formatting the date/time."
 *** org-global
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/setting.el"
 (setq org-clock-into-drawer t)
-(setq-hook! 'org-mode-hook fill-column 80)
-(setq-hook! 'org-mode-hook org-superstar-mode 1)
 (setq org-directory "~/Documents/org-notes")
 (setq org-log-into-drawer t)
 (setq org-agenda-start-day "-1d")
@@ -603,7 +629,7 @@ Uses `current-date-time-format' for the formatting the date/time."
 
 ** org-starter
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
-(use-package! org-starter
+(use-package org-starter
   :config
   ;; (add-hook! 'after-init-hook 'org-starter-load-all-files-in-path)
   (org-starter-def "~/Documents/org-notes"
@@ -1281,18 +1307,10 @@ In that case, insert the number."
 ** window
 *** setting
 #+begin_src emacs-lisp :tangle "config.el"
-(use-package! visual-fill-column
-  :config
-  (add-hook 'visual-line-mode-hook #'visual-fill-column-mode)
-  (add-hook 'visual-fill-column-mode-hook #'visual-line-mode)
-  (add-hook 'w3m-display-hook #'visual-line-mode)
-)
-
-
-(use-package! hungry-delete
-  :config
-  (add-hook! 'after-init-hook #'global-hungry-delete-mode)
-)
+(add-hook 'visual-line-mode-hook #'visual-fill-column-mode)
+(add-hook 'visual-fill-column-mode-hook #'visual-line-mode)
+(add-hook 'w3m-display-hook #'visual-line-mode)
+(add-hook! 'after-init-hook #'global-hungry-delete-mode)
 (add-hook! 'after-init-hook #'cua-mode)
 (add-hook 'before-save-hook 'whitespace-cleanup)
 
@@ -1665,7 +1683,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/show-parentheses.el"
 ;;; -*- lexical-binding: t; -*-
-(add-hook! 'org--mode-hook 'org-superstar-mode)
+
 ;; we will call `blink-matching-open` ourselves...
 
 (remove-hook 'post-self-insert-hook
