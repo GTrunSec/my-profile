@@ -215,7 +215,7 @@ HTML them READ org
          :private
          spacemacs-default
          my-org
-         ;;my-code
+         my-code
 )
 #+end_src
 
@@ -1314,10 +1314,6 @@ make
 ** latex
 ** Latex
 *** auctex
-#+begin_src emacs-lisp :tangle "./modules/private/my-code/my-latex.el"
-(use-package! auctex)
-#+end_src
-
 *** chinese-latex
 #+begin_src emacs-lisp :tangle  "./modules/private/my-code/my-latex.el"
 (after! latex
