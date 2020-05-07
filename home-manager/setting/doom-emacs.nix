@@ -9,7 +9,7 @@ in
 {
   config = with lib; mkMerge [
     #fonts
-    (mkIf (pkgs.stdenv.isLinux || pkgs.stdenv.isDrawin) {
+    (mkIf (pkgs.stdenv.isLinux || pkgs.stdenv.isDarwin) {
 
       home.file.".local/share/fonts/my-font" = {
         source = ../../dotfiles/my-font;
