@@ -52,16 +52,73 @@ in
         source = ../../dotfiles/doom/xah-fly.org;
         onChange = updateInit;
       };
-      programs.emacs = {
+        programs.emacs = {
         enable = true;
         extraPackages = epkgs: with epkgs;[
           #editon
           scrollkeeper
-          lsp-julia
+          #org
+          #python
+          flycheck-cython
+          cython-mode
+          pip-requirements
+          poetry
+          nose
+          python-pytest
+          #data
+          graphql-mode
+          json-mode
+          jsonnet-mode
+          yaml-mode
+          csv-mode
+          dhall-mode
+          protobuf-mode
+          #ein
+          ein
+          #go
+          go-eldoc
+          go-guru
+          go-mode
+          gorepl-mode
+          go-tag
+          go-gen-test
+          company-go
+          flycheck-golangci-lint
+          #haskell
+          haskell-mode
           lsp-haskell
+          #latex
+          ivy-bibtex
+          company-auctex
+          company-reftex
+          company-math
+          auctex
+          adaptive-wrap
+          latex-preview-pane
+          #julia
+          julia-mode
+          julia-repl
+          lsp-julia
+          #markdown
+          markdown-mode
+          markdown-toc
+          edit-indirect
+          grip-mode
+          #nix
+          nix-mode
+          nix-update
+          company-nixos-options
+          #helm-nixos-options
+          ##vterm
           vterm
           emacs-libvterm
-
+          ##magit
+          magit
+          forge
+          magit-todos
+          github-review
+          magit-gitflow
+          ##
           helm-tramp
           visual-fill-column
           vlf
@@ -96,26 +153,35 @@ in
           poly-markdown
           bicycle
           jsonrpc
+          anzu
+          doom-modeline
+          shrink-path
           #scheme
+          geiser
           ##lsp
+          lsp-mode
+          lsp-ui
+          company-lsp
+          lsp-ivy
+          ##helm-lsp
+          ##company-module
+          company
+          company-dict
+          company-prescient
+          #ivy
+          swiper
+          ivy
+          ivy-rich
+          ivy-hydra
+          counsel
+          amx
+          counsel-projectile
+          wgrep
+          ivy-prescient
+          flx
         ];
-        # package = pkgs.emacs.overrideAttrs (old: rec {
-        #   wrapperPath = with pkgs; stdenv.lib.makeBinPath ([
-        #     gcc        # to compile emacsql
-        #     aspell
-        #     aspellDicts.en
-        #     plantuml
-        #     jre        # for plantuml
-        #     wordnet
-        #     languagetool
-        #     pandoc     # markdown preview
-        #   ]);
-        #   postFixup = ''
-        #     wrapProgram $out/bin/emacs --prefix PATH : ${wrapperPath} --set SHELL ${pkgs.bash}/bin/bash
-        #   '';
-        # });
-      };
-      #services.emacs.enable = true;
+        };
+        #services.emacs.enable = true;
     })
-    ];
-    }
+  ];
+}
