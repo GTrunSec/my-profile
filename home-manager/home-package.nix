@@ -45,6 +45,7 @@ in
         bat
         hunspell
         gitkraken
+        suricata
         #dnsproxy
         # tags your files
         tmsu

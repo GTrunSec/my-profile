@@ -5,15 +5,15 @@ with builtins;
   # Use local nixpkgs checkout
   # The first time, might have to run:
   # nixos-rebuild -I nixpkgs=/etc/nixos/channel/nixpkgs -I nixos-config=/etc/nixos/configuration.nix switch
-  # services.zeek = {
-  #   enable = true;
-  #   standalone = true;
-  #   interface = "eno1";
-  #   listenAddress = "localhost";
-  #   privateScript = ''
-  #   @load /home/gtrun/project/hardenedlinux-zeek-script/scripts/zeek-query.zeek
-  #   '';
-  # };
+  services.zeek = {
+    enable = true;
+    standalone = true;
+    interface = "eno1";
+    listenAddress = "localhost";
+    privateScript = ''
+    @load /home/gtrun/project/hardenedlinux-zeek-script/scripts/zeek-query.zeek
+    '';
+  };
   services.trezord.enable = true;
   networking.firewall.allowedTCPPorts = [ 80 443 53 8080 9000 8888 9999 ];
   networking.firewall.allowedUDPPorts = [ 80 443 53 8080 9000 8888 9999 ];

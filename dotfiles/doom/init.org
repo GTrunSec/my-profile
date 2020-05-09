@@ -244,7 +244,7 @@ HTML them READ org
 ;;; config.el -*- lexical-binding: t; -*-
 
 (load! "xah-fly.el")
-;;(load! "show-parentheses.el")
+(load! "show-parentheses.el")
 #+end_src
 
 * use-package
