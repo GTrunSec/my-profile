@@ -60,8 +60,8 @@ pkgs.vscode-with-extensions.override {
     {
       publisher = "julialang";
       name = "language-julia";
-      version = "0.15.18";
-      sha256 = "06m0k4dcl1zs7zzr5lqyx5jn79lw5y7zxf6vyxlbjs3hly4wmz44";
+      version = "0.15.29";
+      sha256 = "12hna9w6403fw2n99x3qk0b46iw7c79bq5gh2yjzn1rcw027xrnl";
     }
 
     {
@@ -98,8 +98,8 @@ pkgs.vscode-with-extensions.override {
     {
       publisher = "ms-vscode";
       name = "Go";
-      version = "0.13.1";
-      sha256 = "18x89g4b085crfm1wnfnsznwlvc30xqcivzf5nw9d1z5rg2dva5h";
+      version = "0.14.1";
+      sha256 = "1zj87m0swjnr7k9nwxj2db96h90fs1cny7w9c0q4kqnrrysh8ala";
     }
 
     {
@@ -112,8 +112,8 @@ pkgs.vscode-with-extensions.override {
     {
       publisher = "ms-python";
       name = "python";
-      version = "2019.11.50794";
-      sha256 = "1imc4gc3aq5x6prb8fxz70v4l838h22hfq2f8an4mldyragdz7ka";
+      version = "2020.4.76186";
+      sha256 = "0arqz1778hp3sk95f3i1p1kyykpn9y7k1h256jpxn1m4723ccbn6";
     }
     
     {

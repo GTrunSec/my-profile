@@ -1258,7 +1258,7 @@ make
 * my-codes
 ** packages
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/packages.el"
-;;(package! lsp-julia :recipe (:host github :repo "gdkrmr/lsp-julia"))
+(package! lsp-julia :recipe (:host github :repo "gdkrmr/lsp-julia"))
 (package! nox :recipe (:host github :repo "manateelazycat/nox"))
 #+end_src
 

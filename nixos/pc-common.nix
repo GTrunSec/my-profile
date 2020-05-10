@@ -10,6 +10,7 @@ with builtins;
     standalone = true;
     interface = "eno1";
     listenAddress = "localhost";
+    package = pkgs.zeek.override{ KafkaPlugin = true; PostgresqlPlugin = true;};
     privateScript = ''
     @load /home/gtrun/project/hardenedlinux-zeek-script/scripts/zeek-query.zeek
     '';

@@ -98,7 +98,6 @@ in
           #julia
           julia-mode
           julia-repl
-          lsp-julia
           #markdown
           markdown-mode
           markdown-toc
