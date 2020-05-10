@@ -1859,6 +1859,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   :config
   (define-key snails-mode-map [remap next-line] #'snails-select-next-item)
   (add-hook 'snails-mode-hook #'xah-fly-insert-mode-activate))
+)
 #+end_src
 
 #+begin_src emacs-lisp :tangle "./modules/my-linux.el"
