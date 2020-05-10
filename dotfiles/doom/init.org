@@ -1649,10 +1649,8 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 #+end_src
 
 ** writegood
-- [[https://github.com/bnbeckwith/writegood-mode][bnbeckwith/writegood-mode: Minor mode for Emacs to improve English writing
+- [[https://github.com/bnbeckwith/writegood-mode][bnbeckwith/writegood-mode: Minor mode for Emacs to improve English writing]]
 
-
-]]
 
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! writegood-mode
@@ -1829,12 +1827,10 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   (define-key org-mode-map (kbd "C-c l") 'grab-x-link)
   (setq notdeft-xapian-program "/home/gtrun/src/notdeft/xapian/notdeft-xapian")
   ;; (setq jupyter-runtime-directory "~/.local/share/jupyter/runtime")
+(add-hook 'ob-async-pre-execute-src-block-hook
+        '(lambda ()
+           (setq inferior-julia-program-name "~/.nix-profile/bin/julia")))
 
-
-  (add-hook 'ob-async-pre-execute-src-block-hook
-            '(lambda ()
-               (setq inferior-julia-program-name "/nix/store/fi7c1417hcv093ffyf03rdrlw84qb6mi-system-path/bin/julia")))
-  )
 
 (use-package! grab-x-link
   :if (eq system-type 'gnu/linux)
