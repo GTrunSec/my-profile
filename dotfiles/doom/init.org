@@ -821,7 +821,7 @@ FACE defaults to inheriting from default and highlight."
 ** config Use-package
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (load! "setting")
-;;(setq org-bullets-bullet-list '("☰" "☷" "☵" "☲"  "☳" "☴"  "☶"  "☱" ))
+(setq org-superstar-headline-bullets-list '("☰" "☷" "☵" "☲"  "☳" "☴"  "☶"  "☱" ))
 (use-package! company-english-helper)
 (use-package! ox-hugo)
 (use-package! ob-session-async)
