@@ -16,7 +16,6 @@ with builtins;
     '';
   };
 
-  services.emacs.enable = true;
   services.trezord.enable = true;
   networking.firewall.allowedTCPPorts = [ 80 443 53 8080 9000 8888 9999 ];
   networking.firewall.allowedUDPPorts = [ 80 443 53 8080 9000 8888 9999 ];

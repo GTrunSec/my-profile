@@ -12,6 +12,7 @@ in
   imports = [
     ./home-manager/import.nix
     ./home-manager/randr
+    ~/.nix-defexpr/channels/home-manager/modules/services/emacs.nix
   ];
 
   config = with lib; mkMerge [
@@ -75,6 +76,7 @@ in
     
     (mkIf pkgs.stdenv.isLinux {
       systemd.user.startServices = true;
+      services.emacs.enable = true;
     })
 
   ];
