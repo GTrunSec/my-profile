@@ -1212,6 +1212,11 @@ make
 ** org-spacer :edit:
 - [[https://github.com/dustinlacewell/org-spacer.el][dustinlacewell/org-spacer.el: Enforce the number of blank lines between elements in an org-mode document]]
 
+  postInstall = ''
+    for prog in "$out"/bin/*; do
+        wrapProgram "$prog" --set PYTHONPATH $PYTHONPATH:${gunicorn}/lib/${python.libPrefix}/site-packages:$(toPythonPath "$out")
+    done
+  '';
 
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-spacer
@@ -1650,23 +1655,30 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
 ** writegood
 - [[https://github.com/bnbeckwith/writegood-mode][bnbeckwith/writegood-mode: Minor mode for Emacs to improve English writing]]
-
+#+begin_src emacs-lisp :tangle "config.el"
+(use-package! writeroom-mode
+  :hook (org-mode . writeroom-mode)
+  :config
+  (advice-add 'text-scale-adjust :after
+              #'visual-fill-column-adjust)
+)
+#+end_src
 
 #+begin_src emacs-lisp :tangle "config.el"
-(use-package! writegood-mode
-  ;; Load this whenver I'm composing prose.
-  ;;:hook (text-mode org-mode)
-  ;; Don't show me the “Wg” marker in the mode line
-  :diminish
-  ;; Some additional weasel words.
-  :config
-  (--map (push it writegood-weasel-words)
-         '("some" "simple" "simply" "easy" "often" "easily" "probably"
-           "clearly"               ;; Is the premise undeniably true?
-           "experience shows"      ;; Whose? What kind? How does it do so?
-           "may have"              ;; It may also have not!
-           "it turns out that")))  ;; How does it turn out so?
-           ;; ↯ What is the evidence of highighted phrase? ↯
+;; (use-package! writegood-mode
+;;   ;; Load this whenver I'm composing prose.
+;;   ;;:hook (text-mode org-mode)
+;;   ;; Don't show me the “Wg” marker in the mode line
+;;   :diminish
+;;   ;; Some additional weasel words.
+;;   :config
+;;   (--map (push it writegood-weasel-words)
+;;          '("some" "simple" "simply" "easy" "often" "easily" "probably"
+;;            "clearly"               ;; Is the premise undeniably true?
+;;            "experience shows"      ;; Whose? What kind? How does it do so?
+;;            "may have"              ;; It may also have not!
+;;            "it turns out that")))  ;; How does it turn out so?
+;;            ;; ↯ What is the evidence of highighted phrase? ↯
 #+end_src
 
 ** grip-mode

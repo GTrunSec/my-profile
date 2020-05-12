@@ -134,6 +134,7 @@ in
           shapely
           # eaf
           dbus
+          apache-airflow
           qrcode
           pyqt5
           pymupdf

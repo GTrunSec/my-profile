@@ -56,6 +56,7 @@ in
         enable = true;
         extraPackages = epkgs: with epkgs;[
           #editon
+          writeroom-mode
           scrollkeeper
           #org
           #python

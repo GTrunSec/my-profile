@@ -1,5 +1,7 @@
 with import <nixpkgs> {};
  stdenv.mkDerivation {
   name = "env";
-  buildInputs = [ gcc cmake tclap xapian];
+  buildInputs = [
+    (pkgs.python3.withPackages (pkgs: with pkgs; [apache-airflow]))
+  ];
 }
