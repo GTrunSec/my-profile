@@ -5,7 +5,7 @@ in
 {
   imports =
     [ # Include the results of the hardware scan.
-      ~/.config/nixpkgs/nixos/lang/r-darwin.nix
+      #~/.config/nixpkgs/nixos/lang/r-darwin.nix
       ~/.config/nixpkgs/nixos/lang/python-darwin.nix
       ~/.config/nixpkgs/nixos/lang/go-darwin.nix
       ./darwin-pkgs.nix
@@ -14,6 +14,7 @@ in
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   # bugs sudo mount -uw /
+  # sudo darwin-rebuild switch -I darwin=/Users/gtrun/.nix-defexpr/channels/darwin -I nixpkgs=/Users/gtrun/.config/nixpkgs/channel/nixpkgs -I darwin-config=/Users/gtrun/.config/nixpkgs/darwin/darwin-configuration.nix -I nix-darwin=/Users/gtrun/.nix-defexpr/channels/nix-darwin
   environment.systemPackages = with pkgs; [
     (import ~/.nix-defexpr/channels/home-manager {}).home-manager
     dbus

@@ -115,6 +115,7 @@ let
           packages = [customRPackages];
       };
       
+
       R-with-my-packages = rWrapper.override{
         packages = with rPackages; [ ggplot2 dplyr xts ]; };
 
@@ -125,5 +126,4 @@ in
     R
     libmaxminddb
   ];
-
 }

@@ -11,12 +11,17 @@ let
   };
 
   juliaEnv = (import "${my-pkgs}/pkgs/julia-non-cuda.nix" {});
+
+
+  R-with-my-packages = nixpkgs.rWrapper.override{
+    packages = with nixpkgs.rPackages; [ ggplot2 dplyr xts ]; };
 in
 
 {
   config = with lib; mkMerge [
     (mkIf pkgs.stdenv.isDarwin {
       home.packages = with nixpkgs;[
+        #R-with-my-packages
         (python3.withPackages (pkgs: with pkgs; [
           shapely
           matplotlib

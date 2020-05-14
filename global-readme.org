@@ -378,6 +378,8 @@ diskutil unmountDisk /dev/disk5
 sudo dd bs=1m if=/Users/gtrun/Downloads/nixos-graphical-19.03.173292.65729e08178-x86_64-linux.iso of=/dev/rdisk4
 #+end_src
 
+** [[https://github.com/pnpm/pnpm][pnpm/pnpm: 📦🚀 Fast, disk space efficient package manager]] :manager:
+
 * Bash
 ** [[https://github.com/rothgar/awesome-tmux][rothgar/awesome-tmux: A list of awesome resources for tmux]]
 ** zsh

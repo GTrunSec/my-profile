@@ -1,3 +1,4 @@
+
 #+TITLE: My Doom Emacs config
 #+EMAIL: gtrunsec@hardenedlinux.org
 #+DATE:  25 October 2019
@@ -1218,6 +1219,7 @@ make
     done
   '';
 
+
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-spacer
   :config
@@ -1271,6 +1273,7 @@ make
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
 (load! "my-latex")
 
+
 (use-package! lsp-mode
   :config
  ;; Support LSP in Org Babel with header argument `:file'.
@@ -1316,7 +1319,6 @@ make
     (eval `(lsp-org-babel-enbale ,lang))))
 #+end_src
 
-** latex
 ** Latex
 *** auctex
 *** chinese-latex
@@ -1392,6 +1394,8 @@ make
               "rm -fr %b.out %b.log %b.tex auto"))
 )
 #+end_src
+
+*** [[https://github.com/cdominik/cdlatex][cdominik/cdlatex: Fast input methods to enter LaTeX environments and math with GNU Emacs]]
 
 ** haskell
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
@@ -1655,6 +1659,8 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
 ** writegood
 - [[https://github.com/bnbeckwith/writegood-mode][bnbeckwith/writegood-mode: Minor mode for Emacs to improve English writing]]
+
+
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! writeroom-mode
   :hook (org-mode . writeroom-mode)
