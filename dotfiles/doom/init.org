@@ -410,7 +410,11 @@ Uses `current-date-time-format' for the formatting the date/time."
 
 (setenv "XAPIAN_CJK_NGRAM" "1")
 
-(setq w3m-use-tab-line nil)
+(use-package! w3m
+  :config
+  (setq w3m-use-tab-line nil)
+)
+
 #+end_src
 
 * Completion
@@ -1663,7 +1667,9 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! writeroom-mode
-  :hook (org-mode . writeroom-mode)
+  :hook
+  (org-mode . writeroom-mode)
+  (w3m-mode . writeroom-mode)
   :config
   (advice-add 'text-scale-adjust :after
               #'visual-fill-column-adjust)
