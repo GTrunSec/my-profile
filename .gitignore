@@ -11,6 +11,7 @@ dotfiles/doom/modules/*.el
 dotfiles/doom/autoload/*.el
 dotfiles/doom/modules/private/my-code/*.el
 dotfiles/doom/modules/private/my-org/*.el
+dotfiles/doom/modules/private/public
 dotfiles/doom/*.el
 dotfiles/doom/etc/b*
 dotfiles/emacs/emacs.d/var

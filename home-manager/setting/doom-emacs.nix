@@ -39,9 +39,14 @@ in
      if [ ! -d "$HOME/.doom.d/modules/my-code" ];then
           mkdir -p $HOME/.doom.d/modules/private/my-org
           mkdir -p $HOME/.doom.d/modules/private/my-code
+          mkdir -p $HOME/.doom.d/modules/private/public
           mkdir -p $HOME/.doom.d/autoload
      fi
       ##modules
+     ln -sfT $HOME/.emacs.d/modules/lang/haskell $HOME/.doom.d/modules/private/public/ihaskell #haskell module
+     ln -sfT $HOME/.emacs.d/modules/lang/nix $HOME/.doom.d/modules/private/public/inix #nix module
+     ## remove packages.el 
+      find -L $HOME/.doom.d/modules/private/public -mindepth 1 -name packages.el -delete
    '';
       # editors
       home.file.".doom.d/init.org" = {
