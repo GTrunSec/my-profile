@@ -321,6 +321,14 @@ HTML them READ org
 )
 #+end_src
 
+** w3m
+#+begin_src emacs-lisp :tangle "config.el"
+(use-package! w3m
+  :config
+  (setq w3m-use-tab-line nil)
+)
+#+end_src
+
 * autoload
 ** misc
 *** time
@@ -409,12 +417,6 @@ Uses `current-date-time-format' for the formatting the date/time."
 (add-hook! 'sunrise-start-hook 'xah-fly-insert-mode-activate)
 
 (setenv "XAPIAN_CJK_NGRAM" "1")
-
-(use-package! w3m
-  :config
-  (setq w3m-use-tab-line nil)
-)
-
 #+end_src
 
 * Completion
@@ -1660,6 +1662,8 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 ;;   (setq-default cursor-type '(bar . 2))
 ;;   (setq-default line-spacing 2))
 #+end_src
+
+*** [[https://github.com/rougier/elegant-emacs][rougier/elegant-emacs: A very minimal but elegant emacs (I think)]]
 
 ** writegood
 - [[https://github.com/bnbeckwith/writegood-mode][bnbeckwith/writegood-mode: Minor mode for Emacs to improve English writing]]
