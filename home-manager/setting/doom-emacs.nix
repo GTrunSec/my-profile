@@ -45,7 +45,11 @@ in
       ##modules
      ln -sfT $HOME/.emacs.d/modules/lang/haskell $HOME/.doom.d/modules/private/public/ihaskell #haskell module
      ln -sfT $HOME/.emacs.d/modules/lang/nix $HOME/.doom.d/modules/private/public/inix #nix module
-     ## remove packages.el 
+     ln -sfT $HOME/.emacs.d/modules/lang/julia $HOME/.doom.d/modules/private/public/ijulia #nix module
+     ##tools
+     ln -sfT $HOME/.emacs.d/modules/tools/ein $HOME/.doom.d/modules/private/public/iein #ein module
+
+     ## remove packages.el
       find -L $HOME/.doom.d/modules/private/public -mindepth 1 -name packages.el -delete
    '';
       # editors
@@ -60,6 +64,8 @@ in
         programs.emacs = {
         enable = true;
         extraPackages = epkgs: with epkgs;[
+          #ess
+          poly-markdown
           #editon
           writeroom-mode
           scrollkeeper
@@ -102,8 +108,6 @@ in
           adaptive-wrap
           latex-preview-pane
           #julia
-          julia-mode
-          julia-repl
           #markdown
           markdown-mode
           markdown-toc
@@ -117,12 +121,6 @@ in
           ##vterm
           vterm
           emacs-libvterm
-          ##magit
-          magit
-          forge
-          magit-todos
-          github-review
-          magit-gitflow
           ##
           helm-tramp
           visual-fill-column
@@ -154,8 +152,6 @@ in
           plantuml-mode
           ccls
           company-tabnine
-          polymode
-          poly-markdown
           bicycle
           jsonrpc
           anzu
@@ -164,18 +160,12 @@ in
           #scheme
           geiser
           ##lsp
-          lsp-mode
-          lsp-ui
-          company-lsp
-          lsp-ivy
           ##helm-lsp
           ##company-module
           company
           company-dict
           company-prescient
           #ivy
-          swiper
-          ivy
           ivy-rich
           ivy-hydra
           counsel
