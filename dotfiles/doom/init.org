@@ -388,6 +388,7 @@ HTML them READ org
 
 
 (use-package! undo-tree
+  :disabled
   ;; Branching & persistent undo
   :after-call doom-switch-buffer-hook after-find-file
   :config
