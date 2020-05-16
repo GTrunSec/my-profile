@@ -64,6 +64,10 @@ in
         programs.emacs = {
         enable = true;
         extraPackages = epkgs: with epkgs;[
+          #undo
+          undo-tree
+          undo-fu-session
+          undo-fu
           #ess
           poly-markdown
           #editon
@@ -108,6 +112,7 @@ in
           adaptive-wrap
           latex-preview-pane
           #julia
+          julia-repl
           #markdown
           markdown-mode
           markdown-toc

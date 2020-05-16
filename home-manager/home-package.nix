@@ -27,6 +27,8 @@ in
         nodePackages.node2nix
         system-sendmail
         zeek-own
+        pypi2nix
+        poetry
         #vips
       ];
     })
