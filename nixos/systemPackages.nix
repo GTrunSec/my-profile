@@ -52,7 +52,6 @@ in rec
       emacs
       ispell
       dropbox
-      jupyter
       lxappearance
       appimage-run
       #wmctrl

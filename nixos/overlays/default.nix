@@ -11,4 +11,5 @@ self: super:
   orgbabelhelper = super.callPackage ./python/orgbabelhelper {};
   nteract = super.callPackage ./custom/nteract.nix {};
   voila = super.callPackage ./python/voila {};
+  own-zeek = super.callPackage ./zeek-current {};
 }

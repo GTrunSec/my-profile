@@ -149,20 +149,16 @@ in
           pytest
           numpy
           orgparse
-          jupyter_core
           #ipynb-py-convert
           scikitlearn
           zat
           matplotlib
           sqlalchemy
           pandas
-          ipython
-          jupyterlab
           voila
           python-language-server
           pygments
           orgbabelhelper
-          ipykernel
           wakatime
           ];
           ignoreCollisions = true;
