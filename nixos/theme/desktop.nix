@@ -54,7 +54,7 @@ in
       };
     };
 
-    videoDrivers = [ "nvidiaBeta" "intel"];
+    videoDrivers = [ "nvidia" "intel"];
 
     displayManager.defaultSession = "none+i3";
     desktopManager.xterm.enable = false;
@@ -81,4 +81,10 @@ in
 		};
 	};
 
+  ##cuda https://discourse.nixos.org/t/cuda-setup-on-nixos/1118
+  systemd.services.nvidia-control-devices = {
+    wantedBy = [
+      "multi-user.target"
+    ];
+  };
 }

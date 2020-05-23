@@ -510,6 +510,8 @@ Uses `current-date-time-format' for the formatting the date/time."
 ;; https://emacs.stackexchange.com/questions/5603/how-to-quickly-copy-move-file-in-emacs-dired
 (setq dired-dwim-target t)
 (add-hook! 'xah-fly-command-mode-activate-hook 'xah-fly-save-buffer-if-file)
+
+(add-hook! 'dired-mode 'dired-async-mode)
 ;;(add-hook! 'xah-fly-command-mode-activate-hook 'bookmark-save)
 (defun gtrun/truncate-lines-hook ()
   (setq-local truncate-lines nil)
