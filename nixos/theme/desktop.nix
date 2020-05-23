@@ -61,7 +61,7 @@ in
   };
   boot.blacklistedKernelModules = [ "nouveau" ];
 
-  #hardware.nvidia.prime.enable = true;
+  # hardware.nvidia.prime.enable = true;
   # Bus ID of the NVIDIA GPU. You can find it using lspci
   hardware.nvidia.prime.nvidiaBusId = "PCI:1:0:0";
   hardware.nvidia.prime.intelBusId= "PCI:0:2:0";
