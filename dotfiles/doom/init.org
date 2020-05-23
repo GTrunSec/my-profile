@@ -1377,7 +1377,7 @@ make
 * my-codes
 ** packages
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/packages.el"
-(package! lsp-julia :recipe (:host github :repo "gdkrmr/lsp-julia"))
+(package! lsp-julia :recipe (:host github :repo "non-Jedi/lsp-julia"))
 (package! nox :recipe (:host github :repo "manateelazycat/nox"))
 #+end_src
 
@@ -1556,11 +1556,12 @@ make
 (use-package! lsp-julia
   :init
   ;; (setq lsp-julia--self-path "~/.julia/packages")
-  ;; (setq lsp-julia-package-dir "~/.julia/packages")
   (setq lsp-julia-default-environment "~/.julia/environments/v1.3")
   :config
   (add-hook 'julia-mode-hook #'lsp)
   (setq lsp-folding-range-limit 100)
+  ;;(setq lsp-julia-package-dir nil)
+
 )
 #+end_src
 

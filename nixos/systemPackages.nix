@@ -17,10 +17,11 @@ in rec
       # qtstyleplugin-kvantum-qt4
       # libsForQt5.qtstyleplugin-kvantum
       # qt5ct
-      # latte-dock 
+      # latte-dock
+      #for nox
+      nox
       # deepin.dde-dock
       #latex
-      
       pet
       hugo
       desktop-file-utils
