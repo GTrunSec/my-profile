@@ -131,7 +131,7 @@ in rec
       gcc9
       #lang-haskell
       cabal2nix # create nix expressions for haskell projects from cabal file
-      (import ../channel/ghcide-nix {}).ghcide-ghc865
+      (import ./channel/ghcide-nix {}).ghcide-ghc865
       #lang-c++
       llvmPackages.libclang
       clang
