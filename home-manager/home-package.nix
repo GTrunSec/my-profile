@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 let
-  nixpkgs = (import ~/.config/nixpkgs/channel/nixpkgs) { };
+  nixpkgs = (import ~/.config/nixpkgs/nixos/channel/nixpkgs) { };
   clean-nix-store = nixpkgs.writeScriptBin "clean-nix-store" (import ../bin/clean-nix-store.nix { });
   stable  = import ./stable-pkgs.nix { config={ allowUnfree=true; allowBroken=true; ignoreCollisions = true;};};
   zeek-own = pkgs.callPackage ../own-nixpkgs/zeek {};
