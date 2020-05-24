@@ -1,9 +1,9 @@
 [submodule "dotfiles/wallpaper"]
 	path = dotfiles/wallpaper
 	url = https://github.com/GTrunSec/wallpaper.git
-[submodule "channel/nixpkgs"]
+[submodule "nixos/channel/nixpkgs"]
 	path = channel/nixpkgs
 	url = git@github.com:GTrunSec/nixpkgs.git
-[submodule "channel/ghcide-nix"]
+[submodule "nixos/channel/ghcide-nix"]
 	path = channel/ghcide-nix
 	url = https://github.com/cachix/ghcide-nix.git
