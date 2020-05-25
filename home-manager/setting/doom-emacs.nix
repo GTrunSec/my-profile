@@ -165,6 +165,7 @@ in
           #scheme
           geiser
           ##lsp
+          company-lsp
           ##helm-lsp
           ##company-module
           company

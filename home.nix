@@ -8,7 +8,16 @@ let
 in
 
 {
-  
+  ##https://stackoverflow.com/questions/50622072/how-to-install-jbake-from-unstable-with-overlay-in-home-manager
+#   let
+#   unstable = import <unstable> {};
+# in {
+#   home.packages = with pkgs; [
+#     ...
+#   ] ++ (with unstable; [
+#     jbake
+#   ]);
+# }
   imports = [
     ./home-manager/import.nix
     ./home-manager/randr

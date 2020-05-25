@@ -553,6 +553,7 @@ Uses `current-date-time-format' for the formatting the date/time."
 
 ** company
 #+begin_src emacs-lisp :tangle "config.el"
+(use-package! company-lsp)
 (after! company
   (setq company-idle-delay 0.5
         company-minimum-prefix-length 2
@@ -1388,6 +1389,11 @@ make
 
 (use-package! lsp-mode
   :config
+  (add-to-list 'lsp-language-id-configuration '(nix-mode . "nix"))
+  (lsp-register-client
+   (make-lsp-client :new-connection (lsp-stdio-connection '("rnix-lsp"))
+                    :major-modes '(nix-mode)
+                    :server-id 'nix))
  ;; Support LSP in Org Babel with header argument `:file'.
   ;; https://github.com/emacs-lsp/lsp-mode/issues/377
   (defvar org-babel-lsp-explicit-lang-list
@@ -1933,9 +1939,11 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
         (concat doom-private-dir "etc/bookmark-linux-default.el"))
 
   (bookmark-load bookmark-default-file t)
-
+  (add-hook 'nix-mode-hook #'lsp)
   (set-company-backend! '(nix-mode)
-    '(:separate company-nixos-options
+    '(:separate 
+      company-lsp
+      company-nixos-options
       company-tabnine
       company-files
       company-yasnippet

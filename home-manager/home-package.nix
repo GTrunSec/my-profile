@@ -37,6 +37,7 @@ in
     (mkIf pkgs.stdenv.isLinux {
       home.packages = with nixpkgs;[
         #remacs
+        rnix-lsp
         aria2
         #zeek
         tcpreplay
@@ -121,7 +122,6 @@ in
         #adguardhome
         #log database
         #vast
-        #(import (builtins.fetchTarball "https://github.com/tenzir/vast/tarball/924b05aadaad113a827fa3126bc30b2a9603baa5"){})
         tree
         vgo2nix
         #emacs eaf
@@ -150,6 +150,7 @@ in
           numpy
           orgparse
           #ipynb-py-convert
+          pytest
           scikitlearn
           zat
           matplotlib
