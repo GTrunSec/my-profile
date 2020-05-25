@@ -53,13 +53,13 @@ in
       find -L $HOME/.doom.d/modules/private/public -mindepth 1 -name packages.el -delete
    '';
       # editors
-      home.file.".doom.d/init.org" = {
-        source = ../../dotfiles/doom/init.org;
-        onChange = updateInit;
+      home.file.".doom.d/config.org" = {
+        source = ../../dotfiles/doom/config.org;
+        onChange = updateDoom;
       };
       home.file.".doom.d/xah-fly.org" = {
         source = ../../dotfiles/doom/xah-fly.org;
-        onChange = updateInit;
+        onChange = updateDoom;
       };
         programs.emacs = {
         enable = true;

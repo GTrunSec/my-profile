@@ -23,7 +23,7 @@ HTML them READ org
 
 
 * init.el
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle "init.el"
 ;;; init.el -*- lexical-binding: t; -*-
 
 ;; Copy this file to ~/.doom.d/init.el or ~/.config/doom/init.el ('doom install'
@@ -206,7 +206,7 @@ HTML them READ org
        :config
        ;; For literate config users. This will tangle+compile a config.org
        ;; literate config in your `doom-private-dir' whenever it changes.
-       ;;literate
+       literate
 
        ;; The default module sets reasonable defaults for Emacs. It also
        ;; provides a Spacemacs-inspired keybinding scheme and a smartparens
@@ -260,6 +260,7 @@ HTML them READ org
   (setq make-backup-files nil)
   (setq create-lockfiles nil)
   (setq helm-tramp-custom-connections '(/sshx:gtrun@10.220.170.112:/home/gtrun
+                                        /sshx:gtrun@10.220.170.112:/home/gtrun/.config/nixpkgs
                                         /sshx:test@10.220.170.113:/home/test/))
   (add-hook 'helm-tramp-pre-command-hook '(lambda () ;;(global-aggressive-indent-mode 0)
                      (projectile-mode 0)
@@ -1002,7 +1003,7 @@ FACE defaults to inheriting from default and highlight."
                    )
   (org-starter-def "~/.config/nixpkgs/dotfiles/doom/"
                    :files
-                   ("init.org" :key "i" :refile (:maxlevel . 5))
+                   ("config.org" :key "i" :refile (:maxlevel . 5))
                    ;;("nix.org" :key "x" :refile (:maxlevel . 5))
                    )
   (org-starter-def "~/.config/nixpkgs"
@@ -1017,7 +1018,7 @@ FACE defaults to inheriting from default and highlight."
       "
   Org-starter-files
   ^^^^------------------------------------------------
- _i_: init.org    _g_: gtd.org      _l_: love.org
+ _i_: config.org    _g_: gtd.org      _l_: love.org
  _n_: note        _t_: traveling    _h_: Habit.org
  _m_: myself      _q_: 情-qing      _p_: Plan.org
  _b_: my-books    _e_: elfeed       _M_: learn music

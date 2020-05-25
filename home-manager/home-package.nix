@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 let
-  nixpkgs = (import ~/.config/nixpkgs/nixos/channel/nixpkgs) { };
+  nixpkgs = import ~/.config/nixpkgs/nixos/channel/nixpkgs {  };
   clean-nix-store = nixpkgs.writeScriptBin "clean-nix-store" (import ../bin/clean-nix-store.nix { });
   stable  = import ./stable-pkgs.nix { config={ allowUnfree=true; allowBroken=true; ignoreCollisions = true;};};
   zeek-own = pkgs.callPackage ../own-nixpkgs/zeek {};
@@ -133,7 +133,14 @@ in
 
         (python3.buildEnv.override {
           extraLibs = with python3Packages; [
-          shapely
+            shapely
+            # (pylint.overridePythonAttrs (oldAttrs: {
+            #   src = fetchPypi {
+            #     pname = "pylint";
+            #     version = "2.5.2";
+            #     sha256 = "1344f6zrv3airdls19pbqs7vrb2ky0r09m1y53167w9s1y2k2pmr";
+            #   };
+            # }))
           # eaf
           dbus
           qrcode

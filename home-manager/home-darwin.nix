@@ -29,6 +29,13 @@ in
           pandas
           numpy
           scikitlearn
+          # (pylint.overridePythonAttrs (oldAttrs: {
+          #     src = fetchPypi {
+          #       pname = "pylint";
+          #       version = "2.5.2";
+          #       sha256 = "1344f6zrv3airdls19pbqs7vrb2ky0r09m1y53167w9s1y2k2pmr";
+          #     };
+          # }))
         ]))
         #vips
         ##cachix use ghcide-nix

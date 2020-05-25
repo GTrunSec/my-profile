@@ -26,9 +26,6 @@ in rec
       hugo
       desktop-file-utils
       wireshark
-      (python3.withPackages (pkgs: with pkgs; [
-        trezor_agent wheel
-      ]))
       postgresql
       #openvpn
       (texmacs.override {chineseFonts = true; extraFonts = true;})
