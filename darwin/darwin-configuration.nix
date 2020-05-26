@@ -1,6 +1,6 @@
 { config, pkgs,  ... }:
 let
-  pkgs = (import ~/.config/nixpkgs/channel/nixpkgs) { };
+  pkgs = (import ~/.config/nixpkgs/nixos/channel/nixpkgs) { };
 in
 {
   imports =
@@ -58,7 +58,7 @@ in
     nixPath = [
       "darwin-config=$HOME/.config/nixpkgs/darwin/darin-configuration.nix"
       "home-manager=$HOME/.nix-defexpr/channels/home-manager/"
-      "nixpkgs=$HOME/.config/nixpkgs/channel/nixpkgs"
+      "nixpkgs=$HOME/.config/nixpkgs/nixos/channel/nixpkgs"
       "ssh-config-file=$HOME/.ssh/config"
       #"ssh-auth-sock=${xdg_configHome}/gnupg/S.gpg-agent.ssh"
     ];

@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 let
 
-  nixpkgs = (import ~/.config/nixpkgs/channel/nixpkgs) { };
+  nixpkgs = (import ~/.config/nixpkgs/nixos/channel/nixpkgs) { };
   all-hies = import (fetchTarball "https://github.com/infinisil/all-hies/tarball/master") {};
   my-pkgs = pkgs.fetchFromGitHub {
     owner = "hardenedlinux";
@@ -39,7 +39,7 @@ in
         ]))
         #vips
         ##cachix use ghcide-nix
-        (import ../channel/ghcide-nix {}).ghcide-ghc865
+        (import ../nixos/channel/ghcide-nix {}).ghcide-ghc865
         bat
         gron
         (all-hies.unstable.selection { selector = p: { inherit (p) ghc865; }; })

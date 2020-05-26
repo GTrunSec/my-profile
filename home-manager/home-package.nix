@@ -30,6 +30,7 @@ in
         pypi2nix
         poetry
         #vips
+        nixpkgs-review
       ];
     })
 
