@@ -11,7 +11,7 @@ let
   };
 
   juliaEnv = (import "${my-pkgs}/pkgs/julia-non-cuda.nix" {});
-
+  customVscode = (import ../nixos/custom/vscode.nix { inherit pkgs; });
 
   R-with-my-packages = nixpkgs.rWrapper.override{
     packages = with nixpkgs.rPackages; [ ggplot2 dplyr xts ]; };
@@ -21,6 +21,7 @@ in
   config = with lib; mkMerge [
     (mkIf pkgs.stdenv.isDarwin {
       home.packages = with nixpkgs;[
+        customVscode
         #R-with-my-packages
         (python3.withPackages (pkgs: with pkgs; [
           shapely
@@ -45,7 +46,6 @@ in
         (all-hies.unstable.selection { selector = p: { inherit (p) ghc865; }; })
         exa
         pet
-        vscode
         juliaEnv
         (texlive.combine # latex + packages
           { inherit (texlive)
