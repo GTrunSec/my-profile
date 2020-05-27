@@ -55,7 +55,7 @@ in
       # editors
       home.file.".doom.d/config.org" = {
         source = ../../dotfiles/doom/config.org;
-        onChange = updateDoom;
+        onChange = updateInit;
       };
       home.file.".doom.d/xah-fly.org" = {
         source = ../../dotfiles/doom/xah-fly.org;

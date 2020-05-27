@@ -1018,13 +1018,13 @@ FACE defaults to inheriting from default and highlight."
       "
   Org-starter-files
   ^^^^------------------------------------------------
- _i_: config.org    _g_: gtd.org      _l_: love.org
+ _i_: config.org  _g_: gtd.org     _l_: love.org
  _n_: note        _t_: traveling    _h_: Habit.org
  _m_: myself      _q_: 情-qing      _p_: Plan.org
  _b_: my-books    _e_: elfeed       _M_: learn music
 
   "
-      ("i" org-starter-find-file:init)
+      ("i" org-starter-find-file:config)
       ("g" org-starter-find-file:gtd)
       ("n" org-starter-find-file:notes)
       ("e" org-starter-find-file:elfeed)
