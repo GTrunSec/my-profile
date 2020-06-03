@@ -1,7 +1,9 @@
-with import <nixpkgs> {};
+let
+  nixpkgs = import ~/.config/nixpkgs/nixos/channel/nixpkgs { };
+in
  stdenv.mkDerivation {
   name = "env";
   buildInputs = [
-    (pkgs.python3.withPackages (pkgs: with pkgs; [apache-airflow]))
+    nixpkgs.julia_13
   ];
 }

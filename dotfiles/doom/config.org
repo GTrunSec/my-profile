@@ -636,6 +636,16 @@ In that case, insert the number."
 
 ** company-backend
 #+begin_src emacs-lisp :tangle "config.el"
+
+  (set-company-backend! '(nix-mode)
+    '(:separate 
+      company-nixos-options
+      company-tabnine
+      company-files
+      company-yasnippet
+      ))
+
+
 (set-company-backend! '(julia-mode)
   '(:separate company-lsp
               company-tabnine
@@ -1941,15 +1951,6 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
   (bookmark-load bookmark-default-file t)
   (add-hook 'nix-mode-hook #'lsp)
-  (set-company-backend! '(nix-mode)
-    '(:separate 
-      company-lsp
-      company-nixos-options
-      company-tabnine
-      company-files
-      company-yasnippet
-      ))
-
 
   (setq lsp-python-ms-executable  "~/.nix-profile/bin/mspyls")
   (when (not window-system)
@@ -2029,13 +2030,6 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 (setq insert-directory-program "/usr/local/bin/gls")
 (define-key org-mode-map (kbd "C-c l") 'org-mac-grab-link)
 ;;(eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
-
-(set-company-backend! '(nix-mode)
-  '(:separate company-tabnine
-              company-files
-              company-yasnippet
-              ))
-
 
 (set-face-attribute
  'default nil

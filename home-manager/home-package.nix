@@ -31,6 +31,8 @@ in
         poetry
         #vips
         nixpkgs-review
+        #for emacs notdeft
+        tclap xapian
       ];
     })
 

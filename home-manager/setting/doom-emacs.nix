@@ -125,7 +125,6 @@ in
           #helm-nixos-options
           ##vterm
           vterm
-          emacs-libvterm
           ##
           helm-tramp
           visual-fill-column
