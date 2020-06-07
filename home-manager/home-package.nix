@@ -32,7 +32,10 @@ in
         #vips
         nixpkgs-review
         #for emacs notdeft
-        tclap xapian
+        tclap
+        xapian
+        #nix-lsp
+        rnix-lsp
       ];
     })
 

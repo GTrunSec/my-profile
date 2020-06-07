@@ -15,7 +15,7 @@ stdenv.mkDerivation rec {
   src = fetchurl {
     inherit sha256;
     #url = "mirror://gnu/emacs/${name}.tar.gz";
-    url = "https://github.com/emacs-mirror/emacs/archive/emacs-27.0.90.tar.gz";
+    url = "https://github.com/emacs-mirror/emacs/archive/feature/native-comp/a58fef9f63fd4383c4eae9dfe8ae663b4ed710d1.tar.gz";
   };
 
   enableParallelBuilding = true;
