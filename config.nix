@@ -9,7 +9,4 @@
   };
   allowUnfree = true;
   allowBroken = true; # intero only?
-  permittedInsecurePackages = [
-    "openssl-1.0.2u"
-  ];
 }

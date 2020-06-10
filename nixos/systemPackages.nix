@@ -7,7 +7,6 @@ let
       customEmacs = (import ./custom/nix-emacs-ci { inherit pkgs; });
       julia = (import ./lang/julia.nix {pkgs=stable;});
       #myHaskell = (import ./custom/haskell.nix {inherit pkgs;});
-      myEmacs = pkgs.emacs;
 in rec
   {
     environment.systemPackages = with pkgs; [
@@ -94,7 +93,6 @@ in rec
       #terminal
       kitty
       # Unzip
-      p7zip
       unzip
       zip
       pciutils    # lspci

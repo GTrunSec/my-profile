@@ -1,10 +1,10 @@
 let
   nixpkgs = import ~/.config/nixpkgs/nixos/channel/nixpkgs { };
 in
- nixpkgs.stdenv.mkDerivation {
+ nixpkgs.buildEnv {
   name = "env";
-  buildInputs = [
+  paths = [
     #nixpkgs.julia_13
-    (nixpkgs.python3.withPackages (ps: [ ps.py4j ]))
-  ];
+    nixpkgs.R
+    ];
 }
