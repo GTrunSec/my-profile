@@ -2091,3 +2091,6 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
 
 -  [[https://github.com/munen/emacs.d/blob/master/configuration.org][emacs.d/configuration.org  atmaster · munen/]]
+
+
+- [[https://github.com/dfeich/emacs-course-and-config/blob/master/init.el][emacs-course-and-config/init.el at master · dfeich/emacs-course-and-config]]
