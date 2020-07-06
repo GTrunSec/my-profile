@@ -4,7 +4,7 @@
     enable = true;
     userName = "GTrunSec";
     userEmail = "gtrun@hardenedlinux.org";
-    signing.key = "0x761C8EBEA940960E";
+    signing.key = "761C8EBEA940960E";
     #signing.signByDefault = true;
     ignores = [ ".projectile" ".indium.json" ".ccls-cache"
                 ".Rhistory" ".notdeft*" ".auctex-auto" "__pycache__"
