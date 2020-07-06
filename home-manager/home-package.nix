@@ -97,8 +97,8 @@ in
           };
         }))
         exa
-        deepin.deepin-screenshot
-        deepin.deepin-turbo
+        # deepin.deepin-screenshot
+        # deepin.deepin-turbo
         #overlay
         nteract
         gsettings-desktop-schemas
@@ -162,14 +162,13 @@ in
           pytest
           numpy
           orgparse
-          #ipynb-py-convert
           pytest
           scikitlearn
           zat
           matplotlib
           sqlalchemy
           pandas
-          voila
+          #voila
           python-language-server
           pygments
           orgbabelhelper
