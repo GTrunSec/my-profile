@@ -3,7 +3,7 @@
   programs.git = {
     enable = true;
     userName = "GTrunSec";
-    userEmail = "gtrun@hardenedlinux.org";
+    userEmail = "gtrunsec@hardenedlinux.org";
     signing.key = "761C8EBEA940960E";
     #signing.signByDefault = true;
     ignores = [ ".projectile" ".indium.json" ".ccls-cache"
@@ -12,6 +12,11 @@
                 ".ipynb_checkpoints"
               ];
     extraConfig = {
+
+      github = {
+      user = "gtrunsec";
+      };
+
       pull = {
         rebase = true;
       };
