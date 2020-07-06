@@ -5,7 +5,7 @@
     userName = "GTrunSec";
     userEmail = "gtrunsec@hardenedlinux.org";
     signing.key = "761C8EBEA940960E";
-    #signing.signByDefault = true;
+    signing.signByDefault = true;
     ignores = [ ".projectile" ".indium.json" ".ccls-cache"
                 ".Rhistory" ".notdeft*" ".auctex-auto" "__pycache__"
                 "vast.db" "eaf"
@@ -14,7 +14,7 @@
     extraConfig = {
 
       github = {
-      user = "gtrunsec";
+        user = "gtrunsec";
       };
 
       pull = {
@@ -34,10 +34,9 @@
       };
 
       interactive = {
-
         diffFilter = "delta --color-only";
-
       };
+
     };
   };
 }
