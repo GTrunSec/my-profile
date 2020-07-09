@@ -4,7 +4,7 @@ clean:
 
 compile: config.org clean
 	@emacs -Q --batch -l 'lisp/compile.el'
-	@~/.emacs.d/bin/doom refresh
+	@~/.emacs.d/bin/doom sync
 update:
 	@emacs -Q --batch -l "lisp/update.el"
 

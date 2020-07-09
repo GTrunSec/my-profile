@@ -3,7 +3,7 @@
 
 let
   updatefont = ''fc-cache -f -v'';
-  updateDoom = ".emacs.d/bin/doom refresh";
+  updateDoom = ".emacs.d/bin/doom sync";
   updateInit = "bash .doom.d/bin/emacs.sh";
 in
 {
@@ -42,15 +42,15 @@ in
           mkdir -p $HOME/.doom.d/modules/private/public
           mkdir -p $HOME/.doom.d/autoload
      fi
-      ##modules
-     ln -sfT $HOME/.emacs.d/modules/lang/haskell $HOME/.doom.d/modules/private/public/ihaskell #haskell module
-     ln -sfT $HOME/.emacs.d/modules/lang/nix $HOME/.doom.d/modules/private/public/inix #nix module
-     ln -sfT $HOME/.emacs.d/modules/lang/julia $HOME/.doom.d/modules/private/public/ijulia #nix module
-     ##tools
-     ln -sfT $HOME/.emacs.d/modules/tools/ein $HOME/.doom.d/modules/private/public/iein #ein module
+     #  ##modules
+     # ln -sfT $HOME/.emacs.d/modules/lang/haskell $HOME/.doom.d/modules/private/public/ihaskell #haskell module
+     # ln -sfT $HOME/.emacs.d/modules/lang/nix $HOME/.doom.d/modules/private/public/inix #nix module
+     # ln -sfT $HOME/.emacs.d/modules/lang/julia $HOME/.doom.d/modules/private/public/ijulia #nix module
+     # ##tools
+     # ln -sfT $HOME/.emacs.d/modules/tools/ein $HOME/.doom.d/modules/private/public/iein #ein module
 
-     ## remove packages.el
-      find -L $HOME/.doom.d/modules/private/public -mindepth 1 -name packages.el -delete
+     # ## remove packages.el
+     #  find -L $HOME/.doom.d/modules/private/public -mindepth 1 -name packages.el -delete
    '';
       # editors
       home.file.".doom.d/config.org" = {
@@ -158,8 +158,6 @@ in
           company-tabnine
           bicycle
           jsonrpc
-          anzu
-          doom-modeline
           shrink-path
           #scheme
           geiser
@@ -173,11 +171,6 @@ in
           #ivy
           ivy-rich
           ivy-hydra
-          counsel
-          amx
-          counsel-projectile
-          wgrep
-          ivy-prescient
           flx
         ];
         };
