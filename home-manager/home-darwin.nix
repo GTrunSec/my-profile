@@ -61,8 +61,10 @@ in
             cjk
             ctex
             xecjk
-            fontspec euenc;
+            fontspec
+            euenc;
           }
+          #org-mode roam-server
         )
       ];
     })
