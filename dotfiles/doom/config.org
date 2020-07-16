@@ -1,4 +1,4 @@
-#+TITLE: My Doom Emacs config
+#+title: My Doom Emacs config
 #+EMAIL: gtrunsec@hardenedlinux.org
 #+DATE:  25 October 2019
 #+AUTHOR: GTrunSec
