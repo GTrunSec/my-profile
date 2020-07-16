@@ -5,7 +5,7 @@ let
       unstable = import (fetchTarball https://nixos.org/channels/nixos-unstable/nixexprs.tar.xz) { };
       customVscode = (import ./custom/vscode.nix { inherit pkgs; });
       customEmacs = (import ./custom/nix-emacs-ci { inherit pkgs; });
-      julia = (import ./lang/julia.nix {pkgs=stable;});
+      julia = (import ./lang/julia.nix {inherit pkgs;});
       #myHaskell = (import ./custom/haskell.nix {inherit pkgs;});
 in rec
   {

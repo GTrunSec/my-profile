@@ -93,13 +93,12 @@ pkgs.vscode-with-extensions.override {
       sha256 = "0kqh53jx314bsv3x48vyf29blkicr2jdwgz7vj5vklf9zxd3n1pa";
     }
 
-
     # Lang-Go
     {
-      publisher = "ms-vscode";
+      publisher = "golang";
       name = "Go";
-      version = "0.14.1";
-      sha256 = "1zj87m0swjnr7k9nwxj2db96h90fs1cny7w9c0q4kqnrrysh8ala";
+      version = "0.15.1";
+      sha256 = "1h7r781asl890n9fc0dh81l4ffx8xqd81d4hy2680dji8x390axz";
     }
 
     {
