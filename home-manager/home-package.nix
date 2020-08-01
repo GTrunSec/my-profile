@@ -76,7 +76,7 @@ in
           };
         }))
         #chat
-        riot-desktop
+        element-desktop
         (signal-desktop.overrideDerivation (oldAttrs: {
           src = fetchurl {
             url = "https://updates.signal.org/desktop/apt/pool/main/s/signal-desktop/signal-desktop_1.32.1_amd64.deb";

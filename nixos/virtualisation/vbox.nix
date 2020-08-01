@@ -9,5 +9,6 @@
     };
     kvmgt.enable = true;
   };
+  #virtualisation.vmware.host.enable = true;
   users.extraUsers.myuser.extraGroups = ["vboxusers"];
 }

@@ -1,12 +1,21 @@
 {pkgs, ...}:
 with pkgs;
 let
-  julia = pkgs.julia_13.overrideAttrs(oldAttrs: {checkTarget = "";});
-  d = version: "v${lib.concatStringsSep "." (lib.take 2 (lib.splitString "." version))}";
+  julia = pkgs.julia_13.overrideAttrs(oldAttrs: {
+   src = pkgs.fetchzip {
+     url = "https://github.com/JuliaLang/julia/releases/download/v1.4.2/julia-1.4.2-full.tar.gz";
+     sha256 = "14jghi9mw0wdi6y9saarf0nzary9i21jx43zznddzrq48v4nlayj";
+   };
+   checkTarget = "";
+  });
+
+  cudaVersion = pkgs.cudatoolkit_10_2;
+  nvidiaVersion = pkgs.linuxPackages.nvidia_x11;
+
   extraLibs = [
     # IJulia.jl
     mbedtls
-    zeromq3
+    zeromq4
     # ImageMagick.jl
     imagemagickBig
     # HDF5.jl
@@ -59,13 +68,14 @@ stdenv.mkDerivation rec {
   phases = [ "installPhase" ];
   installPhase = ''
     export CUDA_PATH="${cudatoolkit}"
-    export LD_LIBRARY_PATH=${lib.makeLibraryPath extraLibs}
-    # pushd $JULIA_PKGDIR/${d version}
+    export R_HOME=${pkgs.R}/lib/R
+    export LD_LIBRARY_PATH=${lib.makeLibraryPath extraLibs}:${pkgs.R}/lib/R/lib
     makeWrapper ${julia}/bin/julia $out/bin/julia \
         --prefix LD_LIBRARY_PATH : "$LD_LIBRARY_PATH" \
-        --prefix LD_LIBRARY_PATH ":" "${linuxPackages.nvidia_x11}/lib" \
-        --set CUDA_PATH "${cudatoolkit}" \
-        --set JULIA_PKGDIR $JULIA_PKGDIR
-        # --set JULIA_LOAD_PATH $JULIA_PKGDIR/${d version}
+        --prefix LD_LIBRARY_PATH ":" "${nvidiaVersion}/lib" \
+        --prefix R_HOME : "$R_HOME" \
+        --set JULIA_PKG_SERVER pkg.julialang.org \
+        --set CUDA_PATH "${cudaVersion}"
+        #--set JULIA_PKGDIR $JULIA_PKGDIR
   '';
 }

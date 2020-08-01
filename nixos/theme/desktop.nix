@@ -38,10 +38,6 @@ in
     displayManager.sddm = {
       enable = true;
       # theme = "";
-      autoLogin = {
-        enable = true;
-        user = "gtrun";
-      };
     };
     
     windowManager = {
@@ -56,6 +52,11 @@ in
 
     videoDrivers = [ "nvidia" "intel"];
 
+    displayManager.autoLogin = {
+        enable = true;
+        user = "gtrun";
+      };
+
     displayManager.defaultSession = "none+i3";
     desktopManager.xterm.enable = false;
   };
@@ -67,7 +68,6 @@ in
   hardware.nvidia.prime.intelBusId= "PCI:0:2:0";
 
   # Bus ID of the Intel GPU. You can find it using lspci
-
     # i3 gaps
   environment.pathsToLink = [ "/libexec"  ]; # links /libexec from derivations to /run/current-system/sw
 

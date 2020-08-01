@@ -10,7 +10,6 @@ let
 in rec
   {
     environment.systemPackages = with pkgs; [
-      customEmacs.emacs_27_0          
       # KDE
       # nur.repos.ysndr.kde.breeze-blur
       # qtstyleplugin-kvantum-qt4
@@ -78,7 +77,6 @@ in rec
       killall
       # Browser
       chromium
-      tor-browser-bundle-bin
       #firefox-bin
       # book
 
