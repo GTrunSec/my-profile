@@ -1,20 +1,20 @@
 { config, lib, pkgs, ... }:
 let
-  nixpkgs = import ~/.config/nixpkgs/nixos/channel/nixpkgs {  };
+  overlays = [
+    (import ../home-manager/packages-overlay.nix)
+  ];
+  nixpkgs = import ~/.config/nixpkgs/nixos/channel/nixpkgs { inherit overlays; };
   clean-nix-store = nixpkgs.writeScriptBin "clean-nix-store" (import ../bin/clean-nix-store.nix { });
   stable  = import ./stable-pkgs.nix { config={ allowUnfree=true; allowBroken=true; ignoreCollisions = true;};};
-  zeek-own = pkgs.callPackage ../own-nixpkgs/zeek {};
+
 in
 {
-
   config = with lib; mkMerge [
-
     (mkIf (pkgs.stdenv.isLinux || pkgs.stdenv.isDarwin) {
       home.packages = with stable;[
         vips
       ];
     })
-
 
     ##public pkgs
     (mkIf (pkgs.stdenv.isLinux || pkgs.stdenv.isDarwin) {
@@ -26,7 +26,6 @@ in
         clean-nix-store
         nodePackages.node2nix
         system-sendmail
-        zeek-own
         pypi2nix
         poetry
         #vips
@@ -147,32 +146,32 @@ in
             #     sha256 = "1344f6zrv3airdls19pbqs7vrb2ky0r09m1y53167w9s1y2k2pmr";
             #   };
             # }))
-          # eaf
-          dbus
-          qrcode
-          pyqt5
-          pymupdf
-          xlib
-          grip
-          pyinotify
-          pyqtwebengine
-          markdown
-          feedparser
-          ##
-          pytest
-          numpy
-          orgparse
-          pytest
-          scikitlearn
-          zat
-          matplotlib
-          sqlalchemy
-          pandas
-          #voila
-          python-language-server
-          pygments
-          orgbabelhelper
-          wakatime
+            # eaf
+            dbus
+            qrcode
+            pyqt5
+            pymupdf
+            xlib
+            grip
+            pyinotify
+            pyqtwebengine
+            markdown
+            feedparser
+            ##
+            pytest
+            numpy
+            orgparse
+            pytest
+            scikitlearn
+            zat
+            matplotlib
+            sqlalchemy
+            pandas
+            #voila
+            python-language-server
+            pygments
+            orgbabelhelper
+            wakatime
           ];
           ignoreCollisions = true;
         })

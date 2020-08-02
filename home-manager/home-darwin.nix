@@ -2,7 +2,7 @@
 let
 
   nixpkgs = (import ~/.config/nixpkgs/nixos/channel/nixpkgs) { };
-  all-hies = import (fetchTarball "https://github.com/infinisil/all-hies/tarball/master") {};
+  all-hies = import (fetchTarball "https://github.com/infinisil/all-hies/tarball/4b6aab017cdf96a90641dc287437685675d598da") {};
   my-pkgs = pkgs.fetchFromGitHub {
     owner = "hardenedlinux";
     repo = "NSM-data-analysis";

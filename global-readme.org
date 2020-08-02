@@ -522,7 +522,7 @@ gateway 192.168.122.1
 #+end_src
 
 * Keyboard
-** Plank
+** Plankck
 *** [[https://configure.ergodox-ez.com/planck-ez/layouts/QaBlB/latest/3][Ergodox EZ Configurator]]n<2020-01-28 Tue>
 *** ✔ DONE [[https://configure.ergodox-ez.com/planck-ez/layouts/bvDzx/latest/0][Ergodox EZ Configurator]] <2019-10-29 Tue>[plank]
 *** ✔ DONE [[https://configure.ergodox-ez.com/planck-ez/layouts/EeEqb/latest/0][Ergodox EZ Configurator]]<2019-10-30 Wed>
