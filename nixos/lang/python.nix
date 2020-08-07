@@ -9,11 +9,7 @@ let
     scipy
     numpy
     ipython
-    jupyterlab
-    #bat
-#    google-api-python-client
-    # other python packages you want
-  ]; 
+  ];
  python-with-my-packages = python37.withPackages my-python-packages;
 in {
   # List packages installed in system profile. To search by name, run:
