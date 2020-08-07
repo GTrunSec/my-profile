@@ -32,7 +32,7 @@ floating_modifier $mod
 
 
 # start a terminal
-bindsym Mod4+Return exec kitty
+bindsym Mod4+Return exec alacritty
 
 # kill focused window
 bindsym Mod4+q kill

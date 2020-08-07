@@ -9,6 +9,7 @@
     ./home-files.nix
     ./home-darwin.nix
     ./zeek-pkgs.nix
+    ./alacritty
     #programs
   ];
 }

@@ -99,13 +99,11 @@ in
         # deepin.deepin-screenshot
         # deepin.deepin-turbo
         #overlay
-        nteract
         gsettings-desktop-schemas
-        outline-client
         youtube-dl
-        shadowsocks-qt5
+        #shadowsocks-qt5
         sshfs
-        ms-pyls
+        #ms-pyls
         #nur
         imgcat
 
@@ -123,7 +121,7 @@ in
         #multi-ghc-travis
         niv
         #downloader
-        motrix
+        #motrix
         #adguardhome
         #log database
         #vast
@@ -132,7 +130,6 @@ in
         #emacs eaf
         lxqt.qtermwidget
 
-        deepsea
         libvterm
         libtool
 
@@ -160,17 +157,17 @@ in
             ##
             pytest
             numpy
-            orgparse
+            #orgparse
             pytest
             scikitlearn
-            zat
+            #zat
             matplotlib
             sqlalchemy
             pandas
             #voila
             python-language-server
             pygments
-            orgbabelhelper
+            #orgbabelhelper
             wakatime
           ];
           ignoreCollisions = true;
@@ -178,7 +175,7 @@ in
         ncat
         #Go
         wakatime
-        horcrux
+        #horcrux
         rocksdb
         sqlite
         fish-foreign-env
@@ -187,7 +184,7 @@ in
         jq
         # unstable.nodePackages.bash-language-server
         # nodePackages.javascript-typescript-langserver
-        nodePackages.mermaid-cli
+        #nodePackages.mermaid-cli
         # Nix
         ghc
         #( import ~/.config/nixpkgs/nixos/overlays/rust/cargo2nix {}).package

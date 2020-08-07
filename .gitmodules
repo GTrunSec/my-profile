@@ -7,3 +7,6 @@
 [submodule "nixos/channel/ghcide-nix"]
 	path = nixos/channel/ghcide-nix
 	url = https://github.com/cachix/ghcide-nix.git
+[submodule "nixos-flk"]
+	path = nixos-flk
+	url = git@github.com:GTrunSec/nixos-flk.git
