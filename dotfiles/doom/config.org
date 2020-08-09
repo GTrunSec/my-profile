@@ -527,6 +527,8 @@ Uses `current-date-time-format' for the formatting the date/time."
 (add-hook! 'sunrise-start-hook 'xah-fly-insert-mode-activate)
 
 (setenv "XAPIAN_CJK_NGRAM" "1")
+
+(defalias 'yes-or-no-p 'y-or-n-p)
 #+end_src
 
 * Completion
@@ -992,8 +994,16 @@ FACE defaults to inheriting from default and highlight."
 ;;Markdown
 (eval-after-load "org"
   '(require 'ox-md nil t))
-
 ;;https://orgmode.org/worg/org-contrib/babel/examples/fontify-src-code-blocks.html
+
+
+
+
+(defun org-show-two-levels ()
+  (interactive)
+  (org-content 2))
+
+(add-hook! 'org-mode-hook 'org-show-two-levels)
 #+end_src
 
 ** org-starter
