@@ -8,9 +8,7 @@
       home.file.".config/i3/move-cursor-window-center.sh".source = ../dotfiles/i3/move-cursor-window-center.sh;
 
       #polyar
-      home.file.".config/polybar/config".source = ../dotfiles/polybar/config;
-      home.file.".config/polybar/launch.sh".source = ../dotfiles/polybar/launch.sh;
-
+      home.file.".config/polybar/".source = ../dotfiles/polybar-5;
       # compton
       home.file.".compton.conf".source = ../dotfiles/.compton.conf;
       # rofi
