@@ -9,7 +9,7 @@
           window.decorations = "full";
           font.normal.style = "Medium";
           # Background opacity
-          background_opacity = 0.0;
+          background_opacity = 0.7;
           cursor.style = "Beam";
 
           # snazzy theme

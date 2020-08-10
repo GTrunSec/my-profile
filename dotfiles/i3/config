@@ -195,7 +195,7 @@ exec_always --no-startup-id bash $HOME/.config/nixpkgs/dotfiles/polybar/compton.
 
 # fix Blank screen
 # https://www.reddit.com/r/i3wm/comments/7cy60c/blank_save_screen/
-floating_minimum_size 700 x 500
+floating_minimum_size 1800 x 1700
 floating_maximum_size 3000 x 2000
 #i3-gaps
 for_window [class="^.*"] border pixel 0
@@ -218,7 +218,7 @@ for_window [class="feh"] floating enable, border normal
 #for_window [class=""] fullscreen enable
 
 # Wallpaper
-exec_always --no-startup-id feh --randomize --bg-fill ~/.config/nixpkgs/dotfiles/wallpaper/Fantasy/max-bedulenko-_2019-07-27_04-48-06.jpeg
+exec_always --no-startup-id feh --randomize --bg-fill ~/.config/nixpkgs/dotfiles/wallpaper/sky-sea/ned-rogers-forest-forestchoir-concept01-002_2019-07-27_14-07-36.jpeg
 exec --no-startup-id fcitx -d -r
 
 
