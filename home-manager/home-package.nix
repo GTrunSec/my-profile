@@ -108,8 +108,6 @@ in
         gosec
         gotests
         gotty
-        #blueman
-        blueman
         nodejs
       ];
     })

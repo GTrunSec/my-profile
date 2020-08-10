@@ -1,8 +1,0 @@
----
-- name: Configure ssh-agent
-  blockinfile:
-    path: ~/.xprofile
-    create: True
-    marker: "### {mark} DOTFILES ssh-add ###"
-    content: |
-      ssh-add &

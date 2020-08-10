@@ -19,10 +19,18 @@
 #+begin_src sh :tangle yes
 git clone https://github.com/GTrunSec/my-profile.git --depth=1  --recursive --shallow-submodules ~/.config/nixpkgs
 
-ln -s  ~/.config/nixpkgs/nixos /etc/nixos
+ln -s  ~/.config/nixpkgs/nixos-flk /etc/nixos
 
-sudo nixos-rebuild swith
+# drying flake build test
+cd ~/.config/nixpkgs/nixos-flk
+nix-shell
+# test flakes process
+# NixOS is an argument of your building hsot name(related to ./nixos-flk/hosts/NixOS.nix)
+rebuild NixOS switch
+# activing NixOS config in nixos
+sudo nixos-rebuild switch 
 
+# activing all of config files which in dotfiles path 
 home-manager switch
 
 #+end_src

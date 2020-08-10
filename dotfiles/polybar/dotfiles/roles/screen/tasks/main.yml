@@ -1,7 +1,0 @@
----
-- name: Install screen
-  package: name=screen state=present
-  become: True
-
-- name: Configure screen
-  copy: src=files/screenrc dest=~/.screenrc backup=yes
