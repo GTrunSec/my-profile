@@ -527,9 +527,11 @@ Uses `current-date-time-format' for the formatting the date/time."
 (add-hook! 'sunrise-start-hook 'xah-fly-insert-mode-activate)
 
 (setenv "XAPIAN_CJK_NGRAM" "1")
-
-(defalias 'yes-or-no-p 'y-or-n-p)
+(fset 'yes-or-no-p 'y-or-n-p)
 #+end_src
+
+#+RESULTS:
+: y-or-n-p
 
 * Completion
 ** Ivy/counsel
