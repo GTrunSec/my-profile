@@ -10,6 +10,7 @@
     ./home-darwin.nix
     ./zeek-pkgs.nix
     ./alacritty
+    ./python-pkgs.nix
     #programs
   ];
 }

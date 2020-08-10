@@ -29,7 +29,8 @@ nix-shell
 rebuild NixOS switch
 # activing NixOS config in nixos
 sudo nixos-rebuild switch 
-
+# or using binaryCaches to speed up
+sudo nixos-rebuild switch --option substituters "https://cache.nixos.org http://221.4.35.244:8301" --option trusted-public-keys "221.4.35.244:3ehdeUIC5gWzY+I7iF3lrpmxOMyEZQbZlcjOmlOVpeo="
 # activing all of config files which in dotfiles path 
 home-manager switch
 
