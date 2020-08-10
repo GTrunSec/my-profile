@@ -11,7 +11,7 @@ let
   };
 
   juliaEnv = (import "${my-pkgs}/pkgs/julia-non-cuda.nix" {});
-  customVscode = (import ../nixos/custom/vscode.nix { inherit pkgs; });
+  customVscode = (import ../nixos-flk/profiles/code/vscode.nix { inherit pkgs; });
 
   R-with-my-packages = nixpkgs.rWrapper.override{
     packages = with nixpkgs.rPackages; [ ggplot2 dplyr xts ]; };
