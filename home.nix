@@ -19,7 +19,7 @@ in
 #   ]);
 # }
   imports = [
-    ./home-manager/import.nix
+    ./home-manager
     ./home-manager/randr
     ~/.nix-defexpr/channels/home-manager/modules/services/emacs.nix
   ];

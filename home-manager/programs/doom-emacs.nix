@@ -61,7 +61,8 @@ in
         source = ../../dotfiles/doom/xah-fly.org;
         onChange = updateDoom;
       };
-        programs.emacs = {
+
+      programs.emacs = {
         enable = true;
         extraPackages = epkgs: with epkgs;[
           #undo

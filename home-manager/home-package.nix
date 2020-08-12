@@ -5,7 +5,7 @@ let
   ];
   nixpkgs = import ~/.config/nixpkgs/nixos/channel/nixpkgs { inherit overlays; };
   clean-nix-store = nixpkgs.writeScriptBin "clean-nix-store" (import ../bin/clean-nix-store.nix { });
-  stable  = import ./stable-pkgs.nix { config={ allowUnfree=true; allowBroken=true; ignoreCollisions = true;};};
+  stable  = import ./misc/stable-pkgs.nix { config={ allowUnfree=true; allowBroken=true; ignoreCollisions = true;};};
 in
 {
   config = with lib; mkMerge [
