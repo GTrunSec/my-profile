@@ -570,7 +570,6 @@ Uses `current-date-time-format' for the formatting the date/time."
   (define-key company-active-map (kbd "C-n") 'company-select-next-or-abort)
   (define-key company-active-map (kbd "C-j") 'company-select-previous-or-abort)
 
-
 (defun ora-company-number ()
   "Forward to `company-complete-number'.
 Unless the number is potentially part of the candidate.
@@ -969,6 +968,10 @@ FACE defaults to inheriting from default and highlight."
 ;;(use-package emacs-powerthesaurus)
 (use-package! org-ql
   :commands helm-org-ql
+)
+(use-package! org-superstar
+  :config
+  (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
 )
 #+end_src
 
