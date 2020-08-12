@@ -165,7 +165,7 @@ HTML them READ org
         +hugo            ; use Emacs for hugo blogging
         +ipython         ; ipython/jupyter support for babel
         +pandoc          ; export-with-pandoc support
-        +roam
+        ;;+roam
         ;+pomodoro        ; be fruitful with the tomato technique
         +present)        ; using org-mode for presentations
        ;;perl              ; write code no one else can comprehend
@@ -961,6 +961,7 @@ FACE defaults to inheriting from default and highlight."
 (use-package! ox-hugo)
 (use-package! ob-session-async)
 (use-package! ob-async)
+(use-package! org-roam)
 (use-package! org-books
   :config
   (setq org-books-file "~/Documents/org-notes/GTD/my-books.org")
