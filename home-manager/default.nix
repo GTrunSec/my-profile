@@ -1,4 +1,5 @@
 { ... }:
+
 {
 
   imports = [
@@ -11,6 +12,7 @@
     ./misc
     ./programs
     ./python-pkgs.nix
+    ../nixos-flk/users/password.nix
     #programs
   ];
 }
