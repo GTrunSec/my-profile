@@ -5,6 +5,7 @@ let
   updatefont = ''fc-cache -f -v'';
   updateDoom = ".emacs.d/bin/doom sync";
   updateInit = "bash .doom.d/bin/emacs.sh";
+  emacsPkg  = import ../misc/emacs-27-pkgs.nix { config={ allowUnfree=true; allowBroken=true; ignoreCollisions = true;};};
 in
 {
   config = with lib; mkMerge [
@@ -64,6 +65,7 @@ in
 
       programs.emacs = {
         enable = true;
+        package = emacsPkg.emacs;
         extraPackages = epkgs: with epkgs;[
           #undo
           undo-tree

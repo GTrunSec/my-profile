@@ -38,7 +38,7 @@
      ("2" . org-keymap)
      ("m" . magit-key)
      ("w" . window-key)
-
+     ("o" . org-roam-keymap)
 
      ;;timer
      ("ti" . insert-current-date-time-inactive)
@@ -307,3 +307,17 @@ Version 2017-01-21"
 ;; )
 ;; (add-hook! 'org-mode-hook 'my-xah-fly-key-org-keymap)
 #+end_src
+
+* org-roam
+#+begin_src emacs-lisp :tangle "xah-fly.el"
+  (xah-fly--define-keys
+   ;; create a keymap org-keymap
+   (define-prefix-command 'org-roam-keymap)
+   '(
+     ("l" . org-store-link)
+     ("i" . org-roam-insert)
+     ))
+#+end_src
+
+#+RESULTS:
+: ((l . org-roam-store-link))
