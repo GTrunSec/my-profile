@@ -6,9 +6,8 @@ in
   imports =
     [ # Include the results of the hardware scan.
       #~/.config/nixpkgs/nixos/lang/r-darwin.nix
-      ~/.config/nixpkgs/nixos/lang/python-darwin.nix
-      ~/.config/nixpkgs/nixos/lang/go-darwin.nix
-      ./darwin-pkgs.nix
+      # ~/.config/nixpkgs/nixos/lang/python-darwin.nix
+      # ~/.config/nixpkgs/nixos/lang/go-darwin.nix
       #./tmux.nix
     ];
   # List packages installed in system profile. To search by name, run:
