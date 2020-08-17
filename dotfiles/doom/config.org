@@ -642,22 +642,21 @@ In that case, insert the number."
 
 ** company-backend
 #+begin_src emacs-lisp :tangle "config.el"
-
-  (set-company-backend! '(nix-mode)
-    '(:separate 
-      company-nixos-options
-      company-tabnine
-      company-files
-      company-yasnippet
-      ))
+(set-company-backend! '(nix-mode)
+  '(:separate
+    company-nixos-options
+    company-tabnine
+    company-files
+    company-yasnippet
+    ))
 
 
 (set-company-backend! '(julia-mode)
   '(:separate company-lsp
-              company-tabnine
-              company-files
-              company-yasnippet
-              ))
+    company-tabnine
+    company-files
+    company-yasnippet
+    ))
 
 ;;  (set-company-backend! 'sh-mode nil) ; unsets backends for sh-mode
 (set-company-backend! '(c-mode
@@ -678,11 +677,19 @@ In that case, insert the number."
                         web-mode
                         )
   '(:separate company-tabnine
-              company-files
-              company-yasnippet))
+    company-files
+    company-yasnippet))
 
 (setq +lsp-company-backend '(company-lsp :with company-tabnine :separate))
 
+
+(after! nix-mode
+  (setq +lsp-company-backends '(company-nixos-options
+                                company-tabnine
+                                :with
+                                company-files
+                                ))
+  )
 #+end_src
 
 ** Edition
