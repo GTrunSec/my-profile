@@ -49,10 +49,10 @@
     })
 
     (mkIf pkgs.stdenv.isLinux {
-        programs.alacritty = {
+      programs.alacritty = {
         settings = {
-        font.size = 30.0;
-        font.normal.family = "Fantasque Sans Mono";
+          font.size = 30.0;
+          font.normal.family = "Fantasque Sans Mono";
         };};
     })
 
@@ -62,7 +62,20 @@
         settings = {
           font.size = 25.0;
           font.normal.family = "Fantasque Sans Mono";
-        };};
+          key_bindings =[
+            {
+            key = "P";
+            mods = "Alt";
+            chars = "\x1bp";
+            }
+            {
+            key = "X";
+            mods = "Alt";
+            chars = "\x1bx";
+            }
+          ];
+        };
+      };
     })
   ];
 }

@@ -2017,6 +2017,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   (bookmark-load bookmark-default-file t)
   (add-hook 'nix-mode-hook #'lsp)
 
+  (setq org-roam-db-location "~/.emacs.d/.local/cache/org-roam.db")
   (setq lsp-python-ms-executable  "~/.nix-profile/bin/mspyls")
   (when (not window-system)
     (xterm-mouse-mode 1)
@@ -2093,6 +2094,8 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 (set-cursor-color "yellow1")
 (setq bm-repository-file (f-join doom-private-dir "etc/bm-macos-data"))
 (setq insert-directory-program "/usr/local/bin/gls")
+
+(setq org-roam-db-location "~/.emacs.d/.local/cache/org-roam-macos.db")
 (define-key org-mode-map (kbd "C-c l") 'org-mac-grab-link)
 ;;(eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
 
