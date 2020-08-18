@@ -1246,7 +1246,6 @@ FACE defaults to inheriting from default and highlight."
 
 ** Org-babel
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
-(setq org-babel-mathematica-command "~/.local/bin/mash")
 (defun my-org-confirm-babel-evaluate (lang _body)
   "Return t if LANG is in whitelist."
   (not (or (string= lang "ditaa")
@@ -1255,6 +1254,7 @@ FACE defaults to inheriting from default and highlight."
            (string= lang "julia")
            (string= lang "C++")
            (string= lang "C")
+           (string= lang "ein")
            (string= lang "ein-R")
            (string= lang "python")
            (string= lang "ein-julia")
@@ -1266,6 +1266,9 @@ FACE defaults to inheriting from default and highlight."
 (setq org-babel-C++-compiler 'g++-9)
 (setq org-babel-C-compiler 'gcc-9)
 #+end_src
+
+#+RESULTS:
+: gcc-9
 
 ** org publish 
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/setting.el"
@@ -2052,8 +2055,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   ;; (setq jupyter-runtime-directory "~/.local/share/jupyter/runtime")
 (add-hook 'ob-async-pre-execute-src-block-hook
         '(lambda ()
-           (setq inferior-julia-program-name "~/.nix-profile/bin/julia")))
-
+           (setq inferior-julia-program-name "/run/current-system/sw/bin/julia ")))
 
 (use-package! grab-x-link
   :if (eq system-type 'gnu/linux)
