@@ -105,7 +105,7 @@ HTML them READ org
        ;;direnv
        ;;docker
        ;;editorconfig      ; let someone else argue about tabs vs spaces
-       ;;ein               ; tame Jupyter notebooks with emacs
+       ein               ; tame Jupyter notebooks with emacs
        (eval +overlay)     ; run code, run (also, repls)
        ;;flycheck          ; tasing you for every semicolon you forget
        ;;flyspell          ; tasing you for misspelling mispelling
@@ -338,7 +338,13 @@ HTML them READ org
 
 ** ein
 #+begin_src emacs-lisp :tangle "config.el"
-(use-package! ein)
+(use-package! ein
+  :init
+  (after! ein:notebook-mode
+    (poly-ein-mode 1)
+    (hungry-delete-mode -1)
+    )
+)
 #+end_src
 
 ** undo
@@ -1240,6 +1246,7 @@ FACE defaults to inheriting from default and highlight."
 
 ** Org-babel
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+(setq org-babel-mathematica-command "~/.local/bin/mash")
 (defun my-org-confirm-babel-evaluate (lang _body)
   "Return t if LANG is in whitelist."
   (not (or (string= lang "ditaa")
