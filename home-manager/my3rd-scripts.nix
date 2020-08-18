@@ -15,11 +15,11 @@
     sha256 = "1axy552dx9x478d2499ghy5rd2rm826f55mnz7zvscykcnk6fk0f";
   };
 
-  home.file.".myscript/eaf".source =pkgs.fetchFromGitHub {
+  home.file.".myscript/eaf".source = pkgs.fetchFromGitHub {
     owner = "manateelazycat";
     repo = "emacs-application-framework";
-    rev = "320840214bcb3cd2f5a0729adbe09a0ff56c8148";
-    sha256 = "0f4wra2w78nlbfgnwlnpmn2i73lrv4kqcsnfs86asmvf3g26d5jy";
+    rev = "c302d16c3840fb2bc655041b130ead0494662779";
+    sha256 = "sha256-YLZYYsAKwxQDmr7FUcu5wf+9Ui0WVQO9ftjmF8kQ8WM=";
   };
 
 

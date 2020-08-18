@@ -20,6 +20,8 @@
             pygments
             #orgbabelhelper
             wakatime
+            jupyter
+            jupyterlab
           ];
           ignoreCollisions = true;
         })

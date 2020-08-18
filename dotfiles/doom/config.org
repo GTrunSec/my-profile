@@ -211,7 +211,7 @@ HTML them READ org
        ;; The default module sets reasonable defaults for Emacs. It also
        ;; provides a Spacemacs-inspired keybinding scheme and a smartparens
        ;; config. Use it as a reference for your own modules.
-       (default +smartparens)
+       ;;(default +smartparens)
          :private
          spacemacs-default
          my-org
@@ -510,6 +510,8 @@ Uses `current-date-time-format' for the formatting the date/time."
       user-mail-address "gtrunsec@hardenedlinux.org")
 (setq-default history-length 1000)
 (setq create-lockfiles nil)
+(require 'org-protocol)
+
 ;; (setq browse-url-browser-function 'browse-url-Chrome)
 ;; https://emacs.stackexchange.com/questions/5603/how-to-quickly-copy-move-file-in-emacs-dired
 (setq dired-dwim-target t)
@@ -527,6 +529,7 @@ Uses `current-date-time-format' for the formatting the date/time."
 (add-hook! 'sunrise-start-hook 'xah-fly-insert-mode-activate)
 
 (setenv "XAPIAN_CJK_NGRAM" "1")
+(setenv "QT_DEBUG_PLUGINS" "1")
 (fset 'yes-or-no-p 'y-or-n-p)
 #+end_src
 
@@ -1363,6 +1366,8 @@ make
 *** org-roam
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-roam
+  :init
+  (require 'org-roam-protocol)
   :config
   (setq org-roam-directory "~/Documents/org-notes")
 )
@@ -1393,12 +1398,6 @@ make
 
 ** org-spacer :edit:
 - [[https://github.com/dustinlacewell/org-spacer.el][dustinlacewell/org-spacer.el: Enforce the number of blank lines between elements in an org-mode document]]
-
-  postInstall = ''
-    for prog in "$out"/bin/*; do
-        wrapProgram "$prog" --set PYTHONPATH $PYTHONPATH:${gunicorn}/lib/${python.libPrefix}/site-packages:$(toPythonPath "$out")
-    done
-  '';
 
 
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
@@ -2013,6 +2012,10 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   (setq bm-repository-file (f-join doom-private-dir "etc/bm-linux-data"))
   (setq bookmark-default-file
         (concat doom-private-dir "etc/bookmark-linux-default.el"))
+
+
+  (setq python-shell-interpreter "python3.7")
+  (setq eaf-python-command "python3.7")
 
   (bookmark-load bookmark-default-file t)
   (add-hook 'nix-mode-hook #'lsp)
