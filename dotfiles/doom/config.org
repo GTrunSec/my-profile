@@ -344,6 +344,14 @@ HTML them READ org
     (poly-ein-mode 1)
     (hungry-delete-mode -1)
     )
+  :config
+  (setq ob-ein-languages
+   (quote
+    (("ein-python" . python)
+     ("ein-R" . R)
+     ("ein-r" . R)
+     ("ein-haskell" . haskell)
+     ("ein-julia" . julia))))
 )
 #+end_src
 
@@ -1255,13 +1263,10 @@ FACE defaults to inheriting from default and highlight."
            (string= lang "C++")
            (string= lang "C")
            (string= lang "ein")
-           (string= lang "ein-R")
-           (string= lang "python")
-           (string= lang "ein-julia")
-           (string= lang "ein-python")
            (string= lang "plantuml"))))
 
 (setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)
+
 
 (setq org-babel-C++-compiler 'g++-9)
 (setq org-babel-C-compiler 'gcc-9)
@@ -1514,6 +1519,7 @@ make
       "ein"
       ;; "ruby"
       "js" "css"
+      "haskell"
       ;; "C" "C++"
 
       "rust" "go" "java"))
@@ -1647,12 +1653,11 @@ make
 (use-package! lsp-julia
   :init
   ;; (setq lsp-julia--self-path "~/.julia/packages")
-  (setq lsp-julia-default-environment "~/.julia/environments/v1.3")
+  (setq lsp-julia-default-environment "~/.julia/environments/v1.4")
   :config
   (add-hook 'julia-mode-hook #'lsp)
   (setq lsp-folding-range-limit 100)
   ;;(setq lsp-julia-package-dir nil)
-
 )
 #+end_src
 
@@ -2052,10 +2057,11 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
   (define-key org-mode-map (kbd "C-c l") 'grab-x-link)
   (setq notdeft-xapian-program "/home/gtrun/src/notdeft/xapian/notdeft-xapian")
+  (setq inferior-julia-program-name "/run/current-system/sw/bin/julia")
   ;; (setq jupyter-runtime-directory "~/.local/share/jupyter/runtime")
 (add-hook 'ob-async-pre-execute-src-block-hook
         '(lambda ()
-           (setq inferior-julia-program-name "/run/current-system/sw/bin/julia ")))
+           (setq inferior-julia-program-name "/run/current-system/sw/bin/julia")))
 
 (use-package! grab-x-link
   :if (eq system-type 'gnu/linux)
@@ -2136,8 +2142,6 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 (add-hook 'ob-async-pre-execute-src-block-hook
         '(lambda ()
            (setq inferior-julia-program-name "~/.nix-profile/bin/julia")))
-
-
 ;;(add-hook! 'emacs-startup-hook 'doom-modeline-mode)
 )
 
