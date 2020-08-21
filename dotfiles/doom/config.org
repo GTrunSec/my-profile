@@ -339,11 +339,6 @@ HTML them READ org
 ** ein
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! ein
-  :init
-  (after! ein:notebook-mode
-    (poly-ein-mode 1)
-    (hungry-delete-mode -1)
-    )
   :config
   (setq ob-ein-languages
    (quote
@@ -353,6 +348,11 @@ HTML them READ org
      ("ein-haskell" . haskell)
      ("ein-julia" . julia))))
 )
+
+(after! ein:ipynb-mode
+  (poly-ein-mode 1)
+  (hungry-delete-mode -1)
+  )
 #+end_src
 
 ** undo
