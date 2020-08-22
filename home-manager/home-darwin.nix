@@ -40,7 +40,7 @@ in
         ]))
         #vips
         ##cachix use ghcide-nix
-        (import ../nixos/channel/ghcide-nix {}).ghcide-ghc865
+        (import ../nixos/channel/ghcide-nix {}).ghcide-ghc883
         bat
         gron
         (all-hies.unstable.selection { selector = p: { inherit (p) ghc865; }; })

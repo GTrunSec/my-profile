@@ -1253,6 +1253,15 @@ FACE defaults to inheriting from default and highlight."
 # #+end_src
 
 ** Org-babel
+- [[https://org-babel.readthedocs.io/en/latest/header-args/][Header arguments - Org Babel reference card]]
+
+
+- [[http://kitchingroup.cheme.cmu.edu/blog/2015/01/04/Redirecting-stderr-in-org-mode-shell-blocks/][Redirecting stderr in org-mode shell blocks]]
+
+
+- [[https://necromuralist.github.io/posts/org-babel-cheat-sheet/][Org-Babel Cheat Sheet | The Cloistered Monkey]]
+
+
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (defun my-org-confirm-babel-evaluate (lang _body)
   "Return t if LANG is in whitelist."
