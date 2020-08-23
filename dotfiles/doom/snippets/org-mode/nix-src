@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
 # name: nix
 # uuid: nix
-# key: nix
+# key: no
 # condition: t
 # --
 #+begin_src nix :async t :exports both :results output

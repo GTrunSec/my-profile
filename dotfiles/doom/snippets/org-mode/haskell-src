@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: haskell-src
-# key: haskell
+# key: ho
 # --
 #+begin_src haskell :async t :exports both :results output
 $1
