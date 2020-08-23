@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name:python-src 
-# key: py-                                               
+# key: po
 # --
 #+begin_src python :results output :async t :file "~/Dropbox/Drop-project/my-learning-list/my-python/main.py"
 $1

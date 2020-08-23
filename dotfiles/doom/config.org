@@ -177,7 +177,7 @@ HTML them READ org
        ;;qt                ; the 'cutest' gui framework ever
        ;;racket            ; a DSL for DSL
        ;;ruby              ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
-       ;;rust              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
+       rust              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
        ;;scala             ; java, but good
        ;;scheme            ; a fully conniving family of lisps
        sh                ; she sells {ba,z,fi}sh shells on the C xor
@@ -345,6 +345,7 @@ HTML them READ org
     (("ein-python" . python)
      ("ein-R" . R)
      ("ein-r" . R)
+     ("ein-rust" . rust)
      ("ein-haskell" . haskell)
      ("ein-julia" . julia))))
 )
@@ -1263,6 +1264,10 @@ FACE defaults to inheriting from default and highlight."
 
 
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+  (after! ob-async
+    (add-to-list 'ob-async-no-async-languages-alist "rust")
+    )
+
 (defun my-org-confirm-babel-evaluate (lang _body)
   "Return t if LANG is in whitelist."
   (not (or (string= lang "ditaa")

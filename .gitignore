@@ -1,6 +1,7 @@
 ## nixos
 result
 keys.sh
+nixos-old
 #fish
 fundle.fish
 fish_prompt.fish

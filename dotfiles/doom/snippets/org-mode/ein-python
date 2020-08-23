@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: jupyter-python
-# key: jy
+# key: ep
 # --
 #+BEGIN_SRC ein-python :session localhost :exports both :results raw drawer
 $1

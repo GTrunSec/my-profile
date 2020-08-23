@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: jupyter-R
-# key: jr
+# key: eR
 # --
 #+BEGIN_SRC ein-R :session localhost :exports both :results raw drawer
 $1

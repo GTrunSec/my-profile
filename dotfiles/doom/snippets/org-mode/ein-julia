@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: jupyter-julia
-# key: jj
+# key: ej
 # --
 #+BEGIN_SRC ein-julia :session localhost :exports both :results raw drawer
 $1
