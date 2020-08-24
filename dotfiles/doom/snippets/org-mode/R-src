@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: R_src
-# key: ro
+# key: Ro
 # --
 #+begin_src R :results file :exports both
 $1
