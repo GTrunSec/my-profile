@@ -1264,22 +1264,18 @@ FACE defaults to inheriting from default and highlight."
 
 
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
-  (after! ob-async
-    (add-to-list 'ob-async-no-async-languages-alist "rust")
-    )
+(after! ob-async
+  (setq ob-async-no-async-languages-alist '("ipython" "ein-python"
+                                            "ein-rust"
+                                            "ein-haskell"
+                                            "ein-julia"
+                                            ))
+  )
 
-(defun my-org-confirm-babel-evaluate (lang _body)
-  "Return t if LANG is in whitelist."
-  (not (or (string= lang "ditaa")
-           (string= lang "dot")
-           (string= lang "R")
-           (string= lang "julia")
-           (string= lang "C++")
-           (string= lang "C")
-           (string= lang "ein")
-           (string= lang "plantuml"))))
 
-(setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)
+;;[[https://stackoverflow.com/questions/22668112/how-to-evaluate-all-code-blocks-when-exporting-in-emacs-org-mode][How to evaluate all code blocks when exporting in emacs org-mode - Stack Overflow]]
+(setq org-confirm-babel-evaluate nil)
+(setq org-export-use-babel nil)
 
 
 (setq org-babel-C++-compiler 'g++-9)
@@ -2197,4 +2193,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 - [[https://github.com/freetonik/emacs-dotfiles/blob/master/init.el][emacs-dotfiles/init.el at master · freetonik/emacs-dotfiles]]
 
 
-- Zettelkasten
+- [[https://github.com/MatthewZMD/.emacs.d][MatthewZMD/.emacs.d: M-EMACS, a full-feature GNU Emacs configuration distribution]]
+
+
+  - Zettelkasten
