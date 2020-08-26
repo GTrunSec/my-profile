@@ -1,7 +1,12 @@
 { config, lib, pkgs, ... }:
 let
 
-  nixpkgs = (import ~/.config/nixpkgs/nixos/channel/nixpkgs) { };
+  overlays = [ (import ../nixos-flk/overlays/pkgs.nix)
+             ];
+
+
+  nixpkgs = (import ~/.config/nixpkgs/nixos/channel/nixpkgs) { inherit overlays;};
+
   all-hies = import (fetchTarball "https://github.com/infinisil/all-hies/tarball/4b6aab017cdf96a90641dc287437685675d598da") {};
   my-pkgs = pkgs.fetchFromGitHub {
     owner = "hardenedlinux";
@@ -22,6 +27,7 @@ in
     (mkIf pkgs.stdenv.isDarwin {
       home.packages = with nixpkgs;[
         customVscode
+        govet
         #R-with-my-packages
         (python3.withPackages (pkgs: with pkgs; [
           shapely

@@ -1639,7 +1639,10 @@ make
 
 #+end_src
 
-** Poly
+** Poly && ess
+- [[https://github.com/ShuguangSun/ess-view-data][ShuguangSun/ess-view-data: View data support for ESS]]
+
+
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
 (use-package! polymode)
 (use-package! poly-markdown
