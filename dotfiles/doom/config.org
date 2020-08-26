@@ -2149,9 +2149,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
 (setq notdeft-xapian-program "/Users/gtrun/src/notdeft/xapian/notdeft-xapian")
 
-(add-hook 'ob-async-pre-execute-src-block-hook
-        '(lambda ()
-           (setq inferior-julia-program-name "~/.nix-profile/bin/julia")))
+(setq inferior-julia-program-name "~/.nix-profile/bin/julia")
 ;;(add-hook! 'emacs-startup-hook 'doom-modeline-mode)
 )
 

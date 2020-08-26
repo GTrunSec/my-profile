@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 let
 
-  nixpkgs = (import ~/.config/nixpkgs/nixos/channel/nixpkgs) { };
+  nixpkgs = (import ~/.config/nixpkgs/nixos/channel/nixpkgs) { inherit overlays; };
   all-hies = import (fetchTarball "https://github.com/infinisil/all-hies/tarball/4b6aab017cdf96a90641dc287437685675d598da") {};
   my-pkgs = pkgs.fetchFromGitHub {
     owner = "hardenedlinux";
@@ -30,6 +30,7 @@ in
           pandas
           numpy
           scikitlearn
+          jupyter
           # (pylint.overridePythonAttrs (oldAttrs: {
           #     src = fetchPypi {
           #       pname = "pylint";
