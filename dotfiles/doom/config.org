@@ -1254,6 +1254,9 @@ FACE defaults to inheriting from default and highlight."
 # #+end_src
 
 ** Org-babel
+- [doc] [[https://orgmode.org/manual/Results-of-Evaluation.html][Results of Evaluation (The Org Manual)]]
+
+
 - [[https://org-babel.readthedocs.io/en/latest/header-args/][Header arguments - Org Babel reference card]]
 
 
@@ -2150,6 +2153,11 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 (setq notdeft-xapian-program "/Users/gtrun/src/notdeft/xapian/notdeft-xapian")
 
 (setq inferior-julia-program-name "~/.nix-profile/bin/julia")
+
+
+(add-hook 'ob-async-pre-execute-src-block-hook
+        '(lambda ()
+           (setq inferior-julia-program-name "~/.nix-profile/bin/julia")))
 ;;(add-hook! 'emacs-startup-hook 'doom-modeline-mode)
 )
 
