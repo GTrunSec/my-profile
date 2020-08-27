@@ -29,7 +29,7 @@ in
         customVscode
         govet
         #R-with-my-packages
-        (python3.withPackages (pkgs: with pkgs; [
+        (python37.withPackages (pkgs: with pkgs; [
           shapely
           matplotlib
           sqlalchemy
@@ -37,6 +37,7 @@ in
           numpy
           scikitlearn
           jupyter
+          python-language-server
           # (pylint.overridePythonAttrs (oldAttrs: {
           #     src = fetchPypi {
           #       pname = "pylint";

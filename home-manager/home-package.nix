@@ -9,6 +9,7 @@ let
 in
 {
   config = with lib; mkMerge [
+
     (mkIf (pkgs.stdenv.isLinux || pkgs.stdenv.isDarwin) {
       home.packages = with stable;[
         vips
