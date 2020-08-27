@@ -1062,7 +1062,7 @@ FACE defaults to inheriting from default and highlight."
                    )
   (org-starter-def "~/.config/nixpkgs/dotfiles/doom/"
                    :files
-                   ("config.org" :key "i" :refile (:maxlevel . 5))
+                   ("config.org" :key "c" :refile (:maxlevel . 5))
                    ;;("nix.org" :key "x" :refile (:maxlevel . 5))
                    )
   (org-starter-def "~/.config/nixpkgs"
@@ -1077,7 +1077,7 @@ FACE defaults to inheriting from default and highlight."
       "
   Org-starter-files
   ^^^^------------------------------------------------
- _i_: config.org  _g_: gtd.org     _l_: love.org
+ _c_: config.org  _g_: gtd.org     _l_: love.org
  _n_: note        _t_: traveling    _h_: Habit.org
  _m_: myself      _q_: 情-qing      _p_: Plan.org
  _b_: my-books    _e_: elfeed       _M_: learn music
@@ -1920,6 +1920,10 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
 ** grip-mode
 - [[https://github.com/seagle0128/grip-mode][seagle0128/grip-mode: Instant Github-flavored Markdown/Org preview using grip]]
+
+
+** windown manager
+- [[https://github.com/nex3/perspective-el][nex3/perspective-el: Perspectives for Emacs.]]
 
 
 * chinese
