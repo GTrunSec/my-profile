@@ -1074,16 +1074,16 @@ FACE defaults to inheriting from default and highlight."
 
 
  (defhydra gtrun/hydra-org-starter nil
-      "
+   "
   Org-starter-files
   ^^^^------------------------------------------------
  _c_: config.org  _g_: gtd.org     _l_: love.org
  _n_: note        _t_: traveling    _h_: Habit.org
  _m_: myself      _q_: 情-qing      _p_: Plan.org
  _b_: my-books    _e_: elfeed       _M_: learn music
-
   "
-      ("i" org-starter-find-file:config)
+   
+      ("c" org-starter-find-file:config)
       ("g" org-starter-find-file:gtd)
       ("n" org-starter-find-file:notes)
       ("e" org-starter-find-file:elfeed)
@@ -1398,22 +1398,32 @@ make
   (require 'org-roam-protocol)
   :config
   (setq org-roam-directory "~/Documents/org-notes")
-)
-#+end_src
 
-*** org-roam-server
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
-(use-package! org-roam-server
-  :config
-  (setq org-roam-server-host "127.0.0.1"
-        org-roam-server-port 8081
-        org-roam-server-export-inline-images t
-        org-roam-server-authenticate nil
-        org-roam-server-network-poll t
-        org-roam-server-network-arrows nil
-        org-roam-server-network-label-truncate t
-        org-roam-server-network-label-truncate-length 60
-        org-roam-server-network-label-wrap-length 20))
+  ;;https://github.com/zaeph/.emacs.d/blob/0f4bf9a500ef6397b93c41cb51602bea9ab9a4c3/init.el#L3804
+  
+  (setq org-roam-dailies-directory "~/Documents/org-notes/dailies")
+  (setq org-roam-capture-templates
+        '(("d" "default" plain
+           (function org-roam-capture--get-point)
+           "%?"
+           :file-name "%<%Y%m%d%H%M%S>-${slug}"
+           :head "#+title: ${title}\n#+created: %u\n#+last_modified: %U\n\n"
+           :unnarrowed t))
+        org-roam-capture-ref-templates
+        '(("r" "ref" plain
+           (function org-roam-capture--get-point)
+           ""
+           :file-name "web/${slug}"
+           :head "#+title: ${title}\n#+roam_key: ${ref}\n#+created: %u\n#+last_modified: %U\n\n"
+           :unnarrowed t))
+        org-roam-dailies-directory "scratch/"
+        org-roam-dailies-capture--header-default
+        "#+title: %<%Y-%m-%d>\n\n"
+        org-roam-dailies-capture-templates
+        '(("d" "daily" entry #'org-roam-capture--get-point
+           "* %?\n"
+           :add-created t)))
+)
 #+end_src
 
 ** ob-mermaid
@@ -2210,3 +2220,5 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
 
   - Zettelkasten
+
+
