@@ -1490,6 +1490,7 @@ make
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/packages.el"
 (package! lsp-julia :recipe (:host github :repo "non-Jedi/lsp-julia"))
 (package! nox :recipe (:host github :repo "manateelazycat/nox"))
+(package! lsp-haskell)
 #+end_src
 
 ** lsp
