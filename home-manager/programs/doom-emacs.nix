@@ -40,18 +40,8 @@ in
      if [ ! -d "$HOME/.doom.d/modules/my-code" ];then
           mkdir -p $HOME/.doom.d/modules/private/my-org
           mkdir -p $HOME/.doom.d/modules/private/my-code
-          mkdir -p $HOME/.doom.d/modules/private/public
           mkdir -p $HOME/.doom.d/autoload
      fi
-     #  ##modules
-     # ln -sfT $HOME/.emacs.d/modules/lang/haskell $HOME/.doom.d/modules/private/public/ihaskell #haskell module
-     # ln -sfT $HOME/.emacs.d/modules/lang/nix $HOME/.doom.d/modules/private/public/inix #nix module
-     # ln -sfT $HOME/.emacs.d/modules/lang/julia $HOME/.doom.d/modules/private/public/ijulia #nix module
-     # ##tools
-     # ln -sfT $HOME/.emacs.d/modules/tools/ein $HOME/.doom.d/modules/private/public/iein #ein module
-
-     # ## remove packages.el
-     #  find -L $HOME/.doom.d/modules/private/public -mindepth 1 -name packages.el -delete
    '';
       # editors
       home.file.".doom.d/config.org" = {
@@ -103,9 +93,6 @@ in
           go-gen-test
           company-go
           flycheck-golangci-lint
-          #haskell
-          haskell-mode
-          lsp-haskell
           #latex
           ivy-bibtex
           company-auctex
@@ -114,17 +101,11 @@ in
           auctex
           adaptive-wrap
           latex-preview-pane
-          #julia
-          julia-repl
           #markdown
           markdown-mode
           markdown-toc
           edit-indirect
           grip-mode
-          #nix
-          nix-mode
-          nix-update
-          company-nixos-options
           #helm-nixos-options
           ##vterm
           vterm
