@@ -1003,6 +1003,7 @@ FACE defaults to inheriting from default and highlight."
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (setq org-clock-into-drawer t)
 (add-hook! 'org-mode-hook 'auto-revert-mode)
+(add-hook! 'dired-mode-hook 'org-download-enable)
 ;; (setq-hook! 'org-mode-hook fill-column 80)
 ;; (setq-hook! 'org-mode-hook org-superstar-mode 1)
 (setq org-directory "~/Documents/org-notes")
@@ -1410,6 +1411,21 @@ make
 
 #+RESULTS:
 : t
+
+** org-templates
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/config.el"
+(defun org-roam-dailies-capture-today ()
+  "Capture a note into the daily note for today."
+  (interactive)
+  (let ((org-roam-capture-templates org-roam-dailies-capture-templates)
+        (org-roam-capture--info (list (cons 'time (current-time))))
+        (org-roam-capture--context 'dailies))
+    (org-roam--capture)))
+
+
+(setq org-capture-templates '(("n" "Note" entry (function org-roam-dailies-capture-today)
+                                 "* %?\n")))
+#+end_src
 
 ** ob-mermaid
 #+begin_src emacs-lisp :tangle  "./modules/private/my-org/config.el"
@@ -1881,8 +1897,11 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
 *** [[https://github.com/rougier/elegant-emacs][rougier/elegant-emacs: A very minimal but elegant emacs (I think)]]
 
-** writegood
+** writeroom or writegood
 - [[https://github.com/bnbeckwith/writegood-mode][bnbeckwith/writegood-mode: Minor mode for Emacs to improve English writing]]
+
+
+- [[https://github.com/joostkremers/writeroom-mode][joostkremers/writeroom-mode: Writeroom-mode: distraction-free writing for Emacs.]]
 
 
 #+begin_src emacs-lisp :tangle "config.el"
@@ -1893,6 +1912,9 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   :config
   (advice-add 'text-scale-adjust :after
               #'visual-fill-column-adjust)
+
+  ;;https://github.com/joostkremers/writeroom-mode#fullscreen-effect
+  (setq writeroom-fullscreen-effect 'maximized)
 )
 #+end_src
 
@@ -2205,5 +2227,3 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
 
   - Zettelkasten
-
-
