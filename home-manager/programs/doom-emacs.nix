@@ -31,11 +31,11 @@ in
      mkdir -p $HOME/.doom.d/etc
      fi
 
-     ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/doom/lisp" $HOME/.doom.d/lisp
-     ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/doom/bin" $HOME/.doom.d/bin
-     ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/doom/snippets" $HOME/.doom.d/snippets
-     ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/doom/modules" $HOME/.doom.d/modules
-     ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/doom/Makefile" $HOME/.doom.d/Makefile
+     ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/doom-emacs/lisp" $HOME/.doom.d/lisp
+     ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/doom-emacs/bin" $HOME/.doom.d/bin
+     ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/doom-emacs/snippets" $HOME/.doom.d/snippets
+     ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/doom-emacs/modules" $HOME/.doom.d/modules
+     ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/doom-emacs/Makefile" $HOME/.doom.d/Makefile
 
      if [ ! -d "$HOME/.doom.d/modules/my-code" ];then
           mkdir -p $HOME/.doom.d/modules/private/my-org
@@ -55,11 +55,11 @@ in
    '';
       # editors
       home.file.".doom.d/config.org" = {
-        source = ../../dotfiles/doom/config.org;
+        source = ../../dotfiles/doom-emacs/config.org;
         onChange = updateInit;
       };
       home.file.".doom.d/xah-fly.org" = {
-        source = ../../dotfiles/doom/xah-fly.org;
+        source = ../../dotfiles/doom-emacs/xah-fly.org;
         onChange = updateDoom;
       };
 

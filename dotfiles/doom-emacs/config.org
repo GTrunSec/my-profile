@@ -1061,7 +1061,7 @@ FACE defaults to inheriting from default and highlight."
                    ("NSM-GTD/NsmOrg.org"           :agenda t :required t)
                    ("art/learn-music.org"          :agenda t :key "M" :refile (:maxlevel .5 ))
                    )
-  (org-starter-def "~/.config/nixpkgs/dotfiles/doom/"
+  (org-starter-def "~/.config/nixpkgs/dotfiles/doom-emacs/"
                    :files
                    ("config.org" :key "c" :refile (:maxlevel . 5))
                    ;;("nix.org" :key "x" :refile (:maxlevel . 5))
@@ -1306,7 +1306,7 @@ FACE defaults to inheriting from default and highlight."
            :exclude "README.org"
            )
           ("init"
-           :base-directory "~/.config/nixpkgs/dotfiles/doom"
+           :base-directory "~/.config/nixpkgs/dotfiles/doom-emacs"
            :publishing-function org-html-publish-to-html
            :publishing-directory "~/Documents/my-blog/public/custom"
            )

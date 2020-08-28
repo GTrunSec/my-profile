@@ -8,13 +8,13 @@ fish_prompt.fish
 
 .DS_Store
 init.el
-dotfiles/doom/modules/*.el
-dotfiles/doom/autoload/*.el
-dotfiles/doom/modules/private/my-code/*.el
-dotfiles/doom/modules/private/my-org/*.el
-dotfiles/doom/modules/private/public
-dotfiles/doom/*.el
-dotfiles/doom/etc/b*
+dotfiles/doom-emacs/modules/*.el
+dotfiles/doom-emacs/autoload/*.el
+dotfiles/doom-emacs/modules/private/my-code/*.el
+dotfiles/doom-emacs/modules/private/my-org/*.el
+dotfiles/doom-emacs/modules/private/public
+dotfiles/doom-emacs/*.el
+dotfiles/doom-emacs/etc/b*
 dotfiles/emacs/emacs.d/var
 dotfiles/emacs/emacs.d/straight
 dotfiles/emacs/emacs.d/.*
@@ -55,4 +55,4 @@ dotfiles/emacs/emacs.d/pyim/rime/user.yaml
 dotfiles/emacs/emacs.d/mspyls
 dotfiles/emacs/emacs.d/SessionDesktop.el
 
-dotfiles/doom/Makefile
+dotfiles/doom-emacs/Makefile
