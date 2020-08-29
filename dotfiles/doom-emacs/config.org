@@ -19,7 +19,10 @@ HTML them READ org
 
 #+END_QUOTE
 
--  [[https://www.gtrun.org/custom/init.html][My Doom Emacs config]]
+- [[https://www.gtrun.org/custom/config.html][My Doom Emacs config]]
+
+
+- [Source Code] [[https://github.com/GTrunSec/my-profile/tree/master/dotfiles/doom-emacs][my-profile/dotfiles/doom-emacs at master · GTrunSec/my-profile]]
 
 
 * init.el
@@ -220,10 +223,6 @@ HTML them READ org
 #+end_src
 
 * package.el
-:PROPERTIES:
-:ID:       F2FFBBA8-3EFB-4336-81A5-0BE0A548EAC7
-:END:
-
 #+begin_src emacs-lisp :tangle "packages.el"
 (package! discover :recipe (:host github :repo "mickeynp/discover.el"))
 (package! xah-fly-keys :recipe (:host github :repo "GTrunSec/xah-fly-keys"))
@@ -238,9 +237,11 @@ HTML them READ org
 ;; (package! berrys-theme)
 #+end_src
 
-*** [[https://github.com/jackkamm/undo-propose-el][jackkamm/undo-propose-el: Navigate the emacs undo history by staging undo's in a temporary buffer]]
+-  [[https://github.com/jackkamm/undo-propose-el][jackkamm/undo-propose-el: Navigate the emacs undo history by staging undo's in a temporary buffer]]
 
-*** [[https://github.com/Overdr0ne/sfs][GitHub - Overdr0ne/sfs: Search File System for Emacs]]
+
+-  [[https://github.com/Overdr0ne/sfs][GitHub - Overdr0ne/sfs: Search File System for Emacs]]
+
 
 * config.el
 #+begin_src emacs-lisp :tangle "config.el"

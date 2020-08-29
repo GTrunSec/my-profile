@@ -5,6 +5,10 @@ in
 {
   config = with lib; mkMerge [
     ({
+      home.packages = with pkgs;[
+        ##https://github.com/ajeetdsouza/zoxide A faster way to navigate your filesystem
+        zoxide
+      ];
       programs.zsh = {
         enable = true;
         autocd = true;
@@ -15,7 +19,7 @@ in
           enable = true;
           plugins = [ "git" "sudo" "z" "docker" "git-flow" "tmux" "history-substring-search" "python"
                     ];
-          theme = "xiong-chiamiov";
+          theme = "xiong-chiamiov-plus";
         };
         history = {
           share = true;
@@ -127,6 +131,8 @@ in
       programs.zsh.sessionVariables ={
         PATH =  "$HOME/.nix-profile/bin:/bin:/usr/bin:/run/current-system/sw/bin/:/usr/local/bin:/Applications/kitty.app/Contents/MacOS:/sbin/:/usr/sbin/";
         TMUX_TMPDIR = "$HOME/.config/.";
+        LANG = "en_US.UTF-8";
+        export = "LC_ALL=en_US.UTF-8";
       };
     })
   ];
