@@ -1357,6 +1357,7 @@ FACE defaults to inheriting from default and highlight."
   (setq notdeft-extension "org")
   ;;(setq notdeft-secondary-extensions '("md" "org" "scrbl"))
   (setq notdeft-directories '("~/Documents/org-notes/post/myself"
+                              "~/Documents/org-notes/dailies"
                               "~/Documents/org-notes/post/life-thing"
                               "~/Documents/org-notes/post/traveling"
                               "~/Documents/org-notes/post/agenda"
@@ -1402,7 +1403,7 @@ make
 (setq org-roam-dailies-capture-templates '(("d" "daily" plain (function org-roam-capture--get-point) ""
                                             :immediate-finish t
                                             :file-name "dailies/%<%Y-%m-%d>-${slug}"
-                                            :head "#+TITLE: ${title}\n#+created: %u\n#+last_modified: %U\n\n")))
+                                            :head "#+TITLE: %<%Y-%m-%d>-${slug}\n#+created: %u\n#+last_modified: %U\n\n")))
 )
 #+end_src
 
