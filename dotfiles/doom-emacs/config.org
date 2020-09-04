@@ -169,6 +169,7 @@ HTML them READ org
         +ipython         ; ipython/jupyter support for babel
         +pandoc          ; export-with-pandoc support
         +roam
+        +helm-org
         ;+pomodoro        ; be fruitful with the tomato technique
         +present)        ; using org-mode for presentations
        ;;perl              ; write code no one else can comprehend
@@ -971,7 +972,10 @@ FACE defaults to inheriting from default and highlight."
 (package! org-treeusage :recipe (:host github :repo "mtekman/org-treeusage.el"))
 (package! org-ql)
 (package! org-roam-server)
-;;(package! org-super-links :recipe (:host github :repo ;;"toshism/org-super-links"))
+;;load super-links from local path
+;;(package! org-super-links :recipe (:host github :repo "toshism/org-super-links" :branch "develop"))
+(package! org-roam-bibtex)
+(package! org-ref)
 #+end_src
 
 ** config Use-package
@@ -988,7 +992,8 @@ FACE defaults to inheriting from default and highlight."
   )
 ;;(use-package emacs-powerthesaurus)
 (use-package! org-ql
-  :commands helm-org-ql
+  :init
+  (require 'helm-org-ql)
 )
 (use-package! org-superstar
   :config
@@ -1424,6 +1429,26 @@ make
         org-roam-server-network-label-wrap-length 20))
 #+end_src
 
+*** org-roam-bibtex
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+(use-package! org-roam-bibtex
+  :config
+  (add-hook 'org-mode-hook #'org-roam-bibtex-mode)
+  :bind (:map org-roam-bibtex-mode-map
+              ("C-c n a" . orb-note-actions)
+              )
+  )
+#+end_src
+
+** org-ref
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+(use-package! org-ref
+  :config
+  (setq org-ref-default-bibliography '("~/Documents/org-notes/bibliography/myBibliography.bib"))
+(setq bibtex-completion-bibliography "~/Documents/org-notes/bibliography/myBibliography.bib")
+  )
+#+end_src
+
 ** org-templates
 #+begin_src emacs-lisp :tangle  "./modules/private/my-org/config.el"
 (defun org-roam-dailies-capture-today ()
@@ -1498,7 +1523,10 @@ make
 
 
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
-;;(use-package! org-super-links)
+(use-package! org-super-links
+  :load-path "~/.myscript/org-super-links"
+  )
+
 #+end_src
 
 * my-codes

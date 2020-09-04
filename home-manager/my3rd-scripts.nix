@@ -29,4 +29,12 @@
     rev = "7e83f3822c00ee496cce42cf69331436cb3b1379";
     sha256 = "1448d333vny2gq4jaldl9zy62jy81ih5166l0aak3p49vv8g38bz";
   };
+
+  home.file.".myscript/org-super-links".source = pkgs.fetchFromGitHub {
+    owner = "toshism";
+    repo = "org-super-links";
+    rev = "169389ca32a9891a3c2b2bc25a286eeeeac19130";
+    sha256 = "1f1s4f3ayd0ig41iwrb523r45b2i6ds36l0vgqhflpk8wa3irjrb";
+  };
+
 }
