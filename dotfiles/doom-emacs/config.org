@@ -978,27 +978,13 @@ FACE defaults to inheriting from default and highlight."
 (package! org-ref)
 #+end_src
 
-** config Use-package
+** load basic config
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (load! "setting")
-(setq org-superstar-headline-bullets-list '("☰" "☷" "☵" "☲"  "☳" "☴"  "☶"  "☱" ))
 (use-package! company-english-helper)
 (use-package! ox-hugo)
 (use-package! ob-session-async)
 (use-package! ob-async)
-(use-package! org-books
-  :config
-  (setq org-books-file "~/Documents/org-notes/GTD/my-books.org")
-  )
-;;(use-package emacs-powerthesaurus)
-(use-package! org-ql
-  :init
-  (require 'helm-org-ql)
-)
-(use-package! org-superstar
-  :config
-  (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
-)
 #+end_src
 
 ** org-setting
@@ -1107,6 +1093,23 @@ FACE defaults to inheriting from default and highlight."
   ("C-c e" . org-starter-select-file))
  ;; "C-c e" . org-starter-refile-by-key))
  )
+#+end_src
+
+** org-superstar
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+(use-package! org-superstar
+  :config
+  (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
+  (setq org-superstar-headline-bullets-list '("☰" "☷" "☵" "☲"  "☳" "☴"  "☶"  "☱" ))
+)
+#+end_src
+
+** org-book
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+(use-package! org-books
+  :config
+  (setq org-books-file "~/Documents/org-notes/GTD/my-books.org")
+  )
 #+end_src
 
 ** super-agenda
@@ -1416,6 +1419,9 @@ make
 : t
 
 *** org-roam-server
+- [[https://github.com/org-roam/org-roam-server][org-roam/org-roam-server: A Web Application to Visualize the Org-Roam Database]]
+
+
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-roam-server
   :config
@@ -1528,6 +1534,10 @@ make
   )
 
 #+end_src
+
+** org-clones
+- [[https://github.com/legalnonsense/org-clones][legalnonsense/org-clones: Prototype for method of cloning orgmore headers]]
+
 
 * my-codes
 ** packages

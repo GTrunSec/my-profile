@@ -530,6 +530,17 @@ gateway 192.168.122.1
 * Blog
 ** [[https://github.com/getgridea/gridea][getgridea/gridea: ✍️一个静态博客写作客户端 (A static blog writing client)]]
 ** [[https://github.com/panr/hugo-theme-hello-friend/][panr/hugo-theme-hello-friend: Pretty basic theme for Hugo that covers all of the essentials. All you have to do is start typing!]]
+** Jekyll
+- osx
+
+
+#+begin_src sh :async t :exports both :results output
+sudo rm -rf /Library/Ruby/
+sudo chown $USER /Library/Ruby/
+gem install bundler jekyll
+ruby-bundle install
+#+end_src
+
 * Docker
 ** [[https://github.com/docker-slim/docker-slim#installation][docker-slim/docker-slim: DockerSlim (docker-slim): Don't change anything in your Docker container image and minify it by up to 30x (and for compiled languages even more) making it secure too! (free and open source)]]
 * Book
