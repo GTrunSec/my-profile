@@ -74,6 +74,8 @@ in
           }
           #org-mode roam-server
         )
+        #emacs org notice
+        libnotify
       ];
     })
   ];

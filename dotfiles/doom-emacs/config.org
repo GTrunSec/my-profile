@@ -14,6 +14,7 @@
 - [[https://github.com/hlissner/doom-emacs/blob/develop/docs/getting_started.org][doom-emacs/getting_started.org at develop · hlissner/doom-emacs]]
 
 
+#+TAGS: GTD(G) writing(w) export(e) manage(m) graphical(g)
 #+BEGIN_QUOTE
 HTML them READ org
 
@@ -965,7 +966,6 @@ FACE defaults to inheriting from default and highlight."
 ** Packages
 #+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
 (package! company-english-helper :recipe (:host github :repo "manateelazycat/company-english-helper"))
-(package! org-books :recipe (:host github :repo "lepisma/org-books"))
 (package! notdeft :recipe (:host github :repo "hasu/notdeft"))
 (package! emacs-powerthesaurus :recipe (:host github :repo "SavchenkoValeriy/emacs-powerthesaurus"))
 (package! org-spacer.el :recipe (:host github :repo "dustinlacewell/org-spacer.el"))
@@ -1026,6 +1026,10 @@ FACE defaults to inheriting from default and highlight."
 #+end_src
 
 ** org-starter
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
+(package! org-starter)
+#+end_src
+
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-starter
   :custom
@@ -1071,7 +1075,7 @@ FACE defaults to inheriting from default and highlight."
  _m_: myself      _q_: 情-qing      _p_: Plan.org
  _b_: my-books    _e_: elfeed       _M_: learn music
   "
-   
+
       ("c" org-starter-find-file:config)
       ("g" org-starter-find-file:gtd)
       ("n" org-starter-find-file:notes)
@@ -1096,6 +1100,10 @@ FACE defaults to inheriting from default and highlight."
 #+end_src
 
 ** org-superstar
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
+(package! org-superstar)
+#+end_src
+
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-superstar
   :config
@@ -1105,6 +1113,10 @@ FACE defaults to inheriting from default and highlight."
 #+end_src
 
 ** org-book
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
+(package! org-books :recipe (:host github :repo "lepisma/org-books"))
+#+end_src
+
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-books
   :config
@@ -1112,7 +1124,8 @@ FACE defaults to inheriting from default and highlight."
   )
 #+end_src
 
-** super-agenda
+** GTD
+*** super-agenda
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-super-agenda
   :config
@@ -1129,17 +1142,7 @@ FACE defaults to inheriting from default and highlight."
   )
 #+end_src
 
-** org-wild-notifier
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
-(use-package! org-wild-notifier
-  :defer t
-  :config
-  (add-hook! 'after-init-hook 'org-wild-notifier-mode)
-  (setq org-wild-notifier-alert-time 15
-        alert-default-style (if IS-MAC 'osx-notifier 'libnotify)))
-#+end_src
-
-** agenda-custom-setting
+*** agenda-custom-setting
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (require 'org-super-agenda)
 (setq org-agenda-custom-commands
@@ -1210,6 +1213,23 @@ FACE defaults to inheriting from default and highlight."
 
         ))
 #+end_src
+
+*** org-wild-notifier
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
+(package! org-wild-notifier)
+#+end_src
+
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+(use-package! org-wild-notifier
+  :defer t
+  :config
+  (add-hook! 'after-init-hook 'org-wild-notifier-mode)
+  (setq org-wild-notifier-alert-time 15
+        alert-default-style (if IS-MAC 'osx-notifier 'libnotify)))
+#+end_src
+
+*** ☞ TODO [[https://github.com/takaxp/org-onit][takaxp/org-onit: Easy org-clock-in and org-clock-out]]
+*** ☞ TODO [[https://github.com/Trevoke/org-gtd.el][Trevoke/org-gtd.el: A package for using GTD using org-mode (beta)]] :GTD:
 
 ** elfeed
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
@@ -1294,7 +1314,7 @@ FACE defaults to inheriting from default and highlight."
 #+RESULTS:
 : gcc-9
 
-** org publish 
+** org publish
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/setting.el"
   (setq org-publish-project-alist
         '(("nsm"
@@ -1390,7 +1410,8 @@ make
 
 ** org-protocal
 *** Doc
-- [[https://github.com/alphapapa/org-protocol-capture-html][alphapapa/org-protocol-capture-html: Capture HTML from the browser selection into Emacs as org-mode content]]
+ - 
+ - [[https://github.com/alphapapa/org-protocol-capture-html][alphapapa/org-protocol-capture-html: Capture HTML from the browser selection into Emacs as org-mode content]]
 
 
 ** org-roam
@@ -1524,6 +1545,8 @@ make
 )
 #+end_src
 
+*** [[https://github.com/ianxm/emacs-scrum][ianxm/emacs-scrum: dynamic scrum report generation for org-mode buffers]]
+
 ** org-super-links
 - [[https://github.com/toshism/org-super-links][toshism/org-super-links: Package to create links with auto backlinks]]
 
@@ -1536,8 +1559,19 @@ make
 #+end_src
 
 ** org-clones
-- [[https://github.com/legalnonsense/org-clones][legalnonsense/org-clones: Prototype for method of cloning orgmore headers]]
+1. [[https://github.com/legalnonsense/org-clones][legalnonsense/org-clones: Prototype for method of cloning orgmore headers]]
 
+
+** ☞ TODO [[https://github.com/marcIhm/org-working-set][marcIhm/org-working-set: Manage a working-set of org-nodes]] :manage:
+
+** [[https://github.com/alphapapa/org-graph-view][alphapapa/org-graph-view: View Org buffers as a clickable, graphical mind-map]]
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/packages.el"
+(package! org-graph-view :recipe (:host github :repo "alphapapa/org-graph-view"))
+#+end_src
+
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+(use-package! org-graph-view)
+#+end_src
 
 * my-codes
 ** packages
@@ -1681,6 +1715,8 @@ make
 
 *** [[https://github.com/cdominik/cdlatex][cdominik/cdlatex: Fast input methods to enter LaTeX environments and math with GNU Emacs]]
 
+*** ☞ TODO [[https://github.com/io12/org-fragtog][io12/org-fragtog: Automatically toggle org-mode latex fragment previews as the cursor enters and exits them]]
+
 ** haskell
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
 (use-package! lsp-haskell
@@ -1739,6 +1775,8 @@ make
 )
 #+end_src
 
+*** ☞ TODO [[https://github.com/gcv/julia-snail][gcv/julia-snail: An Emacs development environment for Julia]]
+
 ** python
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
 (setq flycheck-python-pylint-executable "pylint")
@@ -1769,6 +1807,12 @@ make
   ;;   (add-hook hook '(lambda () (nox-ensure))))
   )
 #+end_src
+
+** elisp
+*** ☞ TODO [[https://github.com/doublep/eldev][doublep/eldev: Elisp Development Tool]]
+***
+
+*** ☞ TODO [[https://github.com/emacs-elsa/Elsa][emacs-elsa/Elsa: Emacs Lisp Static Analyzer]]
 
 * Visual
 ** Buffer
@@ -1987,11 +2031,11 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 #+end_src
 
 ** grip-mode
-- [[https://github.com/seagle0128/grip-mode][seagle0128/grip-mode: Instant Github-flavored Markdown/Org preview using grip]]
+1. [[https://github.com/seagle0128/grip-mode][seagle0128/grip-mode: Instant Github-flavored Markdown/Org preview using grip]]
 
 
 ** windown manager
-- [[https://github.com/nex3/perspective-el][nex3/perspective-el: Perspectives for Emacs.]]
+1. [[https://github.com/nex3/perspective-el][nex3/perspective-el: Perspectives for Emacs.]]
 
 
 * chinese
@@ -2073,6 +2117,8 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 #+end_src
 
 ** [[https://github.com/arnm/ob-mermaid][arnm/ob-mermaid: Generate mermaid diagrams within Emacs org-mode babel]]
+** ☞ TODO [[https://github.com/zzkt/smog][zzkt/smog: Analyse the writing style, word use and readability of prose in Emacs.]] :writing:
+
 * load & unload
 ** disbale-package
 #+begin_src emacs-lisp :tangle "packages.el"
@@ -2278,3 +2324,6 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
 
   - Zettelkasten
+
+
+  - [[https://github.com/walseb/QualityEmacsConfig][walseb/QualityEmacsConfig]]
