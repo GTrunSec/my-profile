@@ -55,9 +55,16 @@ in
 
       programs.emacs = {
         enable = true;
-        package = emacsPkg.emacs;
+        package = pkgs.emacs.overrideAttrs (old: rec {
+          configureFlags = [
+            "--with-librsvg"
+            "--with-modules"
+            "--with-ns"
+            "--disable-ns-self-contained"
+          ];
+        });
         extraPackages = epkgs: with epkgs;[
-          #undo
+          #undo          
           undo-tree
           undo-fu-session
           undo-fu
@@ -72,7 +79,7 @@ in
           cython-mode
           pip-requirements
           poetry
-          nose
+          #nose
           python-pytest
           #data
           graphql-mode

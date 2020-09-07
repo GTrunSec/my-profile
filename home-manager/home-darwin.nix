@@ -29,7 +29,7 @@ in
         customVscode
         govet
         #R-with-my-packages
-        (python37.withPackages (pkgs: with pkgs; [
+        (python38.withPackages (pkgs: with pkgs; [
           shapely
           matplotlib
           sqlalchemy

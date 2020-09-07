@@ -1564,6 +1564,11 @@ make
 
 ** ☞ TODO [[https://github.com/marcIhm/org-working-set][marcIhm/org-working-set: Manage a working-set of org-nodes]] :manage:
 
+** [[https://github.com/mtekman/org-tanglesync.el][mtekman/org-tanglesync.el: A package to pull external changes into an org-mode source block if that block is tangled to an external file]]
+
+** ☞ TODO [[https://github.com/casouri/valign][casouri/valign: Pixel-perfect visual alignment for Org and Markdown tables.]]
+
+** ☞ TODO [[https://github.com/lepisma/org-krita][lepisma/org-krita: Krita sketches in Org]]
 ** [[https://github.com/alphapapa/org-graph-view][alphapapa/org-graph-view: View Org buffers as a clickable, graphical mind-map]]
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/packages.el"
 (package! org-graph-view :recipe (:host github :repo "alphapapa/org-graph-view"))
@@ -2118,6 +2123,9 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
 ** [[https://github.com/arnm/ob-mermaid][arnm/ob-mermaid: Generate mermaid diagrams within Emacs org-mode babel]]
 ** ☞ TODO [[https://github.com/zzkt/smog][zzkt/smog: Analyse the writing style, word use and readability of prose in Emacs.]] :writing:
+**
+
+** ☞ TODO [[https://github.com/rnkn/binder][rnkn/binder: Emacs global minor mode facilitating multi-file writing projects]]
 
 * load & unload
 ** disbale-package
