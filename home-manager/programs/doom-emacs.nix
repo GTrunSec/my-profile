@@ -55,16 +55,17 @@ in
 
       programs.emacs = {
         enable = true;
-        package = pkgs.emacs.overrideAttrs (old: rec {
-          configureFlags = [
-            "--with-librsvg"
-            "--with-modules"
-            "--with-ns"
-            "--disable-ns-self-contained"
-          ];
+
+        package = (pkgs.emacs.override({
+          imagemagick = pkgs.imagemagick;
+        })).overrideAttrs(old: rec {
+          configureFlags = (old.configureFlags or []) ++ ["--with-imagemagick"
+                                                          "--with-librsvg"
+                                                         ];
         });
+
         extraPackages = epkgs: with epkgs;[
-          #undo          
+          #undo
           undo-tree
           undo-fu-session
           undo-fu
@@ -160,8 +161,8 @@ in
           ivy-hydra
           flx
         ];
-        };
-        #services.emacs.enable = true;
+      };
+      #services.emacs.enable = true;
     })
   ];
 }
