@@ -1,4 +1,5 @@
 #+title: My Doom Emacs config
+
 #+EMAIL: gtrunsec@hardenedlinux.org
 #+DATE:  25 October 2019
 #+AUTHOR: GTrunSec
@@ -1559,7 +1560,9 @@ make
 #+end_src
 
 ** org-clones
-1. [[https://github.com/legalnonsense/org-clones][legalnonsense/org-clones: Prototype for method of cloning orgmore headers]]
+1. 
+
+   [[https://github.com/legalnonsense/org-clones][legalnonsense/org-clones: Prototype for method of cloning orgmore headers]]
 
 
 ** ☞ TODO [[https://github.com/marcIhm/org-working-set][marcIhm/org-working-set: Manage a working-set of org-nodes]] :manage:
@@ -1577,6 +1580,23 @@ make
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-graph-view)
 #+end_src
+
+** [[https://github.com/the-humanities/org-mind-map][the-humanities/org-mind-map: This is an emacs package that creates graphviz directed graphs.]]
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/packages.el"
+(package! org-mind-map :recipe (:host github :repo "the-humanities/org-mind-map"))
+#+end_src
+
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+(use-package! org-mind-map
+  :init
+  (require 'ox-org)
+  :config
+  (setq org-mind-map-engine "circo")
+  )
+#+end_src
+
+#+RESULTS:
+: t
 
 * my-codes
 ** packages
@@ -2141,6 +2161,8 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 ;;   '(awesome-tab-close-selected((t ( :foreground "DarkGray"))))
 ;;   )
 
+(set-popup-rule! "^\\*org-graph-view" :side 'right :size 70 :quit nil :select t :ttl 0)
+
 (set-popup-rule! "^\\*Ilist"
   :side 'right :size 35 :quit nil :select nil :ttl 0)
 
@@ -2149,6 +2171,8 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   :side 'right :size 35 :quit nil :select nil :ttl 0)
 )
 #+end_src
+
+#+RESULTS:
 
 * Linux & Macsos
 #+begin_src emacs-lisp :tangle "config.el"
