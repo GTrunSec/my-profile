@@ -621,7 +621,7 @@
 <title>[&lt;org&#45;spaceredit&gt;];</title>
 <polygon fill="none" stroke="black" points="2372.4,-503.22 2372.4,-524.22 2453.4,-524.22 2453.4,-503.22 2372.4,-503.22"/>
 <text text-anchor="start" x="2375.4" y="-510.02" font-family="Times-Roman" font-size="14.00">org&#45;spacer</text>
-<polygon fill="#d3b3d6" stroke="transparent" points="2372.4,-480.22 2372.4,-501.22 2453.4,-501.22 2453.4,-480.22 2372.4,-480.22"/>
+<polygon fill="#e382fa" stroke="transparent" points="2372.4,-480.22 2372.4,-501.22 2453.4,-501.22 2453.4,-480.22 2372.4,-480.22"/>
 <polygon fill="none" stroke="black" points="2372.4,-480.22 2372.4,-501.22 2453.4,-501.22 2453.4,-480.22 2372.4,-480.22"/>
 <text text-anchor="start" x="2399.4" y="-487.02" font-family="Times-Roman" font-size="14.00">edit</text>
 <polygon fill="none" stroke="black" points="2368.9,-477.22 2368.9,-527.22 2455.9,-527.22 2455.9,-477.22 2368.9,-477.22"/>
@@ -637,10 +637,10 @@
 <title>[&lt;org&#45;density.elsummarystatistic&gt;];</title>
 <polygon fill="none" stroke="black" points="2541.31,-456.1 2541.31,-477.1 2677.31,-477.1 2677.31,-456.1 2541.31,-456.1"/>
 <text text-anchor="start" x="2562.31" y="-462.9" font-family="Times-Roman" font-size="14.00">org&#45;density.el</text>
-<polygon fill="#82aad4" stroke="transparent" points="2541.31,-433.1 2541.31,-454.1 2614.31,-454.1 2614.31,-433.1 2541.31,-433.1"/>
+<polygon fill="#bbf8f4" stroke="transparent" points="2541.31,-433.1 2541.31,-454.1 2614.31,-454.1 2614.31,-433.1 2541.31,-433.1"/>
 <polygon fill="none" stroke="black" points="2541.31,-433.1 2541.31,-454.1 2614.31,-454.1 2614.31,-433.1 2541.31,-433.1"/>
 <text text-anchor="start" x="2544.31" y="-439.9" font-family="Times-Roman" font-size="14.00">summary</text>
-<polygon fill="#83bbe0" stroke="transparent" points="2616.31,-433.1 2616.31,-454.1 2677.31,-454.1 2677.31,-433.1 2616.31,-433.1"/>
+<polygon fill="#c8edcc" stroke="transparent" points="2616.31,-433.1 2616.31,-454.1 2677.31,-454.1 2677.31,-433.1 2616.31,-433.1"/>
 <polygon fill="none" stroke="black" points="2616.31,-433.1 2616.31,-454.1 2677.31,-454.1 2677.31,-433.1 2616.31,-433.1"/>
 <text text-anchor="start" x="2619.31" y="-439.9" font-family="Times-Roman" font-size="14.00">statistic</text>
 <polygon fill="none" stroke="black" points="2538.31,-430.1 2538.31,-480.1 2680.31,-480.1 2680.31,-430.1 2538.31,-430.1"/>
@@ -697,7 +697,7 @@
 <text text-anchor="start" x="4363.41" y="-690.59" font-family="Times-Roman" font-size="14.00">[[https://github.com/marcIhm/org&#45;working&#45;set][marcIhm/org&#45;working&#45;set:</text>
 <text text-anchor="start" x="4532.41" y="-675.59" font-family="Times-Roman" font-size="14.00">Manage a working&#45;set of</text>
 <text text-anchor="start" x="4577.91" y="-660.59" font-family="Times-Roman" font-size="14.00">org&#45;nodes]]</text>
-<polygon fill="#cd90dd" stroke="transparent" points="4360.41,-630.79 4360.41,-651.79 4876.41,-651.79 4876.41,-630.79 4360.41,-630.79"/>
+<polygon fill="#fa8c8a" stroke="transparent" points="4360.41,-630.79 4360.41,-651.79 4876.41,-651.79 4876.41,-630.79 4360.41,-630.79"/>
 <polygon fill="none" stroke="black" points="4360.41,-630.79 4360.41,-651.79 4876.41,-651.79 4876.41,-630.79 4360.41,-630.79"/>
 <text text-anchor="start" x="4589.91" y="-637.59" font-family="Times-Roman" font-size="14.00">manage</text>
 <polygon fill="none" stroke="black" points="4357.41,-627.79 4357.41,-707.79 4879.41,-707.79 4879.41,-627.79 4357.41,-627.79"/>
@@ -847,7 +847,7 @@
 <text text-anchor="start" x="850.78" y="-1611.08" font-family="Times-Roman" font-size="14.00">[[https://github.com/Trevoke/org&#45;gtd.el][Trevoke/org&#45;gtd.el:</text>
 <text text-anchor="start" x="946.78" y="-1596.08" font-family="Times-Roman" font-size="14.00">A package for using GTD using</text>
 <text text-anchor="start" x="992.78" y="-1581.08" font-family="Times-Roman" font-size="14.00">org&#45;mode (beta)]]</text>
-<polygon fill="#cd95be" stroke="transparent" points="847.78,-1551.28 847.78,-1572.28 1261.78,-1572.28 1261.78,-1551.28 847.78,-1551.28"/>
+<polygon fill="#abc399" stroke="transparent" points="847.78,-1551.28 847.78,-1572.28 1261.78,-1572.28 1261.78,-1551.28 847.78,-1551.28"/>
 <polygon fill="none" stroke="black" points="847.78,-1551.28 847.78,-1572.28 1261.78,-1572.28 1261.78,-1551.28 847.78,-1551.28"/>
 <text text-anchor="start" x="1039.78" y="-1558.08" font-family="Times-Roman" font-size="14.00">GTD</text>
 <polygon fill="none" stroke="black" points="844.78,-1548.28 844.78,-1628.28 1264.78,-1628.28 1264.78,-1548.28 844.78,-1548.28"/>
@@ -1531,7 +1531,7 @@
 <text text-anchor="start" x="7249.33" y="-917.19" font-family="Times-Roman" font-size="14.00">Analyse the writing style,</text>
 <text text-anchor="start" x="7242.83" y="-902.19" font-family="Times-Roman" font-size="14.00">word use and readability of</text>
 <text text-anchor="start" x="7277.33" y="-887.19" font-family="Times-Roman" font-size="14.00">prose in Emacs.]]</text>
-<polygon fill="#cde2b0" stroke="transparent" points="7184.33,-857.39 7184.33,-878.39 7491.33,-878.39 7491.33,-857.39 7184.33,-857.39"/>
+<polygon fill="#d5b8fb" stroke="transparent" points="7184.33,-857.39 7184.33,-878.39 7491.33,-878.39 7491.33,-857.39 7184.33,-857.39"/>
 <polygon fill="none" stroke="black" points="7184.33,-857.39 7184.33,-878.39 7491.33,-878.39 7491.33,-857.39 7184.33,-857.39"/>
 <text text-anchor="start" x="7313.33" y="-864.19" font-family="Times-Roman" font-size="14.00">writing</text>
 <polygon fill="none" stroke="black" points="7180.83,-854.89 7180.83,-949.89 7493.83,-949.89 7493.83,-854.89 7180.83,-854.89"/>
@@ -1615,32 +1615,32 @@
 <text text-anchor="start" x="3209.61" y="-1929.8" font-family="Times-Roman" font-weight="bold" font-size="14.00">Legend</text>
 <polygon fill="none" stroke="black" points="3185.61,-1895 3185.61,-1920 3262.61,-1920 3262.61,-1895 3185.61,-1895"/>
 <text text-anchor="start" x="3209.11" y="-1903.8" font-family="Times-Roman" font-size="14.00">GTD</text>
-<polygon fill="#cd95be" stroke="transparent" points="3262.61,-1895 3262.61,-1920 3291.61,-1920 3291.61,-1895 3262.61,-1895"/>
+<polygon fill="#abc399" stroke="transparent" points="3262.61,-1895 3262.61,-1920 3291.61,-1920 3291.61,-1895 3262.61,-1895"/>
 <polygon fill="none" stroke="black" points="3262.61,-1895 3262.61,-1920 3291.61,-1920 3291.61,-1895 3262.61,-1895"/>
 <text text-anchor="start" x="3267.61" y="-1903.8" font-family="Times-Roman" font-size="14.00">    </text>
 <polygon fill="none" stroke="black" points="3185.61,-1870 3185.61,-1895 3262.61,-1895 3262.61,-1870 3185.61,-1870"/>
 <text text-anchor="start" x="3210.61" y="-1878.8" font-family="Times-Roman" font-size="14.00">edit</text>
-<polygon fill="#d3b3d6" stroke="transparent" points="3262.61,-1870 3262.61,-1895 3291.61,-1895 3291.61,-1870 3262.61,-1870"/>
+<polygon fill="#e382fa" stroke="transparent" points="3262.61,-1870 3262.61,-1895 3291.61,-1895 3291.61,-1870 3262.61,-1870"/>
 <polygon fill="none" stroke="black" points="3262.61,-1870 3262.61,-1895 3291.61,-1895 3291.61,-1870 3262.61,-1870"/>
 <text text-anchor="start" x="3267.61" y="-1878.8" font-family="Times-Roman" font-size="14.00">    </text>
 <polygon fill="none" stroke="black" points="3185.61,-1845 3185.61,-1870 3262.61,-1870 3262.61,-1845 3185.61,-1845"/>
 <text text-anchor="start" x="3190.61" y="-1853.8" font-family="Times-Roman" font-size="14.00">summary</text>
-<polygon fill="#82aad4" stroke="transparent" points="3262.61,-1845 3262.61,-1870 3291.61,-1870 3291.61,-1845 3262.61,-1845"/>
+<polygon fill="#bbf8f4" stroke="transparent" points="3262.61,-1845 3262.61,-1870 3291.61,-1870 3291.61,-1845 3262.61,-1845"/>
 <polygon fill="none" stroke="black" points="3262.61,-1845 3262.61,-1870 3291.61,-1870 3291.61,-1845 3262.61,-1845"/>
 <text text-anchor="start" x="3267.61" y="-1853.8" font-family="Times-Roman" font-size="14.00">    </text>
 <polygon fill="none" stroke="black" points="3185.61,-1820 3185.61,-1845 3262.61,-1845 3262.61,-1820 3185.61,-1820"/>
 <text text-anchor="start" x="3196.61" y="-1828.8" font-family="Times-Roman" font-size="14.00">statistic</text>
-<polygon fill="#83bbe0" stroke="transparent" points="3262.61,-1820 3262.61,-1845 3291.61,-1845 3291.61,-1820 3262.61,-1820"/>
+<polygon fill="#c8edcc" stroke="transparent" points="3262.61,-1820 3262.61,-1845 3291.61,-1845 3291.61,-1820 3262.61,-1820"/>
 <polygon fill="none" stroke="black" points="3262.61,-1820 3262.61,-1845 3291.61,-1845 3291.61,-1820 3262.61,-1820"/>
 <text text-anchor="start" x="3267.61" y="-1828.8" font-family="Times-Roman" font-size="14.00">    </text>
 <polygon fill="none" stroke="black" points="3185.61,-1795 3185.61,-1820 3262.61,-1820 3262.61,-1795 3185.61,-1795"/>
 <text text-anchor="start" x="3195.61" y="-1803.8" font-family="Times-Roman" font-size="14.00">manage</text>
-<polygon fill="#cd90dd" stroke="transparent" points="3262.61,-1795 3262.61,-1820 3291.61,-1820 3291.61,-1795 3262.61,-1795"/>
+<polygon fill="#fa8c8a" stroke="transparent" points="3262.61,-1795 3262.61,-1820 3291.61,-1820 3291.61,-1795 3262.61,-1795"/>
 <polygon fill="none" stroke="black" points="3262.61,-1795 3262.61,-1820 3291.61,-1820 3291.61,-1795 3262.61,-1795"/>
 <text text-anchor="start" x="3267.61" y="-1803.8" font-family="Times-Roman" font-size="14.00">    </text>
 <polygon fill="none" stroke="black" points="3185.61,-1770 3185.61,-1795 3262.61,-1795 3262.61,-1770 3185.61,-1770"/>
 <text text-anchor="start" x="3199.61" y="-1778.8" font-family="Times-Roman" font-size="14.00">writing</text>
-<polygon fill="#cde2b0" stroke="transparent" points="3262.61,-1770 3262.61,-1795 3291.61,-1795 3291.61,-1770 3262.61,-1770"/>
+<polygon fill="#d5b8fb" stroke="transparent" points="3262.61,-1770 3262.61,-1795 3291.61,-1795 3291.61,-1770 3262.61,-1770"/>
 <polygon fill="none" stroke="black" points="3262.61,-1770 3262.61,-1795 3291.61,-1795 3291.61,-1770 3262.61,-1770"/>
 <text text-anchor="start" x="3267.61" y="-1778.8" font-family="Times-Roman" font-size="14.00">    </text>
 </g>
