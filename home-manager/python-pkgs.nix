@@ -7,7 +7,7 @@ in
     (mkIf pkgs.stdenv.isLinux {
       home.packages = with nixpkgs;[
         (python37.buildEnv.override {
-          extraLibs = with python3Packages; [
+          extraLibs = with python37Packages; [
             pytest
             numpy
             #orgparse
@@ -24,6 +24,19 @@ in
             wakatime
             jupyter
             jupyterlab
+            # emacs eafr python dep
+            shapely
+            dbus-python
+            qrcode
+            pyqt5
+            pymupdf
+            xlib
+            grip
+            pyinotify
+            pyqtwebengine
+            markdown
+            feedparser
+            #
           ];
           ignoreCollisions = true;
         })
@@ -33,15 +46,15 @@ in
     (mkIf pkgs.stdenv.isDarwin {
       home.packages = with nixpkgs;[
         (python37.buildEnv.override {
-          extraLibs = with python3Packages; [
-          shapely
-          matplotlib
-          sqlalchemy
-          pandas
-          numpy
-          scikitlearn
-          jupyter
-          python-language-server
+          extraLibs = with python37Packages; [
+            shapely
+            matplotlib
+            sqlalchemy
+            pandas
+            numpy
+            scikitlearn
+            jupyter
+            python-language-server
           ];
           ignoreCollisions = true;
         })
