@@ -14,7 +14,7 @@
 - [[https://github.com/hlissner/doom-emacs/blob/develop/docs/getting_started.org][doom-emacs/getting_started.org at develop · hlissner/doom-emacs]]
 
 
-#+TAGS: GTD(G) writing(w) export(e) manage(m) graphical(g)
+#+TAGS: GTD(G) writing(w) export(e) manage(m) graphical(g) nix(n)
 #+BEGIN_QUOTE
 HTML them READ org
 
@@ -973,7 +973,6 @@ FACE defaults to inheriting from default and highlight."
 (package! org-ql)
 (package! org-roam-server)
 ;;load super-links from local path
-;;(package! org-super-links :recipe (:host github :repo "toshism/org-super-links" :branch "develop"))
 (package! org-roam-bibtex)
 (package! org-ref)
 #+end_src
@@ -2180,7 +2179,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 (load! "./modules/my-macos.el")
 #+end_src
 
-** Linux
+** Linux only
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! my-linux
   :load-path "./modules"
@@ -2222,21 +2221,23 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
     )
 
   (define-key org-mode-map (kbd "C-c l") 'grab-x-link)
+  
   (setq notdeft-xapian-program "/home/gtrun/src/notdeft/xapian/notdeft-xapian")
   (setq inferior-julia-program-name "/run/current-system/sw/bin/julia")
   ;; (setq jupyter-runtime-directory "~/.local/share/jupyter/runtime")
-(add-hook 'ob-async-pre-execute-src-block-hook
-        '(lambda ()
-           (setq inferior-julia-program-name "/run/current-system/sw/bin/julia")))
-
-(use-package! grab-x-link
-  :if (eq system-type 'gnu/linux)
+  (add-hook 'ob-async-pre-execute-src-block-hook
+            '(lambda ()
+               (setq inferior-julia-program-name "/run/current-system/sw/bin/julia")))
   )
 
+#+end_src
+
+** eaf
+#+begin_src emacs-lisp :tangle "config.el"
 (when (display-graphic-p)
   (use-package! eaf
-    :if (eq system-type 'gnu/linux)
     :load-path "~/.myscript/eaf"
+    :if (eq system-type 'gnu/linux)
     :custom
     (eaf-find-alternate-file-in-dired t)
     :config
@@ -2250,16 +2251,26 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
       (interactive)
       (eaf-open-browser "https://www.google.com")))
   )
+#+end_src
 
+** snails
+#+begin_src emacs-lisp :tangle "config.el"
 (use-package! snails
-  :if (eq system-type 'gnu/linux)
   :load-path "~/.myscript/snails"
+  :if (eq system-type 'gnu/linux)
   :config
   (define-key snails-mode-map [remap next-line] #'snails-select-next-item)
   (add-hook 'snails-mode-hook #'xah-fly-insert-mode-activate))
-)
 #+end_src
 
+** grab-x-link :nix:
+#+begin_src emacs-lisp :tangle "config.el"
+(use-package! grab-x-link
+  :if (eq system-type 'gnu/linux)
+  )
+#+end_src
+
+** my-linux
 #+begin_src emacs-lisp :tangle "./modules/my-linux.el"
 (provide 'my-linux)
 #+end_src

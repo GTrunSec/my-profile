@@ -18,16 +18,16 @@
   home.file.".myscript/eaf".source = pkgs.fetchFromGitHub {
     owner = "manateelazycat";
     repo = "emacs-application-framework";
-    rev = "c302d16c3840fb2bc655041b130ead0494662779";
-    sha256 = "sha256-YLZYYsAKwxQDmr7FUcu5wf+9Ui0WVQO9ftjmF8kQ8WM=";
+    rev = "86c6c55f711a3ae72ab4f9f94111b992c3a2ac1b";
+    sha256 = "sha256-FLTLxFDpnAfnJd9P4iqmgO+J9DALzX8Xe3T5DomVjXo=";
   };
 
 
   home.file.".myscript/snails".source =pkgs.fetchFromGitHub {
     owner = "manateelazycat";
     repo = "snails";
-    rev = "7e83f3822c00ee496cce42cf69331436cb3b1379";
-    sha256 = "1448d333vny2gq4jaldl9zy62jy81ih5166l0aak3p49vv8g38bz";
+    rev = "28a5b500e43b54de61db13a332ca259e5ec5be71";
+    sha256 = "sha256-sREyfOgDGP4dXI6+HO8bq6JP+lvdZp2cppX5Ris5dNY=";
   };
 
   home.file.".myscript/org-super-links".source = pkgs.fetchFromGitHub {
