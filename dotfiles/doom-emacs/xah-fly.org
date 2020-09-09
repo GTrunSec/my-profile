@@ -14,6 +14,10 @@
 #+SELECT_TAGS: export
 #+EXCLUDE_TAGS: noexport
 * pre setting && load
+:PROPERTIES:
+:ID:       b6737bcb-0b6f-4b05-a17b-a3ae206dc7e0
+:END:
+
 #+begin_src emacs-lisp :tangle "xah-fly.el"
 (require 'xah-fly-keys)
 

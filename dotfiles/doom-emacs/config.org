@@ -27,6 +27,12 @@ HTML them READ org
 
 
 * init.el
+:PROPERTIES:
+:ID:       0817e14a-4420-494f-a380-48986c6d6f5d
+:END:
+
+[[file:xah-fly.org::*pre setting && load][pre setting && load]]
+
 #+begin_src emacs-lisp :tangle "init.el"
 ;;; init.el -*- lexical-binding: t; -*-
 
@@ -228,6 +234,7 @@ HTML them READ org
 
 * package.el
 #+begin_src emacs-lisp :tangle "packages.el"
+;;; packages.el -*- lexical-binding: t; -*-
 (package! discover :recipe (:host github :repo "mickeynp/discover.el"))
 (package! xah-fly-keys :recipe (:host github :repo "GTrunSec/xah-fly-keys"))
 (package! maple-iedit :recipe (:host github :repo "honmaple/emacs-maple-iedit"))
@@ -551,7 +558,6 @@ Uses `current-date-time-format' for the formatting the date/time."
 
 #+RESULTS:
 : y-or-n-p
-
 * Completion
 ** Ivy/counsel
 #+begin_src emacs-lisp :tangle "config.el"
@@ -972,7 +978,6 @@ FACE defaults to inheriting from default and highlight."
 (package! emacs-powerthesaurus :recipe (:host github :repo "SavchenkoValeriy/emacs-powerthesaurus"))
 (package! org-spacer.el :recipe (:host github :repo "dustinlacewell/org-spacer.el"))
 (package! org-treeusage :recipe (:host github :repo "mtekman/org-treeusage.el"))
-(package! org-ql)
 (package! org-roam-server)
 ;;load super-links from local path
 (package! org-roam-bibtex)
@@ -1111,6 +1116,18 @@ FACE defaults to inheriting from default and highlight."
   (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
   (setq org-superstar-headline-bullets-list '("☰" "☷" "☵" "☲"  "☳" "☴"  "☶"  "☱" ))
 )
+#+end_src
+
+** org-ql
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
+(package! org-ql)
+#+end_src
+
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+(use-package! org-ql
+  :config
+  (require 'helm-org-ql)
+  )
 #+end_src
 
 ** org-book
@@ -1317,6 +1334,7 @@ FACE defaults to inheriting from default and highlight."
 
 ** org publish
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/setting.el"
+;;; setting.el -*- lexical-binding: t; -*-
   (setq org-publish-project-alist
         '(("nsm"
            :base-directory "~/Documents/org-notes/NSM-GTD"
@@ -1553,11 +1571,13 @@ make
 
 
 #+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
-(package! org-super-links :recipe (:local-repo "~/.myscript/org-super-links"))
+;; (package! org-super-links :recipe (:local-repo "~/.myscript/org-super-links"))
 #+end_src
 
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
-(use-package! org-super-links)
+(use-package! org-super-links
+  :load-path "~/.myscript/org-super-links"
+  )
 #+end_src
 
 ** org-clones
@@ -1602,16 +1622,18 @@ make
 * my-codes
 ** packages
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/packages.el"
+;;; packages.el -*- lexical-binding: t; -*-
 (package! lsp-julia :recipe (:host github :repo "non-Jedi/lsp-julia"))
 (package! nox :recipe (:host github :repo "manateelazycat/nox"))
 (package! lsp-haskell)
 #+end_src
 
+#+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
+;;; config..el -*- lexical-binding: t; -*-
+#+end_src
+
 ** lsp
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
-(load! "my-latex")
-
-
 (use-package! lsp-mode
   :config
   (add-to-list 'lsp-language-id-configuration '(nix-mode . "nix"))
@@ -1664,6 +1686,10 @@ make
 #+end_src
 
 ** Latex
+#+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
+(load! "my-latex")
+#+end_src
+
 *** auctex
 *** chinese-latex
 #+begin_src emacs-lisp :tangle  "./modules/private/my-code/my-latex.el"
@@ -2274,6 +2300,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
 ** my-linux
 #+begin_src emacs-lisp :tangle "./modules/my-linux.el"
+;;; my-linux.el -*- lexical-binding: t; -*-
 (provide 'my-linux)
 #+end_src
 
@@ -2335,6 +2362,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
 *** macos-setting
 #+begin_src emacs-lisp :tangle "./modules/my-macos.el"
+;;; my-macos.el -*- lexical-binding: t; -*-
 (use-package! cnfonts)
 
 (use-package! lsp-pyright
