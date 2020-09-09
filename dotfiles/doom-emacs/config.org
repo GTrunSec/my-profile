@@ -2294,6 +2294,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 (setq insert-directory-program "/usr/local/bin/gls")
 
 (setq org-roam-db-location "~/.emacs.d/.local/cache/org-roam-macos.db")
+
 (define-key org-mode-map (kbd "C-c l") 'org-mac-grab-link)
 ;;(eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
 
@@ -2335,6 +2336,13 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 *** macos-setting
 #+begin_src emacs-lisp :tangle "./modules/my-macos.el"
 (use-package! cnfonts)
+
+(use-package! lsp-pyright
+  :config
+  (setq lsp-clients-python-command "pyright")
+  :hook (python-mode . (lambda ()
+                         (require 'lsp-pyright)
+                         (lsp))))
 
 (define-key! awesome-tab-mode-map
   "s-1" #'awesome-tab-select-visible-tab
