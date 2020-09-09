@@ -1,5 +1,4 @@
 #+title: My Doom Emacs config
-
 #+EMAIL: gtrunsec@hardenedlinux.org
 #+DATE:  25 October 2019
 #+AUTHOR: GTrunSec
@@ -1552,11 +1551,12 @@ make
 - [[https://github.com/toshism/org-super-links][toshism/org-super-links: Package to create links with auto backlinks]]
 
 
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
-(use-package! org-super-links
-  :load-path "~/.myscript/org-super-links"
-  )
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
+(package! org-super-links :recipe (:local-repo "~/.myscript/org-super-links"))
+#+end_src
 
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+(use-package! org-super-links)
 #+end_src
 
 ** org-clones
@@ -2232,6 +2232,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 (use-package! grab-x-link
   :if (eq system-type 'gnu/linux)
   )
+
 (when (display-graphic-p)
   (use-package! eaf
     :if (eq system-type 'gnu/linux)

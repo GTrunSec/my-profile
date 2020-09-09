@@ -113,7 +113,8 @@ Version 2017-01-21"
      ("0" . xah-pop-local-mark-ring)
      ("n" . isearch-forward)
      ))
-    (define-key xah-fly-key-map (kbd "p") 'gtrun-xah-fly-key)
+    (define-key xah-fly-key-map (kbd "p") 'gtrun-xah-fly-key-p)
+    (define-key xah-fly-key-map (kbd "s-p") 'gtrun-xah-fly-key-P)
     (define-key xah-fly-key-map (kbd "-") 'gtrun-xah-minus-fly-key)
     (define-key xah-fly-key-map (kbd "/") 'gtrun-xah-slash-fly-key)
     (define-key xah-fly-key-map (kbd ",") 'gtrun-xah-comma-fly-key)
@@ -125,6 +126,9 @@ Version 2017-01-21"
       )
   )
 #+end_src
+
+#+RESULTS:
+: xah-fly-command-mode-init
 
 * define-key xah-fly-key-map
 #+begin_src emacs-lisp :tangle "xah-fly.el"
@@ -216,12 +220,21 @@ Version 2017-01-21"
          (t nil)))
 
 
-      (defun gtrun-xah-fly-key ()
+      (defun gtrun-xah-fly-key-p ()
         "key `p'"
         (interactive)
         (cond
          ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
          ((eq major-mode 'dired-mode) (call-interactively 'xah-open-in-external-app))
+         (t nil)))
+
+
+      (defun gtrun-xah-fly-key-P ()
+        "key `P'"
+        (interactive)
+        (cond
+         ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
+         ((eq major-mode 'dired-mode) (call-interactively 'xah-show-in-desktop))
          (t nil)))
 
 
@@ -233,6 +246,9 @@ Version 2017-01-21"
          ((eq major-mode 'dired-mode) (call-interactively 'vinegar/up-directory))
          (t nil)))
 #+end_src
+
+#+RESULTS:
+: gtrun-xah-minus-fly-key
 
 ** Color
 #+begin_src emacs-lisp :tangle "xah-fly.el"
