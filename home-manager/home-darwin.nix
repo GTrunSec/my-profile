@@ -59,6 +59,8 @@ in
         )
         #emacs org notice
         libnotify
+
+        nodePackages.pyright
       ];
     })
   ];

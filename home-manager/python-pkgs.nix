@@ -15,7 +15,6 @@ in
             numpy
             scikitlearn
             jupyter
-            python-language-server
           ];
           ignoreCollisions = true;
         })
