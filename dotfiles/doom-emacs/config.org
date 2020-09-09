@@ -972,22 +972,11 @@ FACE defaults to inheriting from default and highlight."
 
 * org-mode
 ** Packages
-#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
-(package! company-english-helper :recipe (:host github :repo "manateelazycat/company-english-helper"))
-(package! notdeft :recipe (:host github :repo "hasu/notdeft"))
-(package! emacs-powerthesaurus :recipe (:host github :repo "SavchenkoValeriy/emacs-powerthesaurus"))
-(package! org-spacer.el :recipe (:host github :repo "dustinlacewell/org-spacer.el"))
-(package! org-treeusage :recipe (:host github :repo "mtekman/org-treeusage.el"))
-(package! org-roam-server)
-;;load super-links from local path
-(package! org-roam-bibtex)
-(package! org-ref)
-#+end_src
+
 
 ** load basic config
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (load! "setting")
-(use-package! company-english-helper)
 (use-package! ox-hugo)
 (use-package! ob-session-async)
 (use-package! ob-async)
@@ -1398,6 +1387,10 @@ FACE defaults to inheriting from default and highlight."
 - [[https://github.com/EFLS/zetteldeft][EFLS/zetteldeft: A Zettelkasten system! Or rather, some functions on top of the emacs deft package.]]
 
 
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
+(package! notdeft :recipe (:host github :repo "hasu/notdeft"))
+#+end_src
+
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! notdeft
   :config
@@ -1427,14 +1420,13 @@ FACE defaults to inheriting from default and highlight."
 cd ~/.emacs.d/.local/straight/repos/notdeft/xapian
 make
 
-** org-protocal
+** org-protocol
 *** Doc
  - 
  - [[https://github.com/alphapapa/org-protocol-capture-html][alphapapa/org-protocol-capture-html: Capture HTML from the browser selection into Emacs as org-mode content]]
 
 
 ** org-roam
-*** Doc
 - [[https://github.com/nobiot/Zero-to-Emacs-and-Org-roam][nobiot/Zero-to-Emacs-and-Org-roam: Step by step guide from zero to installing and setting up Emacs and Org-roam on Windows 10]]
 
 
@@ -1455,12 +1447,13 @@ make
 )
 #+end_src
 
-#+RESULTS:
-: t
-
 *** org-roam-server
 - [[https://github.com/org-roam/org-roam-server][org-roam/org-roam-server: A Web Application to Visualize the Org-Roam Database]]
 
+
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
+(package! org-roam-server)
+#+end_src
 
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-roam-server
@@ -1476,6 +1469,10 @@ make
 #+end_src
 
 *** org-roam-bibtex
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
+(package! org-roam-bibtex)
+#+end_src
+
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-roam-bibtex
   :config
@@ -1487,11 +1484,15 @@ make
 #+end_src
 
 ** org-ref
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
+(package! org-ref)
+#+end_src
+
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-ref
   :config
   (setq org-ref-default-bibliography '("~/Documents/org-notes/bibliography/myBibliography.bib"))
-(setq bibtex-completion-bibliography "~/Documents/org-notes/bibliography/myBibliography.bib")
+  (setq bibtex-completion-bibliography "~/Documents/org-notes/bibliography/myBibliography.bib")
   )
 #+end_src
 
@@ -1522,6 +1523,10 @@ make
 - [[https://github.com/dustinlacewell/org-spacer.el][dustinlacewell/org-spacer.el: Enforce the number of blank lines between elements in an org-mode document]]
 
 
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
+(package! org-spacer.el :recipe (:host github :repo "dustinlacewell/org-spacer.el"))
+#+end_src
+
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-spacer
   :config
@@ -1534,6 +1539,10 @@ make
 ** org-density.el :summary:statistic:
 - [[https://github.com/mtekman/org-density.el][mtekman/org-density.el: Examine the density of org headings]]
 
+
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
+(package! org-treeusage :recipe (:host github :repo "mtekman/org-treeusage.el"))
+#+end_src
 
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-treeusage
@@ -1571,13 +1580,11 @@ make
 
 
 #+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
-;; (package! org-super-links :recipe (:local-repo "~/.myscript/org-super-links"))
+(package! org-super-links :recipe (:local-repo "~/.myscript/org-super-links"))
 #+end_src
 
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
-(use-package! org-super-links
-  :load-path "~/.myscript/org-super-links"
-  )
+(use-package! org-super-links)
 #+end_src
 
 ** org-clones
@@ -2162,9 +2169,12 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 ** grammarly
 #+begin_src emacs-lisp :tangle "packages.el"
 ;;(package! flycheck-grammarly :recipe (:host github :repo "jcs-elpa/flycheck-grammarly"))
+(package! company-english-helper :recipe (:host github :repo "manateelazycat/company-english-helper"))
+(package! emacs-powerthesaurus :recipe (:host github :repo "SavchenkoValeriy/emacs-powerthesaurus"))
 #+end_src
 
 #+begin_src emacs-lisp :tangle "config.el"
+(use-package! company-english-helper)
 ;;(use-package! flycheck-grammarly)
 #+end_src
 
@@ -2260,7 +2270,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
 #+end_src
 
-** eaf
+*** eaf
 #+begin_src emacs-lisp :tangle "config.el"
 (when (display-graphic-p)
   (use-package! eaf
@@ -2281,7 +2291,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   )
 #+end_src
 
-** snails
+*** snails
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! snails
   :load-path "~/.myscript/snails"
@@ -2291,7 +2301,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   (add-hook 'snails-mode-hook #'xah-fly-insert-mode-activate))
 #+end_src
 
-** grab-x-link :nix:
+*** grab-x-link :nix:
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! grab-x-link
   :if (eq system-type 'gnu/linux)
@@ -2304,7 +2314,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 (provide 'my-linux)
 #+end_src
 
-** MacOS
+** my MacOS setting
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! my-macos
 :load-path "./modules"
@@ -2360,7 +2370,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
 #+end_src
 
-*** macos-setting
+** macos use packages
 #+begin_src emacs-lisp :tangle "./modules/my-macos.el"
 ;;; my-macos.el -*- lexical-binding: t; -*-
 (use-package! cnfonts)
