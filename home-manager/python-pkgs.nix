@@ -21,6 +21,7 @@ in
           promnesia
           orgparse
           hpi
+          mypy
         ]))
       ];
     })
