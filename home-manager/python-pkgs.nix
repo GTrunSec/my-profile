@@ -20,6 +20,7 @@ in
           jupyter
           promnesia
           orgparse
+          hpi
         ]))
       ];
     })
