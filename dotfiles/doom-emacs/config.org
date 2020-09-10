@@ -31,8 +31,6 @@ HTML them READ org
 :ID:       0817e14a-4420-494f-a380-48986c6d6f5d
 :END:
 
-[[file:xah-fly.org::*pre setting && load][pre setting && load]]
-
 #+begin_src emacs-lisp :tangle "init.el"
 ;;; init.el -*- lexical-binding: t; -*-
 

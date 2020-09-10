@@ -1,23 +1,26 @@
 { lib, pkgs, ... }:
 let
-  nixpkgs  = import ./misc/python-nixpkgs.nix { };
+
+  overlays = [ (import ../nixos-flk/overlays/pkgs.nix)
+             ];
+
+  nixpkgs  = import ./misc/python-nixpkgs.nix { inherit overlays; };
 in
 {
   config = with lib; mkMerge [
     (mkIf pkgs.stdenv.isDarwin {
       home.packages = with nixpkgs;[
-        (python37.buildEnv.override {
-          extraLibs = with python37Packages; [
-            shapely
-            matplotlib
-            sqlalchemy
-            pandas
-            numpy
-            scikitlearn
-            jupyter
-          ];
-          ignoreCollisions = true;
-        })
+        (python37.withPackages (nixpkgs: with nixpkgs; [
+          shapely
+          matplotlib
+          sqlalchemy
+          pandas
+          numpy
+          scikitlearn
+          jupyter
+          promnesia
+          orgparse
+        ]))
       ];
     })
   ];
