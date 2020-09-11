@@ -24,6 +24,8 @@
       #programs.home-manager.enable = true;
       # pet
       home.file.".config/pet".source = ../dotfiles/pet;
+
+      home.file.".config/promnesia".source = ../dotfiles/promnesia;
     })
 
     (mkIf pkgs.stdenv.isDarwin {

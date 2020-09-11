@@ -37,3 +37,11 @@ SOURCES = [
     If not specified, caching isn't used.
 '''
 CACHE_DIR = '/tmp/promnesia_cache/'
+
+FILTERS = [
+    'mail.google.com',
+    '192.168.0.',
+    '10.220.170.'
+    # you can use regexes too!
+    'redditmedia.com.*.(jpg|png|gif)',
+]
