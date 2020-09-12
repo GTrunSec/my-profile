@@ -1002,7 +1002,6 @@ FACE defaults to inheriting from default and highlight."
       org-src-tab-acts-natively t
       org-src-window-setup 'current-window)
 (setq org-agenda-time-leading-zero t)
-(setq org-download-timestamp "%Y%m%d_%H%M%S")
 ;;Markdown
 (eval-after-load "org"
   '(require 'ox-md nil t))
@@ -1420,12 +1419,17 @@ make
 
 ** org-protocol
 *** Doc
- - 
- - [[https://github.com/alphapapa/org-protocol-capture-html][alphapapa/org-protocol-capture-html: Capture HTML from the browser selection into Emacs as org-mode content]]
+   + [[https://www.diegoberrocal.com/blog/2015/08/19/org-protocol/][Using org-capture with org-protocol be like - Diego Berrocal]]
+
+
+   + [[https://github.com/alphapapa/org-protocol-capture-html][alphapapa/org-protocol-capture-html: Capture HTML from the browser selection into Emacs as org-mode content]]
 
 
 ** org-roam
-- [[https://github.com/nobiot/Zero-to-Emacs-and-Org-roam][nobiot/Zero-to-Emacs-and-Org-roam: Step by step guide from zero to installing and setting up Emacs and Org-roam on Windows 10]]
+  + [[https://github.com/nobiot/Zero-to-Emacs-and-Org-roam][nobiot/Zero-to-Emacs-and-Org-roam: Step by step guide from zero to installing and setting up Emacs and Org-roam on Windows 10]]
+
+
+  + [[https://www.orgroam.com/manual/][Top (Org-roam User Manual)]]
 
 
 *** org-roam
@@ -1568,6 +1572,7 @@ make
 
 (after! org
   (org-add-link-type "audio" #'ignore #'endless/export-audio-link)
+  ;;(setq org-download-timestamp "%Y%m%d_%H%M%S")
 )
 #+end_src
 
