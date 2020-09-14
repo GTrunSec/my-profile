@@ -25,7 +25,7 @@
       # pet
       home.file.".config/pet".source = ../dotfiles/pet;
 
-      home.file.".config/promnesia".source = ../nixos-flk/profiles/data/config.py;
+      home.file.".config/promnesia/config.py".source = ../nixos-flk/profiles/data/config.py;
     })
 
     (mkIf pkgs.stdenv.isDarwin {
