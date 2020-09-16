@@ -1,4 +1,3 @@
-#+title: My Doom Emacs config
 #+EMAIL: gtrunsec@hardenedlinux.org
 #+DATE:  25 October 2019
 #+AUTHOR: GTrunSec
@@ -1017,6 +1016,13 @@ FACE defaults to inheriting from default and highlight."
 (add-hook! 'org-mode-hook 'org-show-two-levels)
 #+end_src
 
+** org-mode-map
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+(after! org
+  (define-key org-mode-map (kbd "C-c C-.") 'org-time-stamp-inactive)
+)
+#+end_src
+
 ** org-starter
 #+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
 (package! org-starter)
@@ -1034,13 +1040,11 @@ FACE defaults to inheriting from default and highlight."
                    ("GTD/notes.org"                    :agenda t :key "n" :refile (:maxlevel .5 ))
                    ("GTD/myself.org"                   :agenda t :key "m" :refile (:maxlevel .5 ))
                    ("GTD/Habit.org"                    :agenda t :key "h" :refile (:maxlevel .5 ))
-                   ("post/traveling/traveling.org" :key "t" :refile (:maxlevel .5 ))
                    ("post/myself/love.org"         :key "l" :refile (:maxlevel .5 ))
                    ("post/myself/qing.org"         :key "q" :refile (:maxlevel .5 ))
                    ("post/myself/plan.org"         :key "p" :refile (:maxlevel .5 ))
                    ("elfeed.org"         :key "e" :refile (:maxlevel .5 ))
                    ("GTD/my-books.org"             :agenda t :key "b" :refile (:maxlevel .5 ))
-                   ("post/life-thing/life-things.org")
                    ("NSM-GTD/workflow.org"         :agenda t :required t)
                    ("NSM-GTD/NsmOrg.org"           :agenda t :required t)
                    ("art/learn-music.org"          :agenda t :key "M" :refile (:maxlevel .5 ))
@@ -1048,6 +1052,12 @@ FACE defaults to inheriting from default and highlight."
   (org-starter-def "~/.config/nixpkgs/dotfiles/doom-emacs/"
                    :files
                    ("config.org" :key "c" :refile (:maxlevel . 5))
+                   ;;("nix.org" :key "x" :refile (:maxlevel . 5))
+                   )
+  (org-starter-def "~/Documents/braindump-blog/content-org"
+                   :files
+                   ("traveling.org" :key "t" :refile (:maxlevel .5 ))
+                   ("life-things.org" :key "s" :refile (:maxlelvel . 5))
                    ;;("nix.org" :key "x" :refile (:maxlevel . 5))
                    )
   (org-starter-def "~/.config/nixpkgs"
@@ -1066,10 +1076,12 @@ FACE defaults to inheriting from default and highlight."
  _n_: note        _t_: traveling    _h_: Habit.org
  _m_: myself      _q_: 情-qing      _p_: Plan.org
  _b_: my-books    _e_: elfeed       _M_: learn music
+ _s_: my-life
   "
 
       ("c" org-starter-find-file:config)
       ("g" org-starter-find-file:gtd)
+      ("s" org-starter-find-file:life-things)
       ("n" org-starter-find-file:notes)
       ("e" org-starter-find-file:elfeed)
       ("M" org-starter-find-file:learn-music)

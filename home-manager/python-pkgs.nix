@@ -22,6 +22,7 @@ in
           orgparse
           hpi
           mypy
+          python-language-server
         ]))
       ];
     })
