@@ -4,16 +4,14 @@ let
   updateDoom = ".emacs.d/bin/doom sync";
   updateInit = "bash .doom.d/bin/emacs.sh";
   overlays = [
-      (import (builtins.fetchTarball {
-      url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
-    }))
-];
+
+  ];
   emacsPkgs  = import ../misc/emacs-27-pkgs.nix { inherit overlays;};
 in
 {
   config = with lib; mkMerge [
     #fonts
-    (mkIf pkgs.stdenv.isLinux  {
+    (mkIf pkgs.stdenv.isDarwin  {
       home.file.".local/share/fonts/my-font" = {
         source = ../../dotfiles/my-font;
         onChange = updatefont;

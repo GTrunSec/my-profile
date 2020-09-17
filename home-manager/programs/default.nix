@@ -5,6 +5,7 @@
     ./git.nix
     ./tmux.nix
     ./doom-emacs.nix
+    ./doom-emacs-darwin.nix
     ./zsh.nix
   ];
 

@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 let
   overlays = [
-      (import ../home-manager/packages-overlay.nix)
+    (import ../home-manager/packages-overlay.nix)
   ];
   nixpkgs = import ~/.config/nixpkgs/nixos/channel/nixpkgs { inherit overlays; };
   clean-nix-store = nixpkgs.writeScriptBin "clean-nix-store" (import ../bin/clean-nix-store.nix { });

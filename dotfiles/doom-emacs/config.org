@@ -261,7 +261,7 @@ HTML them READ org
 
 * use-package
 ** helm-tramp
-#+begin_src emacs-lisp :tangle "config.el"
+#+begin_src emacs-lisp :tangle "packages.el"
 (package! helm-tramp)
 #+end_src
 
