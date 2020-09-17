@@ -59,7 +59,7 @@ in
         enable = true;
 
         package = (emacsPkgs.emacsGcc.override({
-          imagemagick = emacsPkgs.imagemagick;
+          imagemagick = emacsPkgs.imagemagickBig;
         })).overrideAttrs(old: rec {
           configureFlags = (old.configureFlags or []) ++ ["--with-imagemagick"
                                                           "--with-nativecomp"
@@ -92,8 +92,6 @@ in
           csv-mode
           dhall-mode
           protobuf-mode
-          #ein
-          ein
           #go
           go-eldoc
           go-guru
@@ -103,19 +101,6 @@ in
           go-gen-test
           company-go
           flycheck-golangci-lint
-          #latex
-          ivy-bibtex
-          company-auctex
-          company-reftex
-          company-math
-          auctex
-          adaptive-wrap
-          latex-preview-pane
-          #markdown
-          markdown-mode
-          markdown-toc
-          edit-indirect
-          grip-mode
           #helm-nixos-options
           ##vterm
           vterm
@@ -138,7 +123,6 @@ in
           bm
           w3m
           org-super-agenda
-          ob-mermaid
           plantuml-mode
           ccls
           company-tabnine

@@ -1531,6 +1531,10 @@ make
 #+end_src
 
 ** ob-mermaid
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
+(package! ob-mermaid)
+#+end_src
+
 #+begin_src emacs-lisp :tangle  "./modules/private/my-org/config.el"
 (use-package! ob-mermaid
   :config
