@@ -118,16 +118,12 @@ in
           ##vterm
           vterm
           ##
-          helm-tramp
           visual-fill-column
           vlf
           wakatime-mode
           imenu-list
           eyebrowse
           cnfonts
-          elfeed-org
-          elfeed
-          elfeed-goodies
           dimmer
           beacon
           golden-ratio

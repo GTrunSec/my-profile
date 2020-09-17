@@ -173,7 +173,7 @@ HTML them READ org
         +ipython         ; ipython/jupyter support for babel
         +pandoc          ; export-with-pandoc support
         +roam
-        +helm-org
+        ;;+helm-org
         ;+pomodoro        ; be fruitful with the tomato technique
         +present)        ; using org-mode for presentations
        ;;perl              ; write code no one else can comprehend
@@ -261,6 +261,10 @@ HTML them READ org
 
 * use-package
 ** helm-tramp
+#+begin_src emacs-lisp :tangle "config.el"
+(package! helm-tramp)
+#+end_src
+
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! helm-tramp
   :config
@@ -1126,6 +1130,7 @@ FACE defaults to inheriting from default and highlight."
   :config
   (require 'helm-org-ql)
   )
+
 #+end_src
 
 ** org-book
@@ -1248,6 +1253,10 @@ FACE defaults to inheriting from default and highlight."
 *** ☞ TODO [[https://github.com/Trevoke/org-gtd.el][Trevoke/org-gtd.el: A package for using GTD using org-mode (beta)]] :GTD:
 
 ** elfeed
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/packages.el"
+(package! elfeed-goodies)
+#+end_src
+
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! elfeed
   :bind (:map elfeed-search-mode-map
@@ -1290,10 +1299,6 @@ FACE defaults to inheriting from default and highlight."
 :config
 (setq rmh-elfeed-org-files (list "~/Documents/org-notes/elfeed.org")))
 #+end_src
-
-# #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
-# (use-package! helm-org-rifle)
-# #+end_src
 
 ** Org-babel
 - [doc] [[https://orgmode.org/manual/Results-of-Evaluation.html][Results of Evaluation (The Org Manual)]]
