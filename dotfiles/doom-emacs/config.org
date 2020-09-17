@@ -1860,6 +1860,7 @@ make
 #+end_src
 
 ** ccls
+
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
 (use-package! ccls
   :hook ((c-mode c++-mode objc-mode cuda-mode) .

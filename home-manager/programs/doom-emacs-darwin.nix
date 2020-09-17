@@ -3,8 +3,10 @@ let
   updatefont = ''fc-cache -f -v'';
   updateDoom = ".emacs.d/bin/doom sync";
   updateInit = "bash .doom.d/bin/emacs.sh";
+  
+  emacs-overlay = import ./nix-gcc-emacs-darwin/emacs.nix;
   overlays = [
-
+   emacs-overlay
   ];
   emacsPkgs  = import ../misc/emacs-27-pkgs.nix { inherit overlays;};
 in
@@ -55,7 +57,8 @@ in
 
       programs.emacs = {
         enable = true;
-        ##issue
+        package = emacsPkgs.emacsGccDarwin;
+        ##emacs: dlopen(../native-lisp/28.0.50-x86_64-apple-darwin19.6.0-9bc8195821f5cde5289548570e0aa1af/lisp-mode-0189ba85598c041b7504f0a916c04219-1738806322de892570d69dfc55b437c2.eln, 1): image not found
         extraPackages = epkgs: with epkgs;[
         ];
       };
