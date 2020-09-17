@@ -3,17 +3,19 @@ let
   updatefont = ''fc-cache -f -v'';
   updateDoom = ".emacs.d/bin/doom sync";
   updateInit = "bash .doom.d/bin/emacs.sh";
-  
-  emacs-overlay = import ./nix-gcc-emacs-darwin/emacs.nix;
+  emacsDrawin-overlay = import ./nix-gcc-emacs-darwin/emacs.nix;
   overlays = [
-   emacs-overlay
+    emacsDrawin-overlay
+    (import (builtins.fetchTarball {
+      url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
+    }))
   ];
   emacsPkgs  = import ../misc/emacs-27-pkgs.nix { inherit overlays;};
 in
 {
   config = with lib; mkMerge [
     #fonts
-    (mkIf pkgs.stdenv.isDarwin  {
+    (mkIf (pkgs.stdenv.isLinux || pkgs.stdenv.isDarwin) {
       home.file.".local/share/fonts/my-font" = {
         source = ../../dotfiles/my-font;
         onChange = updatefont;
@@ -54,15 +56,40 @@ in
         source = ../../dotfiles/doom-emacs/xah-fly.org;
         onChange = updateDoom;
       };
-
-      programs.emacs = {
-        enable = true;
-        package = emacsPkgs.emacsGccDarwin;
-        ##emacs: dlopen(../native-lisp/28.0.50-x86_64-apple-darwin19.6.0-9bc8195821f5cde5289548570e0aa1af/lisp-mode-0189ba85598c041b7504f0a916c04219-1738806322de892570d69dfc55b437c2.eln, 1): image not found
-        extraPackages = epkgs: with epkgs;[
-        ];
-      };
-      #services.emacs.enable = true;
     })
+
+    
+    (mkIf (pkgs.stdenv.isLinux || pkgs.stdenv.isDarwin) {
+      programs.emacs.enable = true;
+    })
+
+
+    (mkIf pkgs.stdenv.isDarwin {
+      programs.emacs.package = emacsPkgs.emacsGccDarwin;
+    })
+
+    (mkIf pkgs.stdenv.isLinux {
+      programs.emacs.package = (emacsPkgs.emacsGcc.override({
+          imagemagick = emacsPkgs.imagemagickBig;
+      })).overrideAttrs(old: rec {
+        configureFlags = (old.configureFlags or []) ++ ["--with-imagemagick"
+                                                        "--with-nativecomp"
+                                                       ];
+      });
+    })
+
+    (mkIf (pkgs.stdenv.isLinux || pkgs.stdenv.isDarwin) {
+        programs.emacs.extraPackages = epkgs: with epkgs;[
+          vterm
+        ];
+    })
+
+
+    (mkIf pkgs.stdenv.isLinux {
+        programs.emacs.extraPackages = epkgs: with epkgs;[
+          grab-x-link
+        ];
+    })
+      #services.emacs.enable = true;
   ];
 }
