@@ -23,7 +23,6 @@ HTML them READ org
 
 - [Source Code] [[https://github.com/GTrunSec/my-profile/tree/master/dotfiles/doom-emacs][my-profile/dotfiles/doom-emacs at master · GTrunSec/my-profile]]
 
-
 * init.el
 :PROPERTIES:
 :ID:       0817e14a-4420-494f-a380-48986c6d6f5d
@@ -294,6 +293,10 @@ HTML them READ org
 #+end_src
 
 ** wakatime-mode
+#+begin_src emacs-lisp :tangle "packages.el"
+(package! wakatime-mode)
+#+end_src
+
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! wakatime-mode
 :hook (after-init . global-wakatime-mode))
@@ -2096,6 +2099,10 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 #+end_src
 
 *** beacon
+#+begin_src emacs-lisp :tangle "packages.el"
+(package! beacon)
+#+end_src
+
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! beacon
   :diminish
@@ -2136,6 +2143,9 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
 - [[https://github.com/joostkremers/writeroom-mode][joostkremers/writeroom-mode: Writeroom-mode: distraction-free writing for Emacs.]]
 
+#+begin_src emacs-lisp :tangle "packages.el"
+(package! writeroom-mode)
+#+end_src
 
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! writeroom-mode
