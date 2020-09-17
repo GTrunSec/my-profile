@@ -16,7 +16,6 @@
 #+TAGS: GTD(G) writing(w) export(e) manage(m) graphical(g) nix(n)
 #+BEGIN_QUOTE
 HTML them READ org
-
 #+END_QUOTE
 
 - [[https://www.gtrun.org/custom/config.html][My Doom Emacs config]]
@@ -135,7 +134,8 @@ HTML them READ org
        :lang
        ;;agda              ; types of types of types of types...
        ;;assembly          ; assembly for fun or debugging
-       cc                ; C/C++/Obj-C madness
+       (cc
+          +lsp)                              ; C/C++/Obj-C madness
        ;;clojure           ; java with a lisp
        common-lisp       ; if you've seen one lisp, you've seen them all
        ;;coq               ; proofs-as-programs
@@ -286,6 +286,9 @@ HTML them READ org
 #+end_src
 
 ** Pinyin
+#+begin_src emacs-lisp :tangle "packages.el"
+(package! pinyin-search)
+#+end_src
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! pinyin-search)
 #+end_src
@@ -305,6 +308,10 @@ HTML them READ org
 #+end_src
 
 ** vlf
+#+begin_src emacs-lisp :tangle "packages.el"
+(package! vlf)
+#+end_src
+
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! vlf
   :config
@@ -327,6 +334,10 @@ HTML them READ org
 #+end_src
 
 ** imenu-list
+#+begin_src emacs-lisp :tangle "packages.el"
+(package! imenu-list)
+#+end_src
+
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! imenu-list
   :config
@@ -338,8 +349,13 @@ HTML them READ org
 #+end_src
 
 ** w3m
+#+begin_src emacs-lisp :tangle "packages.el"
+(package! w3m)
+#+end_src
+
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! w3m
+  :commands (w3m)
   :config
   (setq w3m-use-tab-line nil)
 )
@@ -366,6 +382,12 @@ HTML them READ org
 #+end_src
 
 ** undo
+#+begin_src emacs-lisp :tangle "packages.el"
+(package! undo-fu)
+(package! undo-fu-session)
+#+end_src
+
+
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! undo-fu
   :after-call doom-switch-buffer after-find-file
@@ -586,6 +608,10 @@ Uses `current-date-time-format' for the formatting the date/time."
 #+end_src
 
 ** company
+#+begin_src emacs-lisp :tangle "packages.el"
+(package! company-lsp)
+#+end_src
+
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! company-lsp)
 (after! company
@@ -631,6 +657,10 @@ In that case, insert the number."
 #+end_src
 
 ** company-tabnine
+#+begin_src emacs-lisp :tangle "packages.el"
+(package! company-tabnine)
+#+end_src
+
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! company-tabnine
   :when (featurep! :completion company)
@@ -827,6 +857,10 @@ FACE defaults to inheriting from default and highlight."
 #+end_src
 
 *** hungry-delete
+#+begin_src emacs-lisp :tangle "packages.el"
+(package! hungry-delete)
+#+end_src
+
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! hungry-delete
   :config
@@ -835,6 +869,10 @@ FACE defaults to inheriting from default and highlight."
 #+end_src
 
 ** Bookmark
+#+begin_src emacs-lisp :tangle "packages.el"
+(package! bm)
+#+end_src
+
 #+begin_src emacs-lisp :tangle "config.el"
   (use-package! bm
     :demand t
@@ -958,6 +996,10 @@ FACE defaults to inheriting from default and highlight."
 #+end_src
 
 ** templating
+#+begin_src emacs-lisp :tangle "packages.el"
+(package! yatemplate)
+#+end_src
+
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! yatemplate
   :after yasnippet
@@ -1553,9 +1595,9 @@ make
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-spacer
   :config
-  (add-hook 'org-mode-hook
-            (lambda () (add-hook 'before-save-hook
-                                 'org-spacer-enforce nil 'make-it-local)))
+  ;; (add-hook 'org-mode-hook
+  ;;           (lambda () (add-hook 'before-save-hook
+  ;;                                'org-spacer-enforce nil 'make-it-local)))
   )
 #+end_src
 
@@ -1664,6 +1706,10 @@ make
 #+end_src
 
 ** lsp
+#+begin_src emacs-lisp :tangle "./modules/private/my-code/packages.el"
+(unpin! lsp-mode)
+#+end_src
+
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
 (use-package! lsp-mode
   :config
@@ -1816,8 +1862,6 @@ make
   :hook ((c-mode c++-mode objc-mode cuda-mode) .
          (lambda () (require 'ccls) (lsp)))
   )
-
-
 #+end_src
 
 ** Poly && ess
@@ -1834,6 +1878,9 @@ make
 
 ** Scheme
 - https://gitlab.com/jaor/geiser
+#+begin_src emacs-lisp :tangle "packages.el"
+(package! geiser)
+#+end_src
 
 
 #+begin_src emacs-lisp :tangle "config.el"
@@ -1917,6 +1964,10 @@ make
 #+end_src
 
 *** eysbrowse
+#+begin_src emacs-lisp :tangle "packages.el"
+(package! eyebrowse);
+#+end_src
+
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! eyebrowse
   :config
@@ -2035,6 +2086,10 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 #+end_src
 
 *** Dimming Unused Windows
+#+begin_src emacs-lisp :tangle "packages.el"
+(package! dimmer)
+#+end_src
+
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! dimmer
   :config (dimmer-mode))
@@ -2395,6 +2450,10 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 #+end_src
 
 ** macos use packages
+#+begin_src emacs-lisp :tangle "packages.el"
+(package! cnfonts)
+#+end_src
+
 #+begin_src emacs-lisp :tangle "./modules/my-macos.el"
 ;;; my-macos.el -*- lexical-binding: t; -*-
 (use-package! cnfonts)

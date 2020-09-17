@@ -67,81 +67,8 @@ in
         });
 
         extraPackages = epkgs: with epkgs;[
-          #undo
-          undo-tree
-          undo-fu-session
-          undo-fu
-          #ess
-          poly-markdown
-          #editon
-          writeroom-mode
-          scrollkeeper
-          #org
-          #python
-          flycheck-cython
-          cython-mode
-          pip-requirements
-          poetry
-          #nose
-          python-pytest
-          #data
-          graphql-mode
-          json-mode
-          jsonnet-mode
-          yaml-mode
-          csv-mode
-          dhall-mode
-          protobuf-mode
-          #go
-          go-eldoc
-          go-guru
-          go-mode
-          gorepl-mode
-          go-tag
-          go-gen-test
-          company-go
-          flycheck-golangci-lint
-          #helm-nixos-options
-          ##vterm
           vterm
-          ##
-          visual-fill-column
-          vlf
-          wakatime-mode
-          imenu-list
-          eyebrowse
-          cnfonts
-          dimmer
-          beacon
-          golden-ratio
-          writegood-mode
-          yatemplate
-          pinyin-search
           grab-x-link
-          hungry-delete
-          flymake-json
-          bm
-          w3m
-          org-super-agenda
-          plantuml-mode
-          ccls
-          company-tabnine
-          bicycle
-          jsonrpc
-          shrink-path
-          #scheme
-          geiser
-          ##lsp
-          company-lsp
-          ##helm-lsp
-          ##company-module
-          company
-          company-dict
-          company-prescient
-          #ivy
-          ivy-rich
-          ivy-hydra
-          flx
         ];
       };
       #services.emacs.enable = true;
