@@ -1940,8 +1940,18 @@ make
 *** ☞ TODO [[https://github.com/gcv/julia-snail][gcv/julia-snail: An Emacs development environment for Julia]]
 
 ** python
+#+begin_src emacs-lisp :tangle "./modules/private/my-code/packages.el"
+(package! lsp-pyright)
+#+end_src
+
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
 (setq flycheck-python-pylint-executable "pylint")
+(use-package! lsp-pyright
+  :config
+  (setq lsp-clients-python-command "pyright")
+  :hook (python-mode . (lambda ()
+                         (require 'lsp-pyright)
+                         (lsp))))
 #+end_src
 
 ** nox
@@ -2496,13 +2506,6 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 #+begin_src emacs-lisp :tangle "./modules/my-macos.el"
 ;;; my-macos.el -*- lexical-binding: t; -*-
 (use-package! cnfonts)
-
-(use-package! lsp-pyright
-  :config
-  (setq lsp-clients-python-command "pyright")
-  :hook (python-mode . (lambda ()
-                         (require 'lsp-pyright)
-                         (lsp))))
 
 (define-key! awesome-tab-mode-map
   "s-1" #'awesome-tab-select-visible-tab
