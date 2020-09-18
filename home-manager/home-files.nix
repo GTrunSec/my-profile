@@ -4,6 +4,7 @@
   config = with lib; mkMerge [
 
     (mkIf pkgs.stdenv.isLinux {
+
       home.file.".config/i3/config".source = ../dotfiles/i3/config;
       home.file.".config/i3/move-cursor-window-center.sh".source = ../dotfiles/i3/move-cursor-window-center.sh;
 
@@ -56,6 +57,5 @@
     disable_submodules = false
     '';
     })
-
   ];
 }

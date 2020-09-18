@@ -33,7 +33,6 @@ in
       ];
     })
 
-
     (mkIf pkgs.stdenv.isLinux {
       home.packages = with nixpkgs;[
         dive

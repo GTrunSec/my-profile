@@ -1022,7 +1022,7 @@ FACE defaults to inheriting from default and highlight."
 
 
 ** load basic config
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
 (load! "setting")
 (use-package! ox-hugo)
 (use-package! ob-session-async)
@@ -1030,7 +1030,7 @@ FACE defaults to inheriting from default and highlight."
 #+end_src
 
 ** org-setting
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
 (setq org-clock-into-drawer t)
 (add-hook! 'org-mode-hook 'auto-revert-mode)
 (add-hook! 'dired-mode-hook 'org-download-enable)
@@ -1067,18 +1067,18 @@ FACE defaults to inheriting from default and highlight."
 #+end_src
 
 ** org-mode-map
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch 
 (after! org
   (define-key org-mode-map (kbd "C-c C-.") 'org-time-stamp-inactive)
 )
 #+end_src
 
 ** org-starter
-#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el" :nowatch
 (package! org-starter)
 #+end_src
 
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
 (use-package! org-starter
   :custom
   ;; Enable external configuration files loaded from org-starter-path
@@ -1154,11 +1154,11 @@ FACE defaults to inheriting from default and highlight."
 #+end_src
 
 ** org-superstar
-#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el" :nowatch
 (package! org-superstar)
 #+end_src
 
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
 (use-package! org-superstar
   :config
   (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
@@ -1167,11 +1167,11 @@ FACE defaults to inheriting from default and highlight."
 #+end_src
 
 ** org-ql
-#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el" :nowatch
 (package! org-ql)
 #+end_src
 
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
 (use-package! org-ql
   :config
   (require 'helm-org-ql)
@@ -1180,11 +1180,11 @@ FACE defaults to inheriting from default and highlight."
 #+end_src
 
 ** org-book
-#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el" :nowatch
 (package! org-books :recipe (:host github :repo "lepisma/org-books"))
 #+end_src
 
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
 (use-package! org-books
   :config
   (setq org-books-file "~/Documents/org-notes/GTD/my-books.org")
@@ -1193,7 +1193,7 @@ FACE defaults to inheriting from default and highlight."
 
 ** GTD
 *** super-agenda
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
 (use-package! org-super-agenda
   :config
   (add-hook! 'after-init-hook 'org-super-agenda-mode)
@@ -1210,7 +1210,7 @@ FACE defaults to inheriting from default and highlight."
 #+end_src
 
 *** agenda-custom-setting
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
 (require 'org-super-agenda)
 (setq org-agenda-custom-commands
       '(("z" "GtruN Agenda"
@@ -1282,11 +1282,11 @@ FACE defaults to inheriting from default and highlight."
 #+end_src
 
 *** org-wild-notifier
-#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el" :nowatch
 (package! org-wild-notifier)
 #+end_src
 
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
 (use-package! org-wild-notifier
   :defer t
   :config
@@ -1303,7 +1303,7 @@ FACE defaults to inheriting from default and highlight."
 (package! elfeed-goodies)
 #+end_src
 
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
 (use-package! elfeed
   :bind (:map elfeed-search-mode-map
           ("q" . bjm/elfeed-save-db-and-bury)
@@ -1359,7 +1359,7 @@ FACE defaults to inheriting from default and highlight."
 - [[https://necromuralist.github.io/posts/org-babel-cheat-sheet/][Org-Babel Cheat Sheet | The Cloistered Monkey]]
 
 
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
 (after! ob-async
   (setq ob-async-no-async-languages-alist '("ipython" "ein-python"
                                             "ein-rust"
@@ -1422,7 +1422,7 @@ FACE defaults to inheriting from default and highlight."
 #+end_src
 
 ** org-crypt
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
 ;; 當被加密的部份要存入硬碟時，自動加密回去
   ;; 設定要加密的 tag 標籤為 secret
   (setq org-crypt-tag-matcher "secret")
@@ -1447,11 +1447,11 @@ FACE defaults to inheriting from default and highlight."
 - [[https://github.com/EFLS/zetteldeft][EFLS/zetteldeft: A Zettelkasten system! Or rather, some functions on top of the emacs deft package.]]
 
 
-#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el" :nowatch
 (package! notdeft :recipe (:host github :repo "hasu/notdeft"))
 #+end_src
 
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
 (use-package! notdeft
   :config
   (setq notdeft-extension "org")
@@ -1496,7 +1496,7 @@ make
 
 
 *** org-roam
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
 (use-package! org-roam
   :init
   (require 'org-roam-protocol)
@@ -1516,11 +1516,11 @@ make
 - [[https://github.com/org-roam/org-roam-server][org-roam/org-roam-server: A Web Application to Visualize the Org-Roam Database]]
 
 
-#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el" :nowatch
 (package! org-roam-server)
 #+end_src
 
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
 (use-package! org-roam-server
   :config
   (setq org-roam-server-port 8081
@@ -1534,11 +1534,11 @@ make
 #+end_src
 
 *** org-roam-bibtex
-#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el" :nowatch
 (package! org-roam-bibtex)
 #+end_src
 
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
 (use-package! org-roam-bibtex
   :config
   (add-hook 'org-mode-hook #'org-roam-bibtex-mode)
@@ -1549,11 +1549,11 @@ make
 #+end_src
 
 ** org-ref
-#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el" :nowatch
 (package! org-ref)
 #+end_src
 
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
 (use-package! org-ref
   :config
   (setq org-ref-default-bibliography '("~/Documents/org-notes/bibliography/myBibliography.bib"))
@@ -1577,7 +1577,7 @@ make
 #+end_src
 
 ** ob-mermaid
-#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el" :nowatch
 (package! ob-mermaid)
 #+end_src
 
@@ -1592,11 +1592,11 @@ make
 - [[https://github.com/dustinlacewell/org-spacer.el][dustinlacewell/org-spacer.el: Enforce the number of blank lines between elements in an org-mode document]]
 
 
-#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el" :nowatch
 (package! org-spacer.el :recipe (:host github :repo "dustinlacewell/org-spacer.el"))
 #+end_src
 
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
 (use-package! org-spacer
   :config
   ;; (add-hook 'org-mode-hook
@@ -1609,11 +1609,11 @@ make
 - [[https://github.com/mtekman/org-density.el][mtekman/org-density.el: Examine the density of org headings]]
 
 
-#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el" :nowatch
 (package! org-treeusage :recipe (:host github :repo "mtekman/org-treeusage.el"))
 #+end_src
 
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
 (use-package! org-treeusage
   :config
   (define-key org-mode-map (kbd "C-c d") 'org-treeusage-mode)
@@ -1649,11 +1649,11 @@ make
 - [[https://github.com/toshism/org-super-links][toshism/org-super-links: Package to create links with auto backlinks]]
 
 
-#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el" :nowatch
 (package! org-super-links :recipe (:local-repo "~/.myscript/org-super-links"))
 #+end_src
 
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
 (use-package! org-super-links)
 #+end_src
 
@@ -1664,8 +1664,35 @@ make
 
 
 ** ☞ TODO [[https://github.com/marcIhm/org-working-set][marcIhm/org-working-set: Manage a working-set of org-nodes]] :manage:
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el" :nowatch
+(package! org-working-set
+)
+#+end_src
 
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
+(use-package! org-working-set)
+#+end_src
 ** [[https://github.com/mtekman/org-tanglesync.el][mtekman/org-tanglesync.el: A package to pull external changes into an org-mode source block if that block is tangled to an external file]]
+
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el" :nowatch
+(package! org-tanglesync)
+#+end_src
+
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
+(use-package! org-tanglesync
+  :config
+   :hook ((org-mode . org-tanglesync-mode)
+         ;; enable watch-mode globally:
+         ((prog-mode text-mode) . org-tanglesync-watch-mode))
+  :custom
+  (org-tanglesync-watch-files '("~/.config/nixpkgs/dotfiles/dotfile-config.org"
+                                "~/.config/nixpkgs/hoem-manger-README.org"
+                                ))
+  :bind
+  (( "C-c M-i" . org-tanglesync-process-buffer-interactive)
+   ( "C-c M-a" . org-tanglesync-process-buffer-automatic))
+  )
+#+end_src
 
 ** ☞ TODO [[https://github.com/casouri/valign][casouri/valign: Pixel-perfect visual alignment for Org and Markdown tables.]]
 
@@ -1675,7 +1702,7 @@ make
 (package! org-graph-view :recipe (:host github :repo "alphapapa/org-graph-view"))
 #+end_src
 
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
 (use-package! org-graph-view)
 #+end_src
 
@@ -1684,7 +1711,7 @@ make
 (package! org-mind-map :recipe (:host github :repo "the-humanities/org-mind-map"))
 #+end_src
 
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
 (use-package! org-mind-map
   :init
   (require 'ox-org)
