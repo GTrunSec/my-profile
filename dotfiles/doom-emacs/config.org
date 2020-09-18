@@ -587,7 +587,7 @@ Uses `current-date-time-format' for the formatting the date/time."
 : y-or-n-p
 * Completion
 ** Ivy/counsel
-#+begin_src emacs-lisp :tangle "config.el"
+#+begin_src emacs-lisp :tangle "config.el" 
   (use-package! counsel
     :hook
     (after-init . ivy-mode)
@@ -1674,19 +1674,19 @@ make
 #+end_src
 ** [[https://github.com/mtekman/org-tanglesync.el][mtekman/org-tanglesync.el: A package to pull external changes into an org-mode source block if that block is tangled to an external file]]
 
-#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el" :nowatch
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
 (package! org-tanglesync)
 #+end_src
 
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
 (use-package! org-tanglesync
   :config
-   :hook ((org-mode . org-tanglesync-mode)
+  :hook ((org-mode . org-tanglesync-mode)
          ;; enable watch-mode globally:
          ((prog-mode text-mode) . org-tanglesync-watch-mode))
   :custom
   (org-tanglesync-watch-files '("~/.config/nixpkgs/dotfiles/dotfile-config.org"
-                                "~/.config/nixpkgs/hoem-manger-README.org"
+                                "~/.config/nixpkgs/home-manager-README.org"
                                 ))
   :bind
   (( "C-c M-i" . org-tanglesync-process-buffer-interactive)

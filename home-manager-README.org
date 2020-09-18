@@ -424,6 +424,28 @@ rec {
 }
 #+end_src
 * programs
+** default.nix
+#+begin_src nix :exports both :tangle "~/.config/nixpkgs/home-manager/programs/default.nix"
+{ config, lib, pkgs, ... }:
+{
+  imports = [
+    ./alacritty
+    ./git.nix
+    ./tmux.nix
+    ./doom-emacs.nix
+    ./zsh.nix
+  ];
+
+
+
+  config = with lib; mkMerge [
+    (mkIf pkgs.stdenv.isLinux {
+      programs.htop.enable = true;
+      programs.bat.enable = true;
+    })
+  ];
+}
+#+end_src
 ** doom-emacs
 #+begin_src nix :exports both :tangle "~/.config/nixpkgs/home-manager/programs/doom-emacs.nix"
 { config, lib, pkgs, ... }:
