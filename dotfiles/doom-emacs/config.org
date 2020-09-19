@@ -1078,6 +1078,7 @@ FACE defaults to inheriting from default and highlight."
 (package! org-starter)
 #+end_src
 - adding Braindump to org-agenda files
+   - [[https://superuser.com/questions/633746/loading-all-org-files-on-a-folder-to-agenda][emacs - Loading all org files on a folder to agenda - Super User]]
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
 (setq org-agenda-files (list "~/Documents/org-notes/braindump"))
 
@@ -1733,6 +1734,9 @@ make
 
 #+RESULTS:
 : t
+
+** org-parse
+ - [[http://ergoemacs.org/emacs/elisp_parse_org_mode.html][Elisp: Parse Org Mode]]
 
 * my-codes
 ** packages
