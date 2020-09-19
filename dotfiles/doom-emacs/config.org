@@ -1179,6 +1179,15 @@ FACE defaults to inheriting from default and highlight."
 
 #+end_src
 
+
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el" :nowatch
+(package! helm-org-rifle)
+#+end_src
+
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
+(use-package! helm-org-rifle)
+#+end_src
+
 ** org-book
 #+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el" :nowatch
 (package! org-books :recipe (:host github :repo "lepisma/org-books"))
@@ -1654,7 +1663,11 @@ make
 #+end_src
 
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
-(use-package! org-super-links)
+(use-package! org-super-links
+  :config
+  (setq sl-related-into-drawer t
+   sl-link-prefix 'sl-link-prefix-timestamp)
+)
 #+end_src
 
 ** org-clones
