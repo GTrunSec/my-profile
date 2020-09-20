@@ -23,10 +23,10 @@ in
 
       home.activation.linkEmacsPrivate = config.lib.dag.entryAfter [ "writeBoundary" ] ''
      if [ ! -d "$HOME/.emacs.d" ];then
-         ${pkgs.git}/bin/git clone https://github.com/GTrunSec/doom-emacs.git -b my-doom --depth=1 ~/.emacs.d
+         ${pkgs.git}/bin/git clone https://github.com/GTrunSec/doom-emacs.git -b my-doom
       if [ ! -d "$HOME/.emacs.d/bin/doom" ];then
        mv $HOME/.emacs.d $HOME/.emacs.d-backup
-       ${pkgs.git}/bin/git clone https://github.com/GTrunSec/doom-emacs.git -b my-doom --depth=1 ~/.emacs.d
+       ${pkgs.git}/bin/git clone https://github.com/GTrunSec/doom-emacs.git -b my-doom
        fi
      fi
 
