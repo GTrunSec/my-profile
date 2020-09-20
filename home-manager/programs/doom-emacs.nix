@@ -35,11 +35,13 @@ in
      mkdir -p $HOME/.doom.d/etc
      fi
 
+     if [ ! -d "$HOME/.doom.d/modules" ];then
      ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/doom-emacs/lisp" $HOME/.doom.d/lisp
      ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/doom-emacs/bin" $HOME/.doom.d/bin
      ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/doom-emacs/snippets" $HOME/.doom.d/snippets
      ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/doom-emacs/modules" $HOME/.doom.d/modules
      ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/doom-emacs/Makefile" $HOME/.doom.d/Makefile
+     fi
 
      if [ ! -d "$HOME/.doom.d/modules/my-code" ];then
           mkdir -p $HOME/.doom.d/modules/private/my-org

@@ -1003,7 +1003,7 @@ FACE defaults to inheriting from default and highlight."
 #+begin_src emacs-lisp :tangle "packages.el"
 (package! yatemplate)
 #+end_src
-
+- [[https://github.com/mineo/yatemplate][mineo/yatemplate: Simple file templates for Emacs with YASnippet]]
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! yatemplate
   :after yasnippet
