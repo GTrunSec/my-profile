@@ -28,6 +28,7 @@ in
       home.packages = with nixpkgs;[
         customVscode
         govet
+        hugo
         #R-with-my-packages
         #vips
         ##cachix use ghcide-nix

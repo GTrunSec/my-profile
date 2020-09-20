@@ -5,6 +5,7 @@
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en cn
+#+SETUPFILE: ./hugo.setup
 #+SETUPFILE: ~/Documents/my-blog/public/theme/org-html-themes/setup/theme-readtheorg.setup
 #+hugo_publishdate: `org-time-stamp-rounding-minutes`
 #+hugo_auto_set_lastmod: t

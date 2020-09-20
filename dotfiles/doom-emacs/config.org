@@ -1078,7 +1078,7 @@ FACE defaults to inheriting from default and highlight."
 (package! org-starter)
 #+end_src
 - adding Braindump to org-agenda files
-   - [[https://superuser.com/questions/633746/loading-all-org-files-on-a-folder-to-agenda][emacs - Loading all org files on a folder to agenda - Super User]]
+  - [[https://superuser.com/questions/633746/loading-all-org-files-on-a-folder-to-agenda][emacs - Loading all org files on a folder to agenda - Super User]]
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
 (setq org-agenda-files (list "~/Documents/org-notes/braindump"))
 
@@ -2000,6 +2000,8 @@ make
 ***
 
 *** ☞ TODO [[https://github.com/emacs-elsa/Elsa][emacs-elsa/Elsa: Emacs Lisp Static Analyzer]]
+
+*** [[https://github.com/twlz0ne/elpl][twlz0ne/elpl: Provides a simple interface to evaluating Emacs Lisp expressions but without contaminating current Emacs.]]
 
 * Visual
 ** Buffer
