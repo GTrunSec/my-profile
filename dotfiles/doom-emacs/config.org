@@ -1725,19 +1725,26 @@ easy way to display org-ref with tree view instead of org-mode ?
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
 (use-package! org-tanglesync
   :config
-  :hook ((org-mode . org-tanglesync-mode)
-         ;; enable watch-mode globally:
-         ((prog-mode text-mode) . org-tanglesync-watch-mode))
+  :hook (((prog-mode text-mode) . org-tanglesync-watch-mode))
   :custom
   (org-tanglesync-watch-files '("~/.config/nixpkgs/dotfiles/dotfile-config.org"
                                 "~/.config/nixpkgs/home-manager-README.org"
                                 ))
+  :config
+  (add-hook 'org-mode-hook (lambda ()
+                             ;;……
+                             (cond
+                              ((equal (substring buffer-file-name -11) "-README.org")
+                               (progn 
+                                 (setq-local org-tanglesync-mode t)
+                                 ))
+                               ))
+                             )
   :bind
   (( "C-c M-i" . org-tanglesync-process-buffer-interactive)
    ( "C-c M-a" . org-tanglesync-process-buffer-automatic))
   )
 #+end_src
-
 ** TODO [[https://github.com/casouri/valign][casouri/valign: Pixel-perfect visual alignment for Org and Markdown tables.]]
 
 ** TODO [[https://github.com/lepisma/org-krita][lepisma/org-krita: Krita sketches in Org]]

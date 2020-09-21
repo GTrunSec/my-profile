@@ -995,3 +995,6 @@ with lib;
   ];
 }
 #+end_src
+** sh
+#+begin_src nix :async t :exports both :tangle "~/.config/nixpkgs/home-manager/programs/fish.nix"
+#+end_src
