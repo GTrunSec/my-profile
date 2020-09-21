@@ -6,7 +6,7 @@
 #+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t pri:t
 #+SETUPFILE: ~/Documents/org-notes/setup/hugo.local
 #+SETUPFILE: ~/Documents/my-blog/public/theme/org-html-themes/setup/theme-readtheorg.setup
-#+hugo_publishdate:org-time-stamp-rounding-minutes`
+#+hugo_publishdate: `org-time-stamp-rounding-minutes`
 #+hugo_auto_set_lastmod: t
 #+HUGO_categories: profile Doom-Emacs
 #+HUGO_tags: Emacs Config
