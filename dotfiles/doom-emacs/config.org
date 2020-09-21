@@ -1018,7 +1018,6 @@ FACE defaults to inheriting from default and highlight."
 #+end_src
 
 * org-mode
-** Packages
 
 
 ** load basic config
@@ -1093,9 +1092,9 @@ FACE defaults to inheriting from default and highlight."
                    ("GTD/notes.org"                    :agenda t :key "n" :refile (:maxlevel .5 ))
                    ("GTD/myself.org"                   :agenda t :key "m" :refile (:maxlevel .5 ))
                    ("GTD/Habit.org"                    :agenda t :key "h" :refile (:maxlevel .5 ))
-                   ("post/myself/love.org"         :key "l" :refile (:maxlevel .5 ))
-                   ("post/myself/qing.org"         :key "q" :refile (:maxlevel .5 ))
-                   ("post/myself/plan.org"         :key "p" :refile (:maxlevel .5 ))
+                   ("posts/myself/love.org"         :key "l" :refile (:maxlevel .5 ))
+                   ("posts/myself/qing.org"         :key "q" :refile (:maxlevel .5 ))
+                   ("posts/myself/plan.org"         :key "p" :refile (:maxlevel .5 ))
                    ("elfeed.org"         :key "e" :refile (:maxlevel .5 ))
                    ("GTD/my-books.org"             :agenda t :key "b" :refile (:maxlevel .5 ))
                    ("NSM-GTD/workflow.org"         :agenda t :required t)
@@ -1200,7 +1199,17 @@ FACE defaults to inheriting from default and highlight."
 #+end_src
 
 ** GTD
+*** agenda knowledge
+**** [[http://doc.norang.ca/org-mode.html][Org Mode - Organize Your Life In Plain Text!]]
+:BACKLINKS:
+[2020-09-20 Sun 17:20] <- [[*Org-edna][Org-edna]]
+:END:
+
 *** super-agenda
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/packages.el" :nowatch
+(package! org-super-agenda)
+#+end_src
+
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
 (use-package! org-super-agenda
   :config
@@ -1278,7 +1287,7 @@ FACE defaults to inheriting from default and highlight."
          search "+{:book\\|books:}")
 
         ("bd" "BOOK TODO List"
-         search "+{^\\*+\\s-+\\(⚔ INPROCESS\\|☞ TODO\\|⚑ WAITING\\)\\s-} +{:book\\|books:}")
+         search "+{^\\*+\\s-+\\(⚔ INPROCESS\\|TODO\\|⚑ WAITING\\)\\s-} +{:book\\|books:}")
 
         ("d" "ALL DONE OF TASKS"
          search "+{^\\*+\\s-+\\(✔ DONE\\|✘ CANCELED\\)\\s-}")
@@ -1289,6 +1298,22 @@ FACE defaults to inheriting from default and highlight."
         ))
 #+end_src
 
+*** ✰ IMPORTANT Org-edna
+
+- [[https://www.nongnu.org/org-edna-el/#org2421cd7][Org Edna]]
+
+- [[*\[\[http://doc.norang.ca/org-mode.html\]\[Org Mode - Organize Your Life In Plain Text!\]\]][Org Mode - Organize Your Life In Plain Text!]]
+
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/packages.el" :nowatch
+(package! org-edna)
+#+end_src
+
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
+(use-package! org-edna
+  :config
+  (add-hook! 'after-init-hook 'org-edna-mode)
+)
+#+end_src
 *** org-wild-notifier
 #+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el" :nowatch
 (package! org-wild-notifier)
@@ -1303,9 +1328,8 @@ FACE defaults to inheriting from default and highlight."
         alert-default-style (if IS-MAC 'osx-notifier 'libnotify)))
 #+end_src
 
-*** ☞ TODO [[https://github.com/takaxp/org-onit][takaxp/org-onit: Easy org-clock-in and org-clock-out]]
-*** ☞ TODO [[https://github.com/Trevoke/org-gtd.el][Trevoke/org-gtd.el: A package for using GTD using org-mode (beta)]] :GTD:
-
+*** TODO [[https://github.com/takaxp/org-onit][takaxp/org-onit: Easy org-clock-in and org-clock-out]]
+*** TODO [[https://github.com/Trevoke/org-gtd.el][Trevoke/org-gtd.el: A package for using GTD using org-mode (beta)]] :GTD:
 ** elfeed
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/packages.el"
 (package! elfeed-goodies)
@@ -1497,12 +1521,12 @@ make
 
 
 ** org-roam
-  + [[https://github.com/nobiot/Zero-to-Emacs-and-Org-roam][nobiot/Zero-to-Emacs-and-Org-roam: Step by step guide from zero to installing and setting up Emacs and Org-roam on Windows 10]]
+- [[https://github.com/nobiot/Zero-to-Emacs-and-Org-roam][nobiot/Zero-to-Emacs-and-Org-roam: Step by step guide from zero to installing and setting up Emacs and Org-roam on Windows 10]]
+- [[https://www.orgroam.com/manual/][Top (Org-roam User Manual)]]
+*** idea
+**** ✍ NOTE [[https://github.com/tilmanrassy/emacs-treeview][tilmanrassy/emacs-treeview: Abstract Emacs Lisp framework for tree navigation]]
 
-
-  + [[https://www.orgroam.com/manual/][Top (Org-roam User Manual)]]
-
-
+easy way to display org-ref with tree view instead of org-mode ?
 *** org-roam
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
 (use-package! org-roam
@@ -1675,7 +1699,7 @@ make
    [[https://github.com/legalnonsense/org-clones][legalnonsense/org-clones: Prototype for method of cloning orgmore headers]]
 
 
-** ☞ TODO [[https://github.com/marcIhm/org-working-set][marcIhm/org-working-set: Manage a working-set of org-nodes]] :manage:
+** TODO [[https://github.com/marcIhm/org-working-set][marcIhm/org-working-set: Manage a working-set of org-nodes]] :manage:
 #+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el" :nowatch
 (package! org-working-set
 )
@@ -1706,9 +1730,9 @@ make
   )
 #+end_src
 
-** ☞ TODO [[https://github.com/casouri/valign][casouri/valign: Pixel-perfect visual alignment for Org and Markdown tables.]]
+** TODO [[https://github.com/casouri/valign][casouri/valign: Pixel-perfect visual alignment for Org and Markdown tables.]]
 
-** ☞ TODO [[https://github.com/lepisma/org-krita][lepisma/org-krita: Krita sketches in Org]]
+** TODO [[https://github.com/lepisma/org-krita][lepisma/org-krita: Krita sketches in Org]]
 ** [[https://github.com/alphapapa/org-graph-view][alphapapa/org-graph-view: View Org buffers as a clickable, graphical mind-map]]
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/packages.el"
 (package! org-graph-view :recipe (:host github :repo "alphapapa/org-graph-view"))
@@ -1890,7 +1914,7 @@ make
 
 *** [[https://github.com/cdominik/cdlatex][cdominik/cdlatex: Fast input methods to enter LaTeX environments and math with GNU Emacs]]
 
-*** ☞ TODO [[https://github.com/io12/org-fragtog][io12/org-fragtog: Automatically toggle org-mode latex fragment previews as the cursor enters and exits them]]
+*** TODO [[https://github.com/io12/org-fragtog][io12/org-fragtog: Automatically toggle org-mode latex fragment previews as the cursor enters and exits them]]
 
 ** haskell
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
@@ -1952,7 +1976,7 @@ make
 )
 #+end_src
 
-*** ☞ TODO [[https://github.com/gcv/julia-snail][gcv/julia-snail: An Emacs development environment for Julia]]
+*** TODO [[https://github.com/gcv/julia-snail][gcv/julia-snail: An Emacs development environment for Julia]]
 
 ** python
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/packages.el"
@@ -1996,10 +2020,10 @@ make
 #+end_src
 
 ** elisp
-*** ☞ TODO [[https://github.com/doublep/eldev][doublep/eldev: Elisp Development Tool]]
+*** TODO [[https://github.com/doublep/eldev][doublep/eldev: Elisp Development Tool]]
 ***
 
-*** ☞ TODO [[https://github.com/emacs-elsa/Elsa][emacs-elsa/Elsa: Emacs Lisp Static Analyzer]]
+*** TODO [[https://github.com/emacs-elsa/Elsa][emacs-elsa/Elsa: Emacs Lisp Static Analyzer]]
 
 *** [[https://github.com/twlz0ne/elpl][twlz0ne/elpl: Provides a simple interface to evaluating Emacs Lisp expressions but without contaminating current Emacs.]]
 
@@ -2324,10 +2348,10 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 #+end_src
 
 ** [[https://github.com/arnm/ob-mermaid][arnm/ob-mermaid: Generate mermaid diagrams within Emacs org-mode babel]]
-** ☞ TODO [[https://github.com/zzkt/smog][zzkt/smog: Analyse the writing style, word use and readability of prose in Emacs.]] :writing:
+** TODO [[https://github.com/zzkt/smog][zzkt/smog: Analyse the writing style, word use and readability of prose in Emacs.]] :writing:
 **
 
-** ☞ TODO [[https://github.com/rnkn/binder][rnkn/binder: Emacs global minor mode facilitating multi-file writing projects]]
+** TODO [[https://github.com/rnkn/binder][rnkn/binder: Emacs global minor mode facilitating multi-file writing projects]]
 
 * load & unload
 ** disbale-package
