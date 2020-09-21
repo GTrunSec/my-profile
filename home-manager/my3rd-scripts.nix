@@ -33,8 +33,8 @@
   home.file.".myscript/org-super-links".source = pkgs.fetchFromGitHub {
     owner = "toshism";
     repo = "org-super-links";
-    rev = "169389ca32a9891a3c2b2bc25a286eeeeac19130";
-    sha256 = "1f1s4f3ayd0ig41iwrb523r45b2i6ds36l0vgqhflpk8wa3irjrb";
+    rev = "94f59485e3063f0162b9ab2adddd0b34711d18ef";
+    sha256 = "1i9dnkdhfzvhz55n8ghdnzvaxcpkm0yjrkl4acvq1a6jyjb87q48";
   };
 
 }

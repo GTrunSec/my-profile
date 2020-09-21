@@ -6,7 +6,7 @@
 #+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t pri:t
 #+SETUPFILE: ~/Documents/org-notes/setup/hugo.local
 #+SETUPFILE: ~/Documents/my-blog/public/theme/org-html-themes/setup/theme-readtheorg.setup
-#+hugo_publishdate: `org-time-stamp-rounding-minutes`
+#+hugo_publishdate:org-time-stamp-rounding-minutes`
 #+hugo_auto_set_lastmod: t
 #+HUGO_categories: profile Doom-Emacs
 #+HUGO_tags: Emacs Config
@@ -1029,6 +1029,7 @@ FACE defaults to inheriting from default and highlight."
 #+end_src
 
 ** org-setting
+ - [[https://zzamboni.org/post/beautifying-org-mode-in-emacs/][zzamboni.org | Beautifying Org Mode in Emacs]]
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
 (setq org-clock-into-drawer t)
 (add-hook! 'org-mode-hook 'auto-revert-mode)
@@ -1315,6 +1316,7 @@ FACE defaults to inheriting from default and highlight."
 )
 #+end_src
 *** org-wild-notifier
+- [[https://github.com/akhramov/org-wild-notifier.el][akhramov/org-wild-notifier.el: Alert notifications for org-agenda]]
 #+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el" :nowatch
 (package! org-wild-notifier)
 #+end_src
@@ -1324,7 +1326,7 @@ FACE defaults to inheriting from default and highlight."
   :defer t
   :config
   (add-hook! 'after-init-hook 'org-wild-notifier-mode)
-  (setq org-wild-notifier-alert-time 15
+  (setq ;;org-wild-notifier-alert-time 15
         alert-default-style (if IS-MAC 'osx-notifier 'libnotify)))
 #+end_src
 
@@ -1519,6 +1521,13 @@ make
 
    + [[https://github.com/alphapapa/org-protocol-capture-html][alphapapa/org-protocol-capture-html: Capture HTML from the browser selection into Emacs as org-mode content]]
 
+** org-properties
+- [[https://emacs.stackexchange.com/questions/7607/export-properties-blocks-with-org-mode][Export :PROPERTIES: blocks with org-mode? - Emacs Stack Exchange]]
+
+** org-timestramp
+
+*** export
+- org-export-with-planning ~#+OPTIONS: p:t~
 
 ** org-roam
 - [[https://github.com/nobiot/Zero-to-Emacs-and-Org-roam][nobiot/Zero-to-Emacs-and-Org-roam: Step by step guide from zero to installing and setting up Emacs and Org-roam on Windows 10]]
@@ -1686,12 +1695,11 @@ easy way to display org-ref with tree view instead of org-mode ?
 #+end_src
 
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
-(use-package! org-super-links
-  :config
-  (setq sl-related-into-drawer t
-   sl-link-prefix 'sl-link-prefix-timestamp)
-)
+(use-package! org-super-links)
 #+end_src
+
+#+RESULTS:
+: org-super-links
 
 ** org-clones
 1. 

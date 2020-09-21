@@ -28,6 +28,8 @@ in
       home.packages = with nixpkgs;[
         customVscode
         govet
+        gocode
+        gopls
         hugo
         #R-with-my-packages
         #vips
