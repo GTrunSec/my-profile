@@ -1035,8 +1035,9 @@ FACE defaults to inheriting from default and highlight."
 ** Only modes or files seeting in org-mode
 #+begin_src emacs-lisp :tangle "config.el"
 (define-derived-mode only-file-to-org-mode org-mode "Org + only mode"
-  "Major mode for readonly org file."
-  (setq-local org-tanglesync-mode 1))
+  "Only modes for org file."
+  (add-hook! org-tanglesync-watch-mode :local #'org-tanglesync-mode)
+  )
 (add-to-list 'auto-mode-alist '("README-[^z-a]*\\.org\\'" . only-file-to-org-mode))
 #+end_src
 ** org-setting
@@ -1215,6 +1216,9 @@ FACE defaults to inheriting from default and highlight."
 ** GTD
 *** agenda knowledge
 **** [[http://doc.norang.ca/org-mode.html][Org Mode - Organize Your Life In Plain Text!]]
+:PROPERTIES:
+:ID:       e513ede6-3d58-4ef5-9152-dc809675e063
+:END:
 :BACKLINKS:
 [2020-09-20 Sun 17:20] <- [[*Org-edna][Org-edna]]
 :END:
@@ -1316,7 +1320,7 @@ FACE defaults to inheriting from default and highlight."
 
 - [[https://www.nongnu.org/org-edna-el/#org2421cd7][Org Edna]]
 
-- [[*\[\[http://doc.norang.ca/org-mode.html\]\[Org Mode - Organize Your Life In Plain Text!\]\]][Org Mode - Organize Your Life In Plain Text!]]
+- [[id:e513ede6-3d58-4ef5-9152-dc809675e063][[[http://doc.norang.ca/org-mode.html][Org Mode - Organize Your Life In Plain Text!]​]​]]
 
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/packages.el" :nowatch
 (package! org-edna)
