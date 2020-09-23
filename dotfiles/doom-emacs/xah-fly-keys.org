@@ -24,15 +24,6 @@
   )
 #+END_SRC
 
-* define-key xah-fly-keys-map(Command mode)
-#+begin_src emacs-lisp :tangle "xah-fly-keys.el"
-;; (xah-fly--define-keys
-;;  xah-fly-command-map
-;;  '(
-
-;;    ("C-n" . next-line)
-;;    ))
-#+end_src
 
 * define-key xah-fly-keys-map(Insert mode)
 #+begin_src emacs-lisp :tangle "xah-fly-keys.el"
@@ -71,6 +62,17 @@
      ("y" . nil)
      ("z" . nil)
 
+     ("1" . nil)
+     ("2" . nil)
+     ("3" . nil)
+     ("4" . nil)
+     ("5" . nil)
+     ("6" . nil)
+     ("7" . nil)
+     ("9" . nil)
+     ("0" . nil)
+
+   
      ("/" . nil)
      ("-" . nil)
      ("." . nil)
@@ -79,14 +81,15 @@
      ("'" . nil)
      ("[" . nil)
      ("]" . nil)
+     ("\\" . nil)
+     ("'" . nil)
 
-     ("C-;" . maple-iedit-match-all)
+
      ("C-n" . next-line)
      ("C-s" . swiper-isearch)
      ("C-c i" . counsel-imenu)
      ("C-v" . scrollkeeper-contents-up)
      ("C-x c" . xah-fly-command-mode-activate)
-
      ("<f3>" . gtrun/hydra-org-starter/body)
      ("<f4>" . xah-fly-command-mode-activate)
      ("<f5>" . awesome-tab-ace-jump)
@@ -94,7 +97,7 @@
      ))
   )
 #+end_src
-* define-key xah-fly-keys-map (Key-mode)
+* define-key xah-fly-keys-map(Command mode)
 - [[https://github.com/xahlee/xah-fly-keys/blob/master/xah-fly-keys.el#L3392][xah-fly-keys/xah-fly-keys.el at master · xahlee/xah-fly-keys]]
 #+begin_src emacs-lisp :tangle "xah-fly-keys.el"
 (defun xah-fly-command-mode-init ()
@@ -125,36 +128,53 @@
      ("y" . undo-fu-only-undo)
      ("[" . xah-backward-punct )
      ("]" . xah-forward-punct)
+     (";" . Info-goto-emacs-command-node)
 
+     ("1" . xah-extend-selection)
+     ("2" . xah-select-line)
+     ("3" . delete-other-windows)
+     ("4" . split-window-below)
+     ("5" . delete-char)
+     ("6" . xah-select-block)
+     ("7" . xah-select-line)
+     ("8" . xah-extend-selection)
+     ("9" . xah-select-text-in-quote)
+     ("0" . xah-pop-local-mark-ring)
+
+
+     ("C-a" . beginning-of-visual-line)
+
+     ("M-'" . maple-iedit-match-all)
 
      ("<f3>" . gtrun/hydra-org-starter/body)
      ("<f4>" . xah-fly-command-mode-activate)
      ("<f4>" . xah-fly-command-mode-activate)
      ))
-   (define-key xah-fly-key-map (kbd ".") 'gtrun-xah-fly-keys-dot)
-   )
-;; (define-key xah-fly-key-map (kbd "C-c w") 'helm-org-rifle)
+;; FIXEME: end line with under headlines
 #+end_src
 
 * specific key in different mode map
 ** load all of specific keys
 #+begin_src emacs-lisp :tangle "xah-fly-keys.el"
-;; (define-key xah-fly-key-map (kbd "p") 'gtrun-xah-fly-keys-p)
-;; (define-key xah-fly-key-map (kbd "s-p") 'gtrun-xah-fly-keys-P)
-;; (define-key xah-fly-key-map (kbd "-") 'gtrun-xah-fly-keys-minus)
-;; (define-key xah-fly-key-map (kbd "/") 'gtrun-xah-fly-keys-slash)
-;; (define-key xah-fly-key-map (kbd ",") 'gtrun-xah-fly-keys-comma)
+(define-key xah-fly-key-map (kbd ".") 'gtrun-xah-fly-keys-dot)
+(define-key xah-fly-key-map (kbd "p") 'gtrun-xah-fly-keys-p)
+(define-key xah-fly-key-map (kbd "s-p") 'gtrun-xah-fly-keys-P)
+(define-key xah-fly-key-map (kbd "-") 'gtrun-xah-fly-keys-minus)
+(define-key xah-fly-key-map (kbd "/") 'gtrun-xah-fly-keys-slash)
+(define-key xah-fly-key-map (kbd ",") 'gtrun-xah-fly-keys-comma)
+#+end_src
+** Only Linux keys
+#+begin_src emacs-lisp :tangle "xah-fly-keys.el"
+(when (eq system-type 'gnu/linux)
+  (define-key xah-fly-key-map (kbd "r") 'eaf-open)
+  (define-key xah-fly-key-map (kbd "w") 'snails)
+  )
+;; end line to xah-fly-command-mode-init
+)
 
 (when (display-graphic-p)
  (define-key key-translation-map (kbd "ESC") (kbd "C-x c"))
 )
-#+end_src
-** Only Linux keys
-#+begin_src emacs-lisp :tangle "xah-fly-keys.el"
-;; (when (eq system-type 'gnu/linux)
-;;   (define-key xah-fly-key-map (kbd "r") 'eaf-open)
-;;   (define-key xah-fly-key-map (kbd "w") 'snails)
-;;   )
 #+end_src
 ** .-dot
 #+begin_src emacs-lisp :tangle "xah-fly-keys.el"
@@ -282,6 +302,8 @@
    (define-prefix-command 'xah-fly-leader-key-map)
    '(
      ("m" . magit-keys)
+     ("o" . org-keys)
+     ("s" . search-keys)
      ;;timer
      ("ti" . insert-current-date-time-inactive)
      ("ta" . insert-current-date-time-active)
@@ -300,19 +322,37 @@
      ("bs" . bookmark-set)
      ("bm" . bookmark-bmenu-list)
      ("bt" . bm-toggle)
-     ;; isearch
-     ("y" . xah-search-current-word)
-     ;; search
-     ("sa" . counsel-ag)
-     ("sr" . counsel-rg)
      ;; dired
      ("dw" . dired-other-window)
      ("df" . dired-other-frame)
 ))
 
 #+END_SRC
+* search keys (leader-key to "s")
+#+begin_src emacs-lisp :tangle "xah-fly-keys.el"
+  (xah-fly--define-keys
+   ;; create a keymap my-keymap
+   (define-prefix-command 'search-keys)
+   '(
+     ("a" . counsel-ag)
+     ("r" . counsel-rg)
+     ("y" . xah-search-current-word)
+     ;;
+     ))
+#+END_SRC
+* org-mode (leader-key to "o")
+#+begin_src emacs-lisp :tangle "xah-fly-keys.el"
+  (xah-fly--define-keys
+   ;; create a keymap org-keymap
+   (define-prefix-command 'org-keys)
+   '(
+     ("i" . org-clock-in)
+     ("o" . org-clock-out)
+     ("a" . org-agenda)
+     ))
+#+end_src
 
-* magit
+* magit (leader-key to "m")
 #+begin_src emacs-lisp :tangle "xah-fly-keys.el"
   (xah-fly--define-keys
    ;; create a keymap org-keymap
