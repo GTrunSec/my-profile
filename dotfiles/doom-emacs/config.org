@@ -768,11 +768,16 @@ In that case, insert the number."
     :bind (:map maple-iedit-mode-keymap
                 ("C-n" . maple-iedit-match-next)
                 ("C-m" . maple-iedit-match-previous)
+                ("<down>" . maple-iedit-match-next)
+                ("<up>" . maple-iedit-match-previous)
                 ("C-," . maple-iedit-skip-and-match-next)
                 ("C-." . maple-iedit-skip-and-match-previous)
+                ("<right>" . maple-iedit-skip-and-match-next)
+                ("<left>" . maple-iedit-skip-and-match-previous)
                 )
     )
 #+end_src
+
 
 *** highlight
 #+begin_src emacs-lisp :tangle "config.el"

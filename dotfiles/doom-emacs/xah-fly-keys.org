@@ -362,9 +362,11 @@
      ("a" . counsel-ag)
      ("r" . counsel-rg)
      ("y" . xah-search-current-word)
+     ("m" . maple-iedit-match-next)
      ;;
      ))
 #+END_SRC
+
 * org-mode (leader-key to "o")
 #+begin_src emacs-lisp :tangle "xah-fly-keys.el"
   (xah-fly--define-keys
