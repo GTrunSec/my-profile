@@ -21,6 +21,9 @@
 (use-package! xah-fly-keys
   :config
   (xah-fly-keys 1)
+  (add-hook 'xah-fly-command-mode-activate-hook
+            (lambda ()
+              (setq xah-fly-insert-state-q nil)))
   )
 #+END_SRC
 
