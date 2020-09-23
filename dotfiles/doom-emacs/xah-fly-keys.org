@@ -139,7 +139,7 @@
      ("t" . set-mark-command)
      ("u" . undo-fu-only-redo)
      ("v" . xah-paste-or-paste-previous)
-     ("w" . xah-next-window-or-frame)
+     ("w" . ace-window)
      ("x" . xah-cut-line-or-region)
      ("y" . undo-fu-only-undo)
      ("z" . xah-goto-matching-bracket)
