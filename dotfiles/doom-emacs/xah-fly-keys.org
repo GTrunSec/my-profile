@@ -118,8 +118,8 @@
      ("a" . counsel-M-x)
      ("b" . backward-word)
      ("c" . xah-copy-line-or-region)
-     ("d" . xah-beginning-of-line-or-block)
-     ("e" . xah-end-of-line-or-block)
+     ("d" . xah-end-of-line-or-block)
+     ("e" . xah-beginning-of-line-or-block)
      ("f" . xah-fly-insert-mode-activate)
 
      ("g" . backward-word)
@@ -185,9 +185,10 @@
 ** Only Linux keys
 #+begin_src emacs-lisp :tangle "xah-fly-keys.el"
 (when (eq system-type 'gnu/linux)
+  (when (display-graphic-p)
   (define-key xah-fly-key-map (kbd "r") 'eaf-open)
   (define-key xah-fly-key-map (kbd "w") 'snails)
-  )
+  ))
 ;; end line to xah-fly-command-mode-init
 )
 
