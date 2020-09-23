@@ -101,7 +101,12 @@
   )
 #+end_src
 * define-key xah-fly-keys-map(Command mode)
+:PROPERTIES:
+:ID:       f2cf8f5c-5f8f-4727-8ce0-de5ca5b13fa9
+:END:
 - [[https://github.com/xahlee/xah-fly-keys/blob/master/xah-fly-keys.el#L3392][xah-fly-keys/xah-fly-keys.el at master · xahlee/xah-fly-keys]]
+
+   - [[id:d679148a-220c-47a5-9891-c4158f8255d3][p-keymap]]
 #+begin_src emacs-lisp :tangle "xah-fly-keys.el"
 (defun xah-fly-command-mode-init ()
   (interactive)
@@ -168,7 +173,7 @@
 ;; FIXEME: end line with under headlines
 #+end_src
 
-* specific key in different mode map
+* specific keys in different mode map
 ** load all of specific keys
 #+begin_src emacs-lisp :tangle "xah-fly-keys.el"
 (define-key xah-fly-key-map (kbd ".") 'gtrun-xah-fly-keys-dot)
@@ -263,6 +268,12 @@
 #+end_src
 
 ** p-keymap
+:PROPERTIES:
+:ID:       d679148a-220c-47a5-9891-c4158f8255d3
+:END:
+:BACKLINKS:
+[2020-09-23 Wed 03:14] <- [[id:f2cf8f5c-5f8f-4727-8ce0-de5ca5b13fa9][define-key xah-fly-keys-map(Command mode)]]
+:END:
 #+begin_src emacs-lisp :tangle "xah-fly-keys.el"
 (xah-fly--define-keys
  (define-prefix-command 'xah-fly-p-keymap)
@@ -296,7 +307,7 @@
    (t nil)))
 #+end_src
 
-** ""
+** --minus
 #+begin_src emacs-lisp :tangle "xah-fly-keys.el"
 (defun gtrun-xah-minus-fly-keys ()
   "key `-'"
@@ -321,7 +332,13 @@
 ;; (add-hook! 'xah-fly-insert-mode-activate-hook  'my-xfk-insert-color)
 #+end_src
 
-* xah-fly-leader-key-map
+* define-key xah-fly-leader-key-map
+:PROPERTIES:
+:ID:       428d5810-1acc-46d4-9fd5-19af6d0d8cc6
+:END:
+ - [[id:7e984d98-fdbf-4d94-84c5-ce4605d9816f][magit-keys (leader-key to "m")]]
+ - [[id:2755ee61-1f79-4e5b-bd69-d7c730bb28e4][org-keys (leader-key to "o")]]
+ - [[id:38c793b6-7b4e-4da4-b647-03a62237249a][search-keys (leader-key to "s")]]
 #+begin_src emacs-lisp :tangle "xah-fly-keys.el"
   (xah-fly--define-keys
    (define-prefix-command 'xah-fly-leader-key-map)
@@ -353,7 +370,13 @@
 ))
 
 #+END_SRC
-* search keys (leader-key to "s")
+* search-keys (leader-key to "s")
+:PROPERTIES:
+:ID:       38c793b6-7b4e-4da4-b647-03a62237249a
+:END:
+:BACKLINKS:
+[2020-09-23 Wed 03:25] <- [[id:428d5810-1acc-46d4-9fd5-19af6d0d8cc6][define-key xah-fly-leader-key-map]]
+:END:
 #+begin_src emacs-lisp :tangle "xah-fly-keys.el"
   (xah-fly--define-keys
    ;; create a keymap my-keymap
@@ -367,7 +390,13 @@
      ))
 #+END_SRC
 
-* org-mode (leader-key to "o")
+* org-keys (leader-key to "o")
+:PROPERTIES:
+:ID:       2755ee61-1f79-4e5b-bd69-d7c730bb28e4
+:END:
+:BACKLINKS:
+[2020-09-23 Wed 03:24] <- [[id:428d5810-1acc-46d4-9fd5-19af6d0d8cc6][define-key xah-fly-leader-key-map]]
+:END:
 #+begin_src emacs-lisp :tangle "xah-fly-keys.el"
   (xah-fly--define-keys
    ;; create a keymap org-keymap
@@ -379,7 +408,13 @@
      ))
 #+end_src
 
-* magit (leader-key to "m")
+* magit-keys (leader-key to "m")
+:PROPERTIES:
+:ID:       7e984d98-fdbf-4d94-84c5-ce4605d9816f
+:END:
+:BACKLINKS:
+[2020-09-23 Wed 03:22] <- [[id:428d5810-1acc-46d4-9fd5-19af6d0d8cc6][define-key xah-fly-leader-key-map]]
+:END:
 #+begin_src emacs-lisp :tangle "xah-fly-keys.el"
   (xah-fly--define-keys
    ;; create a keymap org-keymap
