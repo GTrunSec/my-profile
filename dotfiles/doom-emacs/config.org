@@ -233,7 +233,7 @@ HTML them READ org
 #+begin_src emacs-lisp :tangle "packages.el"
 ;;; packages.el -*- lexical-binding: t; -*-
 (package! discover :recipe (:host github :repo "mickeynp/discover.el"))
-(package! xah-fly-keys :recipe (:host github :repo "GTrunSec/xah-fly-keys"))
+(package! xah-fly-keys :recipe (:host github :repo "xahlee/xah-fly-keys"))
 (package! maple-iedit :recipe (:host github :repo "honmaple/emacs-maple-iedit"))
 (package! ctrlf :recipe (:host github :repo "raxod502/ctrlf"))
 (package! scrollkeeper :recipe (:host github :repo "alphapapa/scrollkeeper.el"))
@@ -255,7 +255,7 @@ HTML them READ org
 #+begin_src emacs-lisp :tangle "config.el"
 ;;; config.el -*- lexical-binding: t; -*-
 
-(load! "xah-fly.el")
+(load! "xah-fly-keys.el")
 (load! "show-parentheses.el")
 #+end_src
 

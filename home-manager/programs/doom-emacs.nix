@@ -54,9 +54,9 @@ in
         source = ../../dotfiles/doom-emacs/config.org;
         onChange = updateInit;
       };
-      home.file.".doom.d/xah-fly.org" = {
-        source = ../../dotfiles/doom-emacs/xah-fly.org;
-        onChange = updateDoom;
+      home.file.".doom.d/xah-fly-keys.org" = {
+        source = ../../dotfiles/doom-emacs/xah-fly-keys.org;
+        onChange = updateInit;
       };
     })
 
