@@ -20,6 +20,9 @@
 * use package with xah-fly-keys
 #+begin_src emacs-lisp :tangle "xah-fly-keys.el"
 (use-package! xah-fly-keys
+  :init
+  (require 'xah-fly-keys)
+  (define-key xah-fly-shared-map (kbd "C-n") nil)
   :config
   (xah-fly-keys 1)
   (add-hook 'xah-fly-command-mode-activate-hook
@@ -89,9 +92,6 @@
      ("]" . nil)
      ("\\" . nil)
      ("'" . nil)
-
-
-     ("C-n" . next-line)
      ("C-s" . swiper-isearch)
      ("C-c i" . counsel-imenu)
      ("C-v" . scrollkeeper-contents-up)
@@ -102,7 +102,9 @@
      ;; more
      ))
   )
+
 #+end_src
+
 * define-key xah-fly-keys-map(Command mode)
 :PROPERTIES:
 :ID:       f2cf8f5c-5f8f-4727-8ce0-de5ca5b13fa9
@@ -167,9 +169,6 @@
 
 
      ("C-a" . beginning-of-visual-line)
-     ("C-n" . next-line)
-
-
      ("M-'" . maple-iedit-match-all)
 
 
@@ -304,7 +303,7 @@
    ))
 #+end_src
 
-** P-key
+** P-keymap
 #+begin_src emacs-lisp :tangle "xah-fly-keys.el"
 (defun gtrun-xah-fly-keys-P ()
   "key `P'"
