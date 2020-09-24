@@ -18,10 +18,12 @@
 - [[http://ergoemacs.org/misc/xah-fly-keys_tutorial.html][Emacs: Xah Fly Keys Tutorial]]
 
 * use package with xah-fly-keys
+- https://github.com/xahlee/xah-fly-keys/blob/master/xah-fly-keys.el#L3454
 #+begin_src emacs-lisp :tangle "xah-fly-keys.el"
 (use-package! xah-fly-keys
   :init
   (require 'xah-fly-keys)
+  ;;disable xah-fly-shared-map
   (define-key xah-fly-shared-map (kbd "C-n") nil)
   :config
   (xah-fly-keys 1)

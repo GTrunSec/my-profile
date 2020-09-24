@@ -2428,7 +2428,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   :side 'right :size 35 :quit nil :select nil :ttl 0)
 
 (after! helm
-  (set-popup-rule! "^\\*helm" :size 30))
+  (set-popup-rule! "^\\*helm" :size 0.5))
 
 (after! maple-explorer-imenu
 (set-popup-rule! "^\\*maple-explorer-imenu"
