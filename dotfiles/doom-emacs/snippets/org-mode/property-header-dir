@@ -1,9 +1,8 @@
 # -*- mode: snippet -*-
 # name: PROPERTIES header dir
-# uuid:
 # key: phd
-# condition: t
+# condition: t                  
 # --
 :PROPERTIES:
-:header-args:sh: :dir ~/project/go
+:header-args:sh: :dir ./$1
 :END:

@@ -310,7 +310,7 @@
 
 ** --minus
 #+begin_src emacs-lisp :tangle "xah-fly-keys.el"
-(defun gtrun-xah-minus-fly-keys ()
+(defun gtrun-xah-fly-keys-minus ()
   "key `-'"
   (interactive)
   (cond
@@ -318,6 +318,7 @@
    ((eq major-mode 'dired-mode) (call-interactively 'vinegar/up-directory))
    (t nil)))
 #+end_src
+
 ** Color
 #+begin_src emacs-lisp :tangle "xah-fly-keys.el"
 ;; (defun my-highlight-line-on () (global-hl-line-mode 1))
