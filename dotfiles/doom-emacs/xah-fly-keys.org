@@ -45,6 +45,7 @@
      ("e" . nil)
      ("f" . nil)
      ("g" . nil)
+
      ("h" . nil)
      ("i" . nil)
      ("j" . nil)
@@ -52,12 +53,14 @@
      ("l" . nil)
      ("m" . nil)
      ("n" . nil)
+
      ("o" . nil)
      ("p" . nil)
      ("q" . nil)
      ("r" . nil)
      ("s" . nil)
      ("t" . nil)
+
      ("u" . nil)
      ("v" . nil)
      ("w" . nil)
@@ -137,6 +140,7 @@
      ("q" . quit-window)
      ("r" . xah-delete-backward-char-or-bracket-text)
      ("t" . set-mark-command)
+
      ("u" . undo-fu-only-redo)
      ("v" . xah-paste-or-paste-previous)
      ("w" . ace-window)
@@ -163,8 +167,11 @@
 
 
      ("C-a" . beginning-of-visual-line)
+     ("C-n" . next-line)
+
 
      ("M-'" . maple-iedit-match-all)
+
 
      ("<f3>" . gtrun/hydra-org-starter/body)
      ("<f4>" . xah-fly-command-mode-activate)
@@ -419,9 +426,10 @@
 :END:
 #+begin_src emacs-lisp :tangle "xah-fly-keys.el"
   (xah-fly--define-keys
-   ;; create a keymap org-keymap
+   ;; create a keymap magit-keymap
    (define-prefix-command 'magit-keys)
    '(
      ("s" . magit)
      ))
 #+end_src
+
