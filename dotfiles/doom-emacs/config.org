@@ -623,8 +623,8 @@ Uses `current-date-time-format' for the formatting the date/time."
         company-minimum-prefix-length 2
         company-transformers nil)
   (setq company-show-numbers t)
-  (define-key company-active-map (kbd "C-n") 'company-select-next-or-abort)
-  (define-key company-active-map (kbd "C-j") 'company-select-previous-or-abort)
+  (define-key company-active-map (kbd "C-j") 'company-select-next-or-abort)
+  (define-key company-active-map (kbd "C-i") 'company-select-previous-or-abort)
 
 (defun ora-company-number ()
   "Forward to `company-complete-number'.
@@ -700,6 +700,16 @@ In that case, insert the number."
 
 #+end_src
 
+** company-math
+#+begin_src emacs-lisp :tangle "config.el"
+(use-package! company-math
+  :config
+  (defun my-latex-mode-setup ()
+  (setq-local company-backends
+              (append '((company-math-symbols-latex company-latex-commands))
+                      company-backends)))
+  )
+#+end_src
 ** company-backend
 #+begin_src emacs-lisp :tangle "config.el"
 (set-company-backend! '(nix-mode)
@@ -716,6 +726,7 @@ In that case, insert the number."
     company-tabnine
     company-files
     company-yasnippet
+    company-math-symbols-unicode
     ))
 
 ;;  (set-company-backend! 'sh-mode nil) ; unsets backends for sh-mode
@@ -740,7 +751,11 @@ In that case, insert the number."
     company-files
     company-yasnippet))
 
-(setq +lsp-company-backend '(company-lsp :with company-tabnine :separate))
+
+(setq +lsp-company-backend '(company-lsp
+                             :with company-tabnine
+                             company-math-symbols-unicode
+                             :separate))
 
 
 (after! nix-mode
