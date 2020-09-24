@@ -1803,10 +1803,7 @@ easy way to display org-ref with tree view instead of org-mode ?
 * my-codes
 ** packages
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/packages.el"
-;;; packages.el -*- lexical-binding: t; -*-
-;;(package! lsp-julia :b342e5f74f9b815d2a7db9fffee7b9c46850d293 :recipe (:host github :repo "non-Jedi/lsp-julia"))
-(package! nox :recipe (:host github :repo "manateelazycat/nox"))
-(package! lsp-haskell)
+;;; modules/private/my-code/packages/packages.el -*- lexical-binding: t; -*-
 #+end_src
 
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
@@ -1955,6 +1952,11 @@ easy way to display org-ref with tree view instead of org-mode ?
 *** TODO [[https://github.com/io12/org-fragtog][io12/org-fragtog: Automatically toggle org-mode latex fragment previews as the cursor enters and exits them]]
 
 ** haskell
+*** lsp-haskell
+#+begin_src emacs-lisp :tangle "./modules/private/my-code/packages.el"
+(package! lsp-haskell)
+#+end_src
+
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
 (use-package! lsp-haskell
   :config
@@ -2002,9 +2004,9 @@ easy way to display org-ref with tree view instead of org-mode ?
 ** julia
 *** [[https://github.com/gcv/julia-snail][julia-snail: An Emacs development environment for Julia]]
 *** lsp-julia
-- b342e5f74f9b815d2a7db9fffee7b9c46850d293
+- pin "716e7d99a30b26012e5711fb2f33bea71a7bc5ab" to master
   #+begin_src emacs-lisp :tangle "./modules/private/my-code/packages.el"
-(package! lsp-julia :pin "b342e5f74f9b815d2a7db9fffee7b9c46850d293" :recipe (:host github :repo "non-Jedi/lsp-julia"))
+(package! lsp-julia :recipe (:host github :repo "non-Jedi/lsp-julia"))
 #+end_src
 
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
