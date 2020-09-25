@@ -25,87 +25,13 @@
   (require 'xah-fly-keys)
   ;;disable xah-fly-shared-map
   (define-key xah-fly-shared-map (kbd "C-n") nil)
+  (define-key xah-fly-shared-map (kbd "C-a") nil)
   :config
   (xah-fly-keys 1)
-  (add-hook 'xah-fly-command-mode-activate-hook
-            (lambda ()
-              (setq xah-fly-insert-state-q nil)))
-  )
+  :bind
+  ;; FIXEME: end line with under headlines
 #+END_SRC
 
-
-* define-key xah-fly-keys-map(Insert mode)
-#+begin_src emacs-lisp :tangle "xah-fly-keys.el"
-(defun xah-fly-insert-mode-init ()
-  (xah-fly--define-keys
-   xah-fly-key-map
-   '(
-     ("SPC" . nil)
-     ("DEL" . nil)
-
-     ("a" . nil)
-     ("b" . nil)
-     ("c" . nil)
-     ("d" . nil)
-     ("e" . nil)
-     ("f" . nil)
-     ("g" . nil)
-
-     ("h" . nil)
-     ("i" . nil)
-     ("j" . nil)
-     ("k" . nil)
-     ("l" . nil)
-     ("m" . nil)
-     ("n" . nil)
-
-     ("o" . nil)
-     ("p" . nil)
-     ("q" . nil)
-     ("r" . nil)
-     ("s" . nil)
-     ("t" . nil)
-
-     ("u" . nil)
-     ("v" . nil)
-     ("w" . nil)
-     ("x" . nil)
-     ("y" . nil)
-     ("z" . nil)
-
-     ("1" . nil)
-     ("2" . nil)
-     ("3" . nil)
-     ("4" . nil)
-     ("5" . nil)
-     ("6" . nil)
-     ("7" . nil)
-     ("9" . nil)
-     ("0" . nil)
-
-
-     ("/" . nil)
-     ("-" . nil)
-     ("." . nil)
-     ("," . nil)
-     (";" . nil)
-     ("'" . nil)
-     ("[" . nil)
-     ("]" . nil)
-     ("\\" . nil)
-     ("'" . nil)
-     ("C-s" . swiper-isearch)
-     ("C-c i" . counsel-imenu)
-     ("C-v" . scrollkeeper-contents-up)
-     ("C-x c" . xah-fly-command-mode-activate)
-     ("<f3>" . gtrun/hydra-org-starter/body)
-     ("<f4>" . xah-fly-command-mode-activate)
-     ("<f5>" . awesome-tab-ace-jump)
-     ;; more
-     ))
-  )
-
-#+end_src
 
 * define-key xah-fly-keys-map(Command mode)
 :PROPERTIES:
@@ -115,75 +41,68 @@
 
    - [[id:d679148a-220c-47a5-9891-c4158f8255d3][p-keymap]]
 #+begin_src emacs-lisp :tangle "xah-fly-keys.el"
-(defun xah-fly-command-mode-init ()
-  (interactive)
-  (xah-fly--define-keys
-   xah-fly-key-map
-   '(
-     ("SPC" . xah-fly-leader-key-map)
+(:map xah-fly-key-map
+ ("DEL" . nil)
 
-     ("a" . counsel-M-x)
-     ("b" . backward-word)
-     ("c" . xah-copy-line-or-region)
-     ("d" . xah-end-of-line-or-block)
-     ("e" . xah-beginning-of-line-or-block)
-     ("f" . xah-fly-insert-mode-activate)
+ ("a" . counsel-M-x)
+ ("b" . backward-word)
+ ("c" . xah-copy-line-or-region)
+ ("d" . xah-end-of-line-or-block)
+ ("e" . xah-beginning-of-line-or-block)
+ ("f" . xah-fly-insert-mode-activate)
 
-     ("g" . backward-word)
-     ("h" . forward-word)
+ ("g" . backward-word)
+ ("h" . forward-word)
 
-     ("i" . previous-line)
-     ("j" . forward-char)
-     ("k" . next-line)
-     ("l" . backward-char)
-     ("m" . isearch-backward)
-     ("n" . isearch-forward)
+ ("i" . previous-line)
+ ("j" . forward-char)
+ ("k" . next-line)
+ ("l" . backward-char)
+ ("m" . isearch-backward)
+ ("n" . isearch-forward)
 
-     ("o" . xah-delete-current-text-block)
-     ("p" . xah-fly-p-keymap)
-     ("q" . quit-window)
-     ("r" . xah-delete-backward-char-or-bracket-text)
-     ("t" . set-mark-command)
+ ("o" . xah-delete-current-text-block)
+ ("p" . xah-fly-p-keymap)
+ ("q" . quit-window)
+ ("r" . xah-delete-backward-char-or-bracket-text)
+ ("t" . set-mark-command)
 
-     ("u" . undo-fu-only-redo)
-     ("v" . xah-paste-or-paste-previous)
-     ("w" . ace-window)
-     ("x" . xah-cut-line-or-region)
-     ("y" . undo-fu-only-undo)
-     ("z" . xah-goto-matching-bracket)
+ ("u" . undo-fu-only-redo)
+ ("v" . xah-paste-or-paste-previous)
+ ("w" . ace-window)
+ ("x" . xah-cut-line-or-region)
+ ("y" . undo-fu-only-undo)
+ ("z" . xah-goto-matching-bracket)
 
 
 
-     ("[" . xah-backward-punct)
-     ("]" . xah-forward-punct)
-     (";" . Info-goto-emacs-command-node)
+ ("[" . xah-backward-punct)
+ ("]" . xah-forward-punct)
+ (";" . Info-goto-emacs-command-node)
 
-     ("1" . xah-extend-selection)
-     ("2" . xah-select-line)
-     ("3" . delete-other-windows)
-     ("4" . split-window-below)
-     ("5" . delete-char)
-     ("6" . xah-select-block)
-     ("7" . xah-select-line)
-     ("8" . xah-extend-selection)
-     ("9" . xah-select-text-in-quote)
-     ("0" . xah-pop-local-mark-ring)
+ ("1" . xah-extend-selection)
+ ("2" . xah-select-line)
+ ("3" . delete-other-windows)
+ ("4" . split-window-below)
+ ("5" . delete-char)
+ ("6" . xah-select-block)
+ ("7" . xah-select-line)
+ ("8" . xah-extend-selection)
+ ("9" . xah-select-text-in-quote)
+ ("0" . xah-pop-local-mark-ring)
 
+ ("C-s" . swiper-isearch)
+ ("C-c i" . counsel-imenu)
+ ("C-v" . scrollkeeper-contents-up)
+ ("C-x c" . xah-fly-command-mode-activate)
+ )
 
-     ("C-a" . beginning-of-visual-line)
-     ("M-'" . maple-iedit-match-all)
-
-
-     ("<f3>" . gtrun/hydra-org-starter/body)
-     ("<f4>" . xah-fly-command-mode-activate)
-     ("<f4>" . xah-fly-command-mode-activate)
-     ))
-;; FIXEME: end line with under headlines
 #+end_src
 
 * specific keys in different mode map
 ** load all of specific keys
 #+begin_src emacs-lisp :tangle "xah-fly-keys.el"
+:config
 (define-key xah-fly-key-map (kbd ".") 'gtrun-xah-fly-keys-dot)
 (define-key xah-fly-key-map (kbd "s-p") 'gtrun-xah-fly-keys-P)
 (define-key xah-fly-key-map (kbd "-") 'gtrun-xah-fly-keys-minus)
@@ -197,9 +116,6 @@
   (define-key xah-fly-key-map (kbd "r") 'eaf-open)
   (define-key xah-fly-key-map (kbd "w") 'snails)
   ))
-;; end line to xah-fly-command-mode-init
-)
-
 (when (display-graphic-p)
  (define-key key-translation-map (kbd "ESC") (kbd "C-x c"))
 )
@@ -380,6 +296,7 @@
 ))
 
 #+END_SRC
+
 * search-keys (leader-key to "s")
 :PROPERTIES:
 :ID:       38c793b6-7b4e-4da4-b647-03a62237249a
@@ -434,3 +351,89 @@
      ))
 #+end_src
 
+* end use-package config setting
+#+begin_src emacs-lisp :tangle "xah-fly-keys.el"
+;; FIXME: end line to xah-fly-keys
+)
+#+end_src
+* define global-set-key
+#+begin_src emacs-lisp :tangle "xah-fly-keys.el"
+(global-set-key (kbd "<f3>") 'gtrun/hydra-org-starter/body)
+(global-set-key (kbd "<f4>") 'xah-fly-command-mode-activate)
+#+end_src
+* ✘ CANCELED define-key xah-fly-keys-map(Insert mode)
+:LOGBOOK:
+- State "✘ CANCELED" from              [2020-09-24 Thu 19:46] \\
+  crashed
+:END:
+#+begin_src emacs-lisp :tangle "xah-fly-keys.el"
+;; (defun xah-fly-insert-mode-init ()
+;;   (xah-fly--define-keys
+;;    xah-fly-key-map
+;;    '(
+;;      ("SPC" . nil)
+;;      ("DEL" . nil)
+
+;;      ("a" . nil)
+;;      ("b" . nil)
+;;      ("c" . nil)
+;;      ("d" . nil)
+;;      ("e" . nil)
+;;      ("f" . nil)
+;;      ("g" . nil)
+
+;;      ("h" . nil)
+;;      ("i" . nil)
+;;      ("j" . nil)
+;;      ("k" . nil)
+;;      ("l" . nil)
+;;      ("m" . nil)
+;;      ("n" . nil)
+
+;;      ("o" . nil)
+;;      ("p" . nil)
+;;      ("q" . nil)
+;;      ("r" . nil)
+;;      ("s" . nil)
+;;      ("t" . nil)
+
+;;      ("u" . nil)
+;;      ("v" . nil)
+;;      ("w" . nil)
+;;      ("x" . nil)
+;;      ("y" . nil)
+;;      ("z" . nil)
+
+;;      ("1" . nil)
+;;      ("2" . nil)
+;;      ("3" . nil)
+;;      ("4" . nil)
+;;      ("5" . nil)
+;;      ("6" . nil)
+;;      ("7" . nil)
+;;      ("9" . nil)
+;;      ("0" . nil)
+
+
+;;      ("/" . nil)
+;;      ("-" . nil)
+;;      ("." . nil)
+;;      ("," . nil)
+;;      (";" . nil)
+;;      ("'" . nil)
+;;      ("[" . nil)
+;;      ("]" . nil)
+;;      ("\\" . nil)
+;;      ("'" . nil)
+;;      ("C-s" . swiper-isearch)
+;;      ("C-c i" . counsel-imenu)
+;;      ("C-v" . scrollkeeper-contents-up)
+;;      ("C-x c" . xah-fly-command-mode-activate)
+;;      ("<f3>" . gtrun/hydra-org-starter/body)
+;;      ("<f4>" . xah-fly-command-mode-activate)
+;;      ("<f5>" . awesome-tab-ace-jump)
+;;      ;; more
+;;      ))
+;;   )
+
+#+end_src
