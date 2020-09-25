@@ -38,7 +38,7 @@
 :END:
 - [[https://github.com/xahlee/xah-fly-keys/blob/master/xah-fly-keys.el#L3392][xah-fly-keys/xah-fly-keys.el at master · xahlee/xah-fly-keys]]
 **  Index Owner Customization keys
-- [[*s-keymap][s-keymap]]
+- [[id:c1ea1757-9e83-4121-a7ec-f93d8a9ce1e7][s-keymap]]
 - [[id:d679148a-220c-47a5-9891-c4158f8255d3][p-keymap]]
 **  xah-fly-key-map
 #+begin_src emacs-lisp :tangle "xah-fly-keys.el"
@@ -81,7 +81,7 @@
 
  ("[" . xah-backward-punct)
  ("]" . xah-forward-punct)
- (";" . Info-goto-emacs-command-node)
+
 
  ("1" . xah-extend-selection)
  ("2" . xah-select-line)
@@ -106,11 +106,8 @@
 ** load all of specific keys
 #+begin_src emacs-lisp :tangle "xah-fly-keys.el"
 :config
-(define-key xah-fly-key-map (kbd ".") 'gtrun-xah-fly-keys-dot)
-(define-key xah-fly-key-map (kbd "s-p") 'gtrun-xah-fly-keys-P)
-(define-key xah-fly-key-map (kbd "-") 'gtrun-xah-fly-keys-minus)
-(define-key xah-fly-key-map (kbd "/") 'gtrun-xah-fly-keys-slash)
-(define-key xah-fly-key-map (kbd ",") 'gtrun-xah-fly-keys-comma)
+(define-key xah-fly-key-map (kbd ".") 'gtrun-xah-fly-keys-dot) (define-key xah-fly-key-map (kbd "s-p") 'gtrun-xah-fly-keys-P) (define-key xah-fly-key-map (kbd "-") 'gtrun-xah-fly-keys-minus) (define-key xah-fly-key-map (kbd "/") 'gtrun-xah-fly-keys-slash) (define-key xah-fly-key-map (kbd ",") 'gtrun-xah-fly-keys-comma) (define-key xah-fly-key-map (kbd ";") 'gtrun-xah-fly-keys-semicolon)
+(define-key xah-fly-key-map (kbd "'") 'gtrun-xah-fly-keys-apostrophe)
 #+end_src
 ** Only Linux keys
 #+begin_src emacs-lisp :tangle "xah-fly-keys.el"
@@ -158,6 +155,7 @@
    ((eq major-mode 'dired-mode) (call-interactively 'vinegar/dired-diff))
    ((eq major-mode 'w3m-mode) (call-interactively 'w3m-bookmark-add-current-url))
    ((eq major-mode 'org-agenda-mode) (call-interactively 'org-agenda-filter-by-tag))
+   ((eq major-mode 'org-mode) (call-interactively 'helm-org-agenda-files-headings))
    ((eq major-mode 'elfeed-search-mode) (call-interactively 'elfeed-update))
    ((eq major-mode 'ess-julia-mode) (call-interactively 'julia-mode))
    (t nil)))
@@ -169,17 +167,17 @@
   "key `;'"
   (interactive)
   (cond
-   ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
+   ((eq major-mode 'org-mode) (call-interactively 'sl-store-link))
 
    (t nil)))
 #+end_src
 ** '-apostrophe
 #+begin_src emacs-lisp :tangle "xah-fly-keys.el"
 (defun gtrun-xah-fly-keys-apostrophe ()
-  "key `''" 
+  "key `''"
   (interactive)
   (cond
-   ;; ((eq major-mode 'dired-mode) (call-interactively 'd))
+   ((eq major-mode 'org-mode) (call-interactively 'sl-insert-link))
 
    (t nil)))
 #+end_src
@@ -225,6 +223,9 @@
 #+end_src
 
 ** s-keymap
+:PROPERTIES:
+:ID:       c1ea1757-9e83-4121-a7ec-f93d8a9ce1e7
+:END:
 :BACKLINKS:
 [2020-09-24 Thu 20:30] <- [[*Owner Customization keys][Owner Customization keys]]
 :END:
@@ -329,6 +330,9 @@
      ("r" . counsel-rg)
      ("y" . xah-search-current-word)
      ("m" . maple-iedit-match-next)
+     ("i" . org-roam-insert)
+     ("d" . sl-quick-insert-drawer-link)
+     ("i" . sl-quick-insert-inline-link)
      ;;
      ))
 #+END_SRC

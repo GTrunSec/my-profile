@@ -1120,7 +1120,7 @@ FACE defaults to inheriting from default and highlight."
                    ("posts/myself/qing.org"         :key "q" :refile (:maxlevel .5 ))
                    ("posts/myself/plan.org"         :key "p" :refile (:maxlevel .5 ))
                    ("elfeed.org"         :key "e" :refile (:maxlevel .5 ))
-                   ("GTD/my-books.org"             :agenda t :key "b" :refile (:maxlevel .5 ))
+                   ("braindump/my-books.org"       :agenda t :key "b" :refile (:maxlevel .5 ))
                    ("NSM-GTD/workflow.org"         :agenda t :required t)
                    ("NSM-GTD/NsmOrg.org"           :agenda t :required t)
                    ("art/learn-music.org"          :agenda t :key "M" :refile (:maxlevel .5 ))
