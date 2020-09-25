@@ -377,6 +377,12 @@
 (global-set-key (kbd "<f3>") 'gtrun/hydra-org-starter/body)
 (global-set-key (kbd "<f4>") 'xah-fly-command-mode-activate)
 #+end_src
+* add hook to active xah-fly-keys insert or command mode
+#+begin_src emacs-lisp :tangle "xah-fly-keys.el"
+(add-hook! 'magit-mode-hook 'xah-fly-insert-mode-activate)
+(add-hook! 'snails-mode-hook 'xah-fly-insert-mode-activate)
+(add-hook! 'sunrise-start-hook 'xah-fly-insert-mode-activate)
+#+end_src
 * ✘ CANCELED define-key xah-fly-keys-map(Insert mode)
 :LOGBOOK:
 - State "✘ CANCELED" from              [2020-09-24 Thu 19:46] \\

@@ -576,8 +576,6 @@ Uses `current-date-time-format' for the formatting the date/time."
 (add-hook! 'text-mode-hook 'gtrun/truncate-lines-hook)
 (add-hook! 'elfeed-show-mode-hook 'gtrun/truncate-lines-hook)
 
-(add-hook! 'sunrise-start-hook 'xah-fly-insert-mode-activate)
-
 (setenv "XAPIAN_CJK_NGRAM" "1")
 (setenv "QT_DEBUG_PLUGINS" "1")
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -2524,8 +2522,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   :load-path "~/.myscript/snails"
   :if (eq system-type 'gnu/linux)
   :config
-  (define-key snails-mode-map [remap next-line] #'snails-select-next-item)
-  (add-hook 'snails-mode-hook #'xah-fly-insert-mode-activate))
+  (define-key snails-mode-map [remap next-line] #'snails-select-next-item))
 #+end_src
 
 *** grab-x-link :nix:
