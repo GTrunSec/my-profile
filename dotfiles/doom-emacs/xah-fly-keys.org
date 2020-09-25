@@ -28,7 +28,6 @@
   (define-key xah-fly-shared-map (kbd "C-a") nil)
   :config
   (xah-fly-keys 1)
-  :bind
   ;; FIXEME: end line with under headlines
 #+END_SRC
 
@@ -38,9 +37,12 @@
 :ID:       f2cf8f5c-5f8f-4727-8ce0-de5ca5b13fa9
 :END:
 - [[https://github.com/xahlee/xah-fly-keys/blob/master/xah-fly-keys.el#L3392][xah-fly-keys/xah-fly-keys.el at master · xahlee/xah-fly-keys]]
-
-   - [[id:d679148a-220c-47a5-9891-c4158f8255d3][p-keymap]]
+**  Index Owner Customization keys
+- [[*s-keymap][s-keymap]]
+- [[id:d679148a-220c-47a5-9891-c4158f8255d3][p-keymap]]
+**  xah-fly-key-map
 #+begin_src emacs-lisp :tangle "xah-fly-keys.el"
+:bind
 (:map xah-fly-key-map
  ("DEL" . nil)
 
@@ -54,6 +56,7 @@
  ("g" . backward-word)
  ("h" . forward-word)
 
+ ("s" . save-buffer)
  ("i" . previous-line)
  ("j" . forward-char)
  ("k" . next-line)
@@ -218,6 +221,19 @@
    ("y" . xah-list-recently-closed)
    ("r" . xah-open-file-fast)
    ("s" . write-file)
+   ))
+#+end_src
+
+** s-keymap
+:BACKLINKS:
+[2020-09-24 Thu 20:30] <- [[*Owner Customization keys][Owner Customization keys]]
+:END:
+#+begin_src emacs-lisp :tangle "xah-fly-keys.el"
+(xah-fly--define-keys
+ (define-prefix-command 'gtrun-a-keymap)
+ '(
+   ("a" . mark-whole-buffer)
+   ("s" . save-buffer)
    ))
 #+end_src
 
