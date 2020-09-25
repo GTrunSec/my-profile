@@ -56,7 +56,7 @@
  ("g" . backward-word)
  ("h" . forward-word)
 
- ("s" . save-buffer)
+ ("s" . gtrun-s-keymap)
  ("i" . previous-line)
  ("j" . forward-char)
  ("k" . next-line)
@@ -230,7 +230,7 @@
 :END:
 #+begin_src emacs-lisp :tangle "xah-fly-keys.el"
 (xah-fly--define-keys
- (define-prefix-command 'gtrun-a-keymap)
+ (define-prefix-command 'gtrun-s-keymap)
  '(
    ("a" . mark-whole-buffer)
    ("s" . save-buffer)
