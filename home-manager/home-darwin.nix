@@ -64,6 +64,7 @@ in
         libnotify
 
         nodePackages.pyright
+
       ];
     })
   ];

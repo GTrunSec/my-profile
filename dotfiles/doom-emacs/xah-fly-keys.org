@@ -332,11 +332,10 @@
      ("m" . maple-iedit-match-next)
      ("i" . org-roam-insert)
      ("d" . sl-quick-insert-drawer-link)
-     ("i" . sl-quick-insert-inline-link)
+     ("l" . sl-quick-insert-inline-link)
      ;;
      ))
 #+END_SRC
-
 * org-keys (leader-key to "o")
 :PROPERTIES:
 :ID:       2755ee61-1f79-4e5b-bd69-d7c730bb28e4
