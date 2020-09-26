@@ -1120,10 +1120,11 @@ FACE defaults to inheriting from default and highlight."
                    ("posts/myself/qing.org"         :key "q" :refile (:maxlevel .5 ))
                    ("posts/myself/plan.org"         :key "p" :refile (:maxlevel .5 ))
                    ("elfeed.org"         :key "e" :refile (:maxlevel .5 ))
-                   ("braindump/my-books.org"       :agenda t :key "b" :refile (:maxlevel .5 ))
                    ("NSM-GTD/workflow.org"         :agenda t :required t)
                    ("NSM-GTD/NsmOrg.org"           :agenda t :required t)
                    ("art/learn-music.org"          :agenda t :key "M" :refile (:maxlevel .5 ))
+                   ("braindump/my-books.org"       :key "b" :refile (:maxlevel .5 ))
+                   ("braindump/life-goods.org"     :key "s" :refile (:maxlevel .5 ))
                    )
   (org-starter-def "~/.config/nixpkgs/dotfiles/doom-emacs/"
                    :files
@@ -1153,7 +1154,7 @@ FACE defaults to inheriting from default and highlight."
       ("c" org-starter-find-file:config)
       ("x" org-starter-find-file:xah-fly-keys)
       ("g" org-starter-find-file:gtd)
-      ("s" org-starter-find-file:life-things)
+      ("s" org-starter-find-file:life-goods)
       ("n" org-starter-find-file:notes)
       ("e" org-starter-find-file:elfeed)
       ("M" org-starter-find-file:learn-music)
@@ -1520,13 +1521,13 @@ FACE defaults to inheriting from default and highlight."
   ;;(setq notdeft-secondary-extensions '("md" "org" "scrbl"))
   (setq notdeft-directories '("~/Documents/org-notes/post/myself"
                               "~/Documents/org-notes/dailies"
-                              "~/Documents/org-notes/post/life-thing"
                               "~/Documents/org-notes/post/traveling"
                               "~/Documents/org-notes/post/agenda"
                               "~/Documents/org-notes/post/game"
                               "~/Dropbox/project/my-learning-list"
                               "~/Documents/org-notes/GTD"
                               "~/Documents/org-notes/art"
+                              "~/Documents/org-notes/braindump"
                               ))
 
   :bind (:map notdeft-mode-map
