@@ -1232,7 +1232,7 @@ FACE defaults to inheriting from default and highlight."
 :ID:       e513ede6-3d58-4ef5-9152-dc809675e063
 :END:
 :BACKLINKS:
-[2020-09-20 Sun 17:20] <- [[*Org-edna][Org-edna]]
+[2020-09-20 Sun 17:20] <- [[id:629570ef-ecd4-494f-a3b5-1fb10aeef227][Org-edna]]
 :END:
 
 *** super-agenda
@@ -1329,6 +1329,9 @@ FACE defaults to inheriting from default and highlight."
 #+end_src
 
 *** ✰ IMPORTANT Org-edna
+:PROPERTIES:
+:ID:       629570ef-ecd4-494f-a3b5-1fb10aeef227
+:END:
 
 - [[https://www.nongnu.org/org-edna-el/#org2421cd7][Org Edna]]
 
