@@ -11,6 +11,7 @@ fish_prompt.fish
 init.el
 dotfiles/doom-emacs/modules/*.el
 dotfiles/doom-emacs/autoload/*.el
+dotfiles/doom-emacs/org-roam.db
 dotfiles/doom-emacs/modules/private/my-code/*.el
 dotfiles/doom-emacs/modules/private/my-org/*.el
 dotfiles/doom-emacs/modules/private/public
