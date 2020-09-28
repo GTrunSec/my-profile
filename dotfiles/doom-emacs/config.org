@@ -710,19 +710,19 @@ In that case, insert the number."
 #+begin_src emacs-lisp :tangle "config.el"
 (when IS-LINUX
   (set-company-backend! '(nix-mode)
-    '(:separate
-      company-nixos-options
-      company-tabnine
+    '(
       company-files
-      company-yasnippet
+      :separate
+      company-tabnine
+      company-nixos-options
       )))
 
 (when IS-MAC
   (set-company-backend! '(nix-mode)
-    '(:separate
-      company-tabnine
-      company-files
+    '(company-files
       company-yasnippet
+      :separate
+      company-tabnine
       )))
 
 (set-company-backend! '(julia-mode)
@@ -753,21 +753,27 @@ In that case, insert the number."
                         org-mode
                         web-mode
                         )
-  '(:separate company-tabnine
+  '(
     company-files
-    company-yasnippet))
+    company-yasnippet
+    :separate
+    company-tabnine
+    ))
 
 
 (setq +lsp-company-backend '(company-lsp
-                             :with company-tabnine
-                             :separate))
+                             company-files
+                             company-yasnippet
+                             :separate
+                             company-tabnine
+                             ))
 
 
 (after! nix-mode
-  (setq +lsp-company-backends '(company-nixos-options
+  (setq +lsp-company-backends '(company-files
+                                :separate
                                 company-tabnine
-                                :with
-                                company-files
+                                company-nixos-options
                                 ))
   )
 #+end_src

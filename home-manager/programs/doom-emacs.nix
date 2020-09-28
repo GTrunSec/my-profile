@@ -4,6 +4,7 @@ let
   updateDoom = ".emacs.d/bin/doom sync";
   updateInit = "bash .doom.d/bin/emacs.sh";
   emacsDrawin-overlay = import ./nix-gcc-emacs-darwin/emacs.nix;
+
   overlays = [
     emacsDrawin-overlay
     (import (builtins.fetchTarball {
