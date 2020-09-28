@@ -708,24 +708,34 @@ In that case, insert the number."
 #+end_src
 ** company-backend
 #+begin_src emacs-lisp :tangle "config.el"
-(set-company-backend! '(nix-mode)
-  '(:separate
-    company-nixos-options
-    company-tabnine
-    company-files
-    company-yasnippet
-    ))
+(when IS-LINUX
+  (set-company-backend! '(nix-mode)
+    '(:separate
+      company-nixos-options
+      company-tabnine
+      company-files
+      company-yasnippet
+      )))
 
+(when IS-MAC
+  (set-company-backend! '(nix-mode)
+    '(:separate
+      company-tabnine
+      company-files
+      company-yasnippet
+      )))
 
 (set-company-backend! '(julia-mode)
-  '(:separate company-lsp
-    company-tabnine
-    company-files
-    company-yasnippet
+  '(
     company-math-symbols-unicode
+    company-files
+    :separate
+    company-tabnine
+    company-yasnippet
     ))
 
 ;;  (set-company-backend! 'sh-mode nil) ; unsets backends for sh-mode
+
 (set-company-backend! '(c-mode
                         c++-mode
                         ess-mode
@@ -750,7 +760,6 @@ In that case, insert the number."
 
 (setq +lsp-company-backend '(company-lsp
                              :with company-tabnine
-                             company-math-symbols-unicode
                              :separate))
 
 
@@ -2031,11 +2040,12 @@ easy way to display org-ref with tree view instead of org-mode ?
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
 (use-package! lsp-julia
   :config
-  (add-hook 'julia-mode-hook #'lsp)
+  ;;(add-hook 'julia-mode-hook #'lsp)
   ;;(setq lsp-julia-default-environment "~/.julia/environments/v1.5")
-  ;;(setq lsp-folding-range-limit 100)
+  (setq lsp-folding-range-limit 100)
 )
 #+end_src
+
 
 *** TODO [[https://github.com/gcv/julia-snail][gcv/julia-snail: An Emacs development environment for Julia]]
 
