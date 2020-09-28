@@ -715,7 +715,14 @@ In that case, insert the number."
       :separate
       company-tabnine
       company-nixos-options
-      )))
+      ))
+
+  (setq +lsp-company-backends '(company-files
+                                company-nixos-options
+                                :separate
+                                company-tabnine
+                                ))
+  )
 
 (when IS-MAC
   (set-company-backend! '(nix-mode)
@@ -723,15 +730,20 @@ In that case, insert the number."
       company-yasnippet
       :separate
       company-tabnine
-      )))
+      ))
+  (setq +lsp-company-backends '(company-files
+                                :separate
+                                company-tabnine
+                                ))
+  )
 
 (set-company-backend! '(julia-mode)
   '(
     company-math-symbols-unicode
     company-files
+    company-yasnippet
     :separate
     company-tabnine
-    company-yasnippet
     ))
 
 ;;  (set-company-backend! 'sh-mode nil) ; unsets backends for sh-mode
@@ -741,6 +753,7 @@ In that case, insert the number."
                         ess-mode
                         haskell-mode
                         ;;emacs-lisp-mode
+                        conf-mode
                         lisp-mode
                         sh-mode
                         php-mode
@@ -767,15 +780,6 @@ In that case, insert the number."
                              :separate
                              company-tabnine
                              ))
-
-
-(after! nix-mode
-  (setq +lsp-company-backends '(company-files
-                                :separate
-                                company-tabnine
-                                company-nixos-options
-                                ))
-  )
 #+end_src
 
 ** Edition

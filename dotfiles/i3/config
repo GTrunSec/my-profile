@@ -219,7 +219,7 @@ for_window [class="feh"] floating enable, border normal
 #for_window [class=""] fullscreen enable
 
 # Wallpaper
-exec_always --no-startup-id feh --randomize --bg-fill ~/.config/nixpkgs/dotfiles/wallpaper/sky-sea/ned-rogers-forest-forestchoir-concept01-002_2019-07-27_14-07-36.jpeg
+exec_always --no-startup-id feh --randomize --bg-fill ~/.config/nixpkgs/dotfiles/wallpaper/.attach/12/004cda-72c7-4199-898a-e1c05e389f36/richard-rude-richardrude-d2f-hellrisecanyon-002_2019-07-27_16-32-49.jpeg
 exec --no-startup-id fcitx -d -r
 
 
