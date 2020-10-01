@@ -565,7 +565,6 @@ Uses `current-date-time-format' for the formatting the date/time."
 ;; (setq browse-url-browser-function 'browse-url-Chrome)
 ;; https://emacs.stackexchange.com/questions/5603/how-to-quickly-copy-move-file-in-emacs-dired
 (setq dired-dwim-target t)
-(add-hook! 'xah-fly-command-mode-activate-hook 'xah-fly-save-buffer-if-file)
 
 (add-hook! 'dired-mode 'dired-async-mode)
 ;;(add-hook! 'xah-fly-command-mode-activate-hook 'bookmark-save)
@@ -656,6 +655,17 @@ In that case, insert the number."
                         (self-insert-command 1)))
   (define-key map (kbd "<return>") nil)))
 #+end_src
+
+** Customize completion-at-point
+
+ - [[https://with-emacs.com/posts/tutorials/customize-completion-at-point/][with-emacs · Customize completion-at-point]]
+
+#+begin_src emacs-lisp :tangle "config.el"
+;; First try to indent the current line, and if the line
+;; was already indented, then try `completion-at-point'
+(setq tab-always-indent 'complete)
+#+end_src
+
 ** company-tabnine
 #+begin_src emacs-lisp :tangle "packages.el"
 (package! company-tabnine)
@@ -1056,7 +1066,7 @@ FACE defaults to inheriting from default and highlight."
 
 
 ** load basic config
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (load! "setting")
 (use-package! ox-hugo)
 (use-package! ob-session-async)
@@ -1072,7 +1082,7 @@ FACE defaults to inheriting from default and highlight."
 #+end_src
 ** org-setting
  - [[https://zzamboni.org/post/beautifying-org-mode-in-emacs/][zzamboni.org | Beautifying Org Mode in Emacs]]
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (setq org-clock-into-drawer t)
 (add-hook! 'org-mode-hook 'auto-revert-mode)
 (add-hook! 'dired-mode-hook 'org-download-enable)
@@ -1109,19 +1119,19 @@ FACE defaults to inheriting from default and highlight."
 #+end_src
 
 ** org-mode-map
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch 
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (after! org
   (define-key org-mode-map (kbd "C-c C-.") 'org-time-stamp-inactive)
 )
 #+end_src
 
 ** org-starter
-#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el" :nowatch
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
 (package! org-starter)
 #+end_src
 - adding Braindump to org-agenda files
   - [[https://superuser.com/questions/633746/loading-all-org-files-on-a-folder-to-agenda][emacs - Loading all org files on a folder to agenda - Super User]]
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (setq org-agenda-files (list "~/Documents/org-notes/braindump"))
 
 (use-package! org-starter
@@ -1198,11 +1208,11 @@ FACE defaults to inheriting from default and highlight."
 : org-starter-select-file
 
 ** org-superstar
-#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el" :nowatch
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
 (package! org-superstar)
 #+end_src
 
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-superstar
   :config
   (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
@@ -1211,11 +1221,11 @@ FACE defaults to inheriting from default and highlight."
 #+end_src
 
 ** org-ql
-#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el" :nowatch
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
 (package! org-ql)
 #+end_src
 
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-ql
   :config
   (require 'helm-org-ql)
@@ -1224,20 +1234,20 @@ FACE defaults to inheriting from default and highlight."
 #+end_src
 
 
-#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el" :nowatch
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
 (package! helm-org-rifle)
 #+end_src
 
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! helm-org-rifle)
 #+end_src
 
 ** org-book
-#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el" :nowatch
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
 (package! org-books :recipe (:host github :repo "lepisma/org-books"))
 #+end_src
 
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-books
   :config
   (setq org-books-file "~/Documents/org-notes/GTD/my-books.org")
@@ -1255,11 +1265,11 @@ FACE defaults to inheriting from default and highlight."
 :END:
 
 *** super-agenda
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/packages.el" :nowatch
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/packages.el"
 (package! org-super-agenda)
 #+end_src
 
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-super-agenda
   :config
   (add-hook! 'after-init-hook 'org-super-agenda-mode)
@@ -1276,7 +1286,7 @@ FACE defaults to inheriting from default and highlight."
 #+end_src
 
 *** agenda-custom-setting
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (require 'org-super-agenda)
 (setq org-agenda-custom-commands
       '(("z" "GtruN Agenda"
@@ -1356,11 +1366,11 @@ FACE defaults to inheriting from default and highlight."
 
 - [[id:e513ede6-3d58-4ef5-9152-dc809675e063][[[http://doc.norang.ca/org-mode.html][Org Mode - Organize Your Life In Plain Text!]​]​]]
 
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/packages.el" :nowatch
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/packages.el"
 (package! org-edna)
 #+end_src
 
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-edna
   :config
   (add-hook! 'after-init-hook 'org-edna-mode)
@@ -1368,11 +1378,11 @@ FACE defaults to inheriting from default and highlight."
 #+end_src
 *** org-wild-notifier
 - [[https://github.com/akhramov/org-wild-notifier.el][akhramov/org-wild-notifier.el: Alert notifications for org-agenda]]
-#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el" :nowatch
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
 (package! org-wild-notifier)
 #+end_src
 
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-wild-notifier
   :defer t
   :config
@@ -1388,7 +1398,7 @@ FACE defaults to inheriting from default and highlight."
 (package! elfeed-goodies)
 #+end_src
 
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! elfeed
   :bind (:map elfeed-search-mode-map
           ("q" . bjm/elfeed-save-db-and-bury)
@@ -1444,7 +1454,7 @@ FACE defaults to inheriting from default and highlight."
 - [[https://necromuralist.github.io/posts/org-babel-cheat-sheet/][Org-Babel Cheat Sheet | The Cloistered Monkey]]
 
 
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (after! ob-async
   (setq ob-async-no-async-languages-alist '("ipython" "ein-python"
                                             "ein-rust"
@@ -1507,7 +1517,7 @@ FACE defaults to inheriting from default and highlight."
 #+end_src
 
 ** org-crypt
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 ;; 當被加密的部份要存入硬碟時，自動加密回去
   ;; 設定要加密的 tag 標籤為 secret
   (setq org-crypt-tag-matcher "secret")
@@ -1532,11 +1542,11 @@ FACE defaults to inheriting from default and highlight."
 - [[https://github.com/EFLS/zetteldeft][EFLS/zetteldeft: A Zettelkasten system! Or rather, some functions on top of the emacs deft package.]]
 
 
-#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el" :nowatch
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
 (package! notdeft :recipe (:host github :repo "hasu/notdeft"))
 #+end_src
 
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! notdeft
   :config
   (setq notdeft-extension "org")
@@ -1594,7 +1604,7 @@ make
 
 easy way to display org-ref with tree view instead of org-mode ?
 *** org-roam
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-roam
   :init
   (require 'org-roam-protocol)
@@ -1614,11 +1624,11 @@ easy way to display org-ref with tree view instead of org-mode ?
 - [[https://github.com/org-roam/org-roam-server][org-roam/org-roam-server: A Web Application to Visualize the Org-Roam Database]]
 
 
-#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el" :nowatch
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
 (package! org-roam-server)
 #+end_src
 
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-roam-server
   :config
   (setq org-roam-server-port 8081
@@ -1632,11 +1642,11 @@ easy way to display org-ref with tree view instead of org-mode ?
 #+end_src
 
 *** org-roam-bibtex
-#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el" :nowatch
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
 (package! org-roam-bibtex)
 #+end_src
 
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-roam-bibtex
   :config
   (add-hook 'org-mode-hook #'org-roam-bibtex-mode)
@@ -1647,11 +1657,11 @@ easy way to display org-ref with tree view instead of org-mode ?
 #+end_src
 
 *** org-ref
-#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el" :nowatch
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
 (package! org-ref)
 #+end_src
 
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-ref
   :config
   (setq org-ref-default-bibliography '("~/Documents/org-notes/bibliography/myBibliography.bib"))
@@ -1679,7 +1689,7 @@ easy way to display org-ref with tree view instead of org-mode ?
 
 ** ob-mermaid
 - [[https://github.com/arnm/ob-mermaid][GitHub - arnm/ob-mermaid: Generate mermaid diagrams within Emacs org-mode babel]]
-#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el" :nowatch
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
 (package! ob-mermaid)
 #+end_src
 
@@ -1694,11 +1704,11 @@ easy way to display org-ref with tree view instead of org-mode ?
 - [[https://github.com/dustinlacewell/org-spacer.el][dustinlacewell/org-spacer.el: Enforce the number of blank lines between elements in an org-mode document]]
 
 
-#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el" :nowatch
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
 (package! org-spacer.el :recipe (:host github :repo "dustinlacewell/org-spacer.el"))
 #+end_src
 
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-spacer
   :config
   ;; (add-hook 'org-mode-hook
@@ -1711,11 +1721,11 @@ easy way to display org-ref with tree view instead of org-mode ?
 - [[https://github.com/mtekman/org-density.el][mtekman/org-density.el: Examine the density of org headings]]
 
 
-#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el" :nowatch
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
 (package! org-treeusage :recipe (:host github :repo "mtekman/org-treeusage.el"))
 #+end_src
 
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-treeusage
   :config
   (define-key org-mode-map (kbd "C-c d") 'org-treeusage-mode)
@@ -1751,11 +1761,11 @@ easy way to display org-ref with tree view instead of org-mode ?
 - [[https://github.com/toshism/org-super-links][toshism/org-super-links: Package to create links with auto backlinks]]
 
 
-#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el" :nowatch
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
 (package! org-super-links :recipe (:local-repo "~/.myscript/org-super-links"))
 #+end_src
 
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-super-links)
 #+end_src
 
@@ -1769,12 +1779,12 @@ easy way to display org-ref with tree view instead of org-mode ?
 
 
 ** TODO [[https://github.com/marcIhm/org-working-set][marcIhm/org-working-set: Manage a working-set of org-nodes]] :manage:
-#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el" :nowatch
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
 (package! org-working-set
 )
 #+end_src
 
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-working-set)
 #+end_src
 ** [[https://github.com/mtekman/org-tanglesync.el][mtekman/org-tanglesync.el: A package to pull external changes into an org-mode source block if that block is tangled to an external file]]
@@ -1783,7 +1793,7 @@ easy way to display org-ref with tree view instead of org-mode ?
 (package! org-tanglesync)
 #+end_src
 
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-tanglesync
   :config
   :hook (((prog-mode text-mode) . org-tanglesync-watch-mode))
@@ -1815,7 +1825,7 @@ easy way to display org-ref with tree view instead of org-mode ?
 (package! org-graph-view :recipe (:host github :repo "alphapapa/org-graph-view"))
 #+end_src
 
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-graph-view)
 #+end_src
 
@@ -1824,7 +1834,7 @@ easy way to display org-ref with tree view instead of org-mode ?
 (package! org-mind-map :recipe (:host github :repo "the-humanities/org-mind-map"))
 #+end_src
 
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el" :nowatch
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-mind-map
   :init
   (require 'ox-org)

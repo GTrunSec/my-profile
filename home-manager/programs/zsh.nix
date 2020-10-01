@@ -23,7 +23,7 @@ in
         };
         history = {
           share = true;
-          path = config.programs.zsh.dotDir + "/.zsh_history";
+          path = home_directory + "/" + config.programs.zsh.dotDir + "/.zsh_history";
           save = 10000000;
           ignoreDups = true;
           extended = true;
