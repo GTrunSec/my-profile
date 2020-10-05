@@ -93,6 +93,5 @@ in
           grab-x-link
         ];
     })
-      #services.emacs.enable = true;
   ];
 }

@@ -36,6 +36,14 @@
     })
 
     ({
+      home.file.".config/direnv/direnvrc".text = ''
+      use_flake() {
+      watch_file flake.nix
+      watch_file flake.lock
+      eval "$(nix print-dev-env)"
+      }
+    '';
+      
       home.file.".wakatime.cfg".text = ''
     [settings]
     debug=true
