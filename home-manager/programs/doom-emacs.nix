@@ -4,14 +4,14 @@ let
   updateDoom = ".emacs.d/bin/doom sync";
   updateInit = "bash .doom.d/bin/emacs.sh";
   emacsDrawin-overlay = import ./nix-gcc-emacs-darwin/emacs.nix;
-
-  overlays = [
-    emacsDrawin-overlay
+  emacs-overlay-rev = (builtins.fromJSON (builtins.readFile ../../flake.lock)).nodes.emacs-overlay.locked.rev;
+    overlays = [
     (import (builtins.fetchTarball {
-      url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
+      url = "https://github.com/nix-community/emacs-overlay/archive/${emacs-overlay-rev}.tar.gz";
     }))
   ];
-  emacsPkgs  = import ../misc/emacs-27-pkgs.nix { inherit overlays;};
+
+    emacsPkgs  = import ../misc/master.nix {inherit overlays;};
 in
 {
   config = with lib; mkMerge [

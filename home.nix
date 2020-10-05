@@ -76,7 +76,6 @@ in
     
     (mkIf pkgs.stdenv.isLinux {
       systemd.user.startServices = true;
-      services.emacs.enable = true;
     })
 
   ];
