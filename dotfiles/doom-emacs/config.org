@@ -2505,7 +2505,6 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   (setq eaf-python-command "python3.7")
 
   (bookmark-load bookmark-default-file t)
-  (add-hook 'nix-mode-hook #'lsp)
 
   (setq org-roam-db-location "~/.emacs.d/.local/cache/org-roam.db")
 

@@ -8,11 +8,9 @@ let
 in
 
 {
-  ##https://stackoverflow.com/questions/50622072/how-to-install-jbake-from-unstable-with-overlay-in-home-manager
   imports = [
     ./home-manager
     ./home-manager/randr
-    ~/.nix-defexpr/channels/home-manager/modules/services/emacs.nix
   ];
 
   config = with lib; mkMerge [

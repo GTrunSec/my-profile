@@ -461,15 +461,14 @@ let
   updateInit = "bash .doom.d/bin/emacs.sh";
   emacsDrawin-overlay = import ./nix-gcc-emacs-darwin/emacs.nix;
   emacs-overlay-rev = (builtins.fromJSON (builtins.readFile ../../flake.lock)).nodes.emacs-overlay.locked.rev;
-    overlays = [
+  overlays = [
+    emacsDrawin-overlay
     (import (builtins.fetchTarball {
       url = "https://github.com/nix-community/emacs-overlay/archive/${emacs-overlay-rev}.tar.gz";
     }))
   ];
 
-  emacsPkgs  = import ../../nix/master-pkgs.nix {inherit overlays;};
-
-  emacsPkgs  = import ../misc/emacs-27-pkgs.nix { inherit overlays;};
+    emacsPkgs  = import ../misc/master.nix {inherit overlays;};
 in
 {
   config = with lib; mkMerge [
@@ -519,7 +518,7 @@ in
       };
     })
 
-    
+
     (mkIf (pkgs.stdenv.isLinux || pkgs.stdenv.isDarwin) {
       programs.emacs.enable = true;
     })
@@ -551,10 +550,8 @@ in
           grab-x-link
         ];
     })
-      #services.emacs.enable = true;
   ];
 }
-
 #+end_src
 ** zsh
 #+begin_src nix :exports both :tangle "~/.config/nixpkgs/home-manager/programs/zsh.nix"
@@ -583,7 +580,7 @@ in
         };
         history = {
           share = true;
-          path = home_directory + "/" + config.programs.zsh.dotDir + "/.zsh_history";
+          path = config.programs.zsh.dotDir + "/.zsh_history";
           save = 10000000;
           ignoreDups = true;
           extended = true;
@@ -597,7 +594,7 @@ in
           em    = "emacs";
           cp    = "cp -i";
           mv    = "mv -i";
-          ##update Nixpkgs
+          ##update Nixpkgs 
           un    = "~/.config/nixpkgs  && git fetch && git pull";
           overlay-go   = "cd ~/.config/nixpkgs/nixos/overlays/go";
           overlay-python   = "cd ~/.config/nixpkgs/nixos/overlays/python";
@@ -697,6 +694,7 @@ in
     })
   ];
 }
+
 #+end_src
 ** alacritty
 #+begin_src nix :exports both :tangle "~/.config/nixpkgs/home-manager/programs/alacritty/default.nix"
