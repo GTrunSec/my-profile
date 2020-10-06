@@ -2314,6 +2314,8 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
 - [[https://github.com/joostkremers/writeroom-mode][joostkremers/writeroom-mode: Writeroom-mode: distraction-free writing for Emacs.]]
 
+- [[https://github.com/rnkn/olivetti][rnkn/olivetti: Emacs minor mode for a nice writing environment]]
+
 #+begin_src emacs-lisp :tangle "packages.el"
 (package! writeroom-mode)
 #+end_src
@@ -2451,6 +2453,10 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 (disable-packages! company-go)
 (disable-packages! lsp-python-ms)
 #+end_src
+
+* misc
+** emacs-music
+*** [[https://github.com/SpringHan/netease-cloud-music.el][SpringHan/netease-cloud-music.el: A netease music client for emacs.]]
 
 * set popup rules
 #+begin_src emacs-lisp :tangle "config.el"

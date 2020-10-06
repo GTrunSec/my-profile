@@ -583,7 +583,7 @@ in
         };
         history = {
           share = true;
-          path = config.programs.zsh.dotDir + "/.zsh_history";
+          path = home_directory + "/" + config.programs.zsh.dotDir + "/.zsh_history";
           save = 10000000;
           ignoreDups = true;
           extended = true;
@@ -697,7 +697,6 @@ in
     })
   ];
 }
-
 #+end_src
 ** alacritty
 #+begin_src nix :exports both :tangle "~/.config/nixpkgs/home-manager/programs/alacritty/default.nix"

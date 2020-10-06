@@ -12,7 +12,7 @@ let
     }))
   ];
 
-    emacsPkgs  = import ../misc/master.nix {inherit overlays;};
+  emacsPkgs  = import ../misc/master.nix {inherit overlays;};
 in
 {
   config = with lib; mkMerge [
@@ -74,7 +74,7 @@ in
 
     (mkIf pkgs.stdenv.isLinux {
       programs.emacs.package = (emacsPkgs.emacsGcc.override({
-          imagemagick = emacsPkgs.imagemagickBig;
+        imagemagick = emacsPkgs.imagemagickBig;
       })).overrideAttrs(old: rec {
         configureFlags = (old.configureFlags or []) ++ ["--with-imagemagick"
                                                         "--with-nativecomp"
@@ -83,16 +83,16 @@ in
     })
 
     (mkIf (pkgs.stdenv.isLinux || pkgs.stdenv.isDarwin) {
-        programs.emacs.extraPackages = epkgs: with epkgs;[
-          vterm
-        ];
+      programs.emacs.extraPackages = epkgs: with epkgs;[
+        vterm
+      ];
     })
 
 
     (mkIf pkgs.stdenv.isLinux {
-        programs.emacs.extraPackages = epkgs: with epkgs;[
-          grab-x-link
-        ];
+      programs.emacs.extraPackages = epkgs: with epkgs;[
+        grab-x-link
+      ];
     })
   ];
 }
