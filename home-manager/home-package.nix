@@ -29,7 +29,7 @@ in
         #for emacs notdeft
         tclap
         xapian
-        rnix-lsp
+        #rnix-lsp
       ];
     })
 
