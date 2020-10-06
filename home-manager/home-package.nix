@@ -1,10 +1,6 @@
 { config, lib, pkgs, ... }:
 let
-  overlays = [
-    (import ../home-manager/packages-overlay.nix)
-  ];
-  nixpkgs = import ~/.config/nixpkgs/nixos/channel/nixpkgs { inherit overlays; };
-  clean-nix-store = nixpkgs.writeScriptBin "clean-nix-store" (import ../bin/clean-nix-store.nix { });
+  clean-nix-store = pkgs.writeScriptBin "clean-nix-store" (import ../bin/clean-nix-store.nix { });
   stable  = import ./misc/stable-pkgs.nix { config={ allowUnfree=true; allowBroken=true; ignoreCollisions = true;};};
 in
 {
@@ -18,7 +14,7 @@ in
 
     ##public pkgs
     (mkIf (pkgs.stdenv.isLinux || pkgs.stdenv.isDarwin) {
-      home.packages = with nixpkgs;[
+      home.packages = with pkgs;[
         clean-nix-store
         nodePackages.node2nix
         system-sendmail
@@ -34,7 +30,7 @@ in
     })
 
     (mkIf pkgs.stdenv.isLinux {
-      home.packages = with nixpkgs;[
+      home.packages = with pkgs;[
         dive
       ];
     })

@@ -4,6 +4,7 @@ let
   
   home_directory = builtins.getEnv "HOME";
   log_directory = "${home_directory}/logs";
+  all-hies = (fetchTarball "https://github.com/infinisil/all-hies/tarball/534ac517b386821b787d1edbd855b9966d0c0775");
 
 in
 
@@ -13,8 +14,16 @@ in
     ./home-manager/randr
   ];
 
+
   config = with lib; mkMerge [
     ({
+
+      nixpkgs.overlays = [
+        (import ./nixos-flk/overlays/pkgs.nix)
+        (import all-hies {}).overlay
+        (import ./home-manager/packages-overlay.nix)
+      ];
+
       programs.direnv = {
         enable = true;
         enableBashIntegration = true;

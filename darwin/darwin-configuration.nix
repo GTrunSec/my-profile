@@ -1,7 +1,4 @@
 { config, pkgs,  ... }:
-let
-  pkgs = (import ~/.config/nixpkgs/nixos/channel/nixpkgs) { };
-in
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -14,10 +11,9 @@ in
   # $ nix-env -qaP | grep wget
   # bugs sudo mount -uw /
   # sudo darwin-rebuild switch -I darwin=/Users/gtrun/.nix-defexpr/channels/darwin -I nixpkgs=/Users/gtrun/.config/nixpkgs/channel/nixpkgs -I darwin-config=/Users/gtrun/.config/nixpkgs/darwin/darwin-configuration.nix -I nix-darwin=/Users/gtrun/.nix-defexpr/channels/nix-darwin
+
   environment.systemPackages = with pkgs; [
     (import ~/.nix-defexpr/channels/home-manager {}).home-manager
-    dbus
-    go
     (bundler.overrideAttrs(old:  {
       name = "bundler-2.1.4";
       src = pkgs.fetchurl {
@@ -30,20 +26,16 @@ in
             '';
     }))
     jekyll
-    glib
-    #vips
-    libxml2
-    wakatime
-    ];
+  ];
 
-  environment.variables = { GOROOT = [ "${pkgs.go.out}/share/go" ]; };
+  #environment.variables = { GOROOT = [ "${pkgs.go.out}/share/go" ]; };
   # Use a custom configuration.nix location.
   # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
   # environment.darwinConfig = "$HOME/.config/nixpkgs/darwin/configuration.nix";
 
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
-  nix.package = pkgs.nix;
+  nix.package = pkgs.nixFlakes;
 
   # Create /etc/bashrc that loads the nix-darwin environment.
   programs.bash.enable = true;
