@@ -1,17 +1,9 @@
 { config, lib, pkgs, ... }:
 let
   clean-nix-store = pkgs.writeScriptBin "clean-nix-store" (import ../bin/clean-nix-store.nix { });
-  stable  = import ./misc/stable-pkgs.nix { config={ allowUnfree=true; allowBroken=true; ignoreCollisions = true;};};
 in
 {
   config = with lib; mkMerge [
-
-    (mkIf (pkgs.stdenv.isLinux || pkgs.stdenv.isDarwin) {
-      home.packages = with stable;[
-        vips
-      ];
-    })
-
     ##public pkgs
     (mkIf (pkgs.stdenv.isLinux || pkgs.stdenv.isDarwin) {
       home.packages = with pkgs;[

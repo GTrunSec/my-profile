@@ -1,8 +1,8 @@
 ## https://github.com/NixOS/nixpkgs/issues/77503 openssl 1.0.2 is not supported
 let
   src = builtins.fetchTarball {
-    url    = "https://github.com/GTrunSec/nixpkgs/tarball/39247f8d04c04b3ee629a1f85aeedd582bf41cac";
-    sha256 = "1q7asvk73w7287d2ghgya2hnvn01szh65n8xczk4x2b169c5rfv0";
+    url = "https://github.com/NixOS/nixpkgs/archive/4c67f879f0ee0f4eb610373e479a0a9c518c51c4.tar.gz";
+    sha256 = "1411z0df803g3pzsh5m1w4652mibwbggsza9y96w9bi7w6hrvswg";
   };
 in
 import src
