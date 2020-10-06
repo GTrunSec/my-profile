@@ -58,7 +58,7 @@ in
         libnotify
 
         nodePackages.pyright
-
+        nixFlakes
       ];
     })
   ];
