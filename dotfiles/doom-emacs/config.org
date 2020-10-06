@@ -366,6 +366,10 @@ HTML them READ org
 #+end_src
 
 ** ein
+#+begin_src emacs-lisp :tangle "packages.el"
+(unpin! ein)
+#+end_src
+
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! ein
   :config
