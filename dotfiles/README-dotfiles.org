@@ -17,6 +17,7 @@
 * zsh
 ** config
 #+begin_src conf :exports both :tangle "~/.config/nixpkgs/dotfiles/zshrc"
+
 #! /usr/bin/env zsh
 # Use fd (https://github.com/sharkdp/fd) instead of the default find
 # command for listing path candidates.
