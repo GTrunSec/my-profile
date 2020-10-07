@@ -39,7 +39,6 @@ let
 
   home_directory = builtins.getEnv "HOME";
   log_directory = "${home_directory}/logs";
-  all-hies = (fetchTarball "https://github.com/infinisil/all-hies/tarball/534ac517b386821b787d1edbd855b9966d0c0775");
 
 in
 
@@ -49,16 +48,8 @@ in
     ./home-manager/randr
   ];
 
-
   config = with lib; mkMerge [
     ({
-
-      nixpkgs.overlays = [
-        (import ./nixos-flk/overlays/pkgs.nix)
-        (import all-hies {}).overlay
-        (import ./home-manager/packages-overlay.nix)
-      ];
-
       programs.direnv = {
         enable = true;
         enableBashIntegration = true;
@@ -175,42 +166,42 @@ in
 #+begin_src nix :exports both :tangle "~/.config/nixpkgs/home-manager/home-darwin.nix"
 { config, lib, pkgs, ... }:
 let
-  customVscode = (import ../nixos-flk/profiles/code/vscode.nix { inherit pkgs; });
 
-  R-with-my-packages = pkgs.rWrapper.override{
-    packages = with pkgs.rPackages; [ ggplot2 dplyr xts ]; };
+  overlays = [ (import ../nixos-flk/overlays/pkgs.nix)
+             ];
+
+
+  nixpkgs = (import ~/.config/nixpkgs/nixos/channel/nixpkgs) { inherit overlays;};
+
+  all-hies = import (fetchTarball "https://github.com/infinisil/all-hies/tarball/4b6aab017cdf96a90641dc287437685675d598da") {};
+
+  master  = import ./misc/master.nix {};
+
+  customVscode = (import ../nixos-flk/profiles/code/vscode.nix { pkgs=nixpkgs; });
+
+  R-with-my-packages = nixpkgs.rWrapper.override{
+    packages = with nixpkgs.rPackages; [ ggplot2 dplyr xts ]; };
 in
 
 {
   config = with lib; mkMerge [
     (mkIf pkgs.stdenv.isDarwin {
-      home.packages = with pkgs;[
+      home.packages = with nixpkgs;[
         customVscode
-        #R-with-my-packages
-      ] ++ [ #library
-        libnotify
-      ] ++ [ #misc
-        #vips
-        wakatime
-        bat
-        gron
-        exa
-        pet
-        #emacs org notice
-      ] ++ [ #haskell packages
-        ##cachix use ghcide-nix
-        (import ../nixos/channel/ghcide-nix {}).ghcide-ghc883
-        #cachix use all-hies
-        #haskellPackages.hie
-      ] ++ [
-        nodePackages.pyright
-      ] ++ [ #go packages
         govet
         gocode
         gopls
         hugo
-      ] ++ [  # latex + packages
-        (texlive.combine
+        #R-with-my-packages
+        #vips
+        ##cachix use ghcide-nix
+        (import ../nixos/channel/ghcide-nix {}).ghcide-ghc883
+        bat
+        gron
+        (all-hies.unstable.selection { selector = p: { inherit (p) ghc865; }; })
+        exa
+        pet
+        (texlive.combine # latex + packages
           { inherit (texlive)
             collection-plaingeneric
             collection-latexextra
@@ -229,6 +220,10 @@ in
           }
           #org-mode roam-server
         )
+        #emacs org notice
+        libnotify
+
+        nodePackages.pyright
       ];
     })
   ];
@@ -462,7 +457,7 @@ let
     }))
   ];
 
-    emacsPkgs  = import ../misc/master.nix {inherit overlays;};
+  emacsPkgs  = import ../misc/master.nix {inherit overlays;};
 in
 {
   config = with lib; mkMerge [
@@ -524,7 +519,7 @@ in
 
     (mkIf pkgs.stdenv.isLinux {
       programs.emacs.package = (emacsPkgs.emacsGcc.override({
-          imagemagick = emacsPkgs.imagemagickBig;
+        imagemagick = emacsPkgs.imagemagickBig;
       })).overrideAttrs(old: rec {
         configureFlags = (old.configureFlags or []) ++ ["--with-imagemagick"
                                                         "--with-nativecomp"
@@ -533,16 +528,17 @@ in
     })
 
     (mkIf (pkgs.stdenv.isLinux || pkgs.stdenv.isDarwin) {
-        programs.emacs.extraPackages = epkgs: with epkgs;[
-          vterm
-        ];
+      programs.emacs.extraPackages = epkgs: with epkgs;[
+        vterm
+      ];
     })
 
 
     (mkIf pkgs.stdenv.isLinux {
-        programs.emacs.extraPackages = epkgs: with epkgs;[
-          grab-x-link
-        ];
+      programs.emacs.extraPackages = epkgs: with epkgs;[
+        grab-x-link
+        ein
+      ];
     })
   ];
 }

@@ -111,7 +111,7 @@ HTML them READ org
        ;;direnv
        ;;docker
        ;;editorconfig      ; let someone else argue about tabs vs spaces
-       ein               ; tame Jupyter notebooks with emacs
+       ;;ein               ; tame Jupyter notebooks with emacs
        (eval +overlay)     ; run code, run (also, repls)
        ;;flycheck          ; tasing you for every semicolon you forget
        ;;flyspell          ; tasing you for misspelling mispelling
@@ -367,7 +367,10 @@ HTML them READ org
 
 ** ein
 #+begin_src emacs-lisp :tangle "packages.el"
-(unpin! ein)
+(package! ein :recipe (:host github
+                       :repo "millejoh/emacs-ipython-notebook"
+                       :files ("lisp/*.el")
+                       :no-byte-compile t))
 #+end_src
 
 #+begin_src emacs-lisp :tangle "config.el"
@@ -381,9 +384,9 @@ HTML them READ org
      ("ein-rust" . rust)
      ("ein-haskell" . haskell)
      ("ein-julia" . julia))))
-)
+  )
 
-(after! ein:ipynb-mode
+(after! ein:ipynb-mode                  ;
   (poly-ein-mode 1)
   (hungry-delete-mode -1)
   )
