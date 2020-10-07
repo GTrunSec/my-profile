@@ -1769,16 +1769,15 @@ easy way to display org-ref with tree view instead of org-mode ?
 
 
 #+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
-(package! org-super-links :recipe (:local-repo "~/.myscript/org-super-links"))
+(package! org-super-links :recipe (:host github
+                       :repo "toshism/org-super-links"
+                       :files ("*.el")
+                       :no-byte-compile t))
 #+end_src
 
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-super-links)
 #+end_src
-
-#+RESULTS:
-: org-super-links
-
 ** org-clones
 1. 
 
@@ -2546,10 +2545,17 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 #+end_src
 
 *** eaf
+#+begin_src emacs-lisp :tangle "packages.el"
+(when IS-LINUX
+  (package! eaf :recipe (:host github
+                            :repo "manateelazycat/emacs-application-framework"
+                            :files ("*")
+                            :no-byte-compile t))
+  )
+#+end_src
 #+begin_src emacs-lisp :tangle "config.el"
 (when (display-graphic-p)
   (use-package! eaf
-    :load-path "~/.myscript/eaf"
     :if (eq system-type 'gnu/linux)
     :custom
     (eaf-find-alternate-file-in-dired t)
@@ -2567,9 +2573,16 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 #+end_src
 
 *** snails
+#+begin_src emacs-lisp :tangle "packages.el"
+(when IS-LINUX
+  (package! snails :recipe (:host github
+                            :repo "manateelazycat/snails"
+                            :files ("*.el")
+                            :no-byte-compile t))
+  )
+#+end_src
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! snails
-  :load-path "~/.myscript/snails"
   :if (eq system-type 'gnu/linux)
   :config
   (define-key snails-mode-map [remap next-line] #'snails-select-next-item))
