@@ -9,6 +9,7 @@
 
     emacs-overlay.url = "github:nix-community/emacs-overlay/9f0ac65857f41e134389317c6463cf2df6f05f75";
     #ein = { url = "github:emillejoh/emacs-ipython-notebook/master"; flake = false;};
+    org-super-links = { url = "git+https://github.com/toshism/org-super-links"; flake = false;};
   };
 
   #outputs = inputs@{ self, nixpkgs, hardenedlinux-pkgs, master, flake-utils, emacs-overlay }:

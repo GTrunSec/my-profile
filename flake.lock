@@ -174,13 +174,30 @@
         "type": "indirect"
       }
     },
+    "org-super-links": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1600723444,
+        "narHash": "sha256-q/uYOlvJj1q93xgqUEQNuAamGeESSV3QMEgQyOmmFU4=",
+        "ref": "master",
+        "rev": "e7dad20f1c9824fefa1e963270f1b8ff81f35d1b",
+        "revCount": 72,
+        "type": "git",
+        "url": "https://github.com/toshism/org-super-links"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://github.com/toshism/org-super-links"
+      }
+    },
     "root": {
       "inputs": {
         "emacs-overlay": "emacs-overlay",
         "flake-utils": "flake-utils",
         "hardenedlinux-pkgs": "hardenedlinux-pkgs",
         "master": "master",
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": "nixpkgs_3",
+        "org-super-links": "org-super-links"
       }
     },
     "zeek-community-id": {

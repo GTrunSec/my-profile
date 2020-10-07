@@ -15,4 +15,10 @@
     sha256 = "1axy552dx9x478d2499ghy5rd2rm826f55mnz7zvscykcnk6fk0f";
   };
 
+  home.file.".myscript/org-super-links".source = pkgs.fetchgit {
+    url = (builtins.fromJSON (builtins.readFile ../flake.lock)).nodes.org-super-links.locked.url;
+    rev = (builtins.fromJSON (builtins.readFile ../flake.lock)).nodes.org-super-links.locked.rev;
+    sha256 = (builtins.fromJSON (builtins.readFile ../flake.lock)).nodes.org-super-links.locked.narHash;
+  };
+
 }
