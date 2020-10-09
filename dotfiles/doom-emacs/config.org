@@ -2475,6 +2475,9 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 (set-popup-rule! "^\\*Ilist"
   :side 'right :size 35 :quit nil :select nil :ttl 0)
 
+(after! org
+  (set-popup-rule! "^\\*Org tags" :size 0.5))
+
 (after! helm
   (set-popup-rule! "^\\*helm" :size 0.5))
 
@@ -2484,7 +2487,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 )
 #+end_src
 
-#+RESULTS:
+
 
 * Linux & Macsos
 #+begin_src emacs-lisp :tangle "config.el"
