@@ -13,14 +13,12 @@
 #+PROPERTY: header-args :tangle "~/.emacs.d/init.el"
 - [[https://github.com/hlissner/doom-emacs/blob/develop/docs/getting_started.org][doom-emacs/getting_started.org at develop · hlissner/doom-emacs]]
 
-
 #+TAGS: GTD(G) writing(w) export(e) manage(m) graphical(g) nix(n)
 #+BEGIN_QUOTE
 HTML them READ org
 #+END_QUOTE
 
 - [[https://www.gtrun.org/custom/config.html][My Doom Emacs config]]
-
 
 - [Source Code] [[https://github.com/GTrunSec/my-profile/tree/master/dotfiles/doom-emacs][my-profile/dotfiles/doom-emacs at master · GTrunSec/my-profile]]
 
@@ -98,7 +96,6 @@ HTML them READ org
        ;;shell             ; a terminal REPL for Emacs
        ;;term              ; terminals in Emacs
        vterm             ; another terminals in Emacs
-
 
        :checkers
        syntax              ; tasing you for every semicolon you forget
@@ -247,9 +244,7 @@ HTML them READ org
 
 -  [[https://github.com/jackkamm/undo-propose-el][jackkamm/undo-propose-el: Navigate the emacs undo history by staging undo's in a temporary buffer]]
 
-
 -  [[https://github.com/Overdr0ne/sfs][GitHub - Overdr0ne/sfs: Search File System for Emacs]]
-
 
 * config.el
 #+begin_src emacs-lisp :tangle "config.el"
@@ -398,7 +393,6 @@ HTML them READ org
 (package! undo-fu-session)
 #+end_src
 
-
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! undo-fu
   :after-call doom-switch-buffer after-find-file
@@ -427,7 +421,6 @@ HTML them READ org
 
   (undo-fu-mode +1))
 
-
 (use-package! undo-fu-session
   :hook (undo-fu-mode . global-undo-fu-session-mode)
   :preface
@@ -446,7 +439,6 @@ HTML them READ org
         (if undo-fu-session-compression
             (concat (file-name-sans-extension filename) ".zst")
           filename)))))
-
 
 (use-package! undo-tree
   :disabled
@@ -514,9 +506,7 @@ Uses `current-date-time-format' for the formatting the date/time."
        (insert (format-time-string current-date-time-format (current-time)))
        )
 
-
 (defvar current-date-time-format-inactive "[%Y-%m-%d %a %H:%M]"
-
 
   "Format of date to insert with `insert-current-date-time' func
 See help of `format-time-string' for possible replacements")
@@ -533,10 +523,7 @@ Uses `current-date-time-format' for the formatting the date/time."
        ;;(insert "\n")
        )
 
-
-
 (defvar current-date-time-format-active "<%Y-%m-%d %a %H:%M>"
-
 
   "Format of date to insert with `insert-current-date-time' func
 See help of `format-time-string' for possible replacements")
@@ -591,7 +578,7 @@ Uses `current-date-time-format' for the formatting the date/time."
 : y-or-n-p
 * Completion
 ** Ivy/counsel
-#+begin_src emacs-lisp :tangle "config.el" 
+#+begin_src emacs-lisp :tangle "config.el"
   (use-package! counsel
     :hook
     (after-init . ivy-mode)
@@ -790,7 +777,6 @@ In that case, insert the number."
     company-tabnine
     ))
 
-
 (setq +lsp-company-backend '(company-lsp
                              company-files
                              company-yasnippet
@@ -825,7 +811,6 @@ In that case, insert the number."
     )
 #+end_src
 
-
 *** highlight
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! highlight-indent-guides
@@ -841,9 +826,7 @@ In that case, insert the number."
 *** parentheses
 - [[https://with-emacs.com/posts/ui-hacks/show-matching-lines-when-parentheses-go-off-screen/][with-emacs · Show matching lines when parentheses go off-screen]]s
 
-
 - [[https://www.reddit.com/r/emacs/comments/bqyx6h/withemacs_show_matching_lines_when_parentheses_go/][(with-emacs · Show matching lines when parentheses go off-screen : emacs]]
-
 
 #+begin_src emacs-lisp :tangle "show-parentheses.el"
 ;;; -*- lexical-binding: t; -*-
@@ -1071,7 +1054,6 @@ FACE defaults to inheriting from default and highlight."
 
 * org-mode
 
-
 ** load basic config
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (load! "setting")
@@ -1114,9 +1096,6 @@ FACE defaults to inheriting from default and highlight."
 (eval-after-load "org"
   '(require 'ox-md nil t))
 ;;https://orgmode.org/worg/org-contrib/babel/examples/fontify-src-code-blocks.html
-
-
-
 
 (defun org-show-two-levels ()
   (interactive)
@@ -1174,7 +1153,6 @@ FACE defaults to inheriting from default and highlight."
                    ("global-readme.org")
                    ("dotfiles/wallpaper/wallpaper.org" :agenda nil)
                    )
-
 
  (defhydra gtrun/hydra-org-starter nil
    "
@@ -1239,7 +1217,6 @@ FACE defaults to inheriting from default and highlight."
   )
 
 #+end_src
-
 
 #+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
 (package! helm-org-rifle)
@@ -1451,15 +1428,11 @@ FACE defaults to inheriting from default and highlight."
 ** Org-babel
 - [doc] [[https://orgmode.org/manual/Results-of-Evaluation.html][Results of Evaluation (The Org Manual)]]
 
-
 - [[https://org-babel.readthedocs.io/en/latest/header-args/][Header arguments - Org Babel reference card]]
-
 
 - [[http://kitchingroup.cheme.cmu.edu/blog/2015/01/04/Redirecting-stderr-in-org-mode-shell-blocks/][Redirecting stderr in org-mode shell blocks]]
 
-
 - [[https://necromuralist.github.io/posts/org-babel-cheat-sheet/][Org-Babel Cheat Sheet | The Cloistered Monkey]]
-
 
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (after! ob-async
@@ -1470,11 +1443,9 @@ FACE defaults to inheriting from default and highlight."
                                             ))
   )
 
-
 ;;[[https://stackoverflow.com/questions/22668112/how-to-evaluate-all-code-blocks-when-exporting-in-emacs-org-mode][How to evaluate all code blocks when exporting in emacs org-mode - Stack Overflow]]
 (setq org-confirm-babel-evaluate nil)
 (setq org-export-use-babel nil)
-
 
 (setq org-babel-C++-compiler 'g++-9)
 (setq org-babel-C-compiler 'gcc-9)
@@ -1542,12 +1513,9 @@ FACE defaults to inheriting from default and highlight."
 ** org-notdeft
 - [[https://jingsi.space/post/2017/04/05/organizing-a-complex-directory-for-emacs-org-mode-and-deft/#configuring-deft][Organizing a Complex Directory for Emacs Org Mode and Deft]]
 
-
 - [[https://tero.hasu.is/notdeft/#org7b25462][NotDeft | Tero Hasu]]
 
-
 - [[https://github.com/EFLS/zetteldeft][EFLS/zetteldeft: A Zettelkasten system! Or rather, some functions on top of the emacs deft package.]]
-
 
 #+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
 (package! notdeft :recipe (:host github :repo "hasu/notdeft"))
@@ -1578,14 +1546,12 @@ FACE defaults to inheriting from default and highlight."
 
 - build
 
-
 cd ~/.emacs.d/.local/straight/repos/notdeft/xapian
 make
 
 ** org-protocol
 *** Doc
    + [[https://www.diegoberrocal.com/blog/2015/08/19/org-protocol/][Using org-capture with org-protocol be like - Diego Berrocal]]
-
 
    + [[https://github.com/alphapapa/org-protocol-capture-html][alphapapa/org-protocol-capture-html: Capture HTML from the browser selection into Emacs as org-mode content]]
 
@@ -1629,7 +1595,6 @@ easy way to display org-ref with tree view instead of org-mode ?
 
 *** org-roam-server
 - [[https://github.com/org-roam/org-roam-server][org-roam/org-roam-server: A Web Application to Visualize the Org-Roam Database]]
-
 
 #+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
 (package! org-roam-server)
@@ -1689,7 +1654,6 @@ easy way to display org-ref with tree view instead of org-mode ?
         (org-roam-capture--context 'dailies))
     (org-roam--capture)))
 
-
 (setq org-capture-templates '(("n" "Note" entry (function org-roam-dailies-capture-today)
                                  "* %?\n")))
 #+end_src
@@ -1710,7 +1674,6 @@ easy way to display org-ref with tree view instead of org-mode ?
 ** org-spacer :edit:
 - [[https://github.com/dustinlacewell/org-spacer.el][dustinlacewell/org-spacer.el: Enforce the number of blank lines between elements in an org-mode document]]
 
-
 #+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
 (package! org-spacer.el :recipe (:host github :repo "dustinlacewell/org-spacer.el"))
 #+end_src
@@ -1726,7 +1689,6 @@ easy way to display org-ref with tree view instead of org-mode ?
 
 ** org-density.el :summary:statistic:
 - [[https://github.com/mtekman/org-density.el][mtekman/org-density.el: Examine the density of org headings]]
-
 
 #+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
 (package! org-treeusage :recipe (:host github :repo "mtekman/org-treeusage.el"))
@@ -1767,7 +1729,6 @@ easy way to display org-ref with tree view instead of org-mode ?
 ** org-super-links
 - [[https://github.com/toshism/org-super-links][toshism/org-super-links: Package to create links with auto backlinks]]
 
-
 #+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
 (package! org-super-links :recipe (:host github
                        :repo "toshism/org-super-links"
@@ -1779,10 +1740,9 @@ easy way to display org-ref with tree view instead of org-mode ?
 (use-package! org-super-links)
 #+end_src
 ** org-clones
-1. 
+1.
 
    [[https://github.com/legalnonsense/org-clones][legalnonsense/org-clones: Prototype for method of cloning orgmore headers]]
-
 
 ** TODO [[https://github.com/marcIhm/org-working-set][marcIhm/org-working-set: Manage a working-set of org-nodes]] :manage:
 #+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
@@ -1806,6 +1766,7 @@ easy way to display org-ref with tree view instead of org-mode ?
   :custom
   (org-tanglesync-watch-files '("~/.config/nixpkgs/dotfiles/README-dotfiles.org"
                                 "~/.config/nixpkgs/README-home-manager.org"
+                                "~/.config/nixpkgs/nixos-flk/README-NixOS.org"
                                 ))
   :config
   ;; (add-hook 'org-mode-hook (lambda ()
@@ -1817,12 +1778,13 @@ easy way to display org-ref with tree view instead of org-mode ?
   ;;                                ))
   ;;                              ))
   ;;                            )
-  
+
   :bind
   (( "C-c M-i" . org-tanglesync-process-buffer-interactive)
    ( "C-c M-a" . org-tanglesync-process-buffer-automatic))
   )
 #+end_src
+
 ** TODO [[https://github.com/casouri/valign][casouri/valign: Pixel-perfect visual alignment for Org and Markdown tables.]]
 
 ** TODO [[https://github.com/lepisma/org-krita][lepisma/org-krita: Krita sketches in Org]]
@@ -2032,7 +1994,6 @@ easy way to display org-ref with tree view instead of org-mode ?
 ** Poly && ess
 - [[https://github.com/ShuguangSun/ess-view-data][ShuguangSun/ess-view-data: View data support for ESS]]
 
-
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
 (use-package! polymode)
 (use-package! poly-markdown
@@ -2046,7 +2007,6 @@ easy way to display org-ref with tree view instead of org-mode ?
 #+begin_src emacs-lisp :tangle "packages.el"
 (package! geiser)
 #+end_src
-
 
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! geiser
@@ -2071,7 +2031,6 @@ easy way to display org-ref with tree view instead of org-mode ?
   (setq lsp-folding-range-limit 100)
 )
 #+end_src
-
 
 *** TODO [[https://github.com/gcv/julia-snail][gcv/julia-snail: An Emacs development environment for Julia]]
 
@@ -2216,8 +2175,6 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
       (t
        (awesome-tab-get-group-name (current-buffer))))))
 
-
-
   (defhydra awesome-fast-switch (:hint nil)
     "
  ^^^^Fast Move             ^^^^Tab                    ^^Search            ^^Misc
@@ -2317,7 +2274,6 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 ** writeroom or writegood
 - [[https://github.com/bnbeckwith/writegood-mode][bnbeckwith/writegood-mode: Minor mode for Emacs to improve English writing]]
 
-
 - [[https://github.com/joostkremers/writeroom-mode][joostkremers/writeroom-mode: Writeroom-mode: distraction-free writing for Emacs.]]
 
 - [[https://github.com/rnkn/olivetti][rnkn/olivetti: Emacs minor mode for a nice writing environment]]
@@ -2360,10 +2316,8 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 ** grip-mode
 1. [[https://github.com/seagle0128/grip-mode][seagle0128/grip-mode: Instant Github-flavored Markdown/Org preview using grip]]
 
-
 ** windown manager
 1. [[https://github.com/nex3/perspective-el][nex3/perspective-el: Perspectives for Emacs.]]
-
 
 * chinese
 ** pinyinlib
@@ -2402,7 +2356,6 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
               (setq i (1+ i))))
           (setq str rlt))))
       (ivy--regex-plus str)))
-
 
   (eval-after-load 'ivy
     '(progn
@@ -2487,8 +2440,6 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 )
 #+end_src
 
-
-
 * Linux & Macsos
 #+begin_src emacs-lisp :tangle "config.el"
 (load! "./modules/my-linux.el")
@@ -2508,7 +2459,6 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   (setq bm-repository-file (f-join doom-private-dir "etc/bm-linux-data"))
   (setq bookmark-default-file
         (concat doom-private-dir "etc/bookmark-linux-default.el"))
-
 
   (setq python-shell-interpreter "python3.7")
   (setq eaf-python-command "python3.7")
@@ -2536,7 +2486,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
     )
 
   (define-key org-mode-map (kbd "C-c l") 'grab-x-link)
-  
+
   (setq notdeft-xapian-program "/home/gtrun/src/notdeft/xapian/notdeft-xapian")
   (setq inferior-julia-program-name "/run/current-system/sw/bin/julia")
   ;; (setq jupyter-runtime-directory "~/.local/share/jupyter/runtime")
@@ -2649,14 +2599,11 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
 (setq inferior-julia-program-name "~/.nix-profile/bin/julia")
 
-
 (add-hook 'ob-async-pre-execute-src-block-hook
         '(lambda ()
            (setq inferior-julia-program-name "~/.nix-profile/bin/julia")))
 ;;(add-hook! 'emacs-startup-hook 'doom-modeline-mode)
 )
-
-
 
 #+end_src
 
@@ -2686,23 +2633,16 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 * Cache
 -  [[https://github.com/bzg/dotemacs/blob/master/emacs.org][dotemacs/emacs.org at master · bzg/dotemacs]]
 
-
 -  [[http://irfu.cea.fr/Pisp/vianney.lebouteiller/emacs.html][Everything with Emacs]]
-
 
 -  [[https://github.com/munen/emacs.d/blob/master/configuration.org][emacs.d/configuration.org  atmaster · munen/]]
 
-
 - [[https://github.com/dfeich/emacs-course-and-config/blob/master/init.el][emacs-course-and-config/init.el at master · dfeich/emacs-course-and-config]]
-
 
 - [[https://github.com/freetonik/emacs-dotfiles/blob/master/init.el][emacs-dotfiles/init.el at master · freetonik/emacs-dotfiles]]
 
-
 - [[https://github.com/MatthewZMD/.emacs.d][MatthewZMD/.emacs.d: M-EMACS, a full-feature GNU Emacs configuration distribution]]
 
-
   - Zettelkasten
-
 
   - [[https://github.com/walseb/QualityEmacsConfig][walseb/QualityEmacsConfig]]
