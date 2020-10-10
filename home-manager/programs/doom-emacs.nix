@@ -93,6 +93,7 @@ in
       programs.emacs.extraPackages = epkgs: with epkgs;[
         grab-x-link
       ];
+      services.emacs.enable = true;
     })
   ];
 }
