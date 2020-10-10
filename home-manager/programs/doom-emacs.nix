@@ -15,6 +15,10 @@ let
   emacsPkgs  = import ../misc/master.nix {inherit overlays;};
 in
 {
+
+  imports = [
+    ~/.nix-defexpr/channels/home-manager/modules/services/emacs.nix
+  ];
   config = with lib; mkMerge [
     #fonts
     (mkIf (pkgs.stdenv.isLinux || pkgs.stdenv.isDarwin) {
@@ -94,6 +98,7 @@ in
         grab-x-link
       ];
       services.emacs.enable = true;
+      services.emacs.socketActivation.enable = true;
     })
   ];
 }

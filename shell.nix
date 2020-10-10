@@ -6,7 +6,6 @@ let
 in
 pkgs.mkShell {
   buildInputs = with pkgs;[
-    home-manager
   ];
   shellHook = ''
     # nix-channel --add https://github.com/NixOS/nixpkgs/archive/${nixpkgs-locked.rev}.tar.gz nixpkgs

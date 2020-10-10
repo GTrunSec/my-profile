@@ -77,27 +77,6 @@
         "type": "github"
       }
     },
-    "hardenedlinux-pkgs": {
-      "inputs": {
-        "flake-utils": "flake-utils_2",
-        "nixpkgs": "nixpkgs",
-        "zeek-nix": "zeek-nix"
-      },
-      "locked": {
-        "lastModified": 1601864625,
-        "narHash": "sha256-RADxpi2NNyo/HI1kPKcqYN0HD6Wb8pcOgedTTuA8i8Y=",
-        "owner": "hardenedlinux",
-        "repo": "nixpkgs-hardenedlinux",
-        "rev": "616970814528c149ae8f3f795fc46fedeaff1b3c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hardenedlinux",
-        "ref": "master",
-        "repo": "nixpkgs-hardenedlinux",
-        "type": "github"
-      }
-    },
     "master": {
       "locked": {
         "lastModified": 1601419125,
@@ -131,17 +110,38 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1601539597,
-        "narHash": "sha256-gOuB2wl8C0Nxi68VsFL+FP30yj62Yt4izr8WtSldQgI=",
+        "lastModified": 1601941917,
+        "narHash": "sha256-Hjk6Uysg+RUy9VnVcHyoaIqRu8NVpuwldQkyO02xR/M=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "302ef60620d277fc87a8aa58c5c561b62c925651",
+        "rev": "0cdf13328905da1d35c9395ad1de89424c511943",
         "type": "github"
       },
       "original": {
         "id": "nixpkgs",
-        "rev": "302ef60620d277fc87a8aa58c5c561b62c925651",
+        "rev": "0cdf13328905da1d35c9395ad1de89424c511943",
         "type": "indirect"
+      }
+    },
+    "nixpkgs-hardenedlinux": {
+      "inputs": {
+        "flake-utils": "flake-utils_2",
+        "nixpkgs": "nixpkgs_2",
+        "zeek-nix": "zeek-nix"
+      },
+      "locked": {
+        "lastModified": 1602369059,
+        "narHash": "sha256-TipSJXPQ0lpOXLfDsT3AWlQ/4f2gzAst7jhG1cQbAHk=",
+        "owner": "hardenedlinux",
+        "repo": "nixpkgs-hardenedlinux",
+        "rev": "26fc43b29187d9fa0bfbf01f6e3323e5c19b1db8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hardenedlinux",
+        "ref": "master",
+        "repo": "nixpkgs-hardenedlinux",
+        "type": "github"
       }
     },
     "nixpkgs_2": {
@@ -161,16 +161,16 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1601941917,
-        "narHash": "sha256-Hjk6Uysg+RUy9VnVcHyoaIqRu8NVpuwldQkyO02xR/M=",
+        "lastModified": 1601539597,
+        "narHash": "sha256-gOuB2wl8C0Nxi68VsFL+FP30yj62Yt4izr8WtSldQgI=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "0cdf13328905da1d35c9395ad1de89424c511943",
+        "rev": "302ef60620d277fc87a8aa58c5c561b62c925651",
         "type": "github"
       },
       "original": {
         "id": "nixpkgs",
-        "rev": "0cdf13328905da1d35c9395ad1de89424c511943",
+        "rev": "302ef60620d277fc87a8aa58c5c561b62c925651",
         "type": "indirect"
       }
     },
@@ -194,9 +194,9 @@
       "inputs": {
         "emacs-overlay": "emacs-overlay",
         "flake-utils": "flake-utils",
-        "hardenedlinux-pkgs": "hardenedlinux-pkgs",
         "master": "master",
-        "nixpkgs": "nixpkgs_3",
+        "nixpkgs": "nixpkgs",
+        "nixpkgs-hardenedlinux": "nixpkgs-hardenedlinux",
         "org-super-links": "org-super-links"
       }
     },
@@ -233,7 +233,7 @@
         "bro-http2": "bro-http2",
         "flake-utils": "flake-utils_3",
         "metron-bro-plugin-kafka": "metron-bro-plugin-kafka",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs_3",
         "zeek-community-id": "zeek-community-id",
         "zeek-current": "zeek-current",
         "zeek-plugin-ikev2": "zeek-plugin-ikev2",
