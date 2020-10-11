@@ -9,6 +9,10 @@ let
   voila = pkgs.writeScriptBin "voila" ''
     nix-shell ${nixpkgs-hardenedlinux}/pkgs/python/env/voila --command "voila"
     '';
+
+  timesketch = pkgs.writeScriptBin "timesketch" ''
+    nix-shell ${nixpkgs-hardenedlinux}/pkgs/python/env/timesketch/shell.nix --command "tsctl"
+      '';
 in
 {
   config = with lib; mkMerge [
@@ -16,6 +20,7 @@ in
     (mkIf pkgs.stdenv.isLinux {
       home.packages = with pkgs;[
         voila
+        timesketch
       ];
     })
   ];
