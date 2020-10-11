@@ -1,4 +1,4 @@
-final: prev:
+{ config, lib, pkgs, ... }:
 let
   rev = (builtins.fromJSON (builtins.readFile ../flake.lock)).nodes.nixpkgs-hardenedlinux.locked.rev;
   nixpkgs-hardenedlinux = builtins.fetchTarball {
@@ -6,10 +6,18 @@ let
     sha256 = (builtins.fromJSON (builtins.readFile ../flake.lock)).nodes.nixpkgs-hardenedlinux.locked.narHash;
   };
 
+  voila = pkgs.writeScriptBin "voila" ''
+    nix-shell ${nixpkgs-hardenedlinux}/pkgs/python/env/voila --command "voila"
+    '';
 in
-rec {
-  zeek = prev.callPackage "${nixpkgs-hardenedlinux}/pkgs/zeek" {KafkaPlugin = true; PostgresqlPlugin = true; Http2Plugin = true;};
-  vast = prev.callPackage "${nixpkgs-hardenedlinux}/pkgs/vast" { };
-  # pf-ring = prev.callPackage ../pkgs/network/pf_ring.nix { };
-  # osquery = prev.callPackages ../pkgs/osquery { };
+{
+  config = with lib; mkMerge [
+    ##public pkgs
+    (mkIf pkgs.stdenv.isLinux {
+      home.packages = with pkgs;[
+        voila
+      ];
+    })
+  ];
+
 }

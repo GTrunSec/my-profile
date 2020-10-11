@@ -12,6 +12,7 @@
     ./misc
     ./programs
     ./python-pkgs.nix
+    ./shell-env.nix
     #programs
   ];
 }

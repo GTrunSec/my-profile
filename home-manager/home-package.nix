@@ -24,7 +24,6 @@ in
     (mkIf pkgs.stdenv.isLinux {
       home.packages = with pkgs;[
         dive
-        (python37.withPackages (ps: [ ps.voila ]))
         #python37Packages.voila
       ];
     })

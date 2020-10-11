@@ -998,3 +998,30 @@ with lib;
 ** sh
 #+begin_src nix :async t :exports both :tangle "~/.config/nixpkgs/home-manager/programs/fish.nix"
 #+end_src
+* Shell-env
+- voila
+#+begin_src nix :exports both :tangle "~/.config/nixpkgs/home-manager/shell-env.nix"
+{ config, lib, pkgs, ... }:
+let
+  rev = (builtins.fromJSON (builtins.readFile ../flake.lock)).nodes.nixpkgs-hardenedlinux.locked.rev;
+  nixpkgs-hardenedlinux = builtins.fetchTarball {
+    url = "https://github.com/hardenedlinux/nixpkgs-hardenedlinux/archive/${rev}.tar.gz";
+    sha256 = (builtins.fromJSON (builtins.readFile ../flake.lock)).nodes.nixpkgs-hardenedlinux.locked.narHash;
+  };
+
+  voila = pkgs.writeScriptBin "voila" ''
+    nix-shell ${nixpkgs-hardenedlinux}/pkgs/python/env/voila --command "voila"
+    '';
+in
+{
+  config = with lib; mkMerge [
+    ##public pkgs
+    (mkIf pkgs.stdenv.isLinux {
+      home.packages = with pkgs;[
+        voila
+      ];
+    })
+  ];
+
+}
+#+end_src
