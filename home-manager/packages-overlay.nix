@@ -7,10 +7,14 @@ let
   };
 
 in
-{
+rec {
   zeek = prev.callPackage "${nixpkgs-hardenedlinux}/pkgs/zeek" {KafkaPlugin = true; PostgresqlPlugin = true; Http2Plugin = true;};
   vast = prev.callPackage "${nixpkgs-hardenedlinux}/pkgs/vast" { };
-  voila = prev.python3Packages.callPackage "${nixpkgs-hardenedlinux}/pkgs/python/voila" {};
   # pf-ring = prev.callPackage ../pkgs/network/pf_ring.nix { };
   # osquery = prev.callPackages ../pkgs/osquery { };
+  python37 = prev.python37.override {
+    packageOverrides = selfPythonPackages: pythonPackages: {
+      voila = prev.python3Packages.callPackage "${nixpkgs-hardenedlinux}/pkgs/python/voila" {python3Packages = prev.python37Packages;};
+    };
+  };
 }
