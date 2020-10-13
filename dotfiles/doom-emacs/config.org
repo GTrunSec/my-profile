@@ -255,6 +255,10 @@ HTML them READ org
 (load! "xah-fly-keys.el")
 (load! "show-parentheses.el")
 #+end_src
+- native compile
+#+begin_src emacs-lisp :tangle "config.el"
+;;(setq comp-async-jobs-number 24)
+#+end_src
 
 * use-package
 ** helm-tramp
@@ -1351,9 +1355,9 @@ FACE defaults to inheriting from default and highlight."
 - [[https://www.nongnu.org/org-edna-el/#org2421cd7][Org Edna]]
 
 - [[id:e513ede6-3d58-4ef5-9152-dc809675e063][[[http://doc.norang.ca/org-mode.html][Org Mode - Organize Your Life In Plain Text!]​]​]]
-
+- native-compiler-error
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/packages.el"
-(package! org-edna)
+(package! org-edna :recipe (:no-byte-compile t))
 #+end_src
 
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
