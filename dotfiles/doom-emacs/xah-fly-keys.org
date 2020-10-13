@@ -387,6 +387,7 @@
 (add-hook! 'snails-mode-hook 'xah-fly-insert-mode-activate)
 (add-hook! 'sunrise-start-hook 'xah-fly-insert-mode-activate)
 (add-hook! 'dired-hook 'xah-fly-insert-mode-activate)
+(add-hook! 'color-rg-mode-hook 'xah-fly-insert-mode-activate)
 #+end_src
 * ✘ CANCELED define-key xah-fly-keys-map(Insert mode)
 :LOGBOOK:

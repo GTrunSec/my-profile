@@ -492,6 +492,14 @@ HTML them READ org
   (global-undo-tree-mode +1))
 #+end_src
 
+** color-rg
+#+begin_src emacs-lisp :tangle "packages.el"
+(package! color-rg :recipe (:host github :repo "manateelazycat/color-rg"))
+#+end_src
+
+#+begin_src emacs-lisp :tangle "config.el"
+(use-package! color-rg)
+#+end_src
 * autoload
 ** misc
 *** time
@@ -2639,8 +2647,10 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 * Bugs
 ** <2020-10-13 Tue> magit commit server error
   with-editor
+  #+begin_src sh :async t :tangle nil
   rm -rf ~/.emacs.d/.local/straight/repos/with-editor
   rm -rf ~/.emacs.d/.local/straight/build/with-editor
+  #+end_src
   rebuild
 * Cache
 -  [[https://github.com/bzg/dotemacs/blob/master/emacs.org][dotemacs/emacs.org at master · bzg/dotemacs]]
