@@ -1256,10 +1256,10 @@ FACE defaults to inheriting from default and highlight."
 *** agenda knowledge
 **** [[http://doc.norang.ca/org-mode.html][Org Mode - Organize Your Life In Plain Text!]]
 :PROPERTIES:
-:ID:       e513ede6-3d58-4ef5-9152-dc809675e063
+:ID:       a9083e79-5da7-4721-817d-6a19760e3800
 :END:
 :BACKLINKS:
-[2020-09-20 Sun 17:20] <- [[id:629570ef-ecd4-494f-a3b5-1fb10aeef227][Org-edna]]
+[2020-10-13 Tue 15:05] <- [[*\[\[https://www.nongnu.org/org-edna-el/#org2421cd7\]\[Org Edna\]\]][Org Edna]]
 :END:
 
 *** super-agenda
@@ -1355,15 +1355,14 @@ FACE defaults to inheriting from default and highlight."
         ))
 #+end_src
 
-*** ✰ IMPORTANT Org-edna
+*** ✰ IMPORTANT [[https://www.nongnu.org/org-edna-el/#org2421cd7][Org Edna]]
 :PROPERTIES:
 :ID:       629570ef-ecd4-494f-a3b5-1fb10aeef227
 :END:
-
-- [[https://www.nongnu.org/org-edna-el/#org2421cd7][Org Edna]]
-
-- [[id:e513ede6-3d58-4ef5-9152-dc809675e063][[[http://doc.norang.ca/org-mode.html][Org Mode - Organize Your Life In Plain Text!]​]​]]
-- native-compiler-error
+:RELATED:
+[2020-10-13 Tue 15:05] -> [[id:a9083e79-5da7-4721-817d-6a19760e3800][Org Mode - Organize Your Life In Plain Text!]]
+:END:
+  - native-compiler-error
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/packages.el"
 (package! org-edna :recipe (:no-byte-compile t))
 #+end_src
