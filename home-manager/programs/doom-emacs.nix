@@ -98,7 +98,7 @@ in
         grab-x-link
       ];
       services.emacs.enable = true;
-      services.emacs.socketActivation.enable = true;
+      #services.emacs.socketActivation.enable = true;
     })
   ];
 }

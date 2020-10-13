@@ -2632,6 +2632,12 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 (provide 'my-macos)
 #+end_src
 
+* Bugs
+** <2020-10-13 Tue> magit commit server error
+  with-editor
+  rm -rf ~/.emacs.d/.local/straight/repos/with-editor
+  rm -rf ~/.emacs.d/.local/straight/build/with-editor
+  rebuild
 * Cache
 -  [[https://github.com/bzg/dotemacs/blob/master/emacs.org][dotemacs/emacs.org at master · bzg/dotemacs]]
 
