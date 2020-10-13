@@ -239,6 +239,8 @@ HTML them READ org
 (package! maple-explorer :recipe (:host github :repo "honmaple/emacs-maple-explorer"))
 (package! sunrise-commander :recipe (:host github :repo "sunrise-commander/sunrise-commander"))
 (package! awesome-pair :recipe (:host github :repo "manateelazycat/awesome-pair"))
+
+(unpin! magit)
 ;; (package! berrys-theme)
 #+end_src
 
