@@ -59,9 +59,7 @@ HTML them READ org
        nav-flash         ; blink the current line after jumping
        ;;neotree           ; a project drawer, like NERDTree for vim
        ophints           ; highlight the region an operation acts on
-       (popup            ; tame sudden yet inevitable temporary windows
-        +all             ; catch all popups that start with an asterix
-        +defaults)       ; default popup rules
+       (popup +defaults)   ; tame sudden yet inevitable temporary windows
        ;;pretty-code       ; replace bits of code with pretty symbols
        ;;tabs              ; an tab bar for Emacs
        treemacs          ; a project drawer, like neotree but cooler
@@ -127,6 +125,9 @@ HTML them READ org
        ;;tmux              ; an API for interacting with tmux
        ;;upload              ; map local to remote projects via ssh/ftp
        ;;wakatime
+
+       :os
+       (:if IS-MAC macos)  ; improve compatibility with macOS
 
        :lang
        ;;agda              ; types of types of types of types...
