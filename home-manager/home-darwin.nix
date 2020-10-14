@@ -21,6 +21,7 @@ in
         gron
         exa
         pet
+        gitAndTools.delta
         #emacs org notice
       ] ++ [ #haskell packages
         ##cachix use ghcide-nix

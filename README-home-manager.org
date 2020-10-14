@@ -189,7 +189,6 @@ in
         #R-with-my-packages
       ] ++ [ #library
         libnotify
-        terminal-notifier
       ] ++ [ #misc
         #vips
         wakatime
@@ -197,6 +196,7 @@ in
         gron
         exa
         pet
+        gitAndTools.delta
         #emacs org notice
       ] ++ [ #haskell packages
         ##cachix use ghcide-nix
