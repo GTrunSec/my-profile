@@ -306,10 +306,10 @@ HTML them READ org
 
 ** ctrlf
 #+begin_src emacs-lisp :tangle "config.el"
-(use-package! ctrlf
-  :config
-  (add-hook! 'after-init-hook #'ctrlf-mode)
-)
+;; (use-package! ctrlf
+;;   :config
+;;   (add-hook! 'after-init-hook #'ctrlf-mode)
+;; )
 #+end_src
 
 ** vlf
@@ -498,7 +498,14 @@ HTML them READ org
 #+end_src
 
 #+begin_src emacs-lisp :tangle "config.el"
-(use-package! color-rg)
+(use-package! color-rg
+  :commands (color-rg-search-input color-rg-search-symbol
+                                   color-rg-search-input-in-project
+                                   )
+  :bind
+  (:map isearch-mode-map
+   ("M-s M-s" . isearch-toggle-color-rg))
+  )
 #+end_src
 * autoload
 ** misc
