@@ -791,6 +791,7 @@ In that case, insert the number."
                         css-mode
                         org-mode
                         web-mode
+                        zeek-mode
                         )
   '(
     company-files
@@ -2103,6 +2104,18 @@ easy way to display org-ref with tree view instead of org-mode ?
 *** TODO [[https://github.com/emacs-elsa/Elsa][emacs-elsa/Elsa: Emacs Lisp Static Analyzer]]
 
 *** [[https://github.com/twlz0ne/elpl][twlz0ne/elpl: Provides a simple interface to evaluating Emacs Lisp expressions but without contaminating current Emacs.]]
+
+** zeek-mode
+#+begin_src emacs-lisp :tangle "./modules/private/my-code/packages.el"
+(package! zeek-mode :recipe (:host github :repo "ynadji/zeek-mode"))
+#+end_src
+
+#+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
+(use-package! zeek-mode
+  :config
+  (setq default-tab-width 4)
+  )
+#+end_src
 
 * Visual
 ** Buffer

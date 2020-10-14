@@ -46,13 +46,14 @@
 :END:
 - [[id:49646c11-6a30-4ded-9345-d444f97fcfc9][s-keymap]]
 - [[id:d679148a-220c-47a5-9891-c4158f8255d3][p-keymap]]
-- [[id:236bb70e-a39d-47d4-80a9-ba2c59867fd7][s-keymap]]
+- [[id:c25ad90a-bafb-4fd6-936e-88331bbed6a0][r-keymap -> regex]]
 **  xah-fly-key-map
 #+begin_src emacs-lisp :tangle "xah-fly-keys.el"
 :bind
 (:map xah-fly-key-map
+ ("ESC" . nil)
  ("DEL" . nil)
-
+ 
  ("a" . counsel-M-x)
  ("b" . backward-word)
  ("c" . xah-copy-line-or-region)
@@ -250,6 +251,9 @@
 :PROPERTIES:
 :ID:       c25ad90a-bafb-4fd6-936e-88331bbed6a0
 :END:
+:BACKLINKS:
+[2020-10-13 Tue 18:21] <- [[*Index Owner Customization keys][Index Owner Customization keys]]
+:END:
 :RELATED:
 [2020-10-13 Tue 16:47] -> [[id:377062dc-cbce-4302-9f39-f25c175d4ae6][Index Owner Customization keys]]
 :END:
@@ -308,6 +312,7 @@
   (xah-fly--define-keys
    (define-prefix-command 'xah-fly-leader-key-map)
    '(
+     ("DEL" . keyboard-quit)
      ("m" . magit-keys)
      ("o" . org-keys)
      ("s" . search-keys)
@@ -401,7 +406,7 @@
 #+begin_src emacs-lisp :tangle "xah-fly-keys.el"
 (global-set-key (kbd "<f3>") 'gtrun/hydra-org-starter/body)
 (global-set-key (kbd "<f4>") 'xah-fly-command-mode-activate)
-(define-key key-translation-map (kbd "ESC") (kbd "C-g"))
+(global-set-key (kbd "ESC ESC") 'keyboard-quit)
 #+end_src
 
 * add hook to active xah-fly-keys insert or command mode
