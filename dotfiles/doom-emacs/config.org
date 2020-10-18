@@ -1763,6 +1763,22 @@ easy way to display org-ref with tree view instead of org-mode ?
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-super-links)
 #+end_src
+** org-wiki
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
+(package! wikinfo :recipe (:host github
+                             :repo "progfolio/wikinfo"
+                             ))
+
+(package! wikinforg :recipe (:host github
+                             :repo "progfolio/wikinforg"
+                             ))
+
+#+end_src
+
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+(use-package! wikinfo)
+(use-package! wikinforg)
+#+end_src
 ** org-clones
 1.
 

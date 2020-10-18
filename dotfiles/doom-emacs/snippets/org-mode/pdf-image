@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: img
-# key: img
+# name: pdf-image size
+# key: pi
 # --
 #+NAME: $1
 #+CAPTION: $2 

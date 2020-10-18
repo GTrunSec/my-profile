@@ -11,7 +11,6 @@ in
   config = with lib; mkMerge [
     (mkIf pkgs.stdenv.isDarwin {
       home.packages = with nixpkgs;[
-
         vips
       ] ++ [
         (python37.withPackages (nixpkgs: with nixpkgs; [

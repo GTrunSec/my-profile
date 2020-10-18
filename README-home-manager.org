@@ -239,22 +239,32 @@ in
 ** Python packages
 #+begin_src nix :exports both :tangle "~/.config/nixpkgs/home-manager/python-pkgs.nix"
 { lib, pkgs, ... }:
+let
+  overlays = [
+    (import ../nixos-flk/overlays/pkgs.nix)
+  ];
+
+  nixpkgs  = import ./misc/stable-pkgs.nix { inherit overlays; };
+
+in
 {
   config = with lib; mkMerge [
     (mkIf pkgs.stdenv.isDarwin {
-      home.packages = with pkgs;[
-        (python37.withPackages (pkgs: with pkgs; [
+      home.packages = with nixpkgs;[
+        vips
+      ] ++ [
+        (python37.withPackages (nixpkgs: with nixpkgs; [
           shapely
           matplotlib
           sqlalchemy
           pandas
           numpy
           scikitlearn
+          jupyter
           promnesia
           orgparse
           hpi
           mypy
-          python-language-server
         ]))
       ];
     })
@@ -595,7 +605,7 @@ in
           em    = "emacs";
           cp    = "cp -i";
           mv    = "mv -i";
-          ##update Nixpkgs 
+          ##update Nixpkgs
           un    = "~/.config/nixpkgs  && git fetch && git pull";
           overlay-go   = "cd ~/.config/nixpkgs/nixos/overlays/go";
           overlay-python   = "cd ~/.config/nixpkgs/nixos/overlays/python";
@@ -606,7 +616,7 @@ in
           si    = "pactl set-default-sink (pacmd list-sinks | awk \\\'/name:.*pci/{if (a != \"\") print a;} {a=$NF}\\\')";
         };
 
-        initExtra = builtins.readFile "${home_directory}/.config/nixpkgs/dotfiles/keys.sh" + builtins.readFile "${home_directory}/.config/nixpkgs/dotfiles/zshrc" +
+        initExtra = builtins.readFile "${home_directory}/.config/nixpkgs/dotfiles/zshrc" +
                     ''
                      ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#fdf6e3,bg=#586e75,bold,underline"
 
@@ -695,7 +705,6 @@ in
     })
   ];
 }
-
 #+end_src
 ** alacritty
 #+begin_src nix :exports both :tangle "~/.config/nixpkgs/home-manager/programs/alacritty/default.nix"
