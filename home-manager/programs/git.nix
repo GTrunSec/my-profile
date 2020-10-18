@@ -1,42 +1,53 @@
-{pkgs, ...}:
+{pkgs, lib, ...}:
 {
-  programs.git = {
-    enable = true;
-    userName = "GTrunSec";
-    userEmail = "gtrunsec@hardenedlinux.org";
-    signing.key = "761C8EBEA940960E";
-    signing.signByDefault = true;
-    ignores = [ ".projectile" ".indium.json" ".ccls-cache"
-                ".Rhistory" ".notdeft*" ".auctex-auto" "__pycache__"
-                "vast.db" "eaf"
-                ".ipynb_checkpoints"
-              ];
-    extraConfig = {
+  config = with lib; mkMerge [
+    (mkIf (pkgs.stdenv.isLinux || pkgs.stdenv.isDarwin) {
+      programs.git = {
+        enable = true;
+        userName = "GTrunSec";
+        userEmail = "gtrunsec@hardenedlinux.org";
+        signing.key = "761C8EBEA940960E";
+        ignores = [ ".projectile" ".indium.json" ".ccls-cache"
+                    ".Rhistory" ".notdeft*" ".auctex-auto" "__pycache__"
+                    "vast.db" "eaf"
+                    ".ipynb_checkpoints"
+                  ];
+        extraConfig = {
 
-      github = {
-        user = "gtrunsec";
-      };
+          github = {
+            user = "gtrunsec";
+          };
 
-      pull = {
-        rebase = true;
-      };
-      merge = {
-        ff = "only";
-      };
-      rebase = {
-        autostash = true;
-      };
-      core = {
-        pager = [ ''
-        delta --plus-color="#012800" --minus-color="#340001"
+          pull = {
+            rebase = true;
+          };
+          merge = {
+            ff = "only";
+          };
+          rebase = {
+            autostash = true;
+          };
+          core = {
+            pager = [ ''
+            delta --plus-color="#012800" --minus-color="#340001"
               ''
-                ];
-      };
+                    ];
+          };
 
-      interactive = {
-        diffFilter = "delta --color-only";
-      };
+          interactive = {
+            diffFilter = "delta --color-only";
+          };
 
-    };
-  };
+        };
+      };
+    })
+    (mkIf pkgs.stdenv.isLinux {
+      programs.git.signing.signByDefault = true;
+    })
+
+    (mkIf pkgs.stdenv.isDarwin {
+      programs.git.signing.signByDefault = false;
+    })
+  ];
+  
 }
