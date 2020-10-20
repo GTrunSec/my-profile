@@ -2437,6 +2437,17 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
             (t . ivy-prescient-re-builder))))
   )
 #+end_src
+** helm-pinyin
+#+begin_src emacs-lisp :tangle "packages.el"
+;; (package! helm-pinyin :recipe (:host github :repo "twlz0ne/helm-pinyin"))
+#+end_src
+
+#+begin_src emacs-lisp :tangle "config.el"
+;; (use-package! helm-pinyin
+;;   :hook
+;;   (after-init . turn-on-helm-pinyin)
+;;   )
+#+end_src
 
 * minor mode and major mode
 ** [[https://github.com/rnkn/binder][rnkn/binder: Emacs global minor mode facilitating multi-file writing projects]]
