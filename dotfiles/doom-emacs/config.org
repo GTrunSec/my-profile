@@ -22,6 +22,20 @@ HTML them READ org
 
 - [Source Code] [[https://github.com/GTrunSec/my-profile/tree/master/dotfiles/doom-emacs][my-profile/dotfiles/doom-emacs at master · GTrunSec/my-profile]]
 
+  
+* Emacs
+:PROPERTIES:
+:original-authors: David A. Moon, Guy L. Steele Jr.
+:developers: Various free/libre software developers, including volunteers and commercial developers
+:initial-release: 1976; 44 years ago (1976)
+:stable-release: 27.1 (August 10, 2020; 2 months ago (2020-08-10))
+:written-in: Lisp, C
+:operating-system: Cross-platform
+:type:     Text editor
+:wikinfo-id: 18933234
+:URL:      https://en.wikipedia.org?curid=18933234
+:END:
+Emacs or EMACS (Editor MACroS) is a family of text editors that are characterized by their extensibility. The manual for the most widely used variant, GNU Emacs, describes it as "the extensible, customizable, self-documenting, real-time display editor". Development of the first Emacs began in the mid-1970s, and work on its direct descendant, GNU Emacs, continues actively as of 2020.
 * init.el
 :PROPERTIES:
 :ID:       0817e14a-4420-494f-a380-48986c6d6f5d
@@ -1601,6 +1615,11 @@ make
 
 easy way to display org-ref with tree view instead of org-mode ?
 *** org-roam
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/packages.el"
+(unpin! org-roam)
+#+end_src
+
+
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-roam
   :init
@@ -2011,20 +2030,18 @@ easy way to display org-ref with tree view instead of org-mode ?
 (use-package org-latex-instant-preview
   ;;:hook (org-mode . org-latex-instant-preview-mode)
   :config
+
   (when IS-LINUX
     (setq org-latex-instant-preview-tex2svg-bin "/run/current-system/sw/bin/tex2svg")
     (setq org-latex-instant-preview-scale 10.0)
     )
+
   (when IS-MAC
     (setq org-latex-instant-preview-tex2svg-bin "~/.nix-profile/bin/tex2svg")
-      )
+    (setq org-latex-instant-preview-scale 5.0)
+    )
   )
 #+end_src
-
-*** [[https://github.com/cdominik/cdlatex][cdominik/cdlatex: Fast input methods to enter LaTeX environments and math with GNU Emacs]]
-
-*** TODO [[https://github.com/io12/org-fragtog][io12/org-fragtog: Automatically toggle org-mode latex fragment previews as the cursor enters and exits them]]
-
 ** haskell
 *** lsp-haskell
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/packages.el"

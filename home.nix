@@ -20,6 +20,7 @@ in
 
       nixpkgs.overlays = [
         (import ./nixos-flk/overlays/pkgs.nix)
+        (import ./nixos-flk/pkgs/my-node-packages)
         (import all-hies {}).overlay
         (import ./home-manager/packages-overlay.nix)
       ];

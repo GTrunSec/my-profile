@@ -30,6 +30,8 @@ in
         #haskellPackages.hie
       ] ++ [
         nodePackages.pyright
+        nodePackages.mathjax-node-cli
+        nodePackages.mathjax
       ] ++ [ #go packages
         govet
         gocode

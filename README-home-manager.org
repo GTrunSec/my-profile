@@ -55,6 +55,7 @@ in
 
       nixpkgs.overlays = [
         (import ./nixos-flk/overlays/pkgs.nix)
+        (import ./nixos-flk/pkgs/my-node-packages)
         (import all-hies {}).overlay
         (import ./home-manager/packages-overlay.nix)
       ];
@@ -205,6 +206,8 @@ in
         #haskellPackages.hie
       ] ++ [
         nodePackages.pyright
+        nodePackages.mathjax-node-cli
+        nodePackages.mathjax
       ] ++ [ #go packages
         govet
         gocode
@@ -235,7 +238,6 @@ in
   ];
 
 }
-
 #+end_src
 ** Python packages
 #+begin_src nix :exports both :tangle "~/.config/nixpkgs/home-manager/python-pkgs.nix"
