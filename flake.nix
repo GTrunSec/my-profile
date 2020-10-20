@@ -7,8 +7,7 @@
     master.url = "nixpkgs/703f052de185c3dd1218165e62b105a68e05e15f";
     nixpkgs-hardenedlinux.url = "github:hardenedlinux/nixpkgs-hardenedlinux/master";
 
-    emacs-overlay.url = "github:nix-community/emacs-overlay/1ee4901cab8dacb8e5a77f4d06b57053141f5fad";
-    #ein = { url = "github:emillejoh/emacs-ipython-notebook/master"; flake = false;};
+    emacs-overlay.url = "github:nix-community/emacs-overlay/c4bef73fed2370d1f12fa1de4d3df220e46f1829";
     org-super-links = { url = "git+https://github.com/toshism/org-super-links"; flake = false;};
   };
 

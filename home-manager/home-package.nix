@@ -17,6 +17,7 @@ in
         #for emacs notdeft
         tclap
         xapian
+        libvterm
         #rnix-lsp
       ];
     })
