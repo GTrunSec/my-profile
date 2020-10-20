@@ -12,7 +12,7 @@ let
     pkgs.emacs
     [
 
-      (drv: drv.override { srcRepo = true; imagemagick = pkgs.imagemagickBig;})
+      (drv: drv.override { srcRepo = true; imagemagick = pkgs.imagemagick;})
 
       (
         drv: drv.overrideAttrs (
