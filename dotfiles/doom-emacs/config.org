@@ -764,7 +764,8 @@ In that case, insert the number."
                                 ))
   )
 
-(set-company-backend! '(julia-mode)
+(set-company-backend! '(julia-mode
+                        org-mode)
   '(
     company-math-symbols-unicode
     company-files
@@ -789,7 +790,6 @@ In that case, insert the number."
                         rust-mode
                         js-mode
                         css-mode
-                        org-mode
                         web-mode
                         )
   '(
