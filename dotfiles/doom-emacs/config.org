@@ -750,14 +750,15 @@ In that case, insert the number."
 ** company-backend
 #+begin_src emacs-lisp :tangle "config.el"
 (when IS-LINUX
-  (set-company-backend! '(nix-mode)
-    '(
-      company-files
-      :separate
-      company-tabnine
-      company-nixos-options
-      ))
-
+  (after! nix-mode
+    (set-company-backend! '(nix-mode)
+      '(
+        company-files
+        :separate
+        company-tabnine
+        company-nixos-options
+        ))
+    )
   (setq +lsp-company-backends '(company-files
                                 company-nixos-options
                                 :separate
@@ -766,12 +767,14 @@ In that case, insert the number."
   )
 
 (when IS-MAC
-  (set-company-backend! '(nix-mode)
-    '(company-files
-      company-yasnippet
-      :separate
-      company-tabnine
-      ))
+  (after! nix-mode
+    (set-company-backend! '(nix-mode)
+      '(company-files
+        company-yasnippet
+        :separate
+        company-tabnine
+        ))
+    )
   (setq +lsp-company-backends '(company-files
                                 :separate
                                 company-tabnine
@@ -820,9 +823,6 @@ In that case, insert the number."
                              company-tabnine
                              ))
 #+end_src
-
-#+RESULTS:
-| company-lsp | company-files | company-yasnippet | :separate | company-tabnine |
 
 ** Edition
 *** maple-iedit
@@ -1092,7 +1092,6 @@ FACE defaults to inheriting from default and highlight."
 #+end_src
 
 * org-mode
-
 ** load basic config
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (load! "setting")
@@ -1143,9 +1142,10 @@ FACE defaults to inheriting from default and highlight."
 (add-hook! 'org-mode-hook 'org-show-two-levels)
 #+end_src
 
-** org-mode-map
+** org-mode-map && after org setting
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (after! org
+  (setq org-download-timestamp "%Y%m%d_%H%M%S")
   (define-key org-mode-map (kbd "C-c C-.") 'org-time-stamp-inactive)
 )
 #+end_src
@@ -1308,6 +1308,46 @@ FACE defaults to inheriting from default and highlight."
   )
 #+end_src
 
+*** org-todo-keywords
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+    (setq org-todo-keywords
+     '((sequence
+           "TODO(t)"  ; A task that needs doing & is ready to do
+           "PROJ(p)"  ; An ongoing project that cannot be completed in one step
+           "INPROCESS(s)"  ; A task that is in progress
+           "⚑ WAITING(w)"  ; Something is holding up this task; or it is paused
+           "|"
+           "☟ NEXT(n)"
+           "✰ IMPORTANT(i)"
+           "DONE(d)"  ; Task successfully completed
+           "✘ CANCELED(c@)") ; Task was cancelled, aborted or is no longer applicable
+          (sequence
+           "✍ NOTE(N)"
+           "FIXME(f)"
+           "☕ BREAK(b)"
+           "❤ LOVE(l)"
+           "REVIEW(r)"
+           )) ; Task was completed
+        org-todo-keyword-faces
+        '(
+          ("TODO" . (:foreground "#ff39a3" :weight bold))
+          ("INPROCESS"  . "orangered")
+          ("✘ CANCELED" . (:foreground "white" :background "#4d4d4d" :weight bold))
+          ("⚑ WAITING" . "pink")
+          ("☕ BREAK" . "gray")
+          ("❤ LOVE" . (:foreground "VioletRed4"
+                                   ;; :background "#7A586A"
+                                   :weight bold))
+          ("☟ NEXT" . (:foreground "DeepSkyBlue"
+                                   ;; :background "#7A586A"
+                                      :weight bold))
+          ("✰ IMPORTANT" . (:foreground "greenyellow"
+                                      ;; :background "#7A586A"
+                                      :weight bold))
+          ("DONE" . "#008080")
+          ("FIXME" . "IndianRed")
+          ))
+#+end_src
 *** agenda-custom-setting
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (require 'org-super-agenda)
@@ -1722,12 +1762,12 @@ easy way to display org-ref with tree view instead of org-mode ?
 #+end_src
 
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
-(use-package! org-spacer
-  :config
-  ;; (add-hook 'org-mode-hook
-  ;;           (lambda () (add-hook 'before-save-hook
-  ;;                                'org-spacer-enforce nil 'make-it-local)))
-  )
+;; (use-package! org-spacer
+;;   :config
+;;   ;; (add-hook 'org-mode-hook
+;;   ;;           (lambda () (add-hook 'before-save-hook
+;;   ;;                                'org-spacer-enforce nil 'make-it-local)))
+;;   )
 #+end_src
 
 ** org-density.el :summary:statistic:
@@ -1849,11 +1889,12 @@ easy way to display org-ref with tree view instead of org-mode ?
 ** TODO [[https://github.com/lepisma/org-krita][lepisma/org-krita: Krita sketches in Org]]
 ** [[https://github.com/alphapapa/org-graph-view][alphapapa/org-graph-view: View Org buffers as a clickable, graphical mind-map]]
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/packages.el"
-(package! org-graph-view :recipe (:host github :repo "alphapapa/org-graph-view"))
+;; (package! org-graph-view :recipe (:host github :repo "alphapapa/org-graph-view"))
+
 #+end_src
 
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
-(use-package! org-graph-view)
+;;(use-package! org-graph-view)
 #+end_src
 
 ** [[https://github.com/the-humanities/org-mind-map][the-humanities/org-mind-map: This is an emacs package that creates graphviz directed graphs.]]
