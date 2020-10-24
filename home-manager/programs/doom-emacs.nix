@@ -28,13 +28,15 @@ in
       };
 
       home.activation.linkEmacsPrivate = config.lib.dag.entryAfter [ "writeBoundary" ] ''
-     if [ ! -d "$HOME/.emacs.d" ];then
-         ${pkgs.git}/bin/git clone https://github.com/GTrunSec/doom-emacs.git -b my-doom
-      if [ ! -d "$HOME/.emacs.d/bin/doom" ];then
+      if [ ! -d "$HOME/.emacs.d" ];then
+         ${pkgs.git}/bin/git clone https://github.com/GTrunSec/doom-emacs.git -b my-doom ~/.emacs.d
+         ##org-mode path
+      fi
+
+      if [ ! -f "$HOME/.emacs.d/bin/doom" ];then
        mv $HOME/.emacs.d $HOME/.emacs.d-backup
-       ${pkgs.git}/bin/git clone https://github.com/GTrunSec/doom-emacs.git -b my-doom
-       fi
-     fi
+       ${pkgs.git}/bin/git clone https://github.com/GTrunSec/doom-emacs.git -b my-doom ~/.emacs.d
+      fi
 
      if [ ! -d "$HOME/.doom.d" ];then
      mkdir -p $HOME/.doom.d/

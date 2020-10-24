@@ -1286,7 +1286,8 @@ FACE defaults to inheriting from default and highlight."
 :BACKLINKS:
 [2020-10-13 Tue 15:05] <- [[*\[\[https://www.nongnu.org/org-edna-el/#org2421cd7\]\[Org Edna\]\]][Org Edna]]
 :END:
-
+**** Sexp Entries and the Fancy Diary Display
+- [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Sexp-Diary-Entries.html][https://www.gnu.org/software/emacs/manual/html_node/emacs/Sexp-Diary-Entries.html]]
 *** super-agenda
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/packages.el"
 (package! org-super-agenda)
