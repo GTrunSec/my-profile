@@ -522,6 +522,19 @@ Emacs or EMACS (Editor MACroS) is a family of text editors that are characterize
    ("M-s M-s" . isearch-toggle-color-rg))
   )
 #+end_src
+*** snails
+#+begin_src emacs-lisp :tangle "packages.el"
+  (package! snails :recipe (:host github
+                            :repo "manateelazycat/snails"
+                            :files ("*.el")
+                            :no-byte-compile t))
+#+end_src
+
+#+begin_src emacs-lisp :tangle "config.el"
+(use-package! snails
+  :config
+  (define-key snails-mode-map [remap next-line] #'snails-select-next-item))
+#+end_src
 * autoload
 ** misc
 *** time
@@ -2672,23 +2685,6 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
       (eaf-open-browser "https://www.google.com")))
   )
 #+end_src
-
-*** snails
-#+begin_src emacs-lisp :tangle "packages.el"
-(when IS-LINUX
-  (package! snails :recipe (:host github
-                            :repo "manateelazycat/snails"
-                            :files ("*.el")
-                            :no-byte-compile t))
-  )
-#+end_src
-#+begin_src emacs-lisp :tangle "config.el"
-(use-package! snails
-  :if (eq system-type 'gnu/linux)
-  :config
-  (define-key snails-mode-map [remap next-line] #'snails-select-next-item))
-#+end_src
-
 *** grab-x-link :nix:
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! grab-x-link
