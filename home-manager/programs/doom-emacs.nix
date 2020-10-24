@@ -30,12 +30,25 @@ in
       home.activation.linkEmacsPrivate = config.lib.dag.entryAfter [ "writeBoundary" ] ''
       if [ ! -d "$HOME/.emacs.d" ];then
          ${pkgs.git}/bin/git clone https://github.com/GTrunSec/doom-emacs.git -b my-doom ~/.emacs.d
-         ##org-mode path
+         if [[ "$OSTYPE" == "linux-gnu" ]]; then
+         sed -i 's|~/org|~/Documents/org-notes|' $HOME/.emacs.d/modules/lang/org/config.el
+         sed -i 's|org-roam-directory "roam"|org-roam-directory "braindump"|' $HOME/.emacs.d/modules/lang/org/contrib/roam.el
+         else
+         sed -i '' "s|~/org/|~/Documents/org-notes|g" $HOME/.emacs.d/modules/lang/org/config.el
+         sed -i '' 's|org-roam-directory "roam"|org-roam-directory "braindump"|g' $HOME/.emacs.d/modules/lang/org/contrib/roam.el
+         fi
       fi
 
       if [ ! -f "$HOME/.emacs.d/bin/doom" ];then
        mv $HOME/.emacs.d $HOME/.emacs.d-backup
        ${pkgs.git}/bin/git clone https://github.com/GTrunSec/doom-emacs.git -b my-doom ~/.emacs.d
+         if [[ "$OSTYPE" == "linux-gnu" ]]; then
+         sed -i 's|~/org|~/Documents/org-notes|' $HOME/.emacs.d/modules/lang/org/config.el
+         sed -i 's|org-roam-directory "roam"|org-roam-directory "braindump"|' $HOME/.emacs.d/modules/lang/org/contrib/roam.el
+         else
+         sed -i '' "s|~/org/|~/Documents/org-notes|g" $HOME/.emacs.d/modules/lang/org/config.el
+         sed -i '' 's|org-roam-directory "roam"|org-roam-directory "braindump"|g' $HOME/.emacs.d/modules/lang/org/contrib/roam.el
+         fi
       fi
 
      if [ ! -d "$HOME/.doom.d" ];then
