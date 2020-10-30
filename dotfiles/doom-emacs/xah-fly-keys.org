@@ -417,11 +417,12 @@
 
 #+begin_src emacs-lisp :tangle "xah-fly-keys.el"
 (when IS-MAC
-  (global-set-key (kbd "C-x c-d") 'sl-quick-insert-drawer-link)
-  (global-set-key (kbd "C-x c-l") 'sl-quick-insert-inline-link)
-  (global-set-key (kbd "C-x c-i") 'org-roam-insert)
+  (global-set-key (kbd "C-x c d") 'sl-quick-insert-drawer-link)
+  (global-set-key (kbd "C-x c l") 'sl-quick-insert-inline-link)
+  (global-set-key (kbd "C-x c i") 'org-roam-insert)
 )
 #+end_src
+
 * add hook to active xah-fly-keys insert or command mode
 #+begin_src emacs-lisp :tangle "xah-fly-keys.el"
 (add-hook! 'xah-fly-command-mode-activate-hook 'xah-fly-save-buffer-if-file)
