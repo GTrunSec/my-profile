@@ -408,10 +408,19 @@
 (global-set-key (kbd "<f4>") 'xah-fly-command-mode-activate)
 (global-set-key (kbd "ESC ESC") 'keyboard-quit)
 #+end_src
-
+** org-mode set key
 #+begin_src emacs-lisp :tangle "xah-fly-keys.el"
 (global-set-key (kbd "M-s d") 'sl-quick-insert-drawer-link)
 (global-set-key (kbd "M-s l") 'sl-quick-insert-inline-link)
+(global-set-key (kbd "M-s i") 'org-roam-insert)
+#+end_src
+
+#+begin_src emacs-lisp :tangle "xah-fly-keys.el"
+(when IS-MAC
+  (global-set-key (kbd "C-x c-d") 'sl-quick-insert-drawer-link)
+  (global-set-key (kbd "C-x c-l") 'sl-quick-insert-inline-link)
+  (global-set-key (kbd "C-x c-i") 'org-roam-insert)
+)
 #+end_src
 * add hook to active xah-fly-keys insert or command mode
 #+begin_src emacs-lisp :tangle "xah-fly-keys.el"
