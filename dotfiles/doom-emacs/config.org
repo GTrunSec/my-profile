@@ -762,38 +762,6 @@ In that case, insert the number."
 
 ** company-backend
 #+begin_src emacs-lisp :tangle "config.el"
-(when IS-LINUX
-  (after! nix-mode
-    (set-company-backend! '(nix-mode)
-      '(
-        company-files
-        :separate
-        company-tabnine
-        company-nixos-options
-        ))
-    )
-  (setq +lsp-company-backends '(company-files
-                                company-nixos-options
-                                :separate
-                                company-tabnine
-                                ))
-  )
-
-(when IS-MAC
-  (after! nix-mode
-    (set-company-backend! '(nix-mode)
-      '(company-files
-        company-yasnippet
-        :separate
-        company-tabnine
-        ))
-    )
-  (setq +lsp-company-backends '(company-files
-                                :separate
-                                company-tabnine
-                                ))
-  )
-
 (set-company-backend! '(julia-mode
                         org-mode)
   '(
@@ -803,7 +771,6 @@ In that case, insert the number."
     :separate
     company-tabnine
     ))
-
 ;;  (set-company-backend! 'sh-mode nil) ; unsets backends for sh-mode
 (set-company-backend! '(c-mode
                         c++-mode
@@ -821,6 +788,8 @@ In that case, insert the number."
                         js-mode
                         css-mode
                         web-mode
+                        nix-mode
+                        json-mode
                         )
   '(
     company-files
@@ -2231,6 +2200,14 @@ easy way to display org-ref with tree view instead of org-mode ?
   (defun add-company-tabnine ()
     (add-to-list (make-local-variable 'company-backends) 'company-tabnine))
   (add-hook 'zeek-mode-hook #'add-company-tabnine)
+  )
+#+end_src
+
+** nix-mode
+#+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
+(use-package! nix-mode
+  :config
+  (setq-hook! 'nix-mode-hook company-idle-delay t)
   )
 #+end_src
 
