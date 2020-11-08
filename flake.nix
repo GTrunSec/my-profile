@@ -5,10 +5,10 @@
     flake-utils.url = "github:numtide/flake-utils";
     nixpkgs.url = "nixpkgs/0cdf13328905da1d35c9395ad1de89424c511943";
     master.url = "nixpkgs/703f052de185c3dd1218165e62b105a68e05e15f";
-    nixpkgs-hardenedlinux.url = "github:hardenedlinux/nixpkgs-hardenedlinux/master";
 
-    emacs-overlay.url = "github:nix-community/emacs-overlay/c4bef73fed2370d1f12fa1de4d3df220e46f1829";
-    org-super-links = { url = "git+https://github.com/toshism/org-super-links"; flake = false;};
+    nixpkgs-hardenedlinux.url = "github:hardenedlinux/nixpkgs-hardenedlinux/master";
+    emacs-overlay.url = "github:nix-community/emacs-overlay/68eae166cdb48b230a03085bdd3e422a54155f3a";
+
   };
 
   #outputs = inputs@{ self, nixpkgs, nixpkgs-hardenedlinux, master, flake-utils, emacs-overlay }:

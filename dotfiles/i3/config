@@ -63,10 +63,10 @@ bindsym ctrl+Shift+Right exec --no-startup-id bash ~/.config/i3/move-cursor-wind
 
 
 # split in horizontal orientation
-bindsym $mod+Shift+h split h
+bindsym Mod4+h split h
 
 # split in vertical orientation
-bindsym $mod+Shift+v split v
+bindsym Mod4+v split v
 
 # enter fullscreen mode for the focused container
 bindsym Mod4+f fullscreen toggle
