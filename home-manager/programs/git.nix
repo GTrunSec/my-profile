@@ -10,6 +10,7 @@
         ignores = [ ".projectile" ".indium.json" ".ccls-cache"
                     ".Rhistory" ".notdeft*" ".auctex-auto" "__pycache__"
                     "vast.db" "eaf"
+                    ".DS_Store"
                     ".ipynb_checkpoints"
                   ];
         extraConfig = {

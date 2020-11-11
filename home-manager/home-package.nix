@@ -24,6 +24,7 @@ in
     (mkIf pkgs.stdenv.isLinux {
       home.packages = with pkgs;[
         dive
+        ffmpegthumbnailer #emacs-org-beautify
         #python37Packages.voila
       ];
     })

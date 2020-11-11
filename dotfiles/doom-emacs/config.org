@@ -1831,7 +1831,21 @@ easy way to display org-ref with tree view instead of org-mode ?
 1.
 
    [[https://github.com/legalnonsense/org-clones][legalnonsense/org-clones: Prototype for method of cloning orgmore headers]]
+** [[https://github.com/stardiviner/org-link-beautify][stardiviner/org-link-beautify: Beautify org links with colors and icons.]]
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
+(package! org-link-beautify :recipe (:host github
+                             :repo "stardiviner/org-link-beautify"
+                             ))
 
+#+end_src
+
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+(use-package! org-link-beautify
+  :config
+  (add-hook! 'org-mode-hook 'org-link-beautify-mode)
+  )
+
+#+end_src
 ** TODO [[https://github.com/marcIhm/org-working-set][marcIhm/org-working-set: Manage a working-set of org-nodes]] :manage:
 #+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
 (package! org-working-set
@@ -2447,6 +2461,8 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 ** windown manager
 1. [[https://github.com/nex3/perspective-el][nex3/perspective-el: Perspectives for Emacs.]]
 
+** [[https://github.com/alphapapa/burly.el][alphapapa/burly.el: Save and restore frames and windows with their buffers in Emacs]]
+
 * chinese
 ** pinyinlib
 #+begin_src emacs-lisp :tangle "config.el"
@@ -2765,6 +2781,8 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   rm -rf ~/.emacs.d/.local/straight/build/with-editor
   #+end_src
   rebuild
+
+* [[https://github.com/r0man/docopt.el][r0man/docopt.el: A Docopt implementation in Emacs Lisp.]]
 * Cache
 -  [[https://github.com/bzg/dotemacs/blob/master/emacs.org][dotemacs/emacs.org at master · bzg/dotemacs]]
 
