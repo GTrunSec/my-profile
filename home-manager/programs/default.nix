@@ -15,5 +15,9 @@
       programs.htop.enable = true;
       programs.bat.enable = true;
     })
+
+    (mkIf (pkgs.stdenv.isLinux || pkgs.stdenv.isDarwin) {
+      programs.broot.enable = true;
+    })
   ];
 }

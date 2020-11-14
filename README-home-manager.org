@@ -439,6 +439,8 @@ rec {
 #+end_src
 * programs
 ** default.nix
+- [[https://github.com/Canop/broot][Canop/broot: A new way to see and navigate directory trees : https://dystroy.org/broot]]
+
 #+begin_src nix :exports both :tangle "~/.config/nixpkgs/home-manager/programs/default.nix"
 { config, lib, pkgs, ... }:
 {
@@ -456,6 +458,10 @@ rec {
     (mkIf pkgs.stdenv.isLinux {
       programs.htop.enable = true;
       programs.bat.enable = true;
+    })
+
+    (mkIf (pkgs.stdenv.isLinux || pkgs.stdenv.isDarwin) {
+      programs.broot.enable = true;
     })
   ];
 }
