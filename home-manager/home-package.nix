@@ -15,8 +15,7 @@ in
         #vips
         nixpkgs-review
         #for emacs notdeft
-        tclap
-        xapian
+        notdeft
         #rnix-lsp
       ];
     })

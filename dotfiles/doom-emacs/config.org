@@ -1587,6 +1587,10 @@ FACE defaults to inheriting from default and highlight."
   :config
   (setq notdeft-extension "org")
   ;;(setq notdeft-secondary-extensions '("md" "org" "scrbl"))
+  (setq notdeft-xapian-program "/home/gtrun/.nix-profile/bin/notdeft-xapian")
+  (when IS-MAC
+    (setq notdeft-xapian-program "/Users/gtrun/.nix-profile/bin/notdeft-xapian")
+    )
   (setq notdeft-directories '("~/Documents/org-notes/post/myself"
                               "~/Documents/org-notes/dailies"
                               "~/Documents/org-notes/post/traveling"
@@ -1599,9 +1603,9 @@ FACE defaults to inheriting from default and highlight."
                               ))
 
   :bind (:map notdeft-mode-map
-          ("C-q" . notdeft-quit)
-          ("C-r" . notdeft-refresh)
-          )
+         ("C-q" . notdeft-quit)
+         ("C-r" . notdeft-refresh)
+         )
   )
 #+end_src
 
@@ -2647,7 +2651,6 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
   (define-key org-mode-map (kbd "C-c l") 'grab-x-link)
 
-  (setq notdeft-xapian-program "/home/gtrun/src/notdeft/xapian/notdeft-xapian")
   (setq inferior-julia-program-name "/run/current-system/sw/bin/julia")
   ;; (setq jupyter-runtime-directory "~/.local/share/jupyter/runtime")
   (add-hook 'ob-async-pre-execute-src-block-hook
@@ -2737,8 +2740,6 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
 ;; (setq lsp-python-ms-executable
 ;;       "~/src/python-language-server/output/bin/Release/osx-x64/publish/Microsoft.Python.LanguageServer")
-
-(setq notdeft-xapian-program "/Users/gtrun/src/notdeft/xapian/notdeft-xapian")
 
 (setq inferior-julia-program-name "~/.nix-profile/bin/julia")
 
