@@ -84,6 +84,9 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .pod                  38;5;184
 .tex                  38;5;184
 .textile              38;5;184
+# org {{{2
+.org                  38;5;180
+
 # key-value, non-relational data {{{2
 .msg                  38;5;178
 .pgn                  38;5;178

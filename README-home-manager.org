@@ -588,6 +588,7 @@ in
 }
 #+end_src
 ** zsh
+- [[https://github.com/trapd00r/LS_COLORS][trapd00r/LS_COLORS: A collection of LS_COLORS definitions; needs your contribution!]]
 #+begin_src nix :exports both :tangle "~/.config/nixpkgs/home-manager/programs/zsh.nix"
 { config, lib, pkgs, ... }:
 let
@@ -642,8 +643,8 @@ in
         initExtra = builtins.readFile "${home_directory}/.config/nixpkgs/dotfiles/zshrc" +
                     ''
                      ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#fdf6e3,bg=#586e75,bold,underline"
-
-                    ''
+                     eval $(${pkgs.coreutils}/bin/dircolors -b ~/.config/nixpkgs/dotfiles/LS_COLORS)
+ls                    ''
         ;
 
         plugins =
