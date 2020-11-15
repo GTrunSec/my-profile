@@ -1,4 +1,12 @@
 #! /usr/bin/env zsh
+autoload -Uz promptinit
+promptinit
+# zsh-mime-setup
+autoload colors
+colors
+autoload -Uz zmv # move function
+autoload -Uz zed # edit functions within zle
+
 # Use fd (https://github.com/sharkdp/fd) instead of the default find
 # command for listing path candidates.
 # - The first argument to the function ($1) is the base path to start traversal

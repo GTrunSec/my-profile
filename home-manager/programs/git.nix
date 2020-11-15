@@ -8,10 +8,10 @@
         userEmail = "gtrunsec@hardenedlinux.org";
         signing.key = "761C8EBEA940960E";
         ignores = [ ".projectile" ".indium.json" ".ccls-cache"
-                    ".Rhistory" ".notdeft*" ".auctex-auto" "__pycache__"
-                    "vast.db" "eaf"
-                    ".DS_Store"
-                    ".ipynb_checkpoints"
+                    ".Rhistory" ".notdeft*"  "eaf"
+                    ".auctex-auto"
+                    "vast.db" ".DS_Store" "result"
+                    ".ipynb_checkpoints" "__pycache__"
                   ];
         extraConfig = {
 
