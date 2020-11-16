@@ -826,9 +826,10 @@ in
         userEmail = "gtrunsec@hardenedlinux.org";
         signing.key = "761C8EBEA940960E";
         ignores = [ ".projectile" ".indium.json" ".ccls-cache"
-                    ".Rhistory" ".notdeft*" ".auctex-auto" "__pycache__"
-                    "vast.db" "eaf"
-                    ".ipynb_checkpoints"
+                    ".Rhistory" ".notdeft*"  "eaf"
+                    ".auctex-auto"
+                    "vast.db" ".DS_Store" "result"
+                    ".ipynb_checkpoints" "__pycache__"
                   ];
         extraConfig = {
 
@@ -867,9 +868,8 @@ in
       programs.git.signing.signByDefault = false;
     })
   ];
-  
-}
 
+}
 #+end_src
 ** tmux
 #+begin_src nix :exports both :tangle "~/.config/nixpkgs/home-manager/programs/tmux.nix"
