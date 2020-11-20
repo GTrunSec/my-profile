@@ -37,10 +37,6 @@ HTML them READ org
 :END:
 Emacs or EMACS (Editor MACroS) is a family of text editors that are characterized by their extensibility. The manual for the most widely used variant, GNU Emacs, describes it as "the extensible, customizable, self-documenting, real-time display editor". Development of the first Emacs began in the mid-1970s, and work on its direct descendant, GNU Emacs, continues actively as of 2020.
 * init.el
-:PROPERTIES:
-:ID:       0817e14a-4420-494f-a380-48986c6d6f5d
-:END:
-
 #+begin_src emacs-lisp :tangle "init.el"
 ;;; init.el -*- lexical-binding: t; -*-
 
@@ -1797,6 +1793,9 @@ easy way to display org-ref with tree view instead of org-mode ?
 *** [[https://github.com/ianxm/emacs-scrum][ianxm/emacs-scrum: dynamic scrum report generation for org-mode buffers]]
 
 ** org-super-links
+:PROPERTIES:
+:ID:       1761cf4f-5d3a-4e22-adb1-6b1e4114830b
+:END:
 - [[https://github.com/toshism/org-super-links][toshism/org-super-links: Package to create links with auto backlinks]]
 
 #+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
@@ -1809,10 +1808,22 @@ easy way to display org-ref with tree view instead of org-mode ?
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-super-links
   :config
+
+(defun sl-link-k-prefix-timestamp ()
+  "Return the default prefix string for a backlink.
+Inactive timestamp formatted according to `org-time-stamp-formats' and
+a separator ' -> '."
+  (let* ((time-format (substring (cdr org-time-stamp-formats) 1 -1))
+	 (time-stamp (format-time-string time-format (current-time))))
+    (format "- [%s] -> "
+	    time-stamp)))
+
+
   (setq org-id-link-to-org-use-id
         'create-if-interactive-and-no-custom-id)
-  (setq sl-related-into-drawer t
-  	sl-link-prefix 'sl-link-prefix-timestamp)
+  (setq sl-related-into-drawer nil
+        sl-backlink-into-drawer nil
+  	sl-link-prefix 'sl-link-k-prefix-timestamp)
 )
 #+end_src
 ** org-wiki
