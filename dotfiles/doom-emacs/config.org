@@ -1837,7 +1837,7 @@ a separator ' -> '."
         'create-if-interactive-and-no-custom-id)
   (setq sl-related-into-drawer nil
         sl-backlink-into-drawer nil
-        sl-link-prefix 'sl-link-k-prefix-timestamp)
+        sl-link-prefix 'sl-link-prefix-timestamp)
   )
 #+end_src
 
