@@ -2098,11 +2098,11 @@ a separator ' -> '."
 #+end_src
 *** org-latex-instant-preview
 #+begin_src emacs-lisp :tangle  "./modules/private/my-code/packages.el"
-(package! org-latex-instant-preview :recipe (:host github :repo "yangsheng6810/org-latex-instant-preview"))
+(package! org-latex-impatient :recipe (:host github :repo "yangsheng6810/org-latex-impatient"))
 #+end_src
 
 #+begin_src emacs-lisp :tangle  "./modules/private/my-code/my-latex.el"
-(use-package org-latex-instant-preview
+(use-package org-latex-impatient
   ;;:hook (org-mode . org-latex-instant-preview-mode)
   :config
 
