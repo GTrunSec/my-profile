@@ -2781,12 +2781,13 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 ** macos use packages
 #+begin_src emacs-lisp :tangle "packages.el"
 (package! cnfonts)
+(package! exec-path-from-shell)
 #+end_src
 
 #+begin_src emacs-lisp :tangle "./modules/my-macos.el"
 ;;; my-macos.el -*- lexical-binding: t; -*-
 (use-package! cnfonts)
-
+(use-package! exec-path-from-shell)
 (define-key! awesome-tab-mode-map
   "s-1" #'awesome-tab-select-visible-tab
   "s-2" #'awesome-tab-select-visible-tab
