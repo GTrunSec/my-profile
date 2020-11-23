@@ -1,7 +1,7 @@
 #+TITLE: ${1:Title}
 #+AUTHOR: `user-full-name`
 #+EMAIL: `user-mail-address`
-#+DATE: `(format-time-string "%e %B %Y")`
+#+DATE: `(format-time-string "%Y-$M-%H")`
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en cn

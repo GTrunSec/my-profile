@@ -52,6 +52,7 @@ in
             cjk
             ctex
             xecjk
+            dvipng
             fontspec
             euenc;
           }
