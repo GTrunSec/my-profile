@@ -2105,18 +2105,21 @@ a separator ' -> '."
 (use-package org-latex-impatient
   ;;:hook (org-mode . org-latex-instant-preview-mode)
   :config
+  (add-hook 'org-latex-impatient-mode-hook (lambda () (awesome-tab-mode -1)))
 
   (when IS-LINUX
-    (setq org-latex-instant-preview-tex2svg-bin "/run/current-system/sw/bin/tex2svg")
-    (setq org-latex-instant-preview-scale 10.0)
+    (setq org-latex-impatient-tex2svg-bin "/run/current-system/sw/bin/tex2svg")
+    (setq org-latex-impatient-scale 10.0)
     )
 
   (when IS-MAC
-    (setq org-latex-instant-preview-tex2svg-bin "~/.nix-profile/bin/tex2svg")
-    (setq org-latex-instant-preview-scale 5.0)
+    (setq org-latex-impatient-tex2svg-bin
+          "~/.nix-profile/bin/tex2svg")
+    (setq org-latex-impatient-scale 5.0)
     )
   )
 #+end_src
+
 ** haskell
 *** lsp-haskell
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/packages.el"
