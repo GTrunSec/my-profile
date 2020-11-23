@@ -125,9 +125,9 @@
   (define-key xah-fly-key-map (kbd "w") 'snails)
   ))
 
-(when (display-graphic-p)
- (define-key key-translation-map (kbd "ESC") (kbd "C-x c"))
-)
+;; (when (display-graphic-p)
+;;  (define-key key-translation-map (kbd "ESC") (kbd "C-x c"))
+;; )
 #+end_src
 ** .-dot
 #+begin_src emacs-lisp :tangle "xah-fly-keys.el"
