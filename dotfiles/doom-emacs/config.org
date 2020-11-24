@@ -215,7 +215,7 @@ Emacs or EMACS (Editor MACroS) is a family of text editors that are characterize
        :app
        ;;calendar
        ;;irc               ; how neckbeards socialize
-       (rss +org)        ; emacs as an RSS reader
+       ;;(rss +org)        ; emacs as an RSS reader
        ;;twitter           ; twitter client https://twitter.com/vnought
        ;;(write            ; emacs for writers (fiction, notes, papers, etc.)
        ;; +wordnut         ; wordnet (wn) search
@@ -612,7 +612,6 @@ Uses `current-date-time-format' for the formatting the date/time."
   )
 
 (add-hook! 'text-mode-hook 'gtrun/truncate-lines-hook)
-(add-hook! 'elfeed-show-mode-hook 'gtrun/truncate-lines-hook)
 
 (setenv "XAPIAN_CJK_NGRAM" "1")
 (setenv "QT_DEBUG_PLUGINS" "1")
@@ -1434,54 +1433,6 @@ FACE defaults to inheriting from default and highlight."
 
 *** TODO [[https://github.com/takaxp/org-onit][takaxp/org-onit: Easy org-clock-in and org-clock-out]]
 *** TODO [[https://github.com/Trevoke/org-gtd.el][Trevoke/org-gtd.el: A package for using GTD using org-mode (beta)]] :GTD:
-** elfeed
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/packages.el"
-(package! elfeed-goodies)
-#+end_src
-
-#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
-(use-package! elfeed
-  :bind (:map elfeed-search-mode-map
-          ("q" . bjm/elfeed-save-db-and-bury)
-          ("Q" . bjm/elfeed-save-db-and-bury)
-          ("m" . elfeed-toggle-star)
-          )
-  :config
-(global-set-key (kbd "C-x w") 'elfeed)
-(setf url-queue-timeout 30)
-(setq elfeed-db-directory "~/Dropbox/shared/elfeeddb")
-;;functions to support syncing .elfeed between machines
-;;makes sure elfeed reads index from disk before launching
-(defun bjm/elfeed-load-db-and-open ()
-  "Wrapper to load the elfeed db from disk before opening"
-  (interactive)
-  (elfeed-db-load)
-  (elfeed)
-  (elfeed-search-update--force))
-
-;;write to disk when quiting
-
-(defun bjm/elfeed-save-db-and-bury ()
-  "Wrapper to save the elfeed db to disk before burying buffer"
-  (interactive)
-  (elfeed-db-save)
-  (quit-window))
-
-(defun elfeed-mark-all-as-read ()
-  (interactive)
-  (mark-whole-buffer)
-  (elfeed-search-untag-all-unread))
-  )
-
-(use-package! elfeed-goodies
-  :config
-  (elfeed-goodies/setup))
-
-(use-package! elfeed-org
-:config
-(setq rmh-elfeed-org-files (list "~/Documents/org-notes/elfeed.org")))
-#+end_src
-
 ** Org-babel
 - [doc] [[https://orgmode.org/manual/Results-of-Evaluation.html][Results of Evaluation (The Org Manual)]]
 
