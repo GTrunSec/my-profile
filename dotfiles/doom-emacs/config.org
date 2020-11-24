@@ -531,6 +531,24 @@ Emacs or EMACS (Editor MACroS) is a family of text editors that are characterize
   :config
   (define-key snails-mode-map [remap next-line] #'snails-select-next-item))
 #+end_src
+
+** calibredb.el
+#+begin_src emacs-lisp :tangle "packages.el"
+(package! calibredb :recipe (:host github :repo "chenyanming/calibredb.el"))
+#+end_src
+
+#+begin_src emacs-lisp :tangle "config.el"
+(use-package! calibredb
+  :defer t
+  :init
+  (autoload 'calibredb "calibredb")
+  (setq calibredb-library-alist '(("~/Dropbox/my-book")
+                                  ))
+  (setq calibredb-root-dir "~/Dropbox/my-book")
+  (setq calibredb-db-dir (expand-file-name "calibredb-metadata.db" calibredb-root-dir))
+  )
+#+end_src
+
 * autoload
 ** misc
 *** time

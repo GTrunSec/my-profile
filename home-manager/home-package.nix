@@ -29,6 +29,7 @@ in
         notdeft
         #rnix-lsp
         ls-colors
+        calibre
       ];
     })
 
