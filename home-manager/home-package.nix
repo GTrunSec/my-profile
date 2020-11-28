@@ -29,6 +29,8 @@ in
         notdeft
         #rnix-lsp
         ls-colors
+        php
+        poppler_utils
       ];
     })
 
