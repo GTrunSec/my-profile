@@ -1221,6 +1221,7 @@ FACE defaults to inheriting from default and highlight."
 #+end_src
 
 ** org-ql
+- [[https://github.com/tpeacock19/org-ql-config][tpeacock19/org-ql-config]]
 #+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
 (package! org-ql)
 #+end_src

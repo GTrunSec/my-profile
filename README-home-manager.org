@@ -873,6 +873,8 @@ in
 }
 #+end_src
 ** tmux
+- [[https://github.com/gpakosz/.tmux][gpakosz/.tmux: 🇫🇷 Oh My Tmux! Pretty & versatile tmux configuration made with ❤️ (imho the best tmux configuration that just works)]]
+
 #+begin_src nix :exports both :tangle "~/.config/nixpkgs/home-manager/programs/tmux.nix"
 { config, pkgs, lib, ... }:
 let

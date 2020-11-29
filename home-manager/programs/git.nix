@@ -12,6 +12,7 @@
                     ".auctex-auto"
                     "vast.db" ".DS_Store" "result"
                     ".ipynb_checkpoints" "__pycache__"
+                    "*.org.organice-bak"
                   ];
         extraConfig = {
 
