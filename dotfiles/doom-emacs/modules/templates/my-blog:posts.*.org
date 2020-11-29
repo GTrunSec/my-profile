@@ -2,5 +2,5 @@
 #+AUTHOR: `user-full-name`
 #+EMAIL: `user-mail-address`
 #+DATE: `(format-time-string "%Y-%m-%d %a %H:%M")`
-#+SETUPFILE: ~/Documents/org-notes/setup/hugo.local
-#+SETUPFILE: ~/Documents/my-blog/public/theme/org-html-themes/setup/theme-readtheorg.setup
+#+SETUPFILE: ./hugo.local
+#+SETUPFILE: ./theme-readtheorg.setup

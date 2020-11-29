@@ -3,5 +3,5 @@
 #+EMAIL: gtrunsec@hardenedlinux.org
 #+DATE: `(format-time-string "%Y-%m-%d %a %H:%M")`
 #+SETUPFILE: ./hugo.setup
-#+SETUPFILE: ~/Documents/my-blog/public/theme/org-html-themes/setup/theme-readtheorg.setup
+#+SETUPFILE: ./theme-readtheorg.setup
 #+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t
