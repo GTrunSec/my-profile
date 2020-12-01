@@ -31,6 +31,9 @@ in
         ls-colors
         php
         poppler_utils
+        dnsperf
+        pet
+        yarn2nix
       ];
     })
 

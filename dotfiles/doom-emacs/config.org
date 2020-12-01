@@ -1227,10 +1227,7 @@ FACE defaults to inheriting from default and highlight."
 #+end_src
 
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
-(use-package! org-ql
-  :config
-  (require 'helm-org-ql)
-  )
+(use-package! org-ql)
 
 #+end_src
 
@@ -1241,7 +1238,6 @@ FACE defaults to inheriting from default and highlight."
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! helm-org-rifle)
 #+end_src
-
 ** org-book
 #+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
 (package! org-books :recipe (:host github :repo "lepisma/org-books"))
@@ -1253,7 +1249,16 @@ FACE defaults to inheriting from default and highlight."
   (setq org-books-file "~/Documents/org-notes/GTD/my-books.org")
   )
 #+end_src
+** org-z
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
+(package! org-z :recipe (:host github :repo "landakram/org-z"))
+#+end_src
 
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+(use-package! org-z
+  :config
+  (org-z-mode 1))
+#+end_src
 ** GTD
 *** agenda knowledge
 **** [[http://doc.norang.ca/org-mode.html][Org Mode - Organize Your Life In Plain Text!]]

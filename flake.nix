@@ -7,7 +7,7 @@
     master.url = "nixpkgs/703f052de185c3dd1218165e62b105a68e05e15f";
 
     nixpkgs-hardenedlinux.url = "github:hardenedlinux/nixpkgs-hardenedlinux/master";
-    emacs-overlay.url = "github:nix-community/emacs-overlay/1ec15008fb44299a4371b7b99df5b6ba45e35442";
+    emacs-overlay.url = "github:nix-community/emacs-overlay/16023b9b8ce82bb77f77ea8058e45375cd006d48";
 
   };
 
