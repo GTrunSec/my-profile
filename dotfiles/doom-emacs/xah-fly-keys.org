@@ -413,6 +413,9 @@
 (global-set-key (kbd "M-s d") 'sl-quick-insert-drawer-link)
 (global-set-key (kbd "M-s l") 'sl-quick-insert-inline-link)
 (global-set-key (kbd "M-s i") 'org-roam-insert)
+(global-set-key (kbd "C-M-s-<right>") 'switch-to-next-buffer)
+(global-set-key (kbd "C-M-s-<left>") 'switch-to-prev-buffer)
+
 #+end_src
 
 #+begin_src emacs-lisp :tangle "xah-fly-keys.el"
