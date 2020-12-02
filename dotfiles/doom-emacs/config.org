@@ -1150,8 +1150,6 @@ FACE defaults to inheriting from default and highlight."
                    ("posts/myself/qing.org"         :key "q" :refile (:maxlevel .5 ))
                    ("posts/myself/plan.org"         :key "p" :refile (:maxlevel .5 ))
                    ("elfeed.org"         :key "e" :refile (:maxlevel .5 ))
-                   ("NSM-GTD/workflow.org"         :agenda t :required t)
-                   ("NSM-GTD/NsmOrg.org"           :agenda t :required t)
                    ("art/learn-music.org"          :agenda t :key "M" :refile (:maxlevel .5 ))
                    ("braindump/my-books.org"       :key "b" :refile (:maxlevel .5 ))
                    ("braindump/life-goods.org"     :key "s" :refile (:maxlevel .5 ))
@@ -1175,8 +1173,8 @@ FACE defaults to inheriting from default and highlight."
   ^^^^------------------------------------------------
  _c_: config.org  _g_: gtd.org     _l_: love.org
  _n_: note        _h_: Habit.org    _x_: xah-fly-keys.org
- _m_: myself      _q_: 情-qing      _p_: Plan.org
- _b_: my-books    _e_: elfeed       _M_: learn music
+ _m_: myself      _p_: Plan.org
+ _b_: my-books    _e_: elfeed
  _s_: my-life
   "
 
@@ -1186,9 +1184,7 @@ FACE defaults to inheriting from default and highlight."
       ("s" org-starter-find-file:life-goods)
       ("n" org-starter-find-file:notes)
       ("e" org-starter-find-file:elfeed)
-      ("M" org-starter-find-file:learn-music)
       ("m" org-starter-find-file:myself)
-      ("q" org-starter-find-file:qing)
       ("l" org-starter-find-file:love)
       ("h" org-starter-find-file:Habit)
       ("p" org-starter-find-file:plan)
