@@ -1447,8 +1447,8 @@ FACE defaults to inheriting from default and highlight."
 (after! ob-async
   (setq ob-async-no-async-languages-alist '("ipython" "ein-python"
                                             "ein-rust"
-                                            "ein-haskell"
                                             "ein-julia"
+                                            "ein-haskell"
                                             ))
   )
 
@@ -1456,8 +1456,8 @@ FACE defaults to inheriting from default and highlight."
 (setq org-confirm-babel-evaluate nil)
 (setq org-export-use-babel nil)
 
-(setq org-babel-C++-compiler 'g++-9)
-(setq org-babel-C-compiler 'gcc-9)
+(setq org-babel-C++-compiler 'clang++)
+(setq org-babel-C-compiler 'clang)
 #+end_src
 
 #+RESULTS:

@@ -2,6 +2,6 @@
 # name: haskell-src
 # key: ho
 # --
-#+begin_src haskell :async t :exports both :results output
+#+begin_src haskell :exports both :results output
 $1
 #+end_src
