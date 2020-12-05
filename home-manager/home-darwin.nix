@@ -16,6 +16,7 @@ in
         libnotify
       ] ++ [ #misc
         #vips
+        git
         wakatime
         bat
         gron
