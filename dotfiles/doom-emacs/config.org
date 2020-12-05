@@ -3,8 +3,8 @@
 #+DATE:  2019-12-30 Mon
 #+AUTHOR: GTrunSec
 #+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t pri:t
-#+SETUPFILE: ./hugo.setup
-#+SETUPFILE: ./theme-readtheorg.setup
+#+SETUPFILE: ~/.config/nixpkgs/dotfiles/doom-emacs/hugo.setup
+#+SETUPFILE: ~/.config/nixpkgs/dotfiles/doom-emacs/theme-readtheorg.setup
 - [[https://github.com/hlissner/doom-emacs/blob/develop/docs/getting_started.org][doom-emacs/getting_started.org at develop · hlissner/doom-emacs]]
 
 #+TAGS: GTD(G) writing(w) export(e) manage(m) graphical(g) nix(n)

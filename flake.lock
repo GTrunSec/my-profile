@@ -12,6 +12,7 @@
       "original": {
         "owner": "nix-community",
         "repo": "emacs-overlay",
+        "rev": "16023b9b8ce82bb77f77ea8058e45375cd006d48",
         "type": "github"
       }
     },
