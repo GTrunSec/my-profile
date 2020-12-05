@@ -1,16 +1,10 @@
 #+TITLE: GuangTao's Doom Emacs config
 #+EMAIL: gtrunsec@hardenedlinux.org
-#+DATE:  25 October 2019
+#+DATE:  2019-12-30 Mon
 #+AUTHOR: GTrunSec
-#+KEYWORDS: Emacs Profile Doom-Emacs
 #+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t pri:t
-#+SETUPFILE: ~/Documents/org-notes/setup/hugo.local
-#+SETUPFILE: ~/Documents/my-blog/public/theme/org-html-themes/setup/theme-readtheorg.setup
-#+hugo_publishdate: `org-time-stamp-rounding-minutes`
-#+hugo_auto_set_lastmod: t
-#+HUGO_categories: profile Doom-Emacs
-#+HUGO_tags: Emacs Config
-#+PROPERTY: header-args :tangle "~/.emacs.d/init.el"
+#+SETUPFILE: ./hugo.setup
+#+SETUPFILE: ./theme-readtheorg.setup
 - [[https://github.com/hlissner/doom-emacs/blob/develop/docs/getting_started.org][doom-emacs/getting_started.org at develop · hlissner/doom-emacs]]
 
 #+TAGS: GTD(G) writing(w) export(e) manage(m) graphical(g) nix(n)

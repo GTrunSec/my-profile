@@ -1,19 +1,11 @@
 #+TITLE: GuangTao's Xah Fly Keys config
 #+AUTHOR: GTrunSec
 #+EMAIL: gtrunsec@hardenedlinux.org
-#+DATE: 30 December 2019
-#+DESCRIPTION:
-#+KEYWORDS:
-#+LANGUAGE:  en cn
-#+SETUPFILE: ~/Documents/org-notes/setup/hugo.local
-#+SETUPFILE: ~/Documents/my-blog/public/theme/org-html-themes/setup/theme-readtheorg.setup
-#+hugo_publishdate: (0 5)
-#+hugo_auto_set_lastmod: t
-#+HUGO_categories:
-#+HUGO_tags:
+#+DATE: 2019-12-30 Mon
+#+SETUPFILE: ./hugo.setup
+#+SETUPFILE: ./theme-readtheorg.setup
 #+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t
-#+SELECT_TAGS: export
-#+EXCLUDE_TAGS: noexport
+
 - [[http://ergoemacs.org/misc/xah-fly-keys_customization.html][Emacs: Xah Fly Keys Customization]]
 - [[http://ergoemacs.org/misc/xah-fly-keys_tutorial.html][Emacs: Xah Fly Keys Tutorial]]
 
