@@ -28,6 +28,7 @@ in
         (import ../nixos/channel/ghcide-nix {}).ghcide-ghc883
         #cachix use all-hies
         #haskellPackages.hie
+        ghc
       ] ++ [
         nodePackages.pyright
         nodePackages.mathjax-node-cli
