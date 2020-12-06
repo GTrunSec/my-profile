@@ -1331,11 +1331,11 @@ FACE defaults to inheriting from default and highlight."
     (setq org-id-locations-file (concat org-directory "/cache/.mac-orgids"))
   )
   (setq org-download-timestamp "%Y%m%d_%H%M%S")
+  (add-hook! 'unpackaged/org-return-dwim 'unpackaged/org-fix-blank-lines)
   (define-key org-mode-map (kbd "C-c C-.") 'org-time-stamp-inactive)
-
+  (define-key org-mode-map (kbd "RET") 'unpackaged/org-return-dwim)
 )
 #+end_src
-
 
 ** org-starter
 
