@@ -198,7 +198,7 @@ in
         gron
         exa
         pet
-        rg
+        ripgrep
         ag
         gitAndTools.delta
         #emacs org notice
@@ -243,7 +243,6 @@ in
   ];
 
 }
-
 #+end_src
 ** Python packages
 #+begin_src nix :exports both :tangle "~/.config/nixpkgs/home-manager/python-pkgs.nix"
@@ -558,14 +557,14 @@ in
     })
 
 
-    (mkIf (pkgs.stdenv.isLinux || pkgs.stdenv.isDarwin) {
+    (mkIf (pkgs.stdenv.isLinux) {
       programs.emacs.enable = true;
     })
 
-
-    (mkIf pkgs.stdenv.isDarwin {
-      programs.emacs.package = emacsPkgs.emacsGccDarwin;
-    })
+    # Big sur crashed
+    # (mkIf pkgs.stdenv.isDarwin {
+    #   programs.emacs.package = emacsPkgs.emacsGccDarwin;
+    # })
 
     (mkIf pkgs.stdenv.isLinux {
       programs.emacs.package = (emacsPkgs.emacsGcc.override({
@@ -577,7 +576,7 @@ in
       });
     })
 
-    (mkIf (pkgs.stdenv.isLinux || pkgs.stdenv.isDarwin) {
+    (mkIf (pkgs.stdenv.isLinux ) {
       programs.emacs.extraPackages = epkgs: with epkgs;[
         vterm
       ];
@@ -736,6 +735,9 @@ in
         LANG = "en_US.UTF-8";
         export = "LC_ALL=en_US.UTF-8";
       };
+      programs.zsh.initExtra = ''
+      source  ~/.nix-profile/etc/profile.d/nix.sh
+      '';
     })
   ];
 }

@@ -1362,7 +1362,7 @@ FACE defaults to inheriting from default and highlight."
                    ("posts/myself/qing.org"         :key "q" :refile (:maxlevel .5 ))
                    ("posts/myself/plan.org"         :key "p" :refile (:maxlevel .5 ))
                    ("elfeed.org"         :key "e" :refile (:maxlevel .5 ))
-                   ("art/learn-music.org"          :agenda t :key "M" :refile (:maxlevel .5 ))
+                   ("braindump/learn-music.org"          :agenda t :key "M" :refile (:maxlevel .5 ))
                    ("braindump/my-books.org"       :key "b" :refile (:maxlevel .5 ))
                    ("braindump/life-goods.org"     :key "s" :refile (:maxlevel .5 ))
                    )
@@ -3123,7 +3123,6 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   )
 (provide 'my-macos)
 #+end_src
-
 * Bugs
 
 ** <2020-10-13 Tue> magit commit server error
