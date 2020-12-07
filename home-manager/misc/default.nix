@@ -1,6 +1,6 @@
 { ... }:
 {
   imports = [
-    ./zeek-pkgs.nix
+    #./zeek-pkgs.nix
    ];
 }

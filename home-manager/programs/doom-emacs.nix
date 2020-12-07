@@ -82,14 +82,14 @@ in
     })
 
     
-    (mkIf (pkgs.stdenv.isLinux || pkgs.stdenv.isDarwin) {
+    (mkIf (pkgs.stdenv.isLinux) {
       programs.emacs.enable = true;
     })
 
-
-    (mkIf pkgs.stdenv.isDarwin {
-      programs.emacs.package = emacsPkgs.emacsGccDarwin;
-    })
+    # Big sur crashed
+    # (mkIf pkgs.stdenv.isDarwin {
+    #   programs.emacs.package = emacsPkgs.emacsGccDarwin;
+    # })
 
     (mkIf pkgs.stdenv.isLinux {
       programs.emacs.package = (emacsPkgs.emacsGcc.override({
@@ -101,7 +101,7 @@ in
       });
     })
 
-    (mkIf (pkgs.stdenv.isLinux || pkgs.stdenv.isDarwin) {
+    (mkIf (pkgs.stdenv.isLinux ) {
       programs.emacs.extraPackages = epkgs: with epkgs;[
         vterm
       ];

@@ -137,6 +137,9 @@ in
         LANG = "en_US.UTF-8";
         export = "LC_ALL=en_US.UTF-8";
       };
+      programs.zsh.initExtra = ''
+      source  ~/.nix-profile/etc/profile.d/nix.sh
+      '';
     })
   ];
 }

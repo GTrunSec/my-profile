@@ -26,7 +26,7 @@ in
         #vips
         nixpkgs-review
         #for emacs notdeft
-        notdeft
+        #notdeft
         #rnix-lsp
         ls-colors
         php

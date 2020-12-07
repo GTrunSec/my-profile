@@ -192,19 +192,22 @@ in
         libnotify
       ] ++ [ #misc
         #vips
+        git
         wakatime
         bat
         gron
         exa
         pet
+        rg
+        ag
         gitAndTools.delta
         #emacs org notice
       ] ++ [ #haskell packages
         ##cachix use ghcide-nix
-        (import ../nixos/channel/ghcide-nix {}).ghcide-ghc883
+        #(import ../nixos/channel/ghcide-nix {}).ghcide-ghc883
         #cachix use all-hies
         #haskellPackages.hie
-        ghc
+        #ghc
       ] ++ [
         nodePackages.pyright
         nodePackages.mathjax-node-cli
@@ -240,6 +243,7 @@ in
   ];
 
 }
+
 #+end_src
 ** Python packages
 #+begin_src nix :exports both :tangle "~/.config/nixpkgs/home-manager/python-pkgs.nix"

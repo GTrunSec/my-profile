@@ -22,14 +22,16 @@ in
         gron
         exa
         pet
+        ripgrep
+        ag
         gitAndTools.delta
         #emacs org notice
       ] ++ [ #haskell packages
         ##cachix use ghcide-nix
-        (import ../nixos/channel/ghcide-nix {}).ghcide-ghc883
+        #(import ../nixos/channel/ghcide-nix {}).ghcide-ghc883
         #cachix use all-hies
         #haskellPackages.hie
-        ghc
+        #ghc
       ] ++ [
         nodePackages.pyright
         nodePackages.mathjax-node-cli
