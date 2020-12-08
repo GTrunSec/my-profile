@@ -11,7 +11,7 @@
     ./home-darwin.nix
     ./misc
     ./programs
-    ./python-pkgs.nix
+    ./packages-stable.nix
     ./shell-env.nix
     #programs
   ];

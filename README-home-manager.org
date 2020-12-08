@@ -557,11 +557,12 @@ in
     })
 
 
+   # (mkIf (pkgs.stdenv.isLinux || pkgs.stdenv.isDarwin) {
     (mkIf (pkgs.stdenv.isLinux) {
       programs.emacs.enable = true;
     })
 
-    # Big sur crashed
+    #Big sur crashed
     # (mkIf pkgs.stdenv.isDarwin {
     #   programs.emacs.package = emacsPkgs.emacsGccDarwin;
     # })

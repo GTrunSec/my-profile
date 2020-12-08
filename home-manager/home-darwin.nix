@@ -15,7 +15,6 @@ in
       ] ++ [ #library
         libnotify
       ] ++ [ #misc
-        #vips
         git
         wakatime
         bat
@@ -25,13 +24,25 @@ in
         ripgrep
         ag
         gitAndTools.delta
+        (bundler.overrideAttrs(old:  {
+          name = "bundler-2.1.4";
+          src = pkgs.fetchurl {
+            url = "https://rubygems.org/gems/bundler-2.1.4.gem";
+            sha256 = "12glbb1357x91fvd004jgkw7ihlkpc9dwr349pd7j83isqhls0ah";
+          };
+          postFixup = ''
+          mv $out/bin/bundle $out/bin/ruby-bundle
+          sed -i -e "s/activate_bin_path/bin_path/g" $out/bin/ruby-bundle
+            '';
+        }))
+        jekyll
         #emacs org notice
       ] ++ [ #haskell packages
         ##cachix use ghcide-nix
-        #(import ../nixos/channel/ghcide-nix {}).ghcide-ghc883
+        (import (builtins.fetchTarball "https://github.com/cachix/ghcide-nix/tarball/master") {}).ghcide-ghc884
         #cachix use all-hies
         #haskellPackages.hie
-        #ghc
+        haskellPackages.ghc
       ] ++ [
         nodePackages.pyright
         nodePackages.mathjax-node-cli
