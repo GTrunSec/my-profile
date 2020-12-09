@@ -1334,9 +1334,10 @@ FACE defaults to inheriting from default and highlight."
   (add-hook! 'unpackaged/org-return-dwim 'unpackaged/org-fix-blank-lines)
   (define-key org-mode-map (kbd "C-c ;") 'org-time-stamp-inactive)
   (define-key org-mode-map (kbd "RET") 'unpackaged/org-return-dwim)
+  (setq org-plantuml-jar-path (expand-file-name "~/.myscript/plantuml"))
+
 )
 #+end_src
-
 ** org-starter
 
 #+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"

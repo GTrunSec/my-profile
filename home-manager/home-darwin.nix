@@ -44,6 +44,8 @@ in
         #haskellPackages.hie
         haskellPackages.ghc
       ] ++ [
+        jdk
+        oraclejre
         nodePackages.pyright
         nodePackages.mathjax-node-cli
         nodePackages.mathjax
