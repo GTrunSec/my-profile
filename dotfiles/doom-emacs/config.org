@@ -1332,7 +1332,7 @@ FACE defaults to inheriting from default and highlight."
   )
   (setq org-download-timestamp "%Y%m%d_%H%M%S")
   (add-hook! 'unpackaged/org-return-dwim 'unpackaged/org-fix-blank-lines)
-  (define-key org-mode-map (kbd "C-c C-.") 'org-time-stamp-inactive)
+  (define-key org-mode-map (kbd "C-c ;") 'org-time-stamp-inactive)
   (define-key org-mode-map (kbd "RET") 'unpackaged/org-return-dwim)
 )
 #+end_src
@@ -1475,10 +1475,11 @@ FACE defaults to inheriting from default and highlight."
 
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-z
+  :init
+  (define-key org-mode-map (kbd "C-c C-;") 'org-z-insert-link)
   :config
   (org-z-mode 1))
 #+end_src
-
 
 ** GTD
 
