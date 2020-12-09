@@ -3091,11 +3091,11 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 ;; (setq lsp-python-ms-executable
 ;;       "~/src/python-language-server/output/bin/Release/osx-x64/publish/Microsoft.Python.LanguageServer")
 
-(setq inferior-julia-program-name "~/.nix-profile/bin/julia")
+(setq inferior-julia-program-name "/usr/local/bin/julia")
 
 (add-hook 'ob-async-pre-execute-src-block-hook
         '(lambda ()
-           (setq inferior-julia-program-name "~/.nix-profile/bin/julia")))
+           (setq inferior-julia-program-name "/usr/local/bin/julia")))
 ;;(add-hook! 'emacs-startup-hook 'doom-modeline-mode)
 )
 
