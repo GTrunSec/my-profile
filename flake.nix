@@ -3,11 +3,11 @@
 
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
-    nixpkgs.url = "nixpkgs/0cdf13328905da1d35c9395ad1de89424c511943";
+    nixpkgs.url = "nixpkgs/7ff5e241a2b96fff7912b7d793a06b4374bd846c";
     master.url = "nixpkgs/703f052de185c3dd1218165e62b105a68e05e15f";
 
     nixpkgs-hardenedlinux.url = "github:hardenedlinux/nixpkgs-hardenedlinux/master";
-    emacs-overlay.url = "github:nix-community/emacs-overlay/16023b9b8ce82bb77f77ea8058e45375cd006d48";
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
 
   };
 
