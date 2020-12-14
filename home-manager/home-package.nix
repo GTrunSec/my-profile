@@ -12,6 +12,12 @@ let
     ln -s ${pkgs.coreutils}/bin/dircolors $out/bin/dircolors
     cp ${LS_COLORS}/LS_COLORS $out/share/LS_COLORS
   '';
+  clj2nix = pkgs.callPackage (pkgs.fetchFromGitHub {
+    owner = "hlolli";
+    repo = "clj2nix";
+    rev = "89d1cda232175b588c7774e638c9ebfaaedea0e3";
+    sha256 = "sha256-IOJOxcox3/ArMpRU4oZd2PgIX6OiW+TTr4z6JvyIXPY=";
+  }) {};
 in
 {
   config = with lib; mkMerge [
@@ -40,6 +46,8 @@ in
     (mkIf pkgs.stdenv.isLinux {
       home.packages = with pkgs;[
         dive
+        clojure
+        clj2nix
         ffmpegthumbnailer #emacs-org-beautify
         #python37Packages.voila
       ];

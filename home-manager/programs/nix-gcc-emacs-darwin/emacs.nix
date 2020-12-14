@@ -24,9 +24,9 @@ let
             };
 
             configureFlags = old.configureFlags
-            ++ [ "--with-ns"
-	    	 "--with-imagemagick"
-		 ];
+                             ++ [ "--with-ns"
+	    	                          "--with-imagemagick"
+		                            ];
 
             patches = [
               (
@@ -72,21 +72,21 @@ let
     ];
 in
 _: _:
-  {
-    ci = (import ./nix {}).ci;
+{
+  ci = (import ./nix {}).ci;
 
-    inherit emacsGccDarwin;
+  inherit emacsGccDarwin;
 
-    emacsGccDarwinWrapped = pkgs.symlinkJoin {
-      name = "emacsGccDarwinWrapped";
-      paths = [ emacsGccDarwin ];
-      buildInputs = [ pkgs.makeWrapper ];
-      postBuild = ''
+  emacsGccDarwinWrapped = pkgs.symlinkJoin {
+    name = "emacsGccDarwinWrapped";
+    paths = [ emacsGccDarwin ];
+    buildInputs = [ pkgs.makeWrapper ];
+    postBuild = ''
         wrapProgram $out/bin/emacs \
         --set LIBRARY_PATH ${libPath}
       '';
-      meta.platforms = pkgs.stdenv.lib.platforms.linux;
-      passthru.nativeComp = true;
-      src = emacsGccDarwin.src;
-    };
-  }
+    meta.platforms = pkgs.stdenv.lib.platforms.linux;
+    passthru.nativeComp = true;
+    src = emacsGccDarwin.src;
+  };
+}
