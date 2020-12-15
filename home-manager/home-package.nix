@@ -47,8 +47,9 @@ in
       home.packages = with pkgs;[
         dive
         clojure
-        clj2nix
-        ffmpegthumbnailer #emacs-org-beautify
+        #clj2nix
+        ## emacs-org-beautify
+        ffmpegthumbnailer
         #python37Packages.voila
       ];
     })

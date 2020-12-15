@@ -1,9 +1,14 @@
 #!/bin/bash
-action=$(echo -e "lock\nlogout\nshutdown\nreboot" | rofi -dmenu -p "power:")
+action=$(echo -e "lock\nlogout\nshutdown\nreboot\nscreen off" | rofi -dmenu -p "power:")
 
 if [[ "$action" == "lock" ]]
 then
     ~/.i3/i3lock-fancy-multimonitor/lock
+fi
+
+if [[ "$action" == "screen off" ]]
+then
+    xset dpms force off
 fi
 
 if [[ "$action" == "logout" ]]
