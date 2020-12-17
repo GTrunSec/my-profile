@@ -89,7 +89,8 @@ in
 
     #Big sur crashed
     # (mkIf pkgs.stdenv.isDarwin {
-    #   programs.emacs.package = emacsPkgs.emacsGccDarwin;
+    #  programs.emacs.enable = true;
+    #  programs.emacs.package = emacsPkgs.emacsGccDarwin;
     # })
 
     (mkIf pkgs.stdenv.isLinux {

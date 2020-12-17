@@ -11,6 +11,7 @@ in
     (mkIf pkgs.stdenv.isDarwin {
       home.packages = with pkgs;[
         customVscode
+        nixFlakes
         #R-with-my-packages
       ] ++ [ #library
         libnotify

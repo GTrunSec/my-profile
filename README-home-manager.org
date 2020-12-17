@@ -124,7 +124,7 @@ in
   ];
 }
 #+end_src
-*  User's Packages for ~/.nix-profile/bin 
+* User's Packages for ~/.nix-profile/bin
 #+begin_src nix :exports both :tangle"~/.config/nixpkgs/home-manager/home-package.nix"
 { config, lib, pkgs, ... }:
 let
@@ -564,6 +564,7 @@ in
 
     #Big sur crashed
     # (mkIf pkgs.stdenv.isDarwin {
+    #   programs.emacs.enable = true;
     #   programs.emacs.package = emacsPkgs.emacsGccDarwin;
     # })
 
@@ -882,8 +883,12 @@ in
 }
 #+end_src
 ** tmux
+:PROPERTIES:
+:ID:       65ad5d5a-25e5-424f-a873-8dc61722c961
+:END:
+- [2020-12-14 Mon 13:07] <- [[id:b5c87647-5046-4b93-b91e-10bbb73498c7][Shell]]
 - [[https://github.com/gpakosz/.tmux][gpakosz/.tmux: 🇫🇷 Oh My Tmux! Pretty & versatile tmux configuration made with ❤️ (imho the best tmux configuration that just works)]]
-
+- [[https://github.com/tony/tmux-config/tree/master][tony/tmux-config: Example tmux configuration - screen + vim key-bindings, system stat, cpu load bar.]]
 #+begin_src nix :exports both :tangle "~/.config/nixpkgs/home-manager/programs/tmux.nix"
 { config, pkgs, lib, ... }:
 let

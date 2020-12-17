@@ -2794,6 +2794,8 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
 ** [[https://github.com/alphapapa/burly.el][alphapapa/burly.el: Save and restore frames and windows with their buffers in Emacs]]
 
+** [[https://github.com/ashton314/emacs-writer][ashton314/emacs-writer: An elegant Emacs setup optimized for non-technical writers]]
+
 * chinese
 
 ** pinyinlib
