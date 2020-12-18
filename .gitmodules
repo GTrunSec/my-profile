@@ -4,9 +4,6 @@
 [submodule "nixos/channel/nixpkgs"]
 	path = nixos/channel/nixpkgs
 	url = git@github.com:GTrunSec/nixpkgs.git
-[submodule "nixos/channel/ghcide-nix"]
-	path = nixos/channel/ghcide-nix
-	url = https://github.com/cachix/ghcide-nix.git
 [submodule "nixos-flk"]
 	path = nixos-flk
 	url = git@github.com:GTrunSec/nixos-flk.git

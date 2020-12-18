@@ -40,9 +40,9 @@ in
         #emacs org notice
       ] ++ [ #haskell packages
         ##cachix use ghcide-nix
-        (import (builtins.fetchTarball "https://github.com/cachix/ghcide-nix/tarball/master") {}).ghcide-ghc884
         #cachix use all-hies
         #haskellPackages.hie
+        haskellPackages.haskell-language-server
         haskellPackages.ghc
       ] ++ [
         graphviz

@@ -187,11 +187,11 @@ in
     (mkIf pkgs.stdenv.isDarwin {
       home.packages = with pkgs;[
         customVscode
+        nixFlakes
         #R-with-my-packages
       ] ++ [ #library
         libnotify
       ] ++ [ #misc
-        #vips
         git
         wakatime
         bat
@@ -201,14 +201,27 @@ in
         ripgrep
         ag
         gitAndTools.delta
+        (bundler.overrideAttrs(old:  {
+          name = "bundler-2.1.4";
+          src = pkgs.fetchurl {
+            url = "https://rubygems.org/gems/bundler-2.1.4.gem";
+            sha256 = "12glbb1357x91fvd004jgkw7ihlkpc9dwr349pd7j83isqhls0ah";
+          };
+          postFixup = ''
+          mv $out/bin/bundle $out/bin/ruby-bundle
+          sed -i -e "s/activate_bin_path/bin_path/g" $out/bin/ruby-bundle
+            '';
+        }))
+        jekyll
         #emacs org notice
       ] ++ [ #haskell packages
         ##cachix use ghcide-nix
-        #(import ../nixos/channel/ghcide-nix {}).ghcide-ghc883
         #cachix use all-hies
         #haskellPackages.hie
-        #ghc
+        haskellPackages.haskell-language-server
+        haskellPackages.ghc
       ] ++ [
+        graphviz
         nodePackages.pyright
         nodePackages.mathjax-node-cli
         nodePackages.mathjax
@@ -243,6 +256,7 @@ in
   ];
 
 }
+
 #+end_src
 ** Python packages
 #+begin_src nix :exports both :tangle "~/.config/nixpkgs/home-manager/python-pkgs.nix"
@@ -556,7 +570,7 @@ in
       };
     })
 
-
+    
    # (mkIf (pkgs.stdenv.isLinux || pkgs.stdenv.isDarwin) {
     (mkIf (pkgs.stdenv.isLinux) {
       programs.emacs.enable = true;
@@ -564,8 +578,8 @@ in
 
     #Big sur crashed
     # (mkIf pkgs.stdenv.isDarwin {
-    #   programs.emacs.enable = true;
-    #   programs.emacs.package = emacsPkgs.emacsGccDarwin;
+    #  programs.emacs.enable = true;
+    #  programs.emacs.package = emacsPkgs.emacsGccDarwin;
     # })
 
     (mkIf pkgs.stdenv.isLinux {
@@ -594,6 +608,7 @@ in
     })
   ];
 }
+
 #+end_src
 ** zsh
 - [[https://github.com/trapd00r/LS_COLORS][trapd00r/LS_COLORS: A collection of LS_COLORS definitions; needs your contribution!]]
