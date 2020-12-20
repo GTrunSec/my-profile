@@ -1,6 +1,8 @@
 { config, lib, pkgs, ... }:
 let
   clean-nix-store = pkgs.writeScriptBin "clean-nix-store" (import ../bin/clean-nix-store.nix { });
+  lsyncd-rsync = pkgs.writeScriptBin "lsyncd-rsync" (import ../bin/lsyncd-rsync.nix { });
+
   LS_COLORS = pkgs.fetchgit {
     url = "https://github.com/trapd00r/LS_COLORS";
     rev = "6fb72eecdcb533637f5a04ac635aa666b736cf50";
@@ -47,6 +49,8 @@ in
       home.packages = with pkgs;[
         dive
         clojure
+        lsyncd
+        lsyncd-rsync
         #clj2nix
         ## emacs-org-beautify
         ffmpegthumbnailer
