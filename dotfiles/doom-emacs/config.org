@@ -3088,7 +3088,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
               :slant 'normal
               :size 24.5)))
 
-(setq ispell-program-name "/usr/local/bin/ispell")
+(setq ispell-program-name "~/.nix-profile/bin/ispell")
 
 ;; (setq lsp-python-ms-executable
 ;;       "~/src/python-language-server/output/bin/Release/osx-x64/publish/Microsoft.Python.LanguageServer")

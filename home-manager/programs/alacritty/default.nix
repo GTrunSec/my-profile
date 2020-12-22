@@ -65,9 +65,9 @@
           alt_send_esc = true;
           key_bindings =[
             {
-            key = "Key1";
+            key = "X";
             mods = "Alt";
-            chars = "\x1b1";
+            chars = "\x1bx";
             }
           ];
         };

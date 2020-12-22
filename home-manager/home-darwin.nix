@@ -19,6 +19,8 @@ in
         git
         fd
         reattach-to-user-namespace
+        ispell
+        hunspell
         wakatime
         bat
         gron
