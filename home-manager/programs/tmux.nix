@@ -23,8 +23,12 @@ in
   enable = true;
   clock24 = true;
   keyMode = "vi";
-  extraConfig = /* tmux */ ''
+  extraConfig = /* tmux */(if pkgs.stdenv.isLinux then ''
    set-option -g default-shell /run/current-system/sw/bin/zsh
+   '' else ''
+   set-option -g default-shell ~/.nix-profile/bin/zsh
+   '' ) + ''
+
    bind r source-file ~/.tmux.conf \; display-message "Config reloaded..."
    set -gu prefix2
    unbind C-a

@@ -18,6 +18,7 @@ in
       ] ++ [ #misc
         git
         fd
+        reattach-to-user-namespace
         wakatime
         bat
         gron
