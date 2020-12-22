@@ -17,6 +17,7 @@ in
         libnotify
       ] ++ [ #misc
         git
+        fd
         wakatime
         bat
         gron

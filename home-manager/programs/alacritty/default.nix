@@ -7,7 +7,7 @@
         settings = {
           env.TERM = "xterm-256color";
           window.decorations = "full";
-          font.normal.style = "Medium";
+          font.normal.style = "Regular";
           # Background opacity
           background_opacity = 0.7;
           cursor.style = "Beam";
