@@ -1355,17 +1355,17 @@ FACE defaults to inheriting from default and highlight."
   :config
   (org-starter-def "~/Documents/org-notes"
                    :files
-                   ("GTD/gtd.org"                      :agenda t :key "g" :refile (:maxlevel . 5))
-                   ("GTD/notes.org"                    :agenda t :key "n" :refile (:maxlevel .5 ))
-                   ("GTD/myself.org"                   :agenda t :key "m" :refile (:maxlevel .5 ))
-                   ("GTD/Habit.org"                    :agenda t :key "h" :refile (:maxlevel .5 ))
-                   ("posts/myself/love.org"         :key "l" :refile (:maxlevel .5 ))
-                   ("posts/myself/qing.org"         :key "q" :refile (:maxlevel .5 ))
-                   ("posts/myself/plan.org"         :key "p" :refile (:maxlevel .5 ))
-                   ("elfeed.org"         :key "e" :refile (:maxlevel .5 ))
-                   ("braindump/learn-music.org"          :agenda t :key "M" :refile (:maxlevel .5 ))
-                   ("braindump/my-books.org"       :key "b" :refile (:maxlevel .5 ))
-                   ("braindump/life-goods.org"     :key "s" :refile (:maxlevel .5 ))
+                   ("braindump/private-org/GTD/gtd.org"                      :agenda t :key "g" :refile (:maxlevel . 5))
+                   ("braindump/private-org/GTD/notes.org"                    :agenda t :key "n" :refile (:maxlevel . 5 ))
+                   ("braindump/private-org/GTD/myself.org"                   :agenda t :key "m" :refile (:maxlevel . 5 ))
+                   ("braindump/private-org/GTD/Habit.org"                    :agenda t :key "h" :refile (:maxlevel . 5 ))
+                   ("posts/myself/love.org"         :key "l" :refile (:maxlevel . 5 ))
+                   ("posts/myself/qing.org"         :key "q" :refile (:maxlevel . 5 ))
+                   ("posts/myself/plan.org"         :key "p" :refile (:maxlevel . 5 ))
+                   ("elfeed.org"         :key "e" :refile (:maxlevel . 5 ))
+                   ("braindump/learn-music.org"          :agenda t :key "M" :refile (:maxlevel . 5 ))
+                   ("braindump/my-books.org"       :key "b" :refile (:maxlevel . 5 ))
+                   ("braindump/life-goods.org"     :key "s" :refile (:maxlevel . 5 ))
                    )
   (org-starter-def "~/.config/nixpkgs/dotfiles/doom-emacs/"
                    :files
@@ -1412,10 +1412,6 @@ FACE defaults to inheriting from default and highlight."
  ;; "C-c e" . org-starter-refile-by-key))
  )
 #+end_src
-
-#+RESULTS:
-: org-starter-select-file
-
 
 ** org-superstar
 
