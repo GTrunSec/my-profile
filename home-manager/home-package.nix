@@ -54,6 +54,7 @@ in
         #clj2nix
         ## emacs-org-beautify
         ffmpegthumbnailer
+        python-language-server
         #python37Packages.voila
       ];
     })
