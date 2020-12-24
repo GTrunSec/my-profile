@@ -530,7 +530,17 @@ Emacs or EMACS (Editor MACroS) is a family of text editors that are characterize
    ("M-s M-s" . isearch-toggle-color-rg))
   )
 #+end_src
+** envrc
 
+#+begin_src emacs-lisp :tangle "packages.el"
+(package! envrc :recipe (:host github :repo "purcell/envrc"))
+#+end_src
+
+#+begin_src emacs-lisp :tangle "config.el"
+(use-package! envrc
+:hook (after-init . envrc-global-mode)
+)
+#+end_src
 *** snails
 
 #+begin_src emacs-lisp :tangle "packages.el"
@@ -970,7 +980,7 @@ In that case, insert the number."
     company-tabnine
     ))
 
-(setq +lsp-company-backend '(company-lsp
+(setq +lsp-company-backends '(company-lsp
                              company-files
                              company-yasnippet
                              :separate
@@ -1364,7 +1374,7 @@ FACE defaults to inheriting from default and highlight."
                    ("posts/myself/plan.org"         :key "p" :refile (:maxlevel . 5 ))
                    ("elfeed.org"         :key "e" :refile (:maxlevel . 5 ))
                    ("braindump/learn-music.org"          :agenda t :key "M" :refile (:maxlevel . 5 ))
-                   ("braindump/my-books.org"       :key "b" :refile (:maxlevel . 5 ))
+                   ("braindump/GuangTao-library.org"       :key "b" :refile (:maxlevel . 5 ))
                    ("braindump/life-goods.org"     :key "s" :refile (:maxlevel . 5 ))
                    )
   (org-starter-def "~/.config/nixpkgs/dotfiles/doom-emacs/"
@@ -1401,7 +1411,7 @@ FACE defaults to inheriting from default and highlight."
       ("l" org-starter-find-file:love)
       ("h" org-starter-find-file:Habit)
       ("p" org-starter-find-file:plan)
-      ("b" org-starter-find-file:my-books)
+      ("b" org-starter-find-file:GuangTao-library)
 )
 :commands org-starter-load-all-files-in-path
 :hook
@@ -1412,6 +1422,7 @@ FACE defaults to inheriting from default and highlight."
  ;; "C-c e" . org-starter-refile-by-key))
  )
 #+end_src
+
 
 ** org-superstar
 
@@ -2536,6 +2547,12 @@ a separator ' -> '."
   (setq-hook! 'nix-mode-hook company-idle-delay t)
   )
 #+end_src
+
+** rust
+#+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
+(setq racer-cmd "racer")
+#+end_src
+
 
 * Visual
 
