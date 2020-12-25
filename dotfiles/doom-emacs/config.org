@@ -5,9 +5,13 @@
 #+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t pri:t
 #+SETUPFILE: ~/.config/nixpkgs/dotfiles/doom-emacs/hugo.setup
 #+SETUPFILE: ~/.config/nixpkgs/dotfiles/doom-emacs/theme-readtheorg.setup
+#+TAGS: GTD(G) writing(w) export(e) manage(m) graphical(g) nix(n)
+
+
+
 - [[https://github.com/hlissner/doom-emacs/blob/develop/docs/getting_started.org][doom-emacs/getting_started.org at develop · hlissner/doom-emacs]]
 
-#+TAGS: GTD(G) writing(w) export(e) manage(m) graphical(g) nix(n)
+
 #+BEGIN_QUOTE
 HTML them READ org
 #+END_QUOTE
@@ -1269,6 +1273,8 @@ FACE defaults to inheriting from default and highlight."
   )
 #+end_src
 
+** [[https://github.com/ROCKTAKEY/grugru][ROCKTAKEY/grugru: Rotate text at point in Emacs.]]
+
 * org-mode
 
 
@@ -1873,8 +1879,7 @@ easy way to display org-ref with tree view instead of org-mode ?
   :init
   (require 'org-roam-protocol)
   :config
-  (setq org-roam-directory "~/Documents/org-notes")
-
+  ;;(setq org-roam-directory nil)
   ;;https://github.com/zaeph/.emacs.d/blob/0f4bf9a500ef6397b93c41cb51602bea9ab9a4c3/init.el#L3804
   ;; [[https://copingmechanism.com/2020/keeping-org-roam-daily-notes-in-a-separate-folder/][Keeping Org-roam Daily Notes in a separate folder – Coping Mechanism]]
 (setq org-roam-dailies-capture-templates '(("d" "daily" plain (function org-roam-capture--get-point) ""
