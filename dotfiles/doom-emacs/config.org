@@ -1374,9 +1374,9 @@ FACE defaults to inheriting from default and highlight."
                    ("posts/myself/qing.org"         :key "q" :refile (:maxlevel . 5 ))
                    ("posts/myself/plan.org"         :key "p" :refile (:maxlevel . 5 ))
                    ("elfeed.org"         :key "e" :refile (:maxlevel . 5 ))
-                   ("braindump/learn-music.org"          :agenda t :key "M" :refile (:maxlevel . 5 ))
-                   ("braindump/GuangTao-library.org"       :key "b" :refile (:maxlevel . 5 ))
-                   ("braindump/life-goods.org"     :key "s" :refile (:maxlevel . 5 ))
+                   ("braindump/GuangTao-owner/learn-music.org"          :agenda t :key "M" :refile (:maxlevel . 5 ))
+                   ("braindump//GuangTao-owner/GuangTao-library.org"       :key "b" :refile (:maxlevel . 5 ))
+                   ("braindump/life/life-goods.org"     :key "s" :refile (:maxlevel . 5 ))
                    )
   (org-starter-def "~/.config/nixpkgs/dotfiles/doom-emacs/"
                    :files
