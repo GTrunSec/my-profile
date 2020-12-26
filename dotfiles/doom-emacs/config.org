@@ -545,7 +545,7 @@ Emacs or EMACS (Editor MACroS) is a family of text editors that are characterize
 :hook (after-init . envrc-global-mode)
 )
 #+end_src
-*** snails
+** snails
 
 #+begin_src emacs-lisp :tangle "packages.el"
   (package! snails :recipe (:host github
@@ -2397,7 +2397,7 @@ a separator ' -> '."
   (when IS-MAC
     (setq org-latex-impatient-tex2svg-bin
           "~/.nix-profile/bin/tex2svg")
-    (setq org-latex-impatient-scale 5.0)
+    (setq org-latex-impatient-scale 0.1)
     )
   )
 #+end_src

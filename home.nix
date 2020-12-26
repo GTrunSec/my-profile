@@ -23,6 +23,7 @@ in
         (import ./nixos-flk/pkgs/my-node-packages)
         (import all-hies {}).overlay
         (import ./home-manager/packages-overlay.nix)
+        (import ./home-manager/programs/nix-gcc-emacs-darwin/emacs.nix)
       ];
 
       programs.direnv = {

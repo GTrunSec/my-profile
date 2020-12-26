@@ -1,7 +1,7 @@
 let
   sources = import ./nix/sources.nix;
   nixpkgs = sources."nixpkgs-unstable";
-  pkgs = import nixpkgs {};
+  pkgs = import <nixpkgs> {};
   emacs-nativecomp = sources."emacs-nativecomp";
   libPath = with pkgs; lib.concatStringsSep ":" [
     "${lib.getLib libgccjit}/lib/gcc/${stdenv.targetPlatform.config}/${libgccjit.version}"
@@ -12,7 +12,9 @@ let
     pkgs.emacs
     [
 
-      (drv: drv.override { srcRepo = true; imagemagick = pkgs.imagemagick;})
+      (drv: drv.override { srcRepo = true;
+                           imagemagick = pkgs.imagemagick7;
+                         })
 
       (
         drv: drv.overrideAttrs (
@@ -67,6 +69,8 @@ let
       (
         drv: drv.override {
           nativeComp = true;
+          withImageMagick = true;
+          withXwidgets = true;
         }
       )
     ];

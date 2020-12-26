@@ -3,8 +3,8 @@
 
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
-    nixpkgs.url = "nixpkgs/7ff5e241a2b96fff7912b7d793a06b4374bd846c";
-    master.url = "nixpkgs/703f052de185c3dd1218165e62b105a68e05e15f";
+    nixpkgs.url = "nixpkgs/75d69a0a27ee9262805e6a7a605f00e654b75a28";
+    master.url = "nixpkgs/75d69a0a27ee9262805e6a7a605f00e654b75a28";
 
     nixpkgs-hardenedlinux.url = "github:hardenedlinux/nixpkgs-hardenedlinux/master";
     emacs-overlay.url = "github:nix-community/emacs-overlay";

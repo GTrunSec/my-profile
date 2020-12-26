@@ -3,10 +3,8 @@ let
   updatefont = ''fc-cache -f -v'';
   updateDoom = ".emacs.d/bin/doom sync";
   updateInit = "bash .doom.d/bin/emacs.sh";
-  emacsDrawin-overlay = import ./nix-gcc-emacs-darwin/emacs.nix;
   emacs-overlay-rev = (builtins.fromJSON (builtins.readFile ../../flake.lock)).nodes.emacs-overlay.locked.rev;
   overlays = [
-    emacsDrawin-overlay
     (import (builtins.fetchTarball {
       url = "https://github.com/nix-community/emacs-overlay/archive/${emacs-overlay-rev}.tar.gz";
     }))
@@ -88,10 +86,10 @@ in
     })
 
     #Big sur crashed
-    # (mkIf pkgs.stdenv.isDarwin {
-    #  programs.emacs.enable = true;
-    #  programs.emacs.package = emacsPkgs.emacsGccDarwin;
-    # })
+    (mkIf pkgs.stdenv.isDarwin {
+     programs.emacs.enable = true;
+     programs.emacs.package = pkgs.emacsGccDarwin;
+    })
 
     (mkIf pkgs.stdenv.isLinux {
       programs.emacs.package = (emacsPkgs.emacsGcc.override({
