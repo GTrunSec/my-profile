@@ -70,7 +70,6 @@ let
         drv: drv.override {
           nativeComp = true;
           withImageMagick = true;
-          withXwidgets = true;
         }
       )
     ];
