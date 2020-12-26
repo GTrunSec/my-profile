@@ -5,7 +5,7 @@ let
   home_directory = builtins.getEnv "HOME";
   log_directory = "${home_directory}/logs";
   all-hies = (fetchTarball "https://github.com/infinisil/all-hies/tarball/534ac517b386821b787d1edbd855b9966d0c0775");
-
+  emacs-overlay-rev = (builtins.fromJSON (builtins.readFile ./flake.lock)).nodes.emacs-overlay.locked.rev;
 in
 
 {
@@ -24,6 +24,9 @@ in
         (import all-hies {}).overlay
         (import ./home-manager/packages-overlay.nix)
         (import ./home-manager/programs/nix-gcc-emacs-darwin/emacs.nix)
+        (import (builtins.fetchTarball {
+          url = "https://github.com/nix-community/emacs-overlay/archive/${emacs-overlay-rev}.tar.gz";
+        }))
       ];
 
       programs.direnv = {
@@ -71,9 +74,9 @@ in
         grabKeyboardAndMouse = false;
       };
 
-        services.dunst = {
-          enable = true;
-        };
+      services.dunst = {
+        enable = true;
+      };
     })
 
     (mkIf pkgs.stdenv.isDarwin {

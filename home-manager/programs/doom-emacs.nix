@@ -3,14 +3,6 @@ let
   updatefont = ''fc-cache -f -v'';
   updateDoom = ".emacs.d/bin/doom sync";
   updateInit = "bash .doom.d/bin/emacs.sh";
-  emacs-overlay-rev = (builtins.fromJSON (builtins.readFile ../../flake.lock)).nodes.emacs-overlay.locked.rev;
-  overlays = [
-    (import (builtins.fetchTarball {
-      url = "https://github.com/nix-community/emacs-overlay/archive/${emacs-overlay-rev}.tar.gz";
-    }))
-  ];
-
-  emacsPkgs  = import ../misc/master.nix {inherit overlays;};
 in
 {
 
@@ -80,20 +72,21 @@ in
     })
 
     
-   # (mkIf (pkgs.stdenv.isLinux || pkgs.stdenv.isDarwin) {
+    # (mkIf (pkgs.stdenv.isLinux || pkgs.stdenv.isDarwin) {
     (mkIf (pkgs.stdenv.isLinux) {
       programs.emacs.enable = true;
     })
 
     #Big sur crashed
     (mkIf pkgs.stdenv.isDarwin {
-     programs.emacs.enable = true;
-     programs.emacs.package = pkgs.emacsGccDarwin;
+      programs.emacs.enable = true;
+      programs.emacs.package = pkgs.emacsGccDarwin;
     })
 
     (mkIf pkgs.stdenv.isLinux {
-      programs.emacs.package = (emacsPkgs.emacsGcc.override({
-        imagemagick = emacsPkgs.imagemagick;
+      programs.emacs.package = (pkgs.emacsGcc.override({
+        withImageMagick = true;
+        imagemagick = pkgs.imagemagick7;
       })).overrideAttrs(old: rec {
         configureFlags = (old.configureFlags or []) ++ ["--with-imagemagick"
                                                         "--with-nativecomp"
