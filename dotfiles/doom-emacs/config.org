@@ -2989,8 +2989,9 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   (setq bookmark-default-file
         (concat doom-private-dir "etc/bookmark-linux-default.el"))
 
-  (setq python-shell-interpreter "python3.7")
-  (setq eaf-python-command "python3.7")
+
+  (setq python-shell-interpreter "python")
+  (setq eaf-python-command "python")
 
   (bookmark-load bookmark-default-file t)
 

@@ -40,7 +40,7 @@ let
   home_directory = builtins.getEnv "HOME";
   log_directory = "${home_directory}/logs";
   all-hies = (fetchTarball "https://github.com/infinisil/all-hies/tarball/534ac517b386821b787d1edbd855b9966d0c0775");
-
+  emacs-overlay-rev = (builtins.fromJSON (builtins.readFile ./flake.lock)).nodes.emacs-overlay.locked.rev;
 in
 
 {
@@ -58,6 +58,10 @@ in
         (import ./nixos-flk/pkgs/my-node-packages)
         (import all-hies {}).overlay
         (import ./home-manager/packages-overlay.nix)
+        (import ./home-manager/programs/nix-gcc-emacs-darwin/emacs.nix)
+        (import (builtins.fetchTarball {
+          url = "https://github.com/nix-community/emacs-overlay/archive/${emacs-overlay-rev}.tar.gz";
+        }))
       ];
 
       programs.direnv = {
@@ -105,9 +109,9 @@ in
         grabKeyboardAndMouse = false;
       };
 
-        services.dunst = {
-          enable = true;
-        };
+      services.dunst = {
+        enable = true;
+      };
     })
 
     (mkIf pkgs.stdenv.isDarwin {
@@ -495,16 +499,6 @@ let
   updatefont = ''fc-cache -f -v'';
   updateDoom = ".emacs.d/bin/doom sync";
   updateInit = "bash .doom.d/bin/emacs.sh";
-  emacsDrawin-overlay = import ./nix-gcc-emacs-darwin/emacs.nix;
-  emacs-overlay-rev = (builtins.fromJSON (builtins.readFile ../../flake.lock)).nodes.emacs-overlay.locked.rev;
-  overlays = [
-    emacsDrawin-overlay
-    (import (builtins.fetchTarball {
-      url = "https://github.com/nix-community/emacs-overlay/archive/${emacs-overlay-rev}.tar.gz";
-    }))
-  ];
-
-  emacsPkgs  = import ../misc/master.nix {inherit overlays;};
 in
 {
 
@@ -574,7 +568,7 @@ in
     })
 
 
-   # (mkIf (pkgs.stdenv.isLinux || pkgs.stdenv.isDarwin) {
+    # (mkIf (pkgs.stdenv.isLinux || pkgs.stdenv.isDarwin) {
     (mkIf (pkgs.stdenv.isLinux) {
       programs.emacs.enable = true;
     })
@@ -582,19 +576,13 @@ in
     #Big sur crashed
     (mkIf pkgs.stdenv.isDarwin {
       programs.emacs.enable = true;
-      programs.emacs.package = (emacsPkgs.emacsGcc.override({
-        nativeComp = true;
-        imagemagick = emacsPkgs.imagemagick;
-      })).overrideAttrs(old: rec {
-        configureFlags = (old.configureFlags or []) ++ ["--with-imagemagick"
-                                                        "--with-nativecomp"
-                                                       ];
-      });
+      programs.emacs.package = pkgs.emacsGccDarwin;
     })
 
     (mkIf pkgs.stdenv.isLinux {
-      programs.emacs.package = (emacsPkgs.emacsGcc.override({
-        imagemagick = emacsPkgs.imagemagick;
+      programs.emacs.package = (pkgs.emacsGcc.override({
+        withImageMagick = true;
+        imagemagick = pkgs.imagemagick7;
       })).overrideAttrs(old: rec {
         configureFlags = (old.configureFlags or []) ++ ["--with-imagemagick"
                                                         "--with-nativecomp"
@@ -865,6 +853,7 @@ in
                     ".auctex-auto"
                     "vast.db" ".DS_Store" "result"
                     ".ipynb_checkpoints" "__pycache__"
+                    "*.org.organice-bak"
                   ];
         extraConfig = {
 
@@ -887,11 +876,13 @@ in
               ''
                     ];
           };
+          credential = {
+            helper = "store";
+          };
 
           interactive = {
             diffFilter = "delta --color-only";
           };
-
         };
       };
     })

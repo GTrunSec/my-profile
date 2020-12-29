@@ -35,11 +35,13 @@
               ''
                     ];
           };
+          credential = {
+            helper = "store";
+          };
 
           interactive = {
             diffFilter = "delta --color-only";
           };
-
         };
       };
     })
