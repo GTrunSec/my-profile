@@ -168,7 +168,7 @@
   "key `;'"
   (interactive)
   (cond
-   ((eq major-mode 'org-mode) (call-interactively 'sl-store-link))
+   ((eq major-mode 'org-mode) (call-interactively 'org-super-links-store-link))
 
    (t nil)))
 #+end_src
@@ -178,7 +178,7 @@
   "key `''"
   (interactive)
   (cond
-   ((eq major-mode 'org-mode) (call-interactively 'sl-insert-link))
+   ((eq major-mode 'org-mode) (call-interactively 'org-super-links-insert-link))
 
    (t nil)))
 #+end_src
@@ -350,8 +350,8 @@
      ("y" . xah-search-current-word)
      ("m" . maple-iedit-match-next)
      ("i" . org-roam-insert)
-     ("d" . sl-quick-insert-drawer-link)
-     ("l" . sl-quick-insert-inline-link)
+     ("d" . org-super-links-quick-insert-drawer-link)
+     ("l" . org-super-links-quick-insert-inline-link)
      ;;
      ))
 #+END_SRC
@@ -402,8 +402,8 @@
 #+end_src
 ** org-mode set key
 #+begin_src emacs-lisp :tangle "xah-fly-keys.el"
-(global-set-key (kbd "M-s d") 'sl-quick-insert-drawer-link)
-(global-set-key (kbd "M-s l") 'sl-quick-insert-inline-link)
+(global-set-key (kbd "M-s d") 'org-super-links-quick-insert-drawer-link)
+(global-set-key (kbd "M-s l") 'org-super-links-quick-insert-inline-link)
 (global-set-key (kbd "M-s i") 'org-roam-insert)
 (global-set-key (kbd "C-M-s-<right>") 'switch-to-next-buffer)
 (global-set-key (kbd "C-M-s-<left>") 'switch-to-prev-buffer)
@@ -413,8 +413,8 @@
 
 #+begin_src emacs-lisp :tangle "xah-fly-keys.el"
 (when IS-MAC
-  (global-set-key (kbd "C-x c d") 'sl-quick-insert-drawer-link)
-  (global-set-key (kbd "C-x c l") 'sl-quick-insert-inline-link)
+  (global-set-key (kbd "C-x c d") 'org-super-links-quick-insert-drawer-link)
+  (global-set-key (kbd "C-x c l") 'org-super-links-quick-insert-inline-link)
   (global-set-key (kbd "C-x c i") 'org-roam-insert)
   (global-set-key (kbd "C-x c z") 'org-z-insert-link)
   (global-set-key (kbd "C-x c s") 'org-z-knowledge-search)
