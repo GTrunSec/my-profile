@@ -2127,11 +2127,20 @@ a separator ' -> '."
 #+end_src
 
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
-(use-package! org-noter-plus)
+(use-package! org-noter-plus
+  :config
+  (setq org-noter-plus-image-dir "~/Documents/org-notes/braindump/.attach")
+)
 #+end_src
 
+** org-noter-plus
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
+(package! ox-ipynb :recipe (:host github :repo "jkitchin/ox-ipynb"))
+#+end_src
 
-
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+(use-package! ox-ipynb)
+#+end_src
 ** org-clones
 
 1.
