@@ -2088,10 +2088,17 @@ a separator ' -> '."
   (interactive)
   ;; how to handle prefix here?
   (let ((org-super-links-related-into-drawer nil)
-	(org-super-links-link-prefix nil))
+	(org-super-links-link-prefix 'org-super-links-backlink-prefix-timestamp))
     (org-super-links-link)))
 
-  (setq org-id-link-to-org-use-id
+(defun org-super-links-quick-insert-drawer-link ()
+  (interactive)
+  ;; how to handle prefix here?
+  (let ((org-super-links-related-into-drawer (or org-super-links-related-into-drawer t))
+	(org-super-links-link-prefix 'org-super-links-link-prefix-timestamp))
+    (org-super-links-link)))
+
+(setq org-id-link-to-org-use-id
         'create-if-interactive-and-no-custom-id)
 
   (setq org-super-links-related-into-drawer nil
@@ -2099,6 +2106,7 @@ a separator ' -> '."
         org-super-links-link-prefix 'org-super-links-link-prefix-timestamp)
   )
 #+end_src
+
 
 
 ** org-wiki
