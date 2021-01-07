@@ -1,19 +1,11 @@
 #+TITLE: GTrunSec's Nix home manager Profile
 #+AUTHOR: GTrunSec
 #+EMAIL: gtrunsec@hardenedlinux.org
-#+DATE: 17 September 2020
-#+DESCRIPTION:
-#+KEYWORDS:
-#+LANGUAGE:  en cn
-#+SETUPFILE: ~/Documents/my-blog/public/theme/org-html-themes/setup/theme-readtheorg.setup
-#+hugo_publishdate: (0 5)
-#+hugo_auto_set_lastmod: t
-#+HUGO_categories:
-#+HUGO_tags:
-#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t
-#+SELECT_TAGS: export
-#+EXCLUDE_TAGS: noexport
+#+DATE: 2020-09-17
 #+PROPERTY: header-args:sh :prologue "exec 2>&1" :epilogue ":"
+
+
+
 * global
 ** config.nix
 #+begin_src nix :exports both :tangle "~/.config/nixpkgs/config.nix"
@@ -29,7 +21,9 @@
   allowUnfree = true;
   allowBroken = true; # intero only?
   distributedBuilds = true;
+  allowUnsupportedSystem = true;
 }
+
 #+end_src
 ** home.nix
 #+begin_src nix :exports both :tangle "~/.config/nixpkgs/home.nix"
@@ -40,7 +34,7 @@ let
   home_directory = builtins.getEnv "HOME";
   log_directory = "${home_directory}/logs";
   all-hies = (fetchTarball "https://github.com/infinisil/all-hies/tarball/534ac517b386821b787d1edbd855b9966d0c0775");
-  emacs-overlay-rev = (builtins.fromJSON (builtins.readFile ./flake.lock)).nodes.emacs-overlay.locked.rev;
+
 in
 
 {
@@ -59,9 +53,6 @@ in
         (import all-hies {}).overlay
         (import ./home-manager/packages-overlay.nix)
         (import ./home-manager/programs/nix-gcc-emacs-darwin/emacs.nix)
-        (import (builtins.fetchTarball {
-          url = "https://github.com/nix-community/emacs-overlay/archive/${emacs-overlay-rev}.tar.gz";
-        }))
       ];
 
       programs.direnv = {
@@ -109,9 +100,9 @@ in
         grabKeyboardAndMouse = false;
       };
 
-      services.dunst = {
-        enable = true;
-      };
+        services.dunst = {
+          enable = true;
+        };
     })
 
     (mkIf pkgs.stdenv.isDarwin {
@@ -195,6 +186,7 @@ in
         #R-with-my-packages
       ] ++ [ #library
         libnotify
+        ffmpegthumbnailer
       ] ++ [ #misc
         git
         fd
@@ -239,31 +231,13 @@ in
         gopls
         hugo
       ] ++ [  # latex + packages
-        (texlive.combine
-          { inherit (texlive)
-            collection-plaingeneric
-            collection-latexextra
-            collection-fontsrecommended
-            collection-pictures
-            collection-bibtexextra
-            collection-mathscience
-            collection-langgerman
-            scheme-basic
-            xetex
-            cjk
-            ctex
-            xecjk
-            dvipng
-            fontspec
-            euenc;
-          }
-          #org-mode roam-server
-        )
+
       ];
     })
   ];
 
 }
+
 #+end_src
 ** Python packages
 #+begin_src nix :exports both :tangle "~/.config/nixpkgs/home-manager/python-pkgs.nix"
@@ -499,6 +473,16 @@ let
   updatefont = ''fc-cache -f -v'';
   updateDoom = ".emacs.d/bin/doom sync";
   updateInit = "bash .doom.d/bin/emacs.sh";
+  emacsDrawin-overlay = import ./nix-gcc-emacs-darwin/emacs.nix;
+  emacs-overlay-rev = (builtins.fromJSON (builtins.readFile ../../flake.lock)).nodes.emacs-overlay.locked.rev;
+  overlays = [
+    emacsDrawin-overlay
+    (import (builtins.fetchTarball {
+      url = "https://github.com/nix-community/emacs-overlay/archive/${emacs-overlay-rev}.tar.gz";
+    }))
+  ];
+
+  emacsPkgs  = import ../misc/master.nix {inherit overlays;};
 in
 {
 
@@ -567,22 +551,21 @@ in
       };
     })
 
-
-    # (mkIf (pkgs.stdenv.isLinux || pkgs.stdenv.isDarwin) {
+    
+   # (mkIf (pkgs.stdenv.isLinux || pkgs.stdenv.isDarwin) {
     (mkIf (pkgs.stdenv.isLinux) {
       programs.emacs.enable = true;
     })
 
     #Big sur crashed
     (mkIf pkgs.stdenv.isDarwin {
-      programs.emacs.enable = true;
-      programs.emacs.package = pkgs.emacsGccDarwin;
+     programs.emacs.enable = true;
+     programs.emacs.package = pkgs.emacsGccDarwin;
     })
 
     (mkIf pkgs.stdenv.isLinux {
-      programs.emacs.package = (pkgs.emacsGcc.override({
-        withImageMagick = true;
-        imagemagick = pkgs.imagemagick7;
+      programs.emacs.package = (emacsPkgs.emacsGcc.override({
+        imagemagick = emacsPkgs.imagemagick;
       })).overrideAttrs(old: rec {
         configureFlags = (old.configureFlags or []) ++ ["--with-imagemagick"
                                                         "--with-nativecomp"
@@ -606,6 +589,7 @@ in
     })
   ];
 }
+
 #+end_src
 ** zsh
 - [[https://github.com/trapd00r/LS_COLORS][trapd00r/LS_COLORS: A collection of LS_COLORS definitions; needs your contribution!]]
@@ -853,7 +837,6 @@ in
                     ".auctex-auto"
                     "vast.db" ".DS_Store" "result"
                     ".ipynb_checkpoints" "__pycache__"
-                    "*.org.organice-bak"
                   ];
         extraConfig = {
 
@@ -876,13 +859,11 @@ in
               ''
                     ];
           };
-          credential = {
-            helper = "store";
-          };
 
           interactive = {
             diffFilter = "delta --color-only";
           };
+
         };
       };
     })

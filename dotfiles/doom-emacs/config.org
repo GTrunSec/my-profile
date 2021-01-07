@@ -1490,10 +1490,9 @@ FACE defaults to inheriting from default and highlight."
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-books
   :config
-  (setq org-books-file "~/Documents/org-notes/GTD/my-books.org")
+  (setq org-books-file "~/Documents/org-notes/braindump/GuangTao-owner/GuangTao-library.org")
   )
 #+end_src
-
 
 ** org-z
 

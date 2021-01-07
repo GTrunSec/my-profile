@@ -15,6 +15,7 @@ in
         #R-with-my-packages
       ] ++ [ #library
         libnotify
+        ffmpegthumbnailer
       ] ++ [ #misc
         git
         fd

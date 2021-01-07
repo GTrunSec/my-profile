@@ -10,4 +10,5 @@
   allowUnfree = true;
   allowBroken = true; # intero only?
   distributedBuilds = true;
+  allowUnsupportedSystem = true;
 }

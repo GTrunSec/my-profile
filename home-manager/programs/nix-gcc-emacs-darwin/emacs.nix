@@ -13,7 +13,7 @@ let
     [
 
       (drv: drv.override { srcRepo = true;
-                           imagemagick = pkgs.imagemagick7;
+                           imagemagick = pkgs.imagemagick;
                          })
 
       (
