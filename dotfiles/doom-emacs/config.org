@@ -2,9 +2,9 @@
 #+EMAIL: gtrunsec@hardenedlinux.org
 #+AUTHOR: GTrunSec
 #+SETUPFILE: ~/.config/nixpkgs/dotfiles/doom-emacs/hugo.setup
-#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t pri:t
 #+SETUPFILE: ~/.config/nixpkgs/dotfiles/doom-emacs/theme-readtheorg.setup
-#+TAGS: GTD(G) writing(w) export(e) manage(m) graphical(g) nix
+#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t pri:t
+#+TAGS: GTD(G) writing(w) export(e) manage(m) graphical(g) nix(n)
 
 
 - [[https://github.com/hlissner/doom-emacs/blob/develop/docs/getting_started.org][doom-emacs/getting_started.org at develop · hlissner/doom-emacs]]
@@ -1376,6 +1376,8 @@ FACE defaults to inheriting from default and highlight."
   (interactive)
   (org-content 2))
 
+(setq org-download-timestamp "%Y%m%d_%H%M%S")
+
 (add-hook! 'org-mode-hook 'org-show-two-levels)
 #+end_src
 
@@ -1391,12 +1393,10 @@ FACE defaults to inheriting from default and highlight."
   (when IS-MAC
     (setq org-id-locations-file (concat org-directory "/cache/.mac-orgids"))
   )
-  (setq org-download-timestamp "%Y%m%d_%H%M%S")
   (add-hook! 'unpackaged/org-return-dwim 'unpackaged/org-fix-blank-lines)
   (define-key org-mode-map (kbd "C-c ;") 'org-time-stamp-inactive)
   (define-key org-mode-map (kbd "RET") 'unpackaged/org-return-dwim)
   (setq org-plantuml-jar-path (expand-file-name "~/.myscript/plantuml"))
-
 )
 #+end_src
 ** org-starter
@@ -1407,72 +1407,93 @@ FACE defaults to inheriting from default and highlight."
 - adding Braindump to org-agenda files
   - [[https://superuser.com/questions/633746/loading-all-org-files-on-a-folder-to-agenda][emacs - Loading all org files on a folder to agenda - Super User]]
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
-(setq org-agenda-files (list "~/Documents/org-notes/braindump"))
-
 (use-package! org-starter
   :custom
   ;; Enable external configuration files loaded from org-starter-path
   (org-starter-load-config-files t)
   :config
   (org-starter-def "~/Documents/org-notes"
-                   :files
-                   ("braindump/private-org/GTD/gtd.org"                      :agenda t :key "g" :refile (:maxlevel . 5))
-                   ("braindump/private-org/GTD/notes.org"                    :agenda t :key "n" :refile (:maxlevel . 5 ))
-                   ("braindump/private-org/GTD/myself.org"                   :agenda t :key "m" :refile (:maxlevel . 5 ))
-                   ("braindump/private-org/GTD/Habit.org"                    :agenda t :key "h" :refile (:maxlevel . 5 ))
-                   ("posts/myself/love.org"         :key "l" :refile (:maxlevel . 5 ))
-                   ("posts/myself/qing.org"         :key "q" :refile (:maxlevel . 5 ))
-                   ("posts/myself/plan.org"         :key "p" :refile (:maxlevel . 5 ))
-                   ("elfeed.org"         :key "e" :refile (:maxlevel . 5 ))
-                   ("braindump/GuangTao-owner/learn-music.org"          :agenda t :key "M" :refile (:maxlevel . 5 ))
-                   ("braindump//GuangTao-owner/GuangTao-library.org"       :key "b" :refile (:maxlevel . 5 ))
-                   ("braindump/life/life-goods.org"     :key "s" :refile (:maxlevel . 5 ))
-                   )
+    :files
+    ("posts/myself/love.org"         :key "l" :refile (:maxlevel . 5 ))
+    ("posts/myself/qing.org"         :key "q" :refile (:maxlevel . 5 ))
+    ("posts/myself/plan.org"         :key "p" :refile (:maxlevel . 5 ))
+    ("elfeed.org"         :key "e" :refile (:maxlevel . 5 ))
+    )
+  (org-starter-def "~/Documents/org-notes/braindump"
+    :files
+    ("private-org/" :agenda t)
+    ("private-org/GTD/gtd.org"                      :key "g" :refile (:maxlevel . 5))
+    ("private-org/GTD/notes.org"                    :key "n" :refile (:maxlevel . 5 ))
+    ("private-org/GTD/myself.org"                    :key "m" :refile (:maxlevel . 5 ))
+    ("private-org/GTD/Habit.org"                     :key "h" :refile (:maxlevel . 5 ))
+    ("life/" :agenda t)
+    ("GuangTao-owner/" :agenda t)
+    ("GuangTao-owner/learn-music.org"          :agenda t :key "M" :refile (:maxlevel . 5 ))
+    ("GuangTao-owner/GuangTao-library.org"       :key "b" :refile (:maxlevel . 5 ))
+    ("life/" :agenda t)
+    ("life/life-goods.org"     :key "s" :refile (:maxlevel . 5 ))
+    ("gaming/" :agenda t)
+    ("journals/" :agenda t)
+    ("hardware/" :agenda t)
+    ("system/" :agenda t)
+    ("deployment/" :agenda t)
+    ("CS/" :agenda t)
+    ("programming/" :agenda t)
+    ("nix/" :agenda t)
+    ("emacs/" :agenda t)
+    ("security/" :agenda t)
+    ("financial/" :agenda t)
+    ("network/" :agenda t)
+    ("data-science/" :agenda t)        
+    )
   (org-starter-def "~/.config/nixpkgs/dotfiles/doom-emacs/"
-                   :files
-                   ("config.org" :key "c" :refile (:maxlevel . 5))
-                   ("xah-fly-keys.org" :key "x" :refile (:maxlevel . 5))
-                   ;;("nix.org" :key "x" :refile (:maxlevel . 5))
-                   )
+    :files
+    ("config.org" :key "c" :refile (:maxlevel . 5))
+    ("xah-fly-keys.org" :key "x" :refile (:maxlevel . 5))
+    ;;("nix.org" :key "x" :refile (:maxlevel . 5))
+    )
   (org-starter-def "~/.config/nixpkgs"
-                   :files
-                   ("README.org")
-                   ("global-readme.org")
-                   ("dotfiles/wallpaper/wallpaper.org" :agenda nil)
-                   )
+    :files
+    ("README.org")
+    ("global-readme.org")
+    ("dotfiles/wallpaper/wallpaper.org" :agenda nil)
+    )
 
- (defhydra gtrun/hydra-org-starter nil
-   "
+  (defhydra gtrun/hydra-org-starter nil
+    "
   Org-starter-files
   ^^^^------------------------------------------------
  _c_: config.org  _g_: gtd.org     _l_: love.org
  _n_: note        _h_: Habit.org    _x_: xah-fly-keys.org
  _m_: myself      _p_: Plan.org
  _b_: my-books    _e_: elfeed
- _s_: my-life
+ _s_: life-goods
   "
 
-      ("c" org-starter-find-file:config)
-      ("x" org-starter-find-file:xah-fly-keys)
-      ("g" org-starter-find-file:gtd)
-      ("s" org-starter-find-file:life-goods)
-      ("n" org-starter-find-file:notes)
-      ("e" org-starter-find-file:elfeed)
-      ("m" org-starter-find-file:myself)
-      ("l" org-starter-find-file:love)
-      ("h" org-starter-find-file:Habit)
-      ("p" org-starter-find-file:plan)
-      ("b" org-starter-find-file:GuangTao-library)
-)
-:commands org-starter-load-all-files-in-path
-:hook
-(after-init . org-starter-load-all-files-in-path)
- :bind
- (
-  ("C-c e" . org-starter-select-file))
- ;; "C-c e" . org-starter-refile-by-key))
- )
+    ("c" org-starter-find-file:config)
+    ("x" org-starter-find-file:xah-fly-keys)
+    ("g" org-starter-find-file:gtd)
+    ("s" org-starter-find-file:life-goods)
+    ("n" org-starter-find-file:notes)
+    ("e" org-starter-find-file:elfeed)
+    ("m" org-starter-find-file:myself)
+    ("l" org-starter-find-file:love)
+    ("h" org-starter-find-file:Habit)
+    ("p" org-starter-find-file:plan)
+    ("b" org-starter-find-file:GuangTao-library)
+    )
+  :commands org-starter-load-all-files-in-path
+  :hook
+  (after-init . org-starter-load-all-files-in-path)
+  :bind
+  (
+   ("C-c e" . org-starter-select-file))
+  ;; "C-c e" . org-starter-refile-by-key))
+  )
 #+end_src
+
+#+RESULTS:
+: org-starter-select-file
 
 
 ** org-superstar
@@ -1562,6 +1583,7 @@ FACE defaults to inheriting from default and highlight."
                              "~/Documents/org-notes/braindump/data-science"
                              "~/Documents/org-notes/braindump/deployment"
                              "~/Documents/org-notes/braindump/hardware"
+                             "~/Documents/org-notes/braindump/system"
                              "~/Documents/org-notes/braindump/emacs"
                              "~/Documents/org-notes/braindump/gaming"
                              "~/Documents/org-notes/braindump/financial"
