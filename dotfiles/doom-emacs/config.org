@@ -572,8 +572,20 @@ Emacs or EMACS (Editor MACroS) is a family of text editors that are characterize
   (good-scroll-mode 1)
 )
 #+end_src
+** helm-tramp
+** helm-rg
+:PROPERTIES:
+:ID:       132bd909-bf8d-40c7-8809-c50dc3226002
+:END:
 
+- [2021-01-08 Fri 17:49] <- [[id:ccfe887a-cb1b-4671-8d35-44d46f98b0ef][org-z]]
+#+begin_src emacs-lisp :tangle "packages.el"
+(package! helm-rg)
+#+end_src
 
+#+begin_src emacs-lisp :tangle "config.el"
+(use-package! helm-rg)
+#+end_src
 * autoload
 
 ** +misc.el
@@ -892,7 +904,27 @@ In that case, insert the number."
   (define-key map (kbd "<return>") nil)))
 #+end_src
 
+** selectrum
+#+begin_src emacs-lisp :tangle "packages.el"
+(package! selectrum)
+(package! selectrum-prescient)
+#+end_src
 
+#+begin_src emacs-lisp :tangle "config.el"
+(use-package! selectrum
+  :config
+  (selectrum-mode 1)
+  )
+(use-package! selectrum-prescient
+  :config
+  ;; to make sorting and filtering more intelligent
+  ;;(selectrum-prescient-mode +1)
+
+  ;; to save your command history on disk, so the sorting gets more
+  ;; intelligent over time
+  ;;(prescient-persist-mode +1)
+  )
+#+end_src
 ** Customize completion-at-point
 
  - [[https://with-emacs.com/posts/tutorials/customize-completion-at-point/][with-emacs · Customize completion-at-point]]
@@ -1461,15 +1493,20 @@ FACE defaults to inheriting from default and highlight."
 
 
 ** org-ql
+:PROPERTIES:
+:ID:       13ea46d9-4bc3-49fd-b776-e0259d977b03
+:END:
 
+- [2021-01-08 Fri 17:49] <- [[id:ccfe887a-cb1b-4671-8d35-44d46f98b0ef][org-z]]
 - [[https://github.com/tpeacock19/org-ql-config][tpeacock19/org-ql-config]]
 #+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
-(package! org-ql)
+(package! org-ql :recipe (:host github :repo "alphapapa/org-ql"
+                         :files ("*.el")
+                         ))
 #+end_src
 
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-ql)
-
 #+end_src
 
 #+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
@@ -1495,18 +1532,32 @@ FACE defaults to inheriting from default and highlight."
 #+end_src
 
 ** org-z
-
+:PROPERTIES:
+:ID:       ccfe887a-cb1b-4671-8d35-44d46f98b0ef
+:END:
+ - [2021-01-08 Fri 17:49] -> [[id:132bd909-bf8d-40c7-8809-c50dc3226002][helm-rg]]
+ - [2021-01-08 Fri 17:49] -> [[id:13ea46d9-4bc3-49fd-b776-e0259d977b03][org-ql]]
 
 #+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
-(package! org-z :recipe (:host github :repo "landakram/org-z"))
+(package! org-z :recipe (:host github :repo "landakram/org-z"
+                         :files ("*.el")
+                         ))
 #+end_src
 
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-z
   :init
   (define-key org-mode-map (kbd "C-c C-;") 'org-z-insert-link)
+  ;;(require 'org-z-helm)
+  (require 'org-z-selectrum)
   :config
-  (org-z-mode 1))
+  (org-z-mode 1)
+  (setq org-z-directories  '("~/Documents/org-notes/braindump"
+                             "~/Documents/org-notes/braindump/GuangTao-owner"
+                             "~/Documents/org-notes/braindump/math"
+                             "~/.config/nixpkgs/dotfiles/doom-emacs"
+                               ))
+)
 #+end_src
 
 ** GTD

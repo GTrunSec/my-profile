@@ -398,8 +398,10 @@
 #+begin_src emacs-lisp :tangle "xah-fly-keys.el"
 (global-set-key (kbd "<f3>") 'gtrun/hydra-org-starter/body)
 (global-set-key (kbd "<f4>") 'xah-fly-command-mode-activate)
+(global-set-key (kbd "<f5>") 'notdeft)
 (global-set-key (kbd "ESC ESC") 'xah-fly-command-mode-activate)
 #+end_src
+
 ** org-mode set key
 #+begin_src emacs-lisp :tangle "xah-fly-keys.el"
 (global-set-key (kbd "M-s d") 'org-super-links-quick-insert-drawer-link)
