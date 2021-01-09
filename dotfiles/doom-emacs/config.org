@@ -914,13 +914,12 @@ In that case, insert the number."
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! selectrum
   :config
-  (selectrum-mode 1)
+  (selectrum-mode +1)
   )
 (use-package! selectrum-prescient
   :config
   ;; to make sorting and filtering more intelligent
-  ;;(selectrum-prescient-mode +1)
-
+  (selectrum-prescient-mode +1)
   ;; to save your command history on disk, so the sorting gets more
   ;; intelligent over time
   ;;(prescient-persist-mode +1)
@@ -1553,18 +1552,27 @@ FACE defaults to inheriting from default and highlight."
   (require 'org-z-selectrum)
   :config
   (org-z-mode 1)
-  ;; (setq org-z-directories  '("~/Documents/org-notes/braindump"
-  ;;                            "~/Documents/org-notes/braindump/GuangTao-owner"
-  ;;                            "~/Documents/org-notes/braindump/math"
-  ;;                            "~/Documents/org-notes/braindump/deployment"
-  ;;                            "~/.config/nixpkgs/dotfiles/doom-emacs"
-  ;;                            ))
-  (setq
-   org-z-directories
-   (file-name-as-directory
-    (file-truename
-     (expand-file-name (or org-roam-directory "braindump"
-                       org-directory)))))
+  (setq org-z-directories  '("~/Documents/org-notes/braindump"
+                             "~/Documents/org-notes/braindump/GuangTao-owner"
+                             "~/Documents/org-notes/braindump/journals"
+                             "~/Documents/org-notes/braindump/CS"
+                             "~/Documents/org-notes/braindump/network"
+                             "~/Documents/org-notes/braindump/security"
+                             "~/Documents/org-notes/braindump/life"
+                             "~/Documents/org-notes/braindump/math"
+                             "~/Documents/org-notes/braindump/math/my-mathematic-julia"
+                             "~/Documents/org-notes/braindump/data-science"
+                             "~/Documents/org-notes/braindump/deployment"
+                             "~/Documents/org-notes/braindump/hardware"
+                             "~/Documents/org-notes/braindump/emacs"
+                             "~/Documents/org-notes/braindump/gaming"
+                             "~/Documents/org-notes/braindump/financial"
+                             "~/Documents/org-notes/braindump/private-org"
+                             "~/Documents/org-notes/braindump/private-org/GTD"
+                             "~/Documents/org-notes/braindump/nix"
+                             "~/Documents/org-notes/braindump/programming"
+                             "~/.config/nixpkgs/dotfiles/doom-emacs"
+                             ))
 
    )
 #+end_src
