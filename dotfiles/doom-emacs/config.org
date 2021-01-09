@@ -1421,11 +1421,11 @@ FACE defaults to inheriting from default and highlight."
     )
   (org-starter-def "~/Documents/org-notes/braindump"
     :files
-    ("private-org/" :agenda t)
-    ("private-org/GTD/gtd.org"                      :key "g" :refile (:maxlevel . 5))
-    ("private-org/GTD/notes.org"                    :key "n" :refile (:maxlevel . 5 ))
-    ("private-org/GTD/myself.org"                    :key "m" :refile (:maxlevel . 5 ))
-    ("private-org/GTD/Habit.org"                     :key "h" :refile (:maxlevel . 5 ))
+    ("myself-private/" :agenda t)
+    ("myself-private/GTD/gtd.org"                      :key "g" :refile (:maxlevel . 5))
+    ("myself-private/GTD/notes.org"                    :key "n" :refile (:maxlevel . 5 ))
+    ("myself-private/GTD/myself.org"                    :key "m" :refile (:maxlevel . 5 ))
+    ("myself-private/GTD/Habit.org"                     :key "h" :refile (:maxlevel . 5 ))
     ("life/" :agenda t)
     ("GuangTao-owner/" :agenda t)
     ("GuangTao-owner/learn-music.org"          :agenda t :key "M" :refile (:maxlevel . 5 ))
@@ -1587,8 +1587,8 @@ FACE defaults to inheriting from default and highlight."
                              "~/Documents/org-notes/braindump/emacs"
                              "~/Documents/org-notes/braindump/gaming"
                              "~/Documents/org-notes/braindump/financial"
-                             "~/Documents/org-notes/braindump/private-org"
-                             "~/Documents/org-notes/braindump/private-org/GTD"
+                             "~/Documents/org-notes/braindump/myself-private"
+                             "~/Documents/org-notes/braindump/myself-private/GTD"
                              "~/Documents/org-notes/braindump/nix"
                              "~/Documents/org-notes/braindump/programming"
                              "~/.config/nixpkgs/dotfiles/doom-emacs"
