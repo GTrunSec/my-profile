@@ -586,6 +586,7 @@ Emacs or EMACS (Editor MACroS) is a family of text editors that are characterize
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! helm-rg)
 #+end_src
+
 * autoload
 
 ** +misc.el
@@ -1552,13 +1553,22 @@ FACE defaults to inheriting from default and highlight."
   (require 'org-z-selectrum)
   :config
   (org-z-mode 1)
-  (setq org-z-directories  '("~/Documents/org-notes/braindump"
-                             "~/Documents/org-notes/braindump/GuangTao-owner"
-                             "~/Documents/org-notes/braindump/math"
-                             "~/.config/nixpkgs/dotfiles/doom-emacs"
-                               ))
-)
+  ;; (setq org-z-directories  '("~/Documents/org-notes/braindump"
+  ;;                            "~/Documents/org-notes/braindump/GuangTao-owner"
+  ;;                            "~/Documents/org-notes/braindump/math"
+  ;;                            "~/Documents/org-notes/braindump/deployment"
+  ;;                            "~/.config/nixpkgs/dotfiles/doom-emacs"
+  ;;                            ))
+  (setq
+   org-z-directories
+   (file-name-as-directory
+    (file-truename
+     (expand-file-name (or org-roam-directory "braindump"
+                       org-directory)))))
+
+   )
 #+end_src
+
 
 ** GTD
 
@@ -3078,6 +3088,8 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   :if (eq system-type 'gnu/linux)
   :config
   ;;(add-hook! 'emacs-startup-hook 'doom-modeline-mode)
+  ;;fix post hook only linux
+  (require 'savehist)
   (setq-default cursor-type 'box)
   (blink-cursor-mode -1)
   (set-cursor-color "IndianRed3")
