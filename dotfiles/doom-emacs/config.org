@@ -1,12 +1,10 @@
 #+TITLE: GuangTao's Doom Emacs config
 #+EMAIL: gtrunsec@hardenedlinux.org
-#+DATE:  2019-12-30 Mon
 #+AUTHOR: GTrunSec
-#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t pri:t
 #+SETUPFILE: ~/.config/nixpkgs/dotfiles/doom-emacs/hugo.setup
+#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t pri:t
 #+SETUPFILE: ~/.config/nixpkgs/dotfiles/doom-emacs/theme-readtheorg.setup
-#+TAGS: GTD(G) writing(w) export(e) manage(m) graphical(g) nix(n)
-
+#+TAGS: GTD(G) writing(w) export(e) manage(m) graphical(g) nix
 
 
 - [[https://github.com/hlissner/doom-emacs/blob/develop/docs/getting_started.org][doom-emacs/getting_started.org at develop · hlissner/doom-emacs]]

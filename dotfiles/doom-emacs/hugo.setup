@@ -1,5 +1,5 @@
-#+HUGO_BASE_DIR: ~/Documents/braindump-blog/
-#+HUGO_SECTION: posts
+#+HUGO_BASE_DIR: ~/Documents/my-blog/
+#+HUGO_SECTION: post
 #+hugo_custom_front_matter: :author "GTrunSec"
 #+options: creator:t author:nil
 #+hugo_auto_set_lastmod: t
