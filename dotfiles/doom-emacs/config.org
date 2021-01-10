@@ -2083,6 +2083,25 @@ easy way to display org-ref with tree view instead of org-mode ?
 
 #+end_src
 
+** org-brain
+
+** org-brain
+
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
+(package! org-brain :recipe (:no-byte-compile t))
+#+end_src
+
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+(use-package! org-brain
+  :config
+  (setq org-brain-visualize-default-choices 'all
+        org-brain-title-max-length 24
+        org-brain-include-file-entries nil
+        org-brain-file-entries-use-title nil)
+  (setq org-brain-path "~/Documents/org-notes/braindump")
+  )
+#+end_src
+
 ** ob-mermaid
 
 - [[https://github.com/arnm/ob-mermaid][GitHub - arnm/ob-mermaid: Generate mermaid diagrams within Emacs org-mode babel]]
@@ -2577,7 +2596,10 @@ a separator ' -> '."
 - [[https://github.com/ShuguangSun/ess-view-data][ShuguangSun/ess-view-data: View data support for ESS]]
 
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
-(use-package! polymode)
+(use-package! polymode
+:config
+  (add-hook 'org-brain-visualize-mode-hook #'org-brain-polymode)
+)
 (use-package! poly-markdown
   :config
   (add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown-mode))
