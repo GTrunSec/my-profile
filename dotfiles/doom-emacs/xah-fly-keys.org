@@ -406,20 +406,25 @@
 #+begin_src emacs-lisp :tangle "xah-fly-keys.el"
 (global-set-key (kbd "M-s d") 'org-super-links-quick-insert-drawer-link)
 (global-set-key (kbd "M-s l") 'org-super-links-quick-insert-inline-link)
-(global-set-key (kbd "M-s i") 'org-roam-insert)
+(global-set-key (kbd "M-s v") 'org-brain-visualize-dwim)
+(global-set-key (kbd "M-s i") 'org-super-links-insert-link)
+(global-set-key (kbd "M-s s") 'org-super-links-store-link)
 (global-set-key (kbd "C-M-s-<right>") 'switch-to-next-buffer)
 (global-set-key (kbd "C-M-s-<left>") 'switch-to-prev-buffer)
 (global-set-key (kbd "M-s z") 'org-z-insert-link)
-(global-set-key (kbd "M-s s") 'org-z-knowledge-search)
+(global-set-key (kbd "M-s n") 'org-z-knowledge-search)
 #+end_src
+
 
 #+begin_src emacs-lisp :tangle "xah-fly-keys.el"
 (when IS-MAC
   (global-set-key (kbd "C-x c d") 'org-super-links-quick-insert-drawer-link)
   (global-set-key (kbd "C-x c l") 'org-super-links-quick-insert-inline-link)
-  (global-set-key (kbd "C-x c i") 'org-roam-insert)
+  (global-set-key (kbd "C-x c v") 'org-brain-visualize-dwim)
+  (global-set-key (kbd "C-x c i") 'org-super-links-insert-link)
+  (global-set-key (kbd "C-x c s") 'org-super-links-store-link)
   (global-set-key (kbd "C-x c z") 'org-z-insert-link)
-  (global-set-key (kbd "C-x c s") 'org-z-knowledge-search)
+  (global-set-key (kbd "C-x c n") 'org-z-knowledge-search)
 )
 #+end_src
 

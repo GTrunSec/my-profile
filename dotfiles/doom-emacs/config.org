@@ -181,7 +181,7 @@ Emacs or EMACS (Editor MACroS) is a family of text editors that are characterize
         +ipython         ; ipython/jupyter support for babel
         +pandoc          ; export-with-pandoc support
         +journal
-        +roam
+        ;;+roam
         ;;+helm-org
         ;+pomodoro        ; be fruitful with the tomato technique
         +present)        ; using org-mode for presentations
@@ -1505,12 +1505,12 @@ FACE defaults to inheriting from default and highlight."
 
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-superstar
+  :hook
+  (org-mode . org-superstar-mode)
   :config
-  (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
   (setq org-superstar-headline-bullets-list '("☰" "☷" "☵" "☲"  "☳" "☴"  "☶"  "☱" ))
 )
 #+end_src
-
 
 ** org-ql
 :PROPERTIES:
@@ -1973,23 +1973,23 @@ easy way to display org-ref with tree view instead of org-mode ?
 *** org-roam
 
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/packages.el"
-(unpin! org-roam)
+;;(unpin! org-roam)
 #+end_src
 
 
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
-(use-package! org-roam
-  :init
-  (require 'org-roam-protocol)
-  :config
-  (setq org-roam-index-file "pages/contents.org")
-  ;;https://github.com/zaeph/.emacs.d/blob/0f4bf9a500ef6397b93c41cb51602bea9ab9a4c3/init.el#L3804
-  ;; [[https://copingmechanism.com/2020/keeping-org-roam-daily-notes-in-a-separate-folder/][Keeping Org-roam Daily Notes in a separate folder – Coping Mechanism]]
-  (setq org-roam-dailies-capture-templates '(("d" "daily" plain (function org-roam-capture--get-point) ""
-                                              :immediate-finish t
-                                              :file-name "dailies/%<%Y-%m-%d>-${slug}"
-                                              :head "#+TITLE: %<%Y-%m-%d>-${slug}\n#+created: %u\n#+last_modified: %U\n\n")))
-  )
+;; (use-package! org-roam
+;;   :init
+;;   (require 'org-roam-protocol)
+;;   :config
+;;   (setq org-roam-index-file "pages/contents.org")
+;;   ;;https://github.com/zaeph/.emacs.d/blob/0f4bf9a500ef6397b93c41cb51602bea9ab9a4c3/init.el#L3804
+;;   ;; [[https://copingmechanism.com/2020/keeping-org-roam-daily-notes-in-a-separate-folder/][Keeping Org-roam Daily Notes in a separate folder – Coping Mechanism]]
+;;   (setq org-roam-dailies-capture-templates '(("d" "daily" plain (function org-roam-capture--get-point) ""
+;;                                               :immediate-finish t
+;;                                               :file-name "dailies/%<%Y-%m-%d>-${slug}"
+;;                                               :head "#+TITLE: %<%Y-%m-%d>-${slug}\n#+created: %u\n#+last_modified: %U\n\n")))
+;;   )
 #+end_src
 
 
@@ -1999,37 +1999,37 @@ easy way to display org-ref with tree view instead of org-mode ?
 - [[https://github.com/org-roam/org-roam-server][org-roam/org-roam-server: A Web Application to Visualize the Org-Roam Database]]
 
 #+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
-(package! org-roam-server)
+;;(package! org-roam-server)
 #+end_src
 
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
-(use-package! org-roam-server
-  :config
-  (setq org-roam-server-port 8081
-        org-roam-server-export-inline-images t
-        org-roam-server-authenticate nil
-        org-roam-server-network-poll t
-        org-roam-server-network-arrows nil
-        org-roam-server-network-label-truncate t
-        org-roam-server-network-label-truncate-length 60
-        org-roam-server-network-label-wrap-length 20))
+;; (use-package! org-roam-server
+;;   :config
+;;   (setq org-roam-server-port 8081
+;;         org-roam-server-export-inline-images t
+;;         org-roam-server-authenticate nil
+;;         org-roam-server-network-poll t
+;;         org-roam-server-network-arrows nil
+;;         org-roam-server-network-label-truncate t
+;;         org-roam-server-network-label-truncate-length 60
+;;         org-roam-server-network-label-wrap-length 20))
 #+end_src
 
 
 *** org-roam-bibtex
 
 #+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
-(package! org-roam-bibtex)
+;;(package! org-roam-bibtex)
 #+end_src
 
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
-(use-package! org-roam-bibtex
-  :config
-  (add-hook 'org-mode-hook 'org-roam-bibtex-mode)
-  :bind (:map org-roam-bibtex-mode-map
-              ("C-c n a" . orb-note-actions)
-              )
-  )
+;; (use-package! org-roam-bibtex
+;;   :config
+;;   (add-hook 'org-mode-hook 'org-roam-bibtex-mode)
+;;   :bind (:map org-roam-bibtex-mode-map
+;;               ("C-c n a" . orb-note-actions)
+;;               )
+;;   )
 #+end_src
 
 
@@ -2062,16 +2062,16 @@ easy way to display org-ref with tree view instead of org-mode ?
 :END:
 
 #+begin_src emacs-lisp :tangle  "./modules/private/my-org/config.el"
-(defun org-roam-dailies-capture-today ()
-  "Capture a note into the daily note for today."
-  (interactive)
-  (let ((org-roam-capture-templates org-roam-dailies-capture-templates)
-        (org-roam-capture--info (list (cons 'time (current-time))))
-        (org-roam-capture--context 'dailies))
-    (org-roam--capture)))
+;; (defun org-roam-dailies-capture-today ()
+;;   "Capture a note into the daily note for today."
+;;   (interactive)
+;;   (let ((org-roam-capture-templates org-roam-dailies-capture-templates)
+;;         (org-roam-capture--info (list (cons 'time (current-time))))
+;;         (org-roam-capture--context 'dailies))
+;;     (org-roam--capture)))
 
-(setq org-capture-templates '(("n" "Note" entry (function org-roam-dailies-capture-today)
-                                 "* %?\n")))
+;; (setq org-capture-templates '(("n" "Note" entry (function org-roam-dailies-capture-today)
+;;                                  "* %?\n")))
 #+end_src
 
 ** org-journal
