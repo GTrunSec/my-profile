@@ -906,23 +906,23 @@ In that case, insert the number."
 
 ** selectrum
 #+begin_src emacs-lisp :tangle "packages.el"
-(package! selectrum)
-(package! selectrum-prescient)
+;; (package! selectrum)
+;; (package! selectrum-prescient)
 #+end_src
 
 #+begin_src emacs-lisp :tangle "config.el"
-(use-package! selectrum
-  :config
-  (selectrum-mode +1)
-  )
-(use-package! selectrum-prescient
-  :config
-  ;; to make sorting and filtering more intelligent
-  (selectrum-prescient-mode +1)
-  ;; to save your command history on disk, so the sorting gets more
-  ;; intelligent over time
-  ;;(prescient-persist-mode +1)
-  )
+;; (use-package! selectrum
+;;   :config
+;;   (selectrum-mode +1)
+;;   )
+;; (use-package! selectrum-prescient
+;;   :config
+;;   ;; to make sorting and filtering more intelligent
+;;   (selectrum-prescient-mode +1)
+;;   ;; to save your command history on disk, so the sorting gets more
+;;   ;; intelligent over time
+;;   ;;(prescient-persist-mode +1)
+;;   )
 #+end_src
 ** Customize completion-at-point
 
@@ -1568,8 +1568,8 @@ FACE defaults to inheriting from default and highlight."
 (use-package! org-z
   :init
   (define-key org-mode-map (kbd "C-c C-;") 'org-z-insert-link)
-  ;;(require 'org-z-helm)
-  (require 'org-z-selectrum)
+  (require 'org-z-helm)
+  ;;(require 'org-z-selectrum)
   :config
   (org-z-mode 1)
   (setq org-z-directories  '("~/Documents/org-notes/braindump"
