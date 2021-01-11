@@ -1982,15 +1982,16 @@ easy way to display org-ref with tree view instead of org-mode ?
   :init
   (require 'org-roam-protocol)
   :config
-  ;;(setq org-roam-directory nil)
+  (setq org-roam-index-file "pages/contents.org")
   ;;https://github.com/zaeph/.emacs.d/blob/0f4bf9a500ef6397b93c41cb51602bea9ab9a4c3/init.el#L3804
   ;; [[https://copingmechanism.com/2020/keeping-org-roam-daily-notes-in-a-separate-folder/][Keeping Org-roam Daily Notes in a separate folder – Coping Mechanism]]
-(setq org-roam-dailies-capture-templates '(("d" "daily" plain (function org-roam-capture--get-point) ""
-                                            :immediate-finish t
-                                            :file-name "dailies/%<%Y-%m-%d>-${slug}"
-                                            :head "#+TITLE: %<%Y-%m-%d>-${slug}\n#+created: %u\n#+last_modified: %U\n\n")))
-)
+  (setq org-roam-dailies-capture-templates '(("d" "daily" plain (function org-roam-capture--get-point) ""
+                                              :immediate-finish t
+                                              :file-name "dailies/%<%Y-%m-%d>-${slug}"
+                                              :head "#+TITLE: %<%Y-%m-%d>-${slug}\n#+created: %u\n#+last_modified: %U\n\n")))
+  )
 #+end_src
+
 
 
 *** org-roam-server
