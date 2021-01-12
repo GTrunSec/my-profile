@@ -2299,8 +2299,7 @@ a separator ' -> '."
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-link-beautify
   :config
-  (when IS-LINUX
-   (add-hook! 'org-mode-hook 'org-link-beautify-mode))
+  (add-hook! 'org-mode-hook 'org-link-beautify-mode)
   )
 
 #+end_src
