@@ -1978,19 +1978,17 @@ easy way to display org-ref with tree view instead of org-mode ?
 
 
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
-(when IS-LINUX
-  (use-package! org-roam
-    :init
-    (require 'org-roam-protocol)
-    :config
-    (setq org-roam-index-file "pages/contents.org")
-    ;;https://github.com/zaeph/.emacs.d/blob/0f4bf9a500ef6397b93c41cb51602bea9ab9a4c3/init.el#L3804
-    ;; [[https://copingmechanism.com/2020/keeping-org-roam-daily-notes-in-a-separate-folder/][Keeping Org-roam Daily Notes in a separate folder – Coping Mechanism]]
-    (setq org-roam-dailies-capture-templates '(("d" "daily" plain (function org-roam-capture--get-point) ""
-                                                :immediate-finish t
-                                                :file-name "dailies/%<%Y-%m-%d>-${slug}"
-                                                :head "#+TITLE: %<%Y-%m-%d>-${slug}\n#+created: %u\n#+last_modified: %U\n\n")))
-    )
+(use-package! org-roam
+  :init
+  (require 'org-roam-protocol)
+  :config
+  (setq org-roam-index-file "~/Documents/org-notes/braindump/pages/contents.org")
+  ;;https://github.com/zaeph/.emacs.d/blob/0f4bf9a500ef6397b93c41cb51602bea9ab9a4c3/init.el#L3804
+  ;; [[https://copingmechanism.com/2020/keeping-org-roam-daily-notes-in-a-separate-folder/][Keeping Org-roam Daily Notes in a separate folder – Coping Mechanism]]
+  ;; (setq org-roam-dailies-capture-templates '(("d" "daily" plain (function org-roam-capture--get-point) ""
+  ;;                                             :immediate-finish t
+  ;;                                             :file-name "dailies/%<%Y-%m-%d>-${slug}"
+  ;;                                             :head "#+TITLE: %<%Y-%m-%d>-${slug}\n#+created: %u\n#+last_modified: %U\n\n")))
   )
 #+end_src
 
@@ -2088,20 +2086,19 @@ easy way to display org-ref with tree view instead of org-mode ?
 
 ** gkroam
 #+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
-(package! gkroam :recipe (:host github :repo "Kinneyzhang/gkroam"))
+;;(package! gkroam :recipe (:host github :repo "Kinneyzhang/gkroam"))
 #+end_src
 
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
-(use-package gkroam
-  :ensure t
-  :hook (after-init . gkroam-mode)
-  :init
-  (setq gkroam-root-dir "~/Documents/org-notes/braindump")
-  (setq gkroam-prettify-page-p t
-        gkroam-show-brackets-p nil
-        gkroam-use-default-filename t
-        gkroam-window-margin 4)
-  )
+;; (use-package gkroam
+;;   :hook (after-init . gkroam-mode)
+;;   :init
+;;   (setq gkroam-root-dir "~/Documents/org-notes/braindump")
+;;   (setq gkroam-prettify-page-p t
+;;         gkroam-show-brackets-p nil
+;;         gkroam-use-default-filename t
+;;         gkroam-window-margin 4)
+;;   )
 #+end_src
 
 ** org-brain
