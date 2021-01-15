@@ -413,6 +413,7 @@
 (global-set-key (kbd "C-M-s-<left>") 'switch-to-prev-buffer)
 (global-set-key (kbd "M-s z") 'org-z-insert-link)
 (global-set-key (kbd "M-s n") 'org-z-knowledge-search)
+(global-set-key (kbd "M-s f") 'org-roam-insert)
 #+end_src
 
 
