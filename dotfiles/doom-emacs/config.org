@@ -1380,6 +1380,7 @@ FACE defaults to inheriting from default and highlight."
 (setq org-download-timestamp "%Y%m%d_%H%M%S")
 
 (add-hook! 'org-mode-hook 'org-show-two-levels)
+(add-hook! 'after-init-hook 'org-id-update-id-locations)
 #+end_src
 
 
