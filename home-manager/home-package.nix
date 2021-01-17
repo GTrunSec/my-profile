@@ -42,7 +42,9 @@ in
         dnsperf
         pet
         yarn2nix
-        hunspellDicts.en_US
+        (hunspellWithDicts [
+          hunspellDicts.en-us
+        ])
       ];
     })
 

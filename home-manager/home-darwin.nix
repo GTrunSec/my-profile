@@ -21,7 +21,6 @@ in
         fd
         reattach-to-user-namespace
         ispell
-        hunspell
         wakatime
         bat
         gron
@@ -59,6 +58,7 @@ in
         gocode
         gopls
         hugo
+        go
       ] ++ [  # latex + packages
 
       ];
