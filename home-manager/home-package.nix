@@ -45,6 +45,9 @@ in
         (hunspellWithDicts [
           hunspellDicts.en-us
         ])
+        aspellDicts.en
+        aspellDicts.en-computers
+        aspellDicts.en-science
       ];
     })
 
