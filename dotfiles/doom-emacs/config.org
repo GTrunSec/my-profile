@@ -555,6 +555,7 @@ Emacs or EMACS (Editor MACroS) is a family of text editors that are characterize
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! snails
   :config
+  (setq snails-show-with-frame nil)
   (define-key snails-mode-map [remap next-line] #'snails-select-next-item))
 #+end_src
 ** good-scroll.el

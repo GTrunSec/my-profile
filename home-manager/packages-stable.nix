@@ -1,7 +1,7 @@
 { lib, pkgs, ... }:
 let
   overlays = [
-    (import ../nixos-flk/overlays/pkgs.nix)
+    (import ../nixos-flk/pkgs/default.nix)
   ];
 
   nixpkgs  = import ./misc/stable-pkgs.nix { inherit overlays; };
