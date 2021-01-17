@@ -15,4 +15,4 @@ jobs:
 
 
     - run: git submodule update --init --recursive nixos-flk
-    - run: nix-shell -p home-manager --command 'home-manager -f home.nix instantiate'
+    - run: nix-shell -p home-manager --command 'home-manager -f home.nix instantiate -n'
