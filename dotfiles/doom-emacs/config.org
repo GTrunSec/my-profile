@@ -556,7 +556,9 @@ Emacs or EMACS (Editor MACroS) is a family of text editors that are characterize
 (use-package! snails
   :config
   (setq snails-show-with-frame nil)
-  (define-key snails-mode-map [remap next-line] #'snails-select-next-item))
+  (define-key snails-mode-map [remap previous-line] #'snails-select-prev-item)
+  (define-key snails-mode-map [remap next-line] #'snails-select-next-item)
+  )
 #+end_src
 ** good-scroll.el
 
@@ -3149,7 +3151,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
 #+RESULTS:
 
-* Linux & Macsos
+* Linux & MacOS
 
 #+begin_src emacs-lisp :tangle "config.el"
 (load! "./modules/my-linux.el")
@@ -3220,6 +3222,9 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
                             :no-byte-compile t))
   )
 #+end_src
+
+
+
 #+begin_src emacs-lisp :tangle "config.el"
 (when (display-graphic-p)
   (use-package! eaf
@@ -3228,6 +3233,8 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
     (eaf-find-alternate-file-in-dired t)
     :config
     (add-hook! 'eaf-mode-hook 'xah-fly-keys-off)
+
+    (eaf-setq eaf-browser-default-zoom "3.0")
 
     (eaf-bind-key scroll_up "C-n" eaf-pdf-viewer-keybinding)
     (eaf-bind-key scroll_down "C-p" eaf-pdf-viewer-keybinding)
@@ -3246,15 +3253,13 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   :if (eq system-type 'gnu/linux)
   )
 #+end_src
-
-** my-linux
-
+*** end line of linux setting
 #+begin_src emacs-lisp :tangle "./modules/my-linux.el"
 ;;; my-linux.el -*- lexical-binding: t; -*-
 (provide 'my-linux)
 #+end_src
 
-** my MacOS setting
+** my-MacOS
 
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! my-macos

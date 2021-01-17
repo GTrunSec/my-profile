@@ -42,6 +42,7 @@ in
         dnsperf
         pet
         yarn2nix
+        hunspellDicts.en_US
       ];
     })
 
