@@ -549,8 +549,7 @@ Emacs or EMACS (Editor MACroS) is a family of text editors that are characterize
 #+begin_src emacs-lisp :tangle "packages.el"
   (package! snails :recipe (:host github
                             :repo "manateelazycat/snails"
-                            :files ("*.el")
-                            :no-byte-compile t))
+                            :files ("*.el")))
 #+end_src
 
 #+begin_src emacs-lisp :tangle "config.el"
