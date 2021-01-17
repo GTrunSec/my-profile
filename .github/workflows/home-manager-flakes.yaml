@@ -11,7 +11,8 @@ jobs:
       with:
         nix_path: nixpkgs=channel:nixos-unstable
         fetch-depth: 0
+        submodules: true
 
-    # Build the binary
-    # override the compiler
+
+    - run: git submodule update --init --recursive nixos-flk
     - run: nix-shell -p home-manager --command 'home-manager -f home.nix instantiate'
