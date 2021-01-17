@@ -5,10 +5,9 @@ let
   updateInit = "bash .doom.d/bin/emacs.sh";
 in
 {
-
-  imports = [
-    ~/.nix-defexpr/channels/home-manager/modules/services/emacs.nix
-  ];
+  # imports = [
+  #   ~/.nix-defexpr/channels/home-manager/modules/services/emacs.nix
+  # ];
   config = with lib; mkMerge [
     #fonts
     (mkIf (pkgs.stdenv.isLinux || pkgs.stdenv.isDarwin) {
@@ -105,8 +104,8 @@ in
       programs.emacs.extraPackages = epkgs: with epkgs;[
         grab-x-link
       ];
-      services.emacs.enable = true;
-      #services.emacs.socketActivation.enable = true;
+      # services.emacs.enable = true;
+      # services.emacs.socketActivation.enable = true;
     })
   ];
 }
