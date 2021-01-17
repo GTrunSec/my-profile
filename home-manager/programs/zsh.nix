@@ -48,11 +48,11 @@ in
           si    = "pactl set-default-sink (pacmd list-sinks | awk \\\'/name:.*pci/{if (a != \"\") print a;} {a=$NF}\\\')";
         };
 
-        initExtraBeforeCompInit = builtins.readFile "${home_directory}/.config/nixpkgs/dotfiles/pre-zsh-Compinit" + ''
+        initExtraBeforeCompInit = (builtins.readFile ../../dotfiles/pre-zsh-Compinit) + ''
         eval $(${pkgs.coreutils}/bin/dircolors -b ~/.config/nixpkgs/dotfiles/LS_COLORS)
         '';
 
-        initExtra = builtins.readFile "${home_directory}/.config/nixpkgs/dotfiles/zshrc" +
+        initExtra = (builtins.readFile ../../dotfiles/zshrc) +
                     ''
                      ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#fdf6e3,bg=#586e75,bold,underline"
                     ''
