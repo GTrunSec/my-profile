@@ -6,7 +6,7 @@
 	url = git@github.com:GTrunSec/nixpkgs.git
 [submodule "nixos-flk"]
 	path = nixos-flk
-	url = git@github.com:GTrunSec/nixos-flk.git
+	url = https://github.com/GTrunSec/nixos-flk.git
 [submodule "dotfiles/rime"]
 	path = dotfiles/rime
 	url = https://github.com/GTrunSec/Rime.git
