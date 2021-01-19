@@ -2291,7 +2291,7 @@ a separator ' -> '."
 )
 #+end_src
 
-** org-noter-plus
+** org-ipynb
 #+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
 (package! ox-ipynb :recipe (:host github :repo "jkitchin/ox-ipynb"))
 #+end_src
@@ -2299,6 +2299,26 @@ a separator ' -> '."
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! ox-ipynb)
 #+end_src
+
+** org-html-theme
+
+
+#+begin_src emacs-lisp :tangle  "./modules/private/my-org/packages.el"
+(package! org-html-themify :recipe (:host github :repo "DogLooksGood/org-html-themify"
+                                    :files ("*.el" "*.js" "*.css")))
+#+end_src
+
+#+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
+;; (use-package! org-html-themify
+;;   :hook (org-mode . org-html-themify-mode)
+;;   :custom
+;;   (org-html-themify-themes
+;;    '((dark . doom-one)
+;;      (light . doom-one)))
+;;   )
+
+#+end_src
+
 ** org-clones
 
 1.
@@ -2741,8 +2761,15 @@ a separator ' -> '."
 ** rust
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
 (setq racer-cmd "racer")
-(add-hook 'rustic-mode-hook (lambda () (setq-local +lsp-company-backends '(company-capf))))
+(add-hook 'rustic-mode-hook (lambda () (setq-local +lsp-company-backends '(company-capf
+                                                                           :separate
+                                                                           company-tabnine))
+                              (setq-local racer-rust-src-path "~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src")
+                              (setq-local rustic-racer-rust-src-path "~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src")
+                              )
+          )
 #+end_src
+
 * Visual
 
 ** Buffer
@@ -3234,7 +3261,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
     :config
     (add-hook! 'eaf-mode-hook 'xah-fly-keys-off)
 
-    (eaf-setq eaf-browser-default-zoom "3.0")
+    (eaf-setq eaf-browser-default-zoom "2.0")
 
     (eaf-bind-key scroll_up "C-n" eaf-pdf-viewer-keybinding)
     (eaf-bind-key scroll_down "C-p" eaf-pdf-viewer-keybinding)

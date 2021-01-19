@@ -1,4 +1,4 @@
-#+TITLE: My-computer Profile
+#+TITLE: My Computer Profile
 #+AUTHOR: GTrunSec
 #+EMAIL: gtrunsec@hardenedlinux.org
 #+DATE: 23 October 2019
