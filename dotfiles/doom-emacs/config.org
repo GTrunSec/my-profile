@@ -3144,6 +3144,8 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 #+begin_src emacs-lisp :tangle "packages.el"
 (unpin! doom-modeline)
 (unpin! magit)
+(unpin! nix-mode)
+(unpin! org-journal)
 #+end_src
 * misc
 
