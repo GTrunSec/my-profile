@@ -104,19 +104,28 @@
 #+RESULTS:
 | meow-expand-0 | meow-expand-9 | meow-expand-8 | meow-expand-7 | meow-expand-6 | meow-expand-5 | meow-expand-4 | meow-expand-3 | meow-expand-2 | meow-expand-1 | negative-argument | meow-reverse | meow-inner-of-thing | meow-bounds-of-thing | meow-beginning-of-thing | meow-end-of-thing | meow-append | meow-open-below | meow-back-word | meow-back-symbol | meow-change | meow-change-save | meow-delete | meow-line | meow-find | meow-find-expand | meow-keyboard-quit | meow-goto-line | meow-left | meow-left-expand | meow-insert | meow-open-above | meow-join | delete-indentation | meow-kill | meow-till | meow-till-expand | meow-mark-word | meow-mark-symbol | meow-next | meow-next-expand | meow-block | meow-block-expand | meow-prev | meow-prev-expand | meow-quit | meow-replace | meow-replace-save | meow-search | meow-pop-search | meow-right | meow-right-expand | undo | meow-visit | meow-next-word | meow-next-symbol | meow-save | meow-yank | meow-pop-selection | meow-pop-all-selection | meow-query-replace | meow-query-replace-regexp | meow-last-buffer |
 
-* Leader Key
+* Meow Define Leader Key
 
 #+begin_src emacs-lisp :tangle "meow.el"
 (meow-leader-define-key
   '("d" . dired)
   '("r" . counsel-recentf)
-  '("f" . find-file)
+  '("f" . counsel-find-file)
+  '("F" . +ivy/projectile-find-file)
   '("a" . counsel-ag)
+  '("w" . ace-window)
+  '("ti" . insert-current-date-time-inactive)
+  '("ta" . insert-current-date-time-active)
+  '("tc" . insert-current-date-time)
+  '("bs" . bookmark-set)
+  '("bm" . bookmark-bmenu-list)
+  '("bt" . bm-toggle)
+  '("RET" . counsel-bookmark)
 )
 #+end_src
 
 #+RESULTS:
-| dired | counsel-recentf | find-file |
+| dired | counsel-recentf | counsel-find-file | +ivy/projectile-find-file | counsel-ag | ace-window | insert-current-date-time-inactive | insert-current-date-time-active | insert-current-date-time | bookmark-set | bookmark-bmenu-list | bm-toggle | counsel-bookmark |
 * define global-set-key
 #+begin_src emacs-lisp :tangle "meow.el"
 (global-set-key (kbd "<f3>") 'gtrun/hydra-org-starter/body)
@@ -134,11 +143,21 @@
 
 * advice-add [[https://github.com/DogLooksGood/meow/blob/master/meow-shims.el#L86-L115][meow/meow-shims.el at master · DogLooksGood/meow]]
 * Setting map! keys in specific mode
-
+** Dired Mode map => map!
 #+begin_src emacs-lisp :tangle "meow.el"
 (map! :map dired-mode-map
       "-" 'vinegar/up-directory
       "/" 'vinegar/dired-diff
+      "," 'xah-open-in-external-app
+      )
+#+end_src
+** Org mode => map!
+
+#+begin_src emacs-lisp :tangle yes
+(map! :map org-mode-map
+      "M-s l" 'org-super-links-quick-insert-inline-link
+      "M-s d" 'org-super-links-quick-insert-drawer-link
+      "M-s i" 'org-super-links-insert-link
       )
 #+end_src
 
