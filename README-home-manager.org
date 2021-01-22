@@ -190,9 +190,9 @@ in
       ] ++ [ #misc
         git
         fd
+        wget
         reattach-to-user-namespace
         ispell
-        hunspell
         wakatime
         bat
         gron
@@ -230,6 +230,7 @@ in
         gocode
         gopls
         hugo
+        go
       ] ++ [  # latex + packages
 
       ];
@@ -237,7 +238,6 @@ in
   ];
 
 }
-
 #+end_src
 ** Python packages
 #+begin_src nix :exports both :tangle "~/.config/nixpkgs/home-manager/python-pkgs.nix"

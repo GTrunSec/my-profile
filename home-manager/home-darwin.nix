@@ -19,6 +19,7 @@ in
       ] ++ [ #misc
         git
         fd
+        wget
         reattach-to-user-namespace
         ispell
         wakatime

@@ -132,6 +132,7 @@
 (global-set-key (kbd "<f4>") 'org-agenda)
 (global-set-key (kbd "<f5>") 'notdeft)
 (global-set-key (kbd "C-s") 'swiper)
+(global-set-key (kbd "<f9") 'save-buffer)
 #+end_src
 
 
@@ -158,6 +159,7 @@
       "M-s l" 'org-super-links-quick-insert-inline-link
       "M-s d" 'org-super-links-quick-insert-drawer-link
       "M-s i" 'org-super-links-insert-link
+      "M-s s" 'org-super-links-store-link
       )
 #+end_src
 
