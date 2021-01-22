@@ -3182,6 +3182,17 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
 #+RESULTS:
 
+* Warning
+
+#+begin_src emacs-lisp :tangle "config.el"
+(add-to-list 'warning-suppress-types '(yasnippet backquote-change))
+#+end_src
+
+#+RESULTS:
+| yasnippet | backquote-change |
+| :warning  |                  |
+
+
 * Linux & MacOS
 
 #+begin_src emacs-lisp :tangle "config.el"
