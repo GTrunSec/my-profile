@@ -111,25 +111,40 @@
   '("d" . dired)
   '("r" . counsel-recentf)
   '("f" . find-file)
+  '("a" . counsel-ag)
 )
 #+end_src
 
 #+RESULTS:
 | dired | counsel-recentf | find-file |
 * define global-set-key
-#+begin_src emacs-lisp :tangle "xah-fly-keys.el"
+#+begin_src emacs-lisp :tangle "meow.el"
 (global-set-key (kbd "<f3>") 'gtrun/hydra-org-starter/body)
-(global-set-key (kbd "<f4>") 'save-buffer)
+(global-set-key (kbd "<f4>") 'org-agenda)
 (global-set-key (kbd "<f5>") 'notdeft)
 (global-set-key (kbd "C-s") 'swiper)
 #+end_src
 
 
+* remap global keys
+
+#+begin_src emacs-lisp :tangle "meow.el"
+(global-set-key [remap list-buffers] #'+ivy/switch-buffer)
+#+end_src
+
+* advice-add [[https://github.com/DogLooksGood/meow/blob/master/meow-shims.el#L86-L115][meow/meow-shims.el at master · DogLooksGood/meow]]
+* Setting map! keys in specific mode
+
+#+begin_src emacs-lisp :tangle "meow.el"
+(map! :map dired-mode-map
+      "-" 'vinegar/up-directory
+      "/" 'vinegar/dired-diff
+      )
+#+end_src
+
 #+RESULTS:
-: swiper
 
 * end line of meow setting
-
 #+begin_src emacs-lisp :tangle "meow.el"
  )
 #+end_src
