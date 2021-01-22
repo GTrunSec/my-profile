@@ -243,7 +243,6 @@ Emacs or EMACS (Editor MACroS) is a family of text editors that are characterize
 #+begin_src emacs-lisp :tangle "packages.el"
 ;;; packages.el -*- lexical-binding: t; -*-
 (package! discover :recipe (:host github :repo "mickeynp/discover.el"))
-(package! xah-fly-keys :recipe (:host github :repo "xahlee/xah-fly-keys"))
 (package! maple-iedit :recipe (:host github :repo "honmaple/emacs-maple-iedit"))
 (package! ctrlf :recipe (:host github :repo "raxod502/ctrlf"))
 (package! scrollkeeper :recipe (:host github :repo "alphapapa/scrollkeeper.el"))
@@ -263,7 +262,6 @@ Emacs or EMACS (Editor MACroS) is a family of text editors that are characterize
 
 #+begin_src emacs-lisp :tangle "config.el"
 ;;; config.el -*- lexical-binding: t; -*-
-;;(load! "xah-fly-keys.el")
 (load! "show-parentheses.el")
 (load! "meow.el")
 #+end_src
@@ -814,7 +812,7 @@ appropriate.  In tables, insert a new row or end the table."
 (setq dired-dwim-target t)
 
 (add-hook! 'dired-mode 'dired-async-mode)
-;;(add-hook! 'xah-fly-command-mode-activate-hook 'bookmark-save)
+
 (defun gtrun/truncate-lines-hook ()
   (setq-local truncate-lines nil)
   )
@@ -1451,7 +1449,7 @@ FACE defaults to inheriting from default and highlight."
   (org-starter-def "~/.config/nixpkgs/dotfiles/doom-emacs/"
     :files
     ("config.org" :key "c" :refile (:maxlevel . 5))
-    ("xah-fly-keys.org" :key "x" :refile (:maxlevel . 5))
+    ("meow.org" :key "w" :refile (:maxlevel . 5))
     ;;("nix.org" :key "x" :refile (:maxlevel . 5))
     )
   (org-starter-def "~/.config/nixpkgs"
@@ -1466,14 +1464,14 @@ FACE defaults to inheriting from default and highlight."
   Org-starter-files
   ^^^^------------------------------------------------
  _c_: config.org  _g_: gtd.org     _l_: love.org
- _n_: note        _h_: Habit.org    _x_: xah-fly-keys.org
+ _n_: note        _h_: Habit.org    _w_: meow.org
  _m_: myself      _p_: Plan.org
  _b_: my-books    _e_: elfeed
  _s_: life-goods
   "
 
     ("c" org-starter-find-file:config)
-    ("x" org-starter-find-file:xah-fly-keys)
+    ("w" org-starter-find-file:meow)
     ("g" org-starter-find-file:gtd)
     ("s" org-starter-find-file:life-goods)
     ("n" org-starter-find-file:notes)
