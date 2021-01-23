@@ -87,7 +87,8 @@
    '("S" . meow-pop-search)
    '("t" . meow-right)
    '("T" . meow-right-expand)
-   '("u" . undo)
+   '("u" . undo-fu-only-undo)
+   '("U" . undo-fu-only-redo)
    '("v" . meow-visit)
    '("w" . meow-next-word)
    '("W" . meow-next-symbol)
@@ -102,7 +103,7 @@
 #+end_src
 
 #+RESULTS:
-| meow-expand-0 | meow-expand-9 | meow-expand-8 | meow-expand-7 | meow-expand-6 | meow-expand-5 | meow-expand-4 | meow-expand-3 | meow-expand-2 | meow-expand-1 | negative-argument | meow-reverse | meow-inner-of-thing | meow-bounds-of-thing | meow-beginning-of-thing | meow-end-of-thing | meow-append | meow-open-below | meow-back-word | meow-back-symbol | meow-change | meow-change-save | meow-delete | meow-line | meow-find | meow-find-expand | meow-keyboard-quit | meow-goto-line | meow-left | meow-left-expand | meow-insert | meow-open-above | meow-join | delete-indentation | meow-kill | meow-till | meow-till-expand | meow-mark-word | meow-mark-symbol | meow-next | meow-next-expand | meow-block | meow-block-expand | meow-prev | meow-prev-expand | meow-quit | meow-replace | meow-replace-save | meow-search | meow-pop-search | meow-right | meow-right-expand | undo | meow-visit | meow-next-word | meow-next-symbol | meow-save | meow-yank | meow-pop-selection | meow-pop-all-selection | meow-query-replace | meow-query-replace-regexp | meow-last-buffer |
+| meow-expand-0 | meow-expand-9 | meow-expand-8 | meow-expand-7 | meow-expand-6 | meow-expand-5 | meow-expand-4 | meow-expand-3 | meow-expand-2 | meow-expand-1 | negative-argument | meow-reverse | meow-inner-of-thing | meow-bounds-of-thing | meow-beginning-of-thing | meow-end-of-thing | meow-append | meow-open-below | meow-back-word | meow-back-symbol | meow-change | meow-change-save | meow-delete | meow-line | meow-find | meow-find-expand | meow-keyboard-quit | meow-goto-line | meow-left | meow-left-expand | meow-insert | meow-open-above | meow-join | delete-indentation | meow-kill | meow-till | meow-till-expand | meow-mark-word | meow-mark-symbol | meow-next | meow-next-expand | meow-block | meow-block-expand | meow-prev | meow-prev-expand | meow-quit | meow-replace | meow-replace-save | meow-search | meow-pop-search | meow-right | meow-right-expand | undo-fu-only-undo | undo-fu-only-redo | meow-visit | meow-next-word | meow-next-symbol | meow-save | meow-yank | meow-pop-selection | meow-pop-all-selection | meow-query-replace | meow-query-replace-regexp | meow-last-buffer |
 
 * Meow Define Leader Key
 
@@ -138,10 +139,12 @@
 (global-set-key (kbd "<f5>") 'notdeft)
 (global-set-key (kbd "C-s") 'swiper-isearch)
 (global-set-key (kbd "<f9>") 'save-buffer)
+(global-set-key (kbd "C-c w") 'doom/save-and-kill-buffer)
+(global-set-key (kbd "C-c i") 'counsel-imenu)
 #+end_src
 
 #+RESULTS:
-: save-buffer
+: counsel-imenu
 
 
 * remap global keys

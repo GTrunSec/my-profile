@@ -42,6 +42,8 @@ in
         dnsperf
         pet
         yarn2nix
+        manix
+      ] ++ [
         (hunspellWithDicts [
           hunspellDicts.en-us
         ])
