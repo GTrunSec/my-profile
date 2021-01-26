@@ -854,13 +854,7 @@ appropriate.  In tables, insert a new row or end the table."
 
 
 ** company
-
-#+begin_src emacs-lisp :tangle "packages.el"
-(package! company-lsp)
-#+end_src
-
 #+begin_src emacs-lisp :tangle "config.el"
-(use-package! company-lsp)
 (after! company
   (setq company-idle-delay 0.5
         company-minimum-prefix-length 2
@@ -1027,7 +1021,7 @@ In that case, insert the number."
     company-tabnine
     ))
 
-(setq +lsp-company-backends '(company-lsp
+(setq +lsp-company-backends '(company-capf
                               company-files
                               company-yasnippet
                               :separate
@@ -2230,18 +2224,19 @@ a separator ' -> '."
     (format " - [%s] -> "
 	    time-stamp)))
 
-
 (defun org-super-links-quick-insert-inline-link ()
+  "Insert inline link regardless of variable `org-super-links-related-into-drawer' value."
   (interactive)
   ;; how to handle prefix here?
   (let ((org-super-links-related-into-drawer nil)
-	(org-super-links-link-prefix 'org-super-links-backlink-prefix-timestamp))
+	(org-super-links-link-prefix nil))
     (org-super-links-link)))
 
 (defun org-super-links-quick-insert-drawer-link ()
+  "Insert link into drawer regardless of variable `org-super-links-related-into-drawer' value."
   (interactive)
   ;; how to handle prefix here?
-  (let ((org-super-links-related-into-drawer (or org-super-links-related-into-drawer t))
+  (let ((org-super-links-related-into-drawer (or org-super-links-related-into-drawer nil))
 	(org-super-links-link-prefix 'org-super-links-link-prefix-timestamp))
     (org-super-links-link)))
 
@@ -2252,8 +2247,10 @@ a separator ' -> '."
         org-super-links-backlink-into-drawer nil
         org-super-links-link-prefix 'org-super-links-link-prefix-timestamp)
   )
-#+end_src
+  #+end_src
 
+  #+RESULTS:
+  : t
 
 
 ** org-wiki
