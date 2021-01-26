@@ -3,7 +3,8 @@
   killall -q lsyncd &
   PID=$!
   wait $PID
-  lsyncd -rsync /home/gtrun/Nextcloud/wallpaper/.attach /var/lib/photoprism/import/wallpaper-backup
-  lsyncd -rsync /home/gtrun/Nextcloud/phone /var/lib/photoprism/import/phone-backup
+  # sync to webdev
+  # lsyncd -rsync ~/Nextcloud/phone /var/lib/photoprism/import/phone-backup
+  # lsyncd -rsync ~/Nextcloud/oneplus /var/lib/photoprism/import/oneplus-backup
   lsyncd -rsync ~/.config/fcitx5 ~/.config/nixpkgs/dotfiles/fcitx5
 ''
