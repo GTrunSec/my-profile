@@ -556,18 +556,18 @@ Emacs or EMACS (Editor MACroS) is a family of text editors that are characterize
   (define-key snails-mode-map [remap next-line] #'snails-select-next-item)
   )
 #+end_src
-** good-scroll.el
+** iscroll
 
 #+begin_src emacs-lisp :tangle "packages.el"
-  (package! good-scroll :recipe (:host github
-                                 :repo "io12/good-scroll.el"))
+  (package! iscroll :recipe (:host github
+                                 :repo "casouri/iscroll"))
 #+end_src
 
 #+begin_src emacs-lisp :tangle "config.el"
-(use-package! good-scroll
+(use-package! iscroll
   :config
-  (good-scroll-mode 1)
-)
+  (add-hook! 'org-mode-hook 'iscroll-mode)
+  )
 #+end_src
 ** helm-tramp
 ** helm-rg
@@ -1828,41 +1828,14 @@ FACE defaults to inheriting from default and highlight."
 
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/setting.el"
 ;;; setting.el -*- lexical-binding: t; -*-
-  (setq org-publish-project-alist
-        '(("nsm"
-           :base-directory "~/Documents/org-notes/NSM-GTD"
-           :with-author "GTrunSec"
-           :publishing-function org-html-publish-to-html
-           :publishing-directory "~/Documents/my-blog/public/custom"
-           :exclude "README.org"
-           )
-          ("my-learning"
-           :base-directory "~/Documents/org-publish"
-           :publishing-function org-html-publish-to-html
-           :publishing-directory "~/Documents/my-blog/public/custom"
-           :exclude "README.org"
-           )
-          ("init"
-           :base-directory "~/.config/nixpkgs/dotfiles/doom-emacs"
-           :publishing-function org-html-publish-to-html
-           :publishing-directory "~/Documents/my-blog/public/custom"
-           )
-          ("jupyter-math"
-           :base-directory "~/Dropbox/Drop-project/my-mathematic-env/math"
-           :publishing-function org-html-publish-to-html
-           :publishing-directory "~/Documents/my-blog/public/custom"
-           )
-          ("art"
-           :base-directory "~/Documents/org-notes/art"
-           :publishing-function org-html-publish-to-html
-           :publishing-directory "~/Documents/my-blog/public/custom"
-           )
-          ("course"
-           :base-directory "~/Documents/org-notes/course"
-           :publishing-function org-html-publish-to-html
-           :publishing-directory "~/Documents/my-blog/public/custom"
-           )
-          ))
+(setq org-publish-project-alist
+      '(
+        ("init"
+         :base-directory "~/.config/nixpkgs/dotfiles/doom-emacs"
+         :publishing-function org-html-publish-to-html
+         :publishing-directory "~/Documents/my-blog/public/custom"
+         )
+        ))
 #+end_src
 
 
