@@ -86,7 +86,7 @@ Emacs or EMACS (Editor MACroS) is a family of text editors that are characterize
        fold              ; (nigh) universal code folding
        ;;(format +onsave)  ; automated prettiness
        ;;lispy             ; vim for lisp, for people who dont like vim
-       multiple-cursors  ; editing in many places at once
+       ;;multiple-cursors  ; editing in many places at once
        ;;objed             ; text object editing for the innocent
        ;;parinfer          ; turn lisp into python, sort of
        rotate-text       ; cycle region at point between text candidates
@@ -562,7 +562,7 @@ Emacs or EMACS (Editor MACroS) is a family of text editors that are characterize
 ** iscroll
 
 #+begin_src emacs-lisp :tangle "packages.el"
-  (package! iscroll :recipe (:host github
+(package! iscroll :recipe (:host github
                                  :repo "casouri/iscroll"))
 #+end_src
 
@@ -585,6 +585,27 @@ Emacs or EMACS (Editor MACroS) is a family of text editors that are characterize
 
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! helm-rg)
+#+end_src
+** fd-dired
+#+begin_src emacs-lisp :tangle "packages.el"
+(package! fd-dired :recipe (:host github
+                                 :repo "yqrashawn/fd-dired"))
+
+#+end_src
+
+#+begin_src emacs-lisp :tangle "config.el"
+(use-package! fd-dired)
+#+end_src
+
+** find-dupes-dired
+#+begin_src emacs-lisp :tangle "packages.el"
+(package! find-dupes-dired :recipe (:host github
+                                 :repo "ShuguangSun/find-dupes-dired"))
+
+#+end_src
+
+#+begin_src emacs-lisp :tangle "config.el"
+(use-package! find-dupes-dired)
 #+end_src
 
 * autoload

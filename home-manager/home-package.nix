@@ -31,6 +31,7 @@ in
         system-sendmail
         pypi2nix
         poetry
+        fdupes
         #vips
         nixpkgs-review
         #for emacs notdeft
