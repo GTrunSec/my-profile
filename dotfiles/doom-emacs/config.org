@@ -2624,16 +2624,21 @@ a separator ' -> '."
 ** Poly && ess
 
 - [[https://github.com/ShuguangSun/ess-view-data][ShuguangSun/ess-view-data: View data support for ESS]]
+#+begin_src emacs-lisp :tangle "packages.el"
+(unpin! polymode)
+(package! poly-markdown :recipe (:no-byte-compile t))
+#+end_src
 
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
 (use-package! polymode
 :config
   (add-hook 'org-brain-visualize-mode-hook #'org-brain-polymode)
 )
+
 (use-package! poly-markdown
   :config
   (add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown-mode))
-  )
+)
 #+end_src
 
 ** Scheme
