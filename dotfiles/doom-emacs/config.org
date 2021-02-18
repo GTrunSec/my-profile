@@ -1434,7 +1434,7 @@ FACE defaults to inheriting from default and highlight."
     ("posts/myself/love.org"         :key "l" :refile (:maxlevel . 5 ))
     ("posts/myself/qing.org"         :key "q" :refile (:maxlevel . 5 ))
     ("posts/myself/plan.org"         :key "p" :refile (:maxlevel . 5 ))
-    ("elfeed.org"         :key "e" :refile (:maxlevel . 5 ))
+    ("feed.org"         :agenda t :key "f" :refile (:maxlevel . 5 ))
     )
   (org-starter-def "~/Documents/org-notes/braindump"
     :files
@@ -1444,11 +1444,11 @@ FACE defaults to inheriting from default and highlight."
     ("myself-private/GTD/myself.org"                    :key "m" :refile (:maxlevel . 5 ))
     ("myself-private/GTD/Habit.org"                     :key "h" :refile (:maxlevel . 5 ))
     ("life/" :agenda t)
-    ("GuangTao-owner/" :agenda t)
-    ("GuangTao-owner/learn-music.org"          :agenda t :key "M" :refile (:maxlevel . 5 ))
-    ("GuangTao-owner/GuangTao-library.org"       :key "b" :refile (:maxlevel . 5 ))
+    ("guangtao/" :agenda t)
+    ("guangtao/learn_music.org"          :agenda t :key "M" :refile (:maxlevel . 5 ))
+    ("guangtao/guangtao's_library.org"       :key "b" :refile (:maxlevel . 5 ))
     ("life/" :agenda t)
-    ("life/life-goods.org"     :key "s" :refile (:maxlevel . 5 ))
+    ("life/life_goods.org"     :key "s" :refile (:maxlevel . 5 ))
     ("gaming/" :agenda t)
     ("journals/" :agenda t)
     ("hardware/" :agenda t)
@@ -1483,7 +1483,7 @@ FACE defaults to inheriting from default and highlight."
  _c_: config.org  _g_: gtd.org     _l_: love.org
  _n_: note        _h_: Habit.org    _w_: meow.org
  _m_: myself      _p_: Plan.org
- _b_: my-books    _e_: elfeed
+ _b_: my-books    _f_: feed
  _s_: life-goods
   "
 
@@ -1492,7 +1492,7 @@ FACE defaults to inheriting from default and highlight."
     ("g" org-starter-find-file:gtd)
     ("s" org-starter-find-file:life-goods)
     ("n" org-starter-find-file:notes)
-    ("e" org-starter-find-file:elfeed)
+    ("f" org-starter-find-file:feed)
     ("m" org-starter-find-file:myself)
     ("l" org-starter-find-file:love)
     ("h" org-starter-find-file:Habit)
@@ -1564,7 +1564,7 @@ FACE defaults to inheriting from default and highlight."
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/config.el"
 (use-package! org-books
   :config
-  (setq org-books-file "~/Documents/org-notes/braindump/GuangTao-owner/GuangTao-library.org")
+  (setq org-books-file "~/Documents/org-notes/braindump/guangtao/guangtao's_library.org")
   )
 #+end_src
 
