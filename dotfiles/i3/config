@@ -205,7 +205,8 @@ for_window [class="feh"] floating enable, border normal
 #for_window [class=""] fullscreen enable
 
 # Wallpaper
-exec_always --no-startup-id feh --randomize --bg-fill ~/.config/nixpkgs/dotfiles/wallpaper/.attach/12/004cda-72c7-4199-898a-e1c05e389f36/richard-rude-richardrude-d2f-hellrisecanyon-002_2019-07-27_16-32-49.jpeg
+exec_always --no-startup-id feh --randomize --bg-fill ~/Nextcloud/sync-photoprism/wallpaper/.attach/8f/59b01b-0a09-4249-af00-50e283e34c8c/20210216_002250screenshot.png
+
 exec --no-startup-id fcitx5 -d
 
 

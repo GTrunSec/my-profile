@@ -115,7 +115,7 @@
  '("df" . fd-dired)
   '("r" . counsel-recentf)
   '("f" . counsel-find-file)
-  '("F" . +ivy/projectile-find-file)
+  '("F" . project-find-file)
   '("a" . counsel-ag)
   '("s" . counsel-M-x)
   '("w" . ace-window)
@@ -141,7 +141,7 @@
 #+end_src
 
 #+RESULTS:
-| dired | counsel-recentf | counsel-find-file | +ivy/projectile-find-file | counsel-ag | counsel-M-x | ace-window | org-roam-insert | org-z-insert-link | org-z-knowledge-search | org-brain-visualize | org-brain-visualize-dwim | insert-current-date-time-inactive | insert-current-date-time-active | insert-current-date-time | bookmark-set | bookmark-bmenu-list | bm-toggle | +ivy/switch-buffer | +ivy/switch-workspace-buffer | helm-register | point-to-register | counsel-bookmark |
+| fd-dired | counsel-recentf | counsel-find-file | project-find-file | counsel-ag | counsel-M-x | ace-window | org-roam-insert | org-z-insert-link | org-z-knowledge-search | org-brain-visualize | org-brain-visualize-dwim | insert-current-date-time-inactive | insert-current-date-time-active | insert-current-date-time | bookmark-set | bookmark-bmenu-list | bm-toggle | +ivy/switch-buffer | +ivy/switch-workspace-buffer | helm-register | point-to-register | counsel-bookmark |
 * define global-set-key
 #+begin_src emacs-lisp :tangle "meow.el"
 (global-set-key (kbd "<f3>") 'gtrun/hydra-org-starter/body)
