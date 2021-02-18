@@ -151,10 +151,12 @@
 (global-set-key (kbd "<f9>") 'save-buffer)
 (global-set-key (kbd "C-c w") 'doom/save-and-kill-buffer)
 (global-set-key (kbd "C-c i") 'counsel-imenu)
+(global-set-key (kbd "C-x g") 'magit-status)
+
 #+end_src
 
 #+RESULTS:
-: counsel-imenu
+: magit-status
 
 
 * remap global keys

@@ -544,7 +544,6 @@ Emacs or EMACS (Editor MACroS) is a family of text editors that are characterize
 )
 #+end_src
 ** snails
-
 #+begin_src emacs-lisp :tangle "packages.el"
   (package! snails :recipe (:host github
                             :repo "manateelazycat/snails"
@@ -552,12 +551,12 @@ Emacs or EMACS (Editor MACroS) is a family of text editors that are characterize
 #+end_src
 
 #+begin_src emacs-lisp :tangle "config.el"
-(use-package! snails
-  :config
-  (setq snails-show-with-frame nil)
-  (define-key snails-mode-map [remap previous-line] #'snails-select-prev-item)
-  (define-key snails-mode-map [remap next-line] #'snails-select-next-item)
-  )
+;; (use-package! snails
+;;   :config
+;;   (setq snails-show-with-frame nil)
+;;   (define-key snails-mode-map [remap previous-line] #'snails-select-prev-item)
+;;   (define-key snails-mode-map [remap next-line] #'snails-select-next-item)
+;;   )
 #+end_src
 ** iscroll
 
@@ -2792,22 +2791,21 @@ a separator ' -> '."
 *** eysbrowse
 
 #+begin_src emacs-lisp :tangle "packages.el"
-(package! eyebrowse);
+(package! eyebrowse)
 #+end_src
 
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! eyebrowse
+  :hook (after-init . eyebrowse-mode)
   :config
-  (progn
-    (define-key eyebrowse-mode-map (kbd "M-1") 'eyebrowse-switch-to-window-config-1)
-    (define-key eyebrowse-mode-map (kbd "M-2") 'eyebrowse-switch-to-window-config-2)
-    (define-key eyebrowse-mode-map (kbd "M-3") 'eyebrowse-switch-to-window-config-3)
-    (define-key eyebrowse-mode-map (kbd "M-4") 'eyebrowse-switch-to-window-config-4)
-    (define-key eyebrowse-mode-map (kbd "M-5") 'eyebrowse-switch-to-window-config-5)
-    (eyebrowse-mode t)
-    (setq eyebrowse-new-workspace t)))
-    #+end_src
-
+  (define-key eyebrowse-mode-map (kbd "M-1") 'eyebrowse-switch-to-window-config-1)
+  (define-key eyebrowse-mode-map (kbd "M-2") 'eyebrowse-switch-to-window-config-2)
+  (define-key eyebrowse-mode-map (kbd "M-3") 'eyebrowse-switch-to-window-config-3)
+  (define-key eyebrowse-mode-map (kbd "M-4") 'eyebrowse-switch-to-window-config-4)
+  (define-key eyebrowse-mode-map (kbd "M-5") 'eyebrowse-switch-to-window-config-5)
+  (setq eyebrowse-new-workspace t)
+)
+ #+end_src
 ** window
 
 *** awesome-tab
@@ -3196,63 +3194,61 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 * Linux & MacOS
 
 #+begin_src emacs-lisp :tangle "config.el"
-(load! "./modules/my-linux.el")
-(load! "./modules/my-macos.el")
+(when IS-LINUX
+  (load! "linux.el")
+)
+(when IS-MAC
+  (load! "macos.el")
+)
 #+end_src
 
 ** Linux only
-
-#+begin_src emacs-lisp :tangle "config.el"
-(use-package! my-linux
-  :load-path "./modules"
-  :if (eq system-type 'gnu/linux)
-  :config
-  ;;(add-hook! 'emacs-startup-hook 'doom-modeline-mode)
-  ;;fix post hook only linux
-  (require 'savehist)
-  (setq-default cursor-type 'box)
-  (blink-cursor-mode -1)
-  (set-cursor-color "IndianRed3")
-  (setq bm-repository-file (f-join doom-private-dir "etc/bm-linux-data"))
-  (setq bookmark-default-file
-        (concat doom-private-dir "etc/bookmark-linux-default.el"))
+#+begin_src emacs-lisp :tangle "linux.el"
+;;(add-hook! 'emacs-startup-hook 'doom-modeline-mode)
+;;fix post hook only linux
+(require 'savehist)
+(setq-default cursor-type 'box)
+(blink-cursor-mode -1)
+(set-cursor-color "IndianRed3")
+(setq bm-repository-file (f-join doom-private-dir "etc/bm-linux-data"))
+(setq bookmark-default-file
+      (concat doom-private-dir "etc/bookmark-linux-default.el"))
 
 
-  (setq python-shell-interpreter "python")
-  (setq eaf-python-command "python")
+(setq python-shell-interpreter "python")
+(setq eaf-python-command "python")
 
-  (bookmark-load bookmark-default-file t)
+(bookmark-load bookmark-default-file t)
 
-  (setq org-roam-db-location "~/.emacs.d/.local/cache/org-roam.db")
+(setq org-roam-db-location "~/.emacs.d/.local/cache/org-roam.db")
 
-  (when (not window-system)
-    (xterm-mouse-mode 1)
-    )
-  (setq org-crypt-key "24945FE0DBD04F4C045025F96F92B3E8F942D425")
+(when (not window-system)
+  (xterm-mouse-mode 1)
+  )
+(setq org-crypt-key "24945FE0DBD04F4C045025F96F92B3E8F942D425")
 
-  (set-face-attribute
-   'default nil
-   :font (font-spec :name "-PfEd-Fantasque Sans Mono-bold-italic-normal-*-*-*-*-*-m-0-iso10646-1"
-                    :weight 'normal
-                    :slant 'normal
-                    :size 12.0))
+(set-face-attribute
+ 'default nil
+ :font (font-spec :name "-PfEd-Fantasque Sans Mono-bold-italic-normal-*-*-*-*-*-m-0-iso10646-1"
+                  :weight 'normal
+                  :slant 'normal
+                  :size 12.0))
 
-  (when (display-graphic-p)
-    (dolist (charset '(kana han cjk-misc bopomofo))
-      (set-fontset-font (frame-parameter nil 'font) charset
-                        (font-spec :family "Weibei SC" :size 55)))
-    )
-
-  (define-key org-mode-map (kbd "C-c l") 'grab-x-link)
-
-  (setq inferior-julia-program-name "/run/current-system/sw/bin/julia")
-  ;; (setq jupyter-runtime-directory "~/.local/share/jupyter/runtime")
-  (add-hook 'ob-async-pre-execute-src-block-hook
-            '(lambda ()
-               (setq inferior-julia-program-name "/run/current-system/sw/bin/julia")))
+(when (display-graphic-p)
+  (dolist (charset '(kana han cjk-misc bopomofo))
+    (set-fontset-font (frame-parameter nil 'font) charset
+                      (font-spec :family "Weibei SC" :size 55)))
   )
 
+(define-key org-mode-map (kbd "C-c l") 'grab-x-link)
+
+(setq inferior-julia-program-name "/run/current-system/sw/bin/julia")
+;; (setq jupyter-runtime-directory "~/.local/share/jupyter/runtime")
+(add-hook 'ob-async-pre-execute-src-block-hook
+          '(lambda ()
+             (setq inferior-julia-program-name "/run/current-system/sw/bin/julia")))
 #+end_src
+
 
 *** eaf
 
@@ -3264,7 +3260,6 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
                             :no-byte-compile t))
   )
 #+end_src
-
 
 
 #+begin_src emacs-lisp :tangle "config.el"
@@ -3293,22 +3288,12 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
   :if (eq system-type 'gnu/linux)
   )
 #+end_src
-*** end line of linux setting
-#+begin_src emacs-lisp :tangle "./modules/my-linux.el"
-;;; my-linux.el -*- lexical-binding: t; -*-
-(provide 'my-linux)
-#+end_src
 
-** my-MacOS
-
-#+begin_src emacs-lisp :tangle "config.el"
-(use-package! my-macos
-:load-path "./modules"
-:if (memq window-system '(mac ns))
-:config
- (setq bookmark-default-file
-        (concat doom-private-dir "etc/bookmark-macos-default.el"))
- (bookmark-load bookmark-default-file t)
+** My MacOS
+#+begin_src emacs-lisp :tangle "macos.el"
+(setq bookmark-default-file
+      (concat doom-private-dir "etc/bookmark-macos-default.el"))
+(bookmark-load bookmark-default-file t)
 
 (setq-default cursor-type 'box)
 (blink-cursor-mode -1)
@@ -3319,7 +3304,6 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 (setq org-roam-db-location "~/.emacs.d/.local/cache/org-roam-macos.db")
 
 (define-key org-mode-map (kbd "C-c l") 'org-mac-grab-link)
-;;(eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
 
 (set-face-attribute
  'default nil
@@ -3338,54 +3322,41 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
 (setq ispell-program-name "~/.nix-profile/bin/ispell")
 
-;; (setq lsp-python-ms-executable
-;;       "~/src/python-language-server/output/bin/Release/osx-x64/publish/Microsoft.Python.LanguageServer")
-
 (setq inferior-julia-program-name "/usr/local/bin/julia")
 
 (add-hook 'ob-async-pre-execute-src-block-hook
-        '(lambda ()
-           (setq inferior-julia-program-name "/usr/local/bin/julia")))
-;;(add-hook! 'emacs-startup-hook 'doom-modeline-mode)
-)
-
+          '(lambda ()
+             (setq inferior-julia-program-name "/usr/local/bin/julia")))
 #+end_src
 
 ** macos use packages
 
 #+begin_src emacs-lisp :tangle "packages.el"
-(package! cnfonts)
-(package! exec-path-from-shell)
+(when IS-MAC
+  (package! cnfonts)
+  (package! exec-path-from-shell)
+)
 #+end_src
 
-#+begin_src emacs-lisp :tangle "./modules/my-macos.el"
+#+begin_src emacs-lisp :tangle "config.el"
 ;;; my-macos.el -*- lexical-binding: t; -*-
-(use-package! cnfonts)
-(use-package! exec-path-from-shell)
-(define-key! awesome-tab-mode-map
-  "s-1" #'awesome-tab-select-visible-tab
-  "s-2" #'awesome-tab-select-visible-tab
-  "s-3" #'awesome-tab-select-visible-tab
-  "s-4" #'awesome-tab-select-visible-tab
-  "s-5" #'awesome-tab-select-visible-tab
-  "s-6" #'awesome-tab-select-visible-tab
-  "s-7" #'awesome-tab-select-visible-tab
-  "s-8" #'awesome-tab-select-visible-tab
-  "s-9" #'awesome-tab-select-visible-tab
+(when IS-MAC
+  (use-package! cnfonts)
+  (use-package! exec-path-from-shell)
+  (define-key! awesome-tab-mode-map
+    "s-1" #'awesome-tab-select-visible-tab
+    "s-2" #'awesome-tab-select-visible-tab
+    "s-3" #'awesome-tab-select-visible-tab
+    "s-4" #'awesome-tab-select-visible-tab
+    "s-5" #'awesome-tab-select-visible-tab
+    "s-6" #'awesome-tab-select-visible-tab
+    "s-7" #'awesome-tab-select-visible-tab
+    "s-8" #'awesome-tab-select-visible-tab
+    "s-9" #'awesome-tab-select-visible-tab
+    )
   )
-(provide 'my-macos)
 #+end_src
 * Bugs
-
-** <2020-10-13 Tue> magit commit server error
-
-  with-editor
-  #+begin_src sh :async t :tangle nil
-  rm -rf ~/.emacs.d/.local/straight/repos/with-editor
-  rm -rf ~/.emacs.d/.local/straight/build/with-editor
-  #+end_src
-  rebuild
-
 * [[https://github.com/r0man/docopt.el][r0man/docopt.el: A Docopt implementation in Emacs Lisp.]]
 
 * Cache
