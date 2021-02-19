@@ -4,7 +4,7 @@ let
   inherit (pkgs) tmuxPlugins tmux;
   inherit (lib) optionalString maybeEnv;
   inherit (pkgs.stdenv) isLinux mkDerivation;
-    resurrect-patched = (tmuxPlugins.resurrect.overrideAttrs (oldAttrs: rec {
+  resurrect-patched = (tmuxPlugins.resurrect.overrideAttrs (oldAttrs: rec {
     src = pkgs.fetchFromGitHub {
       owner = "tmux-plugins";
       repo = "tmux-resurrect";
@@ -20,14 +20,14 @@ let
 in
 {
   programs.tmux = {
-  enable = true;
-  clock24 = true;
-  keyMode = "vi";
-  extraConfig = /* tmux */(if pkgs.stdenv.isLinux then ''
-   set-option -g default-shell /run/current-system/sw/bin/zsh
-   '' else ''
-   set-option -g default-shell ~/.nix-profile/bin/zsh
-   '' ) + ''
+    enable = true;
+    clock24 = true;
+    keyMode = "vi";
+    extraConfig = /* tmux */(if pkgs.stdenv.isLinux then ''
+      set-option -g default-shell /run/current-system/sw/bin/zsh
+    '' else ''
+      set-option -g default-shell ~/.nix-profile/bin/zsh
+    '') + ''
 
    bind r source-file ~/.tmux.conf \; display-message "Config reloaded..."
    set -gu prefix2
@@ -68,10 +68,10 @@ set-option -g display-panes-colour colour166 #orange
 
   '';
 
-  plugins = with tmuxPlugins; [
-    {
-      plugin = resurrect-patched;
-      extraConfig = /* tmux */ ''
+    plugins = with tmuxPlugins; [
+      {
+        plugin = resurrect-patched;
+        extraConfig = /* tmux */ ''
           set -g @resurrect-capture-pane-contents "on"
           set -g @resurrect-processes "mosh-client man '~yarn watch'"
           ${optionalString isLinux /* tmux */ ''
@@ -80,7 +80,7 @@ set-option -g display-panes-colour colour166 #orange
           set -g @resurrect-process-match-strategy "basename"
           set -g @resurrect-strategy-nvim "session"
         '';
-    }
-  ]; 
- };
+      }
+    ];
+  };
 }

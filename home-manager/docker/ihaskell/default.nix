@@ -1,4 +1,4 @@
-  # default.nix
+# default.nix
 let
   pkgs = {
     ihaskell = builtins.fetchTarball {
@@ -10,10 +10,10 @@ let
       sha256 = "18d01cw6s6k9fnac3vq0k6inybqalkz4ak88pw67q4wqzq9rc07l";
     };
   };
-  nixpkgs = import pkgs.nixpkgs {};
+  nixpkgs = import pkgs.nixpkgs { };
   NB_USER = "gtrun";
   NB_UID = "1000";
-  dockerEtc = nixpkgs.runCommand "docker-etc" {} ''
+  dockerEtc = nixpkgs.runCommand "docker-etc" { } ''
     mkdir -p $out/etc/pam.d
 
     echo "root:x:0:0::/root:/bin/sh" > $out/etc/passwd
@@ -29,24 +29,25 @@ let
   ihaskell = import "${pkgs.ihaskell}/release.nix" {
     inherit nixpkgs;
     compiler = "ghc864";
-    packages = self: with self; [];
+    packages = self: with self; [ ];
   };
-in nixpkgs.dockerTools.buildLayeredImage {
-    name = "ihaskell-nix";
-    tag = "latest";
-    contents =  [
-      dockerEtc
-      ihaskell
-      nixpkgs.bashInteractive
-    ];
-    config = {
-      Cmd = ["ihaskell-notebook" "--ip" "0.0.0.0"];
-      User = NB_USER;
-      WorkingDir = "/home/${NB_USER}";
-    };
-    extraCommands = ''
-      mkdir -m 1777 ./tmp
-      mkdir -m 777 -p ./home/${NB_USER}
-    '';
-    maxLayers = 100;
+in
+nixpkgs.dockerTools.buildLayeredImage {
+  name = "ihaskell-nix";
+  tag = "latest";
+  contents = [
+    dockerEtc
+    ihaskell
+    nixpkgs.bashInteractive
+  ];
+  config = {
+    Cmd = [ "ihaskell-notebook" "--ip" "0.0.0.0" ];
+    User = NB_USER;
+    WorkingDir = "/home/${NB_USER}";
+  };
+  extraCommands = ''
+    mkdir -m 1777 ./tmp
+    mkdir -m 777 -p ./home/${NB_USER}
+  '';
+  maxLayers = 100;
 }

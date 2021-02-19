@@ -53,7 +53,8 @@
         settings = {
           font.size = 30.0;
           font.normal.family = "Fantasque Sans Mono";
-        };};
+        };
+      };
     })
 
 
@@ -63,11 +64,11 @@
           font.size = 25.0;
           font.normal.family = "Fantasque Sans Mono";
           alt_send_esc = true;
-          key_bindings =[
+          key_bindings = [
             {
-            key = "X";
-            mods = "Alt";
-            chars = "\x1bx";
+              key = "X";
+              mods = "Alt";
+              chars = "\x1bx";
             }
           ];
         };

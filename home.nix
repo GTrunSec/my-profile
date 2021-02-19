@@ -1,13 +1,10 @@
 { config, pkgs, lib, ... }:
-
 let
-  
   home_directory = builtins.getEnv "HOME";
   log_directory = "${home_directory}/logs";
   all-hies = (fetchTarball "https://github.com/infinisil/all-hies/tarball/534ac517b386821b787d1edbd855b9966d0c0775");
   emacs-overlay-rev = (builtins.fromJSON (builtins.readFile ./flake.lock)).nodes.emacs-overlay.locked.rev;
 in
-
 {
   imports = [
     ./home-manager
@@ -21,7 +18,7 @@ in
       nixpkgs.overlays = [
         (import ./nixos-flk/pkgs/default.nix)
         (import ./nixos-flk/pkgs/my-node-packages)
-        (import all-hies {}).overlay
+        (import all-hies { }).overlay
         (import ./home-manager/packages-overlay.nix)
         (import ./home-manager/programs/nix-gcc-emacs-darwin/emacs.nix)
         (import (builtins.fetchTarball {
@@ -47,7 +44,7 @@ in
           with-fingerprint = true;
         };
       };
-      
+
       programs.fzf = {
         enable = true;
         enableBashIntegration = true;
@@ -59,13 +56,12 @@ in
         path = "${home_directory}/.nix-defexpr/channels/home-mananger";
       };
 
-      home.sessionVariables = {
-      };
+      home.sessionVariables = { };
     })
 
 
     (mkIf pkgs.stdenv.isLinux {
-      services.gpg-agent ={
+      services.gpg-agent = {
         defaultCacheTtl = 180000;
         defaultCacheTtlSsh = 180000;
         enable = true;
@@ -85,7 +81,7 @@ in
         pinentry-program ${pkgs.pinentry_mac}/Applications/pinentry-mac.app/Contents/MacOS/pinentry-mac
       '';
     })
-    
+
     (mkIf pkgs.stdenv.isLinux {
       systemd.user.startServices = true;
     })

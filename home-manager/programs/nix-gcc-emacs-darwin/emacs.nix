@@ -1,7 +1,7 @@
 let
   sources = import ./nix/sources.nix;
   nixpkgs = sources."nixpkgs-unstable";
-  pkgs = import <nixpkgs> {};
+  pkgs = import <nixpkgs> { };
   emacs-nativecomp = sources."emacs-nativecomp";
   libPath = with pkgs; lib.concatStringsSep ":" [
     "${lib.getLib libgccjit}/lib/gcc/${stdenv.targetPlatform.config}/${libgccjit.version}"
@@ -12,9 +12,10 @@ let
     pkgs.emacs
     [
 
-      (drv: drv.override { srcRepo = true;
-                           imagemagick = pkgs.imagemagick;
-                         })
+      (drv: drv.override {
+        srcRepo = true;
+        imagemagick = pkgs.imagemagick;
+      })
 
       (
         drv: drv.overrideAttrs (
@@ -26,9 +27,10 @@ let
             };
 
             configureFlags = old.configureFlags
-                             ++ [ "--with-ns"
-	    	                          "--with-imagemagick"
-		                            ];
+              ++ [
+              "--with-ns"
+              "--with-imagemagick"
+            ];
 
             patches = [
               (
@@ -76,7 +78,7 @@ let
 in
 _: _:
 {
-  ci = (import ./nix {}).ci;
+  ci = (import ./nix { }).ci;
 
   inherit emacsGccDarwin;
 
@@ -85,9 +87,9 @@ _: _:
     paths = [ emacsGccDarwin ];
     buildInputs = [ pkgs.makeWrapper ];
     postBuild = ''
-        wrapProgram $out/bin/emacs \
-        --set LIBRARY_PATH ${libPath}
-      '';
+      wrapProgram $out/bin/emacs \
+      --set LIBRARY_PATH ${libPath}
+    '';
     meta.platforms = pkgs.stdenv.lib.platforms.linux;
     passthru.nativeComp = true;
     src = emacsGccDarwin.src;

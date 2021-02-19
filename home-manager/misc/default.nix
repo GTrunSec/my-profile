@@ -2,5 +2,5 @@
 {
   imports = [
     #./zeek-pkgs.nix
-   ];
+  ];
 }

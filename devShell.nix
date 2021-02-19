@@ -15,5 +15,5 @@ pkgs.mkShell {
     nix-channel --update
     home-manager build -f home.nix -I nixpkgs=${pkgsChannel}
     exit
-    '';
+  '';
 }

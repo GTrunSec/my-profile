@@ -3,7 +3,7 @@
   config = with lib; mkMerge [
     (mkIf pkgs.stdenv.isLinux {
       programs = {
-        autorandr ={
+        autorandr = {
           enable = true;
           # hooks.postswitch ={
           #   "fix_screen" = "${pkgs.stumpish}/bin/stumpish refresh-heads";

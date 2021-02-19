@@ -8,18 +8,22 @@ let
     rev = "6fb72eecdcb533637f5a04ac635aa666b736cf50";
     sha256 = "0czqgizxq7ckmqw9xbjik7i1dfwgc1ci8fvp1fsddb35qrqi857a";
   };
+
   ls-colors = pkgs.runCommand "ls-colors" { } ''
     mkdir -p $out/bin $out/share
     ln -s ${pkgs.coreutils}/bin/ls $out/bin/ls
     ln -s ${pkgs.coreutils}/bin/dircolors $out/bin/dircolors
     cp ${LS_COLORS}/LS_COLORS $out/share/LS_COLORS
   '';
-  clj2nix = pkgs.callPackage (pkgs.fetchFromGitHub {
-    owner = "hlolli";
-    repo = "clj2nix";
-    rev = "89d1cda232175b588c7774e638c9ebfaaedea0e3";
-    sha256 = "sha256-IOJOxcox3/ArMpRU4oZd2PgIX6OiW+TTr4z6JvyIXPY=";
-  }) {};
+
+  clj2nix = pkgs.callPackage
+    (pkgs.fetchFromGitHub {
+      owner = "hlolli";
+      repo = "clj2nix";
+      rev = "89d1cda232175b588c7774e638c9ebfaaedea0e3";
+      sha256 = "sha256-IOJOxcox3/ArMpRU4oZd2PgIX6OiW+TTr4z6JvyIXPY=";
+    })
+    { };
 in
 {
   config = with lib; mkMerge [

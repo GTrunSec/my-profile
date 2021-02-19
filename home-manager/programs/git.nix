@@ -1,4 +1,4 @@
-{pkgs, lib, ...}:
+{ pkgs, lib, ... }:
 {
   config = with lib; mkMerge [
     (mkIf (pkgs.stdenv.isLinux || pkgs.stdenv.isDarwin) {
@@ -7,13 +7,21 @@
         userName = "GTrunSec";
         userEmail = "gtrunsec@hardenedlinux.org";
         signing.key = "761C8EBEA940960E";
-        ignores = [ ".projectile" ".indium.json" ".ccls-cache"
-                    ".Rhistory" ".notdeft*"  "eaf"
-                    ".auctex-auto"
-                    "vast.db" ".DS_Store" "result"
-                    ".ipynb_checkpoints" "__pycache__"
-                    "*.org.organice-bak"
-                  ];
+        ignores = [
+          ".projectile"
+          ".indium.json"
+          ".ccls-cache"
+          ".Rhistory"
+          ".notdeft*"
+          "eaf"
+          ".auctex-auto"
+          "vast.db"
+          ".DS_Store"
+          "result"
+          ".ipynb_checkpoints"
+          "__pycache__"
+          "*.org.organice-bak"
+        ];
         extraConfig = {
 
           github = {
@@ -30,10 +38,11 @@
             autostash = true;
           };
           core = {
-            pager = [ ''
-            delta --plus-color="#012800" --minus-color="#340001"
+            pager = [
               ''
-                    ];
+                delta --plus-color="#012800" --minus-color="#340001"
+              ''
+            ];
           };
           credential = {
             helper = "store";
@@ -53,5 +62,5 @@
       programs.git.signing.signByDefault = false;
     })
   ];
-  
+
 }

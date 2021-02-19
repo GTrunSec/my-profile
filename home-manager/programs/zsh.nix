@@ -17,8 +17,16 @@ in
         dotDir = ".config/zsh";
         oh-my-zsh = {
           enable = true;
-          plugins = [ "git" "sudo" "z" "docker" "git-flow" "tmux" "history-substring-search" "python"
-                    ];
+          plugins = [
+            "git"
+            "sudo"
+            "z"
+            "docker"
+            "git-flow"
+            "tmux"
+            "history-substring-search"
+            "python"
+          ];
           theme = "xiong-chiamiov-plus";
         };
         history = {
@@ -30,32 +38,32 @@ in
           size = 10000000;
         };
         shellAliases = with pkgs; {
-          l     = "exa -lah";
-          f     = "rg --files";
-          E     = "env SUDO_EDITOR=\"emacsclient\" sudo -e";
-          e     = "emacsclient";
-          em    = "emacs";
-          cp    = "cp -i";
-          mv    = "mv -i";
+          l = "exa -lah";
+          f = "rg --files";
+          E = "env SUDO_EDITOR=\"emacsclient\" sudo -e";
+          e = "emacsclient";
+          em = "emacs";
+          cp = "cp -i";
+          mv = "mv -i";
           ##update Nixpkgs 
-          un    = "~/.config/nixpkgs  && git fetch && git pull";
-          overlay-go   = "cd ~/.config/nixpkgs/nixos/overlays/go";
-          overlay-python   = "cd ~/.config/nixpkgs/nixos/overlays/python";
-          overlay-custom   = "cd ~/.config/nixpkgs/nixos/overlays/custom";
-          ag0   = "rg --max-depth=1";
-          pcat  = "${python3Packages.pygments}/bin/pygmentize";
-          so    = "pactl set-default-sink (pacmd list-sinks | awk \\\'/name:.*usb/{if (a != \"\") print a;} {a=$NF}\\\')";
-          si    = "pactl set-default-sink (pacmd list-sinks | awk \\\'/name:.*pci/{if (a != \"\") print a;} {a=$NF}\\\')";
+          un = "~/.config/nixpkgs  && git fetch && git pull";
+          overlay-go = "cd ~/.config/nixpkgs/nixos/overlays/go";
+          overlay-python = "cd ~/.config/nixpkgs/nixos/overlays/python";
+          overlay-custom = "cd ~/.config/nixpkgs/nixos/overlays/custom";
+          ag0 = "rg --max-depth=1";
+          pcat = "${python3Packages.pygments}/bin/pygmentize";
+          so = "pactl set-default-sink (pacmd list-sinks | awk \\\'/name:.*usb/{if (a != \"\") print a;} {a=$NF}\\\')";
+          si = "pactl set-default-sink (pacmd list-sinks | awk \\\'/name:.*pci/{if (a != \"\") print a;} {a=$NF}\\\')";
         };
 
         initExtraBeforeCompInit = (builtins.readFile ../../dotfiles/pre-zsh-Compinit) + ''
-        eval $(${pkgs.coreutils}/bin/dircolors -b ~/.config/nixpkgs/dotfiles/LS_COLORS)
+          eval $(${pkgs.coreutils}/bin/dircolors -b ~/.config/nixpkgs/dotfiles/LS_COLORS)
         '';
 
         initExtra = (builtins.readFile ../../dotfiles/zshrc) +
-                    ''
-                     ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#fdf6e3,bg=#586e75,bold,underline"
-                    ''
+          ''
+            ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#fdf6e3,bg=#586e75,bold,underline"
+          ''
         ;
 
         plugins =
@@ -128,17 +136,17 @@ in
         SPACESHIP_VI_MODE_SHOW=false
         SPACESHIP_BATTERY_THRESHOLD=30
         setopt HIST_IGNORE_ALL_DUPS
-     '';
+      '';
     })
     (mkIf pkgs.stdenv.isDarwin {
-      programs.zsh.sessionVariables ={
-        PATH =  "$HOME/.nix-profile/bin:/bin:/usr/bin:/run/current-system/sw/bin/:/usr/local/bin:/Applications/kitty.app/Contents/MacOS:/sbin/:/usr/sbin/";
+      programs.zsh.sessionVariables = {
+        PATH = "$HOME/.nix-profile/bin:/bin:/usr/bin:/run/current-system/sw/bin/:/usr/local/bin:/Applications/kitty.app/Contents/MacOS:/sbin/:/usr/sbin/";
         TMUX_TMPDIR = "$HOME/.config/.";
         LANG = "en_US.UTF-8";
         export = "LC_ALL=en_US.UTF-8";
       };
       programs.zsh.initExtra = ''
-      source  ~/.nix-profile/etc/profile.d/nix.sh
+        source  ~/.nix-profile/etc/profile.d/nix.sh
       '';
     })
   ];

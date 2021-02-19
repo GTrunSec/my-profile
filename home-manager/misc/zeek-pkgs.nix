@@ -8,10 +8,10 @@ in
 {
   home.file = {
     ".zeek-script/__load__.zeek".text = ''
-    @load ${hardenedlinux-zeek-script}/scripts
-    @load ${spl-spt}/scripts
-    ##@load ${IRC-Zeek-package}
-    @load ${IRC-Behavioral-Analysis}/zeek/irc_records.zeek
+      @load ${hardenedlinux-zeek-script}/scripts
+      @load ${spl-spt}/scripts
+      ##@load ${IRC-Zeek-package}
+      @load ${IRC-Behavioral-Analysis}/zeek/irc_records.zeek
     '';
   };
 }

@@ -8,11 +8,11 @@ let
 
   voila = pkgs.writeScriptBin "voila" ''
     nix-shell ${nixpkgs-hardenedlinux}/pkgs/python/env/voila --command "voila $1"
-    '';
+  '';
 
   timesketch = pkgs.writeScriptBin "timesketch" ''
     nix-shell ${nixpkgs-hardenedlinux}/pkgs/python/env/timesketch/shell.nix --command "tsctl $1"
-      '';
+  '';
 in
 {
   config = with lib; mkMerge [
@@ -24,5 +24,4 @@ in
       ];
     })
   ];
-
 }

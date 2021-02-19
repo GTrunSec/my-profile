@@ -2,10 +2,10 @@
 let
   customVscode = (import ../nixos-flk/profiles/code/vscode.nix { inherit pkgs; });
 
-  R-with-my-packages = pkgs.rWrapper.override{
-    packages = with pkgs.rPackages; [ ggplot2 dplyr xts ]; };
+  R-with-my-packages = pkgs.rWrapper.override {
+    packages = with pkgs.rPackages; [ ggplot2 dplyr xts ];
+  };
 in
-
 {
   config = with lib; mkMerge [
     (mkIf pkgs.stdenv.isDarwin {
@@ -13,10 +13,12 @@ in
         customVscode
         nixFlakes
         #R-with-my-packages
-      ] ++ [ #library
+      ] ++ [
+        #library
         libnotify
         ffmpegthumbnailer
-      ] ++ [ #misc
+      ] ++ [
+        #misc
         git
         fd
         wget
@@ -30,20 +32,21 @@ in
         ripgrep
         ag
         gitAndTools.delta
-        (bundler.overrideAttrs(old:  {
+        (bundler.overrideAttrs (old: {
           name = "bundler-2.1.4";
           src = pkgs.fetchurl {
             url = "https://rubygems.org/gems/bundler-2.1.4.gem";
             sha256 = "12glbb1357x91fvd004jgkw7ihlkpc9dwr349pd7j83isqhls0ah";
           };
           postFixup = ''
-          mv $out/bin/bundle $out/bin/ruby-bundle
-          sed -i -e "s/activate_bin_path/bin_path/g" $out/bin/ruby-bundle
-            '';
+            mv $out/bin/bundle $out/bin/ruby-bundle
+            sed -i -e "s/activate_bin_path/bin_path/g" $out/bin/ruby-bundle
+          '';
         }))
         jekyll
         #emacs org notice
-      ] ++ [ #haskell packages
+      ] ++ [
+        #haskell packages
         ##cachix use ghcide-nix
         #cachix use all-hies
         #haskellPackages.hie
@@ -54,13 +57,15 @@ in
         nodePackages.pyright
         nodePackages.mathjax-node-cli
         nodePackages.mathjax
-      ] ++ [ #go packages
+      ] ++ [
+        #go packages
         govet
         gocode
         gopls
         hugo
         go
-      ] ++ [  # latex + packages
+      ] ++ [
+        # latex + packages
 
       ];
     })
