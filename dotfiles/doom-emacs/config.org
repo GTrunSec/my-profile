@@ -2676,6 +2676,25 @@ a separator ' -> '."
 
 *** TODO [[https://github.com/gcv/julia-snail][gcv/julia-snail: An Emacs development environment for Julia]]
 
+*** FelipeLema/julia-formatter.el
+  #+begin_src emacs-lisp :tangle "./modules/private/my-code/packages.el"
+(package! julia-formatter :recipe (:type git :repo "https://codeberg.org/FelipeLema/julia-formatter.el.git"))
+#+end_src
+
+#+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
+(use-package! julia-formatter
+  :config
+  (add-hook 'julia-mode-hook
+            (lambda ()
+              (add-hook 'before-save-hook
+                        (lambda ()
+                          (julia-formatter-format-region
+                           (point-min)
+                           (point-max)))
+                        nil
+                        t)))
+  )
+#+end_src
 ** python
 
 #+begin_src emacs-lisp :tangle "./modules/private/my-code/packages.el"
