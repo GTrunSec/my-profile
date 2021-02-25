@@ -416,7 +416,10 @@ Emacs or EMACS (Editor MACroS) is a family of text editors that are characterize
   )
 #+end_src
 
-** undo
+** undo-fu
+
+- [[https://gitlab.com/ideasman42/emacs-undo-fu-session][ideasman42 / emacs-undo-fu-session · GitLab]]
+- [[https://gitlab.com/ideasman42/emacs-undo-fu][ideasman42 / emacs-undo-fu · GitLab]]
 
 #+begin_src emacs-lisp :tangle "packages.el"
 (package! undo-fu)
@@ -2245,9 +2248,6 @@ a separator ' -> '."
   )
   #+end_src
 
-  #+RESULTS:
-  : t
-
 
 ** org-wiki
 
@@ -2496,7 +2496,8 @@ a separator ' -> '."
 
 *** chinese-latex
 
-#+begin_src emacs-lisp :tangle  "./modules/private/my-code/my-latex.el"
+
+"./modules/private/my-code/my-latex.el"
 (after! latex
       (add-to-list 'org-latex-classes '("article" "\\documentclass[a4paper,11pt]{article}
         [NO-DEFAULT-PACKAGES]
@@ -2639,6 +2640,7 @@ a separator ' -> '."
   (add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown-mode))
 )
 #+end_src
+
 
 ** Scheme
 

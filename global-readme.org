@@ -117,27 +117,6 @@ brew install rxvt-unicode
 *** [[https://termius.com/][Termius]]
 
 * window
-** Login Manager
-*** [[https://github.com/adi1090x/slim_themes][adi1090x/slim_themes: A Beautiful Collection Of SLiM Themes...]]
-** i3
-*** [[https://github.com/teto/i3-dispatch][teto/i3-dispatch: Allows i3 to move focus differently depending on the focused window]]
-*** [[https://github.com/resloved/i3][resloved/i3: 🔲 — Rounded i3-gaps]]
- - [[https://github.com/Airblader/i3/wiki/Building-from-source][Building from source · Airblader/i3 Wiki]]
-
-
-*** [[https://github.com/cornerman/i3-easyfocus][cornerman/i3-easyfocus: Focus and select windows in i3]]
-*** [[https://github.com/SuperPrower/i3lock-fancier][SuperPrower/i3lock-fancier: Yet another i3lock fork. Now with configuration file!]]
-** [MacOS] [[https://github.com/koekeishiya/yabai][koekeishiya/yabai: A tiling window manager for macOS based on binary space partitioning]] 
-** rofi
-*** [[https://github.com/davatorium/rofi-scripts/tree/master][davatorium/rofi-scripts: Small scripts for use with rofi]]
-** Kwin
-*** [[https://github.com/lingtjien/Grid-Tiling-Kwin][lingtjien/Grid-Tiling-Kwin: A kwin script that automatically tiles windows]]
-** Xmonad
-*** [[https://wiki.haskell.org/Xmonad/Using_xmonad_in_Gnome#Gnome3][Xmonad/Using xmonad in Gnome - HaskellWiki]]
-*** https://github.com/Gekkio/gnome-session-xmonad
-*** [[https://xmonad.org/manpage.html][https://xmonad.org/manpage.html]]
-** Polybar
-*** [[https://github.com/rmrfasterisk/dotfiles/blob/master/.config/polybar/scripts/colors-dark.sh][dotfiles/colors-dark.sh at master · rmrfasterisk/dotfiles]]
 * theme
 ** GTK
 *** [[https://www.reddit.com/r/unixporn/comments/crlaoo/fluxbox_blossom_theme/][[Fluxbox] Blossom theme : unixporn]]

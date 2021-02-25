@@ -5,12 +5,32 @@ let
   ];
 
   nixpkgs = import ./misc/stable-pkgs.nix { inherit overlays; };
-
 in
 {
   config = with lib; mkMerge [
     (mkIf pkgs.stdenv.isDarwin {
       home.packages = with nixpkgs;[
+        (texlive.combine
+          {
+            inherit (texlive)
+              collection-plaingeneric
+              collection-latexextra
+              collection-fontsrecommended
+              collection-pictures
+              collection-bibtexextra
+              collection-mathscience
+              collection-langgerman
+              scheme-basic
+              xetex
+              cjk
+              ctex
+              xecjk
+              dvipng
+              fontspec
+              euenc;
+          }
+        )
+
         vips
       ] ++ [
         (python37.withPackages (nixpkgs: with nixpkgs; [
@@ -26,26 +46,6 @@ in
           hpi
           mypy
         ] ++ [
-          (texlive.combine
-            {
-              inherit (texlive)
-                collection-plaingeneric
-                collection-latexextra
-                collection-fontsrecommended
-                collection-pictures
-                collection-bibtexextra
-                collection-mathscience
-                collection-langgerman
-                scheme-basic
-                xetex
-                cjk
-                ctex
-                xecjk
-                dvipng
-                fontspec
-                euenc;
-            }
-          )
         ]))
       ];
     })
