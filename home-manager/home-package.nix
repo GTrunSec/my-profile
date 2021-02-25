@@ -36,6 +36,7 @@ in
         pypi2nix
         poetry
         fdupes
+        asciinema
         #vips
         nixpkgs-review
         #for emacs notdeft

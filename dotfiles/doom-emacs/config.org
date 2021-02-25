@@ -3174,7 +3174,7 @@ Other buffer group by `awesome-tab-get-group-name' with project name."
 
 ** TODO [[https://github.com/rnkn/binder][rnkn/binder: Emacs global minor mode facilitating multi-file writing projects]]
 
-* load & unload
+* unload packages & unpin packages
 
 ** disbale-packages
 
