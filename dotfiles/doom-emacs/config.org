@@ -1458,7 +1458,7 @@ FACE defaults to inheriting from default and highlight."
     ("hardware/" :agenda t)
     ("system/" :agenda t)
     ("deployment/" :agenda t)
-    ("CS/" :agenda t)
+    ("cs/" :agenda t)
     ("programming/" :agenda t)
     ("nix/" :agenda t)
     ("emacs/" :agenda t)
@@ -1471,7 +1471,6 @@ FACE defaults to inheriting from default and highlight."
     :files
     ("config.org" :key "c" :refile (:maxlevel . 5))
     ("meow.org" :key "w" :refile (:maxlevel . 5))
-    ;;("nix.org" :key "x" :refile (:maxlevel . 5))
     )
   (org-starter-def "~/.config/nixpkgs"
     :files
@@ -2170,23 +2169,23 @@ easy way to display org-ref with tree view instead of org-mode ?
 *** org-link-type
 
 #+begin_src emacs-lisp :tangle "./modules/private/my-org/setting.el"
-(defun endless/export-audio-link (path desc format)
-  "Export org audio links to hmtl."
-  (cl-case format
-    (html (format
-       "<audio preload=\"auto\"> <source src=\"https://www.gtrun.org/music/%s\">%s</audio>"
-       path (or desc "")))
+;; (defun endless/export-audio-link (path desc format)
+;;   "Export org audio links to hmtl."
+;;   (cl-case format
+;;     (html (format
+;;        "<audio preload=\"auto\"> <source src=\"https://www.gtrun.org/music/%s\">%s</audio>"
+;;        path (or desc "")))
 
-    ;; README: hugo music file path
-    (md (format
-     "<audio class=\"wp-audio-shortcode\"  loop=\"1\"  preload=\"auto\" style=\"width: 100%%;\" controls> <source src=\"https://www.gtrun.org/music/%s\">%s</audio>"
-     path (or desc "")))
-    (latex (format "(HOW DO I EXPORT AUDIO TO LATEX? \"%s\")" path))))
+;;     ;; README: hugo music file path
+;;     (md (format
+;;      "<audio class=\"wp-audio-shortcode\"  loop=\"1\"  preload=\"auto\" style=\"width: 100%%;\" controls> <source src=\"https://www.gtrun.org/music/%s\">%s</audio>"
+;;      path (or desc "")))
+;;     (latex (format "(HOW DO I EXPORT AUDIO TO LATEX? \"%s\")" path))))
 
-(after! org
-  (org-add-link-type "audio" #'ignore #'endless/export-audio-link)
-  ;;(setq org-download-timestamp "%Y%m%d_%H%M%S")
-)
+;; (after! org
+;;   (org-add-link-type "audio" #'ignore #'endless/export-audio-link)
+;;   ;;(setq org-download-timestamp "%Y%m%d_%H%M%S")
+;; )
 #+end_src
 
 *** [[https://github.com/ianxm/emacs-scrum][ianxm/emacs-scrum: dynamic scrum report generation for org-mode buffers]]
