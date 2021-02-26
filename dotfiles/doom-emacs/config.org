@@ -1437,7 +1437,6 @@ FACE defaults to inheriting from default and highlight."
     ("posts/myself/love.org"         :key "l" :refile (:maxlevel . 5 ))
     ("posts/myself/qing.org"         :key "q" :refile (:maxlevel . 5 ))
     ("posts/myself/plan.org"         :key "p" :refile (:maxlevel . 5 ))
-    ("feed.org"         :agenda t :key "f" :refile (:maxlevel . 5 ))
     )
   (org-starter-def "~/Documents/org-notes/braindump"
     :files
@@ -1446,10 +1445,12 @@ FACE defaults to inheriting from default and highlight."
     ("myself-private/GTD/notes.org"                    :key "n" :refile (:maxlevel . 5 ))
     ("myself-private/GTD/myself.org"                    :key "m" :refile (:maxlevel . 5 ))
     ("myself-private/GTD/Habit.org"                     :key "h" :refile (:maxlevel . 5 ))
-    ("life/" :agenda t)
+    ;;
     ("guangtao/" :agenda t)
     ("guangtao/learn_music.org"          :agenda t :key "M" :refile (:maxlevel . 5 ))
     ("guangtao/guangtao's_library.org"       :key "b" :refile (:maxlevel . 5 ))
+    ("guangtao/guangtao's_feed.org"         :agenda t :key "f" :refile (:maxlevel . 5 ))
+    ;;
     ("life/" :agenda t)
     ("life/life_goods.org"     :key "s" :refile (:maxlevel . 5 ))
     ("gaming/" :agenda t)
@@ -1493,14 +1494,14 @@ FACE defaults to inheriting from default and highlight."
     ("c" org-starter-find-file:config)
     ("w" org-starter-find-file:meow)
     ("g" org-starter-find-file:gtd)
-    ("s" org-starter-find-file:life-goods)
+    ("s" org-starter-find-file:life_goods)
     ("n" org-starter-find-file:notes)
     ("f" org-starter-find-file:feed)
     ("m" org-starter-find-file:myself)
     ("l" org-starter-find-file:love)
     ("h" org-starter-find-file:Habit)
     ("p" org-starter-find-file:plan)
-    ("b" org-starter-find-file:GuangTao-library)
+    ("b" org-starter-find-file:guangtao\'\s_library)
     )
   :commands org-starter-load-all-files-in-path
   :hook
@@ -1593,7 +1594,7 @@ FACE defaults to inheriting from default and highlight."
   :config
   (org-z-mode 1)
   (setq org-z-directories  '("~/Documents/org-notes/braindump"
-                             "~/Documents/org-notes/braindump/GuangTao-owner"
+                             "~/Documents/org-notes/braindump/guangtao"
                              "~/Documents/org-notes/braindump/journals"
                              "~/Documents/org-notes/braindump/CS"
                              "~/Documents/org-notes/braindump/network"
@@ -1617,6 +1618,9 @@ FACE defaults to inheriting from default and highlight."
 
    )
 #+end_src
+
+#+RESULTS:
+: t
 
 
 ** GTD
