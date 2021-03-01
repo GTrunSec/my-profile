@@ -822,13 +822,16 @@ appropriate.  In tables, insert a new row or end the table."
 #+end_src
 
 
-* default-setting
+* Default Setting
 
-** Global
+** Global Setting
 
 #+begin_src emacs-lisp :tangle "config.el"
 (setq user-full-name "GTrunSec"
       user-mail-address "gtrunsec@hardenedlinux.org")
+;; (setq auth-sources '("~/.authinfo.gpg")
+;;       auth-source-cache-expiry nil) ; default is 7200 (2h)
+
 (setq-default history-length 1000)
 (setq create-lockfiles nil)
 (require 'org-protocol)
@@ -849,6 +852,19 @@ appropriate.  In tables, insert a new row or end the table."
 (setenv "QT_DEBUG_PLUGINS" "1")
 (fset 'yes-or-no-p 'y-or-n-p)
 #+end_src
+
+** Better default Setting
+
+#+begin_src emacs-lisp :tangle "config.el"
+(setq-default
+ delete-by-moving-to-trash t                      ;; Delete files to trash
+ window-combination-resize t                      ;; take new window space from all other windows (not just current)
+ x-stretch-cursor t)                              ;; Stretch cursor to the glyph width
+
+#+end_src
+
+#+RESULTS:
+: t
 
 * Completion
 

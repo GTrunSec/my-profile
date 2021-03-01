@@ -1,4 +1,9 @@
 [[snippets]]
+  description = "shadowsocks lib"
+  command = "ss-local -c ~/.config/ss/config.json"
+  output = ""
+
+[[snippets]]
   description = "cut zeek log"
   command = "cat <log> | zeek-cut <field>"
   output = ""
