@@ -2641,22 +2641,31 @@ a separator ' -> '."
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! poly-org
   :commands poly-org-mode
-  :mode ("\\.org$" . poly-org-mode)
+  ;;:mode ("\\.org$" . poly-org-mode)
   )
 #+end_src
+** elisp
+
+*** TODO [[https://github.com/doublep/eldev][doublep/eldev: Elisp Development Tool]]
+
+***
+
+*** TODO [[https://github.com/emacs-elsa/Elsa][emacs-elsa/Elsa: Emacs Lisp Static Analyzer]]
+
+*** [[https://github.com/twlz0ne/elpl][twlz0ne/elpl: Provides a simple interface to evaluating Emacs Lisp expressions but without contaminating current Emacs.]]
 
 ** Scheme
 
 - https://gitlab.com/jaor/geiser
 #+begin_src emacs-lisp :tangle "packages.el"
-(package! geiser)
+;;(package! geiser)
 #+end_src
 
 #+begin_src emacs-lisp :tangle "config.el"
-(use-package! geiser
-  :config
-  (setq geiser-default-implementation 'racket)
-)
+;; (use-package! geiser
+;;   :config
+;;   (setq geiser-default-implementation 'racket)
+;; )
 #+end_src
 
 ** julia
