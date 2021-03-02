@@ -1201,6 +1201,31 @@ FACE defaults to inheriting from default and highlight."
 )
 #+end_src
 
+*** format-all
+#+begin_src emacs-lisp :tangle "packages.el"
+(package! format-all :recipe (:host github :repo "lassik/emacs-format-all-the-code"))
+#+end_src
+
+#+begin_src emacs-lisp :tangle "config.el"
+(use-package! format-all
+  :config
+  (dolist (hook (list
+                 'js-mode-hook
+                 'rust-mode-hook
+                 'python-mode-hook
+                 'java-mode-hook
+                 'sh-mode-hook
+                 'nix-mode-hook
+                 'haskell-mode-hook
+                 'emacs-lisp-mode-hook
+                 ))
+    (add-hook hook 'format-all-mode))
+  (add-hook! 'format-all-mode-hook 'format-all-ensure-formatter)
+  )
+#+end_src
+
+#+RESULTS:
+: t
 
 ** Bookmark
 
@@ -2786,20 +2811,6 @@ a separator ' -> '."
 (use-package! nix-mode
   :config
   (setq-hook! 'nix-mode-hook company-idle-delay t)
-  )
-#+end_src
-
-*** emacs-nixpkgs-fmt
-
-#+begin_src emacs-lisp :tangle "./modules/private/my-code/packages.el"
-(package! nixpkgs-fmt :recipe (:host github :repo "purcell/emacs-nixpkgs-fmt"))
-#+end_src
-
-#+begin_src emacs-lisp :tangle "./modules/private/my-code/config.el"
-(use-package! nixpkgs-fmt
-  :hook (nix-mode . nixpkgs-fmt-on-save-mode)
-  :config
-  (define-key nix-mode-map (kbd "C-c C-l") 'nixpkgs-fmt)
   )
 #+end_src
 
