@@ -2641,7 +2641,7 @@ a separator ' -> '."
 #+begin_src emacs-lisp :tangle "config.el"
 (use-package! poly-org
   :commands poly-org-mode
-  ;;:mode ("\\.org$" . poly-org-mode)
+  :mode ("\\.org$" . poly-org-mode)
   )
 #+end_src
 ** elisp
