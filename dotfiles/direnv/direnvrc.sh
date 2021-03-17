@@ -25,5 +25,3 @@ layout_activate() {
 source $(pyenv root)/versions/$1/bin/activate
   fi
 }
-
-source /run/current-system/sw/share/nix-direnv/direnvrc
