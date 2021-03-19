@@ -8,6 +8,9 @@
 
 
 - [[https://github.com/hlissner/doom-emacs/blob/develop/docs/getting_started.org][doom-emacs/getting_started.org at develop · hlissner/doom-emacs]]
+- [[https://tecosaur.github.io/emacs-config/config.html][Doom Emacs Configuration]]
+- [[https://github.com/tecosaur/emacs-config/blob/master/config.org][emacs-config/config.org at master · tecosaur/emacs-config]]
+
 
 
 #+BEGIN_QUOTE

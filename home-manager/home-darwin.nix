@@ -12,6 +12,7 @@ in
       home.packages = with pkgs;[
         customVscode
         nixFlakes
+        nixpkgs-fmt
         #R-with-my-packages
       ] ++ [
         #library
@@ -66,7 +67,7 @@ in
         go
       ] ++ [
         # latex + packages
-  
+
       ];
     })
   ];
