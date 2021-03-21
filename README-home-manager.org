@@ -253,7 +253,7 @@ let
     (import ../nixos-flk/overlays/pkgs.nix)
   ];
 
-  nixpkgs  = import ./misc/stable-pkgs.nix { inherit overlays; };
+  nixpkgs = import ./misc/stable-pkgs.nix { inherit overlays; };
 
 in
 {
@@ -320,42 +320,34 @@ in
     })
 
     ({
-      home.file.".config/direnv/direnvrc".text = ''
-      source $HOME/.nix-direnv/direnvrc
-      use_flake() {
-      watch_file flake.nix
-      watch_file flake.lock
-      eval "$(nix print-dev-env)"
-      }
-    '';
-
+      home.file.".config/direnv/direnvrc".source = ../dotfiles/direnv/direnvrc.sh;
       home.file.".wakatime.cfg".text = ''
-    [settings]
-    debug=true
-    verbose = true
-    offline = true
-    api_key = dff3f4c8-2b39-4514-b9c7-2f3a14c928c9
-    exclude = ^COMMIT_EDITMSG$
-      ^TAG_EDITMSG$
-      ^/var/(?!www/).*
-      ^/etc/
-      ^__pycache__
-      ^/zeek
-    include =
-    include_only_with_project_file = false
-    [projectmap]
-    ^~/project/hardenedlinux-zeek-script/NSM-data-analysis(\d+)/ = project{0}
-    ^~/.config/nixpkgs(\d+)/ = project{1}
-    [git]
-    disable_submodules = false
-    '';
+        [settings]
+        debug=true
+        verbose = true
+        offline = true
+        api_key = dff3f4c8-2b39-4514-b9c7-2f3a14c928c9
+        exclude = ^COMMIT_EDITMSG$
+          ^TAG_EDITMSG$
+          ^/var/(?!www/).*
+          ^/etc/
+          ^__pycache__
+          ^/zeek
+        include =
+        include_only_with_project_file = false
+        [projectmap]
+        ^~/project/hardenedlinux-zeek-script/NSM-data-analysis(\d+)/ = project{0}
+        ^~/.config/nixpkgs(\d+)/ = project{1}
+        [git]
+        disable_submodules = false
+      '';
     })
   ];
 }
 #+end_src
 * Overlay
 ** Python Overlay
-#+begin_src nix :exports both :tangle  "~/.config/nixpkgs/home-manager/python-overlay.nix"
+#+begin_src nix :exports both :tangle  "~/.config/nixpkgs/home-manager/home-overlay/python-overlay.nix"
 final: prev:
 rec {
   python3 = prev.python3.override {
@@ -377,7 +369,7 @@ rec {
 {
   imports = [
     ./work.nix
-   ];
+  ];
 }
 #+end_src
 #+begin_src nix :exports both :tangle "~/.config/nixpkgs/home-manager/randr/work.nix"
@@ -386,7 +378,7 @@ rec {
   config = with lib; mkMerge [
     (mkIf pkgs.stdenv.isLinux {
       programs = {
-        autorandr ={
+        autorandr = {
           enable = true;
           # hooks.postswitch ={
           #   "fix_screen" = "${pkgs.stumpish}/bin/stumpish refresh-heads";
@@ -471,6 +463,8 @@ rec {
   ];
 }
 #+end_src
+
+
 ** doom-emacs
 #+begin_src nix :exports both :tangle "~/.config/nixpkgs/home-manager/programs/doom-emacs.nix"
 { config, lib, pkgs, ... }:
@@ -542,16 +536,16 @@ in
     })
 
 
-    # (mkIf (pkgs.stdenv.isLinux || pkgs.stdenv.isDarwin) {
     (mkIf (pkgs.stdenv.isLinux) {
       programs.emacs.enable = true;
     })
 
-    #Big sur crashed
+
     (mkIf pkgs.stdenv.isDarwin {
       programs.emacs.enable = true;
       programs.emacs.package = (pkgs.emacsGcc.override ({
-        imagemagick = pkgs.imagemagick7;
+        withImageMagick = true;
+        imagemagick = pkgs.imagemagick;
       })).overrideAttrs (old: rec {
         configureFlags = (old.configureFlags or [ ]) ++ [
           "--with-imagemagick"
@@ -622,7 +616,6 @@ in
     })
   ];
 }
-
 #+end_src
 ** zsh
 - [[https://github.com/trapd00r/LS_COLORS][trapd00r/LS_COLORS: A collection of LS_COLORS definitions; needs your contribution!]]
@@ -646,8 +639,16 @@ in
         dotDir = ".config/zsh";
         oh-my-zsh = {
           enable = true;
-          plugins = [ "git" "sudo" "z" "docker" "git-flow" "tmux" "history-substring-search" "python"
-                    ];
+          plugins = [
+            "git"
+            "sudo"
+            "z"
+            "docker"
+            "git-flow"
+            "tmux"
+            "history-substring-search"
+            "python"
+          ];
           theme = "xiong-chiamiov-plus";
         };
         history = {
@@ -659,32 +660,32 @@ in
           size = 10000000;
         };
         shellAliases = with pkgs; {
-          l     = "exa -lah";
-          f     = "rg --files";
-          E     = "env SUDO_EDITOR=\"emacsclient\" sudo -e";
-          e     = "emacsclient";
-          em    = "emacs";
-          cp    = "cp -i";
-          mv    = "mv -i";
+          l = "exa -lah";
+          f = "rg --files";
+          E = "env SUDO_EDITOR=\"emacsclient\" sudo -e";
+          e = "emacsclient";
+          em = "emacs";
+          cp = "cp -i";
+          mv = "mv -i";
           ##update Nixpkgs
-          un    = "~/.config/nixpkgs  && git fetch && git pull";
-          overlay-go   = "cd ~/.config/nixpkgs/nixos/overlays/go";
-          overlay-python   = "cd ~/.config/nixpkgs/nixos/overlays/python";
-          overlay-custom   = "cd ~/.config/nixpkgs/nixos/overlays/custom";
-          ag0   = "rg --max-depth=1";
-          pcat  = "${python3Packages.pygments}/bin/pygmentize";
-          so    = "pactl set-default-sink (pacmd list-sinks | awk \\\'/name:.*usb/{if (a != \"\") print a;} {a=$NF}\\\')";
-          si    = "pactl set-default-sink (pacmd list-sinks | awk \\\'/name:.*pci/{if (a != \"\") print a;} {a=$NF}\\\')";
+          un = "~/.config/nixpkgs  && git fetch && git pull";
+          overlay-go = "cd ~/.config/nixpkgs/nixos/overlays/go";
+          overlay-python = "cd ~/.config/nixpkgs/nixos/overlays/python";
+          overlay-custom = "cd ~/.config/nixpkgs/nixos/overlays/custom";
+          ag0 = "rg --max-depth=1";
+          pcat = "${python3Packages.pygments}/bin/pygmentize";
+          so = "pactl set-default-sink (pacmd list-sinks | awk \\\'/name:.*usb/{if (a != \"\") print a;} {a=$NF}\\\')";
+          si = "pactl set-default-sink (pacmd list-sinks | awk \\\'/name:.*pci/{if (a != \"\") print a;} {a=$NF}\\\')";
         };
 
-        initExtraBeforeCompInit = builtins.readFile "${home_directory}/.config/nixpkgs/dotfiles/pre-zsh-Compinit" + ''
-        eval $(${pkgs.coreutils}/bin/dircolors -b ~/.config/nixpkgs/dotfiles/LS_COLORS)
+        initExtraBeforeCompInit = (builtins.readFile ../../dotfiles/pre-zsh-Compinit) + ''
+          eval $(${pkgs.coreutils}/bin/dircolors -b ~/.config/nixpkgs/dotfiles/LS_COLORS)
         '';
 
-        initExtra = builtins.readFile "${home_directory}/.config/nixpkgs/dotfiles/zshrc" +
-                    ''
-                     ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#fdf6e3,bg=#586e75,bold,underline"
-                    ''
+        initExtra = (builtins.readFile ../../dotfiles/zshrc) +
+          ''
+            ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#fdf6e3,bg=#586e75,bold,underline"
+          ''
         ;
 
         plugins =
@@ -757,17 +758,19 @@ in
         SPACESHIP_VI_MODE_SHOW=false
         SPACESHIP_BATTERY_THRESHOLD=30
         setopt HIST_IGNORE_ALL_DUPS
-     '';
+        setopt no_extendedglob
+      '';
     })
     (mkIf pkgs.stdenv.isDarwin {
-      programs.zsh.sessionVariables ={
-        PATH =  "$HOME/.nix-profile/bin:/bin:/usr/bin:/run/current-system/sw/bin/:/usr/local/bin:/Applications/kitty.app/Contents/MacOS:/sbin/:/usr/sbin/";
+      programs.zsh.sessionVariables = {
+        PATH = "$HOME/.nix-profile/bin:/bin:/usr/bin:/run/current-system/sw/bin/:/usr/local/bin:/Applications/kitty.app/Contents/MacOS:/sbin/:/usr/sbin/";
         TMUX_TMPDIR = "$HOME/.config/.";
         LANG = "en_US.UTF-8";
         export = "LC_ALL=en_US.UTF-8";
       };
       programs.zsh.initExtra = ''
-      source  ~/.nix-profile/etc/profile.d/nix.sh
+        source  ~/.nix-profile/etc/profile.d/nix.sh
+        setopt no_extendedglob
       '';
     })
   ];
@@ -784,6 +787,7 @@ in
         settings = {
           env.TERM = "xterm-256color";
           window.decorations = "full";
+          font.normal.style = "Regular";
           # Background opacity
           background_opacity = 0.7;
           cursor.style = "Beam";
@@ -829,7 +833,8 @@ in
         settings = {
           font.size = 30.0;
           font.normal.family = "Fantasque Sans Mono";
-        };};
+        };
+      };
     })
 
 
@@ -839,11 +844,11 @@ in
           font.size = 25.0;
           font.normal.family = "Fantasque Sans Mono";
           alt_send_esc = true;
-          key_bindings =[
+          key_bindings = [
             {
-            key = "Key1";
-            mods = "Alt";
-            chars = "\x1b1";
+              key = "X";
+              mods = "Alt";
+              chars = "\x1bx";
             }
           ];
         };
@@ -851,12 +856,11 @@ in
     })
   ];
 }
-
 #+end_src
 ** git
 
 #+begin_src nix :exports both :tangle "~/.config/nixpkgs/home-manager/programs/git.nix"
-{pkgs, lib, ...}:
+{ pkgs, lib, ... }:
 {
   config = with lib; mkMerge [
     (mkIf (pkgs.stdenv.isLinux || pkgs.stdenv.isDarwin) {
@@ -865,12 +869,21 @@ in
         userName = "GTrunSec";
         userEmail = "gtrunsec@hardenedlinux.org";
         signing.key = "761C8EBEA940960E";
-        ignores = [ ".projectile" ".indium.json" ".ccls-cache"
-                    ".Rhistory" ".notdeft*"  "eaf"
-                    ".auctex-auto"
-                    "vast.db" ".DS_Store" "result"
-                    ".ipynb_checkpoints" "__pycache__"
-                  ];
+        ignores = [
+          ".projectile"
+          ".indium.json"
+          ".ccls-cache"
+          ".Rhistory"
+          ".notdeft*"
+          "eaf"
+          ".auctex-auto"
+          "vast.db"
+          ".DS_Store"
+          "result"
+          ".ipynb_checkpoints"
+          "__pycache__"
+          "*.org.organice-bak"
+        ];
         extraConfig = {
 
           github = {
@@ -887,16 +900,19 @@ in
             autostash = true;
           };
           core = {
-            pager = [ ''
-            delta --plus-color="#012800" --minus-color="#340001"
+            pager = [
               ''
-                    ];
+                delta --plus-color="#012800" --minus-color="#340001"
+              ''
+            ];
+          };
+          credential = {
+            helper = "store";
           };
 
           interactive = {
             diffFilter = "delta --color-only";
           };
-
         };
       };
     })
@@ -918,6 +934,7 @@ in
 - [2020-12-14 Mon 13:07] <- [[id:b5c87647-5046-4b93-b91e-10bbb73498c7][Shell]]
 - [[https://github.com/gpakosz/.tmux][gpakosz/.tmux: 🇫🇷 Oh My Tmux! Pretty & versatile tmux configuration made with ❤️ (imho the best tmux configuration that just works)]]
 - [[https://github.com/tony/tmux-config/tree/master][tony/tmux-config: Example tmux configuration - screen + vim key-bindings, system stat, cpu load bar.]]
+
 #+begin_src nix :exports both :tangle "~/.config/nixpkgs/home-manager/programs/tmux.nix"
 { config, pkgs, lib, ... }:
 let
@@ -925,7 +942,7 @@ let
   inherit (pkgs) tmuxPlugins tmux;
   inherit (lib) optionalString maybeEnv;
   inherit (pkgs.stdenv) isLinux mkDerivation;
-    resurrect-patched = (tmuxPlugins.resurrect.overrideAttrs (oldAttrs: rec {
+  resurrect-patched = (tmuxPlugins.resurrect.overrideAttrs (oldAttrs: rec {
     src = pkgs.fetchFromGitHub {
       owner = "tmux-plugins";
       repo = "tmux-resurrect";
@@ -941,14 +958,14 @@ let
 in
 {
   programs.tmux = {
-  enable = true;
-  clock24 = true;
-  keyMode = "vi";
-  extraConfig = /* tmux */(if pkgs.stdenv.isLinux then ''
-   set-option -g default-shell /run/current-system/sw/bin/zsh
-   '' else ''
-   set-option -g default-shell ~/.nix-profile/bin/zsh
-   '' ) + ''
+    enable = true;
+    clock24 = true;
+    keyMode = "vi";
+    extraConfig = /* tmux */(if pkgs.stdenv.isLinux then ''
+      set-option -g default-shell /run/current-system/sw/bin/zsh
+    '' else ''
+      set-option -g default-shell ~/.nix-profile/bin/zsh
+    '') + ''
 
    bind r source-file ~/.tmux.conf \; display-message "Config reloaded..."
    set -gu prefix2
@@ -989,10 +1006,10 @@ set-option -g display-panes-colour colour166 #orange
 
   '';
 
-  plugins = with tmuxPlugins; [
-    {
-      plugin = resurrect-patched;
-      extraConfig = /* tmux */ ''
+    plugins = with tmuxPlugins; [
+      {
+        plugin = resurrect-patched;
+        extraConfig = /* tmux */ ''
           set -g @resurrect-capture-pane-contents "on"
           set -g @resurrect-processes "mosh-client man '~yarn watch'"
           ${optionalString isLinux /* tmux */ ''
@@ -1001,9 +1018,9 @@ set-option -g display-panes-colour colour166 #orange
           set -g @resurrect-process-match-strategy "basename"
           set -g @resurrect-strategy-nvim "session"
         '';
-    }
-  ];
- };
+      }
+    ];
+  };
 }
 #+end_src
 ** ✘ CANCELED fish
@@ -1016,78 +1033,80 @@ with lib;
 
     (mkIf pkgs.stdenv.isLinux {
       #      "oh-my-fish/theme-bobthefish"
-      programs.fish = let
-        plugins = [
-          "edc/bass"
-          "tuvistavie/fish-fastdir"
-          "danhper/fish-theme-afowler"
-          "oh-my-fish/plugin-bang-bang"
-          "oh-my-fish/plugin-direnv"
-          "jethrokuan/fzf"
-          "rominf/omf-plugin-fzf-autojump"
-          "rominf/omf-plugin-autojump"
-          "otms61/fish-pet"
-        ];
-      in {
-        enable = true;
-        shellAliases = with pkgs; {
-          l     = "exa -lah";
-          f     = "rg --files";
-          E     = "env SUDO_EDITOR=\"emacsclient\" sudo -e";
-          em    = "emacs";
-          cp    = "cp -i";
-          mv    = "mv -i";
-          overlay-go   = "cd ~/.config/nixpkgs/nixos/overlays/go";
-          overlay-python   = "cd ~/.config/nixpkgs/nixos/overlays/python";
-          overlay-custom   = "cd ~/.config/nixpkgs/nixos/overlays/custom";
-          ag0   = "rg --max-depth=1";
-          pcat  = "${python3Packages.pygments}/bin/pygmentize";
-          so    = "pactl set-default-sink (pacmd list-sinks | awk \\\'/name:.*usb/{if (a != \"\") print a;} {a=$NF}\\\')";
-          si    = "pactl set-default-sink (pacmd list-sinks | awk \\\'/name:.*pci/{if (a != \"\") print a;} {a=$NF}\\\')";
+      programs.fish =
+        let
+          plugins = [
+            "edc/bass"
+            "tuvistavie/fish-fastdir"
+            "danhper/fish-theme-afowler"
+            "oh-my-fish/plugin-bang-bang"
+            "oh-my-fish/plugin-direnv"
+            "jethrokuan/fzf"
+            "rominf/omf-plugin-fzf-autojump"
+            "rominf/omf-plugin-autojump"
+            "otms61/fish-pet"
+          ];
+        in
+        {
+          enable = true;
+          shellAliases = with pkgs; {
+            l = "exa -lah";
+            f = "rg --files";
+            E = "env SUDO_EDITOR=\"emacsclient\" sudo -e";
+            em = "emacs";
+            cp = "cp -i";
+            mv = "mv -i";
+            overlay-go = "cd ~/.config/nixpkgs/nixos/overlays/go";
+            overlay-python = "cd ~/.config/nixpkgs/nixos/overlays/python";
+            overlay-custom = "cd ~/.config/nixpkgs/nixos/overlays/custom";
+            ag0 = "rg --max-depth=1";
+            pcat = "${python3Packages.pygments}/bin/pygmentize";
+            so = "pactl set-default-sink (pacmd list-sinks | awk \\\'/name:.*usb/{if (a != \"\") print a;} {a=$NF}\\\')";
+            si = "pactl set-default-sink (pacmd list-sinks | awk \\\'/name:.*pci/{if (a != \"\") print a;} {a=$NF}\\\')";
+          };
+
+          interactiveShellInit = ''
+            if not functions -q fundle; eval (curl -sfL https://git.io/fundle-install); end
+              ${concatMapStringsSep "\n" (p: "fundle plugin '${p}'") plugins}
+            fundle init
+            #infocmp | ssh $remote "cat > $TERM.ti ; tic -o ~/.terminfo $TERM.ti"
+            source ${pkgs.autojump}/share/autojump/autojump.fish
+            set -x -U GOPATH $HOME/go
+            set -x -U GOBIN $GOPATH/bin
+            set -g -x PATH $PATH $GOBIN
+            set -g theme_color_scheme gruvbox
+            source ~/.local/share/icons-in-terminal/icons.fish
+            kitty + complete setup fish | source
+            direnv hook fish | source
+            alias ...='cd ../..'
+            alias ....='cd ../../..'
+            alias .....='cd ../../../..'
+            abbr -a g git
+            abbr -a gr "git reset --hard"
+            abbr -a gl "git pull --rebase"
+            set -l project
+             if echo (pwd) | grep -qEi "^/Users/$USER/Sites/"
+                 set  project (echo (pwd) | sed "s#^/Users/$USER/Sites/\\([^/]*\\).*#\\1#")
+             else
+               set  project "Terminal"
+             end
+             wakatime --write --plugin "fish-wakatime/0.0.1" --entity-type app --project "$project" --entity (echo $history[1] | cut -d ' ' -f1) 2>&1 > /dev/null&
+            if status is-interactive
+            and not set -q TMUX
+            exec tmux
+            end
+          '';
         };
 
-        interactiveShellInit = ''
-    if not functions -q fundle; eval (curl -sfL https://git.io/fundle-install); end
-      ${concatMapStringsSep "\n" (p: "fundle plugin '${p}'") plugins}
-    fundle init
-    #infocmp | ssh $remote "cat > $TERM.ti ; tic -o ~/.terminfo $TERM.ti"
-    source ${pkgs.autojump}/share/autojump/autojump.fish
-    set -x -U GOPATH $HOME/go
-    set -x -U GOBIN $GOPATH/bin
-    set -g -x PATH $PATH $GOBIN
-    set -g theme_color_scheme gruvbox
-    source ~/.local/share/icons-in-terminal/icons.fish
-    kitty + complete setup fish | source
-    direnv hook fish | source
-    alias ...='cd ../..'
-    alias ....='cd ../../..'
-    alias .....='cd ../../../..'
-    abbr -a g git
-    abbr -a gr "git reset --hard"
-    abbr -a gl "git pull --rebase"
-    set -l project
-     if echo (pwd) | grep -qEi "^/Users/$USER/Sites/"
-         set  project (echo (pwd) | sed "s#^/Users/$USER/Sites/\\([^/]*\\).*#\\1#")
-     else
-       set  project "Terminal"
-     end
-     wakatime --write --plugin "fish-wakatime/0.0.1" --entity-type app --project "$project" --entity (echo $history[1] | cut -d ' ' -f1) 2>&1 > /dev/null&
-    if status is-interactive
-    and not set -q TMUX
-    exec tmux
-    end
-    '';
-      };
-
       home.activation.linkOMF = config.lib.dag.entryAfter [ "writeBoundary" ] ''
-    ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/omf" ~/.config/omf
-  '';
+        ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/omf" ~/.config/omf
+      '';
       home.activation.linkFuncations = config.lib.dag.entryAfter [ "writeBoundary" ] ''
-    ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/fish/functions" ~/.config/fish/functions
-  '';
+        ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/fish/functions" ~/.config/fish/functions
+      '';
       home.activation.linkCompletions = config.lib.dag.entryAfter [ "writeBoundary" ] ''
-    ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/fish/completions" ~/.config/fish/completions
-  '';
+        ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/fish/completions" ~/.config/fish/completions
+      '';
 
     })
 
@@ -1095,8 +1114,94 @@ with lib;
 }
 #+end_src
 ** sh
-#+begin_src nix :async t :exports both :tangle "~/.config/nixpkgs/home-manager/programs/fish.nix"
-#+end_src
+#+begin_src nix :async t :exports both :tangle "~/.config/nixpkgs/home-manager/programs/fish.nix"#{ config, pkgs, lib, ... }:
+with lib;
+{
+  #fish
+  config = with lib; mkMerge [
+
+    (mkIf pkgs.stdenv.isLinux {
+      #      "oh-my-fish/theme-bobthefish"
+      programs.fish =
+        let
+          plugins = [
+            "edc/bass"
+            "tuvistavie/fish-fastdir"
+            "danhper/fish-theme-afowler"
+            "oh-my-fish/plugin-bang-bang"
+            "oh-my-fish/plugin-direnv"
+            "jethrokuan/fzf"
+            "rominf/omf-plugin-fzf-autojump"
+            "rominf/omf-plugin-autojump"
+            "otms61/fish-pet"
+          ];
+        in
+        {
+          enable = true;
+          shellAliases = with pkgs; {
+            l = "exa -lah";
+            f = "rg --files";
+            E = "env SUDO_EDITOR=\"emacsclient\" sudo -e";
+            em = "emacs";
+            cp = "cp -i";
+            mv = "mv -i";
+            overlay-go = "cd ~/.config/nixpkgs/nixos/overlays/go";
+            overlay-python = "cd ~/.config/nixpkgs/nixos/overlays/python";
+            overlay-custom = "cd ~/.config/nixpkgs/nixos/overlays/custom";
+            ag0 = "rg --max-depth=1";
+            pcat = "${python3Packages.pygments}/bin/pygmentize";
+            so = "pactl set-default-sink (pacmd list-sinks | awk \\\'/name:.*usb/{if (a != \"\") print a;} {a=$NF}\\\')";
+            si = "pactl set-default-sink (pacmd list-sinks | awk \\\'/name:.*pci/{if (a != \"\") print a;} {a=$NF}\\\')";
+          };
+
+          interactiveShellInit = ''
+            if not functions -q fundle; eval (curl -sfL https://git.io/fundle-install); end
+              ${concatMapStringsSep "\n" (p: "fundle plugin '${p}'") plugins}
+            fundle init
+            #infocmp | ssh $remote "cat > $TERM.ti ; tic -o ~/.terminfo $TERM.ti"
+            source ${pkgs.autojump}/share/autojump/autojump.fish
+            set -x -U GOPATH $HOME/go
+            set -x -U GOBIN $GOPATH/bin
+            set -g -x PATH $PATH $GOBIN
+            set -g theme_color_scheme gruvbox
+            source ~/.local/share/icons-in-terminal/icons.fish
+            kitty + complete setup fish | source
+            direnv hook fish | source
+            alias ...='cd ../..'
+            alias ....='cd ../../..'
+            alias .....='cd ../../../..'
+            abbr -a g git
+            abbr -a gr "git reset --hard"
+            abbr -a gl "git pull --rebase"
+            set -l project
+             if echo (pwd) | grep -qEi "^/Users/$USER/Sites/"
+                 set  project (echo (pwd) | sed "s#^/Users/$USER/Sites/\\([^/]*\\).*#\\1#")
+             else
+               set  project "Terminal"
+             end
+             wakatime --write --plugin "fish-wakatime/0.0.1" --entity-type app --project "$project" --entity (echo $history[1] | cut -d ' ' -f1) 2>&1 > /dev/null&
+            if status is-interactive
+            and not set -q TMUX
+            exec tmux
+            end
+          '';
+        };
+
+      home.activation.linkOMF = config.lib.dag.entryAfter [ "writeBoundary" ] ''
+        ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/omf" ~/.config/omf
+      '';
+      home.activation.linkFuncations = config.lib.dag.entryAfter [ "writeBoundary" ] ''
+        ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/fish/functions" ~/.config/fish/functions
+      '';
+      home.activation.linkCompletions = config.lib.dag.entryAfter [ "writeBoundary" ] ''
+        ln -sfT "${config.home.homeDirectory}/.config/nixpkgs/dotfiles/fish/completions" ~/.config/fish/completions
+      '';
+
+    })
+
+  ];
+}
++end_src
 * Shell-env
 - voila
 #+begin_src nix :exports both :tangle "~/.config/nixpkgs/home-manager/shell-env.nix"
@@ -1109,8 +1214,12 @@ let
   };
 
   voila = pkgs.writeScriptBin "voila" ''
-    nix-shell ${nixpkgs-hardenedlinux}/pkgs/python/env/voila --command "voila"
-    '';
+    nix-shell ${nixpkgs-hardenedlinux}/pkgs/python/env/voila --command "voila $1"
+  '';
+
+  timesketch = pkgs.writeScriptBin "timesketch" ''
+    nix-shell ${nixpkgs-hardenedlinux}/pkgs/python/env/timesketch/shell.nix --command "tsctl $1"
+  '';
 in
 {
   config = with lib; mkMerge [
@@ -1118,12 +1227,15 @@ in
     (mkIf pkgs.stdenv.isLinux {
       home.packages = with pkgs;[
         voila
+        timesketch
       ];
     })
   ];
-
 }
 #+end_src
+
+
+
 * Python
 ** mach-nix
 
