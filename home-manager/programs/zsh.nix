@@ -136,6 +136,7 @@ in
         SPACESHIP_VI_MODE_SHOW=false
         SPACESHIP_BATTERY_THRESHOLD=30
         setopt HIST_IGNORE_ALL_DUPS
+        setopt no_extendedglob
       '';
     })
     (mkIf pkgs.stdenv.isDarwin {
@@ -147,6 +148,7 @@ in
       };
       programs.zsh.initExtra = ''
         source  ~/.nix-profile/etc/profile.d/nix.sh
+        setopt no_extendedglob
       '';
     })
   ];
