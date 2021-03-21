@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }:
 let
   customVscode = (import ../nixos-flk/profiles/code/vscode.nix { inherit pkgs; });
-
   R-with-my-packages = pkgs.rWrapper.override {
     packages = with pkgs.rPackages; [ ggplot2 dplyr xts ];
   };
@@ -66,8 +65,6 @@ in
         hugo
         go
       ] ++ [
-        # latex + packages
-
       ];
     })
   ];

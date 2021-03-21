@@ -19,7 +19,7 @@ in
         (import ./nixos-flk/pkgs/default.nix)
         (import ./nixos-flk/pkgs/my-node-packages)
         (import all-hies { }).overlay
-        (import ./home-manager/packages-overlay.nix)
+        (import ./home-manager/home-overlay/packages-overlay.nix)
         (import (builtins.fetchTarball {
           url = "https://github.com/nix-community/emacs-overlay/archive/${emacs-overlay-rev}.tar.gz";
         }))

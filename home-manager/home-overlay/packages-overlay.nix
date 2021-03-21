@@ -9,7 +9,4 @@ let
 in
 rec {
   zeek = prev.callPackage "${nixpkgs-hardenedlinux}/pkgs/zeek" { KafkaPlugin = true; PostgresqlPlugin = true; Http2Plugin = true; };
-  vast = prev.callPackage "${nixpkgs-hardenedlinux}/pkgs/vast" { };
-  # pf-ring = prev.callPackage ../pkgs/network/pf_ring.nix { };
-  # osquery = prev.callPackages ../pkgs/osquery { };
 }

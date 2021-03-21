@@ -1,6 +1,0 @@
-{ ... }:
-{
-  imports = [
-    #./zeek-pkgs.nix
-  ];
-}

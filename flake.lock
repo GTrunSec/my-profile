@@ -1,5 +1,20 @@
 {
   "nodes": {
+    "darwin": {
+      "locked": {
+        "lastModified": 1610942247,
+        "narHash": "sha256-PKo1ATAlC6BmfYSRmX0TVmNoFbrec+A5OKcabGEu2yU=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "7d71001b796340b219d1bfa8552c81995017544a",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "rev": "7d71001b796340b219d1bfa8552c81995017544a",
+        "type": "indirect"
+      }
+    },
     "emacs-overlay": {
       "locked": {
         "lastModified": 1615335717,
@@ -50,33 +65,18 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1611270612,
-        "narHash": "sha256-tLQWDaKnrRTbkqm1am5fJM/eYNJUt/Mpr+6F7h28wNw=",
+        "lastModified": 1612902587,
+        "narHash": "sha256-VZ7Z1OMFf5ReObu3CCVBsC2DWloTYDjqW1onUKejVrE=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "2c0e3f61da903613cc316cb992c8c07d92e1d186",
+        "rev": "209566c752c4428c7692c134731971193f06b37c",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
-        "ref": "master",
+        "ref": "release-20.09",
         "repo": "home-manager",
         "type": "github"
-      }
-    },
-    "master": {
-      "locked": {
-        "lastModified": 1611305326,
-        "narHash": "sha256-pGFFD1zF9dn1z+h5iRKZaZDDiDFDYaqwmchE9BaEAkM=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "07dd1e81bb0c5367e263e726f2ef507c422ea258",
-        "type": "github"
-      },
-      "original": {
-        "id": "nixpkgs",
-        "ref": "master",
-        "type": "indirect"
       }
     },
     "nixpkgs": {
@@ -118,25 +118,25 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1610942247,
-        "narHash": "sha256-PKo1ATAlC6BmfYSRmX0TVmNoFbrec+A5OKcabGEu2yU=",
+        "lastModified": 1615709438,
+        "narHash": "sha256-hDLC1wVzcD+9dt1U9QpbP0v9bOYD9NGczsobHIEhDYw=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "7d71001b796340b219d1bfa8552c81995017544a",
+        "rev": "3a7674c896847d18e598fa5da23d7426cb9be3d2",
         "type": "github"
       },
       "original": {
         "id": "nixpkgs",
-        "rev": "7d71001b796340b219d1bfa8552c81995017544a",
+        "rev": "3a7674c896847d18e598fa5da23d7426cb9be3d2",
         "type": "indirect"
       }
     },
     "root": {
       "inputs": {
+        "darwin": "darwin",
         "emacs-overlay": "emacs-overlay",
         "flake-utils": "flake-utils",
         "home": "home",
-        "master": "master",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-hardenedlinux": "nixpkgs-hardenedlinux"
       }

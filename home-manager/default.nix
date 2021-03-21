@@ -5,13 +5,12 @@
   imports = [
     ./setting
     #lang
-    ./home-package.nix
+    ./home-packages-stable.nix
     ./my3rd-scripts.nix
     ./home-files.nix
     ./home-darwin.nix
-    ./misc
     ./programs
-    ./packages-stable.nix
+    ./home-common-packages.nix
     ./shell-env.nix
     #programs
   ];

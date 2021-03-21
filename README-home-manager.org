@@ -356,13 +356,12 @@ in
 * Overlay
 ** Python Overlay
 #+begin_src nix :exports both :tangle  "~/.config/nixpkgs/home-manager/python-overlay.nix"
-self: super:
-# Within the overlay we use a recursive set, though I think we can use `self` as well.
+final: prev:
 rec {
-  python3 = super.python3.override {
+  python3 = prev.python3.override {
     packageOverrides = selfPythonPackages: pythonPackages: {
       astroid = pythonPackages.astroid.overridePythonAttrs (oldAttrs: {
-        src = super.fetchPypi {
+        src = prev.fetchPypi {
           pname = "astroid";
           version = "2.4.1";
           sha256 = "71ea07f44df9568a75d0f354c49143a4575d90645e9fead6dfb52c26a85ed13f";
@@ -552,7 +551,6 @@ in
     (mkIf pkgs.stdenv.isDarwin {
       programs.emacs.enable = true;
       programs.emacs.package = (pkgs.emacsGcc.override ({
-        withImageMagick = true;
         imagemagick = pkgs.imagemagick7;
       })).overrideAttrs (old: rec {
         configureFlags = (old.configureFlags or [ ]) ++ [
@@ -578,21 +576,21 @@ in
         ];
 
         postPatch = old.postPatch + ''
-              substituteInPlace lisp/loadup.el \
-              --replace '(emacs-repository-get-version)' '"${pkgs.emacsGcc.src.rev}"' \
-              --replace '(emacs-repository-get-branch)' '"master"'
-            '';
+          substituteInPlace lisp/loadup.el \
+          --replace '(emacs-repository-get-version)' '"${pkgs.emacsGcc.src.rev}"' \
+          --replace '(emacs-repository-get-branch)' '"master"'
+        '';
 
         postInstall = old.postInstall or "" + ''
-              ln -snf $out/lib/emacs/28.0.50/native-lisp $out/Applications/Emacs.app/Contents/native-lisp
-              cat <<EOF> $out/bin/run-emacs.sh
-              #!/usr/bin/env bash
-              set -e
-              exec $out/bin/emacs-28.0.50 "\$@"
-              EOF
-              chmod a+x $out/bin/run-emacs.sh
-              ln -snf ./run-emacs.sh $out/bin/emacs
-            '';
+          ln -snf $out/lib/emacs/28.0.50/native-lisp $out/Applications/Emacs.app/Contents/native-lisp
+          cat <<EOF> $out/bin/run-emacs.sh
+          #!/usr/bin/env bash
+          set -e
+          exec $out/bin/emacs-28.0.50 "\$@"
+          EOF
+          chmod a+x $out/bin/run-emacs.sh
+          ln -snf ./run-emacs.sh $out/bin/emacs
+        '';
       });
     })
 
@@ -624,6 +622,7 @@ in
     })
   ];
 }
+
 #+end_src
 ** zsh
 - [[https://github.com/trapd00r/LS_COLORS][trapd00r/LS_COLORS: A collection of LS_COLORS definitions; needs your contribution!]]

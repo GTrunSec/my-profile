@@ -1,15 +1,8 @@
 { lib, pkgs, ... }:
-let
-  overlays = [
-    (import ../nixos-flk/pkgs/default.nix)
-  ];
-
-  nixpkgs = import ./misc/stable-pkgs.nix { inherit overlays; };
-in
 {
   config = with lib; mkMerge [
     (mkIf pkgs.stdenv.isDarwin {
-      home.packages = with nixpkgs;[
+      home.packages = with pkgs;[
         (texlive.combine
           {
             inherit (texlive)
@@ -30,20 +23,13 @@ in
               euenc;
           }
         )
-
         vips
       ] ++ [
-        (python37.withPackages (nixpkgs: with nixpkgs; [
+        (python3.withPackages (pkgs: with pkgs; [
           shapely
-          matplotlib
           sqlalchemy
           pandas
           numpy
-          scikitlearn
-          jupyter
-          promnesia
-          orgparse
-          hpi
           mypy
         ] ++ [
         ]))

@@ -67,17 +67,16 @@ in
     })
 
 
-    # (mkIf (pkgs.stdenv.isLinux || pkgs.stdenv.isDarwin) {
     (mkIf (pkgs.stdenv.isLinux) {
       programs.emacs.enable = true;
     })
 
-    #Big sur crashed
+
     (mkIf pkgs.stdenv.isDarwin {
       programs.emacs.enable = true;
       programs.emacs.package = (pkgs.emacsGcc.override ({
         withImageMagick = true;
-        imagemagick = pkgs.imagemagick7;
+        imagemagick = pkgs.imagemagick;
       })).overrideAttrs (old: rec {
         configureFlags = (old.configureFlags or [ ]) ++ [
           "--with-imagemagick"

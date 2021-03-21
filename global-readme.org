@@ -502,9 +502,8 @@ gateway 192.168.122.1
 
 * Keyboard
 ** Plankck
-*** [[https://configure.ergodox-ez.com/planck-ez/layouts/QaBlB/latest/3][Ergodox EZ Configurator]]n<2020-01-28 Tue>
-*** ✔ DONE [[https://configure.ergodox-ez.com/planck-ez/layouts/bvDzx/latest/0][Ergodox EZ Configurator]] <2019-10-29 Tue>[plank]
-*** ✔ DONE [[https://configure.ergodox-ez.com/planck-ez/layouts/EeEqb/latest/0][Ergodox EZ Configurator]]<2019-10-30 Wed>
+*** [[https://configure.ergodox-ez.com/planck-ez/layouts/vKRPl/latest/0][Oryx: The ZSA Keyboard Configurator]]
+
 ** [[https://configure.ergodox-ez.com/ergodox-ez/layouts/MJv5K/latest/0][Ergodox EZ Configurator]]
 * Blog
 ** [[https://github.com/getgridea/gridea][getgridea/gridea: ✍️一个静态博客写作客户端 (A static blog writing client)]]
