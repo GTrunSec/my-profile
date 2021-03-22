@@ -24,7 +24,6 @@ in
         wget
         reattach-to-user-namespace
         ispell
-        wakatime
         bat
         gron
         exa

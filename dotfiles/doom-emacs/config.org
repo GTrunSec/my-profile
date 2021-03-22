@@ -312,17 +312,6 @@ Emacs or EMACS (Editor MACroS) is a family of text editors that are characterize
 (use-package! pinyin-search)
 #+end_src
 
-** wakatime-mode
-
-#+begin_src emacs-lisp :tangle "packages.el"
-(package! wakatime-mode)
-#+end_src
-
-#+begin_src emacs-lisp :tangle "config.el"
-(use-package! wakatime-mode
-:hook (after-init . global-wakatime-mode))
-#+end_src
-
 ** vlf
 
 #+begin_src emacs-lisp :tangle "packages.el"
