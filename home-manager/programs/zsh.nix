@@ -114,16 +114,6 @@ in
                 sha256 = "1ib98j7v6hy3x43dcli59q5rpg9bamrg335zc4fw91hk6jcxvy45";
               };
             }
-
-            {
-              name = "wakatime";
-              src = pkgs.fetchFromGitHub {
-                owner = "sobolevn";
-                repo = "wakatime-zsh-plugin";
-                rev = "b8d661ae7e7522eb1240782c584c148ce6bf6e5f";
-                sha256 = "1a5lhfpimhb9rdinqgrwk1zq7qx8hh23ld451fvv9ycq0crjskh5";
-              };
-            }
           ];
       };
     })
