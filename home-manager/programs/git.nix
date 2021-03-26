@@ -21,6 +21,7 @@
           ".ipynb_checkpoints"
           "__pycache__"
           "*.org.organice-bak"
+          ".direnv"
         ];
         extraConfig = {
 
