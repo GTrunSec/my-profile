@@ -8,7 +8,6 @@ in
 {
   imports = [
     ./home-manager
-    ./home-manager/randr
   ];
 
 
@@ -16,9 +15,8 @@ in
     ({
 
       nixpkgs.overlays = [
-        (import ./nixos-flk/pkgs/default.nix)
-        (import ./nixos-flk/pkgs/my-node-packages)
-        (import all-hies { }).overlay
+        #(import ./nixos-flk/pkgs/default.nix)
+        (import ./nixos-flk/overlays/node-packages-overlay.nix)
         (import ./home-manager/home-overlay/packages-overlay.nix)
         (import (builtins.fetchTarball {
           url = "https://github.com/nix-community/emacs-overlay/archive/${emacs-overlay-rev}.tar.gz";
@@ -54,24 +52,7 @@ in
         enable = true;
         path = "${home_directory}/.nix-defexpr/channels/home-mananger";
       };
-
       home.sessionVariables = { };
-    })
-
-
-    (mkIf pkgs.stdenv.isLinux {
-      services.gpg-agent = {
-        defaultCacheTtl = 180000;
-        defaultCacheTtlSsh = 180000;
-        enable = true;
-        enableScDaemon = true;
-        enableSshSupport = true;
-        grabKeyboardAndMouse = false;
-      };
-
-      services.dunst = {
-        enable = true;
-      };
     })
 
     (mkIf pkgs.stdenv.isDarwin {
@@ -79,10 +60,6 @@ in
         enable-ssh-support
         pinentry-program ${pkgs.pinentry_mac}/Applications/pinentry-mac.app/Contents/MacOS/pinentry-mac
       '';
-    })
-
-    (mkIf pkgs.stdenv.isLinux {
-      systemd.user.startServices = true;
     })
   ];
 }

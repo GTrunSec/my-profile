@@ -66,12 +66,6 @@ in
       };
     })
 
-
-    (mkIf (pkgs.stdenv.isLinux) {
-      programs.emacs.enable = true;
-    })
-
-
     (mkIf pkgs.stdenv.isDarwin {
       programs.emacs.enable = true;
       programs.emacs.package = (pkgs.emacsGcc.override ({
@@ -117,33 +111,6 @@ in
           ln -snf ./run-emacs.sh $out/bin/emacs
         '';
       });
-    })
-
-    (mkIf pkgs.stdenv.isLinux {
-      programs.emacs.package = (pkgs.emacsGcc.override ({
-        withImageMagick = true;
-        imagemagick = pkgs.imagemagick7;
-      })).overrideAttrs (old: rec {
-        configureFlags = (old.configureFlags or [ ]) ++ [
-          "--with-imagemagick"
-          "--with-nativecomp"
-        ];
-      });
-    })
-
-    (mkIf (pkgs.stdenv.isLinux) {
-      programs.emacs.extraPackages = epkgs: with epkgs;[
-        vterm
-      ];
-    })
-
-
-    (mkIf pkgs.stdenv.isLinux {
-      programs.emacs.extraPackages = epkgs: with epkgs;[
-        grab-x-link
-      ];
-      # services.emacs.enable = true;
-      # services.emacs.socketActivation.enable = true;
     })
   ];
 }
