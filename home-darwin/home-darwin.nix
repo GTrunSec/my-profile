@@ -58,7 +58,6 @@ in
         nodePackages.mathjax
       ] ++ [
         #go packages
-        govet
         gocode
         gopls
         hugo

@@ -7,7 +7,7 @@ let
 in
 {
   imports = [
-    ./home-manager
+    ./home-darwin
   ];
 
 
@@ -17,11 +17,14 @@ in
       nixpkgs.overlays = [
         #(import ./nixos-flk/pkgs/default.nix)
         (import ./nixos-flk/overlays/node-packages-overlay.nix)
-        (import ./home-manager/home-overlay/packages-overlay.nix)
         (import (builtins.fetchTarball {
           url = "https://github.com/nix-community/emacs-overlay/archive/${emacs-overlay-rev}.tar.gz";
         }))
       ];
+
+    })
+
+    (mkIf pkgs.stdenv.isDarwin {
 
       programs.direnv = {
         enable = true;
@@ -53,9 +56,7 @@ in
         path = "${home_directory}/.nix-defexpr/channels/home-mananger";
       };
       home.sessionVariables = { };
-    })
 
-    (mkIf pkgs.stdenv.isDarwin {
       home.file.".gnupg/gpg-agent.conf".text = ''
         enable-ssh-support
         pinentry-program ${pkgs.pinentry_mac}/Applications/pinentry-mac.app/Contents/MacOS/pinentry-mac
