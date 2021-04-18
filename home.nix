@@ -55,6 +55,7 @@ in
         enable = true;
         path = "${home_directory}/.nix-defexpr/channels/home-mananger";
       };
+
       home.sessionVariables = { };
 
       home.file.".gnupg/gpg-agent.conf".text = ''

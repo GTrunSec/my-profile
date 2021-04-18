@@ -8,7 +8,7 @@ in
   config = with lib; mkMerge [
     (mkIf (pkgs.stdenv.isLinux || pkgs.stdenv.isDarwin) {
       home.file.".local/share/fonts/my-font" = {
-        source = ../dotfiles/my-font;
+        source = ../dotfiles/darwin-font;
         onChange = updatefont;
       };
 
@@ -57,11 +57,11 @@ in
       '';
       # editors
       home.file.".doom.d/config.org" = {
-        source = ../dotfiles/doom-emacs/config.org;
+        source = ../nixos-flk/users/dotfiles/doom-emacs/config.org;
         onChange = updateInit;
       };
       home.file.".doom.d/meow.org" = {
-        source = ../dotfiles/doom-emacs/meow.org;
+        source = ../nixos-flk/users/dotfiles/doom-emacs/meow.org;
         onChange = updateInit;
       };
     })
