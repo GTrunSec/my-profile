@@ -17,5 +17,4 @@ jobs:
     # Configure Nix to enable flakes
     - run: echo "experimental-features = nix-command flakes" | sudo tee -a /etc/nix/nix.conf
     - run: |
-        nix flake lock --update-input nixos-flk
-        nix flake check
+        nix build --dry-run .#darwinConfigurations.gtrun-macbook.system
