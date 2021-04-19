@@ -10,6 +10,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/home-manager/master";
     };
+
     nixos-flk = {
       url = "path:./nixos-flk";
       flake = false;
