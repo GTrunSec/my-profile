@@ -11,7 +11,7 @@
       url = "github:nix-community/home-manager/master";
     };
     nixos-flk = {
-      url = "path:/Users/gtrun/.config/nixpkgs/nixos-flk";
+      url = "path:./nixos-flk";
       flake = false;
     };
 

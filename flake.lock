@@ -107,12 +107,12 @@
     "nixos-flk": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-wRZeVhPu6YTovxDB1tCcQOW17HMy3U8kbsnZ4XdGNRY=",
-        "path": "/Users/gtrun/.config/nixpkgs/nixos-flk",
+        "narHash": "sha256-R50y3HVc/3ey/QYxerGrVyI6FkAtHW8VPelki7YVC3s=",
+        "path": "./nixos-flk",
         "type": "path"
       },
       "original": {
-        "path": "/Users/gtrun/.config/nixpkgs/nixos-flk",
+        "path": "./nixos-flk",
         "type": "path"
       }
     },
