@@ -1,34 +1,86 @@
 {
-  description = "Guangtao's home-manager profile";
+  description = "Nix darwin Flake";
 
   inputs = {
+    darwin = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:LnL7/nix-darwin/master";
+    };
+    home-manager = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/home-manager/master";
+    };
+    nixos-flk = {
+      url = "path:/Users/gtrun/.config/nixpkgs/nixos-flk";
+      flake = false;
+    };
+
+    nixpkgs.url = "nixpkgs";
+
+
+    flake-compat = { url = "github:edolstra/flake-compat"; flake = false; };
+
+    emacs-overlay = { url = "github:nix-community/emacs-overlay/174ea8ba8f8a7b4f106f0a08c37d3f8af3bf94bb"; };
+    devshell-flake.url = "github:numtide/devshell";
     flake-utils.url = "github:numtide/flake-utils";
-    nixpkgs.url = "nixpkgs/3a7674c896847d18e598fa5da23d7426cb9be3d2";
-    darwin.url = "nixpkgs/7d71001b796340b219d1bfa8552c81995017544a";
-    home.url = "github:nix-community/home-manager/release-20.09";
-    nixpkgs-hardenedlinux = { url = "github:hardenedlinux/nixpkgs-hardenedlinux/master"; inputs.nixpkgs.follows = "nixpkgs"; };
-    emacs-overlay.url = "github:nix-community/emacs-overlay";
   };
 
-  outputs = inputs: with builtins;
-    let
-      python-packages-overlay = (import "${inputs.nixpkgs-hardenedlinux}/nix/python-packages-overlay.nix");
-      packages-overlay = (import "${inputs.nixpkgs-hardenedlinux}/nix/packages-overlay.nix");
-    in
-    (inputs.flake-utils.lib.eachDefaultSystem
+  outputs =
+    { self
+    , nixpkgs
+    , home-manager
+    , flake-utils
+    , darwin
+    , nixos-flk
+    , flake-compat
+    , emacs-overlay
+    , devshell-flake
+    , ...
+    }:
+    { } //
+    (flake-utils.lib.eachSystem [ "x86_64-darwin" ]
       (system:
-        let
-          pkgs = import inputs.nixpkgs {
-            inherit system;
-            overlays = [
-              python-packages-overlay
-              packages-overlay
+      let
+        pkgs = import nixpkgs {
+          overlays = [
+            devshell-flake.overlay
+          ];
+          inherit system;
+        };
+      in
+      rec {
+        devShell = with pkgs; devshell.mkShell {
+          imports = [
+            (devshell.importTOML ./commands.toml)
+          ];
+        };
+      })
+    ) //
+    {
+      darwinConfigurations.gtrun-macbook =
+        darwin.lib.darwinSystem
+          {
+            inputs = {
+              inherit nixos-flk;
+            };
+            modules = [
+              ./users/gtrun.nix
+              ./darwin-profiles/core.nix
+              home-manager.darwinModules.home-manager
+              {
+                nixpkgs.overlays = [
+                  (import (nixos-flk + "/overlays/node-packages-overlay.nix"))
+                  emacs-overlay.overlay
+                ];
+                nixpkgs.config = { allowUnsupportedSystem = true; };
+              }
+              {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+              }
             ];
           };
-        in
-        {
-          devShell = import ./devShell.nix { inherit pkgs; darwinChannel = inputs.darwin; pkgsChannel = inputs.nixpkgs; homeChannel = inputs.home; };
-        }
-      )
-    );
+    }
+    //
+    { };
 }

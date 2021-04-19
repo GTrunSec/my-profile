@@ -57,11 +57,11 @@ in
       '';
       # editors
       home.file.".doom.d/config.org" = {
-        source = ../nixos-flk/users/dotfiles/doom-emacs/config.org;
+        source = ../dotfiles/doom-emacs/config.org;
         onChange = updateInit;
       };
       home.file.".doom.d/meow.org" = {
-        source = ../nixos-flk/users/dotfiles/doom-emacs/meow.org;
+        source = ../dotfiles/doom-emacs/meow.org;
         onChange = updateInit;
       };
     })
@@ -69,27 +69,18 @@ in
     (mkIf pkgs.stdenv.isDarwin {
       programs.emacs.enable = true;
       programs.emacs.package = (pkgs.emacsGcc.override ({
-        withImageMagick = true;
-        imagemagick = pkgs.imagemagick;
+        # frame Flicker ?
+        # withImageMagick = true;
+        # imagemagick = pkgs.imagemagick;
       })).overrideAttrs (old: rec {
         configureFlags = (old.configureFlags or [ ]) ++ [
-          "--with-imagemagick"
-          "--with-nativecomp"
-          "--with-ns"
         ];
         patches = [
           (
             pkgs.fetchpatch {
-              name = "clean-env.patch";
-              url = "https://raw.githubusercontent.com/nix-community/emacs-overlay/master/patches/clean-env.patch";
-              sha256 = "0lx9062iinxccrqmmfvpb85r2kwfpzvpjq8wy8875hvpm15gp1s5";
-            }
-          )
-          (
-            pkgs.fetchpatch {
               name = "tramp-detect-wrapped-gvfsd.patch";
               url = "https://raw.githubusercontent.com/nix-community/emacs-overlay/master/patches/tramp-detect-wrapped-gvfsd.patch";
-              sha256 = "19nywajnkxjabxnwyp8rgkialyhdpdpy26mxx6ryfl9ddx890rnc";
+              sha256 = "sha256-nW2582royQJ1Prg1jy6wpv2uGctzomByHK2eZIo4f+c=";
             }
           )
         ];
@@ -101,6 +92,7 @@ in
         '';
 
         postInstall = old.postInstall or "" + ''
+          ln -snf $out/lib/emacs/28.0.50/native-lisp $out/native-lisp
           ln -snf $out/lib/emacs/28.0.50/native-lisp $out/Applications/Emacs.app/Contents/native-lisp
           cat <<EOF> $out/bin/run-emacs.sh
           #!/usr/bin/env bash
