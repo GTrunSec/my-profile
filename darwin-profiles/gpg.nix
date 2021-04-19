@@ -4,7 +4,7 @@
   programs.gpg = {
     enable = true;
     settings = {
-      default-key = "6A43333DBD6C7C70B7A1DB59761C8EBEA940960E";
+      default-key = "B1A1304430618C3C";
       cert-digest-algo = "SHA512";
       disable-cipher-algo = "3DES";
       default-recipient-self = true;

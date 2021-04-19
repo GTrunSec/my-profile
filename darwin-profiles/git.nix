@@ -56,5 +56,5 @@
       };
     };
   };
-  programs.git.signing.signByDefault = true;
+  #programs.git.signing.signByDefault = true;
 }

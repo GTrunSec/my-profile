@@ -4,7 +4,7 @@ let
 
   updatefont = ''fc-cache -f -v'';
   updateDoom = ".emacs.d/bin/doom sync";
-  updateInit = "bash ~/.doom.d/bin/emacs.sh";
+  updateInit = "bash .doom.d/bin/emacs.sh";
 
   emacs-final = (pkgs.emacsGcc.override ({
     # frame Flicker ?
