@@ -5,6 +5,7 @@
     #customVscode
     #nixFlakes
     nixpkgs-fmt
+    shfmt
   ] ++ [
     imagemagick
     #library

@@ -34,5 +34,20 @@
       keep-derivations = true
       keep-outputs = true
     '';
+    gc = {
+      # Automatically run the Nix garbage collector.
+      automatic = false;
+
+      # Run the collector as the current user.
+      user = config.my.username;
+
+      options = "--delete-older-than 7d";
+    };
   };
+
+  programs.zsh.enable = true;
+
+
+  environment.shells = [ pkgs.zsh ];
+
 }

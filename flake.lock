@@ -107,7 +107,7 @@
     "nixos-flk": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-vIWcv0+seQ1WP5CUXfiSa9rsm92bi1VusqJmr1O5DV0=",
+        "narHash": "sha256-wRZeVhPu6YTovxDB1tCcQOW17HMy3U8kbsnZ4XdGNRY=",
         "path": "/Users/gtrun/.config/nixpkgs/nixos-flk",
         "type": "path"
       },
