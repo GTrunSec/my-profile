@@ -1,1 +1,0 @@
-cachix use hasktorch
