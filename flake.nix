@@ -6,6 +6,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:LnL7/nix-darwin/master";
     };
+
+    ci-agent = {
+      url = "github:hercules-ci/hercules-ci-agent";
+      inputs = { nix-darwin.follows = "darwin"; flake-compat.follows = "flake-compat"; nixos-20_09.follows = "nixpkgs"; nixos-unstable.follows = "nixpkgs"; };
+    };
+
+
     home-manager = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/home-manager/master";
@@ -36,6 +43,7 @@
     , flake-compat
     , emacs-overlay
     , devshell-flake
+    , ci-agent
     , ...
     }:
     { } //
@@ -67,6 +75,7 @@
             modules = [
               ./users/gtrun.nix
               ./darwin-profiles/core.nix
+              ci-agent.darwinModules.agent-profile
               home-manager.darwinModules.home-manager
               {
                 nixpkgs.overlays = [

@@ -1,5 +1,35 @@
 {
   "nodes": {
+    "ci-agent": {
+      "inputs": {
+        "flake-compat": [
+          "flake-compat"
+        ],
+        "nix-darwin": [
+          "darwin"
+        ],
+        "nixos-20_09": [
+          "nixpkgs"
+        ],
+        "nixos-unstable": [
+          "nixpkgs"
+        ],
+        "pre-commit-hooks-nix": "pre-commit-hooks-nix"
+      },
+      "locked": {
+        "lastModified": 1619088868,
+        "narHash": "sha256-l9db+HpNIkY41MonGE8z4pbkjBa5BdzJTG5AxV7V7Lw=",
+        "owner": "hercules-ci",
+        "repo": "hercules-ci-agent",
+        "rev": "08f953a263518a3af0ca28cd887020ff3465bdf5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "hercules-ci-agent",
+        "type": "github"
+      }
+    },
     "darwin": {
       "inputs": {
         "nixpkgs": [
@@ -70,11 +100,11 @@
     },
     "flake-utils": {
       "locked": {
-        "lastModified": 1618217525,
-        "narHash": "sha256-WGrhVczjXTiswQaoxQ+0PTfbLNeOQM6M36zvLn78AYg=",
+        "lastModified": 1619345332,
+        "narHash": "sha256-qHnQkEp1uklKTpx3MvKtY6xzgcqXDsz5nLilbbuL+3A=",
         "owner": "numtide",
         "repo": "flake-utils",
-        "rev": "c6169a2772643c4a93a0b5ac1c61e296cba68544",
+        "rev": "2ebf2558e5bf978c7fb8ea927dfaed8fefab2e28",
         "type": "github"
       },
       "original": {
@@ -90,11 +120,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1618789951,
-        "narHash": "sha256-EoQxcVIiaqjUwwTl1YF3zGnXtzEvOUDL3SBZ8ASELvU=",
+        "lastModified": 1619558193,
+        "narHash": "sha256-DljP5/9EX0eXEPhzCUFqFEHkkcFuXJBx1PTgcv0OgyM=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "6aa6556bcab6dc0f6398b4daa8404d788fd7a6a2",
+        "rev": "18ad12d52b8cebbb57013865eec2be5125de050a",
         "type": "github"
       },
       "original": {
@@ -129,8 +159,25 @@
         "type": "indirect"
       }
     },
+    "pre-commit-hooks-nix": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1617783930,
+        "narHash": "sha256-SigoU2LWM1fMggqfM9H8XEIvjOjBVQ/wj/zrn02J28c=",
+        "owner": "cachix",
+        "repo": "pre-commit-hooks.nix",
+        "rev": "2d169bb1b23f3b71a894a66ea81f45c788943248",
+        "type": "github"
+      },
+      "original": {
+        "owner": "cachix",
+        "repo": "pre-commit-hooks.nix",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
+        "ci-agent": "ci-agent",
         "darwin": "darwin",
         "devshell-flake": "devshell-flake",
         "emacs-overlay": "emacs-overlay",

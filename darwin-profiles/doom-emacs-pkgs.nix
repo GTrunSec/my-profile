@@ -6,12 +6,15 @@ let
   updateDoom = ".emacs.d/bin/doom sync";
   updateInit = "bash .doom.d/bin/emacs.sh";
 
-  emacs-final = (pkgs.emacsGcc.override ({
-    # frame Flicker ?
-    # withImageMagick = true;
-    # imagemagick = pkgs.imagemagick;
-  })).overrideAttrs
+  emacs-final = (pkgs.emacsGcc.override ({ })).overrideAttrs
     (old: rec {
+      src = pkgs.fetchFromGitHub {
+        owner = "emacs-mirror";
+        repo = "emacs";
+        rev = "c62262736ca9fd5a012565fb5ab50e2dd4ff6a4b";
+        sha256 = "sha256-SmhhllI4DvkkfrJmSrx2nymtQH4wn/buUp9WHQvb4RA=";
+      };
+
       configureFlags = (old.configureFlags or [ ]) ++ [
       ];
       patches = [

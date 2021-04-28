@@ -8,6 +8,7 @@
       (inputs.nixos-flk + "/users/home-darwin.nix")
       #programs
     ];
+
   };
 
 }
