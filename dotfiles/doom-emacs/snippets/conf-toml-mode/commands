@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: commands
-# key: c
-# --
-[[commands]]
-name = "$1"
-category = ""
-command = ""
-help = ""

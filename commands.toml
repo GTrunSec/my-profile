@@ -1,5 +1,0 @@
-[[commands]]
-name = "darwin-gtrun"
-category = "nix-darwin"
-command = "darwin-rebuild $@ --flake .#gtrun-macbook"
-help = "darwin-gtrun rebuild"
