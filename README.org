@@ -2,52 +2,31 @@
 #+AUTHOR: GTrunSec
 #+EMAIL: gtrunsec@hardenedlinux.org
 #+DATE: 23 October 2019
-#+DESCRIPTION:
-#+KEYWORDS:
-#+LANGUAGE:  en cn
-#+SETUPFILE: ~/Documents/org-notes/setup/darkcss.local
-#+hugo_publishdate: (0 5)
-#+hugo_auto_set_lastmod: t
-#+HUGO_categories: 
-#+HUGO_tags: 
 #+OPTIONS:   H:2 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
-#+SELECT_TAGS: export
-#+EXCLUDE_TAGS: noexport
 * Overview
 ** Build system
 - system : ~NIXOS~
 
-
 #+begin_src sh :tangle yes
-git clone https://github.com/GTrunSec/my-profile.git --depth=1  --recursive --shallow-submodules ~/.config/nixpkgs
-
-ln -s  ~/.config/nixpkgs/nixos-flk /etc/nixos
+git clone https://github.com/GTrunSec/my-profile.git --depth=1  --recursive --shallow-submodules ~/.config/guangtao
 
 # drying flake build test
 cd ~/.config/nixpkgs/nixos-flk
-nix-shell
-# test flakes process
+nix-shell or nix develop
 # NixOS is an argument of your building hsot name(related to ./nixos-flk/hosts/NixOS.nix)
-rebuild NixOS switch
-# activing NixOS config in nixos
-sudo nixos-rebuild switch 
-# or using binaryCaches to speed up
-sudo nixos-rebuild switch --option substituters "https://cache.nixos.org http://221.4.35.244:8301" --option trusted-public-keys "221.4.35.244:3ehdeUIC5gWzY+I7iF3lrpmxOMyEZQbZlcjOmlOVpeo="
-# activing all of config files which in dotfiles path 
-home-manager switch
-
+bud rebuild NixOS switch
 #+end_src
 
 ** Overview
 #+NAME: nixos
-#+CAPTION:  
+#+CAPTION:
 #+ATTR_ORG: :width 600
 #+ATTR_LATEX: :width 5in
 
 [[file:img/nixos-profile.png]]
 
-#+NAME: EMacs/ter  
-#+CAPTION:  
+#+NAME: EMacs/ter
+#+CAPTION:
 #+ATTR_ORG: :width 600
 #+ATTR_LATEX: :width 5in
 
@@ -55,13 +34,13 @@ home-manager switch
 
 ** VScode with Rstudio
 #+NAME: vscode-rs
-#+CAPTION:  
+#+CAPTION:
 #+ATTR_ORG: :width 600
 #+ATTR_LATEX: :width 5in
 [[file:img/Screenshot_20200810_135232.png]]
 ** EMacs with Org-mode agenda
 #+NAME: org-agenda
-#+CAPTION:  
+#+CAPTION:
 #+ATTR_ORG: :width 600
 #+ATTR_LATEX: :width 5in
 
@@ -71,7 +50,7 @@ home-manager switch
 
 ** Latex with Emacs and Jupyter
 #+NAME: Latex with Emacs and Jupyte
-#+CAPTION:  
+#+CAPTION:
 #+ATTR_ORG: :width 600
 #+ATTR_LATEX: :width 5in
 
@@ -82,7 +61,7 @@ home-manager switch
 - with https://github.com/GTrunSec/Jupyter-data-science-environment
 [[file:img/app/Screenshot_20200810_134202.png]]
 #+NAME: Jupyter/lang
-#+CAPTION:  
+#+CAPTION:
 #+ATTR_ORG: :width 600
 #+ATTR_LATEX: :width 5in
 
@@ -94,7 +73,7 @@ home-manager switch
 
 
 #+NAME: Linux/dict
-#+CAPTION:  
+#+CAPTION:
 #+ATTR_ORG: :width 600
 #+ATTR_LATEX: :width 5in
 
@@ -103,7 +82,7 @@ home-manager switch
 
 * Terminal & shell
 #+NAME: alacritty * zsh * tmux
-#+CAPTION:  
+#+CAPTION:
 #+ATTR_ORG: :width 600
 #+ATTR_LATEX: :width 5in
 [[file:img/Terminal_&_shell/Screenshot_20200810_135152.png]]
@@ -148,7 +127,7 @@ run emacs
 ** LSP
 *** C++
 #+NAME: C++/emacs
-#+CAPTION:  
+#+CAPTION:
 #+ATTR_ORG: :width 600
 #+ATTR_LATEX: :width 5in
 
@@ -157,7 +136,7 @@ run emacs
 
 *** R/Rmarkdown
 #+NAME: R/emacs
-#+CAPTION:  
+#+CAPTION:
 #+ATTR_ORG: :width 600
 #+ATTR_LATEX: :width 5in
 
@@ -166,7 +145,7 @@ run emacs
 
 *** python
 #+NAME: python/emacs
-#+CAPTION:  
+#+CAPTION:
 #+ATTR_ORG: :width 600
 #+ATTR_LATEX: :width 5in
 
@@ -176,7 +155,7 @@ run emacs
 *** Golang
 ** elfeed
 #+NAME: elfeed
-#+CAPTION:  
+#+CAPTION:
 #+ATTR_ORG: :width 600
 #+ATTR_LATEX: :width 5in
 
@@ -195,10 +174,9 @@ run emacs
 ** DNS
 *** Adguard-home
 #+NAME: adguard-home
-#+CAPTION:  
+#+CAPTION:
 #+ATTR_ORG: :width 600
 #+ATTR_LATEX: :width 5in
 
 #+DOWNLOADED: https://uc2bc8df3e6c0946443fb9968eb3.previews.dropboxusercontent.com/p/thumb/AAlEIZP-Y9JuCTeRdbngbI3fr3dZswWMvSugkrWKF5JqJLlv8KYsXGRhp0bx87eGmG6Wt1YhOW9_GyPGf3oZj7adkyRLpCkuDEA0qlzMX-Riq3tObJPxYWvbqIU7L3BVnyk9sF1016cfZxn7syI8IgN46xf0yV9eynPi1usuZtIwX8948j9MVZCzxEkb9691X0aBh-bnO0xnO_IyV9tKFxDiD0GT4fiLJW-com1STkDSCKO9-aWns_C6wJG9FUkO2hqNVr06UCFgtOUyb0dpe1CXHyslUbVBwxCeYOeslMdXTTryza80xoOW-firoDYH3nvXOERyuU7uW5Tmsiuu6BmCA0CQ40ITNI8tdWJahruUM30INmiK35x37QWYcCo26IJQM8G1Jq0Hn4YR8G-a2ssa/p.png?size=800x600&amp;size_mode=3 @ 2019-10-23 15:01:24
 [[file:img/Network/p_2019-10-23_15-01-24.png]]
-
